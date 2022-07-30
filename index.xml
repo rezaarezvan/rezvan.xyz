@@ -2,11 +2,11 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>rezvan</title>
-    <link>https://rezvan.xyz/</link>
+    <link>http://rezvan.xyz/</link>
     <description>Recent content on rezvan</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 29 Jul 2022 22:46:54 +0200</lastBuildDate>
-    <link rel="alternate" type="application/rss+xml" href="https://rezvan.xyz/index.xml" title="rezvan" />
+    <lastBuildDate>Fri, 29 Jul 2022 14:46:40 +0200</lastBuildDate>
+    <link rel="alternate" type="application/rss+xml" href="http://rezvan.xyz/index.xml" title="rezvan" />
     </channel>
 </rss>
