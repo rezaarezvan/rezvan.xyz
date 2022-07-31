@@ -6,24 +6,14 @@
     <description>Recent content in Posts on rezvan</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 29 Jul 2022 14:42:36 +0200</lastBuildDate><atom:link href="https://rezvan.xyz/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 29 Jul 2022 14:40:26 +0200</lastBuildDate><atom:link href="https://rezvan.xyz/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Second test</title>
-      <link>https://rezvan.xyz/posts/second/</link>
-      <pubDate>Fri, 29 Jul 2022 14:42:36 +0200</pubDate>
-      
-      <guid>https://rezvan.xyz/posts/second/</guid>
-      <description>Test test test</description>
-    </item>
-    
-    <item>
-      <title>First test post</title>
-      <link>https://rezvan.xyz/posts/post/</link>
+      <title>Initial post</title>
+      <link>https://rezvan.xyz/posts/initialpost/</link>
       <pubDate>Fri, 29 Jul 2022 14:40:26 +0200</pubDate>
       
-      <guid>https://rezvan.xyz/posts/post/</guid>
-      <description>This is simple text
-// Some C code int main(void) {  int a = 256;  int *b = &amp;amp;a; } </description>
+      <guid>https://rezvan.xyz/posts/initialpost/</guid>
+      <description>This is just a initial post - I will use this site to write about things I mainly find fascinating or interesting :).</description>
     </item>
     
   </channel>
