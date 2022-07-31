@@ -6,14 +6,24 @@
     <description>Recent content in Posts on rezvan</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 29 Jul 2022 14:40:26 +0200</lastBuildDate><atom:link href="https://rezvan.xyz/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 31 Jul 2022 17:21:34 +0200</lastBuildDate><atom:link href="https://rezvan.xyz/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>My personal bucket list</title>
+      <link>https://rezvan.xyz/posts/bucketlist/</link>
+      <pubDate>Sun, 31 Jul 2022 17:21:34 +0200</pubDate>
+      
+      <guid>https://rezvan.xyz/posts/bucketlist/</guid>
+      <description>One day each and one of us will die - this is a universal truth. I am writing this to keep my self accountable and remind my future self to recongize where I was and where I&amp;rsquo;ve gotten to.
+ Build/own my own place Make a diffrence in the world (well, hard to define) Fall in love Be successful working for myself (finical security) Create something meaningful (film, book, podcast etc) Live in another country Trace my ancestry Read 100 books Mentor someone Help someone else achieving their dreams  </description>
+    </item>
+    
     <item>
       <title>Initial post</title>
       <link>https://rezvan.xyz/posts/initialpost/</link>
-      <pubDate>Fri, 29 Jul 2022 14:40:26 +0200</pubDate>
+      <pubDate>Fri, 29 Jul 2022 17:18:30 +0200</pubDate>
       
       <guid>https://rezvan.xyz/posts/initialpost/</guid>
-      <description>This is just a initial post - I will use this site to write about things I mainly find fascinating or interesting :).</description>
+      <description>This is just a initial post - I&amp;rsquo;ll mainly write about things I find fascinating/interesting on this site :).</description>
     </item>
     
   </channel>
