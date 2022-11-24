@@ -6,7 +6,16 @@
     <description>Recent content in Posts on rezvan</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 23 Aug 2022 21:00:47 +0200</lastBuildDate><atom:link href="https://rezvan.xyz/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 24 Nov 2022 17:57:38 +0100</lastBuildDate><atom:link href="https://rezvan.xyz/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Thermodynamics</title>
+      <link>https://rezvan.xyz/posts/thermodynamics/</link>
+      <pubDate>Thu, 24 Nov 2022 17:57:38 +0100</pubDate>
+      
+      <guid>https://rezvan.xyz/posts/thermodynamics/</guid>
+      <description>In my physics course we have recently began with the thermodynamics part of physics. It&amp;rsquo;s quite overwhelming but at the same time it&amp;rsquo;s really fun. So I&amp;rsquo;ll just post and explain everything I learn in class here - since it&amp;rsquo;s a really good way of learning, explaning. As the late and incredible Richard Feynman once said: &amp;ldquo;If you cannot explain something in simple terms, you don&amp;rsquo;t understand it&amp;rdquo; - Richard Feynman With that said, into thermodynamics!</description>
+    </item>
+    
     <item>
       <title>Julia projects</title>
       <link>https://rezvan.xyz/posts/julia/</link>
