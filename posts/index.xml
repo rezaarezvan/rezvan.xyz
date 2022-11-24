@@ -6,9 +6,20 @@
     <description>Recent content in Posts on rezvan</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 24 Nov 2022 17:57:38 +0100</lastBuildDate><atom:link href="https://rezvan.xyz/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 24 Nov 2022 19:57:27 +0100</lastBuildDate><atom:link href="https://rezvan.xyz/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Thermodynamics</title>
+      <title>DSA: Part 1 - Sorting</title>
+      <link>https://rezvan.xyz/posts/dsa_1/</link>
+      <pubDate>Thu, 24 Nov 2022 19:57:27 +0100</pubDate>
+      
+      <guid>https://rezvan.xyz/posts/dsa_1/</guid>
+      <description>My other course for this study period is a course in Data Structures &amp;amp; Algorithms.
+Sorting &amp;amp; Searching We began this course with sorting and why it&amp;rsquo;s an important topic for a computer scientist. Sorting data comes up in all fields of computer science, everything from low-level, simple, array sorting - to sort millions of data gathered by an AI.
+With this we began with simple sorting and searching algoritms. Firstl we began with binary search.</description>
+    </item>
+    
+    <item>
+      <title>Thermodynamics: Lecture 1</title>
       <link>https://rezvan.xyz/posts/thermodynamics/</link>
       <pubDate>Thu, 24 Nov 2022 17:57:38 +0100</pubDate>
       
