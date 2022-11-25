@@ -41,7 +41,7 @@
 			<h1 class="title">DSA: Part 2 - Complexity (1)</h1><p class="single_time">Nov 25, 2022</p></div>
 		<section class="post">
 			<h3 id="introduction">Introduction</h3>
-<p>What do we mean by an &lsquo;Algorithmic complexity&rsquo;, a good (but not fully formla) definition would be - 
+<p>What do we mean by an &lsquo;Algorithmic complexity&rsquo;, a good (but not fully formal) definition would be - 
 &ldquo;<em>How much resources does the algorithm use in <strong>relation</strong> to quantative properties of its input</em>&rdquo;</p>
 <p>And just to be clear, the definition of an <strong>algorithm</strong>: any well-defined procedure to solve a given problem.</p>
 <p>So what kind of resources could we quantify from an input? Of course the runtime of a algorithm is important.
@@ -53,9 +53,9 @@ but we could also look at, # of comparisions, # of array accesses, # of arithemt
 <p>One thing to rememeber is - that in the real world the only thing that determines the output isn&rsquo;t just the output. For example a input of n doesn&rsquo;t always give T(n) for a given quicksort algorithm.</p>
 <p>That&rsquo;s why computer scientists use <strong>Worst-case</strong>, <strong>Best-case</strong>, and <strong>Average-case</strong> complexities.</p>
 <p>As said before the <strong>exact</strong> runtime of a program depends on so many things - that&rsquo;s why we introduce the so called <strong>Asymptotic complexity</strong>.
-Which is t he <strong>order of growth</strong> of the complexity function - which holds true for all complexity function within the same &lsquo;class&rsquo;.
+Which is the <strong>order of growth</strong> of the complexity function - which holds true for all complexity functions within the same &lsquo;class&rsquo;.
 This is often what computer scientists mean when they say that an algorithm has a complexity of $\dots$ .</p>
-<h3 id="a-computer-scientist-defiition-of-complexity">A Computer Scientist Defiition of Complexity</h3>
+<h3 id="a-computer-scientist-definition-of-complexity">A Computer Scientist Definition of Complexity</h3>
 <p>Let $f$ and $g$ be functions:
 $f$ has an <strong>order of growth</strong> of $g$ if:
 There are constants $C$ and $n_0$ such that:
@@ -68,7 +68,7 @@ $$
 f(n) \in \mathcal{O}(g(n))
 $$</p>
 <h4 id="a-example">A Example</h4>
-<p>Say we have the function $f(n) = 13n + 37$ - claim that the (Asymptotic) complexity of this function is $\mathcal{O}(n)$</p>
+<p>Say we have the function $f(n) = 13n + 37$ - I claim that the (Asymptotic) complexity of this function is $\mathcal{O}(n)$</p>
 <h5 id="proof">Proof</h5>
 <p>We need a $C$ and $n_0$ so that $13n + 37 \leq C n$ for $n \geq n_0$</p>
 <p>If we pick $C = 14$ and say $n_0 = 37$</p>
@@ -109,9 +109,9 @@ $$</p>
 C * \mathcal{O}(f) = \mathcal{O}(f)
 $$</p>
 <h3 id="how-to-find-the-complexity-of-code">How to find the Complexity of code</h3>
-<p>Now that we have understood properly what the Big O notation is and how we can operate with it - the next step is to being able to identify finding the complexity in code!
-How we do this properly is going through each line/operation in an algortihm and see what the complexity of each is. This is very time consuming though - so there are short cuts.
-Sequence of statements (arithmetic and logical operations, function calls, etc), gives us addition between them.</p>
+<p>Now that we have understood properly what the Big O notation is and how we can operate with it - the next step is being able to find the complexity in code!
+How we do this properly is going through each line/operation in an algortihm and see what the complexity of each is. This is very time consuming though - so, luckily, there are short cuts.</p>
+<p>Sequence of statements (arithmetic and logical operations, function calls, etc), gives us addition between them.</p>
 <pre tabindex="0"><code>func whats_the_complexity(int n):
     n = n + 5;                // This takes O(1)
     n = n / 10;               // This takes O(1)
@@ -120,6 +120,45 @@ Sequence of statements (arithmetic and logical operations, function calls, etc),
     return n
 </code></pre><p>The total complexity of <code>whats_the_complexity</code> would in this case be:
 $\mathcal{O}(1) + \mathcal{O}(1) + \mathcal{O}(n)$ and from our first rule that would mean a total (Asymptotic) complexity of, $\mathcal{O}(n)$ for $n \geq 1$</p>
+<p>Nested loops gives multiplication</p>
+<pre tabindex="0"><code>func whats_the_complexity(int[][] arr):
+    
+    // Suppose arr is a n x x matrix
+
+    sum = 0;
+    
+    for i in arr:      // Takes O(n)
+        for j in i:    // Takes O(n)
+            sum += j;
+
+    for i in arr:      // Takes O(n)
+        sum += i;
+
+    return n
+</code></pre><p>The total complexity of <code>whats_the_complexity</code> would in this case be:
+$\mathcal{O}(n) * \mathcal{O}(n) + \mathcal{O}(n)$ and from our first and second rule that would mean a total (Asymptotic) complexity of, $\mathcal{O}(n^2)$</p>
+<h3 id="relatives-of-o-notation">Relatives of O-notation</h3>
+<p>What we have gone through is only a part of a bigger set of notations. The &lsquo;real&rsquo; definitions are the following:</p>
+<p>Let $f$ and $g$ be functions</p>
+<p>$f(n) \in \mathcal{O}(g(n))$ if:
+$$
+f(n) \leq C g(n) \text{ for } n \geq n_0
+$$</p>
+<p>Now let&rsquo;s introduce:</p>
+<p>$f(n) \in \Omega(g(n))$ if:
+$$
+f(n) \geq c g(n) \text{ for } n \geq n_0
+$$</p>
+<p>$f(n) \in \Theta(g(n))$ if:
+$$
+c g(n) \leq f(n) \leq C g(n) \text{ for } n \geq n_0
+$$</p>
+<p>This means:
+$f(n) \in \Theta(g(n))$ means $f(n) \in \mathcal{O}(g(n))$ <strong>and</strong> $f(n) \in \Omega(g(n))$</p>
+<p>What does this mean is</p>
+<p>$f(n) \in \mathcal{O}(g(n))$ the function $f(n)$ eventually has an <strong>upper bound</strong>
+$f(n) \in \Omega(g(n))$ the function $f(n)$ eventually has an <strong>lower bound</strong>
+$f(n) \in \Theta(g(n))$ the function $f(n)$ eventually has both a <strong>lower</strong> and <strong>upper bound</strong></p>
 <h3 id="conclusion">Conclusion</h3>
 <p>This concludes the first part of our complexity journey - complexities are, as we can see, a very powerfull tool to identify what kind of algorithm we&rsquo;re working with
 and to get a somewhat accurate answer about the, for example, runtime of a program.</p>
