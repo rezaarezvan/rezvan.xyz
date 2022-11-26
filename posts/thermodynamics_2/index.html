@@ -13,7 +13,22 @@
   <div class="wrapper">
 	<div class="content">
 		<div class="header_main">
-	<a href="https://rezvan.xyz/"><p class="header_title">rezvan</p>
+	<a href="https://rezvan.xyz/"><p class="header_title">rezvan</p><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.3/dist/katex.min.css" integrity="sha384-Juol1FqnotbkyZUT5Z7gUPjQ9gzlwCENvUZTpQBAPxtusdwFLRy382PSDx5UUJ4/" crossorigin="anonymous">
+
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.3/dist/katex.min.js" integrity="sha384-97gW6UIJxnlKemYavrqDHSX3SiygeOwIZhwyOKRfSaf0JWKRVj9hLASHgFTzT+0O" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.3/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+            delimiters: [
+                {left: "$$", right: "$$", display: true},
+                {left: "$", right: "$", display: false}
+            ]
+        });
+    });
+</script>
+
 	</a>
   <br>
   <nav id="main">
@@ -25,7 +40,215 @@
   <article><div class="title_wrapper">
 			<h1 class="title">Thermodynamics: Lecture 2</h1><p class="single_time">Nov 26, 2022</p></div>
 		<section class="post">
-			
+			<h3 id="ideal-gases">Ideal gases</h3>
+<p>An &lsquo;ideal&rsquo; gas is a gas that is not subject to interparticale interations. Also commonly said to not being suject to &lsquo;react with other substances&rsquo;.</p>
+<p>In many applications of thermodynamics, ideal gases often come up, so it&rsquo;s natural to understand them within a thermodynamic perspective.</p>
+<h3 id="gases-and-pressure">Gases and Pressure</h3>
+<p>Before we begin with the real thermodynamical part of gases we need a bit of background with gases.
+Boyle&rsquo;s law gives us a mathematical formula for our intuition of gases. Say we have setup a experiment where the mass of a gas and the temperature is constant.
+The only thing that could vary now is the pressure within in the gas, and its volume. How we define pressure is the key here - pressure is, in non-science terms,
+the force applied per area unit. Usually we write pressure as, $P$, with the formula:</p>
+<p>$$
+P = \frac{F}{A}
+$$</p>
+<p>So if we expand our container which the gas is held in, intuitively, the pressure should release/decrease.
+This is exactly what Boyle&rsquo;s law tells us.</p>
+<h4 id="boyles-law">Boyle&rsquo;s law</h4>
+<p>$$
+PV = Constant
+$$</p>
+<p>This means we can, for example, write:
+$$
+P_1 V_1 = P_2 V_2
+$$</p>
+<p>But in many cases we can&rsquo;t keep the amount of particles (mass) and temperature constans - so how do we describe it then?</p>
+<h3 id="ideal-gas-law">Ideal Gas Law</h3>
+<p>Suppose we have a cylinder with height $h$, and a surface area of $A$, contaning some gas. Simplified, the gas will have a gravitational force
+$F_mg$, since the gas has a mass $M$.</p>
+<p>We can therefore describe the pressure as:
+$$
+M = (h * A) * \rho
+\newline
+F = Mg
+\newline
+P = \frac{F}{A} = \frac{h * A * \rho * g}{A} = h \rho g
+$$</p>
+<p>From observations and experiemnts, scientist have found that $PV = dT$ has linear relationship and found that:
+$$
+PV = nRT \text{, where:}
+\newline
+P - \text{ Pressure } [N/m^2, Pa]
+\newline
+V - \text{ Volume }   [m^3]
+\newline
+n - \text{ Amount of moles } [moles]
+\newline
+R - \text{ Gas constant, 8.3145 }  [J/mol * K]
+\newline
+T - \text{ Temperature } [K]
+$$</p>
+<p>Moles may something new that some haven&rsquo;t encountered. It&rsquo;s a way of describing how many particles there are in a given substance with some mass.
+The formula for moles is:
+$$
+n = \frac{N}{N_A} \text{, where:}
+\newline
+N - \text{ Amount of particles } [Count]
+\newline
+N_A - \text{Avogadro&rsquo;s constant, } 6.023 * 10^{23} \text{ } [1/mol]
+$$</p>
+<p>We can also define something called &lsquo;particle intensity&rsquo; which is just $\frac{N}{V}$, which can we useful sometimes.</p>
+<p>If we use this definition of moles, we can rewrite the Ideal gas law as:
+$$
+PV = \frac{N}{N_A}RT \rightarrow P = \frac{N}{V} \frac{R}{N_A} T
+$$</p>
+<p>This constant $\frac{R}{N_A}$ has a name, Boltzmann&rsquo;s constant, denoted by
+$$
+k_B = \frac{R}{N_A} = 1.38 * 10^{-23} \text{, therefore the equation becomes}
+\newline
+PV = N k_B T
+$$</p>
+<h3 id="kinectic-gas-theory">Kinectic Gas Theory</h3>
+<p>Our day to day definition of temperature is how &lsquo;hot&rsquo; or &lsquo;cold&rsquo; it is - but what is temperature <em>really</em> describing? 
+One can think that temperature descirbes the <em>average kinectic energy in a object</em>. 
+This of course varies with what substance we have and on many other factors - but in general we can say that gas <strong>particle</strong>, has an average kinetic energy of:
+$$
+E_{average} = \frac{\alpha}{2} k_B T \text{, where } \alpha \text{ is so called &lsquo;degrees of freedom&rsquo;}
+$$</p>
+<p>Therefore the <strong>total</strong> energy in a gas is:
+$$
+E_{total} = N E_{average} = N \frac{\alpha}{2} k_B T 
+$$</p>
+<p>In our course and its applications, where we will only encounter monoatomic and diatomic gases - $\alpha = 3$ for monoatomic and $\alpha = 5$ diatomic.</p>
+<p>There&rsquo;s also a so called &lsquo;inner energy&rsquo; in the gas which we denote with $U$ - for a monoatomic gas, $U$ is generally:
+$$
+U = n \frac{3}{2}RT $$</p>
+<h3 id="conductivity-in-ideal-gases">Conductivity in Ideal Gases</h3>
+<p>Often when we encounter gases in a thermal system - we will encounter two different categories of them. 
+One where we have constant volume, the gas can not expand more than its inital state. 
+One where we have constant pressure, we may have a lid that can be expanded, therefore the volume will change.</p>
+<p>For these kinds of problems the usual $Q = cm\Delta T$ becomes tricky. But luckily, the formula for these are:
+$$
+Q = n C_v \Delta T
+\newline
+Q = n C_p \Delta T
+$$
+Where the subscript of the $C$ denotes which is constant and the other variying.</p>
+<p>With this we can also get formulas for $C_v$ and $C_p$ for ideal gases:
+$$
+C_v = \frac{\alpha}{2}R
+\newline
+C_p = C_v + R
+$$</p>
+<h3 id="work-by-gases">Work by Gases</h3>
+<p>Now that we&rsquo;ve encountered the different kind of categories of problems - we can understand which kind can perform work and which can not.
+If we have constant volume it means the gas cannot expand or &lsquo;push&rsquo; its surrounding. Therefore it cant do work!</p>
+<p>But in the case where we have constant pressure, but not volume, the gas can perform work.
+As we remember from mechanics - work is defined as:
+$$
+dW = \vec{F} dx
+$$</p>
+<p>Since we have another equation for the force, $F = PA$, we can write:
+$$
+dW = P(A dx) = P dV
+$$</p>
+<p>We usually write this as
+$$
+W = \int_i^f P dV
+$$</p>
+<p>Now the &lsquo;direction&rsquo; is really important here - and one may wonder what &lsquo;direction&rsquo; do we have when we&rsquo;re dealing with thermodynamics?
+Direction within thermodynamics means if the gas <strong>expands</strong> $(W &gt; 0)$ or if it compresses $(W &lt; 0)$.</p>
+<h3 id="phase-and-transition-variables">Phase and Transition variables</h3>
+<p>In a given system, we may have a heat flux, $Q$ - we have a &lsquo;inner energy&rsquo;, $U$, and the system may do work, $W$. 
+Notice how I used <strong>may</strong> for $Q$ and $W$ - this is because they are so called &lsquo;phase variables&rsquo;, this because they are only present during a &lsquo;phase&rsquo; or &lsquo;process&rsquo;.</p>
+<p>While the system <strong>always</strong> has a inner energy, $U$.</p>
+<h3 id="thermodynamics">Thermodynamics</h3>
+<p>Now we have finally arrived at what this section of the course is all about - &lsquo;Thermodynamics&rsquo;. So how would one describe thermodynamics? 
+Our lecturer described it as, &ldquo;A transactionsystem for energy&rdquo;. Which I find as a simple - yet good - explaination. 
+It really is about how <strong>systems</strong> &lsquo;handle&rsquo; energy in and out of it.</p>
+<p>We&rsquo;ve already defined a lot of variables that are essential in thermodynamics:</p>
+<p>Q - heat exchange with the systems enviroment</p>
+<p>U - the systems inner energy</p>
+<p>W - Work which the <strong>gas</strong> performs - here we have to careful, sometimes work is defined by the work done by the outside <strong>on</strong> the system.</p>
+<h3 id="0th-law-of-thermodynamics">0th Law of Thermodynamics</h3>
+<p>It&rsquo;s quite a funny name since it&rsquo;s a physics law - and not a Computer Science one - that it&rsquo;s 0 indexed. But this law came <strong>after</strong> all the other laws, because people just assumed this was the case - but a proper formal law was needed.</p>
+<p>The 0th law of thermodynmics states that:</p>
+<p>&ldquo;Suppose we have 3 bodies, 1, 2, and, 3. In that order, if 1 and 2 are in thermal equilibrium - 2 and 3 are also in thermal equilibrium.
+Then 1 and 3 are also in thermal equilibrium&rdquo;.</p>
+<p>As stated - a quite &lsquo;obvious&rsquo; law that is not so powerful, but needed.</p>
+<h3 id="1th-law-of-thermodynamics">1th Law of Thermodynamics</h3>
+<p>Now this is a really powerful law - The 1th law of thermodynamics states that:
+$$
+Q = \Delta U + W
+$$</p>
+<p>If we &rsquo;talk&rsquo; through this forumla we understand that - the heat flux/heat exchange in a system, will be the difference in inner energy added with the work done by the gas in the system.</p>
+<h3 id="isoprocesses">Isoprocesses</h3>
+<p>As we already touched upon - thermodynamical gas problems often come in two categories. Here we will formally define them.
+The prefix &lsquo;iso&rsquo; means that something is unchanged, so therfore a <strong>isobar</strong> process means that the pressure is constant.
+In all of these different processes, the ideal gas law and the diffrence in inner energy will be the same for <strong>all</strong>.
+$$
+PV = nRT
+\newline
+\Delta U = n \frac{\alpha}{R} \Delta T
+$$</p>
+<h4 id="isobar-process">Isobar process</h4>
+<p>In a isobar process, the pressure will be held constant throughout the system. Which means:
+$$
+W_{if} = P(V_f - V_i)
+\newline
+Q = n C_p \Delta T
+\newline
+\Delta U = n C_v \Delta T
+$$</p>
+<h4 id="isochoric-process">Isochoric process</h4>
+<p>In a isochoric process, the volume will instead be held constant throughout the system. Which leads to:
+$$
+W_{if} = 0
+\newline
+Q = n C_v \Delta T
+\newline
+\Delta U = n C_v \Delta T
+$$</p>
+<h4 id="isothermal-process">Isothermal process</h4>
+<p>In a isothermal process, the temperature will instead be held constant throughout the system. Which means:
+$$
+W_{if} = \int P dV = nRT * ln(\frac{V_f}{V_i})
+\newline \Delta U = n C_v \Delta T = 0 \newline
+Q = +W
+$$</p>
+<h4 id="adiabatic-process">Adiabatic process</h4>
+<p>In a adiabatic process, the heat exchange is 0 - this is quite a special case, but this means:
+$$
+Q = 0
+\newline
+W = n C_v (T_i - T_f)
+\newline
+W = - n C_V \Delta T
+\newline
+\Delta U = n C_v \Delta T
+$$</p>
+<p>With this we can see that $\Delta U$ has to &lsquo;pay the price&rsquo; since $Q = 0$. This means the system takes its own inner energy to complete the transaction in energy.</p>
+<p>We also have one more formula in the adiabatic case:
+$$
+PV^\gamma = Constant
+$$</p>
+<p>With the ideal gas law we can find that:
+$$
+TV^{\gamma - 1} = Constant
+$$</p>
+<p>Aswell as:
+$$
+TP^{\frac{1 - \gamma}{\gamma}} = Constant
+$$</p>
+<h3 id="thermal-effiency">Thermal Effiency</h3>
+<p>Now that we have gone through almost all process that we&rsquo;re covering in this course - we will finally <strong>formally</strong> define thermla effiency! As I promised in part 1!</p>
+<p>Thermal effiency can be defined as:
+$$
+e = \frac{\sum W_g}{\sum Q_{pos}} = \frac{\sum Q_{total}}{\sum Q_{pos}}
+$$</p>
+<p>Thermal effiency can also sometimes be denoted as $\eta$.</p>
+<h3 id="conclusion">Conclusion</h3>
+<p>This concludes this part - in the next part (comming next week, probably) we&rsquo;ll cover the 2nd law of thermodynamics, as well as summarize everything!</p>
+
 		</section>
   </article>
 	</div>
