@@ -85,7 +85,7 @@ L = L_0(1 + \beta \Delta T)
 \newline
 \text{Note: } \beta \approx 2\alpha
 $$</p>
-<h3 id="thermal-conductivity">Thermal Conductivity</h3>
+<h3 id="thermal-conductivity-for-simple-geometric-objects">Thermal Conductivity for Simple Geometric Objects</h3>
 <p>Say if we have a system of 2 bodies, one which gains energy/heats up from an external source, with a opening to the second body.
 <br>
 <br>
@@ -112,6 +112,38 @@ P = -Ak \frac{dT}{dx}
 \newline
 P = -Ak \nabla T
 $$</p>
+<h3 id="thermal-conductivity-for-more-complex-geometric-objects">Thermal Conductivity for more Complex Geometric Objects</h3>
+<p>For more complex geometric shapes, we need to consider how the thickness of the body increases/decreases. For example, for a cylinder, the formula becomes: $$ P = -kA\frac{dT}{dr} = -k 2 \pi l r \frac{dT}{dr} $$
+If we&rsquo;re looking at a cylinder that generates heats in it&rsquo;s core for example, being near the core (small inner radius) will obviously be warmer than being at its surface (larger inner radius)</p>
+<p>Since $2\pi l$ is always constant - we can rewrite the equation and integrate both sides to get:</p>
+<p>$$
+\int_{T_h}^{T_c} -\frac{k 2\pi l}{P} = \int_{R1}^{R2} \frac{dr}{r} \rightarrow P =  \frac{2\pi k l}{ln(\frac{R2}{R1})} (T_h - T_c)
+$$</p>
+<p>Where $R1$ and $R2$ are two inner-radii to the cylinder.</p>
+<p>Suppose we have a system which upholds a certain tempurate $T_i$ with an constant effect of $P$ - Now consider if we cut the constant effect of heat, $P$
+and let the system naturally cool down due to its surrounding tempurate being $T_c$. We can describe this relation with the following:</p>
+<p>$dQ = -c m dT$</p>
+<p>Where $c$ is the conductivity coefficent and m is the mass of the substance</p>
+<ul>
+<li>with a bit of rewriting and integrating we also get:</li>
+</ul>
+<p>$$
+\int_{T1}^{T2} \frac{dT}{T - T_0} = \int_0^t \frac{-kA}{lcm} dt \rightarrow  ln(\frac{T_2 - T_0}{T_1 - T_0}) = -\frac{kA}{lcm}t
+$$</p>
+<h3 id="what-thermal-conductivity-really-means">What Thermal Conductivity really means</h3>
+<p>Just so we understand the equation $Q = cm\Delta T$ - 
+the $c$ coefficent tells us how much energy we need to put into a substance to change it&rsquo;s tempurate.
+For example, $\approx$ 4180 J are required to increase the tempurate of 1 kg of water by 1 &lsquo;kelvin&rsquo;. 
+Often we can use \circ C as well - but this is due to the difference between two tempurate being absolute.
+So really it&rsquo;s a increase in any kind of tempurate, just by <strong>1</strong> index.</p>
+<h3 id="latent-heat">Latent Heat</h3>
+<p>Last thing we&rsquo;re about to cover is the so called &lsquo;Latent heat&rsquo; release of required to transition from one phase to another. 
+The formula for how much energy is needed is:</p>
+<p>$Q = mL$</p>
+<p>Where $L$ - specific latent heat for a particular substance [J/kg]</p>
+<h3 id="conclusion">Conclusion</h3>
+<p>This was everything for the first part of the thermodynamics, 
+in the next time we&rsquo;ll looking into how gases behave and why they are so important for thermodynamics.</p>
 
 		</section>
   </article>
