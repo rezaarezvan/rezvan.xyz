@@ -6,7 +6,17 @@
     <description>Recent content in Posts on rezvan</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 26 Nov 2022 00:04:21 +0100</lastBuildDate><atom:link href="https://rezvan.xyz/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 27 Nov 2022 17:26:09 +0100</lastBuildDate><atom:link href="https://rezvan.xyz/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>DSA: Part 3 - Dynamic Arrays</title>
+      <link>https://rezvan.xyz/posts/dsa_3/</link>
+      <pubDate>Sun, 27 Nov 2022 17:26:09 +0100</pubDate>
+      
+      <guid>https://rezvan.xyz/posts/dsa_3/</guid>
+      <description>Dynamic arrays Finally we have arrived at the DS of DSA. In (almost) all programming langugaes the most common built in data structure are arrays. We have seen them, worked with them - nothing new. We&amp;rsquo;ve probably even worked with dynamic arrays, they are an essential datastructure - sometimes we don&amp;rsquo;t know how much data we&amp;rsquo;ll need.
+But how are dynamic arrays actually implemented into a language? The ideas is actually quite simple - we use a fixed length array and make a larger, fixed length, array when we have ran out of space.</description>
+    </item>
+    
     <item>
       <title>Thermodynamics: Lecture 2</title>
       <link>https://rezvan.xyz/posts/thermodynamics_2/</link>
