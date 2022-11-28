@@ -6,7 +6,19 @@
     <description>Recent content in Posts on rezvan</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 28 Nov 2022 18:14:58 +0100</lastBuildDate><atom:link href="https://rezvan.xyz/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 28 Nov 2022 20:30:47 +0100</lastBuildDate><atom:link href="https://rezvan.xyz/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>DSA: Part 4 - Abstract Data Types</title>
+      <link>https://rezvan.xyz/posts/dsa_4/</link>
+      <pubDate>Mon, 28 Nov 2022 20:30:47 +0100</pubDate>
+      
+      <guid>https://rezvan.xyz/posts/dsa_4/</guid>
+      <description>ADT vs Data Structures So what&amp;rsquo;s the difference betwen a Abstract Data Type and an actual datastructure?
+An ADT is a kind of specification of something - it specifies how we can intertact with that object, like an API.
+It consits of methods and constructors but also plain-text specifications (like the complexity for example) and explainations.
+A data structure on the other hand is an actual implementation of an ADT. It specifies how the object works interally.</description>
+    </item>
+    
     <item>
       <title>Thermodynamics: Lecture 3</title>
       <link>https://rezvan.xyz/posts/thermodynamics_3/</link>
