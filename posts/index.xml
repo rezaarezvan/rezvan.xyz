@@ -38,7 +38,7 @@ Increase in temperature $\Delta T &amp;gt; 0, (T_f &amp;gt; T_i), \rightarrow Q 
       <pubDate>Sun, 27 Nov 2022 17:26:09 +0100</pubDate>
       
       <guid>https://rezvan.xyz/posts/dsa_3/</guid>
-      <description>Dynamic arrays Finally we have arrived at the DS of DSA. In (almost) all programming langugaes the most common built in data structure are arrays. We have seen them, worked with them - nothing new. We&amp;rsquo;ve probably even worked with dynamic arrays, they are an essential datastructure - sometimes we don&amp;rsquo;t know how much data we&amp;rsquo;ll need.
+      <description>Dynamic arrays Finally we have arrived at the DS of DSA. In (almost) all programming languages the most common built in data structure are arrays. We have seen them, worked with them - nothing new. We&amp;rsquo;ve probably even worked with dynamic arrays, they are an essential data structure - sometimes we don&amp;rsquo;t know how much data we&amp;rsquo;ll need.
 But how are dynamic arrays actually implemented into a language? The ideas is actually quite simple - we use a fixed length array and make a larger, fixed length, array when we have ran out of space.</description>
     </item>
     
@@ -48,7 +48,7 @@ But how are dynamic arrays actually implemented into a language? The ideas is ac
       <pubDate>Sat, 26 Nov 2022 00:04:21 +0100</pubDate>
       
       <guid>https://rezvan.xyz/posts/thermodynamics_2/</guid>
-      <description>Ideal gases An &amp;lsquo;ideal&amp;rsquo; gas is a gas that is not subject to interparticale interations. Also commonly said to not being suject to &amp;lsquo;react with other substances&amp;rsquo;.
+      <description>Ideal gases An &amp;lsquo;ideal&amp;rsquo; gas is a gas that is not subject to interparticle interactions. Also commonly said to not being subject to &amp;lsquo;react with other substances&amp;rsquo;.
 In many applications of thermodynamics, ideal gases often come up, so it&amp;rsquo;s natural to understand them within a thermodynamic perspective.
 Gases and Pressure Before we begin with the real thermodynamical part of gases we need a bit of background with gases. Boyle&amp;rsquo;s law gives us a mathematical formula for our intuition of gases.</description>
     </item>
@@ -59,7 +59,7 @@ Gases and Pressure Before we begin with the real thermodynamical part of gases w
       <pubDate>Fri, 25 Nov 2022 17:20:46 +0100</pubDate>
       
       <guid>https://rezvan.xyz/posts/dsa_2/</guid>
-      <description>Introduction What do we mean by an &amp;lsquo;Algorithmic complexity&amp;rsquo;, a good (but not fully formal) definition would be - &amp;ldquo;How much resources does the algorithm use in relation to quantative properties of its input&amp;rdquo;
+      <description>Introduction What do we mean by an &amp;lsquo;Algorithmic complexity&amp;rsquo;, a good (but not fully formal) definition would be - &amp;ldquo;How much resources does the algorithm use in relation to quantitative properties of its input&amp;rdquo;
 And just to be clear, the definition of an algorithm: any well-defined procedure to solve a given problem.
 So what kind of resources could we quantify from an input? Of course the runtime of a algorithm is important.</description>
     </item>
@@ -72,7 +72,7 @@ So what kind of resources could we quantify from an input? Of course the runtime
       <guid>https://rezvan.xyz/posts/dsa_1/</guid>
       <description>My other course for this study period is a course in Data Structures &amp;amp; Algorithms.
 Sorting &amp;amp; Searching We began this course with sorting and why it&amp;rsquo;s an important topic for a computer scientist. Sorting data comes up in all fields of computer science, everything from low-level, simple, array sorting - to sort millions of data gathered by an AI.
-With this we began with simple sorting and searching algoritms. Firstl we began with binary search.</description>
+With this we began with simple sorting and searching algorithms. Firstly we began with binary search.</description>
     </item>
     
     <item>
@@ -81,7 +81,7 @@ With this we began with simple sorting and searching algoritms. Firstl we began 
       <pubDate>Thu, 24 Nov 2022 17:57:38 +0100</pubDate>
       
       <guid>https://rezvan.xyz/posts/thermodynamics/</guid>
-      <description>In my physics course we have recently began with the thermodynamics part of physics. It&amp;rsquo;s quite overwhelming but at the same time it&amp;rsquo;s really fun. So I&amp;rsquo;ll just post and explain everything I learn in class here - since it&amp;rsquo;s a really good way of learning, explaning. As the late and incredible Richard Feynman once said: &amp;ldquo;If you cannot explain something in simple terms, you don&amp;rsquo;t understand it&amp;rdquo; - Richard Feynman With that said, into thermodynamics!</description>
+      <description>In my physics course we have recently began with the thermodynamics part of physics. It&amp;rsquo;s quite overwhelming but at the same time it&amp;rsquo;s really fun. So I&amp;rsquo;ll just post and explain everything I learn in class here - since it&amp;rsquo;s a really good way of learning, explaining. As the late and incredible Richard Feynman once said: &amp;ldquo;If you cannot explain something in simple terms, you don&amp;rsquo;t understand it&amp;rdquo; - Richard Feynman With that said, into thermodynamics!</description>
     </item>
     
     <item>
@@ -99,7 +99,7 @@ With this we began with simple sorting and searching algoritms. Firstl we began 
       <pubDate>Wed, 10 Aug 2022 21:04:50 +0200</pubDate>
       
       <guid>https://rezvan.xyz/posts/editor/</guid>
-      <description>I&amp;rsquo;ve wanted to learn Rust for a long time - I&amp;rsquo;ve dabbled and manged to learn the basic syntax a while ago. However you haven&amp;rsquo;t truely learnt a language until you made a project and the code would be considerd &amp;lsquo;idomatic&amp;rsquo; - or atleast in my opinion. So I decided to make a Vim-like text editor. I took alot of inspiration from this post from medium, so all credits to Kofi.</description>
+      <description>I&amp;rsquo;ve wanted to learn Rust for a long time - I&amp;rsquo;ve dabbled and manged to learn the basic syntax a while ago. However you haven&amp;rsquo;t truly learnt a language until you made a project and the code would be considered &amp;lsquo;idiomatic&amp;rsquo; - or at least in my opinion. So I decided to make a Vim-like text editor. I took a lot of inspiration from this post from medium, so all credits to Kofi.</description>
     </item>
     
     <item>
@@ -108,8 +108,8 @@ With this we began with simple sorting and searching algoritms. Firstl we began 
       <pubDate>Sun, 31 Jul 2022 17:21:34 +0200</pubDate>
       
       <guid>https://rezvan.xyz/posts/bucketlist/</guid>
-      <description>One day each and one of us will die - this is a universal truth. I am writing this to keep my self accountable and remind my future self to recongize where I was and where I&amp;rsquo;ve gotten to.
- Build/own my own place Make a diffrence in the world (well, hard to define) Fall in love Be successful working for myself (finical security) Create something meaningful (film, book, podcast etc) Live in another country Trace my ancestry Read 100 200 books Mentor someone Help someone else achieving their dreams Get a PhD Watch over 200 movies  </description>
+      <description>One day each and one of us will die - this is a universal truth. I am writing this to keep my self accountable and remind my future self to recognize where I was and where I&amp;rsquo;ve gotten to.
+ Build/own my own place Make a difference in the world (well, hard to define) Fall in love Be successful working for myself (finical security) Create something meaningful (film, book, podcast etc) Live in another country Trace my ancestry Read 100 200 books Mentor someone Help someone else achieving their dreams Get a PhD Watch over 200 movies  </description>
     </item>
     
     <item>

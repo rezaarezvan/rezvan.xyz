@@ -41,18 +41,18 @@
 			<h1 class="title">DSA: Part 3 - Dynamic Arrays</h1><p class="single_time">Nov 27, 2022</p></div>
 		<section class="post">
 			<h3 id="dynamic-arrays">Dynamic arrays</h3>
-<p>Finally we have arrived at the DS of DSA. In (almost) all programming langugaes the most common built in data structure are arrays.
-We have seen them, worked with them - nothing new. We&rsquo;ve probably even worked with dynamic arrays, they are an essential datastructure - sometimes we don&rsquo;t know how much data we&rsquo;ll need.</p>
+<p>Finally we have arrived at the DS of DSA. In (almost) all programming languages the most common built in data structure are arrays.
+We have seen them, worked with them - nothing new. We&rsquo;ve probably even worked with dynamic arrays, they are an essential data structure - sometimes we don&rsquo;t know how much data we&rsquo;ll need.</p>
 <p>But how are dynamic arrays <em>actually</em> implemented into a language? The ideas is actually quite simple - we use a fixed length array and make a larger, fixed length, array when we have ran out of space.</p>
 <h3 id="different-approaches">Different approaches</h3>
 <h4 id="naive-approach">Naive Approach</h4>
-<p>A very naive and bruteforce implementation would be, if we append a value to a array which doesn&rsquo;t have space, we copy the old array and make the index one larger so we can fit the new value.
+<p>A very naive and brute force implementation would be, if we append a value to a array which doesn&rsquo;t have space, we copy the old array and make the index one larger so we can fit the new value.
 The problem with this approach is that it&rsquo;s <em>really</em> slow. If I want to append 10 items to a list of size 1, we need to copy each time we append.</p>
 <p>The complexity of this becomes $\mathcal{O}(n^2)$, which again, is really bad.</p>
 <h4 id="a-better-but-naive--approach">A Better, but Naive  Approach</h4>
 <p>A better approach would be that each we need to resize the array - we make some extra space for future appends. Let&rsquo;s say each time we need to resize the array we add 10 more indexes, for future use.</p>
 <p>This is actually 10 times faster than our first approach! But it&rsquo;s still $\mathcal{O}(n^2)$ so&hellip;</p>
-<h4 id="multplicative-approach">Multplicative Approach</h4>
+<h4 id="multiplicative-approach">Multiplicative Approach</h4>
 <p>So, instead of resizing by a constant - why not just double the array size each time? With this approach:</p>
 <p>To reach an array of size $2^n$ we would need to do $1 + 2 + 4 + \dots + 2^{n-1}$ total element copies
 This sums up to $2^n - 1$ which makes this approach $\mathcal{O}(n)$!</p>
@@ -62,11 +62,11 @@ of $\mathcal{O}(n)$. If we ever need to resize, we would need to copy $n$ elemen
 <p>If we now suppose we call the <code>add</code> function $n$ times instead. What&rsquo;s the worst-case complexity now? For the constant approach it&rsquo;s quite obvious that it becomes
 $\mathcal{O}(n^2)$, for each call, in the worst-case, we would need to copy n items, then n adds in total.</p>
 <p>For our multiplicative approach - this instead becomes $\mathcal{O}(n)$. But this is still &rsquo;too slow&rsquo; - we would like a $\mathcal{O}(1)$ operation.</p>
-<p>But don&rsquo;t worry - here we have something called <strong>amortised complexity</strong> which playes a huge role.</p>
-<h3 id="amortised-complexity">Amortised Complexity</h3>
+<p>But don&rsquo;t worry - here we have something called <strong>amortized complexity</strong> which plays a huge role.</p>
+<h3 id="amortized-complexity">Amortized Complexity</h3>
 <p>If <code>add</code> had a $\mathcal{O}(1)$ worst-case complexity, $n$ calls would take $\mathcal{O}(n)$ time right?
-But as we stated, our approach took $\mathcal{O}(n)$ for n calls - so we can say that <code>add</code> has a $\mathcal{O}(1)$ <em>amortised</em> complexity!</p>
-<p>Basically what amortised complexity is, we take an <em>average</em> cost of the operation over n calls.</p>
+But as we stated, our approach took $\mathcal{O}(n)$ for n calls - so we can say that <code>add</code> has a $\mathcal{O}(1)$ <em>amortized</em> complexity!</p>
+<p>Basically what amortized complexity is, we take an <em>average</em> cost of the operation over n calls.</p>
 <p>Now that we&rsquo;ve defined how the most important feature of dynamic arrays should work - let&rsquo;s implement one!</p>
 <h3 id="implementation">Implementation</h3>
 <p>A python implementation of a dynamic array:</p>
@@ -102,24 +102,24 @@ But as we stated, our approach took $\mathcal{O}(n)$ for n calls - so we can say
 
         self.array = new_array
 </code></pre><p>Now this isn&rsquo;t a perfect implementation - but it works okay.</p>
-<p>Now that we understand <em>really</em> how dynamic arrays work - we can actually start implementing some more <em>interesting</em> datastructures</p>
+<p>Now that we understand <em>really</em> how dynamic arrays work - we can actually start implementing some more <em>interesting</em> data structures</p>
 <h3 id="stacks-and-queues">Stacks and Queues</h3>
-<p>Stacks and Queues are quite popular and powerfull datastructures. But just to refresh let&rsquo;s go over how both datastructures work.</p>
+<p>Stacks and Queues are quite popular and powerful data structures. But just to refresh let&rsquo;s go over how both data structures work.</p>
 <h4 id="stacks">Stacks</h4>
-<p>A Stack is a so called <strong>LIFO</strong> datastructure. LIFO stands for &lsquo;<strong>L</strong>ast <strong>I</strong>n <strong>F</strong>irst <strong>O</strong>ut&rsquo;. One can visualize it as a literal stack of items (therefore the name). If have a <strong>stack</strong>
-of things, we might take items from the top and keep throwing away items til we reach the bottom. This is exactly how the stack datastructure works!</p>
+<p>A Stack is a so called <strong>LIFO</strong> data structure. LIFO stands for &lsquo;<strong>L</strong>ast <strong>I</strong>n <strong>F</strong>irst <strong>O</strong>ut&rsquo;. One can visualize it as a literal stack of items (therefore the name). If have a <strong>stack</strong>
+of things, we might take items from the top and keep throwing away items til we reach the bottom. This is exactly how the stack data structure works!</p>
 <h5 id="important-functions-for-stacks">Important Functions for Stacks</h5>
 <p>These operations that I was talking about have names - if we remove the top item, we call it <code>pop()</code> - and if we place an item on the top of the stack
 it&rsquo;s called <code>push()</code>. We have some helper functions that are usually needed for an implementation as well - the <code>peek()</code> function gives us the item at the top of the stack.
 The <code>size()</code> returns how large the stack currently is.</p>
 <h4 id="queues">Queues</h4>
-<p>A queue is a so called <strong>FIFO</strong> datastructure, &lsquo;<strong>F</strong>irst <strong>In</strong> <strong>F</strong>irst <strong>O</strong>ut&rsquo;. Just as the stack datastructure, we can visualize this as a literal queue.
+<p>A queue is a so called <strong>FIFO</strong> data structure, &lsquo;<strong>F</strong>irst <strong>In</strong> <strong>F</strong>irst <strong>O</strong>ut&rsquo;. Just as the stack data structure, we can visualize this as a literal queue.
 If someone joins the queue you are put in last - and the first person to join queue will be the first to leave the queue as well.</p>
 <h3 id="how-to-implement-stacks-and-queues">How to implement Stacks and Queues</h3>
-<p>Now that we understood the basics of these datastructures - let&rsquo;s see how one can implement them. But before we dive right in let&rsquo;s see the different approaches to this.
+<p>Now that we understood the basics of these data structures - let&rsquo;s see how one can implement them. But before we dive right in let&rsquo;s see the different approaches to this.
 Both stacks and queues can be implemented with Dynamic arrays as we covered - but equally as good with linked lists. We&rsquo;ll start with how we can implement it using a linked list - but let&rsquo;s refresh our memory of what a linked list is.</p>
 <h4 id="linked-lists">Linked Lists</h4>
-<p>A (singly) linked list consits of &lsquo;Node&rsquo; objects in a sequence - these node objects can contain one or multiple values - each node is &lsquo;pointing&rsquo; to the next node in the sequence.
+<p>A (singly) linked list consist of &lsquo;Node&rsquo; objects in a sequence - these node objects can contain one or multiple values - each node is &lsquo;pointing&rsquo; to the next node in the sequence.
 A singly linked list points to the first node and the last node in the list points to nothing (Nothing can for example be <code>Null</code>)
 Since it would be inefficient to calculate the size each time we call <code>size()</code>, since we would need to traverse the whole list, we instead keep a dynamic size variable that we can access.</p>
 <p>Here&rsquo;s how the boilerplate classes for a Linked List might look:</p>
@@ -134,7 +134,7 @@ class LinkedList:
         self.size = 0
 </code></pre><p>With our new knowledge about linked lists - we can return to stacks!</p>
 <h4 id="stacks-as-linked-lists">Stacks as linked lists</h4>
-<p>An implemention with a linked list for a stack is perfect - we only care about the top element in stack, therefore, when we <code>push()</code>,
+<p>An implementation with a linked list for a stack is perfect - we only care about the top element in stack, therefore, when we <code>push()</code>,
 we first make the new nodes next point to the current head. Then we redirect head to our new node and increase size. When we want to <code>pop()</code> -
 we first store the value of our current head node temporarily, to return the value popped. Then we redirect head to the <code>next</code> of the node we want to pop.</p>
 <p>In many languages we do not need to manually remove the node from the list - since it will be handled by garbage collection. But in a language like C, we would need to <code>free()</code> that node from memory.</p>
@@ -189,7 +189,7 @@ One thing that might not be obvious might be that, using the first element as th
             self.resize(2*self.size)
 
         self.stack[self.size] = x
-        sel.fsize += 1
+        self.size += 1
 
     def pop(self):
         self.size -= 1
@@ -208,7 +208,7 @@ One thing that might not be obvious might be that, using the first element as th
         self.stack = new
 </code></pre><h4 id="implementation-of-a-queue-using-linked-lists">Implementation of a queue using linked lists</h4>
 <p>Now it&rsquo;s now to implement queues! Using a linked list seems as a very natural approach since we have a sequence of pointers forward.
-However, in a queue we always need to the first and the last element. Therefore, we need another pointer to the end of the list aswell.</p>
+However, in a queue we always need to the first and the last element. Therefore, we need another pointer to the end of the list as well.</p>
 <pre tabindex="0"><code>class Node:
     def __init__(self, val):
         self.val = val
@@ -265,7 +265,7 @@ class Queue:
         self.head = 0
         self.tail = len(old)
 </code></pre><p>That&rsquo;s it for this part - in the next part we&rsquo;ll cover something called &lsquo;<strong>A</strong>bstract <strong>D</strong>ata <strong>T</strong>ypes&rsquo; or for short ADTs. 
-We&rsquo;ll define what a ADT is and what&rsquo;s the diffrence between them and ordinary datastructres.</p>
+We&rsquo;ll define what a ADT is and what&rsquo;s the difference between them and ordinary data structures.</p>
 
 		</section>
   </article>
