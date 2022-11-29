@@ -47,6 +47,12 @@ article a {
   font-size: 1.3rem;
   padding: 0;
   margin: 0;
+  color: #eee;
+}
+
+.post_listed .title:hover {
+  background-color: #eee;
+  color: #0a0a0a;
 }
 
 .post_listed .post_time {
@@ -189,6 +195,38 @@ nav a:hover {
   text-transform: uppercase;
 }
 
+/* --- Post Footer --- */
+
+.footer_icon {
+  display: inline;
+  float: left;
+}
+
+.footer_author {
+  font-size: 1.4rem;
+  color: #fff;
+  display: inline-block;
+  margin-top: 10px;
+}
+
+.footer_desc {
+  font-size: 1.2rem;
+  color: #eee;
+  margin-top: 2px;
+  margin-bottom: 2px;
+  overflow-wrap: break-word;
+}
+
+.footer_links {
+  display: block;
+}
+
+.footer_link {
+  margin: 5px 10px 5px 0;
+  padding: 3px 2px;
+  font-size: 1.1rem;
+}
+
 /* --- Page Footer --- */
 
 footer {
@@ -247,6 +285,15 @@ table, th, td {
 /* --- Code Styling --- */
 pre {
   font-size: 1.3rem;
+}
+
+/* --- Selection / Highlight Colors --- */
+p.::selectiton,
+p.::-moz-selection,
+::selection,
+::-moz-selection{
+  background-color: #eee;
+  color: #0a0a0a;
 }
 
 /* --- Custom Menu Hider (used in FAQ) --- */
