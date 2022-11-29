@@ -6,7 +6,17 @@
     <description>Recent content in Posts on rezvan</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 28 Nov 2022 20:30:47 +0100</lastBuildDate><atom:link href="https://rezvan.xyz/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 29 Nov 2022 18:50:23 +0100</lastBuildDate><atom:link href="https://rezvan.xyz/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>DSA: Part 5 - Hash Tables</title>
+      <link>https://rezvan.xyz/posts/dsa_5/</link>
+      <pubDate>Tue, 29 Nov 2022 18:50:23 +0100</pubDate>
+      
+      <guid>https://rezvan.xyz/posts/dsa_5/</guid>
+      <description>Hash Tables Hash tables are one of the most famous (and widely used) data structures. But why are they so popular and powerful? Before we can answer that question we need to look back at sets and maps.
+Sets and Maps in Context Just to refresh our memory - a set is a collection of items, where duplicates aren&amp;rsquo;t allowed. Maps are sets of keys, each having a associate value - or you can formulate it as - a set of key-value pairs.</description>
+    </item>
+    
     <item>
       <title>DSA: Part 4 - Abstract Data Types</title>
       <link>https://rezvan.xyz/posts/dsa_4/</link>
