@@ -6,7 +6,19 @@
     <description>Recent content in Posts on rezvan</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 29 Nov 2022 18:50:23 +0100</lastBuildDate><atom:link href="https://rezvan.xyz/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 30 Nov 2022 18:08:48 +0100</lastBuildDate><atom:link href="https://rezvan.xyz/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>DSA: Part 6 - Trees</title>
+      <link>https://rezvan.xyz/posts/dsa_6/</link>
+      <pubDate>Wed, 30 Nov 2022 18:08:48 +0100</pubDate>
+      
+      <guid>https://rezvan.xyz/posts/dsa_6/</guid>
+      <description>In this part we&amp;rsquo;ll cover so called &amp;rsquo;trees&amp;rsquo; in computer science. Warning, this will be a quite long part soooo&amp;hellip;
+Trees The formal definition of a &amp;rsquo;tree&amp;rsquo; is: &amp;ldquo;A hierarchical data structure built up from nodes&amp;rdquo;.
+So unlike a real tree which has its root at the bottom - the computer scientist flipped it - the root node is at the top of the tree.
+In any tree there&amp;rsquo;s always one root node.</description>
+    </item>
+    
     <item>
       <title>DSA: Part 5 - Hash Tables</title>
       <link>https://rezvan.xyz/posts/dsa_5/</link>
