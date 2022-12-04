@@ -236,11 +236,11 @@ What we need to do in that case is: We first delete the parent node by replacing
 
 	return node
 </code></pre><h3 id="complexity">Complexity</h3>
-<p>The complexity of operations for BST are in the best case and average case, $\mathcal{O}(log n)$ which is great. 
+<p>The complexity of operations for BST are in the best case and average case, $\mathcal{O}(log\ n)$ which is great. 
 In the worst case however, these operations will take $\mathcal{O}(n)$ since the items are in ascending order.</p>
 <h3 id="bst-summary">BST Summary</h3>
 <p>We can use BSTs to implement a set or map, however, with ordering-based operations such as min, max, range etc with good complexity.</p>
-<p>Insert/Delete/Search will take proportional time to the height of the tree. Which in the best/average case is $\mathcal{O}(log n)$,
+<p>Insert/Delete/Search will take proportional time to the height of the tree. Which in the best/average case is $\mathcal{O}(log\ n)$,
 but if the tree is <strong>unbalanced</strong> it will become linear.</p>
 <p>So the main take away is that, if a BST is balanced, it&rsquo;s really powerful and efficient. So let&rsquo;s take a look how we can make it balanced.</p>
 <h3 id="invariants">Invariants</h3>
@@ -276,7 +276,7 @@ To fix this we first make a right rotation in the right subtree - then make a fi
 <h3 id="avl-deletion">AVL Deletion</h3>
 <p>In the case of deleting the node, the same scenarios happens! But instead we <em>reduce</em> the height of some tree by 1, breaking the invariant.</p>
 <p>So therefore we can use the <strong>exact same balancing algorithm</strong>. So when implementing an AVL tree we only need to implement the balancing algorithm once!</p>
-<p>In conclusion, AVL trees use rotation to keep the tree balanced. In the worst case height of the tree is $1.44 log_2(n)$, but normally close to $log_2(n)$.</p>
+<p>In conclusion, AVL trees use rotation to keep the tree balanced. In the worst case height of the tree is $1.44\ log_2(n)$, but normally close to $log_2(n)$.</p>
 <h3 id="2-3-trees">2-3 Trees</h3>
 <p>2-3 trees is also another <strong>height</strong> balanced trees. 2-3 trees is made from two kinds of nodes:</p>
 <ul>
@@ -459,7 +459,7 @@ def exists(self, val):
 </code></pre><h3 id="red-black-tree-summary">Red-black Tree Summary</h3>
 <p>Red-black trees are 2-3 trees implemented using a BST - they have the invariant that they have to correspond to a perfectly balanced 2-3 tree.</p>
 <p>Update strategy is: Insert in a way that break the rules on red nodes, then fix it.</p>
-<p>They have logarithmic performance - worst case they height is $2 lg(n)$</p>
+<p>They have logarithmic performance - worst case they height is $2\ log(n)$</p>
 <p>This was the end of this part - it was a lot to process, it was a lot for me as well :). In the next part we&rsquo;ll cover priority queues and how they can be implemented as a kind of tree :).</p>
 
 		</section>

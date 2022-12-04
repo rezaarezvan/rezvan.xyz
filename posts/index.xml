@@ -6,7 +6,18 @@
     <description>Recent content in Posts on rezvan</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 04 Dec 2022 17:23:27 +0100</lastBuildDate><atom:link href="https://rezvan.xyz/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 04 Dec 2022 18:18:49 +0100</lastBuildDate><atom:link href="https://rezvan.xyz/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>DSA: Part 7 - Binary Heaps</title>
+      <link>https://rezvan.xyz/posts/dsa_7/</link>
+      <pubDate>Sun, 04 Dec 2022 18:18:49 +0100</pubDate>
+      
+      <guid>https://rezvan.xyz/posts/dsa_7/</guid>
+      <description>In this part we&amp;rsquo;ll cover priority queues, binary heaps, and lastly heaps as arrays. So let&amp;rsquo;s begin with priority queues!
+Priority Queues A priority queues is a collection of items which we can:
+ Add an item to the queue Find the smallest item in the queue Remove the smallest item in the queue  In this we&amp;rsquo;ll handle a priority queue as a min-priority queue, but there&amp;rsquo;s also a max-priority queue which gets/removes the maximum item in the queue as well.</description>
+    </item>
+    
     <item>
       <title>Waves: Part 1 - Mechanical Waves</title>
       <link>https://rezvan.xyz/posts/waves/</link>

@@ -73,14 +73,14 @@ $$</p>
 The same logic goes if we lower the heat/temperature - it will compress instead.</p>
 <h4 id="formula-for-thermal-expansion">Formula for Thermal Expansion</h4>
 <p>$$
-L = L_0(1 + \alpha \Delta T)
+L = L_0(1 + \alpha\ \Delta T)
 \text{, where:}
 \newline
 \alpha - \text{Expansion coefficient } [K^{-1}]
 $$</p>
 <p>This is for a 1D expansion, if the expansion happens in 2D it is:</p>
 <p>$$
-L = L_0(1 + \beta \Delta T)
+L = L_0(1 + \beta\ \Delta T)
 \text{, where:}
 \newline
 \beta - \text{Expansion coefficient } [K^{-1}]
@@ -94,7 +94,7 @@ $$</p>
 This will transfer the heat from the hot body, $T_h$ to the colder body $T_c$ since some heat will be lost in the transfer.
 The opening has a so called thermal conductivity, the ability to transfer heat. With this in mind we can derive.</p>
 <p>$$
-P = \frac{dQ}{dt} = Ak \frac{T_h - T_c}{l}
+P = \frac{dQ}{dt} = A\ k\ \frac{T_h - T_c}{l}
 \text{, where:}
 \newline
 P - \text{Effect } [W]
@@ -109,13 +109,13 @@ l - \text{Length of the opening}
 $$</p>
 <p>We can rewrite this also as:
 $$
-P = -Ak \frac{dT}{dx}
+P = -A\ k\ \frac{dT}{dx}
 \text{, or more general}
 \newline
-P = -Ak \nabla T
+P = -A\ k\ \nabla T
 $$</p>
 <h3 id="thermal-conductivity-for-more-complex-geometric-objects">Thermal Conductivity for more Complex Geometric Objects</h3>
-<p>For more complex geometric shapes, we need to consider how the thickness of the body increases/decreases. For example, for a cylinder, the formula becomes: $$ P = -kA\frac{dT}{dr} = -k 2 \pi l r \frac{dT}{dr} $$
+<p>For more complex geometric shapes, we need to consider how the thickness of the body increases/decreases. For example, for a cylinder, the formula becomes: $$ P = -k\ A\ \frac{dT}{dr} = -k\ 2\pi\  l\  r\ \frac{dT}{dr} $$
 If we&rsquo;re looking at a cylinder that generates heats in it&rsquo;s core for example, being near the core (small inner radius) will obviously be warmer than being at its surface (larger inner radius)</p>
 <p>Since $2\pi l$ is always constant - we can rewrite the equation and integrate both sides to get:</p>
 <p>$$
@@ -130,10 +130,10 @@ and let the system naturally cool down due to its surrounding temperature being 
 <li>with a bit of rewriting and integrating we also get:</li>
 </ul>
 <p>$$
-\int_{T1}^{T2} \frac{dT}{T - T_0} = \int_0^t \frac{-kA}{lcm} dt \rightarrow  ln(\frac{T_2 - T_0}{T_1 - T_0}) = -\frac{kA}{lcm}t
+\int_{T1}^{T2} \frac{dT}{T - T_0} = \int_0^t \frac{-kA}{lcm} dt \rightarrow  ln(\frac{T_2 - T_0}{T_1 - T_0}) = -\frac{k\ A}{l\ c\ m}t
 $$</p>
 <h3 id="what-thermal-conductivity-really-means">What Thermal Conductivity really means</h3>
-<p>Just so we understand the equation $Q = cm\Delta T$ - 
+<p>Just so we understand the equation $Q = c\ m\ \Delta T$ - 
 the $c$ coefficient tells us how much energy we need to put into a substance to change it&rsquo;s temperature.
 For example, $\approx$ 4180 J are required to increase the temperature of 1 kg of water by 1 &lsquo;kelvin&rsquo;. 
 Often we can use $^\circ$C as well - but this is due to the difference between two temperature being absolute.
@@ -141,7 +141,7 @@ So really it&rsquo;s a increase in any kind of temperature, just by <strong>1</s
 <h3 id="latent-heat">Latent Heat</h3>
 <p>Last thing we&rsquo;re about to cover is the so called &lsquo;Latent heat&rsquo; release of required to transition from one phase to another. 
 The formula for how much energy is needed is:</p>
-<p>$Q = mL$</p>
+<p>$Q = m\ L$</p>
 <p>Where $L$ - specific latent heat for a particular substance [J/kg]</p>
 <h3 id="conclusion">Conclusion</h3>
 <p>This was everything for the first part of the thermodynamics, 

@@ -62,9 +62,9 @@ This is often what computer scientists mean when they say that an algorithm has 
 $f$ has an <strong>order of growth</strong> of $g$ if:
 There are constants $C$ and $n_0$ such that:
 $$
-f(n) \leq C g(n) \text{ for } n \geq n_0
+f(n) \leq C\ g(n) \text{ for } n \geq n_0
 $$</p>
-<p>What this means if we decipher the math; $f(n)$ is eventually bounded by $C g(n)$, after a certain point, $n_0$</p>
+<p>What this means if we decipher the math; $f(n)$ is eventually bounded by $C\ g(n)$, after a certain point, $n_0$</p>
 <p>With this in our toolkit we can now use the O-notation: 
 $$
 f(n) \in \mathcal{O}(g(n))
@@ -72,7 +72,7 @@ $$</p>
 <h4 id="a-example">A Example</h4>
 <p>Say we have the function $f(n) = 13n + 37$ - I claim that the (Asymptotic) complexity of this function is $\mathcal{O}(n)$</p>
 <h5 id="proof">Proof</h5>
-<p>We need a $C$ and $n_0$ so that $13n + 37 \leq C n$ for $n \geq n_0$</p>
+<p>We need a $C$ and $n_0$ so that $13n + 37 \leq C\ n$ for $n \geq n_0$</p>
 <p>If we pick $C = 14$ and say $n_0 = 37$</p>
 <p>Then $13n + 37 \leq 13n + n \Longleftrightarrow 13n + 37 \leq 14n$ for $n \geq n_0$</p>
 <h4 id="orders-of-growth">Orders of growth</h4>
@@ -86,7 +86,7 @@ $$</p>
 \newline
 \mathcal{O}(n)
 \newline
-\mathcal{O}(n log(n))
+\mathcal{O}(n\ log(n))
 \newline
 \mathcal{O}(n^2)
 \newline
@@ -104,11 +104,11 @@ $$</p>
 $$</p>
 <h4 id="multiplication">Multiplication</h4>
 <p>$$
-\mathcal{O}(f) * \mathcal{O}(g) = \mathcal{O}(f * g) 
+\mathcal{O}(f) \times \mathcal{O}(g) = \mathcal{O}(f \times g) 
 $$</p>
 <p>And</p>
 <p>$$
-C * \mathcal{O}(f) = \mathcal{O}(f)
+C \times \mathcal{O}(f) = \mathcal{O}(f)
 $$</p>
 <h3 id="how-to-find-the-complexity-of-code">How to find the Complexity of code</h3>
 <p>Now that we have understood properly what the Big O notation is and how we can operate with it - the next step is being able to find the complexity in code!
@@ -138,22 +138,22 @@ $\mathcal{O}(1) + \mathcal{O}(1) + \mathcal{O}(n)$ and from our first rule that 
 
     return n
 </code></pre><p>The total complexity of <code>whats_the_complexity</code> would in this case be:
-$\mathcal{O}(n) * \mathcal{O}(n) + \mathcal{O}(n)$ and from our first and second rule that would mean a total (Asymptotic) complexity of, $\mathcal{O}(n^2)$</p>
+$\mathcal{O}(n) \times \mathcal{O}(n) + \mathcal{O}(n)$ and from our first and second rule that would mean a total (Asymptotic) complexity of, $\mathcal{O}(n^2)$</p>
 <h3 id="relatives-of-o-notation">Relatives of O-notation</h3>
 <p>What we have gone through is only a part of a bigger set of notations. The &lsquo;real&rsquo; definitions are the following:</p>
 <p>Let $f$ and $g$ be functions</p>
 <p>$f(n) \in \mathcal{O}(g(n))$ if:
 $$
-f(n) \leq C g(n) \text{ for } n \geq n_0
+f(n) \leq C\ g(n) \text{ for } n \geq n_0
 $$</p>
 <p>Now let&rsquo;s introduce:</p>
 <p>$f(n) \in \Omega(g(n))$ if:
 $$
-f(n) \geq c g(n) \text{ for } n \geq n_0
+f(n) \geq c\ g(n) \text{ for } n \geq n_0
 $$</p>
 <p>$f(n) \in \Theta(g(n))$ if:
 $$
-c g(n) \leq f(n) \leq C g(n) \text{ for } n \geq n_0
+c\ g(n) \leq f(n) \leq C\ g(n) \text{ for } n \geq n_0
 $$</p>
 <p>This means:
 $f(n) \in \Theta(g(n))$ means $f(n) \in \mathcal{O}(g(n))$ <strong>and</strong> $f(n) \in \Omega(g(n))$</p>
