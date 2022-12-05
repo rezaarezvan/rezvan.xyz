@@ -156,6 +156,90 @@ $$
 m = \text{ positive integer }
 $$</p>
 <p>Then we have <strong>destructive</strong> interference, or visually, opposites will be aligned (highs with lows, and lows with higs of the other).</p>
+<h3 id="more-ways-to-write-wave-equation">More Ways to Write Wave Equation</h3>
+<p>One we can rewrite our original wave equation is:
+$$
+A\ sin(\omega(t - \frac{x}{v}))
+$$</p>
+<p>Which can be useful sometimes!</p>
+<h3 id="reflection-and-transmission-of-waves">Reflection and Transmission of Waves</h3>
+<p>If we have a wave that propagates from one medium to another, we will have so called reflection and transmission of the wave.</p>
+<p>If we just visualize what will happen is that - the <em>reflection</em> of the wave will go in the <em>other</em> direction - whilst the transmission will have the <em>same</em> direction as the wave before.</p>
+<p>By doing some math we get:
+$$
+A_i + A_r = A_t
+$$</p>
+<p>Which seems logical, the initial wave added with the reflection wave should have the same <strong>amplitude</strong> as the new transmission wave.</p>
+<p>We can also get the following:
+$$
+\frac{d}{dx}\ (y_i + y_r) = \frac{d}{dx}\ y_t
+$$</p>
+<p>$$
+\frac{1}{V_1}\ (A_i - A_r) = \frac{1}{V_2}\ A_t
+$$</p>
+<p>Which finally gives us the relation:
+$$
+A_t = \frac{2\ V_2}{V_2 + V_1}\ A_i
+$$</p>
+<p>$$
+A_r = \frac{V_2 - V_1}{V_2 + V_1} A_i
+$$</p>
+<h3 id="standing-waves">Standing Waves</h3>
+<p>Standing waves is the phenomena when interference occurs but the waves have opposite direction.
+$$
+y_1 = A\ sin(kx - \omega t)
+\newline
+y_2 = A\ sin(kx + \omega t)
+\newline
+y_{total} = \dots = 2A\ sin(kx)\ cos(\omega t)
+$$</p>
+<p>From this we can see that in some points, we will <strong>always</strong> have some points that are 0. We call these points &rsquo;nodes&rsquo;. The peaks are therefore called antinodes.</p>
+<h3 id="fixated-wave">Fixated Wave</h3>
+<p>Let&rsquo;s apply our knowledge about standing waves to this example - we have a string which is fixated at both ends. So therefore:
+$$
+y(0, t) = 0
+\newline
+y(L, t) = 0
+$$</p>
+<p>So at x = 0 (the start of the string) and x = L (the end of the string).</p>
+<p>We get:
+$$
+y = 2A\ sin(0)\ cos(\omega t) = 0
+$$</p>
+<p>Which is what we wanted, now for $x = L$:
+$$
+y = 2A\ sin(kL)\ cos(omega t) = 0
+$$</p>
+<p>For this to be equal to 0 - $sin(kL)$ needs to be 0. So:
+$$
+sin(kL) = 0
+\newline
+k = \frac{2\pi}{\lambda}
+\newline
+kL = m\pi
+\newline
+\lambda = \frac{2L}{m}
+$$</p>
+<p>This means we only have a subset of all possible Wave-lengths that we can use so that our initial conditions are fullfilled.
+$$
+\lambda = 2L, L, \frac{2}{3}\ L, \dots
+$$</p>
+<h3 id="beats">Beats</h3>
+<p>This phenomena occurs when we have two frequencies which are <em>really</em> close, there isn&rsquo;t really that much to say, we can look at the formula and derive what happens from there:
+$$
+y = y_1 + y_2 = 2A\ cos[2\pi\ (\frac{f_1 - f_2}{2})\ t] \times cos[2\pi\ (\frac{f_1 + f_2}{2})\ t]</p>
+<p>So from this we can see that if $f_1, f_2$ are really close, we will have a really low frequency and a high frequency that is close to $f_1$.</p>
+<h3 id="the-doppler-effect">The Doppler Effect</h3>
+<p>Is the effect that happens when we have a sound source which moves, or both the listener and sound source move.</p>
+<h4 id="if-only-the-listener-moves">If only the listener moves</h4>
+<p>If the listener moves then we can write the frequency which the listener hears as:
+$$
+f_L = \frac{V + V_L}{\lambda} = \frac{V + V_L}{\frac{V}{f_S}} = (1 + \frac{V_L}{V})\ f_S
+$$</p>
+<h4 id="if-both-are-moving">If both are moving</h4>
+<p>$$
+f_L = \frac{V + V_L}{V + V_S}\ f_S
+$$</p>
 <h3 id="conclusion">Conclusion</h3>
 <p>This was it for this part - quite short, waves are a quite natural phenomena so a lot of things comes from intuition. In the next part we&rsquo;ll begin to cover light waves!</p>
 
