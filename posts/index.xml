@@ -6,7 +6,19 @@
     <description>Recent content in Posts on rezvan</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 04 Dec 2022 18:18:49 +0100</lastBuildDate><atom:link href="https://rezvan.xyz/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 06 Dec 2022 13:08:43 +0100</lastBuildDate><atom:link href="https://rezvan.xyz/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>DSA: Part 8 - Graphs</title>
+      <link>https://rezvan.xyz/posts/dsa_8/</link>
+      <pubDate>Tue, 06 Dec 2022 13:08:43 +0100</pubDate>
+      
+      <guid>https://rezvan.xyz/posts/dsa_8/</guid>
+      <description>In this part we&amp;rsquo;ll so called graphs and their applications.
+Introduction of Graphs A graph is a set of vertices connected pairwise by edges. So a very natural thing is that these edged can be either undirected or directed!
+A node can have a so called degree describing how many in/outgoing edges it has. In the directed case we split this variable to &amp;lsquo;out degree&amp;rsquo; and &amp;lsquo;in degree&amp;rsquo;.
+Another basic term that we&amp;rsquo;ll encounter is a cycle.</description>
+    </item>
+    
     <item>
       <title>DSA: Part 7 - Binary Heaps</title>
       <link>https://rezvan.xyz/posts/dsa_7/</link>
