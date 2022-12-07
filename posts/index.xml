@@ -6,7 +6,17 @@
     <description>Recent content in Posts on rezvan</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 07 Dec 2022 17:55:57 +0100</lastBuildDate><atom:link href="https://rezvan.xyz/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 07 Dec 2022 18:34:09 +0100</lastBuildDate><atom:link href="https://rezvan.xyz/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>DSA: Part 9 - Shortest Path Algortihms &amp; Spanning Trees</title>
+      <link>https://rezvan.xyz/posts/dsa_9/</link>
+      <pubDate>Wed, 07 Dec 2022 18:34:09 +0100</pubDate>
+      
+      <guid>https://rezvan.xyz/posts/dsa_9/</guid>
+      <description>In this part we&amp;rsquo;ll cover spanning trees along with how we can use these to solve pathfinding problems!
+Weighted Graphs As we have seen in the last part - graphs can we directed or undircted, the same thing goes for the weights on the edge. These represent some kind of &amp;lsquo;cost&amp;rsquo;, usually these are positive float numbers, but they could be anything - although many algortihms only work for positive weights.</description>
+    </item>
+    
     <item>
       <title>Waves: Part 2 - Light waves</title>
       <link>https://rezvan.xyz/posts/waves_2/</link>
