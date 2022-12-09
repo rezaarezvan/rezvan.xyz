@@ -6,7 +6,19 @@
     <description>Recent content in Posts on rezvan</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 07 Dec 2022 18:34:09 +0100</lastBuildDate><atom:link href="https://rezvan.xyz/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 09 Dec 2022 18:49:03 +0100</lastBuildDate><atom:link href="https://rezvan.xyz/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>DSA: Part 10 - Complexity (2)</title>
+      <link>https://rezvan.xyz/posts/dsa_10/</link>
+      <pubDate>Fri, 09 Dec 2022 18:49:03 +0100</pubDate>
+      
+      <guid>https://rezvan.xyz/posts/dsa_10/</guid>
+      <description>We have actually covered everything in this course - in this part we&amp;rsquo;ll do some exercises!
+Order of growth of Functions Let&amp;rsquo;s find out the complexity ($\mathcal{O}$) of: $$ T(n) = 5(3n^2 + 2n + 6)(4\ log_{10}(n) + 1) $$
+Since we seek the growth rate - we can use our rules about complexity. We can remove all constants: $$ T(n) = (n^2 + n)(log_{10}(n)) $$
+The next rule we can apply is, &amp;ldquo;the most dominating factor &amp;lsquo;wins&amp;rsquo;&amp;rdquo; as I like to call it.</description>
+    </item>
+    
     <item>
       <title>DSA: Part 9 - Shortest Path Algortihms &amp; Spanning Trees</title>
       <link>https://rezvan.xyz/posts/dsa_9/</link>
