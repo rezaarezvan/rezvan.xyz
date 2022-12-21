@@ -130,20 +130,17 @@ or reaching the end of one array - if we do that we know there&rsquo;s nothing l
 We can imagine that we divide the unsorted array into a left and right part and <strong>recursively</strong> mergesort() them as well.</p>
 <p>In practice it means that we get a sorted left array and a sorted right array, then we finally merge them for the final result.</p>
 <p>An implementation of merge sort:</p>
-<pre tabindex="0"><code>def merge_sort(arr):
-    if len(arr) &gt; 1:
+<pre tabindex="0"><code>def merge_sort(arr: list) -&gt; list:
+    if len(arr) &lt; 2:
+        return arr[:]
+    else:
         mid = len(arr) // 2
 
-        L = arr[:mid]
-
-        R = arr[mid:]
-
-        merge_sort(L)
-        merge_sort(R)
-
-        output = merge(L, R)
-
-        return output
+        L = merge_sort(arr[:mid])
+        R = merge_sort(arr[mid:])
+	
+	result = merge(L, R)
+        return result
 </code></pre><p>Merge sort is great, but sometimes, if the list is <em>almost</em> sorted or worse, already sorted and you call this function sort it - it will be incredibly slow, this is due to merge sort not being a so called in place algorithm.
 A algorithm which has the same divide and conquerer strategy but is in-place is Quicksort!</p>
 <p>Quicksort builds on the idea that you <em>partition</em> your array into one part which is lower than the <em>pivot</em> element and one part which is higher.</p>
