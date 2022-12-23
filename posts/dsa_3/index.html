@@ -163,7 +163,7 @@ class Stack:
         if self.head == None:
             self.head = Node(val)
             return
-
+ f
         new = Node(val)
         new.next = self.head
         self.head = new
@@ -223,55 +223,82 @@ However, in a queue we always need to the first and the last element. Therefore,
         self.next = None
 
 class Queue:
-    def __init(self):
+    def __init__(self):
+        self.last = None
         self.first = None
-        self.last  = None
-        self.size  = 0
-    
-    def enqueue(val):
-        new = Node(val)
-        self.last.next = new
-        self.last = new
-        self.size += 1
-    
-    def dequeue():
-        result = self.first.val
-        self.first = self.first.next
-        size -= 1
+        self.size = 0
 
-        return result
+    def is_empty(self):
+        if self.first == None:
+            return True
+
+        return False
+
+    def enqueue(self, val):
+        new_node = Node(val)
+        if self.is_empty():
+            self.first = new_node
+            self.last = new_node
+        else:
+            self.last.next = new_node
+            self.last = new_node
+
+        self.size += 1
+
+    def dequeue(self):
+        if self.is_empty():
+            return None
+
+        exit = self.first
+        self.first = self.first.next
+        self.size -= 1
+        return exit.val
 </code></pre><p>Quite simple and elegant!</p>
 <h4 id="implementation-of-a-queue-using-a-dynamic-array">Implementation of a queue using a (dynamic) array</h4>
 <p>One thing we have go through first is that - our implementation will be a so called circular array. Our pointers to the head and tail can (and will cross).</p>
 <pre tabindex="0"><code>class Queue:
-    def __init(self):
-        self.queue = []
-        self.head  = None
-        self.tail  = None
+    def __init__(self):
+        self.queue = [None]
+        self.head = 0
+        self.tail = 1
 
-    def enqueue(val):
-        if self.tail == self.head:
-            resize(2 * len(self.queue)
+    def is_empty(self):
+        return self.head == (self.tail + 1) % len(self.queue)
 
-        self.queue[tail] = val
-        self.tal = (self.tail + 1) % len(self.queue)
+    def enqueue(self, val):
+        if (self.tail + 1) % len(self.queue) == self.head:
+            self.resize(2 * len(self.queue))
 
-    def dequeue():
-        result = self.queue[head]
-        self.queue[head] = None
-        self.head = (self.head - 1) % (len(self.queue))
+        self.queue[self.tail] = val
+        self.tail = (self.tail + 1) % len(self.queue)
+
+    def dequeue(self):
+        if self.is_empty():
+            raise Exception(&#34;Queue is empty&#34;)
+
+        result = self.queue[self.head]
+        self.head = (self.head + 1) % len(self.queue)
 
         return result
-    
-    def resize(newsize):
-        old = self.queue
-        self.queue = [None] * newsize
-        for i in (len(self.queue)):
-            _i = (i + self.head) % len(old))
-            self.queue[i] = old[_i]
 
-        self.head = 0
-        self.tail = len(old)
+    def resize(self, new_size):
+        old_queue = self.queue
+        self.queue = [None] * new_size
+
+        if self.head &lt; self.tail:
+            for i in range(self.tail - self.head):
+                self.queue[i] = old_queue[(self.head + i) % len(old_queue)]
+
+            self.head = 0
+            self.tail = self.tail - self.head
+
+        else:
+            for i in range(len(old_queue) - 1):
+                _index = (self.head + i) % len(old_queue)
+                self.queue[i] = old_queue[_index]
+
+            self.head = 0
+            self.tail = self.tail - self.head - 1
 </code></pre><p>That&rsquo;s it for this part - in the next part we&rsquo;ll cover something called &lsquo;<strong>A</strong>bstract <strong>D</strong>ata <strong>T</strong>ypes&rsquo; or for short ADTs. 
 We&rsquo;ll define what a ADT is and what&rsquo;s the difference between them and ordinary data structures.</p>
 
