@@ -147,6 +147,7 @@ we first store the value of our current head node temporarily, to return the val
         self.val = val
         self.next = None
 
+
 class Stack:
     def __init__(self):
         self.head = None
@@ -161,6 +162,7 @@ class Stack:
     def push(self, val):
         if self.head == None:
             self.head = Node(val)
+            return
 
         new = Node(val)
         new.next = self.head
@@ -168,7 +170,7 @@ class Stack:
         self.size += 1
 
     def pop(self):
-        if self.is_empty():
+        if self.head == None:
             return None
 
         pop = self.head.val
@@ -182,32 +184,36 @@ One thing that might not be obvious might be that, using the first element as th
 <p>If we pop the first element - we would need to push forward the rest of the stack by 1 step. Which would take $\mathcal{O}(n)$. We want $\mathcal{O}(1)$!</p>
 <p>So instead let&rsquo;s use the last element as the top!</p>
 <pre tabindex="0"><code>class Stack:
-    def __init(self):
-        self.stack = []
-        self.size  = 0
+    def __init__(self):
+        self.stack = [None]
+        self.size = 0
+
+    def is_empty(self):
+        return self.size == 0
 
     def push(self, val):
         if self.size == len(self.stack):
-            self.resize(2*self.size)
+            self.resize(2 * self.size)
 
-        self.stack[self.size] = x
+        self.stack[self.size] = val
         self.size += 1
 
     def pop(self):
         self.size -= 1
-        result = self.stack[self.size]
+        pop = self.stack[self.size]
         self.stack[self.size] = None
         if self.size == (len(self.stack) // 4):
             self.resize(len(self.stack) // 2)
 
-        return result
+        return pop
 
-    def resize(self, newsize):
-        old = self.stack
-        new = [None] * newsize
-        for i in range(len(new)):
-            new[i] = old[i]
-        self.stack = new
+    def resize(self, factor):
+        new_array = [None] * factor
+
+        for i in range(self.size):
+            new_array[i] = self.stack[i]
+
+        self.stack = new_array
 </code></pre><h4 id="implementation-of-a-queue-using-linked-lists">Implementation of a queue using linked lists</h4>
 <p>Now it&rsquo;s now to implement queues! Using a linked list seems as a very natural approach since we have a sequence of pointers forward.
 However, in a queue we always need to the first and the last element. Therefore, we need another pointer to the end of the list as well.</p>
