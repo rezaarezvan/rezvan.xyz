@@ -163,7 +163,8 @@ def get_min(tree: BST):
         c_node = c_node.left
 
     return c_node.value
-</code></pre><h3 id="sorting-a-bst---sometimes-we-might-want-to-printstore-a-bst-in-ascending-order---the-way-to-do-this-of-course-is-via-recursion">Sorting a BST - sometimes we might want to print/store a BST in ascending order - the way to do this of course is via recursion!</h3>
+</code></pre><h3 id="sorting-a-bst">Sorting a BST</h3>
+<p>Sometimes we might want to print/store a BST in ascending order - the way to do this of course is via recursion!</p>
 <p>This is also known as <em>inorder</em> traversal - we print the left subtree, print the root then print the right subtree - we do this recursively.</p>
 <p>So for example:</p>
 <pre tabindex="0"><code>def print_sorted(node: Node):
