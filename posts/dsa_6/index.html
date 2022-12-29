@@ -69,7 +69,7 @@
 <pre tabindex="0"><code>class Tree:
     name: string
     size: int
-    
+
     children: list[Tree]
 </code></pre><p>If we now want to compute the total size of a directory (folder) we would need to:</p>
 <pre tabindex="0"><code>def total(tree: Tree) -&gt; int:
@@ -83,7 +83,7 @@ As well as <strong>Post-order</strong> traversal - meaning you process each node
 <h3 id="binary-trees">Binary Trees</h3>
 <p>Often we can use a special kind of tree called &lsquo;Binary tree&rsquo; - a binary tree is a tree where each node has exactly <strong>two</strong> children.</p>
 <p>As we said before, these children can be represented as a null-value if they&rsquo;re &lsquo;missing&rsquo;. We call these children nodes the &rsquo;left&rsquo; and &lsquo;right&rsquo; nodes or subtrees.</p>
-<p>Some terminology common used for trees are, <code>size</code> <code>height</code>, and <code>level</code>. 
+<p>Some terminology common used for trees are, <code>size</code> <code>height</code>, and <code>level</code>.
 Size is the number of nodes in the (sub)tree - height, is the number of <code>levels</code> in the tree. Level is the distance from node to the root.</p>
 <h3 id="binary-search-trees">Binary Search Trees</h3>
 <p>Binary search trees or BSTs is a kind of binary tree but with some extra conditions:</p>
@@ -92,7 +92,7 @@ Size is the number of nodes in the (sub)tree - height, is the number of <code>le
 <p>Each node has a <em>key</em></p>
 </li>
 <li>
-<p>The node&rsquo;s key is greater than all the keys in its right subtree</p>
+<p>The node&rsquo;s key is smaller than all the keys in its right subtree</p>
 </li>
 <li>
 <p>The node&rsquo;s key is greater than all the keys in its left subtree</p>
@@ -236,7 +236,7 @@ What we need to do in that case is: We first delete the parent node by replacing
 
 	return node
 </code></pre><h3 id="complexity">Complexity</h3>
-<p>The complexity of operations for BST are in the best case and average case, $\mathcal{O}(log\ n)$ which is great. 
+<p>The complexity of operations for BST are in the best case and average case, $\mathcal{O}(log\ n)$ which is great.
 In the worst case however, these operations will take $\mathcal{O}(n)$ since the items are in ascending order.</p>
 <h3 id="bst-summary">BST Summary</h3>
 <p>We can use BSTs to implement a set or map, however, with ordering-based operations such as min, max, range etc with good complexity.</p>
@@ -359,7 +359,7 @@ def insert(self, val):
     new_node.right = self.nil
 
     # New node must be red
-    new_node.red = True  
+    new_node.red = True
 
     parent = None
     current = self.root

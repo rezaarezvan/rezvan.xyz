@@ -61,7 +61,7 @@ Another basic term that we&amp;rsquo;ll encounter is a cycle.</description>
       <guid>https://rezvan.xyz/posts/dsa_7/</guid>
       <description>In this part we&amp;rsquo;ll cover priority queues, binary heaps, and lastly heaps as arrays. So let&amp;rsquo;s begin with priority queues!
 Priority Queues A priority queues is a collection of items which we can:
- Add an item to the queue Find the smallest item in the queue Remove the smallest item in the queue  In this we&amp;rsquo;ll handle a priority queue as a min-priority queue, but there&amp;rsquo;s also a max-priority queue which gets/removes the maximum item in the queue as well.</description>
+Add an item to the queue Find the smallest item in the queue Remove the smallest item in the queue In this we&amp;rsquo;ll handle a priority queue as a min-priority queue, but there&amp;rsquo;s also a max-priority queue which gets/removes the maximum item in the queue as well.</description>
     </item>
     
     <item>
@@ -73,9 +73,9 @@ Priority Queues A priority queues is a collection of items which we can:
       <description>The next chapter in our physics course is about waves, especially mechanical waves.
 General about Waves In this chapter we&amp;rsquo;ll cover mechanical waves but also electromagnetic waves, in this case only (visible) light.
 There&amp;rsquo;s two types of waves we&amp;rsquo;ll be covering:
-  Transverse waves
- They have &amp;rsquo;noise&amp;rsquo; orthogonal against the wave&amp;rsquo;s propagation speed.    Longitudinal waves
- They have &amp;rsquo;noise&amp;rsquo; parallel with the waves&amp;rsquo; propagation speed.    We can describe this noise with the function $y(x, t) = f(x + vt)$.</description>
+Transverse waves
+They have &amp;rsquo;noise&amp;rsquo; orthogonal against the wave&amp;rsquo;s propagation speed. Longitudinal waves
+They have &amp;rsquo;noise&amp;rsquo; parallel with the waves&amp;rsquo; propagation speed. We can describe this noise with the function $y(x, t) = f(x + vt)$.</description>
     </item>
     
     <item>
@@ -202,7 +202,7 @@ With this we began with simple sorting and searching algorithms. Firstly we bega
       
       <guid>https://rezvan.xyz/posts/bucketlist/</guid>
       <description>One day each and one of us will die - this is a universal truth. I am writing this to keep my self accountable and remind my future self to recognize where I was and where I&amp;rsquo;ve gotten to.
- Build/own my own place Make a difference in the world (well, hard to define) Fall in love Be successful working for myself (finical security) Create something meaningful (film, book, podcast etc) Live in another country Trace my ancestry Read 100 200 books Mentor someone Help someone else achieving their dreams Get a PhD Watch over 200 movies  </description>
+Build/own my own place Make a difference in the world (well, hard to define) Fall in love Be successful working for myself (finical security) Create something meaningful (film, book, podcast etc) Live in another country Trace my ancestry Read 100 200 books Mentor someone Help someone else achieving their dreams Get a PhD Watch over 200 movies </description>
     </item>
     
     <item>
