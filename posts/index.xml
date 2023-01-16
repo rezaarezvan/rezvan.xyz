@@ -6,7 +6,18 @@
     <description>Recent content in Posts on rezvan</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 09 Jan 2023 17:03:59 +0100</lastBuildDate><atom:link href="https://rezvan.xyz/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 15 Jan 2023 15:00:13 +0100</lastBuildDate><atom:link href="https://rezvan.xyz/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Digital Design: Part 1 - Introduction &amp; Boolean Algebra</title>
+      <link>https://rezvan.xyz/posts/digital_design/</link>
+      <pubDate>Sun, 15 Jan 2023 15:00:13 +0100</pubDate>
+      
+      <guid>https://rezvan.xyz/posts/digital_design/</guid>
+      <description>In our day-to-day lives, we use digital circuits all the time, without really thinking about them.
+Even most software developers do not appreciate the abstraction which digital circuits are built upon. What are digital circuits built from then? Chips! What are chips built from then? Logical gates! What are logical gates built from then? Transistor circuits! What are these circuits built from? Transistors! (duh).
+As you can see it&amp;rsquo;s quite a few steps.</description>
+    </item>
+    
     <item>
       <title>Programming Principles</title>
       <link>https://rezvan.xyz/posts/programming_principles/</link>
