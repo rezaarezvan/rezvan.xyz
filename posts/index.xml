@@ -6,11 +6,22 @@
     <description>Recent content in Posts on rezvan</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 15 Jan 2023 15:00:13 +0100</lastBuildDate><atom:link href="https://rezvan.xyz/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 16 Jan 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://rezvan.xyz/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Concurrent Programming: Part 1 - Introduction</title>
+      <link>https://rezvan.xyz/posts/concurrent_programming/</link>
+      <pubDate>Mon, 16 Jan 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://rezvan.xyz/posts/concurrent_programming/</guid>
+      <description>Concurrency, multi-threading, parallelism. These are all big terms thrown around in the computer-science world. For an outsider it can be quite confusing what these exactly are and how they differ from each other. In this series we&amp;rsquo;ll cover and dive into concurrency and its applications.
+Let&amp;rsquo;s start by defining what we mean by concurrency.
+Introduction Concurrency, in its very definition is, the fact of two or more events or circumstances happening or existing at the same time.</description>
+    </item>
+    
     <item>
       <title>Digital Design: Part 1 - Introduction &amp; Boolean Algebra</title>
       <link>https://rezvan.xyz/posts/digital_design/</link>
-      <pubDate>Sun, 15 Jan 2023 15:00:13 +0100</pubDate>
+      <pubDate>Mon, 16 Jan 2023 00:00:00 +0000</pubDate>
       
       <guid>https://rezvan.xyz/posts/digital_design/</guid>
       <description>In our day-to-day lives, we use digital circuits all the time, without really thinking about them.
