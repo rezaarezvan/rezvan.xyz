@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"><meta property="og:site_name" content="rezvan"><title>Concurrent Programming: Part 1 - Introduction | rezvan</title>
+  <meta property="og:title" content="Concurrent Programming: Part 1 - Introduction | rezvan"><meta property="og:description" content="">
+  <meta property="og:type" content="blog">
+  <meta property="og:link" content="https://rezvan.xyz/school/concurrent_programming/"><link rel="shortcut icon" type="image/png" href=https://rezvan.xyz//images/icon.png />
+  <meta property="og:image" content="https://rezvan.xyz//images/icon.png" /><meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz//css/main.css" />    
+</head>
+
+<body>
+  <div class="wrapper">
+	<div class="content">
+		<div class="header_main">
+	<a href="https://rezvan.xyz/"><p class="header_title">rezvan</p><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.3/dist/katex.min.css" integrity="sha384-Juol1FqnotbkyZUT5Z7gUPjQ9gzlwCENvUZTpQBAPxtusdwFLRy382PSDx5UUJ4/" crossorigin="anonymous">
+
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.3/dist/katex.min.js" integrity="sha384-97gW6UIJxnlKemYavrqDHSX3SiygeOwIZhwyOKRfSaf0JWKRVj9hLASHgFTzT+0O" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.3/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+            delimiters: [
+                {left: "$$", right: "$$", display: true},
+                {left: "$", right: "$", display: false}
+            ]
+        });
+    });
+</script>
+
+	</a>
+  <br>
+  <nav id="main">
+    
+      <a href="/About/">About</a>
+    
+      <a href="/CV/">CV</a>
+    
+      <a href="/school/">School</a>
+    
+  </nav></div>
+
+  <article><div class="title_wrapper">
+			<h1 class="title">Concurrent Programming: Part 1 - Introduction</h1><p class="single_time">Jan 16, 2023</p></div>
+		<section class="post">
+			<p>Concurrency, multi-threading, parallelism. These are all big terms thrown around in the computer-science world.
+For an outsider it can be quite confusing what these exactly are and how they differ from each other.
+In this series we&rsquo;ll cover and dive into concurrency and its applications.</p>
+<p>Let&rsquo;s start by defining what we mean by concurrency.</p>
+<h1 id="introduction">Introduction</h1>
+<p>Concurrency, in its very definition is, the fact of two or more events or circumstances happening or existing at the same time.</p>
+<p>If we apply this to computer-science, we can see that&rsquo;s a very natural thing.
+Executing two or more events at the same time is something we would love. The only problem is that, we canno&rsquo;t garantuee saftety.</p>
+<p>Let&rsquo;s look at an example.</p>
+<h4 id="simple-example">Simple example</h4>
+<p>Let&rsquo;s look at a Java program which increments a simple counter:</p>
+<p>In a sequential (non-concurrent) program this would be:</p>
+<pre tabindex="0"><code>public class Counter {
+    private int counter = 0;
+
+    public void run() {
+        int cnt = counter;
+        counter = cnt + 1;
+    }
+
+    public int counter() {
+        return counter;
+    }
+}
+</code></pre><pre tabindex="0"><code>public class SequentialCount {
+    public static void main(String[] args) {
+        Counter counter = new Counter();
+
+        counter.run();
+        counter.run();
+
+        System.out.println(counter.counter());
+    }
+}
+</code></pre><p>This program will <strong>always</strong> print out 2. There&rsquo;s no doubt in that.</p>
+<p>If we now introduce concurrency, we will now run these at the same time, or in <em>parallel</em>, do not confuse this with parallelism.
+They&rsquo;re not the same.</p>
+<p>So the idea is that we run the block of code we have on <strong>independent</strong> execution units (so-called threads in Java).</p>
+<p>Specifically, in Java, these threads will run on the <strong>same</strong> <code>counter</code> object. So they will share the global variable called <code>counter</code>.</p>
+<p>We, the programmers, don&rsquo;t have any control in what order these threads will be executed, this is the <em>schedulers</em> job.</p>
+<pre tabindex="0"><code>public class ConcurrentCounter extends Counter implements Runnable {
+    /*
+
+    threads will execute run()
+
+    */
+}
+</code></pre><pre tabindex="0"><code>public class ConcurrentCount {
+    public static void main(String[] args) {
+        ConcurrentCounter counter = new ConcurrentCounter();
+
+        Thread t = new Thread(counter);
+        Thread u = new Thread(counter);
+
+        t.start();
+        u.start();
+
+        try { t.join(); u.join(); }
+
+        catch (InterruptedException e) {
+            System.out.println(&#34;Interrupted!&#34;);
+        }
+
+        System.out.println(counter.counter());
+    }
+}
+</code></pre><p>If we compile and run this, we necessarily won&rsquo;t always get the expected answer, 2. In some (rare) cases, we will get the answer 1.</p>
+<p>But if there is a risk for failure, why would we even want to write concurrent programs? We&rsquo;ll the answer can be described in 3 keypoints.</p>
+<ul>
+<li>
+<p>Abstraction</p>
+<ul>
+<li>By seperating tasks and making sure we don&rsquo;t have to worry about them. For example downloading multiple files at once.</li>
+</ul>
+</li>
+<li>
+<p>Responsiveness</p>
+<ul>
+<li>We can provide a responsive, user interface by writing concurrent programs. For example, browsing youtube while downloading files.</li>
+</ul>
+</li>
+<li>
+<p>Performance</p>
+<ul>
+<li>Splitting complex tasks, into smaller, subtasks will greatly increase the pure computer performance.</li>
+</ul>
+</li>
+</ul>
+<p>Let&rsquo;s also make one thing clear. Concurrency vs Parallelism. Concurrency is &ldquo;logical parallelism&rdquo; and parallelism is &ldquo;phyisical parallelism&rdquo; and parallelism is &ldquo;phyisical parallelism&rdquo;.</p>
+<p>Paralleism is about taking advantage of redundant hardware.</p>
+<p>Today, concurrency is everywhere, all operating-systems are based on concurrency and making sure things are speedy.</p>
+<p>But these speedups aren&rsquo;t always free.</p>
+<h1 id="amdahls-law">Amdahl&rsquo;s law</h1>
+<p>Amdahl&rsquo;s law gives us an equation that, given $n$ processors (these are not necessarily physical processors but can be execution units) that can run in parallel.</p>
+<p>What&rsquo;s the maximum speedup we can gain?
+$$
+\text{max speedup} = \frac{1}{(1 - p) + \frac{p}{n}}
+$$</p>
+<p>$p$ is the % of the program that is being run in parallel. By plugging in some arbitrary values we find quickly that, after a certain threshold, more parallelism doesn&rsquo;t help.</p>
+<h1 id="terminology">Terminology</h1>
+<p>Now that we&rsquo;ve looked at the basics, let&rsquo;s look at some important terminology.</p>
+<p>A process is an <strong>independent unit of execution</strong>. It&rsquo;s an abstraction of a running sequential program.
+This is what the operating system <strong>schedules</strong>, which <strong>process</strong> to run.</p>
+<p>The <strong>scheduler</strong> is the system unit that is in charge of the <strong>process state</strong>.
+There are 3 states in which a process can be in:</p>
+<ul>
+<li>
+<p>Ready</p>
+<ul>
+<li>Ready to be executed, but not allocated to any execution unit.</li>
+</ul>
+</li>
+<li>
+<p>Blocked</p>
+<ul>
+<li>Waiting for an event to happen</li>
+</ul>
+</li>
+<li>
+<p>Running</p>
+<ul>
+<li>Running on some execution unit</li>
+</ul>
+</li>
+</ul>
+<p>A <strong>thread</strong> is a <em>lightweight process</em>. The actual diffrence between a process and a thread is fuzzy and implementation specific.</p>
+<p>Our definition will be:</p>
+<p>Process: Executing units that do <strong>not</strong> share memory.<br>
+Threads: Executing units that share memory.</p>
+<p>An important thing to remember is that, threads (or execution units that share memory) <strong>communicate</strong> via memory.
+While processes (or execution units that do not share memory) send real messages between the processes themselves.</p>
+<p>These models are called, <strong>shared memory</strong> and <strong>distributed memory</strong>.</p>
+<h1 id="traces">Traces</h1>
+<p>A trace is an abstraction of concrete executions, these executions being:</p>
+<ul>
+<li>
+<p>Atomic/linearized</p>
+<ul>
+<li>The effects of each thread appear as if they happened instantaneously.</li>
+</ul>
+</li>
+<li>
+<p>Complete</p>
+<ul>
+<li>The trace includes all intermediate atomic states.</li>
+</ul>
+</li>
+<li>
+<p>Interleaved</p>
+<ul>
+<li>The trace is an interleaving of each thread’s linear trace (in particular, no simultaneity).</li>
+</ul>
+</li>
+</ul>
+<p>What this means is, the sequence of <em>states</em> gives an execution <strong>trace</strong> of the concurrent program.</p>
+<p>So different <em>traces</em> lead to different results in the program.</p>
+<h1 id="conclusion">Conclusion</h1>
+<p>This concludes this first part in this series, we&rsquo;ve only looked at the pure basics and terminology here.
+In the next part we&rsquo;ll cover races, locks and semaphores, which are the first real concurrency principles we&rsquo;ll look at.</p>
+
+		</section>
+  </article>
+	</div>
+
+	<footer><p class="footer_msg">Memento mori</p></footer>
+
+  </div>
+</body>
+</html>

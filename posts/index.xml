@@ -6,29 +6,7 @@
     <description>Recent content in Posts on rezvan</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 16 Jan 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://rezvan.xyz/posts/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Concurrent Programming: Part 1 - Introduction</title>
-      <link>https://rezvan.xyz/posts/concurrent_programming/</link>
-      <pubDate>Mon, 16 Jan 2023 00:00:00 +0000</pubDate>
-      
-      <guid>https://rezvan.xyz/posts/concurrent_programming/</guid>
-      <description>Concurrency, multi-threading, parallelism. These are all big terms thrown around in the computer-science world. For an outsider it can be quite confusing what these exactly are and how they differ from each other. In this series we&amp;rsquo;ll cover and dive into concurrency and its applications.
-Let&amp;rsquo;s start by defining what we mean by concurrency.
-Introduction Concurrency, in its very definition is, the fact of two or more events or circumstances happening or existing at the same time.</description>
-    </item>
-    
-    <item>
-      <title>Digital Design: Part 1 - Introduction &amp; Boolean Algebra</title>
-      <link>https://rezvan.xyz/posts/digital_design/</link>
-      <pubDate>Mon, 16 Jan 2023 00:00:00 +0000</pubDate>
-      
-      <guid>https://rezvan.xyz/posts/digital_design/</guid>
-      <description>In our day-to-day lives, we use digital circuits all the time, without really thinking about them.
-Even most software developers do not appreciate the abstraction which digital circuits are built upon. What are digital circuits built from then? Chips! What are chips built from then? Logical gates! What are logical gates built from then? Transistor circuits! What are these circuits built from? Transistors! (duh).
-As you can see it&amp;rsquo;s quite a few steps.</description>
-    </item>
-    
+    <lastBuildDate>Mon, 09 Jan 2023 17:03:59 +0100</lastBuildDate><atom:link href="https://rezvan.xyz/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Programming Principles</title>
       <link>https://rezvan.xyz/posts/programming_principles/</link>
@@ -37,176 +15,6 @@ As you can see it&amp;rsquo;s quite a few steps.</description>
       <guid>https://rezvan.xyz/posts/programming_principles/</guid>
       <description>One of the core things that makes programming so fun in my eyes are the standards and conventions that we&amp;rsquo;ve built. I want to write down my principles that I follow when writing code. I think it&amp;rsquo;s an essential part of every engineer that they have their own guidelines and principles they follow.
 Consistency Before we even dive into an actual programming principle I want to talk about consistency. Guidlines and principles won&amp;rsquo;t even matter if we aren&amp;rsquo;t consistent with them.</description>
-    </item>
-    
-    <item>
-      <title>DSA: Part 10 - Complexity (2)</title>
-      <link>https://rezvan.xyz/posts/dsa_10/</link>
-      <pubDate>Fri, 09 Dec 2022 18:49:03 +0100</pubDate>
-      
-      <guid>https://rezvan.xyz/posts/dsa_10/</guid>
-      <description>We have actually covered everything in this course - in this part we&amp;rsquo;ll do some exercises!
-Order of growth of Functions Let&amp;rsquo;s find out the complexity ($\mathcal{O}$) of: $$ T(n) = 5(3n^2 + 2n + 6)(4\ log_{10}(n) + 1) $$
-Since we seek the growth rate - we can use our rules about complexity. We can remove all constants: $$ T(n) = (n^2 + n)(log_{10}(n)) $$
-The next rule we can apply is, &amp;ldquo;the most dominating factor &amp;lsquo;wins&amp;rsquo;&amp;rdquo; as I like to call it.</description>
-    </item>
-    
-    <item>
-      <title>DSA: Part 9 - Shortest Path Algortihms &amp; Spanning Trees</title>
-      <link>https://rezvan.xyz/posts/dsa_9/</link>
-      <pubDate>Wed, 07 Dec 2022 18:34:09 +0100</pubDate>
-      
-      <guid>https://rezvan.xyz/posts/dsa_9/</guid>
-      <description>In this part we&amp;rsquo;ll cover spanning trees along with how we can use these to solve pathfinding problems!
-Weighted Graphs As we have seen in the last part - graphs can we directed or undircted, the same thing goes for the weights on the edge. These represent some kind of &amp;lsquo;cost&amp;rsquo;, usually these are positive float numbers, but they could be anything - although many algortihms only work for positive weights.</description>
-    </item>
-    
-    <item>
-      <title>Waves: Part 2 - Light waves</title>
-      <link>https://rezvan.xyz/posts/waves_2/</link>
-      <pubDate>Wed, 07 Dec 2022 17:55:57 +0100</pubDate>
-      
-      <guid>https://rezvan.xyz/posts/waves_2/</guid>
-      <description>In this part we&amp;rsquo;ll cover light waves and it&amp;rsquo;s properties.
-Light is actually electromagnetic radiation. The visible light we can see is usually between 380 - 740 nm
-General Conventions As we remember from mechanical waves $v = \lambda f$, this also applies for light waves, but our $v$ is instead $c$. $$ c = \lambda f = 3 \cdot 10^8 m/s $$
-If we look at light like usual mechanical waves, it quickly becomes very cluttered in our sketch.</description>
-    </item>
-    
-    <item>
-      <title>DSA: Part 8 - Graphs</title>
-      <link>https://rezvan.xyz/posts/dsa_8/</link>
-      <pubDate>Tue, 06 Dec 2022 13:08:43 +0100</pubDate>
-      
-      <guid>https://rezvan.xyz/posts/dsa_8/</guid>
-      <description>In this part we&amp;rsquo;ll so called graphs and their applications.
-Introduction of Graphs A graph is a set of vertices connected pairwise by edges. So a very natural thing is that these edged can be either undirected or directed!
-A node can have a so called degree describing how many in/outgoing edges it has. In the directed case we split this variable to &amp;lsquo;out degree&amp;rsquo; and &amp;lsquo;in degree&amp;rsquo;.
-Another basic term that we&amp;rsquo;ll encounter is a cycle.</description>
-    </item>
-    
-    <item>
-      <title>DSA: Part 7 - Binary Heaps</title>
-      <link>https://rezvan.xyz/posts/dsa_7/</link>
-      <pubDate>Sun, 04 Dec 2022 18:18:49 +0100</pubDate>
-      
-      <guid>https://rezvan.xyz/posts/dsa_7/</guid>
-      <description>In this part we&amp;rsquo;ll cover priority queues, binary heaps, and lastly heaps as arrays. So let&amp;rsquo;s begin with priority queues!
-Priority Queues A priority queues is a collection of items which we can:
-Add an item to the queue Find the smallest item in the queue Remove the smallest item in the queue In this we&amp;rsquo;ll handle a priority queue as a min-priority queue, but there&amp;rsquo;s also a max-priority queue which gets/removes the maximum item in the queue as well.</description>
-    </item>
-    
-    <item>
-      <title>Waves: Part 1 - Mechanical Waves</title>
-      <link>https://rezvan.xyz/posts/waves/</link>
-      <pubDate>Sun, 04 Dec 2022 17:23:27 +0100</pubDate>
-      
-      <guid>https://rezvan.xyz/posts/waves/</guid>
-      <description>The next chapter in our physics course is about waves, especially mechanical waves.
-General about Waves In this chapter we&amp;rsquo;ll cover mechanical waves but also electromagnetic waves, in this case only (visible) light.
-There&amp;rsquo;s two types of waves we&amp;rsquo;ll be covering:
-Transverse waves
-They have &amp;rsquo;noise&amp;rsquo; orthogonal against the wave&amp;rsquo;s propagation speed. Longitudinal waves
-They have &amp;rsquo;noise&amp;rsquo; parallel with the waves&amp;rsquo; propagation speed. We can describe this noise with the function $y(x, t) = f(x + vt)$.</description>
-    </item>
-    
-    <item>
-      <title>DSA: Part 6 - Trees</title>
-      <link>https://rezvan.xyz/posts/dsa_6/</link>
-      <pubDate>Wed, 30 Nov 2022 18:08:48 +0100</pubDate>
-      
-      <guid>https://rezvan.xyz/posts/dsa_6/</guid>
-      <description>In this part we&amp;rsquo;ll cover so called &amp;rsquo;trees&amp;rsquo; in computer science. Warning, this will be a quite long part soooo&amp;hellip;
-Trees The formal definition of a &amp;rsquo;tree&amp;rsquo; is: &amp;ldquo;A hierarchical data structure built up from nodes&amp;rdquo;.
-So unlike a real tree which has its root at the bottom - the computer scientist flipped it - the root node is at the top of the tree.
-In any tree there&amp;rsquo;s always one root node.</description>
-    </item>
-    
-    <item>
-      <title>DSA: Part 5 - Hash Tables</title>
-      <link>https://rezvan.xyz/posts/dsa_5/</link>
-      <pubDate>Tue, 29 Nov 2022 18:50:23 +0100</pubDate>
-      
-      <guid>https://rezvan.xyz/posts/dsa_5/</guid>
-      <description>Hash Tables Hash tables are one of the most famous (and widely used) data structures. But why are they so popular and powerful? Before we can answer that question we need to look back at sets and maps.
-Sets and Maps in Context Just to refresh our memory - a set is a collection of items, where duplicates aren&amp;rsquo;t allowed. Maps are sets of keys, each having a associate value - or you can formulate it as - a set of key-value pairs.</description>
-    </item>
-    
-    <item>
-      <title>DSA: Part 4 - Abstract Data Types</title>
-      <link>https://rezvan.xyz/posts/dsa_4/</link>
-      <pubDate>Mon, 28 Nov 2022 20:30:47 +0100</pubDate>
-      
-      <guid>https://rezvan.xyz/posts/dsa_4/</guid>
-      <description>ADT vs Data Structures So what&amp;rsquo;s the difference betwen a Abstract Data Type and an actual datastructure?
-An ADT is a kind of specification of something - it specifies how we can intertact with that object, like an API.
-It consits of methods and constructors but also plain-text specifications (like the complexity for example) and explainations.
-A data structure on the other hand is an actual implementation of an ADT. It specifies how the object works interally.</description>
-    </item>
-    
-    <item>
-      <title>Thermodynamics: Lecture 3</title>
-      <link>https://rezvan.xyz/posts/thermodynamics_3/</link>
-      <pubDate>Mon, 28 Nov 2022 18:14:58 +0100</pubDate>
-      
-      <guid>https://rezvan.xyz/posts/thermodynamics_3/</guid>
-      <description>In this part we&amp;rsquo;ll cover the 2nd law of thermodynamics - as well as summarize this field of physics.
-Direction for $W$ and $Q$ As we&amp;rsquo;ve seen the work, $W$ and $Q$ is quite important. So let&amp;rsquo;s set up some general guide lines.
-Generally, in a given thermal system:
-A expansion, $(V_f &amp;gt; V_i), \rightarrow W &amp;gt; 0$ A compression, $(V_f &amp;lt; V_i), \rightarrow W &amp;lt; 0$
-Increase in temperature $\Delta T &amp;gt; 0, (T_f &amp;gt; T_i), \rightarrow Q &amp;gt; 0$ Decrease in temperature $\Delta T &amp;lt; 0, (T_f &amp;lt; T_i), \rightarrow Q &amp;lt; 0$</description>
-    </item>
-    
-    <item>
-      <title>DSA: Part 3 - Dynamic Arrays</title>
-      <link>https://rezvan.xyz/posts/dsa_3/</link>
-      <pubDate>Sun, 27 Nov 2022 17:26:09 +0100</pubDate>
-      
-      <guid>https://rezvan.xyz/posts/dsa_3/</guid>
-      <description>Dynamic arrays Finally we have arrived at the DS of DSA. In (almost) all programming languages the most common built in data structure are arrays. We have seen them, worked with them - nothing new. We&amp;rsquo;ve probably even worked with dynamic arrays, they are an essential data structure - sometimes we don&amp;rsquo;t know how much data we&amp;rsquo;ll need.
-But how are dynamic arrays actually implemented into a language? The ideas is actually quite simple - we use a fixed length array and make a larger, fixed length, array when we have ran out of space.</description>
-    </item>
-    
-    <item>
-      <title>Thermodynamics: Lecture 2</title>
-      <link>https://rezvan.xyz/posts/thermodynamics_2/</link>
-      <pubDate>Sat, 26 Nov 2022 00:04:21 +0100</pubDate>
-      
-      <guid>https://rezvan.xyz/posts/thermodynamics_2/</guid>
-      <description>Ideal gases An &amp;lsquo;ideal&amp;rsquo; gas is a gas that is not subject to interparticle interactions. Also commonly said to not being subject to &amp;lsquo;react with other substances&amp;rsquo;.
-In many applications of thermodynamics, ideal gases often come up, so it&amp;rsquo;s natural to understand them within a thermodynamic perspective.
-Gases and Pressure Before we begin with the real thermodynamical part of gases we need a bit of background with gases. Boyle&amp;rsquo;s law gives us a mathematical formula for our intuition of gases.</description>
-    </item>
-    
-    <item>
-      <title>DSA: Part 2 - Complexity (1)</title>
-      <link>https://rezvan.xyz/posts/dsa_2/</link>
-      <pubDate>Fri, 25 Nov 2022 17:20:46 +0100</pubDate>
-      
-      <guid>https://rezvan.xyz/posts/dsa_2/</guid>
-      <description>Introduction What do we mean by an &amp;lsquo;Algorithmic complexity&amp;rsquo;, a good (but not fully formal) definition would be - &amp;ldquo;How much resources does the algorithm use in relation to quantitative properties of its input&amp;rdquo;
-And just to be clear, the definition of an algorithm: any well-defined procedure to solve a given problem.
-So what kind of resources could we quantify from an input? Of course the runtime of a algorithm is important.</description>
-    </item>
-    
-    <item>
-      <title>DSA: Part 1 - Sorting</title>
-      <link>https://rezvan.xyz/posts/dsa_1/</link>
-      <pubDate>Thu, 24 Nov 2022 19:57:27 +0100</pubDate>
-      
-      <guid>https://rezvan.xyz/posts/dsa_1/</guid>
-      <description>My other course for this study period is a course in Data Structures &amp;amp; Algorithms.
-Sorting &amp;amp; Searching We began this course with sorting and why it&amp;rsquo;s an important topic for a computer scientist. Sorting data comes up in all fields of computer science, everything from low-level, simple, array sorting - to sort millions of data gathered by an AI.
-With this we began with simple sorting and searching algorithms. Firstly we began with binary search.</description>
-    </item>
-    
-    <item>
-      <title>Thermodynamics: Lecture 1</title>
-      <link>https://rezvan.xyz/posts/thermodynamics/</link>
-      <pubDate>Thu, 24 Nov 2022 17:57:38 +0100</pubDate>
-      
-      <guid>https://rezvan.xyz/posts/thermodynamics/</guid>
-      <description>In my physics course we have recently began with the thermodynamics part of physics. It&amp;rsquo;s quite overwhelming but at the same time it&amp;rsquo;s really fun. So I&amp;rsquo;ll just post and explain everything I learn in class here - since it&amp;rsquo;s a really good way of learning, explaining. As the late and incredible Richard Feynman once said: &amp;ldquo;If you cannot explain something in simple terms, you don&amp;rsquo;t understand it&amp;rdquo; - Richard Feynman With that said, into thermodynamics!</description>
     </item>
     
     <item>
@@ -234,7 +42,7 @@ With this we began with simple sorting and searching algorithms. Firstly we bega
       
       <guid>https://rezvan.xyz/posts/bucketlist/</guid>
       <description>One day each and one of us will die - this is a universal truth. I am writing this to keep my self accountable and remind my future self to recognize where I was and where I&amp;rsquo;ve gotten to.
-Build/own my own place Make a difference in the world (well, hard to define) Fall in love Be successful working for myself (finical security) Create something meaningful (film, book, podcast etc) Live in another country Trace my ancestry Read 100 200 books Mentor someone Help someone else achieving their dreams Get a PhD Watch over 100 200 movies </description>
+ Build/own my own place Make a difference in the world (well, hard to define) Fall in love Be successful working for myself (finical security) Create something meaningful (film, book, podcast etc) Live in another country Trace my ancestry Read 100 200 books Mentor someone Help someone else achieving their dreams Get a PhD Watch over 100 200 movies  </description>
     </item>
     
     <item>
