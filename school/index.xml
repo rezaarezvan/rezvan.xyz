@@ -6,7 +6,19 @@
     <description>Recent content in Schools on rezvan</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 18 Jan 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://rezvan.xyz/school/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 19 Jan 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://rezvan.xyz/school/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Concurrent Programming: Part 2 - Races, Locks, and Semaphores</title>
+      <link>https://rezvan.xyz/school/concurrent_programming_2/</link>
+      <pubDate>Thu, 19 Jan 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://rezvan.xyz/school/concurrent_programming_2/</guid>
+      <description>In the last part we covered the basics and some principles for concurrent programs. In this part we&amp;rsquo;ll cover how we define concurrent problems, the outcome we want and some solutions.
+Races As we saw in the last part - a different trace leads to a different outcome - this means that concurrent programs are non-deterministic.
+Why concurrent programs are non-deterministic is due to the scheduler&amp;rsquo;s decisions.
+When we have a problem with different possible outcomes, we need to label what is a faulty run and a successful run.</description>
+    </item>
+    
     <item>
       <title>Digital Design: Part 2- Binary Adders</title>
       <link>https://rezvan.xyz/school/digital_design_2/</link>
@@ -95,7 +107,7 @@ Another basic term that we&amp;rsquo;ll encounter is a cycle.</description>
       <guid>https://rezvan.xyz/school/dsa_7/</guid>
       <description>In this part we&amp;rsquo;ll cover priority queues, binary heaps, and lastly heaps as arrays. So let&amp;rsquo;s begin with priority queues!
 Priority Queues A priority queues is a collection of items which we can:
- Add an item to the queue Find the smallest item in the queue Remove the smallest item in the queue  In this we&amp;rsquo;ll handle a priority queue as a min-priority queue, but there&amp;rsquo;s also a max-priority queue which gets/removes the maximum item in the queue as well.</description>
+Add an item to the queue Find the smallest item in the queue Remove the smallest item in the queue In this we&amp;rsquo;ll handle a priority queue as a min-priority queue, but there&amp;rsquo;s also a max-priority queue which gets/removes the maximum item in the queue as well.</description>
     </item>
     
     <item>
@@ -107,9 +119,9 @@ Priority Queues A priority queues is a collection of items which we can:
       <description>The next chapter in our physics course is about waves, especially mechanical waves.
 General about Waves In this chapter we&amp;rsquo;ll cover mechanical waves but also electromagnetic waves, in this case only (visible) light.
 There&amp;rsquo;s two types of waves we&amp;rsquo;ll be covering:
-  Transverse waves
- They have &amp;rsquo;noise&amp;rsquo; orthogonal against the wave&amp;rsquo;s propagation speed.    Longitudinal waves
- They have &amp;rsquo;noise&amp;rsquo; parallel with the waves&amp;rsquo; propagation speed.    We can describe this noise with the function $y(x, t) = f(x + vt)$.</description>
+Transverse waves
+They have &amp;rsquo;noise&amp;rsquo; orthogonal against the wave&amp;rsquo;s propagation speed. Longitudinal waves
+They have &amp;rsquo;noise&amp;rsquo; parallel with the waves&amp;rsquo; propagation speed. We can describe this noise with the function $y(x, t) = f(x + vt)$.</description>
     </item>
     
     <item>

@@ -147,7 +147,7 @@ for i in 0 .. n - 1:
         y = list[j]
         if x + y == 0:
             found = true
-</code></pre><p>In this snippet - we&rsquo;ll have the first loop iterating $n$ times - 
+</code></pre><p>In this snippet - we&rsquo;ll have the first loop iterating $n$ times -
 however, the second loop, it will iterate $(0, \dots ,n -1), (1, \dots , n - 2), \dots$</p>
 <p>This means that the number of times the second loop will run is between 1 and $n$ times - using our definition of complexity.
 Let&rsquo;s call the number of times our loop runs $m$, $m \leq n$ which means m has an complexity of $\mathcal{O}(n)$.</p>
@@ -322,7 +322,7 @@ for xplusy in pairs_list:
         found = true
 </code></pre><p>So, we&rsquo;ve seen that first part, we know it&rsquo;s $\mathcal{O}(n^2)$.
 But now we see a <code>merge_sort()</code> - this has a complexity of $\mathcal{O}(n\ log(n))$.
-As we stated before, the list after the first block has a length of $n^2$. 
+As we stated before, the list after the first block has a length of $n^2$.
 Which means <code>merge_sort()</code> will have a complexity of $\mathcal{O}(n^2\ log(n^2))$</p>
 <p>This will just sort it so no length is added.</p>
 <p>Then the next block, the for loop will have a complexity of $\mathcal{O}(n^2)$.

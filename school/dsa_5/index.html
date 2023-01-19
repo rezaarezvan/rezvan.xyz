@@ -45,7 +45,7 @@
 			<h1 class="title">DSA: Part 5 - Hash Tables</h1><p class="single_time">Nov 29, 2022</p></div>
 		<section class="post">
 			<h3 id="hash-tables">Hash Tables</h3>
-<p>Hash tables are one of the most famous (and widely used) data structures. But why are they so popular and powerful? 
+<p>Hash tables are one of the most famous (and widely used) data structures. But why are they so popular and powerful?
 Before we can answer that question we need to look back at sets and maps.</p>
 <h3 id="sets-and-maps-in-context">Sets and Maps in Context</h3>
 <p>Just to refresh our memory - a set is a <em>collection of items</em>, where duplicates aren&rsquo;t allowed.
@@ -178,7 +178,7 @@ Also we need know the size of the Hash table and also handle null pointers so le
 </code></pre><h3 id="load-factor">Load Factor</h3>
 <p>We should always assume that we have a good hash functions, since in most libraries, they are good! But to understand why it&rsquo;s &lsquo;good&rsquo; we need to understand something called <em>Load factor</em>.
 The load factor is the average number of elements per slot/index.</p>
-<p>So load factor = $\frac{N}{M}$, where N is # of elements and M is the array size. 
+<p>So load factor = $\frac{N}{M}$, where N is # of elements and M is the array size.
 We haven&rsquo;t discussed it yet but, what&rsquo;s the complexity of <code>contains</code>, <code>add</code>, and <code>put</code> for example? Well it depends on the total array size and the number of elements per slot. The load factor!</p>
 <p>Therefore the complexity of each operation is $\mathcal{O}(\frac{N}{M})$</p>
 <p>Which tells us, if we can keep N and M roughly the same all of our operations will be constant! This is the magic with Hash tables.</p>
