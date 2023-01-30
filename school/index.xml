@@ -6,7 +6,18 @@
     <description>Recent content in Schools on rezvan</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 19 Jan 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://rezvan.xyz/school/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 24 Jan 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://rezvan.xyz/school/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Digital Design: Part 3 - Sequential Circuits</title>
+      <link>https://rezvan.xyz/school/digital_design_3/</link>
+      <pubDate>Tue, 24 Jan 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://rezvan.xyz/school/digital_design_3/</guid>
+      <description>Sequential Circuits When we usually look at circuits we have an input and output who are independent on each other. In a sequential circuit, as the name suggest, we have a sequence. Meaning we feed back our output as input.
+We can easily define this as: Our output no longer depends on the present input - but on the past behavior of the circuit.
+State-Holding Memory Elements We&amp;rsquo;ve encountered latches and flip-flops before, they have a so-called memory element to them.</description>
+    </item>
+    
     <item>
       <title>Concurrent Programming: Part 2 - Races, Locks, and Semaphores</title>
       <link>https://rezvan.xyz/school/concurrent_programming_2/</link>
