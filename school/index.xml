@@ -6,7 +6,19 @@
     <description>Recent content in Schools on rezvan</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 24 Jan 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://rezvan.xyz/school/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 31 Jan 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://rezvan.xyz/school/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Concurrent Programming: Part 3 - Models of concurrency &amp; synchronization algorithms</title>
+      <link>https://rezvan.xyz/school/concurrent_programming_3/</link>
+      <pubDate>Tue, 31 Jan 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://rezvan.xyz/school/concurrent_programming_3/</guid>
+      <description>In this part we&amp;rsquo;ll cover how we can achieve mutual exclusion in a program using only atomic read and writes.
+Analyzing Concurrency When analyzing concurrent programs we often look at states and transitions.
+A state in these diagrams are possible program states. Transitions on the other hand, connects these states to an execution order.
+One to thing to note is that, the structural properties in these diagrams, captures the semantics properties of the corresponding program.</description>
+    </item>
+    
     <item>
       <title>Digital Design: Part 3 - Sequential Circuits</title>
       <link>https://rezvan.xyz/school/digital_design_3/</link>
