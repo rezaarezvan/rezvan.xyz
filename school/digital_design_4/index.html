@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"><meta property="og:site_name" content="rezvan"><title>Digital  Design: Part 4 - Finite State Machines | rezvan</title>
+  <meta property="og:title" content="Digital  Design: Part 4 - Finite State Machines | rezvan"><meta property="og:description" content="">
+  <meta property="og:type" content="blog">
+  <meta property="og:link" content="https://rezvan.xyz/school/digital_design_4/"><link rel="shortcut icon" type="image/png" href=https://rezvan.xyz//images/icon.png />
+  <meta property="og:image" content="https://rezvan.xyz//images/icon.png" /><meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz//css/main.css" />    
+</head>
+
+<body>
+  <div class="wrapper">
+	<div class="content">
+		<div class="header_main">
+	<a href="https://rezvan.xyz/"><p class="header_title">rezvan</p><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.3/dist/katex.min.css" integrity="sha384-Juol1FqnotbkyZUT5Z7gUPjQ9gzlwCENvUZTpQBAPxtusdwFLRy382PSDx5UUJ4/" crossorigin="anonymous">
+
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.3/dist/katex.min.js" integrity="sha384-97gW6UIJxnlKemYavrqDHSX3SiygeOwIZhwyOKRfSaf0JWKRVj9hLASHgFTzT+0O" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.3/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+            delimiters: [
+                {left: "$$", right: "$$", display: true},
+                {left: "$", right: "$", display: false}
+            ]
+        });
+    });
+</script>
+
+	</a>
+  <br>
+  <nav id="main">
+    
+      <a href="/About/">About</a>
+    
+      <a href="/CV/">CV</a>
+    
+      <a href="/school/">School</a>
+    
+  </nav></div>
+
+  <article><div class="title_wrapper">
+			<h1 class="title">Digital  Design: Part 4 - Finite State Machines</h1><p class="single_time">Jan 31, 2023</p></div>
+		<section class="post">
+			<p>In the last part we covered sequential circuits, in this part we&rsquo;ll cover <strong>F</strong>inite <strong>S</strong>tate <strong>M</strong>achines.</p>
+<p>FSMs are type of sequential circuits, there are two main type of FSMs, Moore and Mealy.</p>
+<ul>
+<li>
+<p>Moore FSMs</p>
+<ul>
+<li>Outputs depends only on the state.</li>
+</ul>
+</li>
+<li>
+<p>Mealy FSMs</p>
+<ul>
+<li>Outputs depend on both state and primary inputs.</li>
+</ul>
+</li>
+</ul>
+<h3 id="1-1-detector">1-1 Detector</h3>
+<p>A 1-1 detector, generates an output, $z = 1$, whenever the input, $w$ is 1 twice in a row (clock cycles).</p>
+<ul>
+<li>
+<p>Moore</p>
+<ul>
+<li>The output, $z$, be equal to 1 in the clock cycle <em>that follows</em> the detection of the second $w = 1$</li>
+</ul>
+</li>
+<li>
+<p>Mealy</p>
+<ul>
+<li>The output, $z$, be equal to 1 in the <em>same</em> clock cycle when the second, $w = 1$ is detected.</li>
+</ul>
+</li>
+</ul>
+<p>Since the state table for the Mealy type will be shorter, since we have fewer states.
+The end result will result in a simpler circuit. But remember that they do not have the same logical function!</p>
+<p>Most of the tasks can be realized by Moore-type FSM, as well as by
+Mealy-type FSM, although these two type FSMs don’t have the exact
+same logic function</p>
+<p>Compared to Moore-type FSMs, Mealy-type FSMs have following features:</p>
+<ul>
+<li>Less states;</li>
+<li>Quicker response;</li>
+<li>Usually, simpler circuit implementation;</li>
+<li>But, sometimes longer critical path, all the way from input to output
+(v.s. Moore: from state registers to output)
+<ul>
+<li>
+<ul>
+<li>one solution: registered outputs in Mealy</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="state-assignments">State Assignments</h3>
+<p>Some state assignments are better than others.
+The state assignment influences the complexity of the state machine.</p>
+<p>The combinational logic required in the state machine design is dependent on the state assignment.</p>
+<p>Types of state assignment</p>
+<ul>
+<li>Binary encoding: $2^N$ states $\rightarrow N$ Flip-Flops</li>
+<li>Gray-code encoding: $2^N$ states $\rightarrow N$ Flip-Flops</li>
+<li>One-hot encoding: $N$ states $\rightarrow  N$ Flip-Flops</li>
+</ul>
+<h3 id="state-minimization">State minimization</h3>
+<p>Two states $S_i$ and $S_j$ are said to be equivalent if and only if for every
+possible input sequence, the same output sequence will be produced
+regardless of whether $S_i$ or $S_j$ is the initial state.</p>
+<h4 id="partition">Partition</h4>
+<p>A partition consists of one or more blocks, where each block comprises
+a subset of states that maybe equivalent, but the states in a given block
+are <em>definitely not</em> equivalent to the states in other blocks.</p>
+<p>For example:
+$$
+P_2 = (ABD)(CEFG)
+$$</p>
+<p>Here, $(ABD)$ and $(CEFG)$ are &ldquo;blocks&rdquo;.</p>
+
+		</section>
+  </article>
+	</div>
+
+	<footer><p class="footer_msg">Memento mori</p></footer>
+
+  </div>
+</body>
+</html>
