@@ -13,7 +13,22 @@
   <div class="wrapper">
 	<div class="content">
 		<div class="header_main">
-	<a href="https://rezvan.xyz/"><p class="header_title">rezvan</p>
+	<a href="https://rezvan.xyz/"><p class="header_title">rezvan</p><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.3/dist/katex.min.css" integrity="sha384-Juol1FqnotbkyZUT5Z7gUPjQ9gzlwCENvUZTpQBAPxtusdwFLRy382PSDx5UUJ4/" crossorigin="anonymous">
+
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.3/dist/katex.min.js" integrity="sha384-97gW6UIJxnlKemYavrqDHSX3SiygeOwIZhwyOKRfSaf0JWKRVj9hLASHgFTzT+0O" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.3/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+            delimiters: [
+                {left: "$$", right: "$$", display: true},
+                {left: "$", right: "$", display: false}
+            ]
+        });
+    });
+</script>
+
 	</a>
   <br>
   <nav id="main">
@@ -27,7 +42,7 @@
   </nav></div>
 
   <article><div class="title_wrapper">
-			<h1 class="title">Concurrent Programming: Part 4 - Synchronization problems with semaphores</h1><p class="single_time">Jan 24, 2023</p></div>
+			<h1 class="title">Concurrent Programming: Part 4 - Synchronization problems with semaphores</h1><p class="single_time">Feb 1, 2023</p></div>
 		<section class="post">
 			<p>In this part we&rsquo;ll cover how to solve some classical synchronization problems using threads and semaphores.</p>
 <h3 id="dining-philosophers">Dining Philosophers</h3>
@@ -150,7 +165,407 @@ public void putForks(int k) {
 This is under the assumption that the locks/semaphores (and scheduling) are fair.</p>
 <h3 id="producer-consumer">Producer-Consumer</h3>
 <p>Producers and consumers exchange items through a so called shared (asynchronous) buffer.</p>
-<p>The producr (asynchronously) produces items and places them on the buffer. While the consumer (asynchronously) consumes (removes) the items from the buffer.</p>
+<p>The producer (asynchronously) produces items and places them on the buffer. While the consumer (asynchronously) consumes (removes) the items from the buffer.</p>
+<p>So it&rsquo;s clear that the buffer needs to be shared. Therefore, we need a buffer that:</p>
+<ul>
+<li>
+<p>Producers and consumers access the buffer in <strong>mutual exclusion</strong></p>
+</li>
+<li>
+<p>Consumers are blocked when the buffer is empty (can&rsquo;t consume emptiness)</p>
+</li>
+<li>
+<p>Producers are blocked when the buffer is full (can&rsquo;t overproduce)</p>
+</li>
+</ul>
+<pre tabindex="0"><code>interface Buffer&lt;T&gt; {
+
+    // Add item onto buffer; If full block
+    void put(T item);
+
+    // Extract item from buffer; If empty do nothing
+    T get();
+
+    // Get current number of items in buffer
+    int count();
+}
+</code></pre><p>Other properties that we would like:</p>
+<ul>
+<li>
+<p>Support an arbitrary number of producers and consumers</p>
+</li>
+<li>
+<p>Deadlock freedom</p>
+</li>
+<li>
+<p>Starvation freedom</p>
+</li>
+</ul>
+<h3 id="unbounded-shared-buffer">Unbounded shared buffer</h3>
+<p>One possible solution is using one lock and one semaphore:</p>
+<pre tabindex="0"><code>public class UnboundedBuffer&lt;T&gt; implements Buffer&lt;T&gt; {
+
+    // Any collection (list, set, ...)
+    Collection storage = ...;
+
+    // For exclusive access to buffer
+    Lock lock = new Lock();
+
+    // Number of items in buffer
+    Semaphore nItems = new Semaphore(0);
+
+    invariant {
+        storage.count() == nItems.count() +
+        at(nItems.up() in put,  lock.lock and T item = storage.remove() in get);
+    }
+
+    public void put(T item) {
+        // Lock to gain access to buffer
+        lock.lock();
+
+        /* Critical Section */
+
+        storage.add(item);
+
+        // update nItems
+        nItems.up();
+
+        /* End of Critical Section */
+
+        // Release access to buffer to others
+        lock.unlock();
+    }
+
+    public T get() {
+        // Wait until there is items on the buffer
+        nItems.down();
+
+        lock.lock();
+
+        /* Critical Section */
+
+        // Retrieve item
+        T item =storage.remove();
+
+        /* End of Critical Section */
+
+        lock.unlock();
+
+        return item;
+    }
+
+    public int count() {
+        return nItems.count();
+    }
+}
+</code></pre><p>This solution ensures that all requirements are met. There are some LOC that you can swap around.</p>
+<p>But this will do. We can write a solution that is a so-called, bounded shared buffer, that uses two semaphores.</p>
+<p>One for keeping track of how many items there are in buffer. The other to know how many slots are <strong>left</strong>.</p>
+<p>It&rsquo;s essentially the same code.</p>
+<h3 id="barriers">Barriers</h3>
+<p>A barrier in a concurrent program, is a form of synchronization where there is a point in a program&rsquo;s execution,
+where all threads in a group, need to reach <em>before</em> any of them are allowed to continue.</p>
+<p>A simple example is when we only have 2 threads. We use two binary semaphores:</p>
+<pre tabindex="0"><code>Semaphore[] done = {new Semaphore(0), new Semaphore(0)};
+</code></pre><p>$t_0$&rsquo;s code:</p>
+<pre tabindex="0"><code>// Indicate that t0 is done
+done[t0].up();
+
+// Wait until t1 is done
+done[t1].down();
+</code></pre><p>$t_1$&rsquo;s code:</p>
+<pre tabindex="0"><code>// Indicate that t1 is done
+done[t1].up();
+
+// Wait until t0 is done
+done[t0].down();
+</code></pre><p>We could also do:</p>
+<p>$t_0$&rsquo;s code:</p>
+<pre tabindex="0"><code>// Wait until t1 is done
+done[t1].down();
+
+// Indicate that t0 is done
+done[t0].up();
+</code></pre><p>$t_1$&rsquo;s code:</p>
+<pre tabindex="0"><code>// Indicate that t1 is done
+done[t1].up();
+
+// Wait until t0 is done
+done[t0].down();
+</code></pre><p>This works if $t_0$ does <code>down</code> before <code>up</code>, or symmetrically, if $t_1$ does the same.</p>
+<p>This is however, less efficient, since, the last thread to reach the barrier has to yield for the other.</p>
+<p>One thing that might not be obvious but, if we do:</p>
+<p>$t_0$&rsquo;s code:</p>
+<pre tabindex="0"><code>// Wait until t1 is done
+done[t1].down();
+
+// Indicate that t0 is done
+done[t0].up();
+</code></pre><p>$t_1$&rsquo;s code:</p>
+<pre tabindex="0"><code>// Wait until t0 is done
+done[t0].down();
+
+// Indicate that t1 is done
+done[t1].up();
+</code></pre><p>We will have a deadlock if $t_0$ and $t_1$ both perform <code>down</code> before any <code>up</code> calls.</p>
+<p>Let&rsquo;s try to create a reusable, general barrier</p>
+<h3 id="reusable-barriers">Reusable Barriers</h3>
+<pre tabindex="0"><code>interface Barrier {
+    // Block until expect() threads have reached barrier
+    void wait();
+
+    // Number of threads expected at the barrier
+    int expect();
+}
+</code></pre><p>Let&rsquo;s try a naive approach and see what happens:</p>
+<pre tabindex="0"><code>public class NonBarrier1 implements Barrier {
+    int nDone = 0; // number of done threads
+    Semaphore open = new Semaphore(0);
+    final int n;
+
+    // initialize barrier for `n&#39; threads
+    NonBarrier1(int n) {
+        this.n = n;
+    }
+
+    // number of threads expected at the barrier
+    int expect() {
+        return n;
+    }
+
+    public void wait() {
+        synchronized(this) {
+            nDone += 1;
+        }
+
+        if (nDone == n) {
+            // I&#39;m the last arrived: All can go!
+            open.up();
+        }
+
+        // Proceed when possible
+        open.down()
+
+        // Let the next one go
+        open.up()
+
+        synchronized(this) {
+            nDone -= 1;
+        }
+
+        if (nDone == 0) {
+            // I&#39;m the last through: Close barrier!
+            open.down();
+        }
+    }
+}
+</code></pre><p>This solution doesn&rsquo;t work perfectly though. If the n threads wait at <code>if(nDone == 0)</code>
+then more than one thread may try to close the barrier, which results in a deadlock.</p>
+<p>The same goes for opening the barrier, if more than one thread tries to open the barrier,
+it&rsquo;s possible that some threads may be executing <code>wait</code> again before the barrier is closed again.</p>
+<pre tabindex="0"><code>public class NonBarrier2 implements Barrier {
+    int nDone = 0; // number of done threads
+    Semaphore open = new Semaphore(0);
+    final int n;
+
+    // initialize barrier for `n&#39; threads
+    NonBarrier1(int n) {
+        this.n = n;
+    }
+
+    // number of threads expected at the barrier
+    int expect() {
+        return n;
+    }
+
+    public void wait() {
+        synchronized(this) {
+            nDone += 1;
+
+            if (nDone == n) {
+                // I&#39;m the last arrived: All can go!
+                open.up();
+            }
+        }
+
+
+        // Proceed when possible
+        open.down()
+
+        // Let the next one go
+        open.up()
+
+        synchronized(this) {
+            nDone -= 1;
+
+           if (nDone == 0) {
+                // I&#39;m the last through: Close barrier!
+                open.down();
+            }
+        }
+
+    }
+}
+</code></pre><p>Now this solution fixes the past issues listed. This solution has a problem of its own though.</p>
+<p>If we have a thread which is incredibly fast, it may now get ahead of the other (slower) threads.
+Even if we use strong semaphores, we cannot prevent this. This is because this happens due to the
+last thread leaves the gate open.</p>
+<p>To fix this we use a kind of two gate mechanic.</p>
+<pre tabindex="0"><code>public class SemaphoreBarrier implements Barrier {
+    int nDone = 0; // number of done threads
+    Semaphore gate1 = new Semaphore(0);// first gate
+    Semaphore gate2 = new Semaphore(1);// second gate
+    final int n;
+
+    // initialize barrier for `n&#39; threads
+    SemaphoreBarrier(int n) {
+        this.n = n;
+    }
+    // number of threads expected at the barrier
+    int expect() {
+        return n;
+    }
+
+public void wait() {
+    approach(); leave();
+}
+
+void approach() {
+    synchronized (this) {
+        nDone += 1; // arrived
+
+        if (nDone == n) { // if last in:
+            gate1.up(); // open gate1
+            gate2.down(); // close gate2
+        }
+
+    }
+
+    gate1.down(); // pass gate1
+    gate1.up(); // let next pass
+}
+
+void leave() {
+    synchronized (this) {
+        nDone -= 1; // going out
+
+        if (nDone == 0) { // if last out:
+            gate2.up(); // open gate2
+            gate1.down(); // close gate1
+        }
+    }
+
+    gate2.down(); // pass gate2
+    gate2.up(); // let next pass
+}
+</code></pre><p>This solution is what a good, reusable barrier should look like.</p>
+<h3 id="readers-writers">Readers-Writers</h3>
+<p>A problem which we can encounter every day, say we have a board displaying data.
+Readers and writers need to access this board to, read and write.</p>
+<p>We need a board which does:</p>
+<ul>
+<li>
+<p>Multiple readers can operate concurrently</p>
+</li>
+<li>
+<p>Each writer has exclusive access</p>
+<ul>
+<li>Meaning that we have the invariant: # of writers = 0 OR (# of writers == 1 AND # of Readers == 0)</li>
+</ul>
+</li>
+</ul>
+<p>A naive approach would be:</p>
+<pre tabindex="0"><code>public class SyncBoard&lt;T&gt; implements Board&lt;T&gt; {
+    int nReaders = 0;
+
+    // For exclusive access to nReaders
+    Lock lock = new Lock();
+
+    // 1 if and only if no active threads
+    Semaphore empty = new Semaphore(1);
+
+    T message;
+
+    public T read() {
+
+        // Lock to update nReaders
+        lock.lock();
+
+        if(nReaders == 0) {
+            // If first reader, set not empty
+            empty.down();
+        }
+
+        // Update nReaders
+        nReaders += 1
+
+        // Release nReaders
+        lock.unlock();
+
+        // Read (critical section)
+        T msg = message;
+
+        // Aquire nReaders
+        lock.lock();
+
+        nReaders -= 1;
+
+        if(nReaders == 0) {
+            // If # of readers empty, set empty
+            empty.up();
+        }
+
+        // Releaes nReaders
+        lock.unlock();
+
+        return msg;
+    }
+
+    public void write(T msg) {
+        // Get exclusive access
+        empty.down();
+
+        message = msg;
+
+        // Release board
+        empty.up();
+    }
+
+
+}
+</code></pre><p>This solution ensures almost everything we want, the only thing missing is that writers can now starve.</p>
+<p>If there is always one reader active, writers will not be able to access the board at all.</p>
+<pre tabindex="0"><code>public class FairBoard&lt;T&gt; extends SyncBoard&lt;T&gt; {
+    Semaphore baton = new Semaphore(1, true);
+
+    public T read() {
+        // Wait until you get baton
+        baton.down();
+
+        // Release a waiting thread
+        baton.up();
+
+        // Read as in SyncBoard
+        return super.read();
+    }
+
+    public void write(T msg) {
+        // Wait until you get baton
+        baton.down();
+
+        // Write as in SyncBoard
+        super.write(msg);
+
+        // Release
+        baton.up();
+
+    }
+}
+</code></pre><p>This will ensure that readers and writers have the same priority.</p>
+<h3 id="summary">Summary</h3>
+<p>A looong part, but as we can see, all solution uses locks and semaphores.
+When writing solutions to concurrent programs, we will always need to use these.
+To lock and gain exclusive access.</p>
 
 		</section>
   </article>
