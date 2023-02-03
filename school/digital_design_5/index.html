@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"><meta property="og:site_name" content="rezvan"><title>Digital Design: Part 5 - Arithmetic Units | rezvan</title>
+  <meta property="og:title" content="Digital Design: Part 5 - Arithmetic Units | rezvan"><meta property="og:description" content="">
+  <meta property="og:type" content="blog">
+  <meta property="og:link" content="https://rezvan.xyz/school/digital_design_5/"><link rel="shortcut icon" type="image/png" href=https://rezvan.xyz//images/icon.png />
+  <meta property="og:image" content="https://rezvan.xyz//images/icon.png" /><meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz//css/main.css" />    
+</head>
+
+<body>
+  <div class="wrapper">
+	<div class="content">
+		<div class="header_main">
+	<a href="https://rezvan.xyz/"><p class="header_title">rezvan</p><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.3/dist/katex.min.css" integrity="sha384-Juol1FqnotbkyZUT5Z7gUPjQ9gzlwCENvUZTpQBAPxtusdwFLRy382PSDx5UUJ4/" crossorigin="anonymous">
+
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.3/dist/katex.min.js" integrity="sha384-97gW6UIJxnlKemYavrqDHSX3SiygeOwIZhwyOKRfSaf0JWKRVj9hLASHgFTzT+0O" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.3/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+            delimiters: [
+                {left: "$$", right: "$$", display: true},
+                {left: "$", right: "$", display: false}
+            ]
+        });
+    });
+</script>
+
+	</a>
+  <br>
+  <nav id="main">
+    
+      <a href="/About/">About</a>
+    
+      <a href="/CV/">CV</a>
+    
+      <a href="/school/">School</a>
+    
+  </nav></div>
+
+  <article><div class="title_wrapper">
+			<h1 class="title">Digital Design: Part 5 - Arithmetic Units</h1><p class="single_time">Feb 3, 2023</p></div>
+		<section class="post">
+			<p>In this part we&rsquo;ll cover arithmetic units. Specifically multipliers and divers.</p>
+<p>We&rsquo;ll also cover some number representations.</p>
+<h3 id="arithmetic-units">Arithmetic Units</h3>
+<p>It may be common knowledge that, when we want to perform multiplication and division,
+by powers of 2, we perform so-called shift operations on the bits.</p>
+<p>If we for example want to multiply a number with the binary number <code>100</code>, or 4 in decimal.</p>
+<p>We would just shift all bits two steps to the left. Same logic goes for division, but it is right shifts.</p>
+<p>But we won&rsquo;t always have powers of 2 when multiplying. If we for example multiplied with <code>101</code> instead, or 5 in decimal</p>
+<p>We can rewrite the multiplication as:
+$$
+5 * X = 4 * X + X
+$$</p>
+<p>So we perform a left shift with 2 bits, and add the initial value to that.</p>
+<h4 id="multiplication-algorithm">Multiplication Algorithm</h4>
+<p>When multiplying two binary numbers with each other, our usual &lsquo;partial products&rsquo; algorithm works in base 2 as well.</p>
+<p>So we can write out our algorithm as:</p>
+<p>for i = 1 to n, where n = # of bits of the operands</p>
+<p>If the i-th bit of the <em>multiplier</em> is 1:</p>
+<p>Add <em>multiplicand</em> $\cdot\ 2^{i - 1}$ to the final product.</p>
+<p>For any operands of size <code>N</code> bits, the final result will become <code>2N</code>in size.</p>
+<p>If we want to make a multiplier circuit, we would firstly need a register of size <code>2N</code>.</p>
+<p>Secondly, we would need to test the LSB <code>N</code>times of the multiplier, and per bit, we would need to perform 3 operations,
+shift right, shift left and add.</p>
+<p>This is a really slow and expensive circuit.</p>
+<p>To speed up the process, we can share one register for both the result and multiplicand + 1 extra bit (for carry out).</p>
+<p>So we have one single register that is <code>2N + 1</code> in size and our <code>N</code> sized multiplier.</p>
+<p>We still test the LSB <code>N</code> times for the multiplier, but each bit we only perform 2 operations now.
+Shift right and add, since each right shift handles the multiplicand and the result now.</p>
+<h3 id="multiplying-with-signs">Multiplying with signs</h3>
+<p>If we encounter numbers with signs, we convert these numbers to their respective magnitudes.</p>
+<p>Multiply the two magnitudes, if the signs differ of the operands, we negate our result.</p>
+<p>So we can still use our circuit for the multiplication!</p>
+<h3 id="adding-partial-products">Adding partial products</h3>
+<p>If we for example multiply two four bit numbers,
+in the general case, we would need to perform three 4-bit additions due to the carryout(s) that can occur.</p>
+<p>Which is slow! So as we have done before when adding numbers, we can do a so-called carry forward.</p>
+<p>So the carry is added to the next partial product, and an image to illustrate.
+<img src="/images/carryforward.png" alt="carryforward"></p>
+<p>This means we need have a FA at each of the &rsquo;transition&rsquo; states (the arrows) along the usual AND gates.</p>
+<p>Even though it may seem like having this many FA can be slow, it&rsquo;s better than the first solution.</p>
+<h3 id="binary-division">Binary Division</h3>
+<p>When performing binary division, we firstly <strong>always</strong> need to check so that the divisor is not 0.</p>
+<p>Then we have two approaches:</p>
+<ul>
+<li>
+<p>Long division approach</p>
+<ul>
+<li>
+<p>If divisor $\leq$ dividend bits:</p>
+<ul>
+<li>1 bit in quotient, subtract</li>
+</ul>
+</li>
+<li>
+<p>Otherwise:</p>
+<ul>
+<li>0 bit in quotient, bring down next dividend bit.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Restoring division</p>
+<ul>
+<li>Do the subtraction, and if remainder goes $&lt;$ 0, add divisor <em>back</em></li>
+</ul>
+</li>
+<li>
+<p>Signed division</p>
+<ul>
+<li>
+<p>Divide using absolute values (magnitudes)</p>
+<ul>
+<li>Adjust sign of quotient and remainder as required (if they differ, negate).</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>So we can use the same technique as before, the quotient and the dividend share one register together,
+but now we need an extra remainder register. Then we just implement this algorithm into a sequential circuit.</p>
+<h3 id="fixed-point--floating-point-numbers">Fixed-point &amp; Floating-point numbers</h3>
+<p>Often we may need to represent rational numbers. Let&rsquo;s first define integers and rational numbers in binary.</p>
+<p>An integer can be represented as:
+$$
+v = \sum_{i = 0}^{n - 1}\ a_i\ 2^i
+$$</p>
+<p>One way of representing a rational number is using something called a fixed-point number:</p>
+<p>$$
+v = r\ \sum_{i = 0}^{n - 1}\ a_i\ 2^i
+$$</p>
+<p>Where $r$ is called the resolution and is defined as $r = 2^{\text{number of fractional bits}}$</p>
+<p>We represent the fixed point numbers with using the <code>.</code> separator.
+So the <code>1.3</code>format and specifically <code>1.011</code>. Where the <code>.</code> is says what resolution we have.</p>
+<p>So by our definition, <code>1.011</code> has integer value 11. The resolution is 3 bits or, $2^{-3} = \frac{1}{8}$</p>
+<p>Therefore, our final value becomes $\frac{1}{8} \cdot\ 11 = \frac{11}{8}$.</p>
+<p>Now floating-point numbers are a bit harder to grasp by their definition:
+$$
+v = m \cdot\ 2^{e - x} = r\ \sum_{i = 0}^{n - 1}\ m_i\ 2^{i - n} \cdot\ 2^{\sum_{i = 0}^{k - 1} e_i 2^k - x}
+$$</p>
+<p>Now we also have $m$ which is the <em>mantissa</em> or the binary fraction.
+We also have $e$ which is the exponent, or the binary integer.</p>
+<p>The floating-point numbers are derived from scientific notation.</p>
+<p>So an example, say we have:
+$$
+m = 10010, e = 011
+$$</p>
+<p>Therefore, we have:
+$$
+10010E011
+$$</p>
+<p>Which represents:
+$$
+v = \frac{18}{32} \cdot\ 8
+$$</p>
+
+		</section>
+  </article>
+	</div>
+
+	<footer><p class="footer_msg">Memento mori</p></footer>
+
+  </div>
+</body>
+</html>

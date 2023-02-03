@@ -6,7 +6,20 @@
     <description>Recent content in Schools on rezvan</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 01 Feb 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://rezvan.xyz/school/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 03 Feb 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://rezvan.xyz/school/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Digital Design: Part 5 - Arithmetic Units</title>
+      <link>https://rezvan.xyz/school/digital_design_5/</link>
+      <pubDate>Fri, 03 Feb 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://rezvan.xyz/school/digital_design_5/</guid>
+      <description>In this part we&amp;rsquo;ll cover arithmetic units. Specifically multipliers and divers.
+We&amp;rsquo;ll also cover some number representations.
+Arithmetic Units It may be common knowledge that, when we want to perform multiplication and division, by powers of 2, we perform so-called shift operations on the bits.
+If we for example want to multiply a number with the binary number 100, or 4 in decimal.
+We would just shift all bits two steps to the left.</description>
+    </item>
+    
     <item>
       <title>Concurrent Programming: Part 4 - Synchronization problems with semaphores</title>
       <link>https://rezvan.xyz/school/concurrent_programming_4/</link>
