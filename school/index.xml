@@ -6,7 +6,19 @@
     <description>Recent content in Schools on rezvan</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 03 Feb 2023 18:16:30 +0100</lastBuildDate><atom:link href="https://rezvan.xyz/school/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 04 Feb 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://rezvan.xyz/school/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Concurrent Programming: Part 6 - Message-Passing Concurrency</title>
+      <link>https://rezvan.xyz/school/concurrent_programming_6/</link>
+      <pubDate>Sat, 04 Feb 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://rezvan.xyz/school/concurrent_programming_6/</guid>
+      <description>So far we have looked at threads which share memory. The so-called shared memory model, but in this part we&amp;rsquo;ll cover distributed memory model, specifically, message-passing concurrency.
+For this we&amp;rsquo;ll cover and use the programming language, Erlang!
+So let&amp;rsquo;s quickly have a crash course over Erlang!
+What is Erlang? Erlang is a functional programming language with message-passing features. The message-passing part is concurrent and implements the actor model, where Erlang processes are actors.</description>
+    </item>
+    
     <item>
       <title>Concurrent Programming: Part 5 - Monitors</title>
       <link>https://rezvan.xyz/school/concurrent_programming_5/</link>
