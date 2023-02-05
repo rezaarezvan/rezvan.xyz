@@ -6,7 +6,30 @@
     <description>Recent content in Schools on rezvan</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 04 Feb 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://rezvan.xyz/school/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 05 Feb 2023 15:28:10 +0100</lastBuildDate><atom:link href="https://rezvan.xyz/school/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Digital Design: Part 6 - Reconfigurable Hardware</title>
+      <link>https://rezvan.xyz/school/digital_design_6/</link>
+      <pubDate>Sun, 05 Feb 2023 15:28:10 +0100</pubDate>
+      
+      <guid>https://rezvan.xyz/school/digital_design_6/</guid>
+      <description>As we discussed in the first part of this series, there two main paradigms.
+ASIC and reconfigurable Hardware
+ASIC
+Advantages
+Very high performance and efficient. Disadvantages
+Not flexible (can&amp;rsquo;t be altered after fabrication).
+High cost.
+Reconfigurable computing
+Advantages
+Much higher performance than software, lower than ASIC.
+Higher level of flexibility than ASIC, more difficult to program than software.
+Software-programmed processors
+Advantages
+Very flexible to change. Disadvantages
+Performance can suffer if the clock speed isn&amp;rsquo;t fast enough.</description>
+    </item>
+    
     <item>
       <title>Concurrent Programming: Part 6 - Message-Passing Concurrency</title>
       <link>https://rezvan.xyz/school/concurrent_programming_6/</link>
