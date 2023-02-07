@@ -6,7 +6,19 @@
     <description>Recent content in Schools on rezvan</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 05 Feb 2023 15:28:10 +0100</lastBuildDate><atom:link href="https://rezvan.xyz/school/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 07 Feb 2023 14:05:43 +0100</lastBuildDate><atom:link href="https://rezvan.xyz/school/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Concurrent Programming: Part 8 - Synchronization problems with message-passing</title>
+      <link>https://rezvan.xyz/school/concurrent_programming_8/</link>
+      <pubDate>Tue, 07 Feb 2023 14:05:43 +0100</pubDate>
+      
+      <guid>https://rezvan.xyz/school/concurrent_programming_8/</guid>
+      <description>In this part we&amp;rsquo;ll cover the classical problems that occur when dealing with synchronization.
+But within this paradigm, we don&amp;rsquo;t encounter the same problems as when using semaphores. Mutual exclusion is not an issue, since we never share any resource, the big problem today will be synchronization and coordination.
+We&amp;rsquo;ll see that many problems have the solution of a server-client architecture.
+Barriers Let&amp;rsquo;s quickly recap what our barriers should be able to do:</description>
+    </item>
+    
     <item>
       <title>Digital Design: Part 6 - Reconfigurable Hardware</title>
       <link>https://rezvan.xyz/school/digital_design_6/</link>
@@ -31,7 +43,7 @@ Performance can suffer if the clock speed isn&amp;rsquo;t fast enough.</descript
     </item>
     
     <item>
-      <title>Concurrent Programming: Part 6 - Message-Passing Concurrency</title>
+      <title>Concurrent Programming: Part 6 &amp; 7 - Message-Passing Concurrency</title>
       <link>https://rezvan.xyz/school/concurrent_programming_6/</link>
       <pubDate>Sat, 04 Feb 2023 00:00:00 +0000</pubDate>
       

@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"><meta property="og:site_name" content="rezvan"><title>Concurrent Programming: Part 8 - Synchronization problems with message-passing | rezvan</title>
+  <meta property="og:title" content="Concurrent Programming: Part 8 - Synchronization problems with message-passing | rezvan"><meta property="og:description" content="">
+  <meta property="og:type" content="blog">
+  <meta property="og:link" content="https://rezvan.xyz/school/concurrent_programming_8/"><link rel="shortcut icon" type="image/png" href=https://rezvan.xyz//images/icon.png />
+  <meta property="og:image" content="https://rezvan.xyz//images/icon.png" /><meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz//css/main.css" />    
+</head>
+
+<body>
+  <div class="wrapper">
+	<div class="content">
+		<div class="header_main">
+	<a href="https://rezvan.xyz/"><p class="header_title">rezvan</p>
+	</a>
+  <br>
+  <nav id="main">
+    
+      <a href="/About/">About</a>
+    
+      <a href="/CV/">CV</a>
+    
+      <a href="/school/">School</a>
+    
+  </nav></div>
+
+  <article><div class="title_wrapper">
+			<h1 class="title">Concurrent Programming: Part 8 - Synchronization problems with message-passing</h1><p class="single_time">Feb 7, 2023</p></div>
+		<section class="post">
+			<p>In this part we&rsquo;ll cover the classical problems that occur when dealing with synchronization.</p>
+<p>But within this paradigm, we don&rsquo;t encounter the same problems as when using semaphores.
+Mutual exclusion is not an issue, since we never share any resource,
+the big problem today will be synchronization and coordination.</p>
+<p>We&rsquo;ll see that many problems have the solution of a server-client architecture.</p>
+<h3 id="barriers">Barriers</h3>
+<p>Let&rsquo;s quickly recap what our barriers should be able to do:</p>
+<pre tabindex="0"><code>-module(barrier).
+
+% Initialize barrier for ‘Expected’ processes
+init(Expected) -&gt;
+    % TODO
+
+% Block at ‘Barrier’ until all processes have reached it
+wait(Barrier) -&gt;
+    % TODO
+</code></pre><p>Since we are talking about processes, it&rsquo;s natural to have a process for the barrier itself.
+This process keeps track of what <em>other</em> processes that has arrived at the barrier point.</p>
+<p>When a new process arrives at the barrier, it sends a <code>arrived</code> message to the barrier process.
+When the list of all arrived processes is complete, the barrier process sends a <code>continue</code> message to everyone.</p>
+<p>After notifying all other processes, the barrier processes itself, goes back to its initial state.</p>
+<p>So we need to implement the barrier&rsquo;s event loop as a server function:</p>
+<pre tabindex="0"><code>barrier(Arrived, Expected, PidRefs)
+</code></pre><p>Let&rsquo;s implement this:</p>
+<pre tabindex="0"><code>% event loop of barrier for ‘Expected’ processes
+% Arrived: number of processes arrived so far
+% PidRefs: list of {Pid, Ref} of processes arrived so far
+
+% All processes arrived notify all waiting processes:
+barrier(Arrived, Expected, PidRefs) when Arrived =:= Expected -&gt;
+    [To ! {continue, Ref} || {To, Ref} &lt;- PidRefs],
+
+    % Reset barrier
+    barrier(0, Expected, []);
+
+% Still waiting for some processes
+barrier(Arrived, Expected, PidRefs) -&gt;
+    receive
+        {arrived, From, Ref} -&gt;
+            % one more arrived: add {From, Ref} to PidRefs list:
+            barrier(Arrived + 1, Expected, [{From, Ref}|PidRefs])
+end.
+</code></pre><p>Now for the <code>wait</code> function:</p>
+<pre tabindex="0"><code>% Block at ‘Barrier’ until all processes have reached it
+wait(Barrier) -&gt;
+    % Notify barrier of arrival
+    Ref = make _ ref(),
+
+    % Wait for signal to continue
+    Barrier ! {arrived, self(), Ref},
+
+    receive {continue, Ref} -&gt; through end.
+</code></pre><p>And finally, the <code>init</code> function, simple:</p>
+<pre tabindex="0"><code>% Initialize barrier for ‘Expected’ processes
+init(Expected) -&gt;
+    spawn(fun () -&gt; barrier(0, Expected, []) end).
+</code></pre><h3 id="resource-allocator">Resource allocator</h3>
+<p>Let&rsquo;s recap the problem, an *<em>allocator</em> grants <em>users</em>, exclusive access to a number of resources.</p>
+<p>Users asynchronously request and release resources back.
+The allocator ensures exclusive access to a single user, and keeps tracks of the number of available resources.</p>
+<p>So our module would look like:</p>
+<pre tabindex="0"><code>-module(allocator).
+
+% Register allocator with list of Resources
+init(Resources) -&gt;
+    % TODO
+
+% Get N resources from allocator
+request(N) -&gt;
+    % TODO
+
+% Release Resources to allocator
+release(Resources) -&gt;
+    % TODO
+</code></pre><p>The user would perform something like:</p>
+<pre tabindex="0"><code>user() -&gt;
+    % How many resources are needed?
+    N = howMany(),
+
+    % Get resources from allocator
+    Resources = allocator:request(N),
+
+    % Do something with resources
+    use(Resources),
+
+    % Release resources
+    allocator:release(Resources),
+
+    user().
+</code></pre><p>Again, in the message-passing world, using a server-client architecture often solves the problem.</p>
+<p>We dedicate a process to the allocator, which keeps track of list of resources.</p>
+<p>When a process requests for some resources that are available, the allocator sends a <code>granted</code> message.
+Then accordingly removes those resources from the list.</p>
+<p>When a process releases some resources, the allocator sends a <code>released</code>, and then adds the resources to the list.</p>
+<p>If requests exceed the availability, the fall into our built-in mailbox.
+The allocator process will resolve this as soon as they pattern-match again (resources available again).</p>
+<pre tabindex="0"><code>allocator(Resources) -&gt;
+    % Count how many resources are available
+    Available = length(Resources),
+    receive
+
+        % Serve requests if enough resources are available
+        {request, From, Ref, N} when N =&lt; Available -&gt;
+
+            % Granted ++ Remaining =:= Resources
+            % Length(Granted) =:= N
+            {Granted, Remaining} = lists:split(N, Resources),
+
+            % Send resources to requesting process
+            From ! {granted, Ref, Granted},
+
+            % Continue with Remaining resources
+            allocator(Remaining);
+
+
+        % Serve releases
+        {releases, From, Ref, Released} -&gt;
+            % Notify releasing process
+            From ! {released, Ref},
+
+            % Continue with previous and released resources
+            allocator(Resources ++ Released)
+</code></pre><p>The request function:</p>
+<pre tabindex="0"><code>% Get N resources from allocator, gets blocked if not available
+request(N) -&gt;
+    Ref = make_ref(),
+    allocator ! {request, self(), Ref, N},
+    recieve {granted, Ref, Granted} -&gt; Granted end.
+
+% Release Resources to allocator
+release(Resources) -&gt;
+    Ref = make_ref(),
+    allocator ! {release, self(), Ref, Resources},
+    recieve {released, Ref} -&gt; released end.
+</code></pre><h3 id="producer-consumer">Producer-consumer</h3>
+<p>Recap; Implement a <code>buffer</code> such that:</p>
+<ul>
+<li>
+<p>Producers and consumers access the buffer atomically</p>
+</li>
+<li>
+<p>Consumers block when the buffer is empty</p>
+</li>
+<li>
+<p>Producers block when the buffer is full (bounded buffer variant)</p>
+</li>
+</ul>
+<pre tabindex="0"><code>-module(buffer).
+
+% Initialize buffer with size Bound
+init_buffer(Bound) -&gt;
+    % TODO
+
+% Put Item in Buffer; Block if full
+put(Buffer, Item) -&gt;
+    % TODO
+
+% Get Item from Buffer; Block if empty
+get(Buffer) -&gt;
+    % TODO
+</code></pre><p>The producer and buffer:</p>
+<pre tabindex="0"><code>producer(Buffer) -&gt;
+    Item = produce(),
+    buffer:put(Buffer, Item),
+    producer(Buffer).
+
+
+consumer(Buffer) -&gt;
+    Item = buffer:get(Buffer),
+    % Do something with Item
+
+    consume(Item),
+    consumer(Buffer).
+</code></pre><p>At this point you pretty much can see the pattern here that arises:</p>
+<pre tabindex="0"><code>buffer(Content, Count, Bound) -&gt;
+    receive
+
+    % Serve gets when buffer not empty
+    {get, From, Ref} when Count &gt; 0 -&gt;
+        % Match first item
+        [First | Rest] = Content,
+
+        % Send it out
+        From ! {item, Ref, First},
+
+        % Remove it from buffer
+        buffer(Rest, Count-1, Bound);
+
+    % Serve puts when buffer not full
+    {put, From, Ref, Item} when Count &lt; Bound -&gt;
+
+        % Send ack
+        From ! {done, Ref},
+
+        % Add item to end
+        buffer(Content ++ [Item], Count + 1, Bound)
+end.
+</code></pre><p>In this solution, both a bounded and unbounded will work - due to Erlang&rsquo;s order between numbers and atoms!</p>
+<p>Now for get and put:</p>
+<pre tabindex="0"><code>% Get item from ‘Buffer’; block if empty
+get(Buffer) -&gt;
+    Ref = make_ref(),
+    Buffer ! {get, self(), Ref},
+    receive {item, Ref, Item} -&gt; Item end.
+
+% Put ‘Item’ in ‘Buffer’; block if full
+put(Buffer, Item) -&gt;
+    Ref = make_ref(),
+    Buffer ! {put, self(), Ref, Item},
+    receive {done, Ref} -&gt; done end.
+</code></pre><h3 id="readers-writers">Readers-writers</h3>
+<pre tabindex="0"><code>-module(board).
+
+% Register board with Name
+init(Name) -&gt;
+    % TODO
+
+% Get read access to Board
+begin_read(Board) -&gt;
+    % TODO
+
+% Release read access to Board
+end_read(Board) -&gt;
+    % TODO
+
+% Get write access to Board
+begin_write(Board) -&gt;
+    % TODO
+
+% Release write access to Board
+end_write(Board) -&gt;
+    % TODO
+</code></pre><p>Our first naive server function would be:</p>
+<pre tabindex="0"><code>% ‘Readers’ active readers and ‘Writers’ active writers
+board_row(Readers, Writers) -&gt;
+receive
+    {begin_read, From, Ref} when Writers =:= 0 -&gt;
+        From ! {ok_ to_ read, Ref},
+        board_row(Readers+1, Writers);
+
+    {begin_write, From, Ref} when (Writers =:= 0) and (Readers =:= 0) -&gt;
+        From ! {ok_ to_ write, Ref},
+        board_row(Readers, Writers+1);
+
+    {end_read, From, Ref} -&gt; From ! {ok, Ref},
+        board_row(Readers-1, Writers);
+
+    {end_write, From, Ref} -&gt; From ! {ok, Ref},
+        board_row(Readers, Writers-1)
+end.
+</code></pre><p>Just as our naive solution when using semaphores,
+this doesn&rsquo;t prevent starvation due to this version prioritizes readers.</p>
+<p>The solution based on two monitors is a approach here, but it&rsquo;s quite cumbersome for a message-passing program.</p>
+<p>We instead implement two <strong>macro states</strong>:</p>
+<ul>
+<li>
+<p>Empty - no readers or writers</p>
+</li>
+<li>
+<p>Readers - Readers but no writers</p>
+</li>
+</ul>
+<p>The initial board is in empty state, then:</p>
+<ul>
+<li>
+<p>When board is in state <code>emtpy</code>:</p>
+<ul>
+<li>
+<p>Read requests - served immediately, then switches to <code>readers</code> state.</p>
+</li>
+<li>
+<p>Write requests - served immediately and <strong>synchronously</strong>, wait until writing ends, then go into <code>empty</code> state.</p>
+</li>
+</ul>
+</li>
+<li>
+<p>When board is in state <code>readers</code>:</p>
+<ul>
+<li>
+<p>Read requests - served immediately and stays in <code>readers</code>.</p>
+</li>
+<li>
+<p>Write requests - served <em>as soon as possible</em>, board waits until all reading ends, <em>then</em> request is served. Back to <code>empty</code> state.</p>
+</li>
+</ul>
+</li>
+</ul>
+<p>For this we&rsquo;ll need two server functions, <code>empty_board</code> and <code>readers_board</code>:</p>
+<pre tabindex="0"><code>% Board with no readers and no writers
+empty_board() -&gt;
+    receive
+
+    % Serve read request
+    {begin_read, From, Ref} -&gt;
+
+        % Notify reader
+        From ! {ok_to_read, Ref},
+
+        % Board has one reader
+        readers_board(1);
+
+    % Serve write request synchronously
+    {begin_write, From, Ref} -&gt;
+        % Notify writer
+        From ! {ok_to_write, Ref},
+
+        % Wait for writer to finish
+        Receive
+            {end_write, _From, _Ref} -&gt;
+                % Board is empty again
+                empty_board()
+        end
+end.
+
+% Board with no readers (and no writers)
+readers_ board(0) -&gt; empty_ board();
+
+% Board with ‘Readers’ active readers
+% (and no writers)
+readers_board(Readers) -&gt;
+    receive
+
+        % Serve write request
+        {begin_write, From, Ref} -&gt;
+            % Wait until all ‘Readers’ have finished
+            [receive {end_read, _From, _Ref} -&gt; end_read end || _ &lt;- lists:seq(1, Readers)],
+
+            % Notify writer
+            From ! {ok_to_write, Ref},
+
+            % Wait for writer to finish
+            receive
+                {end_write, _From, _Ref} -&gt; empty_board()
+            end;
+
+        % Serve read request
+        {begin_read, From, Ref} -&gt;
+            % Notify reader
+            From ! {ok _ to _ read, Ref},
+
+            % Board has one more reader
+            readers _ board(Readers+1);
+
+        % Serve end read
+        {end_read, From, Ref} -&gt;
+
+            % Board has one less reader
+            readers_board(Readers-1)
+end.
+</code></pre><h3 id="dining-philosophers">Dining Philosophers</h3>
+<pre tabindex="0"><code>-module(philosophers).
+
+% Set up table of N philosophers
+init(N) -&gt;
+    % TODO
+
+% Philosopher picks up Fork
+get_fork(Fork) -&gt;
+    % TODO
+
+% Philosopher releases Fork
+put_fork(Fork) -&gt;
+    % TODO
+</code></pre><p>We could explore the solutions we did based on locking and breaking symmetry -
+but there is a solution which better fits into the message-passing paradigm</p>
+<p>We have a waiter (process) who supervises access to the table.
+So each philosopher asks for <em>permission</em> to sit at the table <strong>before</strong> picking up both forks.</p>
+<p>So, as long as the waiter allows strictly fewer philosopher than the total number of forks to sit around the table, deadlock and starvation are avoided.</p>
+<p>Waiter interface:</p>
+<pre tabindex="0"><code>% Ask Waiter to be seated; may wait
+sit(Waiter) -&gt;
+    % TODO
+
+% Ssk Waiter to leave
+leave(Waiter) -&gt;
+    % TODO
+</code></pre><p>Our server function:</p>
+<pre tabindex="0"><code>waiter(Eating, Seats) -&gt;
+    receive
+
+    % Serve as long as seats are available
+    {sit, From, Ref} when Eating &lt; Seats -&gt;
+        From ! {ok_to_sit, Ref},
+
+        % One more eating
+        waiter(Eating+1, Seats);
+
+    % Can leave at any time
+    {leave, From, Ref} -&gt;
+        From ! {ok_to_leave, Ref},
+
+        % One less eating
+        waiter(Eating-1, Seats)
+end.
+</code></pre><p>And <code>sit</code> and <code>leave</code>:</p>
+<pre tabindex="0"><code>% ask Waiter to be seated; may wait
+sit(Waiter) -&gt;
+    Ref = make _ ref(),
+    Waiter ! {sit, self(), Ref},
+    receive {ok_to_sit, Ref} -&gt; ok end.
+
+% ask Waiter to leave
+leave(Waiter) -&gt;
+    Ref = make _ ref(),
+    Waiter ! {leave, self(), Ref},
+    receive {ok_to_leave, Ref} -&gt; ok end.
+</code></pre><p>Now, each <code>fork</code> is also a process, which keeps track of whether the for is free or not.</p>
+<p>Server function:</p>
+<pre tabindex="0"><code>% Fork not held by anyone
+fork() -&gt;
+    receive
+        {get, From, Ref} -&gt;
+            From ! {ack, Ref},
+
+            % Fork held
+            fork(From)
+end.
+
+% a fork held by Owner
+fork(Owner) -&gt;
+    receive
+        {put, Owner, _ Ref} -&gt;
+            % Fork not held
+            fork()
+end.
+</code></pre><p>and the <code>get</code> and <code>put</code> for the forks:</p>
+<pre tabindex="0"><code>% Pick up Fork; block until available
+get_fork(Fork) -&gt;
+    Ref = make _ ref(),
+    Fork ! {get, self(), Ref},
+    receive {ack, Ref} -&gt; ack end.
+
+% Put down Fork
+put_fork(Fork) -&gt;
+    Ref = make _ ref(),
+    Fork ! {put, self(), Ref}.
+</code></pre><p>And finally, the <code>init</code> function for the whole problem:</p>
+<pre tabindex="0"><code>% Set up table of ‘N’ philosophers
+init(N) -&gt;
+    % Spawn waiter process
+    Waiter = spawn(fun () -&gt; waiter(0, N-1) end),
+
+    % [1, 2, ..., N]
+    Ids = lists:seq(1,N),
+
+    % Spawn fork processes
+    Forks = [spawn(fun fork/0) || _ &lt;- Ids],
+
+    % Spawn philosopher processes
+    [spawn(fun () -&gt;
+        Left = lists:nth(I, Forks),
+
+        % 1-based indexes
+        Right = lists:nth(1+(I rem N), Forks),
+        philosopher(#forks{left=Left, right=Right}, Waiter)
+    end) || I &lt;- Ids].
+</code></pre>
+		</section>
+  </article>
+	</div>
+
+	<footer><p class="footer_msg">Memento mori</p></footer>
+
+  </div>
+</body>
+</html>
