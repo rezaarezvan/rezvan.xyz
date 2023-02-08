@@ -6,7 +6,22 @@
     <description>Recent content in Schools on rezvan</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 07 Feb 2023 14:05:43 +0100</lastBuildDate><atom:link href="https://rezvan.xyz/school/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 08 Feb 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://rezvan.xyz/school/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Digital Design: Part 7 - Timing, delay &amp; power</title>
+      <link>https://rezvan.xyz/school/digital_design_7/</link>
+      <pubDate>Wed, 08 Feb 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://rezvan.xyz/school/digital_design_7/</guid>
+      <description>When designing digital circuits, the timing, delay and power usage of the circuit are important. In this part we&amp;rsquo;ll cover how we usually measure and compare these.
+Timing and delay In an arbitrary synchronous circuit, we usually have:
+A single-bit clock, all other wires may be multiple bits wide.
+Registers (Which is just a collection of flip-flops).
+The clock will be distributed to all flip-flops
+Combinational logic
+No internal state</description>
+    </item>
+    
     <item>
       <title>Concurrent Programming: Part 8 - Synchronization problems with message-passing</title>
       <link>https://rezvan.xyz/school/concurrent_programming_8/</link>
