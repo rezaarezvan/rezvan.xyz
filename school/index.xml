@@ -6,7 +6,24 @@
     <description>Recent content in Schools on rezvan</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 13 Feb 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://rezvan.xyz/school/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 19 Feb 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://rezvan.xyz/school/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Digital Design: Part 8 - Interfaces, Interconnects and Memories</title>
+      <link>https://rezvan.xyz/school/digital_design_8/</link>
+      <pubDate>Sun, 19 Feb 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://rezvan.xyz/school/digital_design_8/</guid>
+      <description>In this part we&amp;rsquo;ll cover interfaces, interconnects as well as memory.
+Interface timing In digital circuits, we often want to send data, from a sender, to a receiver.
+How can we achieve this data passing from one module to another?
+The answer is:
+Open loop
+Flow Control
+Serialized
+In an open loop, we either have so that it&amp;rsquo;s always &amp;ldquo;valid&amp;rdquo; to send data, or periodically.
+In flow control, as the name suggests, the data-flow is controlled.</description>
+    </item>
+    
     <item>
       <title>Concurrent Programming: Part 9 - Parallelizing computations</title>
       <link>https://rezvan.xyz/school/concurrent_programming_9/</link>
