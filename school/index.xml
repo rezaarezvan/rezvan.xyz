@@ -6,7 +6,19 @@
     <description>Recent content in Schools on rezvan</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 19 Feb 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://rezvan.xyz/school/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 05 Mar 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://rezvan.xyz/school/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Digital Design: Part 9 - Testing</title>
+      <link>https://rezvan.xyz/school/digital_design_9/</link>
+      <pubDate>Sun, 05 Mar 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://rezvan.xyz/school/digital_design_9/</guid>
+      <description>When creating digital circuits, there are a lot of things that can go wrong.
+When designing the circuit, it may happen that the designers have implemented a bug into the circuit.
+We call these design bugs. On the other hand, when physically making the chip, it may happen that we get permanent (implementation) fault, or other (transient) faults.
+In the first case we need to perform verification, in the latter case, it&amp;rsquo;s testing and fault tolerance.</description>
+    </item>
+    
     <item>
       <title>Concurrent Programming: Part 10 - Parallel linked lists</title>
       <link>https://rezvan.xyz/school/concurrent_programming_10/</link>
