@@ -11,7 +11,7 @@ body {
 }
 
 a {
-  color: #eee; 
+  color: #eee;
   text-decoration: none;
 }
 
@@ -21,7 +21,7 @@ p {
 
 article a {
   text-decoration: underline;
-} 
+}
 
 /* --- General Document style --- */
 .wrapper {
@@ -56,7 +56,7 @@ article a {
 }
 
 .post_listed .post_time {
-  color: #bcbcbc;
+  color: #aaa;
   margin-right: 10px;
   display: inline-block;
   font-size: 1.1rem;
@@ -71,7 +71,7 @@ article a {
   display: none;
 }
 
-/* --- Header Styling --- */ 
+/* --- Header Styling --- */
 .header_main {
   margin: 45px auto 35px auto;
   width: 100%;
@@ -112,7 +112,7 @@ nav a {
 }
 
 nav a:visited {
-  color: #eee; 
+  color: #eee;
   text-decoration: none;
 }
 
@@ -348,3 +348,25 @@ p.::-moz-selection,
     font-style: normal;
 }
 
+img[src$='#center']
+{
+    display: block;
+    margin: 0.7rem auto; /* you can replace the vertical '0.7rem' by
+                            whatever floats your boat, but keep the
+                            horizontal 'auto' for this to work */
+    /* whatever else styles you fancy here */
+}
+
+img[src$='#floatleft']
+{
+    float:left;
+    margin: 0.7rem;      /* this margin is totally up to you */
+    /* whatever else styles you fancy here */
+}
+
+img[src$='#floatright']
+{
+    float:right;
+    margin: 0.7rem;      /* this margin is totally up to you */
+    /* whatever else styles you fancy here */
+}

@@ -6,7 +6,21 @@
     <description>Recent content in Schools on rezvan</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 05 Mar 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://rezvan.xyz/school/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 20 Mar 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://rezvan.xyz/school/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Electrial Circuits and Fields: Part 1 - Introduction</title>
+      <link>https://rezvan.xyz/school/eem076/</link>
+      <pubDate>Mon, 20 Mar 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://rezvan.xyz/school/eem076/</guid>
+      <description>In this series we&amp;rsquo;ll explore and cover the world of electrical circuit (and later on fields as well).
+Fundamental definitions We&amp;rsquo;ll begin with covering the three basic factors that we&amp;rsquo;ll analyze in all circuits, current, voltage and, resistance.
+Let&amp;rsquo;s start with current.
+Current Current is defined as:
+The rate of flow of electrical charge.
+We measure current in Ampere, 1 A is defined as, 1 coulomb of charge per 1 second.</description>
+    </item>
+    
     <item>
       <title>Digital Design: Part 9 - Testing</title>
       <link>https://rezvan.xyz/school/digital_design_9/</link>
