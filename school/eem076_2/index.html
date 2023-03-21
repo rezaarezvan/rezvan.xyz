@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"><meta property="og:site_name" content="rezvan"><title>Electrial Circuits and Fields: Part 2 - Power &amp; Energy | rezvan</title>
+  <meta property="og:title" content="Electrial Circuits and Fields: Part 2 - Power &amp; Energy | rezvan"><meta property="og:description" content="">
+  <meta property="og:type" content="blog">
+  <meta property="og:link" content="https://rezvan.xyz/school/eem076_2/"><link rel="shortcut icon" type="image/png" href=https://rezvan.xyz//images/icon.png />
+  <meta property="og:image" content="https://rezvan.xyz//images/icon.png" /><meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz//css/main.css" />    
+</head>
+
+<body>
+  <div class="wrapper">
+	<div class="content">
+		<div class="header_main">
+
+    <a href="https://rezvan.xyz/"><p class="header_title">rezvan</p><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.3/dist/katex.min.css" integrity="sha384-Juol1FqnotbkyZUT5Z7gUPjQ9gzlwCENvUZTpQBAPxtusdwFLRy382PSDx5UUJ4/" crossorigin="anonymous">
+
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.3/dist/katex.min.js" integrity="sha384-97gW6UIJxnlKemYavrqDHSX3SiygeOwIZhwyOKRfSaf0JWKRVj9hLASHgFTzT+0O" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.3/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+            delimiters: [
+                {left: "$$", right: "$$", display: true},
+                {left: "$", right: "$", display: false}
+            ]
+        });
+    });
+</script>
+
+    </a>
+
+    <br>
+
+    <nav id="main">
+        
+        <a href="/About/">About</a>
+        
+        <a href="/CV/">CV</a>
+        
+        <a href="/school/">School</a>
+        
+    </nav></div>
+
+  <article><div class="title_wrapper">
+			<h1 class="title">Electrial Circuits and Fields: Part 2 - Power &amp; Energy</h1><p class="single_time">Mar 21, 2023</p></div>
+		<section class="post">
+			<p>In this part we&rsquo;ll cover and properly define a very misunderstood concept in physics, power and energy.</p>
+<p>Let&rsquo;s start with defining power properly.</p>
+<h3 id="power">Power</h3>
+<p>Power can be defined as:</p>
+<blockquote>
+<p><strong>Rate</strong> of energy transferred, <em>or</em> work done, per unit of time.</p>
+</blockquote>
+<p>In electrial circuits, we can define power, $P$, as:
+$$
+P = V \cdot\ I
+$$</p>
+<p>We measure power in watts, which we can define as:
+$$
+1\ W = \frac{1\ J}{s} = \frac{1\ N \cdot\ m}{s} = 1 kg \cdot\ m^{2} \cdot\ s^{-3}
+$$</p>
+<p>We&rsquo;ll mainly only encounter the $P = V \cdot\ I$ variant, however.</p>
+<p>Using Ohm&rsquo;s law that we learned from Part 1 we find that:
+$$
+P = V \cdot\ I = \frac{V^2}{R} = I^2\ R
+$$</p>
+<p>We can throw around this equation as much as we want and need, here&rsquo;s a picture that illustrates all the possible combinations:
+<img src="/images/F.png#center" alt=""></p>
+<h3 id="energy">Energy</h3>
+<p>Energy can be defined as:</p>
+<blockquote>
+<p>The <strong>capacity</strong> to do <em>work</em> in a given time.</p>
+</blockquote>
+<p>Or in math terms:
+$$
+w = \int_{t_1}^{t_2} P(t) dt
+$$</p>
+<p>So, therefore:</p>
+<ul>
+<li><strong>Power</strong> is <strong>Energy</strong> <em>per unit of time</em>.</li>
+<li><strong>Energy</strong> is <strong>Power</strong> <em>over time</em>.</li>
+</ul>
+<h4 id="positive-and-negative-power">Positive and negative power</h4>
+<p>One small note here is that, power can end up being negative, which can be confusing at first.</p>
+<p>We view this as <strong>we&rsquo;re supplying power</strong> into a system. Therefore, positive power is <strong>consuming</strong> the power.</p>
+<p>So:</p>
+<ul>
+<li>Positive: Power being <em>consumed</em></li>
+<li>Negative: Power being <em>supplied</em></li>
+</ul>
+<h3 id="equivalent-resistance">Equivalent resistance</h3>
+<p>As we saw in the first part, we covered that in series circuits, the current needs to be the same.
+While in a parallel circuit, the voltage will need to be the same. We can use this to our advantage and find how we can simplify our circuits when we have a lot of resistors.</p>
+<h4 id="equivalent-resistance-in-series-circuits">Equivalent resistance in series circuits</h4>
+<p>If we have a simple circuit of three resistors like this:
+<img src="/images/S.png#center" alt=""></p>
+<p>Using Ohm&rsquo;s law and the fact that we know this is a series circuit we can find:
+$$
+V = v_1 + v_2 + v_3 \newline
+V = I \cdot\ R_1 + I \cdot\ R_2 + I \cdot\ R_3 \newline
+V = (R_1 + R_2 + R_3) \cdot\ I \newline
+V = R_{eq} \cdot\ I
+$$</p>
+<p>Where $R_{eq}$ is:
+$$
+R_{eq} = R_1 + R_2 + R_3
+$$</p>
+<p>Or, more generally, if we have $N$ resistors in series, we can find the equivalent resistors as:
+$$
+R_{eq} = R_1 + R_2 + \ldots\ + R_N
+$$</p>
+<h4 id="equivalent-resistance-in-parallel-circuits">Equivalent resistance in parallel circuits</h4>
+<p>Now, if we instead have three parallel resistors instead like:
+<img src="/images/P.png#center" alt=""></p>
+<p>Again, using Ohm&rsquo;s law and the fact that this is a parallel circuit we can find:
+$$
+I = I_1 + I_2 + I_3 \newline
+I = \frac{V}{R_1} + \frac{V}{R_3} + \frac{V}{R_3} \newline
+I = (\frac{1}{R_1} + \frac{1}{R_3} + \frac{1}{R_3}) \cdot\ V \newline
+$$</p>
+<p>Which means our $R_{eq}$ is:
+$$
+\frac{1}{\frac{1}{R_1} + \frac{1}{R_3} + \frac{1}{R_3})}
+$$</p>
+<p>Another way of writing this is:
+$$
+\frac{R_1\ R_2\ R_3}{R_1\ R_2 + R_2\ R_3 + R_1\ R_3}
+$$</p>
+<h3 id="current-and-voltage-dividers">Current and Voltage dividers</h3>
+<p>If we have this circuit:</p>
+<p><img src="/images/VD.png#center" alt="">
+$$
+R_{eq} = R_1 + R_2 + R_3 \newline
+I = \frac{V_{total}}{R_{eq}}
+$$</p>
+<p>We can find equations for the relative voltages:
+$$
+V_1 = I \cdot\ R_1 = V_{total} \cdot\ \frac{R_1}{(R_1 + R_2 + R_3)} \newline
+V_2 = I \cdot\ R_2 = V_{total} \cdot\ \frac{R_2}{(R_1 + R_2 + R_3)} \newline
+V_3 = I \cdot\ R_3 = V_{total} \cdot\ \frac{R_3}{(R_1 + R_2 + R_3)} \newline
+$$</p>
+<p>This is what we call a voltage divider.</p>
+<p>If we instead have this circuit:</p>
+<p><img src="/images/CD.png#center" alt="">
+$$
+R_{eq} = \frac{R_1\ R_2}{(R_1 + R_2)} \newline
+V = i_{total}\ R_{eq} \newline
+$$</p>
+<p>We can find equations for the relative currents:
+$$
+I_1 = \frac{V}{R_1} = I_{total}\ \frac{R_2}{(R_1 + R_2)}
+I_2 = \frac{V}{R_2} = I_{total}\ \frac{R_1}{(R_1 + R_2)}
+$$</p>
+
+		</section>
+  </article>
+	</div>
+
+	<footer><p class="footer_msg">Memento mori</p></footer>
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"><meta property="og:site_name" content="rezvan"><title>Computer System Engineering: Part 1 - Introduction | rezvan</title>
+  <meta property="og:title" content="Computer System Engineering: Part 1 - Introduction | rezvan"><meta property="og:description" content="">
+  <meta property="og:type" content="blog">
+  <meta property="og:link" content="https://rezvan.xyz/school/eda333/"><link rel="shortcut icon" type="image/png" href=https://rezvan.xyz//images/icon.png />
+  <meta property="og:image" content="https://rezvan.xyz//images/icon.png" /><meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz//css/main.css" />    
+</head>
+
+<body>
+  <div class="wrapper">
+	<div class="content">
+		<div class="header_main">
+
+    <a href="https://rezvan.xyz/"><p class="header_title">rezvan</p><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.3/dist/katex.min.css" integrity="sha384-Juol1FqnotbkyZUT5Z7gUPjQ9gzlwCENvUZTpQBAPxtusdwFLRy382PSDx5UUJ4/" crossorigin="anonymous">
+
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.3/dist/katex.min.js" integrity="sha384-97gW6UIJxnlKemYavrqDHSX3SiygeOwIZhwyOKRfSaf0JWKRVj9hLASHgFTzT+0O" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.3/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+            delimiters: [
+                {left: "$$", right: "$$", display: true},
+                {left: "$", right: "$", display: false}
+            ]
+        });
+    });
+</script>
+
+    </a>
+
+    <br>
+
+    <nav id="main">
+        
+        <a href="/About/">About</a>
+        
+        <a href="/CV/">CV</a>
+        
+        <a href="/school/">School</a>
+        
+    </nav></div>
+
+  <article><div class="title_wrapper">
+			<h1 class="title">Computer System Engineering: Part 1 - Introduction</h1><p class="single_time">Mar 21, 2023</p></div>
+		<section class="post">
+			<p>In this series we&rsquo;ll understand and learn how to compute, quantify and, measure the performance of different systems and programs.</p>
+<p>To compute, quantify and, measure performance let&rsquo;s start by first defining what performance depends on.</p>
+<h3 id="performance-dependencies">Performance dependencies</h3>
+<p>When we&rsquo;re making a system or a program a lot of different factors will weigh in the total performance:</p>
+<ul>
+<li>
+<p>The underlying algorithm</p>
+<ul>
+<li>Determines number of operations required, which directly impacts the performance.</li>
+</ul>
+</li>
+<li>
+<p>Programming language, compile, and, architecture of choice.</p>
+<ul>
+<li>Determines number of instructions.</li>
+</ul>
+</li>
+<li>
+<p>Processor and memory</p>
+<ul>
+<li>Determines how quickly each instruction executes</li>
+</ul>
+</li>
+<li>
+<p>I/O System (Includes the OS)</p>
+<ul>
+<li>Determines how quickly each I/O operation executes</li>
+</ul>
+</li>
+</ul>
+<h3 id="cpu-time">CPU Time</h3>
+<p>We can define CPU time by a very nice equation:
+$$
+\text{CPU Time} = \frac{\text{Instructions}}{\text{Program}} \cdot\ \frac{\text{Clock cycles}}{\text{Instruction}} \cdot\ \frac{\text{Seconds}}{\text{Clock cycle}}
+$$</p>
+<p>We will call these as the following:
+$$
+\text{CPU Time} = IC \cdot\ CPI \cdot\ T_c
+$$</p>
+<p>One way to actually then measure computers or programs is using SPEC.</p>
+<p>SPEC, or <strong>S</strong>tandard <strong>P</strong>erformance <strong>E</strong>valuation <strong>C</strong>orp, is a company which specialize in measuring.</p>
+<p>The idea is to normalize compared to a reference computer using geometric means.</p>
+<p>This is called the SPECvalue.</p>
+<p>Geometric mean:
+$$
+\sqrt[n]{\prod_{i = 1}^{n} \text{Execution time ratio}_i}
+$$</p>
+<h3 id="risccisc-architecture">RISC/CISC Architecture</h3>
+<p>In the early days, it was thought that, if we made the machine instructions closer to real (higher-level) programming functions,
+it would be faster for the computer.</p>
+<p>We now know this is not true, and machine instructions are therefore as small and atomic as possible.
+These two approaches are known as RISC and CISC.</p>
+<ul>
+<li>RISC (<strong>R</strong>educed <strong>I</strong>nstruction <strong>S</strong>et <strong>C</strong>omputers)</li>
+<li>CISC (<strong>C</strong>omplex <strong>I</strong>nstruction <strong>S</strong>et <strong>C</strong>omputers)</li>
+</ul>
+<h3 id="mips">MIPS</h3>
+<p>In this series we will use a MIPS instruction set, MIPS is still used widely in the real world, but it&rsquo;s slowly fading away to due RISC V&rsquo;s popularity.</p>
+<p>Let&rsquo;s see some MIPS operations:</p>
+<h4 id="arithmetic-operations">Arithmetic operations</h4>
+<pre tabindex="0"><code>add a, b, c # a := b + c
+</code></pre><p>All arithmetic operations have this form, two source register and one destination registers.</p>
+<p>We also see that comments are denoted by a <code>#</code> in MIPS programs.</p>
+<h4 id="register-operations">Register operations</h4>
+<p>All operations in assembly languages utilize <em>registers</em>.</p>
+<p>MIPS has a 32 x 32 bit <strong>register file</strong> (RF)</p>
+<p>They are numbered 0 to 31 and, just a refresher, 32-bit data is called a &ldquo;word&rdquo;.</p>
+<p>Example:</p>
+<pre tabindex="0"><code>f = (g + h) - (i + j);
+</code></pre><p>Given that $f, \ldots, j$ are in registers $s_0, \ldots, s_4$, in MIPS this will become:</p>
+<pre tabindex="0"><code>add $t0, $s1, $s2 # temp0 := g + h
+add $t1, $s3, $s4 # temp1 := i + j
+sub $s0, $t0, $t1 # f := t0 - t1
+</code></pre><h4 id="memory-operations">Memory operations</h4>
+<p>Since MIPS is byte addressable, it means that each &ldquo;word&rdquo; has 4 bytes.
+Also good to note here is that MIPS uses <strong>big endian</strong></p>
+<p>Example:</p>
+<pre tabindex="0"><code>g = h + A[8];
+</code></pre><p>Given that g is in $s_1$, h in $s_2$ and, the starting address for A is at $s_3$</p>
+<p>We will get the following MIPS code:</p>
+<pre tabindex="0"><code>lw $t0, 32($s3)     # load word
+add $s1, $s2, $t0
+</code></pre><p>Example 2:</p>
+<pre tabindex="0"><code>A[12] = h + A[8];
+</code></pre><p>Given that h is in $s_2$, and, the starting address for A is at $s_3$</p>
+<pre tabindex="0"><code>lw $t0, 32($s3)     # load word
+add $t0, $s2, $t0
+sw $t0, 48($s3)     # store word
+</code></pre><h4 id="immediate-operations">Immediate operations</h4>
+<p>Instead of, for example, adding two registers, we may just want to add a constant, this can be done via:</p>
+<pre tabindex="0"><code>addi $s3, $s3, 4
+</code></pre><p>For subtracting we just do:</p>
+<pre tabindex="0"><code>addi $s2, $s1, -1
+</code></pre><h4 id="zero-register">Zero register</h4>
+<p>In MIPS there is a hard-coded zero register, that always contains the value zero, this can be used to quickly move values between registers:</p>
+<pre tabindex="0"><code>add $t2, $s1, $zero     # t2 := s1
+</code></pre>
+		</section>
+  </article>
+	</div>
+
+	<footer><p class="footer_msg">Memento mori</p></footer>
+
+  </div>
+</body>
+</html>

@@ -6,7 +6,34 @@
     <description>Recent content in Schools on rezvan</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 20 Mar 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://rezvan.xyz/school/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 21 Mar 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://rezvan.xyz/school/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Computer System Engineering: Part 1 - Introduction</title>
+      <link>https://rezvan.xyz/school/eda333/</link>
+      <pubDate>Tue, 21 Mar 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://rezvan.xyz/school/eda333/</guid>
+      <description>In this series we&amp;rsquo;ll understand and learn how to compute, quantify and, measure the performance of different systems and programs.
+To compute, quantify and, measure performance let&amp;rsquo;s start by first defining what performance depends on.
+Performance dependencies When we&amp;rsquo;re making a system or a program a lot of different factors will weigh in the total performance:
+The underlying algorithm
+Determines number of operations required, which directly impacts the performance. Programming language, compile, and, architecture of choice.</description>
+    </item>
+    
+    <item>
+      <title>Electrial Circuits and Fields: Part 2 - Power &amp; Energy</title>
+      <link>https://rezvan.xyz/school/eem076_2/</link>
+      <pubDate>Tue, 21 Mar 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://rezvan.xyz/school/eem076_2/</guid>
+      <description>In this part we&amp;rsquo;ll cover and properly define a very misunderstood concept in physics, power and energy.
+Let&amp;rsquo;s start with defining power properly.
+Power Power can be defined as:
+Rate of energy transferred, or work done, per unit of time.
+In electrial circuits, we can define power, $P$, as: $$ P = V \cdot\ I $$
+We measure power in watts, which we can define as: $$ 1\ W = \frac{1\ J}{s} = \frac{1\ N \cdot\ m}{s} = 1 kg \cdot\ m^{2} \cdot\ s^{-3} $$</description>
+    </item>
+    
     <item>
       <title>Electrial Circuits and Fields: Part 1 - Introduction</title>
       <link>https://rezvan.xyz/school/eem076/</link>
