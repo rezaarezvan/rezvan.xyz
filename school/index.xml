@@ -6,7 +6,19 @@
     <description>Recent content in Schools on rezvan</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 21 Mar 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://rezvan.xyz/school/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 22 Mar 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://rezvan.xyz/school/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Computer System Engineering: Part 2 - MIPS</title>
+      <link>https://rezvan.xyz/school/eda333_2/</link>
+      <pubDate>Wed, 22 Mar 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://rezvan.xyz/school/eda333_2/</guid>
+      <description>In this part we&amp;rsquo;ll properly cover the MIPS architecture in depth.
+Parameter transferring When calling a function in C code, what is happening at the assembler level is, calling a subroutine (usually).
+What we need to do before a subroutine call, is the following:
+Place the input parameters into their respective registers Call the function/subroutine Allocate memory for eventual saved and local variables Execute the function/procedure Place the result in a register Reset the stack, if needed Return to where the function/subroutine got called.</description>
+    </item>
+    
     <item>
       <title>Computer System Engineering: Part 1 - Introduction</title>
       <link>https://rezvan.xyz/school/eda333/</link>
