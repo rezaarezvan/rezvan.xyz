@@ -143,7 +143,47 @@ sw $t0, 48($s3)     # store word
 </code></pre><h4 id="zero-register">Zero register</h4>
 <p>In MIPS there is a hard-coded zero register, that always contains the value zero, this can be used to quickly move values between registers:</p>
 <pre tabindex="0"><code>add $t2, $s1, $zero     # t2 := s1
-</code></pre>
+</code></pre><h4 id="logical-operations">Logical operations</h4>
+<p>In MIPS there are of course logical operations:</p>
+<pre tabindex="0"><code># Logical Shifts
+sll $t0, $t1, 2     # t0 := t1 * 4
+srl $t0, $t1, 2     # t0 := t1 / 4
+
+# Logical AND
+and $t0, $t1, $t2   # t0 := t1 &amp; t2
+andi $t0, $t1, 2   # t0 := t1 &amp; 2
+
+# Logical OR
+or $t0, $t1, $t2   # t0 := t1 | t2
+ori $t0, $t1, 2   # t0 := t1 | 2
+
+# Logical NOT
+nor $t0, $t1, $zero # := NOT(t1)
+</code></pre><p>Notice there isn&rsquo;t an explicit <code>not</code> operation, but rather we use a <code>nor</code> operation with the zero register.</p>
+<h4 id="conditional-jumps">Conditional jumps</h4>
+<p>In MIPS there is only two conditional jumps, <code>beq</code> and <code>bne</code>:</p>
+<pre tabindex="0"><code>beq rs, rt, L1 # if(rs == rt); Jump to L1
+bne rs, rt, L1 # if(rs != rt); Jump to L1
+j L1           # Jump to L1
+</code></pre><p>So for example the following C-code:</p>
+<pre tabindex="0"><code>if(i == j) {
+    f = g + h;
+} else {
+    f = g - h;
+}
+</code></pre><p>Given that $f, g, \ldots$ is in $s_0, s_1, \ldots$</p>
+<p>MIPS:</p>
+<pre tabindex="0"><code>bne $s3, $s4, Else # if(i == j) jump to Else
+add $s0, $s1, $s2  # f = g + h
+j Exit             # Jump to exit
+
+Else: sub $s0, $s1, $s2 # f = g - h
+Exit: ...
+</code></pre><p>Notice how there isn&rsquo;t any usual <code>blt, bge</code>, since MIPS is of RISC architecture, we don&rsquo;t need those.</p>
+<p>Instead, what we can do is using <code>slt</code>. Which stands for set less than, we can now use this to replicate a <code>blt</code> or <code>bge</code>.</p>
+<p>However, <code>blt, bge</code> are still pseudo-keywords in MIPS. The assembler will still be able to interpret these.</p>
+<p>On the topic of pseudo-keywords, things like <code>move</code> and <code>li</code> are also pseudo-keywords.</p>
+
 		</section>
   </article>
 	</div>
