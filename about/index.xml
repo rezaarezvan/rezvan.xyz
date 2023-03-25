@@ -8,11 +8,11 @@
     <language>en-us</language>
     <lastBuildDate>Fri, 29 Jul 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://rezvan.xyz/about/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>About</title>
-      <link>https://rezvan.xyz/About/</link>
+      <title>about</title>
+      <link>https://rezvan.xyz/about/</link>
       <pubDate>Fri, 29 Jul 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://rezvan.xyz/About/</guid>
+      <guid>https://rezvan.xyz/about/</guid>
       <description>Hey I&amp;rsquo;m Reza, a student currently studying Computer Science &amp;amp; Engineering.</description>
     </item>
     

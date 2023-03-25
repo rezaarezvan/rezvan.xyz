@@ -2,13 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://rezvan.xyz/About/</loc>
+    <loc>https://rezvan.xyz/about/</loc>
     <lastmod>2022-07-29T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://rezvan.xyz/CV/</loc>
+    <loc>https://rezvan.xyz/cv/</loc>
     <lastmod>2023-03-06T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://rezvan.xyz/school/eem076_3/</loc>
+    <loc>https://rezvan.xyz/school/EEM076_3/</loc>
     <lastmod>2023-03-24T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://rezvan.xyz/</loc>
@@ -17,73 +17,70 @@
     <loc>https://rezvan.xyz/school/</loc>
     <lastmod>2023-03-24T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://rezvan.xyz/school/eda333_2/</loc>
+    <loc>https://rezvan.xyz/school/EDA333_2/</loc>
     <lastmod>2023-03-22T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://rezvan.xyz/school/eda333/</loc>
+    <loc>https://rezvan.xyz/school/EDA333/</loc>
     <lastmod>2023-03-21T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://rezvan.xyz/school/eem076_2/</loc>
+    <loc>https://rezvan.xyz/school/EEM076_2/</loc>
     <lastmod>2023-03-21T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://rezvan.xyz/school/eem076/</loc>
+    <loc>https://rezvan.xyz/school/EEM076/</loc>
     <lastmod>2023-03-20T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://rezvan.xyz/cv/</loc>
-    <lastmod>2023-03-06T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://rezvan.xyz/school/digital_design_9/</loc>
+    <loc>https://rezvan.xyz/school/Digital_design_9/</loc>
     <lastmod>2023-03-05T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://rezvan.xyz/school/concurrent_programming_10/</loc>
+    <loc>https://rezvan.xyz/school/Concurrent_programming_10/</loc>
     <lastmod>2023-02-19T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://rezvan.xyz/school/digital_design_8/</loc>
+    <loc>https://rezvan.xyz/school/Digital_design_8/</loc>
     <lastmod>2023-02-19T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://rezvan.xyz/school/concurrent_programming_9/</loc>
+    <loc>https://rezvan.xyz/school/Concurrent_programming_9/</loc>
     <lastmod>2023-02-13T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://rezvan.xyz/school/digital_design_7/</loc>
+    <loc>https://rezvan.xyz/school/Digital_design_7/</loc>
     <lastmod>2023-02-08T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://rezvan.xyz/school/concurrent_programming_8/</loc>
+    <loc>https://rezvan.xyz/school/Concurrent_programming_8/</loc>
     <lastmod>2023-02-07T14:05:43+01:00</lastmod>
   </url><url>
-    <loc>https://rezvan.xyz/school/digital_design_6/</loc>
+    <loc>https://rezvan.xyz/school/Digital_design_6/</loc>
     <lastmod>2023-02-05T15:28:10+01:00</lastmod>
   </url><url>
-    <loc>https://rezvan.xyz/school/concurrent_programming_6/</loc>
+    <loc>https://rezvan.xyz/school/Concurrent_programming_6/</loc>
     <lastmod>2023-02-04T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://rezvan.xyz/school/concurrent_programming_5/</loc>
+    <loc>https://rezvan.xyz/school/Concurrent_programming_5/</loc>
     <lastmod>2023-02-03T18:16:30+01:00</lastmod>
   </url><url>
-    <loc>https://rezvan.xyz/school/digital_design_5/</loc>
+    <loc>https://rezvan.xyz/school/Digital_design_5/</loc>
     <lastmod>2023-02-03T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://rezvan.xyz/school/concurrent_programming_4/</loc>
+    <loc>https://rezvan.xyz/school/Concurrent_programming_4/</loc>
     <lastmod>2023-02-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://rezvan.xyz/school/digital_design_4/</loc>
+    <loc>https://rezvan.xyz/school/Digital_design_4/</loc>
     <lastmod>2023-01-31T21:12:55+01:00</lastmod>
   </url><url>
-    <loc>https://rezvan.xyz/school/concurrent_programming_3/</loc>
+    <loc>https://rezvan.xyz/school/Concurrent_programming_3/</loc>
     <lastmod>2023-01-31T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://rezvan.xyz/school/digital_design_3/</loc>
+    <loc>https://rezvan.xyz/school/Digital_design_3/</loc>
     <lastmod>2023-01-24T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://rezvan.xyz/school/concurrent_programming_2/</loc>
+    <loc>https://rezvan.xyz/school/Concurrent_programming_2/</loc>
     <lastmod>2023-01-19T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://rezvan.xyz/school/digital_design_2/</loc>
+    <loc>https://rezvan.xyz/school/Digital_design_2/</loc>
     <lastmod>2023-01-18T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://rezvan.xyz/school/concurrent_programming/</loc>
+    <loc>https://rezvan.xyz/school/Concurrent_programming/</loc>
     <lastmod>2023-01-16T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://rezvan.xyz/school/digital_design/</loc>
+    <loc>https://rezvan.xyz/school/Digital_design/</loc>
     <lastmod>2023-01-16T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://rezvan.xyz/posts/</loc>
@@ -92,49 +89,49 @@
     <loc>https://rezvan.xyz/posts/programming_principles/</loc>
     <lastmod>2023-01-09T17:03:59+01:00</lastmod>
   </url><url>
-    <loc>https://rezvan.xyz/school/dsa_10/</loc>
+    <loc>https://rezvan.xyz/school/DSA_10/</loc>
     <lastmod>2022-12-09T18:49:03+01:00</lastmod>
   </url><url>
-    <loc>https://rezvan.xyz/school/dsa_9/</loc>
+    <loc>https://rezvan.xyz/school/DSA_9/</loc>
     <lastmod>2022-12-07T18:34:09+01:00</lastmod>
   </url><url>
-    <loc>https://rezvan.xyz/school/waves_2/</loc>
+    <loc>https://rezvan.xyz/school/Waves_2/</loc>
     <lastmod>2022-12-07T17:55:57+01:00</lastmod>
   </url><url>
-    <loc>https://rezvan.xyz/school/dsa_8/</loc>
+    <loc>https://rezvan.xyz/school/DSA_8/</loc>
     <lastmod>2022-12-06T13:08:43+01:00</lastmod>
   </url><url>
-    <loc>https://rezvan.xyz/school/dsa_7/</loc>
+    <loc>https://rezvan.xyz/school/DSA_7/</loc>
     <lastmod>2022-12-04T18:18:49+01:00</lastmod>
   </url><url>
-    <loc>https://rezvan.xyz/school/waves/</loc>
+    <loc>https://rezvan.xyz/school/Waves/</loc>
     <lastmod>2022-12-04T17:23:27+01:00</lastmod>
   </url><url>
-    <loc>https://rezvan.xyz/school/dsa_6/</loc>
+    <loc>https://rezvan.xyz/school/DSA_6/</loc>
     <lastmod>2022-11-30T18:08:48+01:00</lastmod>
   </url><url>
-    <loc>https://rezvan.xyz/school/dsa_5/</loc>
+    <loc>https://rezvan.xyz/school/DSA_5/</loc>
     <lastmod>2022-11-29T18:50:23+01:00</lastmod>
   </url><url>
-    <loc>https://rezvan.xyz/school/dsa_4/</loc>
+    <loc>https://rezvan.xyz/school/DSA_4/</loc>
     <lastmod>2022-11-28T20:30:47+01:00</lastmod>
   </url><url>
-    <loc>https://rezvan.xyz/school/thermodynamics_3/</loc>
+    <loc>https://rezvan.xyz/school/Thermodynamics_3/</loc>
     <lastmod>2022-11-28T18:14:58+01:00</lastmod>
   </url><url>
-    <loc>https://rezvan.xyz/school/dsa_3/</loc>
+    <loc>https://rezvan.xyz/school/DSA_3/</loc>
     <lastmod>2022-11-27T17:26:09+01:00</lastmod>
   </url><url>
-    <loc>https://rezvan.xyz/school/thermodynamics_2/</loc>
+    <loc>https://rezvan.xyz/school/Thermodynamics_2/</loc>
     <lastmod>2022-11-26T00:04:21+01:00</lastmod>
   </url><url>
-    <loc>https://rezvan.xyz/school/dsa_2/</loc>
+    <loc>https://rezvan.xyz/school/DSA_2/</loc>
     <lastmod>2022-11-25T17:20:46+01:00</lastmod>
   </url><url>
-    <loc>https://rezvan.xyz/school/dsa_1/</loc>
+    <loc>https://rezvan.xyz/school/DSA_1/</loc>
     <lastmod>2022-11-24T19:57:27+01:00</lastmod>
   </url><url>
-    <loc>https://rezvan.xyz/school/thermodynamics/</loc>
+    <loc>https://rezvan.xyz/school/Thermodynamics/</loc>
     <lastmod>2022-11-24T17:57:38+01:00</lastmod>
   </url><url>
     <loc>https://rezvan.xyz/posts/julia/</loc>
@@ -148,9 +145,6 @@
   </url><url>
     <loc>https://rezvan.xyz/posts/initialpost/</loc>
     <lastmod>2022-07-29T17:18:30+02:00</lastmod>
-  </url><url>
-    <loc>https://rezvan.xyz/about/</loc>
-    <lastmod>2022-07-29T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://rezvan.xyz/categories/</loc>
   </url><url>
