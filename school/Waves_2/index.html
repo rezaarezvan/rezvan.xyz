@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"><meta property="og:site_name" content="rezvan"><title>Waves: Part 2 - Light waves | rezvan</title>
+  <meta property="og:title" content="Waves: Part 2 - Light waves | rezvan"><meta property="og:description" content="">
+  <meta property="og:type" content="blog">
+  <meta property="og:link" content="https://rezvan.xyz/school/Waves_2/"><link rel="shortcut icon" type="image/png" href=https://rezvan.xyz//images/icon.png />
+  <meta property="og:image" content="https://rezvan.xyz//images/icon.png" /><meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz//css/main.css" />    
+</head>
+
+<body>
+  <div class="wrapper">
+	<div class="content">
+		<div class="header_main">
+
+    <a href="https://rezvan.xyz/"><p class="header_title">rezvan</p><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.3/dist/katex.min.css" integrity="sha384-Juol1FqnotbkyZUT5Z7gUPjQ9gzlwCENvUZTpQBAPxtusdwFLRy382PSDx5UUJ4/" crossorigin="anonymous">
+
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.3/dist/katex.min.js" integrity="sha384-97gW6UIJxnlKemYavrqDHSX3SiygeOwIZhwyOKRfSaf0JWKRVj9hLASHgFTzT+0O" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.3/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+            delimiters: [
+                {left: "$$", right: "$$", display: true},
+                {left: "$", right: "$", display: false}
+            ]
+        });
+    });
+</script>
+
+    </a>
+
+    <br>
+
+    <nav id="main">
+        
+        <a href="/about/">about</a>
+        
+        <a href="/cv/">cv</a>
+        
+        <a href="/school/">school</a>
+        
+    </nav></div>
+
+  <article><div class="title_wrapper">
+			<h1 class="title">Waves: Part 2 - Light waves</h1><p class="single_time">Dec 7, 2022</p></div>
+		<section class="post">
+			<p>In this part we&rsquo;ll cover light waves and it&rsquo;s properties.</p>
+<p>Light is actually electromagnetic radiation. The visible light we can see is usually between 380 - 740 nm</p>
+<h3 id="general-conventions">General Conventions</h3>
+<p>As we remember from mechanical waves $v = \lambda f$, this also applies for light waves, but our $v$ is instead $c$.
+$$
+c = \lambda f = 3 \cdot 10^8 m/s
+$$</p>
+<p>If we look at light like usual mechanical waves, it quickly becomes very cluttered in our sketch.
+Therefore we usually draw light as a <em>plane wave</em>. Which usually just means a singular line, instead of many.</p>
+<h3 id="refractive-index">Refractive Index</h3>
+<p>We&rsquo;ve seen that if a wave enters a new medium it gains a new velocity, transmission and reflection. The same goes for light.</p>
+<p>The refractive index tells us how much <em>slower</em> the light becomes in the new medium, compared to the speed in vacuum (or air, as we usually just set it as the same).</p>
+<p>$$
+n = \frac{c}{v}
+$$
+$$
+v = \frac{c}{n}
+$$</p>
+<p>Where v is the new speed in the new medium.</p>
+<h3 id="snells-law">Snell&rsquo;s Law</h3>
+<p>Snell&rsquo;s law is a formula which describes the relationship between the input angle which a light wave has and after,
+along with the different refractive indexes. I&rsquo;m not going to prove it, it&rsquo;s quite simple trigonometry but:
+$$
+n_1\ sin(\theta_i) = n_2\ sin(\theta_r)
+$$</p>
+<h3 id="reflection">Reflection</h3>
+<p>When a wave <em>reflects</em> against a <em>more dense</em> medium (which means a <em>lower</em> propagation speed) - the reflected wave is &lsquo;shifted&rsquo; by $\pi$ rad.</p>
+<p>Meaning the reflected wave/pulse/light is the &lsquo;inverse&rsquo; of the input wave, the inputs high becomes the reflections low etc.</p>
+<p>When a wave <em>reflects</em> against a <em>less dense</em> medium (which means a <em>higher</em> propagation speed) - the reflected wave is <strong>not</strong> shifted.
+Thus the input wave and the reflection wave is the &lsquo;same&rsquo; wave.</p>
+<h3 id="interference-with-light">Interference with light</h3>
+<p>Imagine we have two glass panes - we put a small object in between, which is almost negligible.
+We can imagine that the light <strong>inside</strong> these two glass panes travels a distance of $d$.
+Therefore the <strong>total geometric</strong> travel is then $\rightarrow 2d$.</p>
+<p>The <strong>optical way</strong> is then $\rightarrow 2d + \frac{\lambda}{2}$</p>
+<p>And the <strong>phase difference</strong> is $\rightarrow \frac{2d}{\lambda} \cdot 2\pi + \pi$</p>
+<p>We achieve constructive interference if:
+$$
+2d + \frac{\lambda}{2} = m\lambda
+\newline
+2d = m\lambda - \frac{\lambda}{2}
+$$</p>
+<p>Where $m = 1, 2, 3, \dots$</p>
+<h3 id="youngs-interference-experiment">Young&rsquo;s interference experiment</h3>
+<p>This is quite a visual proof/experiment and I&rsquo;m too lazy currently to fix pictures for this sooo:
+$$
+d \cdot sin(\theta) = m\lambda
+$$</p>
+<p>This results in a &lsquo;maxima&rsquo; or when it shines light - then we have 0th maxima, 1st maxima and so on.</p>
+<p>And for minima:
+$$
+d sin(\theta) = (2m + 1)\ \frac{\lambda}{2}
+$$</p>
+<p>And just a general formula for the wave:
+$$
+y = 2A\ cos(\frac{\phi}{2})\ sin(kx - \omega t + \frac{\phi}{2})
+$$</p>
+<p>Also just to dump some formulas here:
+$$
+tan(\theta) = \frac{y}{L}
+$$</p>
+<p>And for &lsquo;small&rsquo; angles (typically $\approx \theta &lt; 10^\circ$
+$$
+tan(\theta) \approx sin(\theta) = \frac{y}{L}
+$$</p>
+<h3 id="reflection-1">Reflection</h3>
+<p>Another way to measure reflection is by using a special kind of mirror and doing some stuff :)</p>
+<p>We can calculate the reflection like:
+$$
+R = (\frac{n_1 - n_2}{n_1 + n_2})^2
+$$</p>
+<h3 id="total-reflection">Total Reflection</h3>
+<p>Total reflection is the phenomena that occurs when the transmission wave becomes parallel with the &lsquo;medium switch&rsquo;. This is quite an easy equation,
+because in practice this just means that transmission wave has an angle of $90^\circ$.
+$$
+n_1\ sin(\theta_1) = n_2\ sin(\theta_2)
+\newline
+n_1\ sin(\theta_1) = n_2
+$$</p>
+<h3 id="interference-in-thin-layers">Interference in thin layers</h3>
+<p>In thin layers the interference for light - we have to consider what medium we have before, inside and after.</p>
+<p>If we have for example, air on both sides (which results in 1 phase shift), this will result in interfernce for maximum:
+$$
+2dn_2 + \frac{\lambda}{2} = m\lambda \text{, } m = 1, 2, 3, \dots
+\newline
+2dn_2 - \frac{\lambda}{2} = m\lambda \text{, } m = 0, 1, 2, 3, \dots
+$$</p>
+<p>So generally:
+$$
+2dn_2 + \text{ev. phase shift} = m\lambda
+$$</p>
+<p>For the minima:
+$$
+2dn_2 = m\lambda \text{, } m = 0, 1, 2, 3, \dots
+$$</p>
+<p>So generally:
+$$
+2dn_2 + \text{ev. phase shift} = m\lambda + \frac{\lambda}{2}
+$$</p>
+<h3 id="diffraction">Diffraction</h3>
+<p>Diffraction is the phenomena that occurs when we have a width of our openings.
+What happens is that, since we now, since we now have a opening with a width, there will be many light &lsquo;points&rsquo; that will radiate.
+This means that these points, most likely, will have destructive interference with each other more often, than if we have just 2 light &lsquo;points&rsquo;.</p>
+<p>This leads to:
+$$
+b \cdot sin(\theta) = m\lambda
+$$</p>
+<p>This is also why the intensity will wear off with distance.</p>
+<h3 id="optical-resolution">Optical resolution</h3>
+<p>So with this in mind, we can now understand why, if we have a big opening, for example a big lens, why the pictures come out better.</p>
+<p>Because if we increase $d$, then $sin(\theta)$ must become larger.</p>
+<p>We can also see this from:
+$$
+\frac{\lambda}{\Delta\lambda} = m \cdot N, \text{ where}
+\newline
+N - \text{ Amount of openings}
+$$</p>
+<h3 id="conclusion">Conclusion</h3>
+<p>This was it for light waves - yes a very short part since a lot of the intuition and proofs are visual and I can&rsquo;t be bothered to put pictures of these at the moment :)</p>
+<p>So take the formulas and go! :)</p>
+
+		</section>
+  </article>
+	</div>
+
+	<footer><p class="footer_msg">memento mori</p></footer>
+
+  </div>
+</body>
+</html>

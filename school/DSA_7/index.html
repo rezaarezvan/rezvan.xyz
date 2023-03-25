@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"><meta property="og:site_name" content="rezvan"><title>DSA: Part 7 - Binary Heaps | rezvan</title>
+  <meta property="og:title" content="DSA: Part 7 - Binary Heaps | rezvan"><meta property="og:description" content="">
+  <meta property="og:type" content="blog">
+  <meta property="og:link" content="https://rezvan.xyz/school/DSA_7/"><link rel="shortcut icon" type="image/png" href=https://rezvan.xyz//images/icon.png />
+  <meta property="og:image" content="https://rezvan.xyz//images/icon.png" /><meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz//css/main.css" />    
+</head>
+
+<body>
+  <div class="wrapper">
+	<div class="content">
+		<div class="header_main">
+
+    <a href="https://rezvan.xyz/"><p class="header_title">rezvan</p><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.3/dist/katex.min.css" integrity="sha384-Juol1FqnotbkyZUT5Z7gUPjQ9gzlwCENvUZTpQBAPxtusdwFLRy382PSDx5UUJ4/" crossorigin="anonymous">
+
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.3/dist/katex.min.js" integrity="sha384-97gW6UIJxnlKemYavrqDHSX3SiygeOwIZhwyOKRfSaf0JWKRVj9hLASHgFTzT+0O" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.3/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+            delimiters: [
+                {left: "$$", right: "$$", display: true},
+                {left: "$", right: "$", display: false}
+            ]
+        });
+    });
+</script>
+
+    </a>
+
+    <br>
+
+    <nav id="main">
+        
+        <a href="/about/">about</a>
+        
+        <a href="/cv/">cv</a>
+        
+        <a href="/school/">school</a>
+        
+    </nav></div>
+
+  <article><div class="title_wrapper">
+			<h1 class="title">DSA: Part 7 - Binary Heaps</h1><p class="single_time">Dec 4, 2022</p></div>
+		<section class="post">
+			<p>In this part we&rsquo;ll cover priority queues, binary heaps, and lastly heaps as arrays. So let&rsquo;s begin with priority queues!</p>
+<h3 id="priority-queues">Priority Queues</h3>
+<p>A priority queues is a collection of items which we can:</p>
+<ul>
+<li>Add an item to the queue</li>
+<li>Find the <em>smallest</em> item in the queue</li>
+<li>Remove the <em>smallest</em> item in the queue</li>
+</ul>
+<p>In this we&rsquo;ll handle a priority queue as a min-priority queue,
+but there&rsquo;s also a max-priority queue which gets/removes the maximum item in the queue as well. Both are useful though!</p>
+<h3 id="applications">Applications</h3>
+<p>The priority queue data structure is a very natural one for example, we can use it for:</p>
+<ul>
+<li>
+<p>A printer queue where we prioritze the shorest document first!</p>
+</li>
+<li>
+<p>The scheduler in a computer operating system</p>
+<ul>
+<li>A lot of different parameters but for example, prioritze tasks which takes the minimum time.</li>
+</ul>
+</li>
+<li>
+<p>Sorting a list</p>
+<ul>
+<li>
+<p>Start with a empty priority queue</p>
+</li>
+<li>
+<p>Add each element of the input list to the queue</p>
+</li>
+<li>
+<p>Remove the smallest element in the queue</p>
+</li>
+<li>
+<p>You get all elements out in ascending order!</p>
+</li>
+</ul>
+</li>
+</ul>
+<p>For this last application - say each operation takes $\mathcal{O}(log\ n)$, then this algorithm takes $\mathcal{O}(n\ log(n))$, which is good!</p>
+<p>This algortihm would look something like:</p>
+<pre tabindex="0"><code>sort(arr: list) -&gt; list:
+    prio_q = new min_prio_q()
+
+    for x in arr:
+        pq.add(x)
+
+    result = []
+    while not pq.empty():
+        result.add(pq.remove_min())
+    
+    return result
+</code></pre><p>There are loads more application, we&rsquo;ll be looking into the graph searching and more A.I applications.</p>
+<h3 id="implementation-of-a-priority-queue">Implementation of a Priority Queue</h3>
+<p>One&rsquo;s first approach might be using a sorted/unsorted array, but the complexity becomes really bad quickly..</p>
+<p>As we covered in the last part, a balanced BST seems lika good approach - and it is, however it will quickly become painful since we need to allow duplicates&hellip;</p>
+<p>So the answer is, using a <strong>binary heap</strong> - it has the same complexity of a BST, but simpler to implement.</p>
+<h3 id="binary-min-heaps">Binary (min-)heaps</h3>
+<p>A binary heap implements a priority queue as we said - using a ordinary binary tree, not a BST.</p>
+<p>Let&rsquo;s add some invariants to make it easy to find and remove the minimum element.</p>
+<h4 id="invariant-1---the-heap-property">Invariant #1 - The Heap Property</h4>
+<p>The tree satifies the so called <em>heap</em> property if the value of each node is less than (or equal to) the value of its children:</p>
+<p>With this the smallet node is always the root - therefore it takes $\mathcal{O}(1)$ to find this.</p>
+<h4 id="invariant-2---completeness">Invariant #2 - Completeness</h4>
+<p>The tree is <em>complete</em> if all levels are full <em>expect</em> the bottom level, which is filled from left to right.</p>
+<p>This means only &lsquo;NULL&rsquo; at the bottom level and no &lsquo;NULL&rsquo; to the left of a node.</p>
+<p>We can see that the first invariant makes it quick to find the minimum element and that the second invariant makes it so the tree is balanced.</p>
+<p>Let&rsquo;s try to implement this!</p>
+<h3 id="binary-heaps-as-arrays">Binary Heaps as Arrays</h3>
+<p>We can use an array as the underlying data structure for this - since we have invariant #2 or the &lsquo;completeness&rsquo; we can easily index them correctly.</p>
+<p>So, if we have node $i$, the child is at index $2i + 1$ and the right child at $2i + 2$. You can test this for yourself, but this just indexing left to right level by level.</p>
+<p>We can also use that the <em>parent</em> of node <em>i</em> is at index $(i - 1) / 2$</p>
+<h3 id="implementation">Implementation</h3>
+<pre tabindex="0"><code>class min_prio_q[Item]:
+    heap: list[Item] = []
+
+    greater(i: int, j: int) -&gt; boolean:
+        return heap[i] &gt; heap[j]
+
+    get_min() -&gt; Item:
+        return heap[0]
+
+    add(item: Item):
+        // Add the item to the end of list (The end of the heap)
+        heap.append(item) 
+        
+        // Swap child with parent if the child is greater than the parent. 
+        // To achieve completeness that may have been lost
+        while k &gt; 0 and greater((k - 1) / 2, k):
+            swap heap[(k - 1) / 2] and heap[k]
+            k = (k - 1) / 2
+    
+    remove_min() -&gt; Item:
+        min: Item = heap[0]
+        n: int = len(heap) - 1
+
+        // Swap root with the end node to fix the invariant that may have been lost
+        swap heap[0] and heap[n]
+
+        k: int = 0
+        // While child to the left is in tree
+        while 2 * k + 1 &lt;= n:
+            j: int = 2 * k + 1
+            // If right child &lt; left child, set j to the right child instead
+            if j &lt; n and greater(j, j + 1):
+                j += 1
+
+            // If parent is larger than smallest child, swap and descend into j
+            if not greater(k, j):
+                break
+
+            swap heap[k] and heap[j]
+            k = j
+        
+        return min
+</code></pre><p>So this is the implementation of a min-heap. If we instead want a max-heap we only change the sign of the <code>greater</code> function - that&rsquo;s it!</p>
+<p>We could also use the &lsquo;heap&rsquo; mind-set to convert an array into a heap, using an in-place algoritm. Heaps are really powerfull when it comes to sorting as well, <em>heap sort</em> for example.</p>
+<h3 id="summary--conclusion">Summary &amp; Conclusion</h3>
+<p>So to summarize:</p>
+<ul>
+<li>
+<p>Priority Queues:</p>
+<ul>
+<li>Min-priority queue: <code>add()</code>, <code>get_min()</code>, <code>remove_min()</code>.</li>
+<li>Max-priority queue: <code>add()</code>, <code>get_max()</code>, <code>remove_max()</code>.</li>
+</ul>
+</li>
+<li>
+<p>Binary Heaps:</p>
+<ul>
+<li>Min-heaps implements min-priority queues</li>
+<li>Max-heaps implements max-priority queues</li>
+<li>Logarithmic performance!</li>
+</ul>
+</li>
+</ul>
+<p>This was it for this quite short part - in the next part(s) we&rsquo;ll begin the final part of this course - graphs!</p>
+
+		</section>
+  </article>
+	</div>
+
+	<footer><p class="footer_msg">memento mori</p></footer>
+
+  </div>
+</body>
+</html>

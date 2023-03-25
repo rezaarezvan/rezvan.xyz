@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"><meta property="og:site_name" content="rezvan"><title>Electrial Circuits and Fields: Part 1 - Introduction | rezvan</title>
+  <meta property="og:title" content="Electrial Circuits and Fields: Part 1 - Introduction | rezvan"><meta property="og:description" content="">
+  <meta property="og:type" content="blog">
+  <meta property="og:link" content="https://rezvan.xyz/school/EEM076/"><link rel="shortcut icon" type="image/png" href=https://rezvan.xyz//images/icon.png />
+  <meta property="og:image" content="https://rezvan.xyz//images/icon.png" /><meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz//css/main.css" />    
+</head>
+
+<body>
+  <div class="wrapper">
+	<div class="content">
+		<div class="header_main">
+
+    <a href="https://rezvan.xyz/"><p class="header_title">rezvan</p><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.3/dist/katex.min.css" integrity="sha384-Juol1FqnotbkyZUT5Z7gUPjQ9gzlwCENvUZTpQBAPxtusdwFLRy382PSDx5UUJ4/" crossorigin="anonymous">
+
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.3/dist/katex.min.js" integrity="sha384-97gW6UIJxnlKemYavrqDHSX3SiygeOwIZhwyOKRfSaf0JWKRVj9hLASHgFTzT+0O" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.3/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+            delimiters: [
+                {left: "$$", right: "$$", display: true},
+                {left: "$", right: "$", display: false}
+            ]
+        });
+    });
+</script>
+
+    </a>
+
+    <br>
+
+    <nav id="main">
+        
+        <a href="/about/">about</a>
+        
+        <a href="/cv/">cv</a>
+        
+        <a href="/school/">school</a>
+        
+    </nav></div>
+
+  <article><div class="title_wrapper">
+			<h1 class="title">Electrial Circuits and Fields: Part 1 - Introduction</h1><p class="single_time">Mar 20, 2023</p></div>
+		<section class="post">
+			<p>In this series we&rsquo;ll explore and cover the world of electrical circuit (and later on fields as well).</p>
+<h3 id="fundamental-definitions">Fundamental definitions</h3>
+<p>We&rsquo;ll begin with covering the three basic factors that we&rsquo;ll analyze in all circuits, <strong>current</strong>, <strong>voltage</strong> and, <strong>resistance</strong>.</p>
+<p>Let&rsquo;s start with current.</p>
+<h4 id="current">Current</h4>
+<p>Current is defined as:</p>
+<blockquote>
+<p>The rate of flow of electrical charge.</p>
+</blockquote>
+<p>We measure current in Ampere, 1 A is defined as, 1 coulomb of charge per 1 second.</p>
+<p>Just a refresher, $1 C = 6.24 \cdot\ 10^{18}$.</p>
+<p>We can also define current mathematically:
+$$
+i(t) = \frac{dq(t)}{dt}
+$$</p>
+<p>Which leads to the equation:
+$$
+i(t) = \int_{t_0}^{t}\ i(t)\ dt + q(t_0)
+$$</p>
+<h4 id="voltage">Voltage</h4>
+<p>Voltage is defined as:</p>
+<blockquote>
+<p>The difference in potential energy between two points, for one Coulomb of charge.</p>
+</blockquote>
+<p>Which we can also define as:</p>
+<blockquote>
+<p>The energy transferred (Joules) per unit of charge.</p>
+</blockquote>
+<p>$$
+V = \frac{\Delta\ PE}{q} = \frac{\text{Work}}{q}
+$$</p>
+<h4 id="resistance">Resistance</h4>
+<p>Resistance is defined as:</p>
+<blockquote>
+<p>Is the opposition to the flow of current.</p>
+</blockquote>
+<p>We can define the resistance in the conductor:
+$$
+V = \frac{\rho L}{A} \newline
+$$</p>
+<p>$$
+\rho = \text{resistivity of the material}
+$$</p>
+<h3 id="ohms-law">Ohm&rsquo;s law</h3>
+<p>Now that we have defined all the fundamental definitions, we can now look in the correlation between them.</p>
+<p>Let&rsquo;s now dive into the famous Ohm&rsquo;s law that we&rsquo;ll use for basically all problems.
+$$
+V = R \cdot\ I
+$$</p>
+<h3 id="kirchhoffs-laws">Kirchhoff&rsquo;s laws</h3>
+<p>Kirchhoff has two very important laws that come in handy when trying to solve electrical circuits.</p>
+<p>Before we dive into the actual laws we&rsquo;ll need to define a very important concept in circuits, direction.</p>
+<h4 id="direction">Direction</h4>
+<p>Both current and voltage has a direction in electrical circuits. Let&rsquo;s cover the notation so it becomes clear:
+<img src="/images/Dir.png#center" alt=""></p>
+<p>As we can see, voltage has a direction, from positive to negative.
+Notice that the notation $v_{ab}$ and $v_{ba}$ indicates the direction.</p>
+<p>The same notation and convention is applied for the current,
+$i_{ab}$ and $i_{ba}$ indicates the direction of the current.</p>
+<h4 id="kirchhoffs-current-law">Kirchhoff&rsquo;s current law</h4>
+<p>Kirchhoff&rsquo;s first law is defined by the following:</p>
+<blockquote>
+<p>The <strong>net</strong> current entering a node is zero</p>
+</blockquote>
+<p>One could also formulate it as:</p>
+<blockquote>
+<p>The sum of current entering the node is equivalent to the sum of current leaving the node.</p>
+</blockquote>
+<p>Or in math terms:
+$$
+\sum_{k = 1}^{n}\ I_k = 0
+$$</p>
+<p>or,</p>
+<p>$$
+\sum_{k = 1}^{n}\ I_{\text{entering}} = \sum_{k = 1}^{n}\ I_{\text{leaving}}
+$$</p>
+<h4 id="kirchhoffs-voltage-law">Kirchhoff&rsquo;s voltage law</h4>
+<p>Kirchhoff&rsquo;s second law is defined by the following:</p>
+<blockquote>
+<p>The sum of voltages equals zero, for any closed loop.</p>
+</blockquote>
+<p>In math terms:
+$$
+\sum_{k = 1}^{n}\ V_k = 0
+$$</p>
+<p>Since we earlier defined what is considered positive and negative voltage, we understand if we go from - to +, we need to subtract that voltage, and the other way around for + to -.</p>
+<h3 id="summary">Summary</h3>
+<p>This concludes this first part - in short - we&rsquo;ll use these concepts and formulas for all problems we encounter in the future, so it&rsquo;s important to precisely define and deeply understand them.</p>
+
+		</section>
+  </article>
+	</div>
+
+	<footer><p class="footer_msg">memento mori</p></footer>
+
+  </div>
+</body>
+</html>

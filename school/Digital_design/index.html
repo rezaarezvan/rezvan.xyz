@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"><meta property="og:site_name" content="rezvan"><title>Digital Design: Part 1 - Introduction &amp; Boolean Algebra | rezvan</title>
+  <meta property="og:title" content="Digital Design: Part 1 - Introduction &amp; Boolean Algebra | rezvan"><meta property="og:description" content="">
+  <meta property="og:type" content="blog">
+  <meta property="og:link" content="https://rezvan.xyz/school/Digital_design/"><link rel="shortcut icon" type="image/png" href=https://rezvan.xyz//images/icon.png />
+  <meta property="og:image" content="https://rezvan.xyz//images/icon.png" /><meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz//css/main.css" />    
+</head>
+
+<body>
+  <div class="wrapper">
+	<div class="content">
+		<div class="header_main">
+
+    <a href="https://rezvan.xyz/"><p class="header_title">rezvan</p><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.3/dist/katex.min.css" integrity="sha384-Juol1FqnotbkyZUT5Z7gUPjQ9gzlwCENvUZTpQBAPxtusdwFLRy382PSDx5UUJ4/" crossorigin="anonymous">
+
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.3/dist/katex.min.js" integrity="sha384-97gW6UIJxnlKemYavrqDHSX3SiygeOwIZhwyOKRfSaf0JWKRVj9hLASHgFTzT+0O" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.3/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+            delimiters: [
+                {left: "$$", right: "$$", display: true},
+                {left: "$", right: "$", display: false}
+            ]
+        });
+    });
+</script>
+
+    </a>
+
+    <br>
+
+    <nav id="main">
+        
+        <a href="/about/">about</a>
+        
+        <a href="/cv/">cv</a>
+        
+        <a href="/school/">school</a>
+        
+    </nav></div>
+
+  <article><div class="title_wrapper">
+			<h1 class="title">Digital Design: Part 1 - Introduction &amp; Boolean Algebra</h1><p class="single_time">Jan 16, 2023</p></div>
+		<section class="post">
+			<p>In our day-to-day lives, we use digital circuits all the time, without really thinking about them.</p>
+<p>Even most software developers do not appreciate the abstraction which digital circuits are built upon.
+What are digital circuits built from then? Chips! What are chips built from then? Logical gates!
+What are logical gates built from then? Transistor circuits! What are these circuits built from?
+Transistors! (duh).</p>
+<p>As you can see it&rsquo;s quite a few steps. So let&rsquo;s try to understand digital circuits better.</p>
+<h1 id="integrated-circuits">Integrated circuits</h1>
+<p>There are two different kinds of circuits we&rsquo;ll be looking at:</p>
+<ul>
+<li>
+<p>ASIC (<strong>A</strong>pplication <strong>S</strong>pecific <strong>I</strong>ntegrated <strong>C</strong>ircuits)</p>
+<ul>
+<li>
+<p>Full-Custom ASICs</p>
+</li>
+<li>
+<p>Standard-cell ASICs</p>
+<ul>
+<li>You use a kind of library to</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Reconfigurable</p>
+<ul>
+<li>
+<p>FPGA (<strong>F</strong>ield <strong>P</strong>rogrammable <strong>G</strong>ate <strong>A</strong>rrays)</p>
+<ul>
+<li>FPGAs are made up by so-called configurable logic blocks,
+we can program these to be any kind of gate and make our own chip, with our own needs.</li>
+</ul>
+</li>
+<li>
+<p>PLD (<strong>P</strong>rogrammable <strong>L</strong>ogic <strong>D</strong>evice)</p>
+</li>
+</ul>
+</li>
+</ul>
+<p>The main difference is:</p>
+<p>ASICs, once they are fabricated (in silicone for example), we can not change the hardware design.
+They&rsquo;re also more expensive to make, since, we need to produce them in a (semiconductor-)factory.</p>
+<p>FPGA, they&rsquo;re generic and can therefore support different hardware designs.</p>
+<h1 id="design-flow-of-digital-hardware">Design Flow of Digital hardware</h1>
+<p>When creating a digital circuit, we can break it down into several layers.</p>
+<p>For a ASIC, we can rank them as:</p>
+<ul>
+<li>
+<p>Algorithmic Level</p>
+</li>
+<li>
+<p>Register Transfer Level</p>
+</li>
+<li>
+<p>Logic gate Level</p>
+</li>
+<li>
+<p>Circuit transistor Level</p>
+</li>
+<li>
+<p>Physical Level</p>
+</li>
+</ul>
+<p>For an FPGA these would be:</p>
+<ul>
+<li>
+<p>High-Level Synthesis (HLS)</p>
+</li>
+<li>
+<p>Logic gate Level</p>
+</li>
+</ul>
+<p>These layers are quite self-explanatory, the algorithmic level is the top level design level of the whole circuit. What&rsquo;s the purpose?
+Register Transfer Level is about how we <em>transfer</em> our register between states.</p>
+<h1 id="boolean-logic">Boolean logic</h1>
+<p>Now that we have seen the beginning of digital circuits, let&rsquo;s dive into their core purpose, doing (boolean) math!</p>
+<p>Let&rsquo;s write down all the &lsquo;rules&rsquo; for boolean algebra - learn by doing:</p>
+<p>$$
+X \cdot\ 0 = 0 \newline
+X \cdot\ 1 = 1 \newline
+X \cdot\ X = X \newline
+X \cdot\ \bar{X} = 0 \newline
+X + 0 = X \newline
+X + 1 = 1 \newline
+X + X = X \newline
+X + \bar{X} = 1 \newline
+\bar{\bar{X}} = X
+$$</p>
+<p>These are the absolute <strong>basic</strong> let&rsquo;s cover some more advanced cases as well.</p>
+<p>Commutative Law:
+$$
+X \cdot Y = Y \cdot X \newline
+X + Y = Y + X \newline
+$$</p>
+<p>Associative Law:
+$$
+X(YZ) = (XY)Z \newline
+X + (Y + Z) = (X + Y) + Z \newline
+$$</p>
+<p>Distributive Law:
+$$
+X(Y + Z) = XY + XZ \newline
+X + (YZ) = (X + Y)(X + Z)\newline
+(X + Y)(W + Z) = XW + XZ + YW + YZ
+$$</p>
+<p>Consensus Theorem:
+$$
+X + \bar{X}Y = X + Y \newline
+\bar{X} + XY = \bar{X} + Y \newline
+X + \bar{X}\bar{Y} = X + \bar{Y} \newline
+\bar{X} + X\bar{Y} = \bar{X} + \bar{Y} \newline
+$$</p>
+<p>And finally (and most important) DeMorgan&rsquo;s Theorem:
+$$
+\bar{XY} = \bar{X} + \bar{Y} \newline
+\bar{(X + Y)} = \bar{X}\bar{Y} \newline
+$$</p>
+<h1 id="different-forms-of-logical-functions">Different Forms of Logical Functions</h1>
+<p>We can write logical functions in different forms, so-called SOP (<strong>S</strong>um <strong>O</strong>f <strong>P</strong>roduct)
+and POS (<strong>P</strong>roduct <strong>O</strong>f <strong>S</strong>ums)</p>
+<p>We use these to find the so-called max and minterms. A minterm is a <strong>product</strong> term in which <em>all the variables appear exactly once</em>.</p>
+<p>And the max term exactly the same but is a <strong>sum</strong> term. So, a minterm is a SOP and maxterm is a POS.</p>
+<p>One more theorem we have to use is the so-called <em>Shannon&rsquo;s expansion theorem</em>.
+$$
+f(x_1, x_2, \dots, x_n) = x_1 \cdot\ f(1, x_2, \dots, x_n) + \bar{x_1} \cdot\ f(0, x_2, \dots, x_n) \newline
+f(x_1, x_2, \dots, x_n) = [x_1 + f(1, x_2, \dots, x_n)] [\bar{x_1} + f(0, x_2, \dots, x_n)]
+$$</p>
+<h1 id="logical-minimization">Logical Minimization</h1>
+<p>In real-world applications we would want to make the cheapest and smallest circuits that still have the same logic.</p>
+<p>This is when it&rsquo;s useful to minimize the logical circuits. In these cases we use <strong>Karnaugh-diagrams</strong>.
+That&rsquo;s a topic that requires you to do a few examples to understand it. So Google it and do a few examples, they&rsquo;re super easy.</p>
+<p>But let&rsquo;s cover some terminology:</p>
+<ul>
+<li>
+<p>A function, f, <strong>covers</strong> another function, g, if it takes the value &lsquo;1&rsquo; when the function g does.</p>
+</li>
+<li>
+<p><strong>Implicant</strong>, a product of variables of a function, f, for which f gets the value &lsquo;1&rsquo;.</p>
+</li>
+<li>
+<p><strong>Prime Implicant</strong>, an <em>implicant</em> that cannot be covered by a more general implicant.</p>
+</li>
+<li>
+<p><strong>Essential Prime Implicant</strong>, a prime implicant of a function, f, that includes a minterm, not included by any other prime implicant of the function.</p>
+</li>
+</ul>
+
+		</section>
+  </article>
+	</div>
+
+	<footer><p class="footer_msg">memento mori</p></footer>
+
+  </div>
+</body>
+</html>

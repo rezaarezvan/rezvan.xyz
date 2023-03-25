@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"><meta property="og:site_name" content="rezvan"><title>Computer System Engineering: Part 2 - MIPS | rezvan</title>
+  <meta property="og:title" content="Computer System Engineering: Part 2 - MIPS | rezvan"><meta property="og:description" content="">
+  <meta property="og:type" content="blog">
+  <meta property="og:link" content="https://rezvan.xyz/school/EDA333_2/"><link rel="shortcut icon" type="image/png" href=https://rezvan.xyz//images/icon.png />
+  <meta property="og:image" content="https://rezvan.xyz//images/icon.png" /><meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz//css/main.css" />    
+</head>
+
+<body>
+  <div class="wrapper">
+	<div class="content">
+		<div class="header_main">
+
+    <a href="https://rezvan.xyz/"><p class="header_title">rezvan</p>
+    </a>
+
+    <br>
+
+    <nav id="main">
+        
+        <a href="/about/">about</a>
+        
+        <a href="/cv/">cv</a>
+        
+        <a href="/school/">school</a>
+        
+    </nav></div>
+
+  <article><div class="title_wrapper">
+			<h1 class="title">Computer System Engineering: Part 2 - MIPS</h1><p class="single_time">Mar 22, 2023</p></div>
+		<section class="post">
+			<p>In this part we&rsquo;ll properly cover the MIPS architecture in depth.</p>
+<h3 id="parameter-transferring">Parameter transferring</h3>
+<p>When calling a function in C code, what is happening at the assembler level is, calling a subroutine (usually).</p>
+<p>What we need to do before a subroutine call, is the following:</p>
+<ol>
+<li>Place the input parameters into their respective registers</li>
+<li>Call the function/subroutine</li>
+<li>Allocate memory for eventual saved and local variables</li>
+<li>Execute the function/procedure</li>
+<li>Place the result in a register</li>
+<li>Reset the stack, if needed</li>
+<li>Return to where the function/subroutine got called.</li>
+</ol>
+<h3 id="register-conventions">Register conventions</h3>
+<p>Since we now need to store our input parameters into register before we call a function, we need to create a convention to where we expect things to be.</p>
+<p>MIPS has this following convention:</p>
+<ul>
+<li>
+<p>$a_0 - a_3$: Input parameters</p>
+</li>
+<li>
+<p>$v_0, v_1$: Result values</p>
+</li>
+<li>
+<p>$t_0 - t_9$: Temporary variables</p>
+</li>
+<li>
+<p>$s_0 - s_7$: &ldquo;Saved&rdquo; registers</p>
+<ul>
+<li>Must be saved and reset by each respective subroutine.</li>
+</ul>
+</li>
+<li>
+<p>$gp$: global pointer</p>
+</li>
+<li>
+<p>$sp$: stack pointer</p>
+</li>
+<li>
+<p>$fp$: frame pointer</p>
+</li>
+<li>
+<p>$ra$: return address</p>
+</li>
+</ul>
+<p>We discussed a lot of subroutines, but how do we actually call one?</p>
+<p><code>jal Label</code> will jump to a label (starting point of a subroutine).</p>
+<p>To return from a subroutine call <code>jr $ra</code>.</p>
+<p>A very simple function like:</p>
+<pre tabindex="0"><code>int example(int g, int h, int i, int j) {
+    int f;
+    f = (g + h) - (i + j);
+    return f;
+}
+</code></pre><p>Given that the arguments are in $a_0, \ldots, a_3$, f is in $s_0$ (therefore we must save $s_0$ to the stack before!).</p>
+<p>The result will be stored in $v_0$</p>
+<p>MIPS Code:</p>
+<pre tabindex="0"><code>example:
+    addi $sp, $sp, -4   # Allocate space for one variable, s_0
+    sw   $s0, 0($sp)    # Save s_0
+
+    add  $t0, $a0, $a1  # (g + h)
+    add  $t1, $a2, $a3  # (i + j)
+    sub  $s0, $t0, $t1  # f = (g + h) - (i + j)a
+
+    add  $v0, $s0, $zero # Store value
+
+    lw   $s0, 0($sp) # Reset s_0 value
+    addi $sp, $sp, 4 # Reset stack pointer
+
+    jr   $ra         # Return
+</code></pre><p>Let&rsquo;s now take a recursive</p>
+<pre tabindex="0"><code>int fact(int n) {
+    if(n &lt; 1) {
+        return 1;
+    } else {
+        return n * fact(n - 1);
+    }
+}
+</code></pre><p>input parameter n in $a_0$, result in $v_0$</p>
+<p>MIPS:</p>
+<pre tabindex="0"><code>fact:
+    addi $sp, $sp, -8   # Adjust stack so we can store 2 variables
+    sw   $ra, 4($sp)    # Save return address
+    sw   $a0, 0($sp)    # Save input register
+
+    slti $t0, $a0, 1    # test for n &lt; 1
+    beq  $t0, $zero, L1
+    addi $v0, $zero, 1  # If n &lt; 1, result = 1
+
+    addi $sp, $sp, 8    # Pop stack
+    jr   $ra            # Return
+
+L1: addi $a0, $a0, -1   # Decrement n
+    jal  fact           # Recursive call
+
+    lw   $a0, 0($sp)    # restore orignal n
+    lw   $ra  4($sp)    # and return address
+
+    addi $sp, $sp, 8    # Pop stack
+    mul  $v0, $a0, $v0  # n * fact(n - 1)
+    jr   $ra            # return
+</code></pre><h3 id="less-than-a-word">Less than a word</h3>
+<p>Sometimes we want to only access a byte or half-word:</p>
+<pre tabindex="0"><code>lb rt, offset(rs)
+lh rt, offset(rs)
+
+# Unsigned
+lbu rt, offset(rs)
+lhu rt, offset(rs)
+
+# Save
+sb rt, offset(rs)
+sh rt, offset(rs)
+</code></pre><h3 id="indexing-vs-pointers">Indexing vs Pointers</h3>
+<ul>
+<li>
+<p>Vector indexing requires:</p>
+<ul>
+<li>
+<p>Multiplication of the index with length</p>
+</li>
+<li>
+<p>Summation of this product to the vectors start address</p>
+</li>
+</ul>
+</li>
+<li>
+<p>Pointer corresponds directly to a memory address</p>
+<ul>
+<li>Therefore, it&rsquo;s faster</li>
+</ul>
+</li>
+</ul>
+<h3 id="common-mistakes">Common mistakes</h3>
+<p>Common mistakes when writing programs in MIPS are:</p>
+<ul>
+<li>
+<p>Incrementing with 1 and not 4!</p>
+</li>
+<li>
+<p>MIPS uses byte addressing</p>
+</li>
+</ul>
+
+		</section>
+  </article>
+	</div>
+
+	<footer><p class="footer_msg">memento mori</p></footer>
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"><meta property="og:site_name" content="rezvan"><title>Digital Design: Part 9 - Testing | rezvan</title>
+  <meta property="og:title" content="Digital Design: Part 9 - Testing | rezvan"><meta property="og:description" content="">
+  <meta property="og:type" content="blog">
+  <meta property="og:link" content="https://rezvan.xyz/school/Digital_design_9/"><link rel="shortcut icon" type="image/png" href=https://rezvan.xyz//images/icon.png />
+  <meta property="og:image" content="https://rezvan.xyz//images/icon.png" /><meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz//css/main.css" />    
+</head>
+
+<body>
+  <div class="wrapper">
+	<div class="content">
+		<div class="header_main">
+
+    <a href="https://rezvan.xyz/"><p class="header_title">rezvan</p><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.3/dist/katex.min.css" integrity="sha384-Juol1FqnotbkyZUT5Z7gUPjQ9gzlwCENvUZTpQBAPxtusdwFLRy382PSDx5UUJ4/" crossorigin="anonymous">
+
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.3/dist/katex.min.js" integrity="sha384-97gW6UIJxnlKemYavrqDHSX3SiygeOwIZhwyOKRfSaf0JWKRVj9hLASHgFTzT+0O" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.3/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+            delimiters: [
+                {left: "$$", right: "$$", display: true},
+                {left: "$", right: "$", display: false}
+            ]
+        });
+    });
+</script>
+
+    </a>
+
+    <br>
+
+    <nav id="main">
+        
+        <a href="/about/">about</a>
+        
+        <a href="/cv/">cv</a>
+        
+        <a href="/school/">school</a>
+        
+    </nav></div>
+
+  <article><div class="title_wrapper">
+			<h1 class="title">Digital Design: Part 9 - Testing</h1><p class="single_time">Mar 5, 2023</p></div>
+		<section class="post">
+			<p>When creating digital circuits, there are a lot of things that can go wrong.</p>
+<p>When designing the circuit, it may happen that the designers have implemented a <em>bug</em> into the circuit.</p>
+<p>We call these <em>design bugs</em>. On the other hand, when physically making the chip, it may happen that we
+get permanent (implementation) fault, or other (transient) faults.</p>
+<p>In the first case we need to perform verification, in the latter case, it&rsquo;s testing and fault tolerance.</p>
+<h3 id="verification-vs-testing">Verification vs Testing</h3>
+<p>Verification is the task of ensuring that a design meets its specification</p>
+<ul>
+<li>Looking for design mistakes</li>
+</ul>
+<p>Testing is performed to ensure that a particular instantiation of a design functions properly</p>
+<ul>
+<li>Looking for implementation faults</li>
+</ul>
+<h3 id="verification">Verification</h3>
+<p>The verification should cover:</p>
+<ul>
+<li>
+<p>The set of test patterns (test suit) written to verify a design should be complete.</p>
+</li>
+<li>
+<p>Specification coverage</p>
+<ul>
+<li>All the features of the design have to be specified</li>
+</ul>
+</li>
+<li>
+<p>Implementation coverage</p>
+<ul>
+<li>
+<p>Every line of the VHDL code should be checked.</p>
+</li>
+<li>
+<p>Examples:</p>
+<ul>
+<li>
+<p>Every case of a <code>case</code> statement, should be activated.</p>
+</li>
+<li>
+<p>For every state machine in our design, every edge between states should be traversed.</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="faults">Faults</h3>
+<p>There are different types of faults:</p>
+<ul>
+<li>
+<p>Transient faults</p>
+<ul>
+<li>
+<p>Faults that happen only once (and it’s VERY unlikely to happen again)</p>
+</li>
+<li>
+<p>Causes:</p>
+<ul>
+<li>
+<p>Electromagnetic Interference:</p>
+<ul>
+<li>
+<p>Neighbors mobile phone</p>
+</li>
+<li>
+<p>Static electricity</p>
+</li>
+</ul>
+</li>
+<li>
+<p>Various particles hitting the silicon surface:</p>
+<ul>
+<li>Heavy ions such as iron, $\alpha$-particles, neutrons.</li>
+</ul>
+</li>
+<li>
+<p>Internal effects:</p>
+<ul>
+<li>Crosstalk, metastability, power supply disturbances</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Permanent faults</p>
+<ul>
+<li>
+<p>Faults that are always there</p>
+</li>
+<li>
+<p>Causes:</p>
+<ul>
+<li>
+<p>Design defects</p>
+</li>
+<li>
+<p>Manufacturing defects</p>
+</li>
+<li>
+<p>Transistor aging</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Intermittent faults</p>
+<ul>
+<li>
+<p>Faults that come and go (probably periodically)</p>
+</li>
+<li>
+<p>Causes: Variations</p>
+<ul>
+<li>
+<p><strong>Static</strong>: transistors on a chip may not be exactly the same, although, they were supposed to be</p>
+</li>
+<li>
+<p><strong>Dynamic</strong>: temperature changes</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="defects-and-yield">Defects and Yield</h3>
+<p>$$
+yield = \frac{\text{number of working chips produced}}{\text{Total number of chips produced}}
+$$</p>
+<p>$$
+cost = \frac{\text{Cost of fabricating and testing a wafer}}{\text{Yield} \cdot\ \text{Number of chip sites on the wafer}}
+$$</p>
+<p>$$
+Y = (1 + \frac{Ad}{\alpha})^{- \alpha} \newline
+A = \text{Chip area} \newline
+d = \text{Defect density} \newline
+\alpha = \text{Fault clustering parameter}
+$$</p>
+<h3 id="testing">Testing</h3>
+<p>When testing, for example, a 64-bit adder, it would take over 500+ years, if we could test an input each ns.</p>
+<p>Therefore, a subset of all possible inputs are used when testing.</p>
+<p>This subset of inputs is determined, as follows:</p>
+<ul>
+<li>
+<p>Random test vectors</p>
+</li>
+<li>
+<p>Based on the logical function (functional testing)</p>
+<ul>
+<li>E.g. check boundary conditions which make your circuit operate differently</li>
+</ul>
+</li>
+<li>
+<p>Based on the design structure (structural testing)</p>
+<ul>
+<li>E.g. partition your hardware in smaller blocks (exploit the hierarchy of your hardware design)</li>
+</ul>
+</li>
+<li>
+<p>Based on the fault model</p>
+<ul>
+<li>Group a huge number of things that can go wrong in a much smaller finite  set of fault models</li>
+</ul>
+</li>
+</ul>
+<h3 id="fault-models">Fault models</h3>
+<p>A fault model is an abstract model of
+physical faults that could cause a chip not
+to work.</p>
+<p>Stuck-at fault model: This model abstracts
+all potential faults as resulting in a logical
+node of the circuit being either stuck at
+logic <code>0</code> or stuck at logic <code>1</code>.</p>
+<h3 id="algorithm-for-path-sensitization">Algorithm for “path sensitization”</h3>
+<ol>
+<li>
+<p>Activate: Specify inputs to generate the appropriate (opposite than the fault) value (0 for SA-1, 1 for SA-0) at the site of the fault.</p>
+</li>
+<li>
+<p>Propagate: Select a path from the site of the fault to an output and specify additional signal values to propagate the fault signal along this path to the output (error propagation).</p>
+</li>
+<li>
+<p>Justify: Specify input values to produce the signal values specified in (2) (line justification).</p>
+</li>
+</ol>
+<ul>
+<li>
+<p>The process is finished when all the assigned values have been
+solved by &ldquo;justify&rdquo; and there are no conflicts</p>
+</li>
+<li>
+<p>A conflict has occurred on two different Justifications
+require different values assigned to a node.</p>
+<ul>
+<li>An input value required to activate the fault is different from the input values required to propagate the fault.</li>
+</ul>
+</li>
+<li>
+<p>If a conflict arises, we look for another way for justification.</p>
+</li>
+</ul>
+
+		</section>
+  </article>
+	</div>
+
+	<footer><p class="footer_msg">memento mori</p></footer>
+
+  </div>
+</body>
+</html>

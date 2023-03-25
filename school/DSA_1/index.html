@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"><meta property="og:site_name" content="rezvan"><title>DSA: Part 1 - Sorting | rezvan</title>
+  <meta property="og:title" content="DSA: Part 1 - Sorting | rezvan"><meta property="og:description" content="">
+  <meta property="og:type" content="blog">
+  <meta property="og:link" content="https://rezvan.xyz/school/DSA_1/"><link rel="shortcut icon" type="image/png" href=https://rezvan.xyz//images/icon.png />
+  <meta property="og:image" content="https://rezvan.xyz//images/icon.png" /><meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz//css/main.css" />    
+</head>
+
+<body>
+  <div class="wrapper">
+	<div class="content">
+		<div class="header_main">
+
+    <a href="https://rezvan.xyz/"><p class="header_title">rezvan</p>
+    </a>
+
+    <br>
+
+    <nav id="main">
+        
+        <a href="/about/">about</a>
+        
+        <a href="/cv/">cv</a>
+        
+        <a href="/school/">school</a>
+        
+    </nav></div>
+
+  <article><div class="title_wrapper">
+			<h1 class="title">DSA: Part 1 - Sorting</h1><p class="single_time">Nov 24, 2022</p></div>
+		<section class="post">
+			<p>My other course for this study period is a course in Data Structures &amp; Algorithms.</p>
+<h3 id="sorting--searching">Sorting &amp; Searching</h3>
+<p>We began this course with sorting and why it&rsquo;s an important topic for a computer scientist.
+Sorting data comes up in all fields of computer science, everything from low-level, simple, array sorting -
+to sort millions of data gathered by an AI.</p>
+<p>With this we began with simple sorting and searching algorithms. Firstly we began with binary search.
+Binary search is a simple yet powerful search algorithm for finding a value in a <strong>sorted</strong> array.</p>
+<p>Pseudo Code for a Binary Search:</p>
+<pre tabindex="0"><code>func binary_search(array, search_value):
+    low  = first index of array
+    high = last index of array
+    
+    # If our low and high pointers ever cross, we know that the element is not in the array
+    while low &lt;= high:
+        mid  = mid index of array; (low + high) / 2
+
+        if(search_value is to the left of mid value):
+            continue search to the left of the array
+
+        else if(search_value is to the right of mid value):
+            continue search to the right of the array
+
+        else:
+            return mid
+
+    return Not in array
+</code></pre><p>And an actual Python implementation:</p>
+<pre tabindex="0"><code>def binary_search(arr, val):
+    low  = 0
+    high = len(arr) - 1
+
+    while low &lt;= high:
+        mid = (low + high) // 2
+
+        if(val &lt; arr[mid]):
+            high = mid - 1
+
+        elif(val &gt; arr[mid]):
+            low = mid + 1
+
+        else:
+            return mid
+    return -1
+</code></pre><p>The next step was Selection and Insertion sort, simple naive sorting algorithms.</p>
+<p>The selection sort algorithm is: Find the smallest element in the list and swap it to the first index, then continue for the next-smallest etc.</p>
+<p>An implementation:</p>
+<pre tabindex="0"><code>def selection_sort(arr):
+    size = len(arr)
+    for index in range(size):
+        min_index = index
+        for j in range(index + 1, size):
+            if(arr[j] &lt; arr[min_index]):
+                min_index = j
+        (arr[index], arr[min_index]) = (arr[min_index], arr[index])
+</code></pre><p>After that it was time for insertion sort, which builds on the idea of inserting a value in an array.
+The idea is that we start by saying that the first element is the &lsquo;sorted&rsquo; part. Then we begin looking the the &lsquo;unsorted&rsquo; part,
+at seeing where it should be inserted into the sorted array. A simple, yet, powerful algorithm. We will see how important the idea of inserting will be later on.</p>
+<p>An implementation:</p>
+<pre tabindex="0"><code>def insertion_sort(arr):
+    # Begin by saying the first element is sorted
+    # We call the 
+    for i in range(1, len(arr)):
+        val = arr[i]
+
+        j = i - 1
+        while j &gt;= 0 and val &lt; arr[j]:
+            arr[j + 1] = arr[j]
+            j -= 1
+        arr[j+ 1] = val
+</code></pre><p>Although these algorithms are simple, they are unfortunately really slow, when the array becomes larges.
+For now we can just say that why this is because: The number of operations needed to check and sort grows quadratic with the array size.</p>
+<p>Imagine we have two sorted lists and we want to merge them - what&rsquo;s the algorithm for this?
+Quite simple actually, we use two pointers for knowing where we are in both arrays, starting at the first index and both and compare which value we insert into the new (bigger) array).
+Then we move the pointers accordingly, until we reach the end. Reaching the end here means we either hit the end of the array of both arrays simultaneously,
+or reaching the end of one array - if we do that we know there&rsquo;s nothing left to compare to, therefore we can just put the rest of the elements in.</p>
+<p>An implementation of a merge function:</p>
+<pre tabindex="0"><code>def merge(arr1, arr2):
+    # We can cheat a little bit using python - but the idea is still the same
+    output = []
+    p1     = 0
+    p2     = 0
+
+    while p1 &lt; len(arr1) and p2 &lt; len(arr2):
+        if(arr1[p1] &lt;= arr2[p2]):
+            output.append(arr1[p1])
+            p1 += 1
+        else:
+            output.append(arr2[p2])
+            p2 += 1
+
+    while p1 &lt; len(arr1):
+        output.append(arr1[p1])
+        p1 += 1
+    
+    while p2 &lt; len(arr2):
+        output.append(arr2[p2])
+        p2 += 1
+
+    return output
+</code></pre><p>Now that we&rsquo;re familiar with this algorithm - we can use this by divide and conquering a unsorted array with a bit of modifications.
+We can imagine that we divide the unsorted array into a left and right part and <strong>recursively</strong> mergesort() them as well.</p>
+<p>In practice it means that we get a sorted left array and a sorted right array, then we finally merge them for the final result.</p>
+<p>An implementation of merge sort:</p>
+<pre tabindex="0"><code>def merge_sort(arr: list) -&gt; list:
+    if len(arr) &lt; 2:
+        return arr[:]
+    else:
+        mid = len(arr) // 2
+
+        L = merge_sort(arr[:mid])
+        R = merge_sort(arr[mid:])
+	
+	result = merge(L, R)
+        return result
+</code></pre><p>Merge sort is great, but sometimes, if the list is <em>almost</em> sorted or worse, already sorted and you call this function sort it - it will be incredibly slow, this is due to merge sort not being a so called in place algorithm.
+A algorithm which has the same divide and conquerer strategy but is in-place is Quicksort!</p>
+<p>Quicksort builds on the idea that you <em>partition</em> your array into one part which is lower than the <em>pivot</em> element and one part which is higher.</p>
+<p>In practice this means you sort it by recursively partitioning the sub-arrays.</p>
+<p>So partitioning, sounds quite easy right? Choose a pivot element and just put larger numbers to the right and lower to the left. But choosing the pivot is the tricky part.
+If we choose a good pivot our algorithm becomes much faster. A common (and good) strategy is either choosing a random pivot, or the median of three.</p>
+<p>In this example I will choose the pivot element as the last element of the list.
+An implementation of Quicksort:</p>
+<pre tabindex="0"><code>def partition(arr, low, high):
+
+    def swap(i, j):
+        arr[i], arr[j] = arr[j], arr[i]
+
+    pivot = arr[high]
+
+    i = low - 1
+
+    for j in range(low, high):
+        if arr[j] &lt;= pivot:
+            i += 1
+            swap(i, j)
+
+    swap(i + 1, high)
+    return i + 1
+
+def quick_sort(arr, low, high):
+    if low &lt; high:
+        
+        p = partition(arr, low, high)
+
+        quick_sort(arr, low, p - 1)
+
+        quick_sort(arr, p + 1, high)
+</code></pre><p>This concludes this part, next time I&rsquo;ll write about (short) about Complexity - after that the major part of this course, actual data structures and how we use them as well as implement them.</p>
+
+		</section>
+  </article>
+	</div>
+
+	<footer><p class="footer_msg">memento mori</p></footer>
+
+  </div>
+</body>
+</html>
