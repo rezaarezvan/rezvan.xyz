@@ -6,7 +6,20 @@
     <description>Recent content in Schools on rezvan</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 22 Mar 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://rezvan.xyz/school/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 24 Mar 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://rezvan.xyz/school/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Electrial Circuits and Fields: Part 3 - Node-voltage analysis, superposition, equivalent circuits</title>
+      <link>https://rezvan.xyz/school/eem076_3/</link>
+      <pubDate>Fri, 24 Mar 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://rezvan.xyz/school/eem076_3/</guid>
+      <description>When analyzing and computing with circuits, it&amp;rsquo;s often a good idea to try to simply as much as possible.
+But when met with a circuit like: We can try all we want to simplify it, with our current knowledge, we simply can&amp;rsquo;t.
+So let&amp;rsquo;s learn about Node-Voltage analysis.
+Node-Voltage analysis Below is a picture that illustrates the idea: Here&amp;rsquo;s the idea:
+Find the nodes Assign a reference node (usually, we pick the node with most connections) Assign node voltages (Note, in a circuit with, $N$, nodes we have, $N - 1$, voltages) Then we solve these using KCL on each node ($\sum\ i_{out} = \sum\ i_{in}$) The convention is also the following:</description>
+    </item>
+    
     <item>
       <title>Computer System Engineering: Part 2 - MIPS</title>
       <link>https://rezvan.xyz/school/eda333_2/</link>
