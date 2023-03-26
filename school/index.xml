@@ -6,7 +6,20 @@
     <description>Recent content in Schools on rezvan</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 24 Mar 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://rezvan.xyz/school/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 26 Mar 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://rezvan.xyz/school/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Electrial Circuits and Fields: Part 4 - Capacitance, inductance, timevarying currents and voltages</title>
+      <link>https://rezvan.xyz/school/EEM076_4/</link>
+      <pubDate>Sun, 26 Mar 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://rezvan.xyz/school/EEM076_4/</guid>
+      <description>In this part we&amp;rsquo;ll cover two very crucial component that are often used in electrical circuits.
+Capacitors and inductors, we will see why these are so important later on as well.
+Let&amp;rsquo;s start with looking at capacitors.
+Capacitors Let&amp;rsquo;s start by properly defining what a capacitor is:
+A capacitor is a device that stores electric charge by creating an electric field between two conductive plates separated by an insulating material.</description>
+    </item>
+    
     <item>
       <title>Electrial Circuits and Fields: Part 3 - Node-voltage analysis, superposition, equivalent circuits</title>
       <link>https://rezvan.xyz/school/EEM076_3/</link>

@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"><meta property="og:site_name" content="rezvan"><title>Electrial Circuits and Fields: Part 4 - Capacitance, inductance, timevarying currents and voltages | rezvan</title>
+  <meta property="og:title" content="Electrial Circuits and Fields: Part 4 - Capacitance, inductance, timevarying currents and voltages | rezvan"><meta property="og:description" content="">
+  <meta property="og:type" content="blog">
+  <meta property="og:link" content="https://rezvan.xyz/school/EEM076_4/"><link rel="shortcut icon" type="image/png" href=https://rezvan.xyz//images/icon.png />
+  <meta property="og:image" content="https://rezvan.xyz//images/icon.png" /><meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz//css/main.css" />    
+</head>
+
+<body>
+  <div class="wrapper">
+	<div class="content">
+		<div class="header_main">
+
+    <a href="https://rezvan.xyz/"><p class="header_title">rezvan</p><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.3/dist/katex.min.css" integrity="sha384-Juol1FqnotbkyZUT5Z7gUPjQ9gzlwCENvUZTpQBAPxtusdwFLRy382PSDx5UUJ4/" crossorigin="anonymous">
+
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.3/dist/katex.min.js" integrity="sha384-97gW6UIJxnlKemYavrqDHSX3SiygeOwIZhwyOKRfSaf0JWKRVj9hLASHgFTzT+0O" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.3/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+            delimiters: [
+                {left: "$$", right: "$$", display: true},
+                {left: "$", right: "$", display: false}
+            ]
+        });
+    });
+</script>
+
+    </a>
+
+    <br>
+
+    <nav id="main">
+        
+        <a href="/about/">about</a>
+        
+        <a href="/cv/">cv</a>
+        
+        <a href="/school/">school</a>
+        
+    </nav></div>
+
+  <article><div class="title_wrapper">
+			<h1 class="title">Electrial Circuits and Fields: Part 4 - Capacitance, inductance, timevarying currents and voltages</h1><p class="single_time">Mar 26, 2023</p></div>
+		<section class="post">
+			<p>In this part we&rsquo;ll cover two very crucial component that are often used in electrical circuits.</p>
+<p>Capacitors and inductors, we will see why these are so important later on as well.</p>
+<p>Let&rsquo;s start with looking at capacitors.</p>
+<h3 id="capacitors">Capacitors</h3>
+<p>Let&rsquo;s start by properly defining what a capacitor is:</p>
+<blockquote>
+<p>A capacitor is a device that stores electric charge by creating an electric field between two conductive plates separated by an insulating material.</p>
+</blockquote>
+<p>So, essentially, it is a component that stores electric energy.</p>
+<p>The ideal capacitor is a <strong>passive</strong> component with the following circuit symbol:
+<img src="/images/C.png#center" alt=""></p>
+<p>The <em>capacitance</em> is measured in farads ($F$) - typically $pF$ to $\mu F$</p>
+<p>Let&rsquo;s jump right into some formulas that we&rsquo;ll need to understand:</p>
+<p>Charge is proportional to the voltage
+$$
+q = C \cdot\ V
+$$</p>
+<p>Further, the current-voltage relation is therefore:
+$$
+I = \frac{dq}{dt} = C\ \frac{dV}{dt}
+$$</p>
+<p>Let&rsquo;s now look at the power &amp; energy when using capacitors:</p>
+<h4 id="power--energy-in-capacitors">Power &amp; Energy in Capacitors</h4>
+<p>$$
+I = \frac{dq}{dt} = C\ \frac{dV}{dt} \newline
+P = I \cdot\ V = CV \frac{dV}{dt}
+$$</p>
+<p>We know that:
+$$
+W(t) = \int_{t_0}^{t}\ P(t)\ dt \newline
+W(t) = \int_{t_0}^{t}\ CV \frac{dV}{dt}\ dt \newline
+W(t) = C \cdot\ \int_{t_0}^{t}\ V\ dV \newline
+W(t) = \frac{C}{2} [v(t)^2 - v(t_0)^2]
+$$</p>
+<p><strong>If $V = 0$ at $t_0$ then:</strong>
+$$
+W(t) = \frac{C \cdot\ v(t)^2}{2} \quad | \quad q = CV \newline
+W(t) = \frac{v(t)\ q(t)}{2} \quad | \quad C = \frac{q}{V} \newline
+W(t) = \frac{q(t)^2}{2C} \quad | \quad V = \frac{q}{C}
+$$</p>
+<p>Let&rsquo;s now take a look on charge and voltage <em>in terms of current</em> in capacitors.</p>
+<h3 id="charge-and-voltage-in-capacitors">Charge and Voltage in Capacitors</h3>
+<p>Charge in terms of current:
+$$
+q(t) = \int_{t_0}^{t}\ i(t)\ dt + q(t_0) \quad | \quad q = Cv
+$$</p>
+<p>Voltage in terms of current:
+$$
+CV(t) = \int_{t_0}^{t}\ i(t)\ dt + CV(t_0) \newline
+V(t) = \frac{1}{C} \int_{t_0}^{t}\ i(t)\ dt + V(t_0)
+$$</p>
+<h4 id="capacitors-in-parallel">Capacitors in parallel</h4>
+<p>If we now take a look at a circuit which has three capacitors in parallel like such:
+<img src="/images/PC.png#center" alt=""></p>
+<p>We can derive the following:
+$$
+i = i_1 + i_2 + i_3 \newline
+$$</p>
+<p>$$
+i = C \frac{dV}{dt} \newline
+$$</p>
+<p>$$
+i = C_1 \frac{dV}{dt} + C_2 \frac{dV}{dT} + C_3 \frac{dV}{dT} \newline
+$$</p>
+<p>$$
+i = (C_1 + C_2 + C_3) \frac{dV}{dt}
+$$</p>
+<p>$$
+\boxed{C_{eq} = C_1 + C_2 + C_3}
+$$</p>
+<h4 id="capacitors-in-series">Capacitors in series</h4>
+<p>In series, this becomes:
+$$
+V = v_1 + v_2 + v_3 \newline
+$$</p>
+<p>$$
+V = \frac{Q}{C_1} + \frac{Q}{C_2} + \frac{Q}{C_3}
+$$</p>
+<p>$$
+V = (\frac{1}{C_1} + \frac{1}{C_2} + \frac{1}{C_3}) \cdot\ Q
+$$</p>
+<p>$$
+\boxed{C_{eq} = \frac{1}{C_1} + \frac{1}{C_2} + \frac{1}{C_3}}
+$$</p>
+<p>So, let&rsquo;s try to summarize capacitors</p>
+<h4 id="capacitors-summary">Capacitors summary</h4>
+<ul>
+<li>
+<p>Capacitors are open circuits to DC voltage (If $V$ is constant, then $I = 0$).</p>
+</li>
+<li>
+<p>The voltage on a capacitor <strong>cannot</strong> <em>jump</em> (Change instantaneously, since then we would have infinite current).</p>
+</li>
+<li>
+<p>Capacitors <em>store</em> energy ($I \cdot\ V &gt; 0$), or, deliver energy ($I \cdot\ V &lt; 0$).</p>
+</li>
+</ul>
+<h3 id="inductors">Inductors</h3>
+<p>Let&rsquo;s first properly define what an inductor is:</p>
+<blockquote>
+<p>An inductor is a component in an electrical circuit that utilizes electromagnetic induction to resist changes in current flow by generating a voltage that opposes the change.</p>
+</blockquote>
+<p>An ideal inductor is a <strong>passive</strong> element with the following circuit symbol:
+<img src="/images/I.png#center" alt=""></p>
+<p>Let&rsquo;s dive into the formulas now!</p>
+<p>The current-voltage relation is:
+$$
+V(t) = L\ \frac{dI}{dt}
+$$</p>
+<p>The unit of inductance, $L$, is henry (H).</p>
+<p>Now with the above formula we can derive:
+$$
+dI = \frac{1}{L}\ V(t) dt
+$$</p>
+<p>$$
+\int_{I(t_0}^{I(t)}\ dI = \frac{1}{L} \int_{t_0}^{t}\ V(t) dt
+$$</p>
+<p>Which means:
+$$
+I(t) = \frac{1}{L} \int_{t_0}^{t}\ V(t) dt + I(t_0)
+$$</p>
+<h4 id="power--energy-in-inductors">Power &amp; Energy in Inductors</h4>
+<p>$$
+P(t) = I(t)\ V(t) = I(L\ \frac{dI}{dt}) = \frac{dW}{dt}
+$$</p>
+<p>Which means:
+$$
+W = \frac{LI^2}{2}
+$$</p>
+<p>As you can see, the formulas for inductors and capacitors are nearly identical.</p>
+<h4 id="inductors-in-series">Inductors in series</h4>
+<p>If we have the following circuit:
+<img src="/images/IS.png#center" alt=""></p>
+<p>We can derive:
+$$
+V_s = V_1 + V_2 + \ldots + V_N \newline
+V_s = L_1\ \frac{dI}{dt} + L_2\ \frac{dI}{dt} + \ldots + L_N\ \frac{dI}{dt} \newline
+V_s = (L_1 + L_2 + \ldots + L_N) \frac{dI}{dt} \newline
+\boxed{L_{eq} = L_1 + L_2 + \ldots + L_N}
+$$</p>
+<h4 id="inductors-in-parallel">Inductors in parallel</h4>
+<p>If we have the following circuit:
+<img src="/images/IP.png#center" alt=""></p>
+<p>We can derive:
+$$
+V = L\ \frac{d}{dt}(I_1 + I_2 + \ldots + I_N) \newline
+$$</p>
+<p>$$
+V = L\ (\frac{dI_1}{dt} + \frac{dI_2}{dt} + \ldots + \frac{dI_N}{dt}) \newline
+$$</p>
+<p>$$
+V = L\ (\frac{V}{L_1} + \frac{V}{L_2} + \ldots + \frac{V}{L_N})
+$$</p>
+<p>Which means:
+$$
+\boxed{L_{eq} = \frac{1}{\frac{1}{L_1} + \frac{1}{L_2} + \ldots + \frac{1}{L_N}}}
+$$</p>
+<h4 id="inductors-summary">Inductors summary</h4>
+<ul>
+<li>
+<p>Inductors are <strong>short circuits</strong> to DC voltages (If $I$ constant, then $V = 0$).</p>
+</li>
+<li>
+<p>The current through an inductor <em>cannot</em> jump (change instantaneously, otherwise we would have infinite voltage).</p>
+</li>
+<li>
+<p>Inductors <em>store</em> energy ($I \cdot\ V &gt; 0$), or, deliver energy ($I \cdot\ V &lt; 0$).</p>
+</li>
+</ul>
+<h3 id="time-varying-circuits">Time-Varying Circuits</h3>
+<p><img src="/images/FORC.png#center" alt=""></p>
+<p>When we&rsquo;re dealing with circuits like this, meaning, we have time aspect to consider. We need new ways to describe our circuits.</p>
+<p>So let&rsquo;s introduce our new formulas:
+$$
+V_{C}(t) = V_{i}\ e^{\frac{-t}{\tau}} \quad \text{, where $\tau$ is:} \newline
+\tau = RC
+$$</p>
+<p>For the inductor case:
+<img src="/images/FORL.png#center" alt=""></p>
+<p>Formulas:
+$$
+I(t) = I_{0}\ e^{\frac{-Rt}{L}} \newline
+\tau = \frac{L}{R}
+$$</p>
+
+		</section>
+  </article>
+	</div>
+
+	<footer><p class="footer_msg">memento mori</p></footer>
+
+  </div>
+</body>
+</html>
