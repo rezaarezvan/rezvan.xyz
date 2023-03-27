@@ -6,7 +6,25 @@
     <description>Recent content in Schools on rezvan</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 26 Mar 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://rezvan.xyz/school/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 27 Mar 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://rezvan.xyz/school/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Computer System Engineering: Part 3 - Pipelining</title>
+      <link>https://rezvan.xyz/school/EDA333_3/</link>
+      <pubDate>Mon, 27 Mar 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://rezvan.xyz/school/EDA333_3/</guid>
+      <description>In this part we&amp;rsquo;ll cover the idea of pipelining - and it&amp;rsquo;s performance effects it has on computer systems.
+Let&amp;rsquo;s first cover what every computer does to perform complex tasks.
+Instruction execution Every computer does these five stages:
+Fetch Instruction. PC → Instruction memory.
+Decode the instruction and read from registers.
+Execute the instruction.
+Arithmetic/logical computation.
+Computation of effective memory address.
+Computation of jump address/conditional address.
+Read / Write from / to memory for load/store instructions.</description>
+    </item>
+    
     <item>
       <title>Electrial Circuits and Fields: Part 4 - Capacitance, inductance, timevarying currents and voltages</title>
       <link>https://rezvan.xyz/school/EEM076_4/</link>
