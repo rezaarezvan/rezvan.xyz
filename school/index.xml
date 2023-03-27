@@ -6,7 +6,19 @@
     <description>Recent content in Schools on rezvan</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 27 Mar 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://rezvan.xyz/school/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 27 Mar 2023 17:20:46 +0100</lastBuildDate><atom:link href="https://rezvan.xyz/school/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Electrical Circuits and Fields: Part 5 - Electrical fields</title>
+      <link>https://rezvan.xyz/school/EEM076_5/</link>
+      <pubDate>Mon, 27 Mar 2023 17:20:46 +0100</pubDate>
+      
+      <guid>https://rezvan.xyz/school/EEM076_5/</guid>
+      <description>In this part we&amp;rsquo;ll discuss electrical fields and some tools we&amp;rsquo;ll begin to use.
+So far we&amp;rsquo;ve only analyzed the electrical circuits at a macro level. In this part we&amp;rsquo;ll try to dissect them at a micro-level, so let&amp;rsquo;s zoom in!
+Electrical charge To understand electrical circuits, let&amp;rsquo;s first understand electrical charge.
+As we&amp;rsquo;ve seen, we use $q$, as the notation for charge. The elementary charge (the charge carried by a single proton) is: $$ e^{-} = 1.</description>
+    </item>
+    
     <item>
       <title>Computer System Engineering: Part 3 - Pipelining</title>
       <link>https://rezvan.xyz/school/EDA333_3/</link>
@@ -26,7 +38,7 @@ Read / Write from / to memory for load/store instructions.</description>
     </item>
     
     <item>
-      <title>Electrial Circuits and Fields: Part 4 - Capacitance, inductance, timevarying currents and voltages</title>
+      <title>Electrical Circuits and Fields: Part 4 - Capacitance, inductance, timevarying currents and voltages</title>
       <link>https://rezvan.xyz/school/EEM076_4/</link>
       <pubDate>Sun, 26 Mar 2023 00:00:00 +0000</pubDate>
       
@@ -39,7 +51,7 @@ A capacitor is a device that stores electric charge by creating an electric fiel
     </item>
     
     <item>
-      <title>Electrial Circuits and Fields: Part 3 - Node-voltage analysis, superposition, equivalent circuits</title>
+      <title>Electrical Circuits and Fields: Part 3 - Node-voltage analysis, superposition, equivalent circuits</title>
       <link>https://rezvan.xyz/school/EEM076_3/</link>
       <pubDate>Fri, 24 Mar 2023 00:00:00 +0000</pubDate>
       
@@ -77,7 +89,7 @@ Determines number of operations required, which directly impacts the performance
     </item>
     
     <item>
-      <title>Electrial Circuits and Fields: Part 2 - Power &amp; Energy</title>
+      <title>Electrical Circuits and Fields: Part 2 - Power &amp; Energy</title>
       <link>https://rezvan.xyz/school/EEM076_2/</link>
       <pubDate>Tue, 21 Mar 2023 00:00:00 +0000</pubDate>
       
@@ -91,7 +103,7 @@ We measure power in watts, which we can define as: $$ 1\ W = \frac{1\ J}{s} = \f
     </item>
     
     <item>
-      <title>Electrial Circuits and Fields: Part 1 - Introduction</title>
+      <title>Electrical Circuits and Fields: Part 1 - Introduction</title>
       <link>https://rezvan.xyz/school/EEM076/</link>
       <pubDate>Mon, 20 Mar 2023 00:00:00 +0000</pubDate>
       
