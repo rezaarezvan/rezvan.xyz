@@ -6,7 +6,20 @@
     <description>Recent content in Schools on rezvan</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 28 Mar 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://rezvan.xyz/school/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 13 Apr 2023 20:04:58 +0200</lastBuildDate><atom:link href="https://rezvan.xyz/school/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Computer System Engineering: Part 5 - Cache memory</title>
+      <link>https://rezvan.xyz/school/EDA333_5/</link>
+      <pubDate>Thu, 13 Apr 2023 20:04:58 +0200</pubDate>
+      
+      <guid>https://rezvan.xyz/school/EDA333_5/</guid>
+      <description>In this part we will cover one of the most important solutions in computer science, the cache memory, but also memory in general.
+Memory types Before we dive in - let&amp;rsquo;s quickly recap the different types of memory there are:
+Static RAM (SRAM)
+0.5 ns - 2.5 ns | $2000 - $5000 per GB Dynamic RAM (DRAM)
+50 ns - 70 ns | $20 - $75 per GB Magnetic storage</description>
+    </item>
+    
     <item>
       <title>Computer System Engineering: Part 4 - Pipeline hardware</title>
       <link>https://rezvan.xyz/school/EDA333_4/</link>
