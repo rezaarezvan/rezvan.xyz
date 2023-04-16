@@ -4,19 +4,20 @@ html, body {
 }
 
 body {
-  background-color: #0a0a0a;
+  background-color: white;
   border: 0;
-  color: #fff;
-  font-family: "Open Sans", sans-serif;
+  color: #0a0a0a;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 a {
-  color: #eee;
+  color: black;
   text-decoration: none;
 }
 
 p {
-  color: #eee;
+  color: #0a0a0a;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 article a {
@@ -47,16 +48,16 @@ article a {
   font-size: 1.3rem;
   padding: 0;
   margin: 0;
-  color: #eee;
+  color: black;
 }
 
 .post_listed .title:hover {
   background-color: #eee;
-  color: #0a0a0a;
+  color: gray;
 }
 
 .post_listed .post_time {
-  color: #aaa;
+  color: #000;
   margin-right: 10px;
   display: inline-block;
   font-size: 1.1rem;
@@ -90,7 +91,7 @@ article a {
   padding: 0;
   font-size: 1.5rem;
   font-weight: bold;
-  color: #fff;
+  color: #0a0a0a;
 }
 
 nav {
@@ -104,7 +105,7 @@ nav#main {
 }
 
 nav a {
-  color: #eee;
+  color: #0a0a0a;
   text-decoration: none;
   padding-left: 6px;
   padding-right: 6px;
@@ -112,13 +113,13 @@ nav a {
 }
 
 nav a:visited {
-  color: #eee;
+  color: #0a0a0a;
   text-decoration: none;
 }
 
 nav a:hover {
   text-decoration: none;
-  color: #0a0a0a;
+  color: gray;
   background-color: #eee;
 }
 
@@ -136,7 +137,7 @@ nav a:hover {
   text-align: center;
   align-content: center;
   width: 100%;
-  color: #fff;
+  color: #0a0a0a;
   padding: 0;
   margin-bottom: 10px;
   font-weight: normal;
@@ -146,18 +147,18 @@ nav a:hover {
   font-size: 1rem;
   text-decoration: none;
   text-align: center;
-  color: #999;
+  color: #0a0a0a;
 }
 
 .title_wrapper .meta:hover {
-  color: #fff;
+  color: #0a0a0a;
   text-decoration: none;
 }
 
 /* --- Post Content --- */
 
 .post {
-  font-family: "Open Sans", sans-serif;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 1.3rem;
 }
 
@@ -236,7 +237,7 @@ footer {
 
 footer .footer_msg {
   font-size: 1.1rem;
-  color: #8a8a8a;
+  color: #0a0a0a;
   text-align: center;
 }
 
@@ -252,11 +253,11 @@ footer .footer_msg {
 .page-link {
   font-size: 1.1rem;
   display: inline-block;
-  color: #eee;
+  color: #0a0a0a;
 }
 
 .page-link:hover {
-  color: #0a0a0a;
+  color: gray;
   background-color: #eee;
 }
 
@@ -274,7 +275,7 @@ table {
 }
 
 table, th, td {
-  border: 1px solid #eee;
+  border: 2px solid #0a0a0a;
 }
 
 /* --- FAQ Styling --- */
@@ -348,8 +349,51 @@ p.::-moz-selection,
     font-style: normal;
 }
 
-img[src$='#center']
-{
+@font-face {
+    font-family: 'Helvetica Neue';
+    src: url('fonts/HelveticaNeue.eot');
+    src: url('fonts/HelveticaNeue.eot?#iefix') format('embedded-opentype'),
+         url('fonts/HelveticaNeue.woff') format('woff'),
+         url('fonts/HelveticaNeue.ttf') format('truetype'),
+         url('fonts/HelveticaNeue.svg#HelveticaNeue') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Helvetica Neue';
+    src: url('fonts/HelveticaNeue-Bold.eot');
+    src: url('fonts/HelveticaNeue-Bold.eot?#iefix') format('embedded-opentype'),
+         url('fonts/HelveticaNeue-Bold.woff') format('woff'),
+         url('fonts/HelveticaNeue-Bold.ttf') format('truetype'),
+         url('fonts/HelveticaNeue-Bold.svg#HelveticaNeue-Bold') format('svg');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Helvetica Neue';
+    src: url('fonts/HelveticaNeue-Italic.eot');
+    src: url('fonts/HelveticaNeue-Italic.eot?#iefix') format('embedded-opentype'),
+         url('fonts/HelveticaNeue-Italic.woff') format('woff'),
+         url('fonts/HelveticaNeue-Italic.ttf') format('truetype'),
+         url('fonts/HelveticaNeue-Italic.svg#HelveticaNeue-Italic') format('svg');
+    font-weight: normal;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Helvetica Neue';
+    src: url('fonts/HelveticaNeue-BoldItalic.eot');
+    src: url('fonts/HelveticaNeue-BoldItalic.eot?#iefix') format('embedded-opentype'),
+         url('fonts/HelveticaNeue-BoldItalic.woff') format('woff'),
+         url('fonts/HelveticaNeue-BoldItalic.ttf') format('truetype'),
+         url('fonts/HelveticaNeue-BoldItalic.svg#HelveticaNeue-BoldItalic') format('svg');
+    font-weight: bold;
+    font-style: italic;
+}
+
+img[src$='#center'] {
     display: block;
     margin: 0.7rem auto; /* you can replace the vertical '0.7rem' by
                             whatever floats your boat, but keep the
@@ -357,15 +401,13 @@ img[src$='#center']
     /* whatever else styles you fancy here */
 }
 
-img[src$='#floatleft']
-{
+img[src$='#floatleft'] {
     float:left;
     margin: 0.7rem;      /* this margin is totally up to you */
     /* whatever else styles you fancy here */
 }
 
-img[src$='#floatright']
-{
+img[src$='#floatright'] {
     float:right;
     margin: 0.7rem;      /* this margin is totally up to you */
     /* whatever else styles you fancy here */
