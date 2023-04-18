@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8"><meta property="og:site_name" content="rezvan"><title>Schools | rezvan</title>
-  <meta property="og:title" content="Schools | rezvan"><meta property="og:description" content="">
+	<meta charset="utf-8"><meta property="og:site_name" content="rezvan"><title>Electrical Circuits and Fields: Part 6 - Work, Voltage and Capacitance | rezvan</title>
+  <meta property="og:title" content="Electrical Circuits and Fields: Part 6 - Work, Voltage and Capacitance | rezvan"><meta property="og:description" content="">
   <meta property="og:type" content="blog">
-  <meta property="og:link" content="https://rezvan.xyz/school/"><link rel="shortcut icon" type="image/png" href=https://rezvan.xyz//images/icon.png />
+  <meta property="og:link" content="https://rezvan.xyz/school/EEM076_6/"><link rel="shortcut icon" type="image/png" href=https://rezvan.xyz//images/icon.png />
   <meta property="og:image" content="https://rezvan.xyz//images/icon.png" /><meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="alternate" type="application/rss+xml" href="https://rezvan.xyz/school/index.xml" title="rezvan" />
 	<link rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz//css/main.css" />
 
     <head>
@@ -223,10 +222,26 @@ body.dark-mode .title {
 </head>
 
 <body>
-    <div class="wrapper">
+  <div class="wrapper">
+	<div class="content">
 		<div class="header_main">
 
-    <a href="https://rezvan.xyz/"><p class="header_title">rezvan</p>
+    <a href="https://rezvan.xyz/"><p class="header_title">rezvan</p><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.3/dist/katex.min.css" integrity="sha384-Juol1FqnotbkyZUT5Z7gUPjQ9gzlwCENvUZTpQBAPxtusdwFLRy382PSDx5UUJ4/" crossorigin="anonymous">
+
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.3/dist/katex.min.js" integrity="sha384-97gW6UIJxnlKemYavrqDHSX3SiygeOwIZhwyOKRfSaf0JWKRVj9hLASHgFTzT+0O" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.3/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+            delimiters: [
+                {left: "$$", right: "$$", display: true},
+                {left: "$", right: "$", display: false}
+            ]
+        });
+    });
+</script>
+
     </a>
 
     <br>
@@ -241,78 +256,178 @@ body.dark-mode .title {
         
     </nav></div>
 
-                
-                
-                
-				<section class="post_listed">
-					<time class="post_time">12.07.22</time>
-					<a class="title" href="/school/DSA_9/">DSA: Part 9 - Shortest Path Algortihms &amp; Spanning Trees</a>
-        </section>
-				
-				<section class="post_listed">
-					<time class="post_time">12.07.22</time>
-					<a class="title" href="/school/Waves_2/">Waves: Part 2 - Light waves</a>
-        </section>
-				
-				<section class="post_listed">
-					<time class="post_time">12.06.22</time>
-					<a class="title" href="/school/DSA_8/">DSA: Part 8 - Graphs</a>
-        </section>
-				
-				<section class="post_listed">
-					<time class="post_time">12.04.22</time>
-					<a class="title" href="/school/DSA_7/">DSA: Part 7 - Binary Heaps</a>
-        </section>
-				
-				<section class="post_listed">
-					<time class="post_time">12.04.22</time>
-					<a class="title" href="/school/Waves/">Waves: Part 1 - Mechanical Waves</a>
-        </section>
-				
-				<section class="post_listed">
-					<time class="post_time">11.30.22</time>
-					<a class="title" href="/school/DSA_6/">DSA: Part 6 - Trees</a>
-        </section>
-				
-				<section class="post_listed">
-					<time class="post_time">11.29.22</time>
-					<a class="title" href="/school/DSA_5/">DSA: Part 5 - Hash Tables</a>
-        </section>
-				
-				<section class="post_listed">
-					<time class="post_time">11.28.22</time>
-					<a class="title" href="/school/DSA_4/">DSA: Part 4 - Abstract Data Types</a>
-        </section>
-				
-				<section class="post_listed">
-					<time class="post_time">11.28.22</time>
-					<a class="title" href="/school/Thermodynamics_3/">Thermodynamics: Lecture 3</a>
-        </section>
-				
-				<section class="post_listed">
-					<time class="post_time">11.27.22</time>
-					<a class="title" href="/school/DSA_3/">DSA: Part 3 - Dynamic Arrays</a>
-        </section>
-				
-				
+  <article><div class="title_wrapper">
+			<h1 class="title">Electrical Circuits and Fields: Part 6 - Work, Voltage and Capacitance</h1><p class="single_time">Apr 18, 2023</p></div>
+		<section class="post">
+			<p>In this part we&rsquo;ll work in electrical fields, the connection between electrical fields and voltages as well as how we can use electrical fields with capacitors.</p>
+<h3 id="work">Work</h3>
+<p>We&rsquo;ve briefly went over work before in this series - but let&rsquo;s consider the work required to <em>move</em> charges apart from eachother.</p>
+<p>For example:
+<img src="/images/W.png#center" alt="">
+$$
+W = F \cdot\ d\mathbf{\vec{r}} \newline
+$$</p>
+<p>$$
+\mathbf{\vec{F_{12}}} = k_{e}\ \dfrac{q_1 q_2}{r^2} \mathbf{\vec{r_{12}}}
+$$</p>
+<p>$$
+\begin{align*}
+W &amp; = \int_{R}^{\infty} \mathbf{\vec{F}} \cdot\ d\mathbf{\vec{r}} \newline
+&amp; = -k_e q_1 q_2 \int_{R}^{\infty} \dfrac{d\mathbf{\vec{r}}}{r^2} \newline
+&amp; = k_e q_1 q_2 \cdot\ \dfrac{-1}{r} \Big|_R^{\infty} \newline
+&amp; = \boxed{\dfrac{k_e q_1 q_2}{R}}
+\end{align*}
+$$</p>
+<h3 id="work-in-an-electrical-field">Work in an electrical field</h3>
+<p>Now, if we consider a charge moving inside an electrical field:</p>
+<p><img src="/images/WE.png#center" alt="">
+Let&rsquo;s calculate the work to move from A to B.
+$$
+W = \mathbf{\vec{F}} \cdot\ d\mathbf{\vec{r}}
+$$</p>
+<p>$$
+\mathbf{\vec{F}_E} = q \mathbf{\vec{E}}
+$$</p>
+<p>$$
+\begin{align*}
+W &amp; = - \int_A^B \mathbf{\vec{F}} \cdot\ d\mathbf{\vec{r}} \newline
+&amp; = - \int_A^B q\mathbf{\vec{E}} \cdot\ d\mathbf{\vec{r}} \newline
+&amp; = -qE_0 \int_A^B d\mathbf{\vec{r}} \newline
+&amp; = -qE_0d
+\end{align*}
+$$</p>
+<p>Note, in the case when we move perpendicular to the field, the work is <strong>0</strong>.</p>
+<p>Another way we can write work is:
+$$
+\begin{align*}
+W &amp; = \Delta U \newline
+&amp; = - \int_A^B \mathbf{\vec{F}} \cdot\ d\mathbf{\vec{r}}
+\end{align*}
+$$</p>
+<p>This means that the potential is proportional to the charge:
+$$
+\mathbf{\vec{F}_E} = q\mathbf{\vec{E}}
+$$</p>
+<p>If we normalize the work with the charge we&rsquo;ll see a very interesting result:
+$$
+\begin{align*}
+\dfrac{W}{q} &amp; = - \int_A^B \mathbf{\vec{E}} \cdot\ d\mathbf{\vec{r}}
+\end{align*}
+$$</p>
+<p>If we just interpret this integral, we move a charged particle a distance.</p>
+<p>Let&rsquo;s go back to our definition of voltage from the first part - this is precisely the difference in voltage!
+$$
+[\Delta V] = \dfrac{Joules}{Coulumb}
+$$</p>
+<p>Just as <strong>Kirchoff&rsquo;s voltage law</strong> tells us that, within a closed loop, the sum of the voltages are 0.</p>
+<p>This means that the work done within a closed path:
+$$
+W = - \oint \mathbf{\vec{F}} \cdot\ d\mathbf{\vec{r}} = 0
+$$</p>
+<p>With all these new formulas, here is a little cheat sheet so that we remember:
+<img src="/images/CS.png#center" alt=""></p>
+<h3 id="electrical-fields">Electrical fields</h3>
+<p>If we work backwards from a known voltage - we can find the electrical field!
+$$
+\Delta V = - \int_A^B \mathbf{\vec{E}} \cdot\ d\mathbf{\vec{r}}
+$$</p>
+<p>$$
+dV = -\mathbf{\vec{E}} \cdot d\mathbf{\vec{r}}
+$$</p>
+<p>$$
+\mathbf{\vec{E}} = - \dfrac{dV}{d\mathbf{\vec{r}}}
+$$</p>
+<p>We can define this as the gradient of the voltage:
+$$
+\mathbf{\vec{E}} = - \nabla V
+$$</p>
+<h3 id="equipotential-curves">Equipotential curves</h3>
+<p>As we just discovered - the electrical field is equal to the gradient of the voltage.
+Equipotential curves are way of visualizing the electric potential in a region of space.
+They are just like geographical maps!</p>
+<p><img src="/images/EC.png#center" alt=""></p>
+<p>Now the interesting part is that these curves are always perpendicular to the electrical field lines!</p>
+<h3 id="capacitance">Capacitance</h3>
+<p>Capacitance is the ability for an electrical potential to <em>hold a charge</em></p>
+<p>We define capacitance as:
+$$
+C = \dfrac{q}{|\Delta V|}
+$$</p>
+<h4 id="capacitors">Capacitors</h4>
+<p>Capacitors are two isolated plates with <strong>equal</strong> and <strong>opposite</strong> charges: $\pm q$</p>
+<p>When they are charged, they create a voltage diffrence between the plates, naturally.</p>
+<p>How can we calculate this voltage?</p>
+<p>Assume we have a surface area of $A$, a <em>surface charge density</em> of $\sigma$.</p>
+<p>We can define charge as:
+$$
+q = \sigma A
+$$</p>
+<p>Let&rsquo;s recall our Gaussian pillbox:
+$$
+\begin{align*}
+\Phi &amp; = \oiint \mathbf{\vec{E}} \cdot\ d\mathbf{\vec{A}} \newline
+&amp; = \dfrac{q_{enc}}{\varepsilon_0}
+\end{align*}
+$$</p>
+<p>For a given area, say, $A_1$, we can write:
+$$
+\begin{align*}
+EA_1 &amp; = \dfrac{q}{\varepsilon_0} \newline
+&amp; = \dfrac{\sigma A_1}{\varepsilon_0}
+\end{align*}
+$$</p>
+<p>Which means:
+$$
+\begin{align*}
+E &amp; = \dfrac{\sigma}{\varepsilon_0} \newline
+&amp; = \boxed{\dfrac{q}{\varepsilon_0 A}}
+\end{align*}
+$$</p>
+<p>Let&rsquo;s apply this on capacitors:
+$$
+\Delta V = - \int_+^- \mathbf{\vec{E}} \cdot\ d\mathbf{\vec{r}} = -Ed
+$$</p>
+<p>$$
+Ed = \dfrac{q}{\varepsilon_0 A} d
+$$</p>
+<p>$$
+\begin{align*}
+C &amp; = \dfrac{q}{|\Delta V|} \newline
+&amp; = \dfrac{q}{\dfrac{q}{\varepsilon_0 A} d} \newline
+&amp; = \boxed{\varepsilon_0 \dfrac{A}{d}}
+\end{align*}
+$$</p>
+<p>This means, the capacitance is <strong>solely</strong> dependent of the geometry of the capacitor!</p>
+<h3 id="energy-stored-in-capacitors">Energy stored in capacitors</h3>
+<p>Recall from earlier that we deduced that:
+$$
+\dfrac{W}{q} = - \int_A^B \mathbf{\vec{E}} \cdot\ d\mathbf{\vec{s}} = \Delta V
+$$</p>
+<p>This means:
+$$
+dW = dq \Delta V = dq \dfrac{q}{C}
+$$</p>
+<p>$$
+W = \int dW = \dfrac{1}{C} \int_0^Q q\ dq = \boxed{\dfrac{1}{C}\ \dfrac{Q^2}{2}}
+$$</p>
+<p>How is the (potential) energy stored?</p>
+<p>$$
+U = \dfrac{1}{C}\ \dfrac{Q^2}{2} = \dfrac{1}{2} Q |\Delta V| = \dfrac{1}{2} C |\Delta V|^2 \newline
+$$</p>
+<p>$$
+\dfrac{1}{2} C |\Delta V|^2 = \dfrac{1}{2}\ \dfrac{\varepsilon_0 A}{d} (Ed)^2 = \dfrac{1}{2} \varepsilon_0 E^2 Ad = u\ \cdot\ x\ (volume)
+$$</p>
+<p>Where, $u$, is called the electrical field density:
+$$
+u = \dfrac{\varepsilon_0 E^2}{2}
+$$</p>
 
-<ul class="pagination">
-	
-    <a href="/school/page/3/" class="page-prev page-link" aria-label="Newer Posts Newer Posts">← Newer Posts</a>
-	
-	
-    <a href="/school/page/5/" class="page-next page-link" aria-label="Older Posts">Older Posts →</a>
-	
-	</span>
-</ul>
-
-
-			<footer><p class="footer_msg">memento mori</p></footer>
-
-		</div>
-    </div>
-		
+		</section>
+  </article>
 	</div>
-	
+
+	<footer><p class="footer_msg">memento mori</p></footer>
+
+  </div>
 </body>
 </html>

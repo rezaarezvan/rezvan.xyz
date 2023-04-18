@@ -6,7 +6,20 @@
     <description>Recent content in Schools on rezvan</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 13 Apr 2023 20:04:58 +0200</lastBuildDate><atom:link href="https://rezvan.xyz/school/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 18 Apr 2023 12:05:29 +0200</lastBuildDate><atom:link href="https://rezvan.xyz/school/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Electrical Circuits and Fields: Part 6 - Work, Voltage and Capacitance</title>
+      <link>https://rezvan.xyz/school/EEM076_6/</link>
+      <pubDate>Tue, 18 Apr 2023 12:05:29 +0200</pubDate>
+      
+      <guid>https://rezvan.xyz/school/EEM076_6/</guid>
+      <description>In this part we&amp;rsquo;ll work in electrical fields, the connection between electrical fields and voltages as well as how we can use electrical fields with capacitors.
+Work We&amp;rsquo;ve briefly went over work before in this series - but let&amp;rsquo;s consider the work required to move charges apart from eachother.
+For example: $$ W = F \cdot\ d\mathbf{\vec{r}} \newline $$
+$$ \mathbf{\vec{F_{12}}} = k_{e}\ \dfrac{q_1 q_2}{r^2} \mathbf{\vec{r_{12}}} $$
+$$ \begin{align*} W &amp;amp; = \int_{R}^{\infty} \mathbf{\vec{F}} \cdot\ d\mathbf{\vec{r}} \newline &amp;amp; = -k_e q_1 q_2 \int_{R}^{\infty} \dfrac{d\mathbf{\vec{r}}}{r^2} \newline &amp;amp; = k_e q_1 q_2 \cdot\ \dfrac{-1}{r} \Big|_R^{\infty} \newline &amp;amp; = \boxed{\dfrac{k_e q_1 q_2}{R}} \end{align*} $$</description>
+    </item>
+    
     <item>
       <title>Computer System Engineering: Part 5 - Cache memory</title>
       <link>https://rezvan.xyz/school/EDA333_5/</link>
