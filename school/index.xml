@@ -6,7 +6,19 @@
     <description>Recent content in Schools on rezvan</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 18 Apr 2023 12:05:29 +0200</lastBuildDate><atom:link href="https://rezvan.xyz/school/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 18 Apr 2023 16:54:06 +0200</lastBuildDate><atom:link href="https://rezvan.xyz/school/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Electrical Circuits and Fields: Part 7 - Electrical &amp; Magnetic fields</title>
+      <link>https://rezvan.xyz/school/EEM076_7/</link>
+      <pubDate>Tue, 18 Apr 2023 16:54:06 +0200</pubDate>
+      
+      <guid>https://rezvan.xyz/school/EEM076_7/</guid>
+      <description>In this part we&amp;rsquo;ll finally cover magnetic fields and some very important laws for these. We&amp;rsquo;ll see how electrical and magnetic fields interact with each other as well.
+Materials in electrical fields We have lightly touched on this before but - different type of materials will behave differently in electrical fields.
+We can roughly say we have three categories of types - conductors, semiconductors and insulators.
+A conductor is, as the name suggest, where the electrons are weakly bound to the atoms.</description>
+    </item>
+    
     <item>
       <title>Electrical Circuits and Fields: Part 6 - Work, Voltage and Capacitance</title>
       <link>https://rezvan.xyz/school/EEM076_6/</link>
