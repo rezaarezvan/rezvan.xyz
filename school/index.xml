@@ -6,7 +6,18 @@
     <description>Recent content in Schools on rezvan</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 18 Apr 2023 16:54:06 +0200</lastBuildDate><atom:link href="https://rezvan.xyz/school/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 21 Apr 2023 19:28:25 +0200</lastBuildDate><atom:link href="https://rezvan.xyz/school/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Computer System Engineering: Part 6 - Virtual Memory</title>
+      <link>https://rezvan.xyz/school/EDA333_6/</link>
+      <pubDate>Fri, 21 Apr 2023 19:28:25 +0200</pubDate>
+      
+      <guid>https://rezvan.xyz/school/EDA333_6/</guid>
+      <description>In this part we&amp;rsquo;ll cover so-called virtual memory - which is an essential technique used in computer engineering.
+Virtual memory is a technique used by computers to allow them to use more memory than physically exists in the system. Now, this may seem odd at a first glance, how can we use more memory than physically exists?
+It works by temporarily transferring data from the computer&amp;rsquo;s main memory (RAM) to a designated area on the secondary memory (hard-drive).</description>
+    </item>
+    
     <item>
       <title>Electrical Circuits and Fields: Part 7 - Electrical &amp; Magnetic fields</title>
       <link>https://rezvan.xyz/school/EEM076_7/</link>
