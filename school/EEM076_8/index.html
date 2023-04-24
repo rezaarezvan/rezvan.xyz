@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8"><meta property="og:site_name" content="rezvan"><title>Posts | rezvan</title>
-  <meta property="og:title" content="Posts | rezvan"><meta property="og:description" content="">
+	<meta charset="utf-8"><meta property="og:site_name" content="rezvan"><title>Electrical Circuits and Fields: Part 8 - Magnetic fields | rezvan</title>
+  <meta property="og:title" content="Electrical Circuits and Fields: Part 8 - Magnetic fields | rezvan"><meta property="og:description" content="">
   <meta property="og:type" content="blog">
-  <meta property="og:link" content="https://rezvan.xyz/posts/"><link rel="shortcut icon" type="image/png" href=https://rezvan.xyz//images/icon.png />
+  <meta property="og:link" content="https://rezvan.xyz/school/EEM076_8/"><link rel="shortcut icon" type="image/png" href=https://rezvan.xyz//images/icon.png />
   <meta property="og:image" content="https://rezvan.xyz//images/icon.png" /><meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="alternate" type="application/rss+xml" href="https://rezvan.xyz/posts/index.xml" title="rezvan" />
 	<link rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz//css/main.css" />
 
     <head>
@@ -223,10 +222,26 @@ body.dark-mode .title {
 </head>
 
 <body>
-    <div class="wrapper">
+  <div class="wrapper">
+	<div class="content">
 		<div class="header_main">
 
-    <a href="https://rezvan.xyz/"><p class="header_title">rezvan</p>
+    <a href="https://rezvan.xyz/"><p class="header_title">rezvan</p><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.3/dist/katex.min.css" integrity="sha384-Juol1FqnotbkyZUT5Z7gUPjQ9gzlwCENvUZTpQBAPxtusdwFLRy382PSDx5UUJ4/" crossorigin="anonymous">
+
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.3/dist/katex.min.js" integrity="sha384-97gW6UIJxnlKemYavrqDHSX3SiygeOwIZhwyOKRfSaf0JWKRVj9hLASHgFTzT+0O" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.3/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+            delimiters: [
+                {left: "$$", right: "$$", display: true},
+                {left: "$", right: "$", display: false}
+            ]
+        });
+    });
+</script>
+
     </a>
 
     <br>
@@ -241,78 +256,157 @@ body.dark-mode .title {
         
     </nav></div>
 
-                
-                
-                
-				<section class="post_listed">
-					<time class="post_time">02.05.23</time>
-					<a class="title" href="/school/Digital_design_6/">Digital Design: Part 6 - Reconfigurable Hardware</a>
-        </section>
-				
-				<section class="post_listed">
-					<time class="post_time">02.04.23</time>
-					<a class="title" href="/school/Concurrent_programming_6/">Concurrent Programming: Part 6 &amp; 7 - Message-Passing Concurrency</a>
-        </section>
-				
-				<section class="post_listed">
-					<time class="post_time">02.03.23</time>
-					<a class="title" href="/school/Concurrent_programming_5/">Concurrent Programming: Part 5 - Monitors</a>
-        </section>
-				
-				<section class="post_listed">
-					<time class="post_time">02.03.23</time>
-					<a class="title" href="/school/Digital_design_5/">Digital Design: Part 5 - Arithmetic Units</a>
-        </section>
-				
-				<section class="post_listed">
-					<time class="post_time">02.01.23</time>
-					<a class="title" href="/school/Concurrent_programming_4/">Concurrent Programming: Part 4 - Synchronization problems with semaphores</a>
-        </section>
-				
-				<section class="post_listed">
-					<time class="post_time">01.31.23</time>
-					<a class="title" href="/school/Digital_design_4/">Digital  Design: Part 4 - Finite State Machines</a>
-        </section>
-				
-				<section class="post_listed">
-					<time class="post_time">01.31.23</time>
-					<a class="title" href="/school/Concurrent_programming_3/">Concurrent Programming: Part 3 - Models of concurrency &amp; synchronization algorithms</a>
-        </section>
-				
-				<section class="post_listed">
-					<time class="post_time">01.24.23</time>
-					<a class="title" href="/school/Digital_design_3/">Digital Design: Part 3 - Sequential Circuits</a>
-        </section>
-				
-				<section class="post_listed">
-					<time class="post_time">01.19.23</time>
-					<a class="title" href="/school/Concurrent_programming_2/">Concurrent Programming: Part 2 - Races, Locks, and Semaphores</a>
-        </section>
-				
-				<section class="post_listed">
-					<time class="post_time">01.18.23</time>
-					<a class="title" href="/school/Digital_design_2/">Digital Design: Part 2- Binary Adders</a>
-        </section>
-				
-				
+  <article><div class="title_wrapper">
+			<h1 class="title">Electrical Circuits and Fields: Part 8 - Magnetic fields</h1><p class="single_time">Apr 24, 2023</p></div>
+		<section class="post">
+			<p>In this part we&rsquo;ll cover more in-depth about magnetic fields and their interactions.</p>
+<p>Recall Biot-Savart&rsquo;s Law:
+$$
+\mathbf{\vec{B}} = \int d\mathbf{\vec{B}} = \dfrac{\mu_0 I}{4\pi}\ \int \dfrac{d\mathbf{\vec{s}} \times \mathbf{\vec{r}}}{r^2}
+$$</p>
+<p>This means that, the magnetic field strength, $B$, at any given is:
+$$
+B = \dfrac{\mu_0 I}{2\pi r}
+$$</p>
+<p>The direction, $\mathbf{\vec{B}}$, is given by the (lazy) right-hand rule.</p>
+<h3 id="magnetic-field-from-a-solenoid">Magnetic field from a solenoid</h3>
+<p>First, let&rsquo;s draw how the field lines would look like:</p>
+<p><img src="/images/SN.png#center" alt=""></p>
+<p>If we zoom in, and look at the magnetic field on a square:
+<img src="/images/ISN.png#center" alt=""></p>
+<p>If we write this as an integral:
+$$
+\oint \mathbf{\vec{B}} \cdot\ d\mathbf{\vec{s}} = \int_1 \mathbf{\vec{B}} \cdot\ d\mathbf{\vec{s}} + \int_2 \mathbf{\vec{B}} \cdot\ d\mathbf{\vec{s}} + \int_3 \mathbf{\vec{B}} \cdot\ d\mathbf{\vec{s}} + \int_4 \mathbf{\vec{B}} \cdot\ d\mathbf{\vec{s}}
+$$</p>
+<p>But we can see that only, $3$, will contribute to our magnetic field, since it&rsquo;s parallel with it.</p>
+<p>Which means:
+$$
+\oint \mathbf{\vec{B}} \cdot\ d\mathbf{\vec{s}} = Bl = \mu_0 I_{enc}
+$$</p>
+<p>One thing we&rsquo;ll need to remember is that, we can make our solenoid more densely coiled. This will, naturally, increase our magnetic field strength.</p>
+<p>$$
+I_{enc} = NI
+$$</p>
+<p>$$
+\oint \mathbf{\vec{B}} \cdot\ d\mathbf{\vec{s}} = Bl = \mu_0 NI
+$$</p>
+<p>Which means:
+$$
+B = \dfrac{\mu_0 NI}{l} = \mu_0 nl
+$$</p>
+<p>Where, $n$, are the number of turns <em>per length unit</em>.</p>
+<h3 id="lorentz-force">Lorentz Force</h3>
+<p>If we have a charged particle, in presence of both an electrical field, $\mathbf{\vec{E}}$, and a magnetic field, $\mathbf{\vec{B}}$.</p>
+<p>The total force on the charged particle, is naturally, the sum of the two forces:
+$$
+\mathbf{\vec{F}_E} = q\mathbf{\vec{E}}
+$$</p>
+<p>$$
+\mathbf{\vec{F}_B} = q\mathbf{\vec{v}} \times \mathbf{\vec{B}}
+$$</p>
+<p>$$
+\boxed{\mathbf{\vec{F}} = q(\mathbf{\vec{E}} + \mathbf{\vec{v}} \times \mathbf{\vec{B}})}
+$$</p>
+<h3 id="magnetic-materials">Magnetic materials</h3>
+<p>As we have seen earlier, introduction of materials in electrical fields - <em>always</em> reduced the electrical field strength, $E$.</p>
+<p>However, we&rsquo;ll see that, introduction of materials in a magnetic may decrease <em>or</em> increase the magnetic field strength, $B$.</p>
+<p>To understand this - let&rsquo;s begin with looking at this:</p>
+<p><img src="/images/MM.png#center" alt=""></p>
+<p>Here we have a cylinder with uniformly distributed magnetic dipoles.</p>
+<p>The net dipole moment is:
+$$
+\mathbf{\vec{M}} = \dfrac{1}{LA}\sum \mathbf{\vec{u}_i}
+$$</p>
+<p>Therefore, the magnetic field strength is just:
+$$
+\mathbf{\vec{B}_M} = \mu_0 \mathbf{\vec{M}}
+$$</p>
+<p>However, these dipoles will probably not be uniformly distributed, rather quite chaotic and random. Thus, there is no net dipole moment</p>
+<p>If we however, exert an external magnetic field, $\mathbf{\vec{B}_0}$, these dipoles will begin to align and <em>enhance</em> the field.a</p>
+<p>$$
+\mathbf{\vec{M}} = \chi_m \dfrac{\mathbf{\vec{B}_0}}{\mu_0}
+$$</p>
+<p>$$
+\mathbf{\vec{B}} = (1 + \chi_m) \mathbf{\vec{B}_0} = \kappa_m \mathbf{\vec{B}_0}
+$$</p>
+<p>Where, $\kappa_m$, is the <em>relative permeability</em> of the material.</p>
+<p>As we discussed earlier, materials that <strong>greatly</strong> <em>enhance</em> the magnetic field, is called <strong>ferromagnetic materials</strong>.</p>
+<p>The very cool and interesting thing is that, ferromagnetic materials induce the dipoles so strongly that, the dipoles themselves begin to strongly influence neighboring dipoles!</p>
+<p>I find that very fascinating.</p>
+<h3 id="faradays-law">Faraday&rsquo;s Law</h3>
+<p>From what we have assumed and used - our fields have been produced by stationary and moving <em>charges</em>.</p>
+<p>Now, let&rsquo;s do this opposite: varying a magnetic field with time to produce an electrical field.</p>
+<p>To understand this we&rsquo;ll first have to define <em>magnetic</em> flux.</p>
+<h4 id="magnetic-flux">Magnetic flux</h4>
+<p>Just as electrical flux, we can define how much magnetic field passes through as surface.</p>
+<p><img src="/images/MF.png#center" alt=""></p>
+<p>We can define this as:
+$$
+\Phi_B = \int \int \mathbf{\vec{B}} \cdot\ d\mathbf{\vec{A}} = BA\ cos(\theta)
+$$</p>
+<p>The unit for magnetic flux is weber:
+$$
+1 Wb = 1T \cdot\ m^2
+$$</p>
+<p>Now, back to Faraday&rsquo;s law. The <strong>induced</strong> <em>electromagnetic field</em>, $\varepsilon$, in a coil is <strong>proportional</strong> to the negative rate of change of the magnetic flux.</p>
+<p>Or, in symbols:
+$$
+\varepsilon = -N \dfrac{d \Phi_B}{dt}
+$$</p>
+<p>Where, $N$, is the number of loops in the coil.</p>
+<p>This also means that:
+$$
+\varepsilon \propto - \dfrac{d}{dt} (BA\ cos(\theta))
+$$</p>
+<p>We can also write this as:
+$$
+-(\dfrac{dB}{dt}) A cos(\theta) - (\dfrac{dA}{dt}) B cos(\theta) + (\dfrac{d\theta}{dt}) BA\ sin(\theta)
+$$</p>
+<p>Here, we can clearly see that the induced electromagnetic field, depends on, the magnetic field, the area and the angle!</p>
+<h3 id="lenzs-law">Lenz&rsquo;s law</h3>
+<p>The direction of the induced current is determined by Lenz&rsquo;s law, which says the following:</p>
+<blockquote>
+<p>The induced current produces a magnetic field, which oppose the change in magnetic flux that induces such currents.</p>
+</blockquote>
+<h3 id="generators-and-motors">Generators and motors</h3>
+<p>As the magnetic flux changes with time, an induced current begins to flow!</p>
+<p>This, naturally, suggest that a potential different is at play:
+$$
+\varepsilon = \Delta V = \oint \mathbf{\vec{E}} \cdot\ d\mathbf{\vec{s}}
+$$</p>
+<p>$$
+\oint \mathbf{\vec{E}} = - \dfrac{d \Phi_B}{dt}
+$$</p>
+<p>Now, by using Faraday&rsquo;s law - we can design <em>generators</em>, to convert mechanical energy into electrical energy and vice versa!</p>
+<p>$$
+\Phi_B = \int \int \mathbf{\vec{B}} \cdot d\mathbf{\vec{A}} = BA\ cos(\theta) = BA\ cos(\omega t)
+$$</p>
+<p><img src="/images/G.png#center" alt=""></p>
+<p>If we take the derivate:
+$$
+\dfrac{d \Phi_B}{dt} = -BA \omega sin(\omega t)
+$$</p>
+<p>Therefore:
+$$
+\varepsilon = -N \dfrac{d \Phi_B}{dt} = NBA \omega sin(\omega t)
+$$</p>
+<p>And also:
+$$
+I = \dfrac{ | \varepsilon |}{R} = \dfrac{NBA \omega}{R} sin(\omega t)
+$$</p>
+<p>Finally, we have defined, <em>alternating current</em>. We&rsquo;ll start to dive into this world into the future parts.</p>
+<p>One last interesting formula that we&rsquo;re going to look at:
+$$
+P = I |\varepsilon| = \dfrac{(NBA \omega)^2}{R} sin^2 (\omega t)
+$$</p>
+<p>We can see that, it&rsquo;s just the absolute value of the alternating current!</p>
 
-<ul class="pagination">
-	
-    <a href="/posts/page/2/" class="page-prev page-link" aria-label="Newer Posts Newer Posts">← Newer Posts</a>
-	
-	
-    <a href="/posts/page/4/" class="page-next page-link" aria-label="Older Posts">Older Posts →</a>
-	
-	</span>
-</ul>
-
-
-			<footer><p class="footer_msg">memento mori</p></footer>
-
-		</div>
-    </div>
-		
+		</section>
+  </article>
 	</div>
-	
+
+	<footer><p class="footer_msg">memento mori</p></footer>
+
+  </div>
 </body>
 </html>

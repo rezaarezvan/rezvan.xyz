@@ -6,7 +6,20 @@
     <description>Recent content in Schools on rezvan</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 21 Apr 2023 19:28:25 +0200</lastBuildDate><atom:link href="https://rezvan.xyz/school/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 24 Apr 2023 17:33:32 +0200</lastBuildDate><atom:link href="https://rezvan.xyz/school/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Electrical Circuits and Fields: Part 8 - Magnetic fields</title>
+      <link>https://rezvan.xyz/school/EEM076_8/</link>
+      <pubDate>Mon, 24 Apr 2023 17:33:32 +0200</pubDate>
+      
+      <guid>https://rezvan.xyz/school/EEM076_8/</guid>
+      <description>In this part we&amp;rsquo;ll cover more in-depth about magnetic fields and their interactions.
+Recall Biot-Savart&amp;rsquo;s Law: $$ \mathbf{\vec{B}} = \int d\mathbf{\vec{B}} = \dfrac{\mu_0 I}{4\pi}\ \int \dfrac{d\mathbf{\vec{s}} \times \mathbf{\vec{r}}}{r^2} $$
+This means that, the magnetic field strength, $B$, at any given is: $$ B = \dfrac{\mu_0 I}{2\pi r} $$
+The direction, $\mathbf{\vec{B}}$, is given by the (lazy) right-hand rule.
+Magnetic field from a solenoid First, let&amp;rsquo;s draw how the field lines would look like:</description>
+    </item>
+    
     <item>
       <title>Computer System Engineering: Part 6 - Virtual Memory</title>
       <link>https://rezvan.xyz/school/EDA333_6/</link>
