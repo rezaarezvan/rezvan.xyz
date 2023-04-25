@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8"><meta property="og:site_name" content="rezvan"><title>Categories | rezvan</title>
-  <meta property="og:title" content="Categories | rezvan"><meta property="og:description" content="">
+	<meta charset="utf-8"><meta property="og:site_name" content="rezvan"><title>Computer System Engineering: Part 7 - Floating-point arithmetic | rezvan</title>
+  <meta property="og:title" content="Computer System Engineering: Part 7 - Floating-point arithmetic | rezvan"><meta property="og:description" content="">
   <meta property="og:type" content="blog">
-  <meta property="og:link" content="https://rezvan.xyz/categories/"><link rel="shortcut icon" type="image/png" href=https://rezvan.xyz//images/icon.png />
+  <meta property="og:link" content="https://rezvan.xyz/school/EDA333_7/"><link rel="shortcut icon" type="image/png" href=https://rezvan.xyz//images/icon.png />
   <meta property="og:image" content="https://rezvan.xyz//images/icon.png" /><meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="alternate" type="application/rss+xml" href="https://rezvan.xyz/categories/index.xml" title="rezvan" />
 	<link rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz//css/main.css" />
 
     <head>
@@ -223,10 +222,26 @@ body.dark-mode .title {
 </head>
 
 <body>
-    <div class="wrapper">
+  <div class="wrapper">
+	<div class="content">
 		<div class="header_main">
 
-    <a href="https://rezvan.xyz/"><p class="header_title">rezvan</p>
+    <a href="https://rezvan.xyz/"><p class="header_title">rezvan</p><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.3/dist/katex.min.css" integrity="sha384-Juol1FqnotbkyZUT5Z7gUPjQ9gzlwCENvUZTpQBAPxtusdwFLRy382PSDx5UUJ4/" crossorigin="anonymous">
+
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.3/dist/katex.min.js" integrity="sha384-97gW6UIJxnlKemYavrqDHSX3SiygeOwIZhwyOKRfSaf0JWKRVj9hLASHgFTzT+0O" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.3/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+            delimiters: [
+                {left: "$$", right: "$$", display: true},
+                {left: "$", right: "$", display: false}
+            ]
+        });
+    });
+</script>
+
     </a>
 
     <br>
@@ -241,78 +256,115 @@ body.dark-mode .title {
         
     </nav></div>
 
-                
-                
-                
-				<section class="post_listed">
-					<time class="post_time">03.24.23</time>
-					<a class="title" href="/school/EEM076_3/">Electrical Circuits and Fields: Part 3 - Node-voltage analysis, superposition, equivalent circuits</a>
-        </section>
-				
-				<section class="post_listed">
-					<time class="post_time">03.22.23</time>
-					<a class="title" href="/school/EDA333_2/">Computer System Engineering: Part 2 - MIPS</a>
-        </section>
-				
-				<section class="post_listed">
-					<time class="post_time">03.21.23</time>
-					<a class="title" href="/school/EDA333/">Computer System Engineering: Part 1 - Introduction</a>
-        </section>
-				
-				<section class="post_listed">
-					<time class="post_time">03.21.23</time>
-					<a class="title" href="/school/EEM076_2/">Electrical Circuits and Fields: Part 2 - Power &amp; Energy</a>
-        </section>
-				
-				<section class="post_listed">
-					<time class="post_time">03.20.23</time>
-					<a class="title" href="/school/EEM076/">Electrical Circuits and Fields: Part 1 - Introduction</a>
-        </section>
-				
-				<section class="post_listed">
-					<time class="post_time">03.05.23</time>
-					<a class="title" href="/school/Digital_design_9/">Digital Design: Part 9 - Testing</a>
-        </section>
-				
-				<section class="post_listed">
-					<time class="post_time">02.19.23</time>
-					<a class="title" href="/school/Concurrent_programming_10/">Concurrent Programming: Part 10 - Parallel linked lists</a>
-        </section>
-				
-				<section class="post_listed">
-					<time class="post_time">02.19.23</time>
-					<a class="title" href="/school/Digital_design_8/">Digital Design: Part 8 - Interfaces, Interconnects and Memories</a>
-        </section>
-				
-				<section class="post_listed">
-					<time class="post_time">02.13.23</time>
-					<a class="title" href="/school/Concurrent_programming_9/">Concurrent Programming: Part 9 - Parallelizing computations</a>
-        </section>
-				
-				<section class="post_listed">
-					<time class="post_time">02.08.23</time>
-					<a class="title" href="/school/Digital_design_7/">Digital Design: Part 7 - Timing, delay &amp; power</a>
-        </section>
-				
-				
-
-<ul class="pagination">
-	
-    <a href="/categories/" class="page-prev page-link" aria-label="Newer Posts Newer Posts">← Newer Posts</a>
-	
-	
-    <a href="/categories/page/3/" class="page-next page-link" aria-label="Older Posts">Older Posts →</a>
-	
-	</span>
+  <article><div class="title_wrapper">
+			<h1 class="title">Computer System Engineering: Part 7 - Floating-point arithmetic</h1><p class="single_time">Apr 25, 2023</p></div>
+		<section class="post">
+			<p>In this part we&rsquo;ll cover some basics for floating-point arithmetic.</p>
+<h3 id="integer-addition">Integer addition</h3>
+<p>Just some basics:</p>
+<ul>
+<li>
+<p>When performing addition</p>
+<ul>
+<li>
+<p><strong>Overflow</strong> if:</p>
+<ul>
+<li>
+<p>Adding a positive and negative operand - no overflow.</p>
+</li>
+<li>
+<p>Adding two positive operands - if the carry-out bit is 1.</p>
+</li>
+<li>
+<p>Adding two negative operands - if the carry-out bit is 0.</p>
+</li>
 </ul>
+</li>
+</ul>
+</li>
+<li>
+<p>When performing subtraction:</p>
+<ul>
+<li>
+<p><strong>Overflow</strong> if:</p>
+<ul>
+<li>
+<p>Subtracting two positive or negative operands - no overflow.</p>
+</li>
+<li>
+<p>Subtracting a positive from a negative operand - overflow if the <strong>results sign bit is 0</strong>.</p>
+</li>
+<li>
+<p>Subtracting a negative from a positive operand - overflow if the <strong>results sign bit is 1</strong>.</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="multiplication">Multiplication</h3>
+<p>We will not cover how to perform binary multiplication - but it&rsquo;s the same principle as decimal multiplication.</p>
+<p>However, let&rsquo;s cover the multiplication instructions that we can use in MIPS.</p>
+<p>In MIPS, we have two 32-bit registers for the product that is generated by multiplication.</p>
+<p><code>$HI</code>: 32 most significant bits.</p>
+<p><code>$LO</code>: 32 least significant bits.</p>
+<p>With the instructions:</p>
+<pre tabindex="0"><code># 64-bits product in HI/LO
+mult rs, rt
+multu rs, rt
 
+# &#34;Move from HI/LO&#34; to rd
+mfhi rd
+mflo rd
 
-			<footer><p class="footer_msg">memento mori</p></footer>
+# Least significant 32-bits of product -&gt; rd
+mul rd, rs, rt
+</code></pre><h3 id="division">Division</h3>
+<p>We will not cover division as well - but there are methods, the &ldquo;usual&rdquo; way we are thought - but also restoring division - which we cover <a href="https://www.rezvan.xyz/school/Digital_design_5/">here</a>.</p>
+<p>Now, <code>$HI</code> and <code>$LO</code>, also store the result after division.</p>
+<p><code>$HI</code>: 32-bit remainder
+<code>$LO</code>: 32-bit quotient</p>
+<pre tabindex="0"><code>div rs, rt
+divu rs, rt
 
-		</div>
-    </div>
-		
+mfhi rd
+mflo rd
+</code></pre><p>One thing that we&rsquo;ll need to remember is that - there is no divide-by-0 control. This must be implemented either at hardware level, or as an exception routine.</p>
+<h3 id="floating-point-representation">Floating-point representation</h3>
+<p>The standard for floating-point representation is the IEEE Std 754-1985.
+This is also important for portability of code.</p>
+<p>There are two representations, one for single precision (32-bit), and one for double precision (64-bit):
+$$
+x = (-1)^S \cdot\ (1 + Fraction) \cdot\ 2^{Exponent - Bias}
+$$</p>
+<p>Our sign bit, S, is always 1 bit. For the fraction part, it is 23 and 52-bits respectively for single or double precision.
+The exponent is 8 and 11-bits respectively.</p>
+<p>We always have a normalized fraction, meaning we always have the format <code>1.frac</code>.</p>
+<p>We&rsquo;ve covered this in good detail in the same post I linked earlier.</p>
+<h3 id="floating-point-in-mips">Floating-point in MIPS</h3>
+<p>Floating-point operations are handled by the Co-processor 1.</p>
+<p>We also have separate floating-point registers, all of which are of 32-bit size.
+For double precision, we use them pairwise - meaning <code>$f0/$f1</code> will be one 64-bit floating-point number.</p>
+<p>For floating-point load and store we use:</p>
+<pre tabindex="0"><code># Eqv to l.s, l.d, s.s, s.d
+lwc1, ldc1, swc1, sdc1
+</code></pre><p>For arithmetic:</p>
+<pre tabindex="0"><code>add.s, sub.s, mul.s, div.s
+</code></pre><p>The same goes for double precision:</p>
+<pre tabindex="0"><code>add.d,.dub.d, mul.d, div.d
+</code></pre><p>Compares and branches:</p>
+<pre tabindex="0"><code># condition can be eq, lt etc.
+c.condition.s, c.condition.d
+
+bc1t, bc1f
+</code></pre><p>It sets a special floating-point condition bit, therefore, the branches take no operands.</p>
+
+		</section>
+  </article>
 	</div>
-	
+
+	<footer><p class="footer_msg">memento mori</p></footer>
+
+  </div>
 </body>
 </html>

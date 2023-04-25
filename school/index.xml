@@ -6,7 +6,26 @@
     <description>Recent content in Schools on rezvan</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 24 Apr 2023 17:33:32 +0200</lastBuildDate><atom:link href="https://rezvan.xyz/school/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 25 Apr 2023 15:18:21 +0200</lastBuildDate><atom:link href="https://rezvan.xyz/school/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Computer System Engineering: Part 7 - Floating-point arithmetic</title>
+      <link>https://rezvan.xyz/school/EDA333_7/</link>
+      <pubDate>Tue, 25 Apr 2023 15:18:21 +0200</pubDate>
+      
+      <guid>https://rezvan.xyz/school/EDA333_7/</guid>
+      <description>In this part we&amp;rsquo;ll cover some basics for floating-point arithmetic.
+Integer addition Just some basics:
+When performing addition
+Overflow if:
+Adding a positive and negative operand - no overflow.
+Adding two positive operands - if the carry-out bit is 1.
+Adding two negative operands - if the carry-out bit is 0.
+When performing subtraction:
+Overflow if:
+Subtracting two positive or negative operands - no overflow.
+Subtracting a positive from a negative operand - overflow if the results sign bit is 0.</description>
+    </item>
+    
     <item>
       <title>Electrical Circuits and Fields: Part 8 - Magnetic fields</title>
       <link>https://rezvan.xyz/school/EEM076_8/</link>
