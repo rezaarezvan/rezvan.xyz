@@ -6,7 +6,20 @@
     <description>Recent content in Schools on rezvan</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 25 Apr 2023 15:18:21 +0200</lastBuildDate><atom:link href="https://rezvan.xyz/school/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 25 Apr 2023 19:40:29 +0200</lastBuildDate><atom:link href="https://rezvan.xyz/school/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Electrical Circuits and Fields: Part 9 - Electromagnetic Waves</title>
+      <link>https://rezvan.xyz/school/EEM076_9/</link>
+      <pubDate>Tue, 25 Apr 2023 19:40:29 +0200</pubDate>
+      
+      <guid>https://rezvan.xyz/school/EEM076_9/</guid>
+      <description>In this part we&amp;rsquo;ll cover electromagnetic waves - we&amp;rsquo;ll see why electrical and magnetic fields always appear together.
+Displacement current If we recall Faraday&amp;rsquo;s law: $$ \oint \mathbf{\vec{E}} \cdot d\mathbf{\vec{s}} = -\dfrac{d \Phi_B}{dt} $$
+This says that a change in the magnetic field will produce an electrical field. But how about the converse?
+Does a change in an electrical field produce a magnetic field?
+If we consider this example with a capacitor being charged:</description>
+    </item>
+    
     <item>
       <title>Computer System Engineering: Part 7 - Floating-point arithmetic</title>
       <link>https://rezvan.xyz/school/EDA333_7/</link>
