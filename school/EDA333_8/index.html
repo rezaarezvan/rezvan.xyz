@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8"><meta property="og:site_name" content="rezvan"><title>Schools | rezvan</title>
-  <meta property="og:title" content="Schools | rezvan"><meta property="og:description" content="">
+	<meta charset="utf-8"><meta property="og:site_name" content="rezvan"><title>Computer System Engineering: Part 8 - Parallel Processors | rezvan</title>
+  <meta property="og:title" content="Computer System Engineering: Part 8 - Parallel Processors | rezvan"><meta property="og:description" content="">
   <meta property="og:type" content="blog">
-  <meta property="og:link" content="https://rezvan.xyz/school/"><link rel="shortcut icon" type="image/png" href=https://rezvan.xyz//images/icon.png />
+  <meta property="og:link" content="https://rezvan.xyz/school/EDA333_8/"><link rel="shortcut icon" type="image/png" href=https://rezvan.xyz//images/icon.png />
   <meta property="og:image" content="https://rezvan.xyz//images/icon.png" /><meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="alternate" type="application/rss+xml" href="https://rezvan.xyz/school/index.xml" title="rezvan" />
 	<link rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz//css/main.css" />
 
     <head>
@@ -223,10 +222,26 @@ body.dark-mode .title {
 </head>
 
 <body>
-    <div class="wrapper">
+  <div class="wrapper">
+	<div class="content">
 		<div class="header_main">
 
-    <a href="https://rezvan.xyz/"><p class="header_title">rezvan</p>
+    <a href="https://rezvan.xyz/"><p class="header_title">rezvan</p><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.3/dist/katex.min.css" integrity="sha384-Juol1FqnotbkyZUT5Z7gUPjQ9gzlwCENvUZTpQBAPxtusdwFLRy382PSDx5UUJ4/" crossorigin="anonymous">
+
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.3/dist/katex.min.js" integrity="sha384-97gW6UIJxnlKemYavrqDHSX3SiygeOwIZhwyOKRfSaf0JWKRVj9hLASHgFTzT+0O" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.3/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+            delimiters: [
+                {left: "$$", right: "$$", display: true},
+                {left: "$", right: "$", display: false}
+            ]
+        });
+    });
+</script>
+
     </a>
 
     <br>
@@ -241,76 +256,84 @@ body.dark-mode .title {
         
     </nav></div>
 
-                
-                
-                
-				<section class="post_listed">
-					<time class="post_time">04.28.23</time>
-					<a class="title" href="/school/EDA333_8/">Computer System Engineering: Part 8 - Parallel Processors</a>
-        </section>
-				
-				<section class="post_listed">
-					<time class="post_time">04.25.23</time>
-					<a class="title" href="/school/EEM076_9/">Electrical Circuits and Fields: Part 9 - Electromagnetic Waves</a>
-        </section>
-				
-				<section class="post_listed">
-					<time class="post_time">04.25.23</time>
-					<a class="title" href="/school/EDA333_7/">Computer System Engineering: Part 7 - Floating-point arithmetic</a>
-        </section>
-				
-				<section class="post_listed">
-					<time class="post_time">04.24.23</time>
-					<a class="title" href="/school/EEM076_8/">Electrical Circuits and Fields: Part 8 - Magnetic fields</a>
-        </section>
-				
-				<section class="post_listed">
-					<time class="post_time">04.21.23</time>
-					<a class="title" href="/school/EDA333_6/">Computer System Engineering: Part 6 - Virtual Memory</a>
-        </section>
-				
-				<section class="post_listed">
-					<time class="post_time">04.18.23</time>
-					<a class="title" href="/school/EEM076_7/">Electrical Circuits and Fields: Part 7 - Electrical &amp; Magnetic fields</a>
-        </section>
-				
-				<section class="post_listed">
-					<time class="post_time">04.18.23</time>
-					<a class="title" href="/school/EEM076_6/">Electrical Circuits and Fields: Part 6 - Work, Voltage and Capacitance</a>
-        </section>
-				
-				<section class="post_listed">
-					<time class="post_time">04.13.23</time>
-					<a class="title" href="/school/EDA333_5/">Computer System Engineering: Part 5 - Cache memory</a>
-        </section>
-				
-				<section class="post_listed">
-					<time class="post_time">03.28.23</time>
-					<a class="title" href="/school/EDA333_4/">Computer System Engineering: Part 4 - Pipeline hardware</a>
-        </section>
-				
-				<section class="post_listed">
-					<time class="post_time">03.27.23</time>
-					<a class="title" href="/school/EEM076_5/">Electrical Circuits and Fields: Part 5 - Electrical fields</a>
-        </section>
-				
-				
-
-<ul class="pagination">
-	
-	
-    <a href="/school/page/2/" class="page-next page-link" aria-label="Older Posts">Older Posts →</a>
-	
-	</span>
+  <article><div class="title_wrapper">
+			<h1 class="title">Computer System Engineering: Part 8 - Parallel Processors</h1><p class="single_time">Apr 28, 2023</p></div>
+		<section class="post">
+			<p>In this part we&rsquo;ll talk about parallel processors, multithreading and other different techniques that we can use to speed up our programs and computers.</p>
+<h3 id="multithreading">Multithreading</h3>
+<p>We&rsquo;ve seen and learned about threads when we covered concurrent programming.</p>
+<p>The idea here is same, if we can utilize threads to parallelize our programs, we can achieve a higher efficiency rate on our clock cycles.</p>
+<p>But when and how do we decide choose what thread? There are three different approaches:</p>
+<ul>
+<li>
+<p>Interleaved</p>
+<ul>
+<li>Switch thread each clock cycle.</li>
 </ul>
+</li>
+<li>
+<p>Blocked</p>
+<ul>
+<li>Switch thread when experience long latency (usually a cache miss).</li>
+</ul>
+</li>
+<li>
+<p>Simultaneous:</p>
+<ul>
+<li>Threads share the architecture resources.</li>
+</ul>
+</li>
+</ul>
+<h4 id="interleaved-multithreading">Interleaved multithreading</h4>
+<p>To achieve interleaved multithreading - we need to add a new stage into our pipeline. The <strong>T</strong>hread <strong>S</strong>elect stage.</p>
+<p>This thread selection usually uses a round-robin to select thread. However, we also need to have a setup of all individual registers, but also program counters, for each thread.</p>
+<p>Note, we have an inefficient use of CPU resources due to frequent context switching.</p>
+<p><img src="/images/TI.png#center" alt=""></p>
+<h4 id="blocked-multithreading">Blocked multithreading</h4>
+<p>To achieve blocked multithreading - our thread selection stages now relies on some kind of signal where we &ldquo;have waited for too long&rdquo;.</p>
+<p>Usually this is due to a cache miss. One important fact is that, when a cache miss arises, we need to flush the entire pipeline.</p>
+<p>Which means we&rsquo;ll lose some clock cycles in the end. Cache misses are in the 100-500s number of clock cycles, so losing a few clock cycles for that price is still really good.</p>
+<p><img src="/images/BT.png#center" alt=""></p>
+<h3 id="simultaneous-multithreading">Simultaneous multithreading</h3>
+<p>Is an interesting one. Instead of fetching just one instruction, we fetch multiple to our threads. To achieve this, we need to basically dupe all of our hardware.</p>
+<p>But the efficiency on the CPU resources becomes immense.</p>
+<p><img src="/images/SM.png#center" alt=""></p>
+<h3 id="amdahls-law">Amdahl&rsquo;s Law</h3>
+<p>We&rsquo;ve discussed this law earlier, so I won&rsquo;t go into much detail - Amdahl&rsquo;s law describes to us that, the sequential part of a program is the bottleneck for potential speed up from parallelism.</p>
+<p>Formula for speed up:
+$$
+Speed up = \dfrac{1}{x + \dfrac{(1 - x)}{N}}
+$$</p>
+<p>Where, $x$, is the portion of the program which is sequential. $N$, is the number of threads.</p>
+<h3 id="parallel-processorscomputers">Parallel processors/computers</h3>
+<p>The main goal with parallel processors and computers is that we want to connect multiple processors/computers to achieve better performance, natural.</p>
+<p><strong>C</strong>hip-<strong>M</strong>ulti-<strong>P</strong>rocessor, or CMP. They are parallel processors on a <em>singular</em> chip. They have so called on-chip communication.</p>
+<p>But in today&rsquo;s computers we mostly see multicore processors. These are chips that consists of multiple processors (cores).</p>
+<p>However, we can&rsquo;t just put as many cores and increase the frequency of these chips to whatever. The power wall, memory wall and, ILP (Instruction Level Programming) wall are all a huge road block.</p>
+<h3 id="flynns-classification-of-computers">Flynn&rsquo;s classification of computers</h3>
+<p>You&rsquo;ve probably heard of SIMD, we&rsquo;ll cover all four types that exist!</p>
+<p>Let&rsquo;s begin with the most simple one, <strong>SISD</strong>. Single Instruction, Single Data.</p>
+<p>We fetch a single instruction and use a single data-flow to memory.</p>
+<p><img src="/images/SISD.png#center" alt=""></p>
+<p>SIMD, or, Single Instruction Multipe Data. This model is when we fetch a single instruction, but perform multiple instances of that instruction. This is a very powerful for performing vectorized operations.</p>
+<p>Note, each processor has it own <strong>local</strong> memory and data.</p>
+<p><img src="/images/SIMD.png#center" alt=""></p>
+<p>The next class is, MIMD, or Multiple Instruction Multiple Data. As the name suggests, it&rsquo;s basically parallelizing SIMD.</p>
+<p><img src="/images/MIMD.png#center" alt=""></p>
+<p>We also have MISD, Multiple Instruction Single Data. This is a very niche class that is used basically only for machine learning areas (hardware accelerators).</p>
+<h3 id="cache-coherence">Cache Coherence</h3>
+<p>When we&rsquo;re dealing with multiple processors - we need to decide how we use our main memory.</p>
+<p>Just as in concurrent programming, we have two paradigms, shared memory and message passing.</p>
+<p>For our <strong>S</strong>hare <strong>M</strong>emory multi<strong>P</strong>rocessor, we need to use synchronization primitives, to avoid cache invalidation.</p>
+<p>We can solve these problems using FSMs as well to set up a clear protocol.</p>
+<p>For message passing, we do not share memory - but we send messages between processors to synchronize.</p>
 
-
-			<footer><p class="footer_msg">memento mori</p></footer>
-
-		</div>
-    </div>
-		
+		</section>
+  </article>
 	</div>
-	
+
+	<footer><p class="footer_msg">memento mori</p></footer>
+
+  </div>
 </body>
 </html>
