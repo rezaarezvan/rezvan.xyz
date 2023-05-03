@@ -6,7 +6,20 @@
     <description>Recent content in Schools on rezvan</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 28 Apr 2023 18:12:01 +0200</lastBuildDate><atom:link href="https://rezvan.xyz/school/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 02 May 2023 15:33:02 +0200</lastBuildDate><atom:link href="https://rezvan.xyz/school/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Electrical Circuits and Fields: Part 10 - Steady-state sinusoidal analysis</title>
+      <link>https://rezvan.xyz/school/EEM076_10/</link>
+      <pubDate>Tue, 02 May 2023 15:33:02 +0200</pubDate>
+      
+      <guid>https://rezvan.xyz/school/EEM076_10/</guid>
+      <description>In this part we&amp;rsquo;ll properly define and understand what alternating-current (AC) is.
+Alternating-current As we have seen, AC is defined using sinusoidal functions: $$ V(t) = V_m sin(\omega t) $$
+Where: $$ V_m - \text{Amplitude}\ [V] \newline \omega - \text{Angular frequency}\ \left[\dfrac{rad}{s}\right] \newline T - \text{Period}\ [s] \newline f - \text{Frequency}\ [Hz] \newline $$
+We can write: $$ T = \dfrac{2\pi}{\omega} = \dfrac{1}{f} $$
+If we want to write this even more generally we also add a constant: $$ V(t) = V_m sin(\omega t + \theta) $$</description>
+    </item>
+    
     <item>
       <title>Computer System Engineering: Part 8 - Parallel Processors</title>
       <link>https://rezvan.xyz/school/EDA333_8/</link>

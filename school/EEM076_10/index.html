@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8"><meta property="og:site_name" content="rezvan"><title>Categories | rezvan</title>
-  <meta property="og:title" content="Categories | rezvan"><meta property="og:description" content="">
+	<meta charset="utf-8"><meta property="og:site_name" content="rezvan"><title>Electrical Circuits and Fields: Part 10 - Steady-state sinusoidal analysis | rezvan</title>
+  <meta property="og:title" content="Electrical Circuits and Fields: Part 10 - Steady-state sinusoidal analysis | rezvan"><meta property="og:description" content="">
   <meta property="og:type" content="blog">
-  <meta property="og:link" content="https://rezvan.xyz/categories/"><link rel="shortcut icon" type="image/png" href=https://rezvan.xyz//images/icon.png />
+  <meta property="og:link" content="https://rezvan.xyz/school/EEM076_10/"><link rel="shortcut icon" type="image/png" href=https://rezvan.xyz//images/icon.png />
   <meta property="og:image" content="https://rezvan.xyz//images/icon.png" /><meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="alternate" type="application/rss+xml" href="https://rezvan.xyz/categories/index.xml" title="rezvan" />
 	<link rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz//css/main.css" />
 
     <head>
@@ -223,10 +222,26 @@ body.dark-mode .title {
 </head>
 
 <body>
-    <div class="wrapper">
+  <div class="wrapper">
+	<div class="content">
 		<div class="header_main">
 
-    <a href="https://rezvan.xyz/"><p class="header_title">rezvan</p>
+    <a href="https://rezvan.xyz/"><p class="header_title">rezvan</p><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.3/dist/katex.min.css" integrity="sha384-Juol1FqnotbkyZUT5Z7gUPjQ9gzlwCENvUZTpQBAPxtusdwFLRy382PSDx5UUJ4/" crossorigin="anonymous">
+
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.3/dist/katex.min.js" integrity="sha384-97gW6UIJxnlKemYavrqDHSX3SiygeOwIZhwyOKRfSaf0JWKRVj9hLASHgFTzT+0O" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.3/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+            delimiters: [
+                {left: "$$", right: "$$", display: true},
+                {left: "$", right: "$", display: false}
+            ]
+        });
+    });
+</script>
+
     </a>
 
     <br>
@@ -241,78 +256,212 @@ body.dark-mode .title {
         
     </nav></div>
 
-                
-                
-                
-				<section class="post_listed">
-					<time class="post_time">12.04.22</time>
-					<a class="title" href="/school/DSA_7/">DSA: Part 7 - Binary Heaps</a>
-        </section>
-				
-				<section class="post_listed">
-					<time class="post_time">12.04.22</time>
-					<a class="title" href="/school/Waves/">Waves: Part 1 - Mechanical Waves</a>
-        </section>
-				
-				<section class="post_listed">
-					<time class="post_time">11.30.22</time>
-					<a class="title" href="/school/DSA_6/">DSA: Part 6 - Trees</a>
-        </section>
-				
-				<section class="post_listed">
-					<time class="post_time">11.29.22</time>
-					<a class="title" href="/school/DSA_5/">DSA: Part 5 - Hash Tables</a>
-        </section>
-				
-				<section class="post_listed">
-					<time class="post_time">11.28.22</time>
-					<a class="title" href="/school/DSA_4/">DSA: Part 4 - Abstract Data Types</a>
-        </section>
-				
-				<section class="post_listed">
-					<time class="post_time">11.28.22</time>
-					<a class="title" href="/school/Thermodynamics_3/">Thermodynamics: Lecture 3</a>
-        </section>
-				
-				<section class="post_listed">
-					<time class="post_time">11.27.22</time>
-					<a class="title" href="/school/DSA_3/">DSA: Part 3 - Dynamic Arrays</a>
-        </section>
-				
-				<section class="post_listed">
-					<time class="post_time">11.26.22</time>
-					<a class="title" href="/school/Thermodynamics_2/">Thermodynamics: Lecture 2</a>
-        </section>
-				
-				<section class="post_listed">
-					<time class="post_time">11.25.22</time>
-					<a class="title" href="/school/DSA_2/">DSA: Part 2 - Complexity (1)</a>
-        </section>
-				
-				<section class="post_listed">
-					<time class="post_time">11.24.22</time>
-					<a class="title" href="/school/DSA_1/">DSA: Part 1 - Sorting</a>
-        </section>
-				
-				
-
-<ul class="pagination">
-	
-    <a href="/categories/page/4/" class="page-prev page-link" aria-label="Newer Posts Newer Posts">← Newer Posts</a>
-	
-	
-    <a href="/categories/page/6/" class="page-next page-link" aria-label="Older Posts">Older Posts →</a>
-	
-	</span>
+  <article><div class="title_wrapper">
+			<h1 class="title">Electrical Circuits and Fields: Part 10 - Steady-state sinusoidal analysis</h1><p class="single_time">May 2, 2023</p></div>
+		<section class="post">
+			<p>In this part we&rsquo;ll properly define and understand what alternating-current (AC) is.</p>
+<h3 id="alternating-current">Alternating-current</h3>
+<p>As we have seen, AC is defined using sinusoidal functions:
+$$
+V(t) = V_m sin(\omega t)
+$$</p>
+<p>Where:
+$$
+V_m - \text{Amplitude}\ [V] \newline
+\omega - \text{Angular frequency}\ \left[\dfrac{rad}{s}\right] \newline
+T - \text{Period}\ [s] \newline
+f - \text{Frequency}\ [Hz] \newline
+$$</p>
+<p>We can write:
+$$
+T = \dfrac{2\pi}{\omega} = \dfrac{1}{f}
+$$</p>
+<p>If we want to write this even more generally we also add a constant:
+$$
+V(t) = V_m sin(\omega t + \theta)
+$$</p>
+<p>We say that this sine function <em>leads</em> the previous by $\theta$.
+The other way around works as well, the previous function <em>lags</em> this function by $\theta$.</p>
+<h3 id="root-mean-square">Root Mean Square</h3>
+<p>The <strong>R</strong>oot <strong>M</strong>ean <strong>S</strong>quare, or RMS, gives us a sensible comparision of our AC current/voltage to the equivalent DC current/voltage.</p>
+<p>This is useful for the power consumption - we define the RMS as:
+$$
+V_{RMS} = \sqrt{\dfrac{1}{T} \int_0^T V^2(t) dt}
+$$</p>
+<p>Which means, in our sinusoidal case:
+$$
+V_{RMS} = \dfrac{V_m}{\sqrt{2}} \newline
+I_{RMS} = \dfrac{I_m}{\sqrt{2}}
+$$</p>
+<p>Which means:
+$$
+P_{Avg} = \dfrac{(V_{RMS})^2}{R} = (I_{RMS})^2 R
+$$</p>
+<h3 id="radians-and-degrees">Radians and degrees</h3>
+<p>If your like me and always forget how to convert radians to degrees or the other way around - here&rsquo;s a quick little reminder:
+$$
+rad = deg \cdot\ \dfrac{\pi}{180}
+$$</p>
+<p>Along with:
+$$
+sin(\omega t) = cos(\omega t - 90^\circ) \newline
+cos(\omega t) = sin(\omega t + 90^\circ)
+$$</p>
+<p>This is really important since, if we want to compare the <strong>phases</strong> of two wave functions - we need to:</p>
+<ul>
+<li>
+<p>Both must be written in <em>either</em> sine or cosine.</p>
+</li>
+<li>
+<p>Both must be written with <strong>positive</strong> amplitude.</p>
+</li>
+<li>
+<p>Each have the same constant frequency.</p>
+</li>
 </ul>
+<h3 id="phasors">Phasors</h3>
+<p>Now we&rsquo;re going to talk about this beautiful idea that happens to perfectly fit our electrical needs!</p>
+<p>A phasor, is a complex number representing a sinusoidal function as vectors.</p>
+<p>The magnitude of the phasor (meaning, the magnitude of the vector) equals the amplitude of the sinusoidal function:
+$$
+V_m = V_m
+$$</p>
+<p>The angle of the phasor equals the phase of the sinusoidal function:
+$$
+\theta = \theta
+$$</p>
+<p>If you&rsquo;re not familiar with complex numbers and their different representations, here is a quick overview:
+<img src="/images/UC.png#center" alt=""></p>
+<p>Note: In maths we usually denote the imaginary unit with $i$, in electrical engineering, we rather use $j$ to avoid confusion with the current.</p>
+<p>Rectangular form:
+$$
+z = x + jy \newline
+z = |z|(cos(\varphi) + j sin(\varphi))
+$$</p>
+<p>Polar form:
+$$
+z = |z|\angle{\theta^\circ} \newline
+z = |z|e^{j \theta^\circ}
+$$</p>
+<p>Polar <em>to</em> rectangular form:
+$$
+z = r\angle{\theta^\circ} \newline
+x = r cos(\theta^\circ) \newline
+y = r cos(\theta^\circ) \newline
+z = x + j y
+$$</p>
+<p>Rectangular <em>to</em> polar form:
+$$
+z = x + jy \newline
+r = \sqrt{x^2 + y^2} \newline
+\theta = tan^{-1}\left(\dfrac{y}{x}\right) = \arctan{\left(\dfrac{y}{x}\right)} \newline
+z = r\angle{\theta^\circ} \newline
+z = re^{j \theta^\circ} \newline
+z = r(cos(\theta) + j sin(\theta))
+$$</p>
+<p>Why do learn both forms and how to convert them? Because, if we want to perform multiplication or division - it&rsquo;s much easier done in Polar form.</p>
+<p>If we want to perform addition or subtraction, it&rsquo;s easier done in rectangular form.</p>
+<p>Multiplication:
+$$
+a = (b\angle{c^\circ}) \cdot\ (d\angle{e^\circ}) \newline
+a = (b \cdot\ d \angle{c^\circ + e^\circ})
+$$</p>
+<p>Division:</p>
+<p>$$
+a = \dfrac{(b\angle{c^\circ})}{(d\angle{e^\circ})} \newline
+a = (\dfrac{b}{d} \angle{c^\circ - e^\circ})
+$$</p>
+<h3 id="phasor-relations">Phasor relations</h3>
+<p>Now that we&rsquo;ve defined phasors, let&rsquo;s look at the relationship between different concepts we have encountered.</p>
+<h4 id="resistance">Resistance</h4>
+<p>As we know from Ohm&rsquo;s law: $V = RI$. If our $V$ and $I$ both are phasors - it means that they are in parallel:
+<img src="/images/VI.png#center" alt=""></p>
+<h4 id="inductor">Inductor</h4>
+<p>As we know, $V = L \dfrac{dI}{dt}$. Now, if both our $V$ and $I$ are phasors, it means that taking the deriviate of $I$ will make it either sine or cosine.</p>
+<p>This means in the end that $V$ and $I$ will be $90^\circ$ apart!</p>
+<p><img src="/images/VIL.png#center" alt=""></p>
+<p>As you may or may not know, but multiplying something with the imaginary unit rotates it by $90^\circ$.
+This means that:
+$$
+V = j\omega LI
+$$</p>
+<h4 id="capacitor">Capacitor</h4>
+<p>We know that, $I = C \dfrac{dV}{dt}$. The same logic applies here, since taking the deriviate of a sinusoidal function will shift it by $90^\circ$ this means that:
+$$
+I = j\omega CV
+$$</p>
+<p><img src="/images/ICV.png#center" alt=""></p>
+<h4 id="summary">Summary</h4>
+<p>This means that we now have two different ways to calculate these equations - in the time domain or in the frequency domain:</p>
+<p>Time domain:
+$$
+V = RI \newline
+$$
+$$
+V = L \dfrac{dI}{dt} \newline
+$$
+$$
+V = \dfrac{1}{C} \int I dt \newline
+$$</p>
+<p>Frequency domain:
+$$
+V = RI \newline
+$$
+$$
+V = j\omega LI \newline
+$$
+$$
+V = \dfrac{1}{j\omega C} I
+$$</p>
+<h3 id="impedance">Impedance</h3>
+<p>The definiton of impedance can be quite dense and technical - but in this series we&rsquo;ll settle with the definition that:
+$$
+Z = \dfrac{V}{I}
+$$</p>
+<p>This means that:
+$$
+Z_{R} = R \newline
+Z_{L} = j\omega L \newline
+Z_{C} = \dfrac{1}{j\omega C}
+$$</p>
+<p>Impedance is therefore complex number, but in the unit Ohm!</p>
+<p>We call the imaginary component of impedance <strong>reactance</strong>.</p>
+<p>A purely resitive impedance is equal to the resistance. A purely reactive impedance has no real component.</p>
+<p>Impedances in series and parallel apply to the same rules as resistors! So we can combine and simplifiy our circuits even more now!</p>
+<p>But the most important thing here is that, we can, just from impedance, understand what dominates in a circuit:
+<img src="/images/EI.png#center" alt="">
+$$
+\begin{align*}
+Z_eq &amp; = 1.5 + \dfrac{(j)(1 - 2j)}{j + 1 - 2j} \newline
+&amp; = 1.5 + \dfrac{2 + j}{1 - j} \newline
+&amp; = 1.5 + \dfrac{(2 + j)(1 + j)}{(1 - j)(1 + j)} \newline
+&amp; = 1.5 + \dfrac{1 + j3}{2} \newline
+&amp; = 2.5\angle{36.87^\circ}\ k\Omega
+\end{align*}
+$$</p>
+<p>From this, we can see that, since we have a positive impedance, means that it&rsquo;s mostly inductive than anything else. This tells us a lot about the circuit.</p>
+<p>Since inductors resists change in the current, it will ultimately mean that the current is <em>late</em>, or <em>lags</em> behind the voltage!</p>
+<p>Which is exactly what we&rsquo;ll see if we calcuate $I(t)$:
+$$
+\begin{align*}
+I &amp; = \dfrac{V}{Z_{eq}} \newline
+&amp; = \dfrac{40\angle{- 90^\circ}}{2.5\angle{36.87^\circ}} \newline
+&amp; = 16 \angle{-126.9^\circ} mA
+\end{align*}
+$$</p>
+<p>Which means:
+$$
+I(t) = 16 cos(3000t - 126.9^\circ) mA
+$$</p>
+<p>Just as we predicted, the current lags behind by a lot!</p>
+<p>As we can see, our new tools and knowledge about how we can use complex numbers are quite powerful!</p>
 
-
-			<footer><p class="footer_msg">memento mori</p></footer>
-
-		</div>
-    </div>
-		
+		</section>
+  </article>
 	</div>
-	
+
+	<footer><p class="footer_msg">memento mori</p></footer>
+
+  </div>
 </body>
 </html>
