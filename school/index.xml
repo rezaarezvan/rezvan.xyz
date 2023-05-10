@@ -6,20 +6,7 @@
     <description>Recent content in Schools on rezvan</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 08 May 2023 16:36:54 +0200</lastBuildDate><atom:link href="https://rezvan.xyz/school/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Electrical Circuits and Fields: Part 11 - Calculation methods for AC-circuits</title>
-      <link>https://rezvan.xyz/school/EEM076_11/</link>
-      <pubDate>Mon, 08 May 2023 16:36:54 +0200</pubDate>
-      
-      <guid>https://rezvan.xyz/school/EEM076_11/</guid>
-      <description>In this part we&amp;rsquo;ll cover all calculation methods that we&amp;rsquo;ll use for AC-circuits.
-Equivalent Impedance Given the circuit and that $\omega = 5 \dfrac{rad}{s}$ - find the equivalent output impedance:
-As we discussed in the last part, our resistor rules, for series and parallel apply for impedance as well.
-Let&amp;rsquo;s first quickly convert the capacitor and inductor to Ohm.
-For our capacitor: $$ \begin{align*} Z_{C} &amp;amp; = \dfrac{1}{j\omega C} \newline &amp;amp; = -j \cdot\ \dfrac{1}{\omega C} \newline &amp;amp; = -j \cdot\ \dfrac{1}{5 \cdot\ 500 \cdot\ 10^{-3}}\ [\Omega] \newline &amp;amp; = -j 0.</description>
-    </item>
-    
+    <lastBuildDate>Tue, 02 May 2023 15:33:02 +0200</lastBuildDate><atom:link href="https://rezvan.xyz/school/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Electrical Circuits and Fields: Part 10 - Steady-state sinusoidal analysis</title>
       <link>https://rezvan.xyz/school/EEM076_10/</link>
