@@ -386,17 +386,223 @@ $$</p>
 <p>Now finding $V_1$ and $V_2$, by substituting in $V_1$ in this:</p>
 <p>$$
 \begin{align*}
-V_2 &amp; = \dfrac{j0.5 + j0.1V_1}{0.1 - j0.1} \newline
-&amp; = \dfrac{j0.5 + j0.1(\dfrac{1 + j0.1V_2}{0.2 + j0.2})}{0.1 - j0.1} \newline
-&amp; = \dfrac{j0.5 + j0.1(\dfrac{1.00 \angle 5.71^{\circ}}{0.28 \angle 45^{\circ}})}{0.1 - j0.1} \newline
-&amp; = \dfrac{j0.5 + j0.1(\dfrac{1.00}{0.28} \angle 5.71 - 45^{\circ})}{0.1 - j0.1} \newline
-&amp; = \dfrac{j0.5 + j0.1(3.57 \angle -39.29^{\circ})}{0.1 - j0.1} \newline
-&amp; = \dfrac{j0.5 + 0.1 \angle 90^{\circ}(3.57 \angle -39.29^{\circ})}{0.1 - j0.1} \newline
-&amp; = \dfrac{j0.5 + 0.1 \cdot\ 3.57 \angle 90 + (-39.29)^{\circ}}{0.1 - j0.1} \newline
-&amp; = \dfrac{j0.5 + 0.357 \angle 50.71^{\circ}}{0.1 - j0.1} \newline
-&amp; = \dfrac{j0.5 + 0.22 + j0.27}{0.1 - j0.1} \newline
-&amp; = \dfrac{0.22 + j0.77}{0.1 - j0.1} \newline
-&amp; = \dfrac{0.8 \angle 74.05}{} \newline
+V_2 &amp; = \ldots = -2 + j4\ V \newline
+&amp; = \boxed{4.47 \angle 116.6^{\circ}\ V}
+\end{align*}
+$$</p>
+<p>Which means $V_2(t)$:
+$$
+\begin{align*}
+V_2(t) &amp; = \boxed{4.47 cos(\omega t + 116.6^{\circ})}
+\end{align*}
+$$</p>
+<p>For $V_1$:
+$$
+\begin{align*}
+V_1 &amp; = \ldots = 1 - j2\ V \newline
+&amp; = \boxed{2.24 \angle -63.4^{\circ}\ V}
+\end{align*}
+$$</p>
+<p>Which means $V_1(t)$:
+$$
+\begin{align*}
+V_1(t) &amp; = \boxed{2.24 cos(\omega t - 63.4^{\circ})}
+\end{align*}
+$$</p>
+<h3 id="mesh-analysis">Mesh analysis</h3>
+<p>Given this circuit, find $I_1(t)$ and $I_2(t)$:</p>
+<p><img src="/images/MAI.png#center" alt=""></p>
+<p>Let&rsquo;s first quickly convert our capacitor and inductor:</p>
+<p>Our inductor:</p>
+<p>$$
+\begin{align*}
+Z_{L} &amp; = j\omega L \newline
+&amp; = j(10^3 \cdot\ 4 \cdot\ 10^{-3}) [\Omega] \newline
+&amp; = j4\ \Omega
+\end{align*}
+$$</p>
+<p>Our capacitor:</p>
+<p>$$
+\begin{align*}
+Z_{L} &amp; = -j \dfrac{1}{\omega C} \newline
+&amp; = -j \dfrac{1}{10^3 \cdot\ 500 \cdot\ 10^{-6}}
+&amp; = -j2\ \Omega
+\end{align*}
+$$</p>
+<p>Which gives us:
+<img src="/images/MAII.png#center" alt=""></p>
+<p>For Mesh 1:
+$$
+\begin{align*}
+-10 \angle 0^{\circ} + 3I_1 + j4(I_1 - I_2) &amp; = 0 \newline
+(3 + j4)I_1 - j4I_2 &amp; = 10
+\end{align*}
+$$</p>
+<p>For Mesh 2:
+$$
+\begin{align*}
+j4(I_2 - I_1) - j2I_2 + 2I_1 &amp; = 0
+(2 - j4)I_1 + j2I_2 &amp; = 0
+\end{align*}
+$$</p>
+<p>Finding $I_1$ and $I_2$:</p>
+<p>$$
+\begin{align*}
+I_1 &amp; = \dfrac{14 + j8}{13}
+&amp; = \boxed{1.24 \angle 29.7^{\circ}\ A}
+\end{align*}
+$$</p>
+<p>$$
+\begin{align*}
+I_2 &amp; = \dfrac{20 + j30}{13}
+&amp; = \boxed{2.77 \angle 56.3^{\circ}\ A}
+\end{align*}
+$$</p>
+<p>Meaning that:
+$$
+\begin{align*}
+I_1(t) &amp; = 1.24 cos(10^3t + 29.7^{\circ})
+\end{align*}
+$$</p>
+<p>$$
+\begin{align*}
+I_2(t) &amp; = 2.77 cos(10^3t + 56.3^{\circ})
+\end{align*}
+$$</p>
+<h3 id="superposition">Superposition</h3>
+<p>Looking at this circuit again:</p>
+<p><img src="/images/NAI.png#center" alt=""></p>
+<p>One can see that we can solve this via the principle of superposition.</p>
+<p>We fist need to simplify our circuit impedance:
+$$
+\begin{align*}
+Z_{eq\ -j5\ ||\ j10} &amp; = \dfrac{(-j5)(j10)}{-j5 + j10} \newline
+&amp; = \dfrac{50}{j5} \newline
+&amp; = \dfrac{50 \angle 0^{\circ}}{j5} \newline
+&amp; = \dfrac{50 \angle 0^{\circ}}{5 \angle 90^{\circ}} \newline
+&amp; = \dfrac{50}{5} \angle -90^{\circ} \newline
+&amp; = -10 \angle -90^{\circ} \newline
+&amp; = -j10 \Omega \newline
+\end{align*}
+$$</p>
+<p>$$
+\begin{align*}
+Z_{eq\ 5\ ||\ -j10} &amp; = \dfrac{(5)(-j10)}{5 + j10} \newline
+&amp; = \dfrac{(5)(-j10)(5 - j10)}{(5 + j10)(5 - j10)} \newline
+&amp; = \dfrac{(-j50)(5 - j10)}{5^2 + 10^2}\newline
+&amp; = \dfrac{-j250 - 500}{125}\newline
+&amp; = 4 - j2\ \Omega
+\end{align*}
+$$</p>
+<p>$$
+\begin{align*}
+Z_{eq\ j5\ ||\ 10} &amp; = \ldots = 2 + j4\ \Omega
+\end{align*}
+$$</p>
+<p>Which means:</p>
+<p><img src="/images/SPI.png#center" alt=""></p>
+<p>When right source is off:
+$$
+\begin{align*}
+(4 - j2) || (-j10 + 2 + j4) \newline
+V_{1L} &amp; = 1 \angle 0^{\circ} \dfrac{(4 - j2)(-j10 + 2 + j4)}{(4 - j2) + (-j10 + 2 + j4)} \newline
+&amp; = \ldots \newline
+&amp; = 2 - j2\ V
+\end{align*}
+$$</p>
+<p>Left source turned off:
+$$
+\begin{align*}
+(4 - j2 - j10) || (2 + j4) \newline
+V_{1R} &amp; = (-0.5 \angle -90^{\circ}) (\dfrac{2 + j4}{4 - j2 - j10 + 2 + j4}) (4 - j2) \newline
+&amp; = \ldots \newline
+&amp; = -1\ V
+\end{align*}
+$$</p>
+<p>Which means:
+$$
+\begin{align*}
+V_1 &amp; = V_{1L} + V_{1R} \newline
+&amp; = 2 - j2 - 1
+&amp; = 1 - j2\ V
+\end{align*}
+$$</p>
+<p>Same procedure for $V_2$</p>
+<h3 id="thévenin-equivalent">Thévenin equivalent</h3>
+<p>Given this circuit, find the Thévenin equivalent circuit:</p>
+<p><img src="/images/TEI.png#center" alt=""></p>
+<p>Let&rsquo;s first disconnect the load:</p>
+<p><img src="/images/TEII.png#center" alt=""></p>
+<p>Which means $V_oc$:
+$$
+\begin{align*}
+V_{oc} &amp; = V_1 - V_2 \newline
+&amp; = (1 \angle 0^{\circ})(4 - j2) - (-0.5 \angle -90^{\circ})(2 - j4) \newline
+&amp; = 6 - j3
+\end{align*}
+$$</p>
+<p>For our equivalent impedance:</p>
+<p><img src="/images/TEIII.png#center" alt=""></p>
+<p>Which means:
+$$
+\begin{align*}
+Z_{th} &amp; = (4 - j2) + (2 + j4) \newline
+&amp; = 6 + j2\ \Omega
+\end{align*}
+$$</p>
+<h3 id="resonance">Resonance</h3>
+<p>A network is in resonance (or resonant) when the
+voltage and current at the network input
+terminals are in phase.</p>
+<p>A maximum-amplitude response is produced in
+the resonant condition</p>
+<p><img src="/images/RIS.png#center" alt=""></p>
+<p>From this we can see that:
+$$
+\begin{align*}
+Z_{s} &amp; = j2\pi f L + R - j \dfrac{1}{2\pi f C}
+\end{align*}
+$$</p>
+<p>At the <strong>resonant</strong> frequency:
+$$
+\begin{align*}
+j2\pi f_0 L = j \dfrac{1}{2\pi f_0 C} \newline
+f_0 = \dfrac{1}{2\pi \sqrt{LC}}
+\end{align*}
+$$</p>
+<p>We call the ratio of the reactance of the impedance to the resistance at the resonant frequency for <strong>quality factor</strong>:
+$$
+\begin{align*}
+Q_{s} = \dfrac{2\pi f_0 L}{R}
+&amp; = \dfrac{1}{2\pi f_0 CR}
+\end{align*}
+$$</p>
+<p>Which means:
+$$
+\begin{align*}
+Z_{s} = R\left[1 + jQ_s \left(\dfrac{f}{f_0} - \dfrac{f_0}{f}\right)\right]
+\end{align*}
+$$</p>
+<p>$$
+\begin{align*}
+I &amp; = \dfrac{V_s}{Z_s} \newline
+&amp; = \dfrac{V_s}{R\left[1 + jQ_s \left(\dfrac{f}{f_0} - \dfrac{f_0}{f}\right)\right]} \newline
+\end{align*}
+$$</p>
+<p>$$
+\begin{align*}
+RI = \dfrac{V_s}{\left[1 + jQ_s \left(\dfrac{f}{f_0} - \dfrac{f_0}{f}\right)\right]} \newline
+\end{align*}
+$$</p>
+<p>$$
+\begin{align*}
+\dfrac{V_R}{V_s} = \dfrac{1}{1 + jQs \left(\dfrac{f}{f_0} - \dfrac{f_0}{f}\right)} \newline
+\end{align*}
+$$</p>
+<p>$$
+\begin{align*}
+B &amp; = f_H - f_L \newline
+&amp; = \dfrac{f_0}{Q_s}
 \end{align*}
 $$</p>
 
