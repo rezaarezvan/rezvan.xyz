@@ -6,7 +6,18 @@
     <description>Recent content in Schools on rezvan</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 08 May 2023 16:36:54 +0200</lastBuildDate><atom:link href="https://rezvan.xyz/school/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 12 May 2023 10:06:12 +0200</lastBuildDate><atom:link href="https://rezvan.xyz/school/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Electrical Circuits and Fields: Part 12 - Power in AC Circuits</title>
+      <link>https://rezvan.xyz/school/EEM076_12/</link>
+      <pubDate>Fri, 12 May 2023 10:06:12 +0200</pubDate>
+      
+      <guid>https://rezvan.xyz/school/EEM076_12/</guid>
+      <description>In this part we&amp;rsquo;ll define Power for AC circuits, we&amp;rsquo;ve had all the tools now for a while, but just never applied them.
+Power in AC circuits and be divided into three categories:
+Resistive load $(\theta = 0)$. Inductive load $(Z = \omega L \angle 90^{\circ})$. Capacitive load* $(Z = \dfrac{1}{\omega C} \angle -90^{\circ})$. Resistive Load When we have a resistive load, meaning no phase shift. Then our Voltage and Current are: $$ V(t) = V_m cos(\omega t) \newline I(t) = I_m cos(\omega t) $$</description>
+    </item>
+    
     <item>
       <title>Electrical Circuits and Fields: Part 11 - Calculation methods for AC-circuits</title>
       <link>https://rezvan.xyz/school/EEM076_11/</link>
