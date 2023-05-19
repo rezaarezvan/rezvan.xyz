@@ -282,8 +282,10 @@ body.dark-mode .title {
 <li>
 <p>Consider $i_{out}$ as positive</p>
 </li>
+<li>
+<p>$V_{current} - V_{adjacent}$</p>
+</li>
 </ul>
-<p>$ Consider $V_{current} - V_{adjacent}$</p>
 <p>So, if we solve the example we get:</p>
 <p>Using KCL on the first node:
 $$
@@ -316,7 +318,7 @@ $$</p>
 <p>Example:
 <img src="/images/MCA.png#center" alt="">
 $$
--5 + 4i_1 + 2(i_1 - i-2) -2 = 0 \newline
+-5 + 4i_1 + 2(i_1 - i_2) - 2 = 0 \newline
 2 + 2(i_2 - i_1) + 5i_2 + 1 = 0
 $$</p>
 <h3 id="supermesh">Supermesh</h3>
@@ -409,7 +411,7 @@ $$</p>
 <p>$$
 V_{oc} = V_6 \quad | \quad \text{Since they are in parallel} \newline
 V_6 = V_{total} \cdot\ \frac{R_6}{(R_3 + R_6)} = 12 V \cdot\ \frac{6 \Omega}{3 \Omega + 6 \Omega} = 8 V \newline
-V_{TH} = V_{oc} = 6 V
+V_{TH} = V_{oc} = 8 V
 $$</p>
 <p>Notice how we didn&rsquo;t include the $R_7$, this is due to the fact that, no current is going through that resistor!</p>
 <p>Next step, let&rsquo;s find the $R_eq$ for this circuit. <strong>Don&rsquo;t forget to turn OFF all independent sources!</strong>:
