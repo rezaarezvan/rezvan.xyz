@@ -6,7 +6,19 @@
     <description>Recent content in Schools on rezvan</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 12 May 2023 10:06:12 +0200</lastBuildDate><atom:link href="https://rezvan.xyz/school/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 19 May 2023 11:34:16 +0200</lastBuildDate><atom:link href="https://rezvan.xyz/school/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Electrical Circuits and Fields: Part 13 - Circuit Response, Passive Filters, and Amplifiers</title>
+      <link>https://rezvan.xyz/school/EEM076_13/</link>
+      <pubDate>Fri, 19 May 2023 11:34:16 +0200</pubDate>
+      
+      <guid>https://rezvan.xyz/school/EEM076_13/</guid>
+      <description>In this part we&amp;rsquo;ll cover circuit response, filter and amplifiers.
+Transfer Function Recall from the last part that, the transfer function is defined as: $$ H(f) = \dfrac{V_{out}}{V_{in}} $$
+Let&amp;rsquo;s find the transfer function of this circuit: Let&amp;rsquo;s find $V_{out}$ $$ \begin{align*} V_{out} &amp;amp; = I \cdot\ Z_C \newline &amp;amp; = \left(\dfrac{V_{in}}{Z_R + Z_C}\right) Z_C \newline &amp;amp; = \left(\dfrac{V_{in}}{R + \dfrac{1}{j2\pi fC}}\right) \left(\dfrac{1}{j2\pi fC}\right) \end{align*} $$
+Which means that $H(f)$: $$ \begin{align*} H(f) &amp;amp; = \dfrac{V_{out}}{V_{in}} &amp;amp; = \dfrac{\left(\dfrac{V_{in}}{R + \dfrac{1}{j2\pi fC}}\right) \left(\dfrac{1}{j2\pi fC}\right)}{V_{in}} \newline &amp;amp; = \cdots &amp;amp; = \dfrac{1}{1 + j2\pi fRC} \end{align*} $$</description>
+    </item>
+    
     <item>
       <title>Electrical Circuits and Fields: Part 12 - Power in AC Circuits</title>
       <link>https://rezvan.xyz/school/EEM076_12/</link>

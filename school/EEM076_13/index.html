@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8"><meta property="og:site_name" content="rezvan"><title>Posts | rezvan</title>
-  <meta property="og:title" content="Posts | rezvan"><meta property="og:description" content="">
+	<meta charset="utf-8"><meta property="og:site_name" content="rezvan"><title>Electrical Circuits and Fields: Part 13 - Circuit Response, Passive Filters, and Amplifiers | rezvan</title>
+  <meta property="og:title" content="Electrical Circuits and Fields: Part 13 - Circuit Response, Passive Filters, and Amplifiers | rezvan"><meta property="og:description" content="">
   <meta property="og:type" content="blog">
-  <meta property="og:link" content="https://rezvan.xyz/posts/"><link rel="shortcut icon" type="image/png" href=https://rezvan.xyz//images/icon.png />
+  <meta property="og:link" content="https://rezvan.xyz/school/EEM076_13/"><link rel="shortcut icon" type="image/png" href=https://rezvan.xyz//images/icon.png />
   <meta property="og:image" content="https://rezvan.xyz//images/icon.png" /><meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="alternate" type="application/rss+xml" href="https://rezvan.xyz/posts/index.xml" title="rezvan" />
 	<link rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz//css/main.css" />
 
     <head>
@@ -223,10 +222,26 @@ body.dark-mode .title {
 </head>
 
 <body>
-    <div class="wrapper">
+  <div class="wrapper">
+	<div class="content">
 		<div class="header_main">
 
-    <a href="https://rezvan.xyz/"><p class="header_title">rezvan</p>
+    <a href="https://rezvan.xyz/"><p class="header_title">rezvan</p><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.3/dist/katex.min.css" integrity="sha384-Juol1FqnotbkyZUT5Z7gUPjQ9gzlwCENvUZTpQBAPxtusdwFLRy382PSDx5UUJ4/" crossorigin="anonymous">
+
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.3/dist/katex.min.js" integrity="sha384-97gW6UIJxnlKemYavrqDHSX3SiygeOwIZhwyOKRfSaf0JWKRVj9hLASHgFTzT+0O" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.3/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+            delimiters: [
+                {left: "$$", right: "$$", display: true},
+                {left: "$", right: "$", display: false}
+            ]
+        });
+    });
+</script>
+
     </a>
 
     <br>
@@ -241,46 +256,143 @@ body.dark-mode .title {
         
     </nav></div>
 
-                
-                
-                
-				<section class="post_listed">
-					<time class="post_time">11.26.22</time>
-					<a class="title" href="/school/Thermodynamics_2/">Thermodynamics: Lecture 2</a>
-        </section>
-				
-				<section class="post_listed">
-					<time class="post_time">11.25.22</time>
-					<a class="title" href="/school/DSA_2/">DSA: Part 2 - Complexity (1)</a>
-        </section>
-				
-				<section class="post_listed">
-					<time class="post_time">11.24.22</time>
-					<a class="title" href="/school/DSA_1/">DSA: Part 1 - Sorting</a>
-        </section>
-				
-				<section class="post_listed">
-					<time class="post_time">11.24.22</time>
-					<a class="title" href="/school/Thermodynamics/">Thermodynamics: Lecture 1</a>
-        </section>
-				
-				
-
-<ul class="pagination">
-	
-    <a href="/posts/page/5/" class="page-prev page-link" aria-label="Newer Posts Newer Posts">← Newer Posts</a>
-	
-	
-	</span>
+  <article><div class="title_wrapper">
+			<h1 class="title">Electrical Circuits and Fields: Part 13 - Circuit Response, Passive Filters, and Amplifiers</h1><p class="single_time">May 19, 2023</p></div>
+		<section class="post">
+			<p>In this part we&rsquo;ll cover circuit response, filter and amplifiers.</p>
+<h3 id="transfer-function">Transfer Function</h3>
+<p>Recall from the last part that, the <em>transfer function</em> is defined as:
+$$
+H(f) = \dfrac{V_{out}}{V_{in}}
+$$</p>
+<p>Let&rsquo;s find the transfer function of this circuit:
+<img src="/images/TF.png#center" alt=""></p>
+<p>Let&rsquo;s find $V_{out}$
+$$
+\begin{align*}
+V_{out} &amp; = I \cdot\ Z_C \newline
+&amp; = \left(\dfrac{V_{in}}{Z_R + Z_C}\right) Z_C \newline
+&amp; = \left(\dfrac{V_{in}}{R + \dfrac{1}{j2\pi fC}}\right) \left(\dfrac{1}{j2\pi fC}\right)
+\end{align*}
+$$</p>
+<p>Which means that $H(f)$:
+$$
+\begin{align*}
+H(f) &amp; = \dfrac{V_{out}}{V_{in}}
+&amp; = \dfrac{\left(\dfrac{V_{in}}{R + \dfrac{1}{j2\pi fC}}\right) \left(\dfrac{1}{j2\pi fC}\right)}{V_{in}} \newline
+&amp; = \cdots
+&amp; = \dfrac{1}{1 + j2\pi fRC}
+\end{align*}
+$$</p>
+<p>We can define $f_B$ as:
+$$
+\begin{align*}
+f_B &amp; = \dfrac{1}{2\pi RC}
+\end{align*}
+$$</p>
+<p>Which means:
+$$
+\begin{align*}
+H(f) &amp; = \dfrac{1}{1 + j \left( \dfrac{f}{f_B} \right)}
+\end{align*}
+$$</p>
+<p>Therefore, the magnitude of $H(f)$ is:
+$$
+\begin{align*}
+|H(f)| &amp; = \dfrac{1}{\sqrt{1 + \left( \dfrac{f}{f_B} \right)^2}}
+\end{align*}
+$$</p>
+<p>The angle:
+$$
+\begin{align*}
+\angle{H(f)} &amp; = - \arctan \left(\dfrac{f}{f_B} \right)
+\end{align*}
+$$</p>
+<h3 id="decibels">Decibels</h3>
+<p>We all have heard (yes, pun intended) of decibels. Let&rsquo;s properly define what decibels are:
+$$
+|H(f)|_{dB} = 20 log(|H(f)|)
+$$</p>
+<h3 id="amplifier">Amplifier</h3>
+<p>Is just as the name suggests:
+$$
+V_{0}(t) = A_{v}V_{i}(t)
+$$</p>
+<p>Note that, $A_{v}$, can be of any sign, which means we also have inverting amplifiers!</p>
+<p>A typical model would look something like:
+<img src="/images/VA.png#center" alt=""></p>
+<h3 id="operational-amplifier-op-amp">Operational Amplifier (Op-Amp)</h3>
+<p>An Op-Amp looks like:
+<img src="/images/OP.png#center" alt=""></p>
+<p>We use the Op-Amp like:
+<img src="/images/OPU.png#center" alt=""></p>
+<p>An <strong>Ideal</strong> Op-Amp has:</p>
+<ul>
+<li>
+<p>Infinite input impedance</p>
+</li>
+<li>
+<p>Infinite gain for differential signal</p>
+</li>
+<li>
+<p>Zero gain for the common-mode signal</p>
+</li>
+<li>
+<p>Zero output impedance</p>
+</li>
+<li>
+<p>Infinite bandwidth</p>
+</li>
+</ul>
+<p>Differential signal:
+$$
+V_d = V_1 - V_2
+$$</p>
+<p>Common-mode signal:
+$$
+V_cm = \dfrac{1}{2} \left(V_1 + V_2 \right)
+$$</p>
+<p><img src="/images/INV.png#center" alt=""></p>
+<p>Let&rsquo;s take a look at this Op-Amp circuit:
+$$
+I_1 = I_2 = \dfrac{V_{in}}{R_1}
+$$</p>
+<p>KVL:
+$$
+0 + I_2 R_2 + V_{o} = 0 \newline
+I_2 = - \dfrac{V_{o}}{R_2} = \dfrac{V_{in}}{R_1}
+$$</p>
+<p>Which means:
+$$
+A_{v} = \dfrac{V_{o}}{V_{in}} = \boxed{- \dfrac{R_2}{R_1}}
+$$</p>
+<p>Let&rsquo;s take a look at this Op-Amp:
+<img src="/images/POS.png#center" alt=""></p>
+<p>Here we&rsquo;ll quickly discover that we have positive feedback. Positive feedback saturates the output - which means we can not use the derived formulas from above!</p>
+<p><strong>Always check if there is positive or negative feedback</strong>.</p>
+<p>For non-inverting amplifiers, we get:
+$$
+A_{v} = \dfrac{V_{o}}{V_{in}} = \boxed{1 + \dfrac{R_2}{R_1}}
+$$</p>
+<p>So, steps to analyze an ideal Op-Amp circuit:</p>
+<ul>
+<li>
+<p>Verify that negative feedback is present</p>
+</li>
+<li>
+<p>Assume that the voltage between the terminals and input current are forced to 0.</p>
+</li>
+<li>
+<p>Apply standard circuit analysis principles (KCL, KVL, and Ohm&rsquo;s Law).</p>
+</li>
 </ul>
 
-
-			<footer><p class="footer_msg">memento mori</p></footer>
-
-		</div>
-    </div>
-		
+		</section>
+  </article>
 	</div>
-	
+
+	<footer><p class="footer_msg">memento mori</p></footer>
+
+  </div>
 </body>
 </html>
