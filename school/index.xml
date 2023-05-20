@@ -6,7 +6,26 @@
     <description>Recent content in Schools on rezvan</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 19 May 2023 11:34:16 +0200</lastBuildDate><atom:link href="https://rezvan.xyz/school/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 19 May 2023 16:57:46 +0200</lastBuildDate><atom:link href="https://rezvan.xyz/school/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Electrical Circuits and Fields: Summary</title>
+      <link>https://rezvan.xyz/school/EEM076_summary/</link>
+      <pubDate>Fri, 19 May 2023 16:57:46 +0200</pubDate>
+      
+      <guid>https://rezvan.xyz/school/EEM076_summary/</guid>
+      <description>Electrical Circuits and Fields DC Current:
+The rate of flow of electrical charge.
+$$ 1 A = \dfrac{1 C}{1 s} $$
+$$ 1 C = 6.24 \cdot\ 10^{18} $$
+$$ I(t) = \dfrac{dQ(t)}{dt}\ [A] $$
+$$ Q(t) = \int_{t_0}^{t} i(t) dt + q(t_0) $$
+Voltage:
+The difference in potential energy between two points, for one Coulomb of charge.
+$$ V = \dfrac{\Delta E_p}{q} = \dfrac{W}{q}\ [V] $$
+Resistance:
+Is the opposition to the flow of current.</description>
+    </item>
+    
     <item>
       <title>Electrical Circuits and Fields: Part 13 - Circuit Response, Passive Filters, and Amplifiers</title>
       <link>https://rezvan.xyz/school/EEM076_13/</link>

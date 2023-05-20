@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8"><meta property="og:site_name" content="rezvan"><title>Electrical Circuits and Fields: Part 5 - Electrical fields | rezvan</title>
-  <meta property="og:title" content="Electrical Circuits and Fields: Part 5 - Electrical fields | rezvan"><meta property="og:description" content="">
+	<meta charset="utf-8"><meta property="og:site_name" content="rezvan"><title>Electrical Circuits and Fields: Summary | rezvan</title>
+  <meta property="og:title" content="Electrical Circuits and Fields: Summary | rezvan"><meta property="og:description" content="">
   <meta property="og:type" content="blog">
-  <meta property="og:link" content="https://rezvan.xyz/school/EEM076_5/"><link rel="shortcut icon" type="image/png" href=https://rezvan.xyz//images/icon.png />
+  <meta property="og:link" content="https://rezvan.xyz/school/EEM076_summary/"><link rel="shortcut icon" type="image/png" href=https://rezvan.xyz//images/icon.png />
   <meta property="og:image" content="https://rezvan.xyz//images/icon.png" /><meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz//css/main.css" />
 
@@ -257,28 +257,273 @@ body.dark-mode .title {
     </nav></div>
 
   <article><div class="title_wrapper">
-			<h1 class="title">Electrical Circuits and Fields: Part 5 - Electrical fields</h1><p class="single_time">Mar 27, 2023</p></div>
+			<h1 class="title">Electrical Circuits and Fields: Summary</h1><p class="single_time">May 19, 2023</p></div>
 		<section class="post">
-			<p>In this part we&rsquo;ll discuss electrical fields and some tools we&rsquo;ll begin to use.</p>
-<p>So far we&rsquo;ve only analyzed the electrical circuits at a macro level. In this part we&rsquo;ll try to dissect them at a micro-level, so let&rsquo;s zoom in!</p>
-<h3 id="electrical-charge">Electrical charge</h3>
-<p>To understand electrical circuits, let&rsquo;s first understand electrical <em>charge</em>.</p>
-<p>As we&rsquo;ve seen, we use $q$, as the notation for charge.
-The elementary charge (the charge carried by a single proton) is:
+			<h2 id="electrical-circuits-and-fields">Electrical Circuits and Fields</h2>
+<h3 id="dc">DC</h3>
+<p>Current:</p>
+<blockquote>
+<p>The rate of flow of electrical charge.</p>
+</blockquote>
+<p>$$
+1 A = \dfrac{1 C}{1 s}
+$$</p>
+<p>$$
+1 C = 6.24 \cdot\ 10^{18}
+$$</p>
+<p>$$
+I(t) = \dfrac{dQ(t)}{dt}\ [A]
+$$</p>
+<p>$$
+Q(t) = \int_{t_0}^{t} i(t) dt + q(t_0)
+$$</p>
+<p>Voltage:</p>
+<blockquote>
+<p>The difference in potential energy between two points, for one Coulomb of charge.</p>
+</blockquote>
+<p>$$
+V = \dfrac{\Delta E_p}{q} = \dfrac{W}{q}\ [V]
+$$</p>
+<p>Resistance:</p>
+<blockquote>
+<p>Is the opposition to the flow of current.</p>
+</blockquote>
+<p>$$
+R = \frac{\rho L}{A}\ [\Omega]
+$$</p>
+<p>$$
+\rho = \text{resistivity of the material}
+$$</p>
+<p>Ohm&rsquo;s Law:
+$$
+V = RI
+$$</p>
+<p>Direction:
+From + to -. $V_{ab}$ means $a$ is the positive terminal and $b$ negative. The same goes for $I_{ab}$</p>
+<p>KCL:</p>
+<blockquote>
+<p>The sum of current entering the node is equivalent to the sum of current leaving the node.</p>
+</blockquote>
+<p>$$
+\sum_{k = 1}^{n}\ I_{entering} = \sum_{k = 1}^{n}\ I_{leaving}
+$$</p>
+<p>KVL:</p>
+<blockquote>
+<p>The sum of voltages equals zero, for any closed loop.</p>
+</blockquote>
+<p>$$
+\sum_{k = 1}^{n}\ V_k = 0
+$$</p>
+<p>Power:
+$$
+P = VI\ [W]
+$$</p>
+<p>Energy:
+$$
+W = \int_{t_1}^{t_2} P(t) dt
+$$</p>
+<p>Equivalent resistance in series:
+$$
+R_{eq} = R_1 + R_2 + \ldots\ R_N
+$$</p>
+<p>Equivalent resistance in parallel:
+$$
+R_{eq} = \dfrac{1}{\dfrac{1}{R_1} + \dfrac{1}{R_2} + \ldots\ + \dfrac{1}{R_N}}
+$$</p>
+<p>$$
+R_{eq} = \dfrac{R_1 R_2}{R_1 + R_2}
+$$</p>
+<p>$$
+R_{eq} = \dfrac{R_1 R_2 R_3}{R_1 R_2 + R_2 R_3 + R_1 R_3}
+$$</p>
+<p>Voltage Divider (Series):
+$$
+V_{k} = V_{total} \cdot\ \dfrac{R_k}{R_1 + R_2 + \ldots\ R_N}
+$$</p>
+<p>Current Divider (Parallel):
+$$
+I_{k} = I_{total} \cdot\ \dfrac{R_{other}}{R_1 + R_2 + \ldots\ R_N}
+$$</p>
+<p>For example, for two parallel:
+$$
+I_{1} = I_{total} \cdot\ \dfrac{R_2}{R_1 + R_2}
+$$</p>
+<p>$$
+I_{2} = I_{total} \cdot\ \dfrac{R_1}{R_1 + R_2}
+$$</p>
+<p>Node-Voltage analysis</p>
+<p>Idea:</p>
+<ol>
+<li>Find the nodes</li>
+<li>Assign a reference node (usually, we pick the node with most connections)</li>
+<li>Assign node voltages (Note, in a circuit with, $N$, nodes we have, $N - 1$, voltages)</li>
+<li>Then we solve these using KCL on each node ($\sum\ I_{out} = \sum\ I_{in}$)</li>
+</ol>
+<p>The convention is also the following:</p>
+<ul>
+<li>
+<p>Consider $i_{out}$ in resistors</p>
+</li>
+<li>
+<p>Consider $i_{out}$ as positive</p>
+</li>
+<li>
+<p>$V_{current} - V_{adjacent}$</p>
+</li>
+</ul>
+<p>Mesh-Current analysis:
+Is the opposite of Node-voltage analysis. Therefore, we just apply KVL instead of KCL. Note that this only forks for <strong>planar circuits</strong>.</p>
+<blockquote>
+<p>Planar circuit: It is possible to draw it in a plane without crossing wires.</p>
+</blockquote>
+<p>Superposition:
+As the name suggest, it&rsquo;s the principle that, given a linear system, the net response caused by two or more stimuli is the sum of these respones.</p>
+<p>In our case, the stimuli are voltage/current sources.</p>
+<p>So our method is:</p>
+<ul>
+<li>
+<p>Leave <strong>one</strong> source ON and turn all other sources OFF.</p>
+<ul>
+<li>
+<p>Voltage sources: $V = 0$, these become <em>short circuits</em>.</p>
+</li>
+<li>
+<p>Current sources: $I = 0$, these become <em>open circuits</em>.</p>
+</li>
+</ul>
+</li>
+<li>
+<p>Add the resulting responses to find the total response.</p>
+</li>
+</ul>
+<p>Equivalent circuits:</p>
+<ol>
+<li>
+<p>Replace the load, $R_L$, with open/short circuit.</p>
+</li>
+<li>
+<p>Find the short/open circuit current/voltage, $V_{oc} / I_{sc}$.</p>
+</li>
+<li>
+<p>Find the equivalent resistance, $R_{eq}$, of the network with all independent sources turned off.</p>
+</li>
+<li>
+<p>Then:</p>
+<ul>
+<li>
+<p>$V_{TH} = V_{oc}$</p>
+</li>
+<li>
+<p>$I_{N}  = I_{sc}$</p>
+</li>
+<li>
+<p>$R_{TH} = R_{N} = R_{eq}$</p>
+</li>
+</ul>
+</li>
+</ol>
+<p>$$
+V_{TH} = I_N \cdot\ R_{eq}
+$$</p>
+<p>Capacitors:</p>
+<blockquote>
+<p>A capacitor is a device that stores electric charge by creating an electric field between two conductive plates separated by an insulating material.</p>
+</blockquote>
+<p>$$
+C = \dfrac{q}{V}
+$$</p>
+<p>$$
+I = C \dfrac{dV}{dt}
+$$</p>
+<p>$$
+P = IV = CV \dfrac{dV}{dt}
+$$</p>
+<p>$$
+W(t) = \int_{t_0}^{t}\ P(t)\ dt \newline
+W(t) = \int_{t_0}^{t}\ CV \frac{dV}{dt}\ dt \newline
+W(t) = C \cdot\ \int_{t_0}^{t}\ V\ dV \newline
+W(t) = \frac{C}{2} [V(t)^2 - V(t_0)^2]
+$$</p>
+<p><strong>If $V = 0$ at $t_0$ then:</strong>
+$$
+W(t) = \frac{C \cdot\ v(t)^2}{2} \quad | \quad q = CV \newline
+W(t) = \frac{v(t)\ q(t)}{2} \quad | \quad C = \frac{q}{V} \newline
+W(t) = \frac{q(t)^2}{2C} \quad | \quad V = \frac{q}{C}
+$$</p>
+<p>$$
+V(t) = \frac{1}{C} \int_{t_0}^{t}\ i(t)\ dt + V(t_0)
+$$</p>
+<p>Capacitors in series and parallel:</p>
+<p>Parallel:
+$$
+C_{eq} = C_1 + C_2 + \ldots\ + C_N
+$$</p>
+<p>Series:
+$$
+C_{eq} = \dfrac{1}{C_1} + \dfrac{1}{C_2} + \ldots\ + \dfrac{1}{C_N}
+$$</p>
+<ul>
+<li>
+<p>Capacitors are open circuits to DC voltage (If $V$ is constant, then $I = 0$).</p>
+</li>
+<li>
+<p>The voltage on a capacitor <strong>cannot</strong> <em>jump</em> (Change instantaneously, since then we would have infinite current).</p>
+</li>
+<li>
+<p>Capacitors <em>store</em> energy ($I \cdot\ V &gt; 0$), or, deliver energy ($I \cdot\ V &lt; 0$).</p>
+</li>
+</ul>
+<p>Inductors:</p>
+<blockquote>
+<p>An inductor is a component in an electrical circuit that utilizes electromagnetic induction to resist changes in current flow by generating a voltage that opposes the change.</p>
+</blockquote>
+<p>$$
+V(t) = L \dfrac{dI}{dt}
+$$</p>
+<p>$$
+I(t) = \frac{1}{L} \int_{t_0}^{t}\ V(t) dt + I(t_0)
+$$</p>
+<p>Power &amp; Energy in Inductors
+$$
+P(t) = I(t) V(t) = I(L\ \frac{dI}{dt}) = \frac{dW}{dt}
+$$</p>
+<p>$$
+W = \frac{LI^2}{2}
+$$</p>
+<p>Inductors in series and parallel:</p>
+<p>Series:
+$$
+L_{eq} = L_1 + L_2 + \ldots\ L_N
+$$</p>
+<p>Parallel:
+$$
+L_{eq} = \dfrac{1}{L_1} + \dfrac{1}{L_2} + \ldots\ \dfrac{1}{L_N}
+$$</p>
+<ul>
+<li>
+<p>Inductors are <strong>short circuits</strong> to DC voltages (If $I$ constant, then $V = 0$).</p>
+</li>
+<li>
+<p>The current through an inductor <em>cannot</em> jump (change instantaneously, otherwise we would have infinite voltage).</p>
+</li>
+<li>
+<p>Inductors <em>store</em> energy ($I \cdot\ V &gt; 0$), or, deliver energy ($I \cdot\ V &lt; 0$).</p>
+</li>
+</ul>
+<p>Time-Varying Circuits:</p>
+<p>$$
+V_{C}(t) = V_{i}\ e^{\frac{-t}{\tau}} \quad \text{, where $\tau$ is:} \newline
+\tau = RC
+$$</p>
+<p>$$
+I(t) = I_{0}\ e^{\frac{-Rt}{L}} \newline
+\tau = \frac{L}{R}
+$$</p>
+<h3 id="electrical-and-magnetic-fields">Electrical and Magnetic Fields</h3>
+<p>Charge:
 $$
 e^{-} = 1.602 \cdot\ 10^{-19} C
 $$</p>
-<p>We also need to remember this very important law:</p>
-<blockquote>
-<p>The total charge within a <strong>closed</strong> system cannot change. It can only be <strong>redistributed</strong>.</p>
-</blockquote>
-<p>Now that we&rsquo;ve defined electrical charge, we can define electrical <strong>fields</strong>!</p>
-<h3 id="electrical-fields">Electrical fields</h3>
-<p>Let&rsquo;s start by defining what an electrical field is!</p>
-<blockquote>
-<p>An electrical field is a force field created by electric charges.</p>
-</blockquote>
-<p>Always remember:</p>
 <ul>
 <li>
 <p><strong>Repulsive</strong> if charges are the <strong>same</strong>.</p>
@@ -287,102 +532,183 @@ $$</p>
 <p><strong>Attractive</strong> if charges are <strong>different</strong>.</p>
 </li>
 </ul>
-<h4 id="coulombs-law">Coulomb&rsquo;s law</h4>
-<p><img src="/images/CL.png#center" alt=""></p>
-<p>This force field that is created by the charges, we can mathematically compute these forces:
+<p>Coulomb&rsquo;s Law:
 $$
-\mathbf{\vec{F_{12}}} = k_{e}\ \frac{q_1 q_20}{r^2} \mathbf{\vec{r_{12}}}
+\mathbf{\vec{F_{12}}} = k_{e}\ \frac{q_1 q_20}{r^2} \hat{r_{12}}
 $$</p>
-<p>Where $k_{e}$ is Coulomb&rsquo;s constant:
-$$
-k_e = \frac{1}{4\pi\varepsilon_{0}}
-$$</p>
-<p>Where $\varepsilon_{0}$ is the vacuum permittivity, we&rsquo;ll actually derive this later on!
-$$
-\varepsilon_{0} = \frac{10^{-9}}{36\pi}
-$$</p>
-<p>Alright with all of these tools, we can <em>finally</em> define electrical fields with some maths!</p>
 <p>$$
-\mathbf{\vec{E}} = k_{e}\ \frac{q}{r^2}\mathbf{\vec{r}}
+\varepsilon_{0} = \frac{10^{-9}}{36\pi} \approx 8.841 \cdot\ 10^{-12}\ \left[\dfrac{F}{m}\right]\ (\text{Farads per meter})
 $$</p>
-<p>Also, given an <em>electrical field</em> we can calculate the force on a point of charge:
-$$
+<p>$$
+k_e = \frac{1}{4\pi\varepsilon_{0}} \approx 9 \cdot\ 10^{9}\ \left[\dfrac{Nm^2}{C^2}\right]
+$$</p>
+<p>$$
+\mathbf{\vec{E}} = k_{e}\ \frac{q}{r^2}\hat{r}
+$$</p>
+<p>$$
 \mathbf{\vec{F_{E}}} = q\ \mathbf{\vec{E}}
 $$</p>
-<p>Notice how these formulas are really similar to formulas of gravitation.</p>
-<h3 id="superposition">Superposition</h3>
-<p>As you could have guessed, yes, the superposition principle applies to the electrical forces and fields:
-$$
-\mathbf{\vec{F_{j}}} = \sum_{i = 1}^{N}\ \mathbf{\vec{F_{ij}}} \newline
-\mathbf{\vec{E}} = \sum_{i = 1}^{N}\ \mathbf{\vec{E_{i}}}
-$$</p>
-<h3 id="dipoles">Dipoles</h3>
-<p>Two equals and opposite charges are known as a <em>dipole</em>.</p>
-<p>A <em>dipole moment</em> is a measure of the density of the electrical field <em>of a dipole</em>.</p>
-<p>The formula
+<p>Dipoles:
 $$
 \mathbf{\vec{p}} = q\mathbf{\vec{d}}
 $$</p>
-<p>Where $\mathbf{\vec{d}}$, is the direction vector, which is defined as, from negative charge to positive charge by convention.</p>
-<p>This means, placing a dipole in an electrical field, applies a <em>torque</em> on the dipole:
-<img src="/images/DP.png#center" alt=""></p>
-<p>Which means we can calculate the torque:
+<p>Placing a dipole in an electrical field:
 $$
 \mathbf{\vec{\tau}} = \mathbf{\vec{p}} \times \mathbf{\vec{E}} \newline
 \tau = p \cdot\ E\ sin(\theta)
 $$</p>
-<h3 id="electrical-flux">Electrical flux</h3>
-<p>So far we&rsquo;ve discussed discrete number of charges and points. Imagine now instead that we have a continuous line:
-<img src="/images/EF.png#center" alt=""></p>
-<p>So instead of:
-$$
-\mathbf{\vec{E}} = \sum_{i = 1}^{N}\ \mathbf{\vec{E_{i}}}
-$$</p>
-<p>We get:
-$$
-\mathbf{\vec{E}} = \int_{L_{1}}^{L_{2}}\ \mathbf{\vec{E_{l}}} dl
-$$</p>
-<p>Now, let&rsquo;s flip it around. We instead have a single point of charge and want to know how much of its electrical field passes through a line.</p>
-<p>This is precisely electrical flux! We denote electrical flux with the $\Phi$.
+<p>Electrical Flux 1D:
 $$
 \Phi = \sum_{i = 1}^{N}\ \mathbf{\vec{E}} \cdot\ \hat{n}
 $$</p>
-<p>And for the continuous case:
-$$
+<p>$$
 \Phi = \int_{L_{1}}^{L_{2}}\ \mathbf{\vec{E_{l}}} \cdot\ \hat{n} \cdot\ dl
 $$</p>
-<p>Let&rsquo;s now add another dimension, so it&rsquo;s a surface
-<img src="/images/EF3.png#center" alt="">
+<p>Electrical Flux 2D:
 $$
 \Phi = \iint \mathbf{\vec{E}} \cdot\ \hat{n} \cdot\ d\mathbf{\vec{A}} = \iint \mathbf{\vec{E}} \cdot\ d\mathbf{\vec{A}}\ cos(\theta)
 $$</p>
-<p>If we&rsquo;re instead within a <strong>closed contour</strong>:
-<img src="/images/EF4.png#center" alt=""></p>
-<p>For this we use the special integral symbol:
+<p>Electrical Flux closed contour:
 $$
 \Phi = \oiint\ \mathbf{\vec{E}} \cdot\ d\mathbf{\vec{A}}
 $$</p>
-<p>What is the total flux through this surface (circle).
-$$
-\mathbf{\vec{E}} = \frac{q}{4\pi r^2 \varepsilon_{0}} \newline
-A = 4\pi r^2
-$$</p>
-<p>Therefore:
-$$
-\Phi = \frac{q}{4\pi r^2 \varepsilon_{0}}\ 4\pi r^2 \newline
-$$</p>
-<p>$$
-\Phi = \frac{q}{\varepsilon_{0}}
-$$</p>
-<h3 id="gausss-law">Gauss&rsquo;s law</h3>
-<p>This is Gauss&rsquo;s law!
+<p>Gauss&rsquo;s Law:
 $$
 \Phi_{E} = \oiint \mathbf{\vec{E}} \cdot\ d\mathbf{\vec{A}} = \frac{q}{\varepsilon_{0}}
 $$</p>
-<h4 id="gaussian-surfaces">Gaussian surfaces</h4>
-<p>Since this is from a specific surface, we&rsquo;ll need to consider the different types:
-<img src="/images/GS.png#center" alt=""></p>
-<p>These are the gaussian surfaces that we&rsquo;ll be looking into!</p>
+<p>Work to move charges:
+$$
+W = \dfrac{k_e q_1 q_2}{R}
+$$</p>
+<p>Work in an electrical field:
+$$
+W = -qE_0d
+$$</p>
+<p>Cheat sheet:
+$$
+W = - \int \mathbf{\vec{F}} \cdot\ dr
+$$</p>
+<p>$$
+\mathbf{\vec{E}} = \dfrac{\mathbf{\vec{F}}}{Q}
+$$</p>
+<p>$$
+\Delta V = \dfrac{W}{Q}
+$$</p>
+<p>$$
+\Delta V = - \int \mathbf{\vec{E}} \cdot\ dr
+$$</p>
+<p>Capacitors:
+$$
+q = \sigma A
+$$</p>
+<p>$$
+E = \dfrac{q}{\varepsilon_0 A}
+$$</p>
+<p>Energy stored in a capacitor:
+$$
+W = \dfrac{1}{C}\ \dfrac{Q^2}{2}
+$$</p>
+<p>Magnetic Fields:
+$$
+\mathbf{\vec{F}_B} = q\mathbf{\vec{v}} \times \mathbf{\vec{B}} = |q|vB\ sin(\theta)
+$$</p>
+<p>$$
+\mathbf{\vec{B}} \left[1\ T = 1 \dfrac{N}{A \cdot\ m}\right]
+$$</p>
+<p>Biot-Savarts law:
+$$
+d\mathbf{\vec{B}} = \dfrac{\mu_0}{4\pi} \dfrac{I\ d\mathbf{\vec{s}} \times \mathbf{\vec{r}}}{r^2}
+$$</p>
+<p>$$
+\mu_0 = 4\pi \cdot\ 10^{-7}\ \approx 1.2566 \cdot\ 10^{-6}
+$$</p>
+<p>$$
+\mathbf{\vec{B}} = \dfrac{\mu_0 I}{4\pi} \int \dfrac{d\mathbf{\vec{s}} \times \mathbf{\vec{r}}}{r^2}
+$$</p>
+<p>$$
+B = \dfrac{\mu_0 I}{2\pi r}
+$$</p>
+<p>$$
+B = \dfrac{\mu_0 NI}{l} = \mu_0 nl
+$$</p>
+<p>Ampere&rsquo;s Law:
+$$
+\oint \mathbf{\vec{B}} \cdot\ d\mathbf{\vec{s}} = \mu_0 I_{enc}
+$$</p>
+<p>Lorentz Force:
+$$
+\mathbf{\vec{F}_E} = q\mathbf{\vec{E}}
+$$</p>
+<p>$$
+\mathbf{\vec{F}_B} = q\mathbf{\vec{v}} \times \mathbf{\vec{B}}
+$$</p>
+<p>$$
+\mathbf{\vec{F} = \mathbf{\vec{F}_E} + \mathbf{\vec{F}_B} = q(\mathbf{\vec{E}} + \mathbf{\vec{v}} \times \mathbf{\vec{B}})}
+$$</p>
+<p>Magnetic Flux:
+$$
+\Phi_B = \int \int \mathbf{\vec{B}} \cdot\ d\mathbf{\vec{A}} = BA\ cos(\theta)
+$$</p>
+<p>Lenz Law:</p>
+<blockquote>
+<p>The induced current produces a magnetic field, which oppose the change in magnetic flux that induces such currents.</p>
+</blockquote>
+<p>Maxwell&rsquo;s Equations:</p>
+<p><strong>Gauss&rsquo;s Law for electrostatics</strong>:
+$$
+\Phi_E = \oiint \mathbf{\vec{E}} \cdot\ d\mathbf{\vec{A}} = \dfrac{q}{\mu_0}
+$$</p>
+<p><strong>Gauss&rsquo;s Law for magnetism</strong>:
+$$
+\Phi_B = \oiint \mathbf{\vec{B}} \cdot\ d\mathbf{\vec{A}} = 0
+$$</p>
+<p><strong>Faraday&rsquo;s Law</strong>:
+$$
+\varepsilon = \oint \mathbf{\vec{E}} \cdot d\mathbf{\vec{s}} = -\dfrac{d \Phi_B}{dt}
+$$</p>
+<p><strong>Ampere-Maxwell Law</strong>:
+$$
+\varepsilon = \oint \mathbf{\vec{B}} \cdot d\mathbf{\vec{s}} = \mu_0(I + I_d) = \mu_0\left(I + \varepsilon_0 \dfrac{d \Phi_E}{dt}\right)
+$$</p>
+<p>If q = 0 and I = 0:</p>
+<p><strong>Gauss&rsquo;s Law for electrostatics</strong>:
+$$
+\Phi_E = \oiint \mathbf{\vec{E}} \cdot\ d\mathbf{\vec{A}} = 0
+$$</p>
+<p><strong>Gauss&rsquo;s Law for magnetism</strong>:
+$$
+\Phi_B = \oiint \mathbf{\vec{B}} \cdot\ d\mathbf{\vec{A}} = 0
+$$</p>
+<p><strong>Faraday&rsquo;s Law</strong>:
+$$
+\varepsilon = \oint \mathbf{\vec{E}} \cdot d\mathbf{\vec{s}} = -\dfrac{d \Phi_B}{dt}
+$$</p>
+<p><strong>Ampere-Maxwell Law</strong>:
+$$
+\varepsilon = \oint \mathbf{\vec{B}} \cdot d\mathbf{\vec{s}} = \mu_0(I + I_d) = \mu_0 \varepsilon_0 \dfrac{d \Phi_E}{dt}
+$$</p>
+<p>Electromagnetic Waves:
+$$
+\dfrac{E}{B} = \dfrac{\omega}{k} = c
+$$</p>
+<p>EMFs in circuits:</p>
+<blockquote>
+<p>Electrical field opposes change in voltage
+$$
+C = \varepsilon_0 \dfrac{A}{d} \newline
+U = \dfrac{1}{2} C|V^2| \newline
+I(t) = C \dfrac{dV}{dt}
+$$</p>
+</blockquote>
+<blockquote>
+<p>Magnetic field opposes change in the current
+$$
+L = \mu_0 N^2 \dfrac{A}{l} \newline
+U = \dfrac{1}{2} LI^2 \newline
+V(t) = L \dfrac{dI}{dt}
+$$</p>
+</blockquote>
+<h3 id="ac">AC</h3>
 
 		</section>
   </article>
