@@ -709,6 +709,141 @@ V(t) = L \dfrac{dI}{dt}
 $$</p>
 </blockquote>
 <h3 id="ac">AC</h3>
+<p>General:</p>
+<p>Note: Can be $\cos$, does not matter.
+$$
+V(t) = V_m \sin(\omega t + \theta)
+$$</p>
+<p>$$
+V_m - \text{Amplitude}\ [V] \newline
+\omega - \text{Angular frequency}\ \left[\dfrac{rad}{s}\right] \newline
+\theta - \text{Phase Shift} \left[^\circ\ \text{or}\ rad \right] \newline
+T - \text{Period}\ [s] \newline
+f - \text{Frequency}\ [Hz] \newline
+$$</p>
+<p>$$
+T = \dfrac{2\pi}{\omega} = \dfrac{1}{f} \newline
+\omega = 2\pi f
+$$</p>
+<p>Root Mean Square (RMS):
+$$
+V_{RMS} = \sqrt{\dfrac{1}{T} \int_0^T V^2(t) dt} = \dfrac{V_m}{\sqrt{2}} \newline
+I_{RMS} = \sqrt{\dfrac{1}{T} \int_0^T I^2(t) dt} = \dfrac{I_m}{\sqrt{2}}
+$$</p>
+<p>$$
+P_{Avg} = \dfrac{(V_{RMS})^2}{R} = \dfrac{\left(\dfrac{V_m}{\sqrt{2}}\right)^2}{R} = \dfrac{V_m^2}{2R} \newline
+$$</p>
+<p>$$
+P_{Avg} = (I_{RMS})^2 R = \left(\dfrac{I_m}{\sqrt{2}}\right)^2 R = \dfrac{I_m^2 R}{2}
+$$</p>
+<p>Trigonometry:
+$$
+rad = deg \cdot\ \dfrac{\pi}{180}
+$$</p>
+<p>$$
+sin(\omega t) = cos(\omega t - 90^\circ) \newline
+cos(\omega t) = sin(\omega t + 90^\circ)
+$$</p>
+<p>Rules for comparing the <strong>phase</strong> of two wave functions:</p>
+<ul>
+<li>
+<p>Both must be written in <em>either</em> sine or cosine.</p>
+</li>
+<li>
+<p>Both must be written with <strong>positive</strong> amplitude.</p>
+</li>
+<li>
+<p>Each have the same constant frequency.</p>
+</li>
+</ul>
+<p>Phasors:</p>
+<p>Rectangular form:
+$$
+z = x + jy \newline
+z = |z|(cos(\varphi) + j sin(\varphi))
+$$</p>
+<p>Polar form:
+$$
+z = |z|\angle{\theta^\circ} \newline
+z = |z|e^{j \theta^\circ}
+$$</p>
+<p>Polar <em>to</em> rectangular form:
+$$
+z = r\angle{\theta^\circ} \newline
+x = r cos(\theta^\circ) \newline
+y = r cos(\theta^\circ) \newline
+z = x + j y
+$$</p>
+<p>Rectangular <em>to</em> polar form:
+$$
+z = x + jy \newline
+r = \sqrt{x^2 + y^2} \newline
+\theta  = \arctan{\left(\dfrac{y}{x}\right)} \newline
+z = r\angle{\theta^\circ} \newline
+$$</p>
+<p>Operations:</p>
+<p>Multiplication:
+$$
+a = (b\angle{c^\circ}) \cdot\ (d\angle{e^\circ}) \newline
+a = (b \cdot\ d \angle{c^\circ + e^\circ})
+$$</p>
+<p>Division:</p>
+<p>$$
+a = \dfrac{(b\angle{c^\circ})}{(d\angle{e^\circ})} \newline
+a = (\dfrac{b}{d} \angle{c^\circ - e^\circ})
+$$</p>
+<p>Phasor relations:
+$$
+V = RI \newline
+$$
+$$
+V = j\omega LI \newline
+$$
+$$
+V = \dfrac{1}{j\omega C} I
+$$</p>
+<p>Impedance:
+$$
+Z = \dfrac{V}{I}
+$$</p>
+<p>This means that:
+$$
+Z_{R} = R \newline
+Z_{L} = j\omega L \newline
+Z_{C} = \dfrac{1}{j\omega C} = -j \dfrac{1}{\omega C}
+$$</p>
+<p>Power in AC - general:</p>
+<p>$$
+V(t) = V_m cos(\omega t + \theta_V) \newline
+I(t) = I_m cos(\omega t + \phi_I)
+$$</p>
+<p>$$
+P(t) = V_m I_m cos(\omega t + \theta_V) cos(\omega t + \phi_I)
+$$</p>
+<p>$$
+P(t) = \dfrac{1}{2} V_m I_m cos(\theta_V - \phi_I) + \dfrac{1}{2} V_m I_m cos(2 \omega t + \theta_V + \phi_I)
+$$</p>
+<p>$$
+P_{avg} = \dfrac{V_m I_m}{2} cos(\theta_V - \phi_I)
+$$</p>
+<p>$$
+P_{avg} = V_{rms} I_{rms} cos(\theta_V - \phi_I)
+$$</p>
+<p>Different Types:</p>
+<ul>
+<li>
+<p>Real Power: $P = V_{rms} I_{rms}\ cos(\theta_V - \phi_I)\ [W]$</p>
+</li>
+<li>
+<p>Reactive Power: $Q = V_{rms} I_{rms} sin(\theta_V - \phi_I) [VAR]$</p>
+</li>
+<li>
+<p>Complex Power: $S = P + jQ$ or in polar form, $S = V_{rms} I_{rms} \angle \theta_V - \phi_I [VA]$</p>
+</li>
+<li>
+<p>Apparent Power: $|S| = V_{rms} I_{rms} [VA]$.</p>
+</li>
+</ul>
 
 		</section>
   </article>
