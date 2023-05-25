@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8"><meta property="og:site_name" content="rezvan"><title>Tags | rezvan</title>
-  <meta property="og:title" content="Tags | rezvan"><meta property="og:description" content="">
+	<meta charset="utf-8"><meta property="og:site_name" content="rezvan"><title>Computer System Engineering: Summary | rezvan</title>
+  <meta property="og:title" content="Computer System Engineering: Summary | rezvan"><meta property="og:description" content="">
   <meta property="og:type" content="blog">
-  <meta property="og:link" content="https://rezvan.xyz/tags/"><link rel="shortcut icon" type="image/png" href=https://rezvan.xyz//images/icon.png />
+  <meta property="og:link" content="https://rezvan.xyz/school/EDA333_summary/"><link rel="shortcut icon" type="image/png" href=https://rezvan.xyz//images/icon.png />
   <meta property="og:image" content="https://rezvan.xyz//images/icon.png" /><meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="alternate" type="application/rss+xml" href="https://rezvan.xyz/tags/index.xml" title="rezvan" />
 	<link rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz//css/main.css" />
 
     <head>
@@ -223,10 +222,26 @@ body.dark-mode .title {
 </head>
 
 <body>
-    <div class="wrapper">
+  <div class="wrapper">
+	<div class="content">
 		<div class="header_main">
 
-    <a href="https://rezvan.xyz/"><p class="header_title">rezvan</p>
+    <a href="https://rezvan.xyz/"><p class="header_title">rezvan</p><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.3/dist/katex.min.css" integrity="sha384-Juol1FqnotbkyZUT5Z7gUPjQ9gzlwCENvUZTpQBAPxtusdwFLRy382PSDx5UUJ4/" crossorigin="anonymous">
+
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.3/dist/katex.min.js" integrity="sha384-97gW6UIJxnlKemYavrqDHSX3SiygeOwIZhwyOKRfSaf0JWKRVj9hLASHgFTzT+0O" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.3/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+            delimiters: [
+                {left: "$$", right: "$$", display: true},
+                {left: "$", right: "$", display: false}
+            ]
+        });
+    });
+</script>
+
     </a>
 
     <br>
@@ -241,78 +256,150 @@ body.dark-mode .title {
         
     </nav></div>
 
-                
-                
-                
-				<section class="post_listed">
-					<time class="post_time">02.04.23</time>
-					<a class="title" href="/school/Concurrent_programming_6/">Concurrent Programming: Part 6 &amp; 7 - Message-Passing Concurrency</a>
-        </section>
-				
-				<section class="post_listed">
-					<time class="post_time">02.03.23</time>
-					<a class="title" href="/school/Concurrent_programming_5/">Concurrent Programming: Part 5 - Monitors</a>
-        </section>
-				
-				<section class="post_listed">
-					<time class="post_time">02.03.23</time>
-					<a class="title" href="/school/Digital_design_5/">Digital Design: Part 5 - Arithmetic Units</a>
-        </section>
-				
-				<section class="post_listed">
-					<time class="post_time">02.01.23</time>
-					<a class="title" href="/school/Concurrent_programming_4/">Concurrent Programming: Part 4 - Synchronization problems with semaphores</a>
-        </section>
-				
-				<section class="post_listed">
-					<time class="post_time">01.31.23</time>
-					<a class="title" href="/school/Digital_design_4/">Digital  Design: Part 4 - Finite State Machines</a>
-        </section>
-				
-				<section class="post_listed">
-					<time class="post_time">01.31.23</time>
-					<a class="title" href="/school/Concurrent_programming_3/">Concurrent Programming: Part 3 - Models of concurrency &amp; synchronization algorithms</a>
-        </section>
-				
-				<section class="post_listed">
-					<time class="post_time">01.24.23</time>
-					<a class="title" href="/school/Digital_design_3/">Digital Design: Part 3 - Sequential Circuits</a>
-        </section>
-				
-				<section class="post_listed">
-					<time class="post_time">01.19.23</time>
-					<a class="title" href="/school/Concurrent_programming_2/">Concurrent Programming: Part 2 - Races, Locks, and Semaphores</a>
-        </section>
-				
-				<section class="post_listed">
-					<time class="post_time">01.18.23</time>
-					<a class="title" href="/school/Digital_design_2/">Digital Design: Part 2- Binary Adders</a>
-        </section>
-				
-				<section class="post_listed">
-					<time class="post_time">01.16.23</time>
-					<a class="title" href="/school/Concurrent_programming/">Concurrent Programming: Part 1 - Introduction</a>
-        </section>
-				
-				
+  <article><div class="title_wrapper">
+			<h1 class="title">Computer System Engineering: Summary</h1><p class="single_time">May 25, 2023</p></div>
+		<section class="post">
+			<h3 id="performance-and-mips">Performance and MIPS</h3>
+<p>CPU Time for a program:
+$$
+\text{CPU Time} = \frac{\text{Instructions}}{\text{Program}} \cdot\ \frac{\text{Clock cycles}}{\text{Instruction}} \cdot\ \frac{\text{Seconds}}{\text{Clock cycle}}
+$$</p>
+<p>$$
+\text{CPU Time} = IC \cdot\ CPI \cdot\ T_c
+$$</p>
+<p>Geometric mean:
+$$
+\sqrt[n]{\prod_{i = 1}^{n} \text{Execution time ratio}_i}
+$$</p>
+<p>MIPS Cheat Sheet:</p>
+<p>Register convention:</p>
+<p><code>$zero</code> - Always 0</p>
+<p><code>$v0-1</code> - Result registers</p>
+<p><code>$a0-3</code> - Argument registers</p>
+<p><code>$t0-7</code> - Temporary registers</p>
+<p><code>$s0-7</code> - Content registers, save for later use</p>
+<p><code>$sp</code> - Stack pointer</p>
+<p><code>$ra</code> - Return address</p>
+<p>Arithmetic:</p>
+<pre tabindex="0"><code>add     $t0, $t0, $t1   #t0 = t0 + t1
+addi    $t0, $t0, 5     #t0 = t0 + 5
+addu    $t0, $t0, $t1   #t0 = t0 + t1 (unsigned)
+addiu   $t0, $t0, 5     #t0 = t0 + 5  (unsigned)
 
-<ul class="pagination">
-	
-    <a href="/tags/page/3/" class="page-prev page-link" aria-label="Newer Posts Newer Posts">← Newer Posts</a>
-	
-	
-    <a href="/tags/page/5/" class="page-next page-link" aria-label="Older Posts">Older Posts →</a>
-	
-	</span>
+
+sub     $t0, $t0, $t1   #t0 = t0 - t1
+subi    $t0, $t0, 5     #t0 = t0 - 5
+subu    $t0, $t0, $t1   #t0 = t0 - t1 (unsigned)
+subiu   $t0, $t0, 5     #t0 = t0 - 5  (unsigned)
+</code></pre><p>Memory:</p>
+<pre tabindex="0"><code>lw $s0, 0($a0)  # s0 = MEM[a0] (word)
+sw $s0, 0($a0)  # MEM[a0] = $s0 (word)
+
+
+l.d $s0, 0($a0)  # s0, s1 = MEM[a0] (Double word)
+s.d $s0, 0($a0)  # MEM[a0] = $s0, $s1 (Double word)
+</code></pre><p>Logical:</p>
+<pre tabindex="0"><code>sll $t0, $t1, 2     # t0 := t1 * 4
+srl $t0, $t1, 2     # t0 := t1 / 4
+
+and $t0, $t1, $t2   # t0 := t1 &amp; t2
+andi $t0, $t1, 2   # t0 := t1 &amp; 2
+
+or $t0, $t1, $t2   # t0 := t1 | t2
+ori $t0, $t1, 2   # t0 := t1 | 2
+
+nor $t0, $t1, $zero # := ~(t1)
+</code></pre><p>Conditionals:</p>
+<pre tabindex="0"><code>beq rs, rt, L1 # if(rs == rt); Jump to L1
+bne rs, rt, L1 # if(rs != rt); Jump to L1
+j L1           # Jump to L1
+</code></pre><p>Remember:</p>
+<ul>
+<li>
+<p>Incrementing with 1 and not 4!</p>
+</li>
+<li>
+<p>MIPS uses byte addressing</p>
+</li>
 </ul>
+<h3 id="pipeline">Pipeline</h3>
+<ol>
+<li>
+<p><strong>Fetch</strong> Instruction. PC → Instruction memory.</p>
+</li>
+<li>
+<p><strong>Decode</strong> the instruction and read from registers.</p>
+</li>
+<li>
+<p><strong>Execute</strong> the instruction.</p>
+<ul>
+<li>
+<p>Arithmetic/logical computation.</p>
+</li>
+<li>
+<p>Computation of effective memory address.</p>
+</li>
+<li>
+<p>Computation of jump address/conditional address.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Read / Write from / to memory</strong> for load/store instructions.</p>
+</li>
+<li>
+<p><strong>Write back</strong> the result into the result register (RF).</p>
+</li>
+</ol>
+<p>$$
+\textbf{Speedup} = \frac{T_{c \quad | \quad \text{Non-pipelined version}}}{T_{c \quad | \quad \text{Pipelined version}}} \approx \text{Number of pipeline stages}
+$$</p>
+<ul>
+<li>
+<p>Structural hazards</p>
+<ul>
+<li>A stage is currently busy doing an operation</li>
+</ul>
+</li>
+<li>
+<p>Data hazards</p>
+<ul>
+<li>An instruction that depends on a earlier instruction.</li>
+</ul>
+</li>
+<li>
+<p>Control hazards</p>
+<ul>
+<li>The condition and potential address of a jump has not yet by the instruction fetch.</li>
+</ul>
+</li>
+</ul>
+<h3 id="caches">Caches</h3>
+<p>$$
+h_x = \textbf{Hit rate} = \text{Percentage of hits in memory x} \newline
+(1 - h_x) = m_x = \textbf{Miss rate} = \text{Percentage of misses in memory x}
+$$</p>
+<p>$$
+T_x = \textbf{Hit time} = \text{Acces time for memory x} \newline
+(T_2 - T_1) = \textbf{Miss penalty} = \text{Miss penalty for a miss in memory 1}
+$$</p>
+<p><em>Average Memory Access Time</em> (AMAT):
+$$
+\text{AMAT} = h_1\ T_1 + m_1\ T_2 = h_1\ T_1 + (1 - h_1)T_2
+$$</p>
+<p>$$
+\frac{\text{Memory size}}{\text{Cache size}} = N \newline
+$$</p>
+<p>$$
+\text{Tag bits} = log_2(N)
+$$</p>
 
-
-			<footer><p class="footer_msg">memento mori</p></footer>
-
-		</div>
-    </div>
-		
+		</section>
+  </article>
 	</div>
-	
+
+	<footer><p class="footer_msg">memento mori</p></footer>
+
+  </div>
 </body>
 </html>

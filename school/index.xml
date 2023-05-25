@@ -6,7 +6,26 @@
     <description>Recent content in Schools on rezvan</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 19 May 2023 16:57:46 +0200</lastBuildDate><atom:link href="https://rezvan.xyz/school/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 25 May 2023 11:22:18 +0200</lastBuildDate><atom:link href="https://rezvan.xyz/school/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Computer System Engineering: Summary</title>
+      <link>https://rezvan.xyz/school/EDA333_summary/</link>
+      <pubDate>Thu, 25 May 2023 11:22:18 +0200</pubDate>
+      
+      <guid>https://rezvan.xyz/school/EDA333_summary/</guid>
+      <description>Performance and MIPS CPU Time for a program: $$ \text{CPU Time} = \frac{\text{Instructions}}{\text{Program}} \cdot\ \frac{\text{Clock cycles}}{\text{Instruction}} \cdot\ \frac{\text{Seconds}}{\text{Clock cycle}} $$
+$$ \text{CPU Time} = IC \cdot\ CPI \cdot\ T_c $$
+Geometric mean: $$ \sqrt[n]{\prod_{i = 1}^{n} \text{Execution time ratio}_i} $$
+MIPS Cheat Sheet:
+Register convention:
+$zero - Always 0
+$v0-1 - Result registers
+$a0-3 - Argument registers
+$t0-7 - Temporary registers
+$s0-7 - Content registers, save for later use
+$sp - Stack pointer</description>
+    </item>
+    
     <item>
       <title>Electrical Circuits and Fields: Summary</title>
       <link>https://rezvan.xyz/school/EEM076_summary/</link>
