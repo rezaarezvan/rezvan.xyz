@@ -452,6 +452,8 @@ Number of virtual pages = (Number of processes $\times$ Size of each virtual add
 <p>A = tag + offset + index</p>
 <p>TLB Index: If there are E pages, index = log2(E).</p>
 <p>TLB Tag: Tag is the rest of bits. So, if we have V virtual address bits, tag = V - index.</p>
+<p>Calculate the size of each <strong>block entry</strong>. = Number of status bits (valid, dirt etc). + Tag bits + Data bits (Usually block size (in bytes) * 8).</p>
+<p>Calculate the size of the cache. = Number of status bits (valid, dirt etc). + Tag bits + Data bits (Usually block size (in bytes) * 8).</p>
 
 		</section>
   </article>
