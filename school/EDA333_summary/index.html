@@ -438,6 +438,20 @@ $$</p>
 </ul>
 </li>
 </ul>
+<h3 id="notes">Notes</h3>
+<p>Page table size = Number of virtual pages $\times$ Size of each page table entry</p>
+<p>Number of virtual pages = Total virtual address space / Page size
+Number of virtual pages = (Number of processes $\times$ Size of each virtual address space) / Page size</p>
+<p>Cache Offset: If block size is B bytes, offset = log2(B).</p>
+<p>Cache Index: Given by how many blocks/sets there are.</p>
+<p>If direct mapped, meaning 1 block per set:</p>
+<p>Number of blocks = Total Cache Size / Sizer per block</p>
+<p>Number of sets = (Total Cache Size / Sizer per block) / Associativity level</p>
+<p>Cache Index = log2(Number of blocks/sets)</p>
+<p>Cache Tag: If A is the total amount of address bits, tag = A - offset - index.</p>
+<p>A = tag + offset + index</p>
+<p>TLB Index: If there are E pages, index = log2(E).</p>
+<p>TLB Tag: Tag is the rest of bits. So, if we have V virtual address bits, tag = V - index.</p>
 
 		</section>
   </article>
