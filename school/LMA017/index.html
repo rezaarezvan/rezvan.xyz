@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8"><meta property="og:site_name" content="rezvan"><title>Categories | rezvan</title>
-  <meta property="og:title" content="Categories | rezvan"><meta property="og:description" content="">
+	<meta charset="utf-8"><meta property="og:site_name" content="rezvan"><title>Mathematical analysis in several variables: Part 1 - Functions of several variables, level curves and limits. | rezvan</title>
+  <meta property="og:title" content="Mathematical analysis in several variables: Part 1 - Functions of several variables, level curves and limits. | rezvan"><meta property="og:description" content="">
   <meta property="og:type" content="blog">
-  <meta property="og:link" content="https://rezvan.xyz/categories/"><link rel="shortcut icon" type="image/png" href=https://rezvan.xyz//images/icon.png />
+  <meta property="og:link" content="https://rezvan.xyz/school/LMA017/"><link rel="shortcut icon" type="image/png" href=https://rezvan.xyz//images/icon.png />
   <meta property="og:image" content="https://rezvan.xyz//images/icon.png" /><meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="alternate" type="application/rss+xml" href="https://rezvan.xyz/categories/index.xml" title="rezvan" />
 	<link rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz//css/main.css" />
 
     <head>
@@ -223,10 +222,26 @@ body.dark-mode .title {
 </head>
 
 <body>
-    <div class="wrapper">
+  <div class="wrapper">
+	<div class="content">
 		<div class="header_main">
 
-    <a href="https://rezvan.xyz/"><p class="header_title">rezvan</p>
+    <a href="https://rezvan.xyz/"><p class="header_title">rezvan</p><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.3/dist/katex.min.css" integrity="sha384-Juol1FqnotbkyZUT5Z7gUPjQ9gzlwCENvUZTpQBAPxtusdwFLRy382PSDx5UUJ4/" crossorigin="anonymous">
+
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.3/dist/katex.min.js" integrity="sha384-97gW6UIJxnlKemYavrqDHSX3SiygeOwIZhwyOKRfSaf0JWKRVj9hLASHgFTzT+0O" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.3/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+            delimiters: [
+                {left: "$$", right: "$$", display: true},
+                {left: "$", right: "$", display: false}
+            ]
+        });
+    });
+</script>
+
     </a>
 
     <br>
@@ -245,78 +260,113 @@ body.dark-mode .title {
         
     </nav></div>
 
-                
-                
-                
-				<section class="post_listed">
-					<time class="post_time">01.18.23</time>
-					<a class="title" href="/school/Digital_design_2/">Digital Design: Part 2- Binary Adders</a>
-        </section>
-				
-				<section class="post_listed">
-					<time class="post_time">01.16.23</time>
-					<a class="title" href="/school/Concurrent_programming/">Concurrent Programming: Part 1 - Introduction</a>
-        </section>
-				
-				<section class="post_listed">
-					<time class="post_time">01.16.23</time>
-					<a class="title" href="/school/Digital_design/">Digital Design: Part 1 - Introduction &amp; Boolean Algebra</a>
-        </section>
-				
-				<section class="post_listed">
-					<time class="post_time">12.09.22</time>
-					<a class="title" href="/school/DSA_10/">DSA: Part 10 - Complexity (2)</a>
-        </section>
-				
-				<section class="post_listed">
-					<time class="post_time">12.07.22</time>
-					<a class="title" href="/school/DSA_9/">DSA: Part 9 - Shortest Path Algortihms &amp; Spanning Trees</a>
-        </section>
-				
-				<section class="post_listed">
-					<time class="post_time">12.07.22</time>
-					<a class="title" href="/school/Waves_2/">Waves: Part 2 - Light waves</a>
-        </section>
-				
-				<section class="post_listed">
-					<time class="post_time">12.06.22</time>
-					<a class="title" href="/school/DSA_8/">DSA: Part 8 - Graphs</a>
-        </section>
-				
-				<section class="post_listed">
-					<time class="post_time">12.04.22</time>
-					<a class="title" href="/school/DSA_7/">DSA: Part 7 - Binary Heaps</a>
-        </section>
-				
-				<section class="post_listed">
-					<time class="post_time">12.04.22</time>
-					<a class="title" href="/school/Waves/">Waves: Part 1 - Mechanical Waves</a>
-        </section>
-				
-				<section class="post_listed">
-					<time class="post_time">11.30.22</time>
-					<a class="title" href="/school/DSA_6/">DSA: Part 6 - Trees</a>
-        </section>
-				
-				
+  <article><div class="title_wrapper">
+			<h1 class="title">Mathematical analysis in several variables: Part 1 - Functions of several variables, level curves and limits.</h1><p class="single_time">Aug 29, 2023</p></div>
+		<section class="post">
+			<h3 id="introduction">Introduction</h3>
+<p>Analysis of one variable is very powerful, but most of the time, functions will have several variables.</p>
+<p>This series will cover analysis in several variables.</p>
+<h3 id="formal-definition">Formal definition</h3>
+<p>Let&rsquo;s properly define what a function of several variables is</p>
+<blockquote>
+<p>A function of two variables is a rule that associates to each pair, $(x, y)$ of real numbers, in a set, $D$, a unique number denoted as, $f(x, y)$.</p>
+</blockquote>
+<blockquote>
+<p>$D$ is the so-called <em>domain</em>. The domain is the allowed values of our variable parameters.</p>
+</blockquote>
+<blockquote>
+<p>The <em>range</em> of $f$, is the set of all values that $f$ can take.</p>
+</blockquote>
+<p>$$
+\{ f(x, y) \ | \ (x, y) \in D \}
+$$</p>
+<h4 id="example">Example</h4>
+<p>$$
+f(x, y) = \dfrac{x^3 y}{y - 1}
+$$</p>
+<p>Range:
+$$
+\{ f(x, y) \ | \ y - 1 \neq 0 \}
+$$</p>
+<p>Domain:
+$$
+\{ (x, y) \ | \ y \neq 1 \}
+$$</p>
+<h3 id="graphs">Graphs</h3>
+<p>Let&rsquo;s define graphs in several variables.</p>
+<h4 id="definition">Definition</h4>
+<blockquote>
+<p>The graph of a function of two variables is the set of all points, $(x, y)$, which, $(x, y) \in D$.</p>
+</blockquote>
+<p>In other words, it&rsquo;s a surface with equation:
+$$
+z = f(x, y)
+$$</p>
+<h4 id="example-1">Example</h4>
+<p>Evaluate $f(0, 4)$ and graph the surface.</p>
+<p>$$
+f(x, y) = 8 - 4x - 2y
+$$</p>
+<p>$$
+f(0, 4) = 8 - 0 - 8 = 0
+$$</p>
+<p><img src="/images/graph.png#center" alt=""></p>
+<h3 id="level-curves">Level curves</h3>
+<p>Level curves are a very important topic when dealing with several variables.</p>
+<h4 id="definition-1">Definition</h4>
+<blockquote>
+<p>The <em>level curves</em> of a function of two variables are the curves with the equation:</p>
+</blockquote>
+<p>$$
+f(x, y) = k, \text{where $k$ is constant}
+$$</p>
+<p><img src="/images/level_curves_2.png#center" alt=""></p>
+<h4 id="example-2">Example</h4>
+<p>Sketch the level curves for $f(x, y) = xy$</p>
+<p>Case $k = 0$:
+$$
+xy = 0 \ | \ \text{$x = 0$ or $y = 0$}
+$$</p>
+<p>Case $k \neq 0$:
+$$
+xy = k \ | \ \text{$x = \dfrac{k}{y}$ or $y = \dfrac{k}{x}$}
+$$</p>
+<p>If we plot for different k values:
+<img src="/images/level_curves.png#center" alt=""></p>
+<h3 id="limits">Limits</h3>
+<p>Let&rsquo;s compare limits in one variable to several.
+$$
+\lim_{x \to a} f(x) = L
+$$</p>
+<p>$$
+\lim_{(x, y) \to (a, b)} f(x) = L
+$$</p>
+<p>They work quite similiar, let&rsquo;s see the limit laws:</p>
+<ol>
+<li></li>
+</ol>
+<p>$$
+\lim_{(x, y) \to (a, b)} f(x, y) \pm h(x, y) = L + M
+$$</p>
+<ol start="2">
+<li></li>
+</ol>
+<p>$$
+\lim_{(x, y) \to (a, b)} f(x, y) \cdot h(x, y) = L \cdot M
+$$</p>
+<ol start="3">
+<li></li>
+</ol>
+<p>$$
+\lim_{(x, y) \to (a, b)} \dfrac{f(x, y)}{h(x, y} = \dfrac{L}{M} , M \neq 0
+$$</p>
 
-<ul class="pagination">
-	
-    <a href="/categories/page/4/" class="page-prev page-link" aria-label="Newer Posts Newer Posts">← Newer Posts</a>
-	
-	
-    <a href="/categories/page/6/" class="page-next page-link" aria-label="Older Posts">Older Posts →</a>
-	
-	</span>
-</ul>
-
-
-			<footer><p class="footer_msg">memento mori</p></footer>
-
-		</div>
-    </div>
-		
+		</section>
+  </article>
 	</div>
-	
+
+	<footer><p class="footer_msg">memento mori</p></footer>
+
+  </div>
 </body>
 </html>

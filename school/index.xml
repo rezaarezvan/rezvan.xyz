@@ -6,7 +6,32 @@
     <description>Recent content in Schools on rezvan</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 25 May 2023 11:22:18 +0200</lastBuildDate><atom:link href="https://rezvan.xyz/school/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 29 Aug 2023 16:12:51 +0200</lastBuildDate><atom:link href="https://rezvan.xyz/school/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Transforms, signals and systems: Part 1 - Introduction &amp; signal operations</title>
+      <link>https://rezvan.xyz/school/SSY081/</link>
+      <pubDate>Tue, 29 Aug 2023 16:12:51 +0200</pubDate>
+      
+      <guid>https://rezvan.xyz/school/SSY081/</guid>
+      <description>Introductions In this series we&amp;rsquo;ll cover what we mean with transforms, signals and systems. How they relate and are used in the real world.
+Signals &amp;amp; systems Let&amp;rsquo;s first define what signals and systems are.
+Definition A signal is a set of information or data. Any physical quantity that varies over time, space or any other variable or variables.
+A system is an entity that processes a signal or a set of signals and outputs a signal or set of signals.</description>
+    </item>
+    
+    <item>
+      <title>Mathematical analysis in several variables: Part 1 - Functions of several variables, level curves and limits.</title>
+      <link>https://rezvan.xyz/school/LMA017/</link>
+      <pubDate>Tue, 29 Aug 2023 10:53:01 +0200</pubDate>
+      
+      <guid>https://rezvan.xyz/school/LMA017/</guid>
+      <description>Introduction Analysis of one variable is very powerful, but most of the time, functions will have several variables.
+This series will cover analysis in several variables.
+Formal definition Let&amp;rsquo;s properly define what a function of several variables is
+A function of two variables is a rule that associates to each pair, $(x, y)$ of real numbers, in a set, $D$, a unique number denoted as, $f(x, y)$.
+$D$ is the so-called domain.</description>
+    </item>
+    
     <item>
       <title>Computer System Engineering: Summary</title>
       <link>https://rezvan.xyz/school/EDA333_summary/</link>

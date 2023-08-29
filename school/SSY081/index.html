@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8"><meta property="og:site_name" content="rezvan"><title>Categories | rezvan</title>
-  <meta property="og:title" content="Categories | rezvan"><meta property="og:description" content="">
+	<meta charset="utf-8"><meta property="og:site_name" content="rezvan"><title>Transforms, signals and systems: Part 1 - Introduction &amp; signal operations | rezvan</title>
+  <meta property="og:title" content="Transforms, signals and systems: Part 1 - Introduction &amp; signal operations | rezvan"><meta property="og:description" content="">
   <meta property="og:type" content="blog">
-  <meta property="og:link" content="https://rezvan.xyz/categories/"><link rel="shortcut icon" type="image/png" href=https://rezvan.xyz//images/icon.png />
+  <meta property="og:link" content="https://rezvan.xyz/school/SSY081/"><link rel="shortcut icon" type="image/png" href=https://rezvan.xyz//images/icon.png />
   <meta property="og:image" content="https://rezvan.xyz//images/icon.png" /><meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="alternate" type="application/rss+xml" href="https://rezvan.xyz/categories/index.xml" title="rezvan" />
 	<link rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz//css/main.css" />
 
     <head>
@@ -223,10 +222,26 @@ body.dark-mode .title {
 </head>
 
 <body>
-    <div class="wrapper">
+  <div class="wrapper">
+	<div class="content">
 		<div class="header_main">
 
-    <a href="https://rezvan.xyz/"><p class="header_title">rezvan</p>
+    <a href="https://rezvan.xyz/"><p class="header_title">rezvan</p><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.3/dist/katex.min.css" integrity="sha384-Juol1FqnotbkyZUT5Z7gUPjQ9gzlwCENvUZTpQBAPxtusdwFLRy382PSDx5UUJ4/" crossorigin="anonymous">
+
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.3/dist/katex.min.js" integrity="sha384-97gW6UIJxnlKemYavrqDHSX3SiygeOwIZhwyOKRfSaf0JWKRVj9hLASHgFTzT+0O" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.3/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+            delimiters: [
+                {left: "$$", right: "$$", display: true},
+                {left: "$", right: "$", display: false}
+            ]
+        });
+    });
+</script>
+
     </a>
 
     <br>
@@ -245,78 +260,73 @@ body.dark-mode .title {
         
     </nav></div>
 
-                
-                
-                
-				<section class="post_listed">
-					<time class="post_time">01.18.23</time>
-					<a class="title" href="/school/Digital_design_2/">Digital Design: Part 2- Binary Adders</a>
-        </section>
-				
-				<section class="post_listed">
-					<time class="post_time">01.16.23</time>
-					<a class="title" href="/school/Concurrent_programming/">Concurrent Programming: Part 1 - Introduction</a>
-        </section>
-				
-				<section class="post_listed">
-					<time class="post_time">01.16.23</time>
-					<a class="title" href="/school/Digital_design/">Digital Design: Part 1 - Introduction &amp; Boolean Algebra</a>
-        </section>
-				
-				<section class="post_listed">
-					<time class="post_time">12.09.22</time>
-					<a class="title" href="/school/DSA_10/">DSA: Part 10 - Complexity (2)</a>
-        </section>
-				
-				<section class="post_listed">
-					<time class="post_time">12.07.22</time>
-					<a class="title" href="/school/DSA_9/">DSA: Part 9 - Shortest Path Algortihms &amp; Spanning Trees</a>
-        </section>
-				
-				<section class="post_listed">
-					<time class="post_time">12.07.22</time>
-					<a class="title" href="/school/Waves_2/">Waves: Part 2 - Light waves</a>
-        </section>
-				
-				<section class="post_listed">
-					<time class="post_time">12.06.22</time>
-					<a class="title" href="/school/DSA_8/">DSA: Part 8 - Graphs</a>
-        </section>
-				
-				<section class="post_listed">
-					<time class="post_time">12.04.22</time>
-					<a class="title" href="/school/DSA_7/">DSA: Part 7 - Binary Heaps</a>
-        </section>
-				
-				<section class="post_listed">
-					<time class="post_time">12.04.22</time>
-					<a class="title" href="/school/Waves/">Waves: Part 1 - Mechanical Waves</a>
-        </section>
-				
-				<section class="post_listed">
-					<time class="post_time">11.30.22</time>
-					<a class="title" href="/school/DSA_6/">DSA: Part 6 - Trees</a>
-        </section>
-				
-				
+  <article><div class="title_wrapper">
+			<h1 class="title">Transforms, signals and systems: Part 1 - Introduction &amp; signal operations</h1><p class="single_time">Aug 29, 2023</p></div>
+		<section class="post">
+			<h3 id="introductions">Introductions</h3>
+<p>In this series we&rsquo;ll cover what we mean with transforms, signals and systems. How they relate and are used in the real world.</p>
+<h3 id="signals--systems">Signals &amp; systems</h3>
+<p>Let&rsquo;s first define what signals and systems are.</p>
+<h4 id="definition">Definition</h4>
+<blockquote>
+<p>A signal is a set of information or data. Any physical quantity that varies over time, space or any other variable or variables.</p>
+</blockquote>
+<blockquote>
+<p>A system is an entity that processes a signal or a set of signals and outputs a signal or set of signals.</p>
+</blockquote>
+<p>We usually define signals with mathematical functions.</p>
+<h3 id="signal-operations">Signal operations</h3>
+<p>We&rsquo;ll cover signal operations for time-continuous signals.</p>
+<h4 id="amplitude-scaling">Amplitude scaling</h4>
+<p>$$
+f(t) \newline
+\Phi(t) = A \cdot f(t)
+$$</p>
+<p><img src="/images/gain.png#center" alt=""></p>
+<p>$$
+A &gt; 1 \ | \ \text{Amplification} \newline
+0 &lt; A &lt; 1 \ | \ \text{Attenuation} \newline
+A &lt; 0 \ | \ \text{Amplitude reversal}
+$$</p>
+<h4 id="dc-offset">DC (Offset)</h4>
+<p>$$
+f(t) \newline
+\Phi(t) = f(t) + B
+$$</p>
+<p><img src="/images/DC_offset.png#center" alt=""></p>
+<h4 id="time-scaling">Time scaling</h4>
+<p>Given our input signal
+$$
+f(t)
+$$</p>
+<p>We can perform different operations.</p>
+<h5 id="compression--expansion">Compression &amp; expansion</h5>
+<p>$$
+\Phi(t) = f(2t)
+$$</p>
+<p>$$
+\Phi(t) = f(\dfrac{t}{2})
+$$</p>
+<p><img src="/images/expand_compress.png#center" alt=""></p>
+<h5 id="reflection">Reflection</h5>
+<p>$$
+\Phi(t) = f(-t)
+$$</p>
+<p><img src="/images/invert.png#center" alt=""></p>
+<h5 id="time-shift">Time shift</h5>
+<p>$$
+\Phi(t) = f(t \pm T)
+$$</p>
+<p><img src="/images/shift.png#center" alt=""></p>
+<h3 id="summary">Summary</h3>
+<p>Will update/add more :]</p>
 
-<ul class="pagination">
-	
-    <a href="/categories/page/4/" class="page-prev page-link" aria-label="Newer Posts Newer Posts">← Newer Posts</a>
-	
-	
-    <a href="/categories/page/6/" class="page-next page-link" aria-label="Older Posts">Older Posts →</a>
-	
-	</span>
-</ul>
-
-
-			<footer><p class="footer_msg">memento mori</p></footer>
-
-		</div>
-    </div>
-		
+		</section>
+  </article>
 	</div>
-	
+
+	<footer><p class="footer_msg">memento mori</p></footer>
+
+  </div>
 </body>
 </html>
