@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8"><meta property="og:site_name" content="rezvan"><title>Schools | rezvan</title>
-  <meta property="og:title" content="Schools | rezvan"><meta property="og:description" content="">
+	<meta charset="utf-8"><meta property="og:site_name" content="rezvan"><title>Mathematical analysis in several variables: Part 2 - Continuity &amp; partial derivatives. | rezvan</title>
+  <meta property="og:title" content="Mathematical analysis in several variables: Part 2 - Continuity &amp; partial derivatives. | rezvan"><meta property="og:description" content="">
   <meta property="og:type" content="blog">
-  <meta property="og:link" content="https://rezvan.xyz/school/"><link rel="shortcut icon" type="image/png" href=https://rezvan.xyz//images/icon.png />
+  <meta property="og:link" content="https://rezvan.xyz/school/LMA017_2/"><link rel="shortcut icon" type="image/png" href=https://rezvan.xyz//images/icon.png />
   <meta property="og:image" content="https://rezvan.xyz//images/icon.png" /><meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="alternate" type="application/rss+xml" href="https://rezvan.xyz/school/index.xml" title="rezvan" />
 	<link rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz//css/main.css" />
 
     <head>
@@ -223,10 +222,26 @@ body.dark-mode .title {
 </head>
 
 <body>
-    <div class="wrapper">
+  <div class="wrapper">
+	<div class="content">
 		<div class="header_main">
 
-    <a href="https://rezvan.xyz/"><p class="header_title">rezvan</p>
+    <a href="https://rezvan.xyz/"><p class="header_title">rezvan</p><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.3/dist/katex.min.css" integrity="sha384-Juol1FqnotbkyZUT5Z7gUPjQ9gzlwCENvUZTpQBAPxtusdwFLRy382PSDx5UUJ4/" crossorigin="anonymous">
+
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.3/dist/katex.min.js" integrity="sha384-97gW6UIJxnlKemYavrqDHSX3SiygeOwIZhwyOKRfSaf0JWKRVj9hLASHgFTzT+0O" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.3/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+            delimiters: [
+                {left: "$$", right: "$$", display: true},
+                {left: "$", right: "$", display: false}
+            ]
+        });
+    });
+</script>
+
     </a>
 
     <br>
@@ -245,76 +260,174 @@ body.dark-mode .title {
         
     </nav></div>
 
-                
-                
-                
-				<section class="post_listed">
-					<time class="post_time">08.30.23</time>
-					<a class="title" href="/school/LMA017_2/">Mathematical analysis in several variables: Part 2 - Continuity &amp; partial derivatives.</a>
-        </section>
-				
-				<section class="post_listed">
-					<time class="post_time">08.29.23</time>
-					<a class="title" href="/school/SSY081/">Transforms, signals and systems: Part 1 - Introduction &amp; signal operations</a>
-        </section>
-				
-				<section class="post_listed">
-					<time class="post_time">08.29.23</time>
-					<a class="title" href="/school/LMA017/">Mathematical analysis in several variables: Part 1 - Functions of several variables, level curves and limits.</a>
-        </section>
-				
-				<section class="post_listed">
-					<time class="post_time">05.25.23</time>
-					<a class="title" href="/school/EDA333_summary/">Computer System Engineering: Summary</a>
-        </section>
-				
-				<section class="post_listed">
-					<time class="post_time">05.19.23</time>
-					<a class="title" href="/school/EEM076_summary/">Electrical Circuits and Fields: Summary</a>
-        </section>
-				
-				<section class="post_listed">
-					<time class="post_time">05.19.23</time>
-					<a class="title" href="/school/EEM076_13/">Electrical Circuits and Fields: Part 13 - Circuit Response, Passive Filters, and Amplifiers</a>
-        </section>
-				
-				<section class="post_listed">
-					<time class="post_time">05.12.23</time>
-					<a class="title" href="/school/EEM076_12/">Electrical Circuits and Fields: Part 12 - Power in AC Circuits</a>
-        </section>
-				
-				<section class="post_listed">
-					<time class="post_time">05.08.23</time>
-					<a class="title" href="/school/EEM076_11/">Electrical Circuits and Fields: Part 11 - Calculation methods for AC-circuits</a>
-        </section>
-				
-				<section class="post_listed">
-					<time class="post_time">05.02.23</time>
-					<a class="title" href="/school/EEM076_10/">Electrical Circuits and Fields: Part 10 - Steady-state sinusoidal analysis</a>
-        </section>
-				
-				<section class="post_listed">
-					<time class="post_time">04.28.23</time>
-					<a class="title" href="/school/EDA333_8/">Computer System Engineering: Part 8 - Parallel Processors</a>
-        </section>
-				
-				
+  <article><div class="title_wrapper">
+			<h1 class="title">Mathematical analysis in several variables: Part 2 - Continuity &amp; partial derivatives.</h1><p class="single_time">Aug 30, 2023</p></div>
+		<section class="post">
+			<h3 id="introduction">Introduction</h3>
+<p>In this part we&rsquo;ll define continuity when dealing with functions with several variables. We&rsquo;ll also start looking at derivatives of functions of several variables.</p>
+<h3 id="continuity">Continuity</h3>
+<p>Let&rsquo;s recall what continuity of a function with one variable is defined:</p>
+<blockquote>
+<p>A function of one variable is <em>continuous</em> at a point, $a \in D$ if:</p>
+</blockquote>
+<p>$$
+\lim_{x \to a} f(x) = f(a)
+$$</p>
+<p>In functions with several variables, it&rsquo;s the same:
+$$
+\lim_{(x, y) \to (a, b)} f(x, y) = f(a, b)
+$$</p>
+<p>We say $f$ is continuous on <em>its domain</em>, if $f$ is continuous at each point, $(a, b) \in D$</p>
+<h3 id="continuity-laws">Continuity laws</h3>
+<p>Suppose $f and g$ are functions of two variables. $h$, is a function of one variable. Which are continuous in their respective domains, then:</p>
+<p>$$
+f \pm g
+$$</p>
+<p>$$
+f \cdot g
+$$</p>
+<p>$$
+\left(\dfrac{f}{g}\right)
+$$</p>
+<p>$$
+h(f(x, y))
+$$</p>
+<p>All of the above, are continuous on their domains.</p>
+<h4 id="example">Example</h4>
+<p>$$
+f(x, y) = x  \ | \ \text{ is continuous at $\mathbb{R}^2$}
+$$</p>
+<p>Proof:
+$$
+\lim_{(x, y) \to (a, b)} f(x, y) = f(a, b) = a
+$$</p>
+<p>$$
+\text{Using the limit law: } \lim_{(x, y) \to (a, b)} x = a
+$$</p>
+<p>Similarly $f(x, y) = y$ is continuous at $\mathbb{R}^2$.</p>
+<p>$$
+f(x, y) = x^3y - y^2 + x \ | \ \text{ is continuous at $\mathbb{R}^2$}
+$$</p>
+<p>Proof:
+Since polynomials are combinations of $f(x, y) = x$ and $f(x, y) = y$, using continuity laws (or limit laws), we can easily prove this.</p>
+<p>$$
+f(x, y) = \dfrac{x^3 y^3 - x^4y}{y - x} \ | \ \text{ is continuous \textbf{on its domain}}
+$$</p>
+<p>The domain of $f$ is:
+$$
+\{(x, y) \ | \ y - x \neq 0 \}
+$$</p>
+<p>$$
+f(x, y) = e^{x^2 - y} \ | \ \text{ is continuous at $\mathbb{R}^2$}
+$$</p>
+<p>Using the composition law of continuity, we easily prove that this function is a continuous function, <strong>on its domain</strong>. In this case it&rsquo;s still $\mathbb{R}^2$.</p>
+<p>Knowing whether a function is continuous or not is very powerful, knowing that the above function is continuous makes:</p>
+<p>$$
+\lim_{(x, y) \to (a, b)} e^{x^2 - y} = e^{1^2 - 3} = \boxed{e^{-2}}
+$$</p>
+<p>Trivial.</p>
+<p>Determine if this function is continuous:
+$$
+f(x, y) =
+\begin{cases}
+\dfrac{xy^2}{x^2 + 3y^4} &amp; (x, y) \neq (0,0) \newline
+0  &amp; (x, y) = (0, 0)
+\end{cases}
+$$</p>
+<p>Solution:
+If the function is continuous, using the definition, then:
+$$
+\lim_{(x, y) \to (a, b)} f(x, y) = f(a, b)
+$$</p>
+<p>which means:
+$$
+\lim_{(x, y) \to (0, 0)} f(x, y) = f(0, 0) = 0
+$$</p>
+<p>$$
+\lim_{(x, y) \to (0, 0)} \dfrac{xy^2}{x^2 + 3y^4} = 0
+$$</p>
+<p>Using the law of limits and the definition, we find that this limit does not exist since:</p>
+<p>Along $x = 0$
+$$
+\dfrac{xy^2}{x^2 + 3y^4} = \dfrac{0}{3y^4} = 0
+$$</p>
+<p>Along $x = y^2$
+$$
+\dfrac{xy^2}{x^2 + 3y^4} = \dfrac{y^4}{y^4 + 3y^4} = \dfrac{1}{4}
+$$</p>
+<p>Which tells us that $f(x, y)$ is not continuous at $(0, 0)$.</p>
+<p>Last example:
+$$
+f(x, y) =
+\begin{cases}
+\dfrac{x^4 - y^4}{x^2 + y^2} &amp; (x, y) \neq (0,0) \newline
+0  &amp; (x, y) = (0, 0)
+\end{cases}
+$$</p>
+<p>$$
+\lim_{(x, y) \to (0, 0)} \dfrac{x^4 - y^4}{x^2 + y^2} = 0
+$$</p>
+<p>$$
+\begin{align*}
+\lim_{(x, y) \to (0, 0)} \dfrac{x^4 - y^4}{x^2 + y^2} &amp; = \newline
+\lim_{(x, y) \to (0, 0)} \dfrac{(x^2 + y^2)(x^2 - y^2)}{x^2 + y^2} &amp; = \newline
+\lim_{(x, y) \to (0, 0)} (x^2 - y^2) &amp; = \newline
+\boxed{0}
+\end{align*}
+$$</p>
+<p>Which means it is continuous at $(0, 0)$.</p>
+<h3 id="partial-derivatives">Partial derivatives</h3>
+<p>Let&rsquo;s first start with recalling the definition of derivative for functions with one variable:
+$$
+\lim_{h \to 0} \dfrac{f(x + h) - f(x)}{h}
+$$</p>
+<p>Since we&rsquo;re dealing with several variables, we need to choose <em>what variable to respect</em>, meaning what variable has a small increase.</p>
+<h4 id="definition">Definition</h4>
+<blockquote>
+<p>The <em>partial</em> derivate of a function of two variables <strong>with respect to</strong> x, denoted by $f_x$, is the function of two variables given by:
+$$
+f_x(x, y) = \lim_{h \to 0} \dfrac{f(x + h, y) - f(x, y)}{h}
+$$</p>
+</blockquote>
+<p>Similarly for $y$:
+$$
+f_y(x, y) = \lim_{h \to 0} \dfrac{f(x, y + h) - f(x, y)}{h}
+$$</p>
+<p>In other words what this means, the partial derivate with respect to a variable, we treat all other variables as they were constants.</p>
+<h4 id="examples">Examples</h4>
+<p>$$
+f(x, y) = x^2y + y^3
+$$</p>
+<p>$$
+f_x(x, y) = 2xy
+$$</p>
+<p>$$
+f_y(x, y) = x^2 + 3y^2
+$$</p>
+<p>$$
+f(x, y) = sin(x^2y - 3x)
+$$</p>
+<p>$$
+f_x(x, y) = cos(x^2y - 3x) \cdot (2xy - 3) \ | \ \text{chain rule}
+$$</p>
+<p>$$
+f_y(x, y) = cos(x^2y - 3x) \cdot x^2 \ | \ \text{chain rule}
+$$</p>
+<p>$$
+f(x, y, z) = x^2z + xy - 7yz^5
+$$</p>
+<p>$$
+f_z(x, y, z) = x^2 - 35yz^4
+$$</p>
+<h3 id="summary">Summary</h3>
+<p>As we have seen continuity is quite similar when dealing with functions of several variables. The <em>partial</em> derivate of functions of several variables are also quite trivial since we treat the other variables as constants!</p>
 
-<ul class="pagination">
-	
-	
-    <a href="/school/page/2/" class="page-next page-link" aria-label="Older Posts">Older Posts →</a>
-	
-	</span>
-</ul>
-
-
-			<footer><p class="footer_msg">memento mori</p></footer>
-
-		</div>
-    </div>
-		
+		</section>
+  </article>
 	</div>
-	
+
+	<footer><p class="footer_msg">memento mori</p></footer>
+
+  </div>
 </body>
 </html>

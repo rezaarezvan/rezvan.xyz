@@ -6,7 +6,20 @@
     <description>Recent content in Schools on rezvan</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 29 Aug 2023 16:12:51 +0200</lastBuildDate><atom:link href="https://rezvan.xyz/school/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 30 Aug 2023 10:53:01 +0200</lastBuildDate><atom:link href="https://rezvan.xyz/school/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Mathematical analysis in several variables: Part 2 - Continuity &amp; partial derivatives.</title>
+      <link>https://rezvan.xyz/school/LMA017_2/</link>
+      <pubDate>Wed, 30 Aug 2023 10:53:01 +0200</pubDate>
+      
+      <guid>https://rezvan.xyz/school/LMA017_2/</guid>
+      <description>Introduction In this part we&amp;rsquo;ll define continuity when dealing with functions with several variables. We&amp;rsquo;ll also start looking at derivatives of functions of several variables.
+Continuity Let&amp;rsquo;s recall what continuity of a function with one variable is defined:
+A function of one variable is continuous at a point, $a \in D$ if:
+$$ \lim_{x \to a} f(x) = f(a) $$
+In functions with several variables, it&amp;rsquo;s the same: $$ \lim_{(x, y) \to (a, b)} f(x, y) = f(a, b) $$</description>
+    </item>
+    
     <item>
       <title>Transforms, signals and systems: Part 1 - Introduction &amp; signal operations</title>
       <link>https://rezvan.xyz/school/SSY081/</link>
