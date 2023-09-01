@@ -2,13 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://rezvan.xyz/school/LMA017_2/</loc>
-    <lastmod>2023-08-30T10:53:01+02:00</lastmod>
+    <loc>https://rezvan.xyz/school/LMA017_3/</loc>
+    <lastmod>2023-09-01T10:53:01+02:00</lastmod>
   </url><url>
     <loc>https://rezvan.xyz/</loc>
-    <lastmod>2023-08-30T10:53:01+02:00</lastmod>
+    <lastmod>2023-09-01T10:53:01+02:00</lastmod>
   </url><url>
     <loc>https://rezvan.xyz/school/</loc>
+    <lastmod>2023-09-01T10:53:01+02:00</lastmod>
+  </url><url>
+    <loc>https://rezvan.xyz/school/LMA017_2/</loc>
     <lastmod>2023-08-30T10:53:01+02:00</lastmod>
   </url><url>
     <loc>https://rezvan.xyz/school/SSY081/</loc>

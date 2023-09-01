@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8"><meta property="og:site_name" content="rezvan"><title>Transforms, signals and systems: Part 1 - Introduction &amp; signal operations | rezvan</title>
-  <meta property="og:title" content="Transforms, signals and systems: Part 1 - Introduction &amp; signal operations | rezvan"><meta property="og:description" content="">
+	<meta charset="utf-8"><meta property="og:site_name" content="rezvan"><title>Transforms, signals and systems: Part 1 - Signals | rezvan</title>
+  <meta property="og:title" content="Transforms, signals and systems: Part 1 - Signals | rezvan"><meta property="og:description" content="">
   <meta property="og:type" content="blog">
   <meta property="og:link" content="https://rezvan.xyz/school/SSY081/"><link rel="shortcut icon" type="image/png" href=https://rezvan.xyz//images/icon.png />
   <meta property="og:image" content="https://rezvan.xyz//images/icon.png" /><meta name="viewport" content="width=device-width, initial-scale=1">
@@ -261,22 +261,80 @@ body.dark-mode .title {
     </nav></div>
 
   <article><div class="title_wrapper">
-			<h1 class="title">Transforms, signals and systems: Part 1 - Introduction &amp; signal operations</h1><p class="single_time">Aug 29, 2023</p></div>
+			<h1 class="title">Transforms, signals and systems: Part 1 - Signals</h1><p class="single_time">Aug 29, 2023</p></div>
 		<section class="post">
 			<h3 id="introductions">Introductions</h3>
 <p>In this series we&rsquo;ll cover what we mean with transforms, signals and systems. How they relate and are used in the real world.</p>
-<h3 id="signals--systems">Signals &amp; systems</h3>
-<p>Let&rsquo;s first define what signals and systems are.</p>
+<h3 id="signals">Signals</h3>
+<p>In this part we&rsquo;ll try to understand signals, <em>classify</em> these. Perform different signal <em>operations</em> and lastly understand and use signal *models.
+Let&rsquo;s first define what a signal is</p>
 <h4 id="definition">Definition</h4>
 <blockquote>
 <p>A signal is a set of information or data. Any physical quantity that varies over time, space or any other variable or variables.</p>
 </blockquote>
+<p>We will usually define signals with mathematical functions.</p>
+<h3 id="signal-classifications">Signal classifications</h3>
+<p>There are different types of signals and representations of signals. Let&rsquo;s list these:</p>
+<ul>
+<li>
+<p>Continuous VS Discrete (Time)</p>
+</li>
+<li>
+<p>Continuous VS Discrete (Amplitude)</p>
+</li>
+<li>
+<p>Periodic VS Aperiodic</p>
+</li>
+<li>
+<p>Deterministic VS Stochastic</p>
+</li>
+</ul>
+<p>We&rsquo;ll properly define each of these, let&rsquo;s start with the time representation:</p>
+<h4 id="continuous-vs-discrete-time">Continuous VS Discrete (Time)</h4>
+<p>As we can see, the discrete representation, is points that are spread with a time interval $T$.</p>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<h4 id="continuous-vs-discrete-amplitude">Continuous VS Discrete (Amplitude)</h4>
+<!-- raw HTML omitted -->
+<p>As we can see, this is <em>quantization</em>, analog $\to$ digital.</p>
+<h4 id="even-odd--periodic">Even, Odd &amp; Periodic</h4>
+<p>Let&rsquo;s also define what an even, odd and periodic functions are.</p>
+<p>An even function is <em>symmetrical</em> about the vertical axis.</p>
+<!-- raw HTML omitted -->
+<p>An odd function is <em>anti-symmetrical</em> about the vertical axis.</p>
+<!-- raw HTML omitted -->
+<p>A periodic function has a <em>fundamental period</em> (minimum), $T_0$. Which also means it has a <em>fundamental frequency</em>, $f_0 = \dfrac{1}{T_0}$.</p>
+<p>We sometimes define the fundamental frequency in angular velocity instead of Hz, which means, $\omega_0 = 2\pi f_0 = \dfrac{2\pi}{T_0}$.</p>
+<!-- raw HTML omitted -->
+<h4 id="deterministic-vs-stochastic">Deterministic VS Stochastic</h4>
+<p>These are quite easy to define.</p>
 <blockquote>
-<p>A system is an entity that processes a signal or a set of signals and outputs a signal or set of signals.</p>
+<p><strong>Deterministic</strong> signal: Its physical description is known completely (mathematical or graphical).</p>
 </blockquote>
-<p>We usually define signals with mathematical functions.</p>
+<blockquote>
+<p><strong>Stochastic</strong> signal: Values are only known in probabilistic terms.</p>
+</blockquote>
 <h3 id="signal-operations">Signal operations</h3>
-<p>We&rsquo;ll cover signal operations for time-continuous signals.</p>
+<p>Now that we have defined what signals are, what operations can we perform? Since they are mathematical functions, we can perform a whole row of operations.</p>
+<p>Let&rsquo;s start in the time-continuous world. We&rsquo;ll list all the operations we can perform.</p>
+<ul>
+<li>
+<p>Amplitude scaling (Gain)</p>
+</li>
+<li>
+<p>DC (Offset)</p>
+</li>
+<li>
+<p>Time scaling</p>
+</li>
+<li>
+<p>Reflection (Time inversion)</p>
+</li>
+<li>
+<p>Time shift</p>
+</li>
+</ul>
+<p>Let&rsquo;s go through them all and define them.</p>
 <h4 id="amplitude-scaling">Amplitude scaling</h4>
 <p>$$
 f(t) \newline
@@ -318,8 +376,145 @@ $$</p>
 \Phi(t) = f(t \pm T)
 $$</p>
 <p><img src="/images/shift.png#center" alt=""></p>
-<h3 id="summary">Summary</h3>
-<p>Will update/add more :]</p>
+<h5 id="summary-of-operations">Summary of operations</h5>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Operation</th>
+<th style="text-align:center">Continuous</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">DC</td>
+<td style="text-align:center">$f(t) \to A + f(t)$</td>
+</tr>
+<tr>
+<td style="text-align:center">Amplitude scaling</td>
+<td style="text-align:center">$f(t) \to Af(t)$</td>
+</tr>
+<tr>
+<td style="text-align:center">Time scaling</td>
+<td style="text-align:center">$f(t) \to f(at)$</td>
+</tr>
+<tr>
+<td style="text-align:center">Reflection</td>
+<td style="text-align:center">$f(t) \to f(-t)$</td>
+</tr>
+<tr>
+<td style="text-align:center">Time shift</td>
+<td style="text-align:center">$f(t) \to f(t \pm t_0)$</td>
+</tr>
+</tbody>
+</table>
+<h3 id="signal-models">Signal models</h3>
+<p>We&rsquo;ll now cover how we can (usually) model these signals, we&rsquo;ll look at three functions which model signals.</p>
+<p>These are:</p>
+<ul>
+<li>
+<p>Unit step function</p>
+</li>
+<li>
+<p>Unit impulse function (also called the Dirac delta function)</p>
+</li>
+<li>
+<p>Exponential function</p>
+</li>
+</ul>
+<h4 id="unit-step-function">Unit step function</h4>
+<p>The unit step function is defined as:</p>
+<p>$$
+u(t) =
+\begin{cases}
+1 &amp; t \geq 0 \newline
+0  &amp; t &lt; 0
+\end{cases}
+$$</p>
+<!-- raw HTML omitted -->
+<p>This means we can represent rectangular signals as linear combination of the unit step function. For example:</p>
+<p>$$
+f(t) = u(t - 2) - u(t - 4)
+$$</p>
+<!-- raw HTML omitted -->
+<h4 id="unit-impulse-function-dirac-delta-function">Unit impulse function (Dirac delta function)</h4>
+<p>We define dirac delta function as the following:
+$$
+\delta(t) = 0 \ | \ t \neq 0
+$$</p>
+<p>$$
+\int_{-\infty}^{\infty} \delta(t)\ dt = 1
+$$</p>
+<!-- raw HTML omitted -->
+<p>We&rsquo;ll see that we can define discrete time-signals with this function! But the main power with the dirac delta function is property to sample/sift:</p>
+<p>Suppose we have a function, $\phi(t)$, which is continuous at $t = 0$. We can perform:
+$$
+\phi(t)\delta(t) = \phi(0)\delta(t)
+$$</p>
+<p>$$
+\int_{-\infty}^{\infty} \phi(t)\delta(t)\ dt = \phi(0) \int_{-\infty}^{\infty} \delta(t)\ dt= \phi(0)
+$$</p>
+<p>This also is true if, $\phi(t)$, is continuous at $t = T$
+$$
+\phi(t)\delta(t - T) = \phi(T)\delta(t - T)
+$$</p>
+<p>$$
+\int_{-\infty}^{\infty} \phi(t)\delta(t - T)\ dt = \phi(T)
+$$</p>
+<p>The area under the product of a function with an impulse, $\delta(t)$, is equal to the value of that function at the instant where the unit impulse is located.</p>
+<h4 id="exponential-function">Exponential function</h4>
+<p>We define the exponential function with complex numbers:</p>
+<p>$$
+e^{st} \ | \ s = \sigma + j\omega
+$$</p>
+<p>This means:
+$$
+e^{st} = e^{t(\sigma + j\omega)} = e^{t\sigma + j\omega t} = e^{t\sigma} \cdot e^{j\omega t} = e^{t\sigma}(cos \omega t + j sin \omega t)
+$$</p>
+<p>We have some special cases where we get:</p>
+<ol>
+<li>A constant $k = ke^{0t} \ | \ (s = 0)$</li>
+<li>A monotonic exponential $e^{\sigma t} \ | \ (\omega  = 0, s = \omega)$</li>
+<li>A sinusoid $cos \omega t \ | \ (\sigma = 0, s = \pm j\omega)$</li>
+<li>A exp. varying $e^{\sigma t} cos \omega t \ | \ (s = \omega \pm j\omega)$</li>
+</ol>
+<h3 id="discrete-time">Discrete time</h3>
+<p>Operations for discrete time behave the same.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Operation</th>
+<th style="text-align:center">Continuous</th>
+<th style="text-align:center">Discrete</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">DC</td>
+<td style="text-align:center">$f(t) \to A + f(t)$</td>
+<td style="text-align:center"> $f[k] \to A + f[k]$</td>
+</tr>
+<tr>
+<td style="text-align:center">Amplitude scaling</td>
+<td style="text-align:center">$f(t) \to Af(t)$</td>
+<td style="text-align:center">$f[k] \to Af(t)$</td>
+</tr>
+<tr>
+<td style="text-align:center">Time scaling</td>
+<td style="text-align:center">$f(t) \to f(at)$</td>
+<td style="text-align:center">$ f[k] \to f[nk]$</td>
+</tr>
+<tr>
+<td style="text-align:center">Reflection</td>
+<td style="text-align:center">$f(t) \to f(-t)$</td>
+<td style="text-align:center">$f[k] \to f[-k]$</td>
+</tr>
+<tr>
+<td style="text-align:center">Time shift</td>
+<td style="text-align:center">$f(t) \to f(t \pm t_0)$</td>
+<td style="text-align:center">$f[k] \to f[k \pm n_0]$</td>
+</tr>
+</tbody>
+</table>
 
 		</section>
   </article>

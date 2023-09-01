@@ -6,7 +6,19 @@
     <description>Recent content in Schools on rezvan</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 30 Aug 2023 10:53:01 +0200</lastBuildDate><atom:link href="https://rezvan.xyz/school/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 01 Sep 2023 10:53:01 +0200</lastBuildDate><atom:link href="https://rezvan.xyz/school/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Mathematical analysis in several variables: Part 3 - Higher partial derivatives &amp; differentiability</title>
+      <link>https://rezvan.xyz/school/LMA017_3/</link>
+      <pubDate>Fri, 01 Sep 2023 10:53:01 +0200</pubDate>
+      
+      <guid>https://rezvan.xyz/school/LMA017_3/</guid>
+      <description>Introduction In this part we&amp;rsquo;ll define higher partial derivatives and how we define if a function with several variables is differentiable.
+Higher partial derivatives In the last part we defined what partial derivatives were: $$ f_x = \lim{h \to 0} \dfrac{f(x + h, y) - f(x, y)}{h} $$
+We can now derive this function again: $$ f_{xx} = \lim{h \to 0} \dfrac{f_x(x + h, y) - f_x(x, y)}{h} $$
+$$ f_{xy} = \lim{h \to 0} \dfrac{f_x(x, y + h) - f_x(x, y)}{h} $$</description>
+    </item>
+    
     <item>
       <title>Mathematical analysis in several variables: Part 2 - Continuity &amp; partial derivatives.</title>
       <link>https://rezvan.xyz/school/LMA017_2/</link>
@@ -21,15 +33,14 @@ In functions with several variables, it&amp;rsquo;s the same: $$ \lim_{(x, y) \t
     </item>
     
     <item>
-      <title>Transforms, signals and systems: Part 1 - Introduction &amp; signal operations</title>
+      <title>Transforms, signals and systems: Part 1 - Signals</title>
       <link>https://rezvan.xyz/school/SSY081/</link>
       <pubDate>Tue, 29 Aug 2023 16:12:51 +0200</pubDate>
       
       <guid>https://rezvan.xyz/school/SSY081/</guid>
       <description>Introductions In this series we&amp;rsquo;ll cover what we mean with transforms, signals and systems. How they relate and are used in the real world.
-Signals &amp;amp; systems Let&amp;rsquo;s first define what signals and systems are.
-Definition A signal is a set of information or data. Any physical quantity that varies over time, space or any other variable or variables.
-A system is an entity that processes a signal or a set of signals and outputs a signal or set of signals.</description>
+Signals In this part we&amp;rsquo;ll try to understand signals, classify these. Perform different signal operations and lastly understand and use signal *models. Let&amp;rsquo;s first define what a signal is
+Definition A signal is a set of information or data. Any physical quantity that varies over time, space or any other variable or variables.</description>
     </item>
     
     <item>
