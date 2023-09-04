@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8"><meta property="og:site_name" content="rezvan"><title>Schools | rezvan</title>
-  <meta property="og:title" content="Schools | rezvan"><meta property="og:description" content="">
+	<meta charset="utf-8"><meta property="og:site_name" content="rezvan"><title>Transforms, signals and systems: Part 2 - System properties &amp; LTI | rezvan</title>
+  <meta property="og:title" content="Transforms, signals and systems: Part 2 - System properties &amp; LTI | rezvan"><meta property="og:description" content="">
   <meta property="og:type" content="blog">
-  <meta property="og:link" content="https://rezvan.xyz/school/"><link rel="shortcut icon" type="image/png" href=https://rezvan.xyz//images/icon.png />
+  <meta property="og:link" content="https://rezvan.xyz/school/SSY081_2/"><link rel="shortcut icon" type="image/png" href=https://rezvan.xyz//images/icon.png />
   <meta property="og:image" content="https://rezvan.xyz//images/icon.png" /><meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="alternate" type="application/rss+xml" href="https://rezvan.xyz/school/index.xml" title="rezvan" />
 	<link rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz//css/main.css" />
 
     <head>
@@ -223,10 +222,26 @@ body.dark-mode .title {
 </head>
 
 <body>
-    <div class="wrapper">
+  <div class="wrapper">
+	<div class="content">
 		<div class="header_main">
 
-    <a href="https://rezvan.xyz/"><p class="header_title">rezvan</p>
+    <a href="https://rezvan.xyz/"><p class="header_title">rezvan</p><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.3/dist/katex.min.css" integrity="sha384-Juol1FqnotbkyZUT5Z7gUPjQ9gzlwCENvUZTpQBAPxtusdwFLRy382PSDx5UUJ4/" crossorigin="anonymous">
+
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.3/dist/katex.min.js" integrity="sha384-97gW6UIJxnlKemYavrqDHSX3SiygeOwIZhwyOKRfSaf0JWKRVj9hLASHgFTzT+0O" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.3/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+            delimiters: [
+                {left: "$$", right: "$$", display: true},
+                {left: "$", right: "$", display: false}
+            ]
+        });
+    });
+</script>
+
     </a>
 
     <br>
@@ -245,76 +260,84 @@ body.dark-mode .title {
         
     </nav></div>
 
-                
-                
-                
-				<section class="post_listed">
-					<time class="post_time">09.04.23</time>
-					<a class="title" href="/school/SSY081_2/">Transforms, signals and systems: Part 2 - System properties &amp; LTI</a>
-        </section>
-				
-				<section class="post_listed">
-					<time class="post_time">09.01.23</time>
-					<a class="title" href="/school/LMA017_3/">Mathematical analysis in several variables: Part 3 - Higher partial derivatives &amp; differentiability</a>
-        </section>
-				
-				<section class="post_listed">
-					<time class="post_time">08.30.23</time>
-					<a class="title" href="/school/LMA017_2/">Mathematical analysis in several variables: Part 2 - Continuity &amp; partial derivatives.</a>
-        </section>
-				
-				<section class="post_listed">
-					<time class="post_time">08.29.23</time>
-					<a class="title" href="/school/SSY081/">Transforms, signals and systems: Part 1 - Signals</a>
-        </section>
-				
-				<section class="post_listed">
-					<time class="post_time">08.29.23</time>
-					<a class="title" href="/school/LMA017/">Mathematical analysis in several variables: Part 1 - Functions of several variables, level curves and limits.</a>
-        </section>
-				
-				<section class="post_listed">
-					<time class="post_time">05.25.23</time>
-					<a class="title" href="/school/EDA333_summary/">Computer System Engineering: Summary</a>
-        </section>
-				
-				<section class="post_listed">
-					<time class="post_time">05.19.23</time>
-					<a class="title" href="/school/EEM076_summary/">Electrical Circuits and Fields: Summary</a>
-        </section>
-				
-				<section class="post_listed">
-					<time class="post_time">05.19.23</time>
-					<a class="title" href="/school/EEM076_13/">Electrical Circuits and Fields: Part 13 - Circuit Response, Passive Filters, and Amplifiers</a>
-        </section>
-				
-				<section class="post_listed">
-					<time class="post_time">05.12.23</time>
-					<a class="title" href="/school/EEM076_12/">Electrical Circuits and Fields: Part 12 - Power in AC Circuits</a>
-        </section>
-				
-				<section class="post_listed">
-					<time class="post_time">05.08.23</time>
-					<a class="title" href="/school/EEM076_11/">Electrical Circuits and Fields: Part 11 - Calculation methods for AC-circuits</a>
-        </section>
-				
-				
+  <article><div class="title_wrapper">
+			<h1 class="title">Transforms, signals and systems: Part 2 - System properties &amp; LTI</h1><p class="single_time">Sep 4, 2023</p></div>
+		<section class="post">
+			<h3 id="introduction">Introduction</h3>
+<p>In this part we will learn to classify systems and recognize a <strong>L</strong>inear-<strong>T</strong>ime <strong>I</strong>nvariant System</p>
+<p>Let&rsquo;s first define what a system is.</p>
+<h3 id="systems">Systems</h3>
+<p>Our definition of a system will be:</p>
+<blockquote>
+<p>An entity that processes a signal/a set of signals to yield another signal/set of signals.</p>
+</blockquote>
+<p>The input, also called excitation, goes through the system and the system spits out an output, also called response.</p>
+<h3 id="interconnection">Interconnection</h3>
+<p>We can have multiple systems.</p>
+<p>If they are in sequence, we call it a series connection.
+We can also have parallel connection.</p>
+<!-- raw HTML omitted -->
+<h3 id="number-of-inputs-and-outputs">Number of inputs and outputs</h3>
+<p><strong>S</strong>ingle <strong>I</strong>nput <strong>S</strong>ingle <strong>O</strong>utput
+<strong>S</strong>ingle <strong>I</strong>nput <strong>M</strong>ultiple <strong>O</strong>utput
+<strong>M</strong>ultiple <strong>I</strong>nput <strong>S</strong>ingle <strong>O</strong>utput
+<strong>M</strong>ultiple <strong>I</strong>nput <strong>M</strong>ultiple <strong>O</strong>utput</p>
+<h3 id="linearity">Linearity</h3>
+<p>A system is said to be <strong>linear</strong> if a linear combination of inputs yields the same linear combination of the outputs to each individual input:
+$$
+x_1(t) \to y_1(t) \newline
+x_2(t) \to y_2(t)
+$$</p>
+<p>$$
+a x_1(t) + b x_2(t) \to a y_1(t) + b y_2(t) \ | \ \text{Superposition principle}
+$$</p>
+<p>Recall that, Superposition $=$ homogeneity + additivity.</p>
+<p>Homogeneity:
+$$
+a x(t) \to a y(t)
+$$</p>
+<p>Additivity:
+$$
+x_1(t) + x_2(t) \to a y_1(t) y_2(t)
+$$</p>
+<h3 id="time-invariance">Time-invariance</h3>
+<p>A system is said to be <strong>time-invariant</strong> if a time shift in the input signal results in the same time shift in the output signal:
+$$
+x(t) \to y(t) \newline
+x(t - t_0) \to y(t - t_0)
+$$</p>
+<h4 id="example">Example</h4>
+<p>$$
+y(t) = (sin(t))x(t)
+$$</p>
+<p>$$
+y(t - t_0) = (sin(t - t_0))x(t - t_0) \neq (sin(t))x(t - t_0)
+$$</p>
+<p>Which means this function is time variant!</p>
+<h3 id="bibo-stability">BIBO-stability</h3>
+<p>A system is BIBO-stable if a bounded input results in a bounded
+output</p>
+<h3 id="causality">Causality</h3>
+<p>A system is causal if the value of the output at the present
+instant depends only on the present and past values of the input
+(it does not depend on future values)</p>
+<h3 id="dynamic">Dynamic</h3>
+<p>A system is instantaneous or memoryless if it&rsquo;s output at a
+certain time instant depends only on the input at the same time
+instant (it does not depend on past or future values of the input)</p>
+<p>Dynamic otherwise.</p>
+<h3 id="invertible">Invertible</h3>
+<p>Invertible if observing one output we can determine (only) one
+input</p>
+<h3 id="lti">LTI</h3>
+<p>Both linear and time-invariant</p>
 
-<ul class="pagination">
-	
-	
-    <a href="/school/page/2/" class="page-next page-link" aria-label="Older Posts">Older Posts →</a>
-	
-	</span>
-</ul>
-
-
-			<footer><p class="footer_msg">memento mori</p></footer>
-
-		</div>
-    </div>
-		
+		</section>
+  </article>
 	</div>
-	
+
+	<footer><p class="footer_msg">memento mori</p></footer>
+
+  </div>
 </body>
 </html>
