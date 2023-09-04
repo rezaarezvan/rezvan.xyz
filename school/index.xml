@@ -39,7 +39,7 @@ In functions with several variables, it&amp;rsquo;s the same: $$ \lim_{(x, y) \t
       
       <guid>https://rezvan.xyz/school/SSY081/</guid>
       <description>Introductions In this series we&amp;rsquo;ll cover what we mean with transforms, signals and systems. How they relate and are used in the real world.
-Signals In this part we&amp;rsquo;ll try to understand signals, classify these. Perform different signal operations and lastly understand and use signal *models. Let&amp;rsquo;s first define what a signal is
+Signals In this part we&amp;rsquo;ll try to understand signals, classify these. Perform different signal operations and lastly understand and use signal models. Let&amp;rsquo;s first define what a signal is
 Definition A signal is a set of information or data. Any physical quantity that varies over time, space or any other variable or variables.</description>
     </item>
     
