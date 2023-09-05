@@ -6,7 +6,20 @@
     <description>Recent content in Schools on rezvan</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 04 Sep 2023 22:03:17 +0200</lastBuildDate><atom:link href="https://rezvan.xyz/school/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 05 Sep 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://rezvan.xyz/school/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Mathematical analysis in several variables: Part 4 - Chain rule &amp; implicit differentiation</title>
+      <link>https://rezvan.xyz/school/LMA017_4/</link>
+      <pubDate>Tue, 05 Sep 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://rezvan.xyz/school/LMA017_4/</guid>
+      <description>Introduction In this part we&amp;rsquo;ll define the chain rule for functions with several variables. We will also cover something called implicit differentiation.
+Chain rule Let&amp;rsquo;s recall the chain rule for functions with one variable. $$ f(x) = h(g(x)) \newline f&amp;rsquo;(x) = h&amp;rsquo;(g(x)) \cdot g&amp;rsquo;(x) $$
+Alternative notation: $$ y = f(x) \newline x = g(t) $$
+$$ \dfrac{dy}{dt} = \dfrac{dy}{dx} \cdot \dfrac{dx}{dt} $$
+For functions with two variables. $$ z = f(x, y),\ x = g(t),\ y = h(t) $$</description>
+    </item>
+    
     <item>
       <title>Transforms, signals and systems: Part 2 - System properties &amp; LTI</title>
       <link>https://rezvan.xyz/school/SSY081_2/</link>
