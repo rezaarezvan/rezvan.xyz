@@ -292,9 +292,9 @@ Let&rsquo;s first define what a signal is</p>
 <p>We&rsquo;ll properly define each of these, let&rsquo;s start with the time representation:</p>
 <h4 id="continuous-vs-discrete-time">Continuous VS Discrete (Time)</h4>
 <p>As we can see, the discrete representation, is points that are spread with a time interval $T$.</p>
-<p><img src="/images/time.png#center" alt=""></p>
+<p><img src="/school/images/time.png#center" alt=""></p>
 <h4 id="continuous-vs-discrete-amplitude">Continuous VS Discrete (Amplitude)</h4>
-<p><img src="/images/amp.png#center" alt=""></p>
+<p><img src="/school/school/images/amp.png#center" alt=""></p>
 <p>As we can see, this is <em>quantization</em>, analog $\to$ digital.</p>
 <h4 id="even-odd--periodic">Even, Odd &amp; Periodic</h4>
 <p>Let&rsquo;s also define what an even, odd and periodic functions are.</p>
@@ -308,14 +308,14 @@ $$
 f(t) = -f(t)
 f[k] = -f[k]
 $$</p>
-<p><img src="/images/even.png#center" alt=""></p>
+<p><img src="/school/images/even.png#center" alt=""></p>
 <p>A periodic function has a <em>fundamental period</em> (minimum), $T_0$. Which also means it has a <em>fundamental frequency</em>, $f_0 = \dfrac{1}{T_0}$.
 $$
 f(t) = f(t + nT_0)
 f[k] = f[k + nK_0]
 $$</p>
 <p>We sometimes define the fundamental frequency in angular velocity instead of Hz, which means, $\omega_0 = 2\pi f_0 = \dfrac{2\pi}{T_0}$.
-<img src="/images/period.png#center" alt=""></p>
+<img src="/school/images/period.png#center" alt=""></p>
 <h4 id="deterministic-vs-stochastic">Deterministic VS Stochastic</h4>
 <p>These are quite easy to define.</p>
 <blockquote>
@@ -378,7 +378,7 @@ $$</p>
 f(t) \newline
 \Phi(t) = A \cdot f(t)
 $$</p>
-<p><img src="/images/gain.png#center" alt=""></p>
+<p><img src="/school/images/gain.png#center" alt=""></p>
 <p>$$
 A &gt; 1 \ | \ \text{Amplification} \newline
 0 &lt; A &lt; 1 \ | \ \text{Attenuation} \newline
@@ -389,7 +389,7 @@ $$</p>
 f(t) \newline
 \Phi(t) = f(t) + B
 $$</p>
-<p><img src="/images/DC_offset.png#center" alt=""></p>
+<p><img src="/school/images/DC_offset.png#center" alt=""></p>
 <h4 id="time-scaling">Time scaling</h4>
 <p>Given our input signal
 $$
@@ -403,17 +403,17 @@ $$</p>
 <p>$$
 \Phi(t) = f(\dfrac{t}{2})
 $$</p>
-<p><img src="/images/expand_compress.png#center" alt=""></p>
+<p><img src="/school/images/expand_compress.png#center" alt=""></p>
 <h5 id="reflection">Reflection</h5>
 <p>$$
 \Phi(t) = f(-t)
 $$</p>
-<p><img src="/images/invert.png#center" alt=""></p>
+<p><img src="/school/images/invert.png#center" alt=""></p>
 <h5 id="time-shift">Time shift</h5>
 <p>$$
 \Phi(t) = f(t \pm T)
 $$</p>
-<p><img src="/images/shift.png#center" alt=""></p>
+<p><img src="/school/images/shift.png#center" alt=""></p>
 <h5 id="summary-of-operations">Summary of operations</h5>
 <table>
 <thead>
@@ -461,7 +461,7 @@ $$</p>
 </ul>
 <h4 id="unit-step-function">Unit step function</h4>
 <p>The unit step function is defined as:
-<img src="/images/unit.png#center" alt=""></p>
+<img src="/school/images/unit.png#center" alt=""></p>
 <p>$$
 u(t) =
 \begin{cases}
@@ -481,9 +481,9 @@ $$</p>
 <p>$$
 f(t) = u(t - 2) - u(t - 4)
 $$</p>
-<p><img src="/images/rect.png#center" alt=""></p>
+<p><img src="/school/images/rect.png#center" alt=""></p>
 <h4 id="unit-impulse-function-dirac-delta-function">Unit impulse function (Dirac delta function)</h4>
-<p><img src="/images/dirac.png#center" alt=""></p>
+<p><img src="/school/images/dirac.png#center" alt=""></p>
 <p>We define dirac delta function as the following:
 $$
 \delta(t) = 0 \ | \ t \neq 0

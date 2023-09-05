@@ -266,7 +266,7 @@ body.dark-mode .title {
 			<p>In this part we&rsquo;ll cover all calculation methods that we&rsquo;ll use for AC-circuits.</p>
 <h3 id="equivalent-impedance">Equivalent Impedance</h3>
 <p>Given the circuit and that $\omega = 5 \dfrac{rad}{s}$ - find the equivalent output impedance:</p>
-<p><img src="/images/EQI.png#center" alt=""></p>
+<p><img src="/school/images/EQI.png#center" alt=""></p>
 <p>As we discussed in the last part, our resistor rules, for series and parallel apply for impedance as well.</p>
 <p>Let&rsquo;s first quickly convert the capacitor and inductor to Ohm.</p>
 <p>For our capacitor:
@@ -287,7 +287,7 @@ Z_{L} &amp; = j\omega L \newline
 \end{align*}
 $$</p>
 <p>Which means we have the following circuit now:</p>
-<p><img src="/images/EQII.png#center" alt=""></p>
+<p><img src="/school/images/EQII.png#center" alt=""></p>
 <p>Now, let&rsquo;s simplify our impedance!</p>
 <p>$$
 \begin{align*}
@@ -321,7 +321,7 @@ Z_{eq\ 10 ||\ 0.026 + j8.61} &amp; = \dfrac{(10)(0.026 + j8.61)}{10 + 0.026 + j8
 $$</p>
 <h3 id="multiple-sources">Multiple sources</h3>
 <p>Given this circuit, and that $\omega = 2 \dfrac{rad}{s}$ $I_{c} = 2 \angle 28^{\circ}$ - find $\mathbf{I}_S$ and $I(t)$</p>
-<p><img src="/images/MSI.png#center" alt=""></p>
+<p><img src="/school/images/MSI.png#center" alt=""></p>
 <p>Here we can utilize Ohm&rsquo;s law:
 $$
 \begin{align*}
@@ -360,7 +360,7 @@ $$
 $$</p>
 <h3 id="node-analysis">Node Analysis</h3>
 <p>Given this circuit, find $V_1$ and $V_2$:</p>
-<p><img src="/images/NAI.png#center" alt=""></p>
+<p><img src="/school/images/NAI.png#center" alt=""></p>
 <p>Let&rsquo;s perform our node analysis algorithm here:</p>
 <p>For $V_1$:
 $$
@@ -415,7 +415,7 @@ V_1(t) &amp; = \boxed{2.24 cos(\omega t - 63.4^{\circ})}
 $$</p>
 <h3 id="mesh-analysis">Mesh analysis</h3>
 <p>Given this circuit, find $I_1(t)$ and $I_2(t)$:</p>
-<p><img src="/images/MAI.png#center" alt=""></p>
+<p><img src="/school/images/MAI.png#center" alt=""></p>
 <p>Let&rsquo;s first quickly convert our capacitor and inductor:</p>
 <p>Our inductor:</p>
 <p>$$
@@ -434,7 +434,7 @@ Z_{L} &amp; = -j \dfrac{1}{\omega C} \newline
 \end{align*}
 $$</p>
 <p>Which gives us:
-<img src="/images/MAII.png#center" alt=""></p>
+<img src="/school/images/MAII.png#center" alt=""></p>
 <p>For Mesh 1:
 $$
 \begin{align*}
@@ -475,7 +475,7 @@ I_2(t) &amp; = 2.77 cos(10^3t + 56.3^{\circ})
 $$</p>
 <h3 id="superposition">Superposition</h3>
 <p>Looking at this circuit again:</p>
-<p><img src="/images/NAI.png#center" alt=""></p>
+<p><img src="/school/images/NAI.png#center" alt=""></p>
 <p>One can see that we can solve this via the principle of superposition.</p>
 <p>We fist need to simplify our circuit impedance:
 $$
@@ -504,7 +504,7 @@ Z_{eq\ j5\ ||\ 10} &amp; = \ldots = 2 + j4\ \Omega
 \end{align*}
 $$</p>
 <p>Which means:</p>
-<p><img src="/images/SPI.png#center" alt=""></p>
+<p><img src="/school/images/SPI.png#center" alt=""></p>
 <p>When right source is off:
 $$
 \begin{align*}
@@ -534,9 +534,9 @@ $$</p>
 <p>Same procedure for $V_2$</p>
 <h3 id="thévenin-equivalent">Thévenin equivalent</h3>
 <p>Given this circuit, find the Thévenin equivalent circuit:</p>
-<p><img src="/images/TEI.png#center" alt=""></p>
+<p><img src="/school/images/TEI.png#center" alt=""></p>
 <p>Let&rsquo;s first disconnect the load:</p>
-<p><img src="/images/TEII.png#center" alt=""></p>
+<p><img src="/school/images/TEII.png#center" alt=""></p>
 <p>Which means $V_oc$:
 $$
 \begin{align*}
@@ -546,7 +546,7 @@ V_{oc} &amp; = V_1 - V_2 \newline
 \end{align*}
 $$</p>
 <p>For our equivalent impedance:</p>
-<p><img src="/images/TEIII.png#center" alt=""></p>
+<p><img src="/school/images/TEIII.png#center" alt=""></p>
 <p>Which means:
 $$
 \begin{align*}
@@ -560,7 +560,7 @@ voltage and current at the network input
 terminals are in phase.</p>
 <p>A maximum-amplitude response is produced in
 the resonant condition</p>
-<p><img src="/images/RIS.png#center" alt=""></p>
+<p><img src="/school/images/RIS.png#center" alt=""></p>
 <p>From this we can see that:
 $$
 \begin{align*}

@@ -292,16 +292,16 @@ body.dark-mode .title {
 <p>To achieve interleaved multithreading - we need to add a new stage into our pipeline. The <strong>T</strong>hread <strong>S</strong>elect stage.</p>
 <p>This thread selection usually uses a round-robin to select thread. However, we also need to have a setup of all individual registers, but also program counters, for each thread.</p>
 <p>Note, we have an inefficient use of CPU resources due to frequent context switching.</p>
-<p><img src="/images/TI.png#center" alt=""></p>
+<p><img src="/school/images/TI.png#center" alt=""></p>
 <h4 id="blocked-multithreading">Blocked multithreading</h4>
 <p>To achieve blocked multithreading - our thread selection stages now relies on some kind of signal where we &ldquo;have waited for too long&rdquo;.</p>
 <p>Usually this is due to a cache miss. One important fact is that, when a cache miss arises, we need to flush the entire pipeline.</p>
 <p>Which means we&rsquo;ll lose some clock cycles in the end. Cache misses are in the 100-500s number of clock cycles, so losing a few clock cycles for that price is still really good.</p>
-<p><img src="/images/BT.png#center" alt=""></p>
+<p><img src="/school/images/BT.png#center" alt=""></p>
 <h3 id="simultaneous-multithreading">Simultaneous multithreading</h3>
 <p>Is an interesting one. Instead of fetching just one instruction, we fetch multiple to our threads. To achieve this, we need to basically dupe all of our hardware.</p>
 <p>But the efficiency on the CPU resources becomes immense.</p>
-<p><img src="/images/SM.png#center" alt=""></p>
+<p><img src="/school/images/SM.png#center" alt=""></p>
 <h3 id="amdahls-law">Amdahl&rsquo;s Law</h3>
 <p>We&rsquo;ve discussed this law earlier, so I won&rsquo;t go into much detail - Amdahl&rsquo;s law describes to us that, the sequential part of a program is the bottleneck for potential speed up from parallelism.</p>
 <p>Formula for speed up:
@@ -318,12 +318,12 @@ $$</p>
 <p>You&rsquo;ve probably heard of SIMD, we&rsquo;ll cover all four types that exist!</p>
 <p>Let&rsquo;s begin with the most simple one, <strong>SISD</strong>. Single Instruction, Single Data.</p>
 <p>We fetch a single instruction and use a single data-flow to memory.</p>
-<p><img src="/images/SISD.png#center" alt=""></p>
+<p><img src="/school/images/SISD.png#center" alt=""></p>
 <p>SIMD, or, Single Instruction Multipe Data. This model is when we fetch a single instruction, but perform multiple instances of that instruction. This is a very powerful for performing vectorized operations.</p>
 <p>Note, each processor has it own <strong>local</strong> memory and data.</p>
-<p><img src="/images/SIMD.png#center" alt=""></p>
+<p><img src="/school/images/SIMD.png#center" alt=""></p>
 <p>The next class is, MIMD, or Multiple Instruction Multiple Data. As the name suggests, it&rsquo;s basically parallelizing SIMD.</p>
-<p><img src="/images/MIMD.png#center" alt=""></p>
+<p><img src="/school/images/MIMD.png#center" alt=""></p>
 <p>We also have MISD, Multiple Instruction Single Data. This is a very niche class that is used basically only for machine learning areas (hardware accelerators).</p>
 <h3 id="cache-coherence">Cache Coherence</h3>
 <p>When we&rsquo;re dealing with multiple processors - we need to decide how we use our main memory.</p>

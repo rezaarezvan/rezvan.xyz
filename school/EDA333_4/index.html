@@ -293,7 +293,7 @@ MEM/WB.RegisteRd = ID/EX.RegisterRt
 </li>
 </ul>
 <p>The hardware would be:
-<img src="/images/FU.png#center" alt=""></p>
+<img src="/school/images/FU.png#center" alt=""></p>
 <p>We can write up some conditions:</p>
 <ul>
 <li>
@@ -368,7 +368,7 @@ add $1, $1, $4
 </li>
 </ul>
 <p>Therefore, the final implementation would be:
-<img src="/images/FU2.png#center" alt=""></p>
+<img src="/school/images/FU2.png#center" alt=""></p>
 <h3 id="load-use-data-hazards">Load-use data hazards</h3>
 <p>As we discussed in the last part when we have:</p>
 <pre tabindex="0"><code>lw $2, 20($1)
@@ -466,7 +466,7 @@ This instruction is called the &ldquo;delayed slot&rdquo;.</p>
 </li>
 </ul>
 <p>So our final CPU looks like:
-<img src="/images/PE.png#center" alt=""></p>
+<img src="/school/images/PE.png#center" alt=""></p>
 <h3 id="advanced-methods">Advanced methods</h3>
 <p>Now we&rsquo;ll cover some more advanced methods - note that this is a very quick overview, and we will not go in depth at all.</p>
 <h4 id="dynamic-jump-prediction">Dynamic jump prediction</h4>
@@ -500,7 +500,7 @@ This instruction is called the &ldquo;delayed slot&rdquo;.</p>
 <p>So, if we have a 1-bit jump table, our prediction is either &ldquo;Take jump&rdquo; or &ldquo;Do not take jump&rdquo;.</p>
 <p>But, if we instead use, for example, a 2-bit jump table, we can also keep the <em>previous</em> state.</p>
 <p>This is a kind of FSM if you will:
-<img src="/images/JFSM.png#center" alt=""></p>
+<img src="/school/images/JFSM.png#center" alt=""></p>
 <h3 id="instruction-level-parallelism">Instruction-level parallelism</h3>
 <p>To increase our parallelism, specifically our ILP, we need deeper pipelines.</p>
 <blockquote>

@@ -265,12 +265,12 @@ body.dark-mode .title {
 		<section class="post">
 			<p>When analyzing and computing with circuits, it&rsquo;s often a good idea to try to simply as much as possible.</p>
 <p>But when met with a circuit like:
-<img src="/images/MS.png#center" alt=""></p>
+<img src="/school/images/MS.png#center" alt=""></p>
 <p>We can try all we want to simplify it, with our current knowledge, we simply can&rsquo;t.</p>
 <p>So let&rsquo;s learn about <strong>Node-Voltage</strong> analysis.</p>
 <h3 id="node-voltage-analysis">Node-Voltage analysis</h3>
 <p>Below is a picture that illustrates the idea:
-<img src="/images/NVA.png#center" alt=""></p>
+<img src="/school/images/NVA.png#center" alt=""></p>
 <p>Here&rsquo;s the idea:</p>
 <ol>
 <li>Find the nodes</li>
@@ -320,7 +320,7 @@ $$</p>
 <p>Planar circuit: It is possible to draw it in a plane without crossing wires.</p>
 </blockquote>
 <p>Example:
-<img src="/images/MCA.png#center" alt="">
+<img src="/school/images/MCA.png#center" alt="">
 $$
 -5 + 4i_1 + 2(i_1 - i_2) - 2 = 0 \newline
 2 + 2(i_2 - i_1) + 5i_2 + 1 = 0
@@ -348,11 +348,11 @@ $$</p>
 </li>
 </ul>
 <p>Example:
-<img src="/images/SP1.png#center" alt=""></p>
+<img src="/school/images/SP1.png#center" alt=""></p>
 <p>Let&rsquo;s call the circuit when we turn off the current source for $i^\prime_{x}$,
 and the circuit when we turn off the voltage source for $i^{\prime \prime}_{x}$.</p>
 <p>The circuit for $i^\prime_x$ becomes:
-<img src="/images/SP2.png#center" alt=""></p>
+<img src="/school/images/SP2.png#center" alt=""></p>
 <p>We can easily solve this:</p>
 <p>$$
 V   = R \cdot\ I \newline
@@ -360,7 +360,7 @@ V   = R \cdot\ I \newline
 i^\prime_x = \frac{3 V}{6 \Omega + 9 \Omega} = 0.2 A
 $$</p>
 <p>The circuit for $i^{\prime \prime}_x$ becomes:a
-<img src="/images/SP3.png#center" alt=""></p>
+<img src="/school/images/SP3.png#center" alt=""></p>
 <p>We can solve this by:
 $$
 R_{eq} = \frac{R_1 R_2}{(R_1 + R_2)} \newline
@@ -382,7 +382,7 @@ $$</p>
 <p>Luckily, there&rsquo;s more powerful method to find equivalent circuits.</p>
 <p>It&rsquo;s called the <em>Thévenin equivalent circuits</em> and <em>Norton equivalent circuits</em>.</p>
 <p>The idea is the following:
-<img src="/images/TN.png#center" alt=""></p>
+<img src="/school/images/TN.png#center" alt=""></p>
 <p>We take a complex network and transform it to just a single voltage source and resistor.</p>
 <p>These are called the Thévenin voltage and resistance. We&rsquo;ll see later why we&rsquo;ll want to name these.</p>
 <p>But how do we actually do this transformation?</p>
@@ -409,9 +409,9 @@ $$</p>
 </li>
 </ol>
 <p>Example:
-<img src="/images/TEC.png#center" alt=""></p>
+<img src="/school/images/TEC.png#center" alt=""></p>
 <p>Let&rsquo;s now disconnect $R_L$ and find the open circuit voltage:
-<img src="/images/TEC1.png#center" alt=""></p>
+<img src="/school/images/TEC1.png#center" alt=""></p>
 <p>$$
 V_{oc} = V_6 \quad | \quad \text{Since they are in parallel} \newline
 V_6 = V_{total} \cdot\ \frac{R_6}{(R_3 + R_6)} = 12 V \cdot\ \frac{6 \Omega}{3 \Omega + 6 \Omega} = 8 V \newline
@@ -419,16 +419,16 @@ V_{TH} = V_{oc} = 8 V
 $$</p>
 <p>Notice how we didn&rsquo;t include the $R_7$, this is due to the fact that, no current is going through that resistor!</p>
 <p>Next step, let&rsquo;s find the $R_eq$ for this circuit. <strong>Don&rsquo;t forget to turn OFF all independent sources!</strong>:
-<img src="/images/TEC2.png#center" alt=""></p>
+<img src="/school/images/TEC2.png#center" alt=""></p>
 <p>$$
 R_{eq} = R_{3 || 6} + R_7 = 2 \Omega + 7 \Omega = 9 \Omega \newline
 R_{TH} = R_{eq} = 9 \Omega
 $$</p>
 <p>Therefore, the final equivalent circuit is:
-<img src="/images/TECF.png#center" alt=""></p>
+<img src="/school/images/TECF.png#center" alt=""></p>
 <h3 id="norton-equivalent-circuits">Norton equivalent circuits</h3>
 <p>Norton equivalent is the same idea, but we replace the voltage source with a current source, and make the resistors parallel instead:
-<img src="/images/NEC.png" alt=""></p>
+<img src="/school/images/NEC.png" alt=""></p>
 <p>The method for finding a Norton equivalent circuit is:</p>
 <ol>
 <li>

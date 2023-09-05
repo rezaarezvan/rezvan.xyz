@@ -296,7 +296,7 @@ body.dark-mode .title {
 </li>
 </ol>
 <p>Let&rsquo;s take a look how this logic is implemented:
-<img src="/images/SL.png#center" alt=""></p>
+<img src="/school/images/SL.png#center" alt=""></p>
 <p>A good refresher that we&rsquo;ll need to remember is that:</p>
 <blockquote>
 <p>The longest critical path determines our clock frequency.</p>
@@ -304,16 +304,16 @@ body.dark-mode .title {
 <p>Let&rsquo;s now look into each stage, so we understand them properly.</p>
 <h4 id="instruction-fetch-if">Instruction Fetch (IF)</h4>
 <p>Let&rsquo;s begin by dissecting the <strong>fetch</strong> stage:</p>
-<p><img src="/images/IF.png#center" alt=""></p>
+<p><img src="/school/images/IF.png#center" alt=""></p>
 <p>We see that everything starts in PC, we read our current address (PC Value), we have this black box of a decoder which outputs the instruction (32-bits).</p>
 <p>Notice that we also take our current PC value and add <code>4</code> to it, why <code>4</code>?, because each instruction is 32-bits, or 4 bytes.</p>
 <h4 id="r-format-instructions">R-Format Instructions</h4>
 <p>For instructions with the R-format, we have the following:
-<img src="/images/RF.png#center" alt=""></p>
+<img src="/school/images/RF.png#center" alt=""></p>
 <p>We take in our two register operands, compute the arithmetic/logical computation and store the result to the result register.</p>
 <h4 id="loadstore-instructions">Load/Store Instructions</h4>
 <p>For instructions that we either load/store to memory:</p>
-<p><img src="/images/LS.png#center" alt=""></p>
+<p><img src="/school/images/LS.png#center" alt=""></p>
 <p>Here we have two important parts, we need to read our register operands but also compute our offset.</p>
 <p>Since the offset is 16-bits and the register operands 32-bits, we need to sign extend our 16-bit offset to 32-bits.</p>
 <h4 id="conditional-jump-instructions">Conditional jump instructions</h4>
@@ -332,7 +332,7 @@ body.dark-mode .title {
 </ul>
 <h3 id="in-depth-overview">In-depth overview</h3>
 <p>Now let&rsquo;s take a look at the first picture, but with some more details:</p>
-<p><img src="/images/TP.png#center" alt=""></p>
+<p><img src="/school/images/TP.png#center" alt=""></p>
 <p>If we try to deduce what our critical path is, we quickly find that load instructions are really slow.</p>
 <p>Since they go through:</p>
 <blockquote>
@@ -341,7 +341,7 @@ body.dark-mode .title {
 <p>Now, let&rsquo;s pipeline this processor to increase the <em>speed</em>.</p>
 <h3 id="pipelined-version">Pipelined version</h3>
 <p>Naturally, since we have five stages, let&rsquo;s pipeline it into 5 separate stages as well!</p>
-<p><img src="/images/PL.png#center" alt="">
+<p><img src="/school/images/PL.png#center" alt="">
 Note: The dotted lines represents registers that separate each stage</p>
 <p>As we can see now, we can handle 5 separate instructions at once!</p>
 <p>If our pipelining is &ldquo;balanced&rdquo;, meaning each stage takes the same amount of time, then we can see a resulting speed up of:

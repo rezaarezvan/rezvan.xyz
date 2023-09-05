@@ -361,7 +361,7 @@ But for now this will do.</p>
 <p>While it seems like it <em>should</em> work, in reality it doesn&rsquo;t.
 This does not guarantee mutual exclusion.</p>
 <p>For example, this diagram illustrates well how:
-<img src="/images/naive.png" alt="naive"></p>
+<img src="/school/images/naive.png" alt="naive"></p>
 <p>So $t_0$ enters into the line where it sets <code>enter[0]</code> to <code>true</code>.
 But then $t_1$ does the same, before <code>enter[0]</code> actually becomes <code>true</code>.</p>
 <p>So they will, in sequence set their respective flag to entered, and both enter the critical section.</p>
