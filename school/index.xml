@@ -6,7 +6,20 @@
     <description>Recent content in Schools on rezvan</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 06 Sep 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://rezvan.xyz/school/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 08 Sep 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://rezvan.xyz/school/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Mathematical analysis in several variables: Part 6 - Maximum and minimum values &amp; 2nd derivative test</title>
+      <link>https://rezvan.xyz/school/LMA017_6/</link>
+      <pubDate>Fri, 08 Sep 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://rezvan.xyz/school/LMA017_6/</guid>
+      <description>Introduction In this part we&amp;rsquo;ll cover how we find maximum and minimum values for a function, we&amp;rsquo;ll also see how this is related to the 2nd derivative.
+Maximum and minimum values Let&amp;rsquo;s first recall how we define maximum and minimum values for functions of one variable.
+Definition For maximum:
+A function of one variable has local maximum at $a$, if $f(a) \geq f(x)$ when $x$ is near $a$.
+For minimum: A function of one variable has local minimum at $a$, if $f(a) \leq f(x)$ when $x$ is near $a$.</description>
+    </item>
+    
     <item>
       <title>Mathematical analysis in several variables: Part 5 - Directional derivatives and the gradient vector</title>
       <link>https://rezvan.xyz/school/LMA017_5/</link>
