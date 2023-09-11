@@ -272,227 +272,134 @@ body.dark-mode .title {
 <p>A function of one variable has local maximum at $a$, if $f(a) \geq f(x)$ when $x$ is near $a$.</p>
 <p>For minimum:
 A function of one variable has local minimum at $a$, if $f(a) \leq f(x)$ when $x$ is near $a$.</p>
-<p>Similary for two variables:
-A function of two variables has local maximum at $(a, b)$ if $f(a, b) \geq f(x, y)$ when $(x, y$)$ is near $(a, b)$.</p>
-<p>A function of two variables has local minimum at $(a, b)$ if $f(a, b) \leq f(x, y)$ when $(x, y$)$ is near $(a, b)$.</p>
+<p>Similarly, for two variables:
+A function of two variables has local maximum at $(a, b)$ if $f(a, b) \geq f(x, y)$ when $(x, y)$ is near $(a, b)$.</p>
+<p>A function of two variables has local minimum at $(a, b)$ if $f(a, b) \leq f(x, y)$ when $(x, y)$ is near $(a, b)$.</p>
 <p>For <strong>absolute</strong> max/min, we define them as:
 If $f(a, b) \geq f(x, y)$ for any $(x, y) \in D$, we have an absolute maximum.</p>
 <p>If $f(a, b) \leq f(x, y)$ for any $(x, y) \in D$, we have an absolute minimum.</p>
 <p>How do we find these minimums and maximums?</p>
 <h3 id="how-to-find-minmax">How to find min/max</h3>
-<h4 id="vectors">Vectors</h4>
-<p>We all know that vectors have a direction and a magnitude (or length), from physics and linear algebra. Let&rsquo;s just quickly define these:
+<p>Let&rsquo;s recall for functions of one variable, min/max points have derivate of zero, therefore:
 $$
-\vec{a} = \langle a, b \rangle
+f&rsquo;(a) = 0 \ | \ f&rsquo;(a) \ \exists
 $$</p>
-<p>$$
-a = x_2 - x_1 \newline
-b = y_2 - y_1
-$$</p>
-<p>Length of $\vec{a}$:
+<p>For two variables, this is the same:
+If a function of two variables has local min/max at $(a, b)$, then $f_x(a, b) = 0$ and $f_y(a, b) = 0$ given that $f_x(a, b)$ and $f_y(a, b)$ exists.</p>
+<h4 id="proof">Proof</h4>
+<p>Let $(a, b)$ be a point of local maximum and $f_x(a, b)$ and $f_y(a, b)$ exists. $f(a, b) \geq f(x, y)$ when $(x, y)$ near $(a, b)$.</p>
+<p>In particular, take y = b:
 $$
-|\vec{a}| = \sqrt{a^2 + b^2}
+f(a, b) = f(x, b) \ | \ x \text{ near } a
 $$</p>
-<p>Important note, we call a vector a <strong>unit</strong> vector if it has the length one, meaning:
+<p>Let $g(x) = f(x, b)$, this means:
 $$
-|\vec{a}| = \sqrt{a^2 + b^2} = 1
+g(a) = f(a, b)
 $$</p>
-<p>We will also use the dot product (also called scalar product) which is the operation denoted with $\cdot$
+<p>We can say that $a$ is a point of local maximum:
 $$
-\vec{a} =  \langle a_1, a_2, a_3 \rangle \newline
-\vec{b} = \langle b_1, b_2, b_3 \rangle \newline
-\vec{a} \cdot \vec{b} = a_1b_1 + a_2b_2 + a_3b_3
+g&rsquo;(a) = 0
 $$</p>
-<p>We can also geometrically define the dot product with:
+<p>Which is just the same as:
 $$
-\vec{a} \cdot \vec{b} = |\vec{a}| |\vec{b}| cos(\alpha)
+f_x(a, b) = 0
 $$</p>
-<p>Where $\alpha$ is the angle between the vectors.</p>
-<p>Let&rsquo;s quickly also recall the standard basis vectors:
-$$
-\vec{i} = \langle 1, 0, 0 \rangle \newline
-\vec{j} = \langle 0, 1, 0 \rangle \newline
-\vec{k} = \langle 0, 0, 1 \rangle
-$$</p>
-<p>Okay that&rsquo;s all the linear algebra that we need. Let&rsquo;s look at the definition of partial derivatives:
-$$
-f_x(x_0, y_0) = \lim_{h \to 0} \dfrac{f(x_0 + h, y_0) - f(x_0, y_0)}{h}
-$$</p>
-<p>For $y$:
-$$
-f_y(x_0, y_0) = \lim_{h \to 0} \dfrac{f(x_0, y_0 + h) - f(x_0, y_0)}{h}
-$$</p>
-<p>As we defined, we can interpret this as:</p>
-<blockquote>
-<p>Rate of change of, $f$, in the $\vec{i}/\vec{j}$ direction - near the point $(x_0, y_0)$.</p>
-</blockquote>
-<p>Therefore, we can ask the question. What is the rate of change of, $f$, in any arbitrary direction?</p>
-<p>Which we&rsquo;ll now define.</p>
-<h3 id="definition-of-directional-derivatives">Definition of directional derivatives</h3>
-<p>The directional derivative of a function, $f$, of two variables, at point $(x_0, y_0)$ in the direction of a <strong>unit</strong> vector, $\vec{u}$.
-$$
-\vec{u} \langle a, b \rangle
-$$</p>
-<p>We denoted the directional derivative with a $D_{\vec{u}} f$.
-$$
-D_{\vec{u}} f(x_0, y_0) = \lim_{h \to 0} \dfrac{f(x_0 + ha, y_0 + hb) - f(x_0, y_0)}{h}
-$$</p>
-<h4 id="reminder">Reminder</h4>
-<p>Since the definition is a limit, this limit may not exist, the directional derivative may not exist in a certain direction.</p>
-<p>This also means that $f_x$ and $f_y$ are special cases for directional derivatives:
-$$
-D_{\vec{i}} f(x_0, y_0) = \lim_{h \to 0} \dfrac{f(x_0 + ha, y_0 + hb) - f(x_0, y_0)}{h} = f_x
-$$</p>
-<p>$$
-D_{\vec{j}} f(x_0, y_0) = \lim_{h \to 0} \dfrac{f(x_0 + ha, y_0 + hb) - f(x_0, y_0)}{h} = f_y
-$$</p>
-<h3 id="how-to-compute-the-directional-derivative">How to compute the directional derivative</h3>
-<p>How do we efficiently compute the directional derivate? We can use the limit definition, but this is tedious.</p>
-<p>Let&rsquo;s denote $f(x_0 + ha, y_0 + hb)$ with $g(h)$. This means $g(0) = f(x_0, y_0)$.</p>
-<p>Which means we can write the equation as:
-$$
-D_{\vec{u}} f(x_0, y_0) = \lim_{h \to 0} \dfrac{g(h) - g(0)}{h}
-$$</p>
-<p>Which is just:
-$$
-D_{\vec{u}} f(x_0, y_0) = \lim_{h \to 0} \dfrac{g(h) - g(0)}{h} = g&rsquo;(0)
-$$</p>
-<p>Let us call $x = x_0 + ha$ and $y = y_0 + hb$. By the chain rule this means!
-$$
-\dfrac{dg}{dh} = \dfrac{\partial f}{\partial x} \dfrac{dx}{dh} + \dfrac{\partial f}{\partial y} \dfrac{dy}{dh}
-$$</p>
-<p>Which is just:
-$$
-\dfrac{dg}{dh} = f_x a + f_y b
-$$</p>
-<p>Which means:
-$$
-g&rsquo;(0) = f_x(x_0, y_0) a + f_y(x_0, y_0) b
-$$</p>
-<p>$$
-D_{\vec{u}} f = f_x a + f_y b
-$$</p>
-<p>Let&rsquo;s rewrite this properly.</p>
-<h3 id="computation-of-directional-derivate">Computation of directional derivate</h3>
-<p>Let, $f$, be a differentiable function of two variables. The directional derivate in the direction of unit vector, $\vec{u} = \langle a, b \rangle$ is:
-$$
-\boxed{D_{\vec{u}} f = f_x a + f_y b}
-$$</p>
-<p>We can also express this as:
-$$
-D_{\vec{u}} f = \langle f_x, f_y \rangle \cdot \langle a, b \rangle
-$$</p>
-<p>This vector has a special name, it&rsquo;s called the <em>gradient</em> and is denoted by nabla symbol, $\nabla$.</p>
-<h3 id="definition-of-gradient">Definition of gradient</h3>
-<p>The gradient of, $f$, is the vector-function:
-$$
-\nabla f = \langle f_x, f_y \rangle
-$$</p>
-<p>Therefore, we usually write:
-$$
-\boxed{D_{\vec{u}} f = \nabla f \cdot \vec{u}}
-$$</p>
-<p>Let&rsquo;s try an example now</p>
+<p>Similarly, for $f_y(a, b) = 0$, we just choose to fix $x = a$ instead.</p>
+<h3 id="geometrical-sense">Geometrical sense</h3>
+<p>In functions of one variable, at points of local min/max, the tangent line is horizontal to our point, if the line exists.</p>
+<p>For functions of two variables, instead of a line, we have a plane. The tangent plane is horizontal to our point, if the plane exists.</p>
+<h3 id="definition-1">Definition</h3>
+<p>Let&rsquo;s properly define what we&rsquo;ve covered so far:</p>
+<p>$(a, b)$ is a <strong>critical point</strong> if $\nabla f(a, b) = 0 \textbf{ or } \nabla f(a, b) \ \nexists$</p>
+<p>In other words, if $(a, b)$ is a critical point of local minimum/maximum then it is a critical point.</p>
+<p>However, the other way around this implication is not true. A critical point might not be a local minimum/maxium.</p>
 <h4 id="example">Example</h4>
-<p>Find the directional derivate of the function $f(x, y) = x^2y^3 - 4y$ at $(2, -1)$ in the direction:
+<p>Find the critical point(s) for the function:
 $$
-a)\ \vec{v} = \langle \dfrac{1}{\sqrt{2}}, \dfrac{1}{\sqrt{2}} \rangle
+f(x, y) = x^2 + y^2 - 2x - 6y + 14
 $$</p>
-<p>$$
-b)\ \vec{v} = 2\vec{i} + 5\vec{j}
-$$</p>
-<p>Solution:
+<p>Let&rsquo;s use our definition:
 $$
-a) D_{\vec{v}} f = \nabla f \cdot \vec{v}
+\nabla f = 0 \newline
+\langle 2x - 2, 2y - 6 \rangle = 0
 $$</p>
-<p>Let&rsquo;s first compute the gradient:
+<p>We find that $x = 1$ and $y = 3$. This means $(1, 3)$ is a critical point (and the only one!).</p>
+<p>But how do we actually know if a critical point is a local minimum or maximum?</p>
+<h3 id="2nd-derivate-test">2nd derivate test</h3>
+<p>For functions of one variable, if we do the 2nd derivate test:</p>
+<p>Suppose $a$ is a point and $f&rsquo;&rsquo;(a)$ exists, then:
 $$
-\nabla f = \langle f_x, f_y \rangle = \langle 2xy^3, 3x^2y^2 - 4 \rangle
+f&rsquo;&rsquo;(a) &gt; 0 \ | \ \text{local min} \newline
+f&rsquo;&rsquo;(a) &lt; 0 \ | \ \text{local max} \newline
+f&rsquo;&rsquo;(a) = 0 \ | \ \text{does not say anything}
 $$</p>
-<p>At point $(2, -1)$:
+<p>Let&rsquo;s see what we can do in functions of two variables.</p>
+<h3 id="2nd-derivate-test-for-functions-of-two-variables">2nd derivate test for functions of two variables</h3>
+<p>Suppose $(a, b)$ is a critical point of a function, $f$, of two variables. Suppose 2nd order partial derivatives exists and are continous.</p>
+<p>Let $D = D(a, b) = f_{xx}(a, b) f_{yy}(a,b) - \left(f_{xy} (a,b)\right)^2$</p>
+<p>Then:
 $$
-\nabla f(2, -1) = \langle -4, 8 \rangle
+D &gt; 0 \text{ and } f_{xx}(a, b) &gt; 0 \ | \ \text{local minimum} \newline
+D &gt; 0 \text{ and } f_{xx}(a, b) &lt; 0 \ | \ \text{local maximum} \newline
+D &lt; 0 \ | \ \text{neither, this is a saddle point} \newline
 $$</p>
-<p>Now we need to check if our vector is a unit vector:
-$$
-|\vec{v}| = \sqrt{\left( \dfrac{1}{\sqrt{2}}\right)^2 + \left(\dfrac{1}{\sqrt{2}}\right)^2} = 1 \ | \ \text{unit vector}
-$$</p>
-<p>$$
-\begin{align*}
-D_{\vec{v}} f(2, -1) &amp; = \langle -4, 8 \rangle \cdot \langle \dfrac{1}{\sqrt{2}}, \dfrac{1}{\sqrt{2}} \rangle \newline
-&amp; = \dfrac{-4}{\sqrt{2}} + \dfrac{8}{\sqrt{2}} \newline
-&amp; = \boxed{\dfrac{4}{\sqrt{2}}}
-\end{align*}
-$$</p>
-<p>For b):
-$$
-\vec{v} = 2\vec{i} + 5\vec{j} = \ldots = \langle 2, 5 \rangle
-$$</p>
-<p>Let&rsquo;s check if this is a unit vector:
-$$
-|\vec{v}| = \sqrt{2^2 + 5^2} = \sqrt{29} \neq 1
-$$</p>
-<p>This means we need to normalize:
-$$
-\vec{u} = \dfrac{\vec{v}}{|\vec{v}|} = \langle \dfrac{2}{\sqrt{29}}, \dfrac{5}{\sqrt{29}} \rangle
-$$</p>
-<p>$$
-\begin{align*}
-D_{\vec{u}} f(2, -1) &amp; = \langle -4, 8 \rangle \cdot \langle \dfrac{2}{\sqrt{29}}, \dfrac{5}{\sqrt{29}} \rangle \newline
-&amp; = \dfrac{-8}{\sqrt{29}} + \dfrac{40}{\sqrt{29}} \newline
-&amp; = \boxed{\dfrac{38}{\sqrt{29}}}
-\end{align*}
-$$</p>
-<p>Let&rsquo;s take one more example:</p>
 <h4 id="example-1">Example</h4>
-<p>Find the rate of change of the function, $f(x, y) = xy^2 + x$ at the point $P(2, 0)$ in the direction from $P$ to $Q\left(\dfrac{1}{2}, 2\right)$</p>
-<p>The direction vector is:
-$$
-\vec{v} = \langle \dfrac{1}{2} - 2, 2 - 0 \rangle = \langle -\dfrac{3}{2}, 2 \rangle
-$$</p>
+<p>Let $f(x, y) = x^2 - y^2$ Find critical point(s):</p>
 <p>$$
-\nabla f = \langle f_x, f_y \rangle = \langle  y^2 + 1, 2xy \rangle
+\nabla f = 0 \newline
+\lange 2x, -2y \rangle = 0
 $$</p>
-<p>$$
-\nabla f(2, 0) = \langle 1, 0 \rangle
-$$</p>
-<p>$$
-|\vec{v}| = \sqrt{\left(-\dfrac{3}{2}\right)^2 + 2^2} = \ldots = \dfrac{5}{2}
-$$</p>
-<p>We need to normalize:
+<p>This means $(0, 0)$ is a critical point:
 $$
-\vec{u} = \dfrac{\vec{v}}{|\vec{v}|} = \langle -\dfrac{3}{5}, \dfrac{4}{5} \rangle
+f_{xx} = 2
+f_{yy} = -2
+f_{xy} = 0
 $$</p>
-<p>$$
-D_{\vec{u}} f(2, 0) = \langle 1, 0 \rangle \cdot \langle -\dfrac{3}{5}, \dfrac{4}{5} \rangle = -\dfrac{3}{5} + 0 = \boxed{-\dfrac{3}{5}}
-$$</p>
-<h3 id="maximum-rate-of-change">Maximum rate of change</h3>
-<p>If we ask ourselves the question, in what direction is $D_{\vec{u}} f(x_0, y_0)$ the largest?</p>
-<p>If we look at the definition:
+<p>This means:
 $$
-D_{\vec{u}} f(x_0, y_0) = \nabla f(x_0, y_0) \cdot \vec{u}
+D = -4 \ | \ \text{saddle point}
 $$</p>
-<p>If we use the geometrical definition:
-$$
-D_{\vec{u}} f(x_0, y_0) = |\nabla f(x_0, y_0)| |\vec{u}| cos(\alpha)
-$$</p>
-<p>This expression is the largest when $cos(\alpha) = 1$, which means $\alpha = 0$. In other words, the directional derivative is the largest when $\vec{u}$ is the same direction as $\nabla f(x_0, y_0)$.</p>
-<h3 id="geometrical-interpretition">Geometrical interpretition</h3>
-<p>Suppose we have a graph like a mountain, where $(x_0, y_0, f(x_0, y_0)$ is our position. The fastest way to get to the top of the mountain is going in the direction of the gradient.</p>
-<p>To go down the mountain, in the fastest way possible, we go in the direction of $-\nabla f$.</p>
+<p>Let&rsquo;s take one last example</p>
 <h4 id="example-2">Example</h4>
-<p>Given $f(x, y) = xe^y$ and $P(2, 0)$.</p>
-<p>a) In what direction is the rate of change the largest?</p>
-<p>b) What is the maximum rate of change?</p>
-<p>a):</p>
-<p>In the direction of the gradient at the point:
-$$
-\nabla f(2, 0) = \langle f_x(2, 0), f_y(2, 0) \rangle \newline
-\nabla f(2, 0) = \langle e^0, 2e^0 \rangle = \langle 1, 2 \rangle
+<p>Find local min/max/saddle points, $f(x, y) = x^4 + y^4 - 4xy + 1$</p>
+<p>$$
+\nabla f = 0
+\langle 4x^3 - 4y, 4y³ - 4x \rangle = 0
 $$</p>
-<p>b):
+<p>$$
+\begin{cases}
+4x^3 - 4y = 0 \newline
+4y^3 - 4x = 0
+\end{cases}
+$$</p>
+<p>Solving this equation system we find that:
 $$
-|\nabla f(2, 0)| = \sqrt{1^2 + 2^2} = \boxed{\sqrt{5}}
+\begin{cases}
+x = 0 \newline
+x = \pm 1
+\end{cases}
+$$
+$$
+\begin{cases}
+y = 0 \newline
+y = \pm 1
+\end{cases}
+$$</p>
+<p>Let&rsquo;s now find the 2nd order partial derivates:</p>
+<p>$$
+f_{xx} = 12x^2 \newline
+f_{yy} = 12y^2 \newline
+f_{xy} = f_{yx} = -4
+$$</p>
+<p>$$
+D = 144x^2y^2 - 16
+$$</p>
+<p>$$
+\begin{cases}
+D(0, 0) = -16 \ | \ \text{saddle point} \newline
+D(1, 1) = 128 \ | \ \text{local minimum} \newline
+D(-1, -1) = 128 \ | \ \text{local minimum} \newline
+\end{cases}
 $$</p>
 
 		</section>
