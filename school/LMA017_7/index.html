@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8"><meta property="og:site_name" content="rezvan"><title>Transforms, signals and systems: Part 3 - Convolution | rezvan</title>
-  <meta property="og:title" content="Transforms, signals and systems: Part 3 - Convolution | rezvan"><meta property="og:description" content="">
+	<meta charset="utf-8"><meta property="og:site_name" content="rezvan"><title>Mathematical analysis in several variables: Part 7 - Absolute max and min values | rezvan</title>
+  <meta property="og:title" content="Mathematical analysis in several variables: Part 7 - Absolute max and min values | rezvan"><meta property="og:description" content="">
   <meta property="og:type" content="blog">
-  <meta property="og:link" content="https://rezvan.xyz/school/SSY081_3/"><link rel="shortcut icon" type="image/png" href=https://rezvan.xyz//images/icon.png />
+  <meta property="og:link" content="https://rezvan.xyz/school/LMA017_7/"><link rel="shortcut icon" type="image/png" href=https://rezvan.xyz//images/icon.png />
   <meta property="og:image" content="https://rezvan.xyz//images/icon.png" /><meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz//css/main.css" />
 
@@ -261,85 +261,146 @@ body.dark-mode .title {
     </nav></div>
 
   <article><div class="title_wrapper">
-			<h1 class="title">Transforms, signals and systems: Part 3 - Convolution</h1><p class="single_time">Sep 5, 2023</p></div>
+			<h1 class="title">Mathematical analysis in several variables: Part 7 - Absolute max and min values</h1><p class="single_time">Sep 12, 2023</p></div>
 		<section class="post">
 			<h3 id="introduction">Introduction</h3>
-<p>In this part we will learn about the convolution operation and how it&rsquo;s used.</p>
-<p>Let&rsquo;s start at how it&rsquo;s used.</p>
-<h3 id="use-case">Use case</h3>
-<p><img src="/school/images/signal.png#center" alt=""></p>
-<p>Given this signal, we want to find activity on the graph, besides the notice. A kind of high-pass filter will do the job. A high-pass filter is precisely doing the convolution operation to filter.</p>
-<p>For example the output for this input can be:
-<img src="/school/images/signal_out.png#center" alt=""></p>
-<h3 id="definition-and-properties">Definition and properties</h3>
-<p>Let&rsquo;s call our input signal $x(t)$, our system operation for $h(t)$ and our output for $y(t)$. Assume that all of these are continuous functions, the convolution operation is denoted with $*$.
+<p>In this part we&rsquo;ll cover how we find maximum and minimum values for a function, we&rsquo;ll also see how this is related to the 2nd derivative.</p>
+<h3 id="maximum-and-minimum-values">Maximum and minimum values</h3>
+<p>Let&rsquo;s first recall how we define maximum and minimum values for functions of one variable.</p>
+<h4 id="definition">Definition</h4>
+<p>For maximum:</p>
+<p>A function of one variable has local maximum at $a$, if $f(a) \geq f(x)$ when $x$ is near $a$.</p>
+<p>For minimum:
+A function of one variable has local minimum at $a$, if $f(a) \leq f(x)$ when $x$ is near $a$.</p>
+<p>Similarly, for two variables:
+A function of two variables has local maximum at $(a, b)$ if $f(a, b) \geq f(x, y)$ when $(x, y)$ is near $(a, b)$.</p>
+<p>A function of two variables has local minimum at $(a, b)$ if $f(a, b) \leq f(x, y)$ when $(x, y)$ is near $(a, b)$.</p>
+<p>For <strong>absolute</strong> max/min, we define them as:
+If $f(a, b) \geq f(x, y)$ for any $(x, y) \in D$, we have an absolute maximum.</p>
+<p>If $f(a, b) \leq f(x, y)$ for any $(x, y) \in D$, we have an absolute minimum.</p>
+<p>How do we find these minimums and maximums?</p>
+<h3 id="how-to-find-minmax">How to find min/max</h3>
+<p>Let&rsquo;s recall for functions of one variable, min/max points have derivate of zero, therefore:
 $$
-y(t) = x(t) * h(t)
+f&rsquo;(a) = 0 \ | \ f&rsquo;(a) \ \exists
 $$</p>
-<p>The convolution operation is defined as:
+<p>For two variables, this is the same:
+If a function of two variables has local min/max at $(a, b)$, then $f_x(a, b) = 0$ and $f_y(a, b) = 0$ given that $f_x(a, b)$ and $f_y(a, b)$ exists.</p>
+<h4 id="proof">Proof</h4>
+<p>Let $(a, b)$ be a point of local maximum and $f_x(a, b)$ and $f_y(a, b)$ exists. $f(a, b) \geq f(x, y)$ when $(x, y)$ near $(a, b)$.</p>
+<p>In particular, take y = b:
 $$
-y(t) = x(t) * h(t) = \int_{-\infty}^{+\infty} x(\tau)h(t - \tau) d\tau
+f(a, b) = f(x, b) \ | \ x \text{ near } a
 $$</p>
-<p>In the discrete case:
+<p>Let $g(x) = f(x, b)$, this means:
 $$
-c[k] = f[k] * g[k] = \sum_{m = -\infty}^{+\infty} f[m]g[k - m]
+g(a) = f(a, b)
 $$</p>
-<p>This operation is also:</p>
-<p>Commutative:
+<p>We can say that $a$ is a point of local maximum:
 $$
-f_1(t) * f_2(t) = f_2(t) * f_1(t)
+g&rsquo;(a) = 0
 $$</p>
-<p>Distributive:
+<p>Which is just the same as:
 $$
-f_1(t) * (f_2(t) + f_3(t)) = f_1(t)* f_2(t) + f_1(t) * f_3(t)
+f_x(a, b) = 0
 $$</p>
-<p>Associative:
+<p>Similarly, for $f_y(a, b) = 0$, we just choose to fix $x = a$ instead.</p>
+<h3 id="geometrical-sense">Geometrical sense</h3>
+<p>In functions of one variable, at points of local min/max, the tangent line is horizontal to our point, if the line exists.</p>
+<p>For functions of two variables, instead of a line, we have a plane. The tangent plane is horizontal to our point, if the plane exists.</p>
+<h3 id="definition-1">Definition</h3>
+<p>Let&rsquo;s properly define what we&rsquo;ve covered so far:</p>
+<p>$(a, b)$ is a <strong>critical point</strong> if $\nabla f(a, b) = 0 \textbf{ or } \nabla f(a, b) \ \nexists$</p>
+<p>In other words, if $(a, b)$ is a critical point of local minimum/maximum then it is a critical point.</p>
+<p>However, the other way around this implication is not true. A critical point might not be a local minimum/maxium.</p>
+<h4 id="example">Example</h4>
+<p>Find the critical point(s) for the function:
 $$
-f_1(t) * (f_2(t) * f_3(t)) = (f_1(t) * f_2(t)) * f_3(t) =
+f(x, y) = x^2 + y^2 - 2x - 6y + 14
 $$</p>
-<p>Suppose we have:
-<img src="/school/images/ser.png#center" alt=""></p>
-<p>Using these properties we can say that:
+<p>Let&rsquo;s use our definition:
 $$
-\begin{align*}
-y(t) &amp; = y_1(t) * h_2(t) \newline
-&amp; = f(t) * h_1(t)) * h_2(t) \newline
-&amp; = f(t) * (h_1(t) * h_2(t)) \newline
-\end{align*}
+\nabla f = 0 \newline
+\langle 2x - 2, 2y - 6 \rangle = 0
 $$</p>
-<p>We usually reduce this to:
+<p>We find that $x = 1$ and $y = 3$. This means $(1, 3)$ is a critical point (and the only one!).</p>
+<p>But how do we actually know if a critical point is a local minimum or maximum?</p>
+<h3 id="2nd-derivate-test">2nd derivate test</h3>
+<p>For functions of one variable, if we do the 2nd derivate test:</p>
+<p>Suppose $a$ is a point and $f&rsquo;&rsquo;(a)$ exists, then:
 $$
-y(t) = f(t) * h(t) \ | \ h(t) = h_1(t) * h_2(t)
+f&rsquo;&rsquo;(a) &gt; 0 \ | \ \text{local min} \newline
+f&rsquo;&rsquo;(a) &lt; 0 \ | \ \text{local max} \newline
+f&rsquo;&rsquo;(a) = 0 \ | \ \text{does not say anything}
 $$</p>
-<p>In the parallel case:
-<img src="/school/images/par.png#center" alt=""></p>
+<p>Let&rsquo;s see what we can do in functions of two variables.</p>
+<h3 id="2nd-derivate-test-for-functions-of-two-variables">2nd derivate test for functions of two variables</h3>
+<p>Suppose $(a, b)$ is a critical point of a function, $f$, of two variables. Suppose 2nd order partial derivatives exists and are continous.</p>
+<p>Let $D = D(a, b) = f_{xx}(a, b) f_{yy}(a,b) - \left(f_{xy} (a,b)\right)^2$</p>
+<p>Then:
+$$
+D &gt; 0 \text{ and } f_{xx}(a, b) &gt; 0 \ | \ \text{local minimum} \newline
+D &gt; 0 \text{ and } f_{xx}(a, b) &lt; 0 \ | \ \text{local maximum} \newline
+D &lt; 0 \ | \ \text{neither, this is a saddle point} \newline
+$$</p>
+<h4 id="example-1">Example</h4>
+<p>Let $f(x, y) = x^2 - y^2$ Find critical point(s):</p>
 <p>$$
-\begin{align*}
-y(t) &amp; = y_1(t) + h_2(t) \newline
-&amp; = (f(t) * h_1(t)) +(f(t) * h_2(t)) \newline
-&amp; = f(t) * (h_1(t) + h_2(t)) \newline
-&amp; = f(t) * h(t) \ | \ h(t) = h_1(t) + h_2(t)
-\end{align*}
+\nabla f = 0 \newline
+\lange 2x, -2y \rangle = 0
 $$</p>
-<p>We also have some more specific properties:</p>
-<p>Shift:
+<p>This means $(0, 0)$ is a critical point:
 $$
-f_1(t) * f_2(t) = c(t) \newline
-f_1(t) * f_2(t - T) = c(t - T) \newline
-f_1(t - T) * f_2(t) = c(t - T) \newline
-f_1(t - T_1) * f_2(t - T_2) = c(t - T_1 - T_2) \newline
+f_{xx} = 2
+f_{yy} = -2
+f_{xy} = 0
 $$</p>
-<p>Convolution with an impulse:
+<p>This means:
 $$
-f(t) * \delta(t) = f(t)
+D = -4 \ | \ \text{saddle point}
 $$</p>
-<p>We can combine these two:
-Convolution with an impulse:
+<p>Let&rsquo;s take one last example</p>
+<h4 id="example-2">Example</h4>
+<p>Find local min/max/saddle points, $f(x, y) = x^4 + y^4 - 4xy + 1$</p>
+<p>$$
+\nabla f = 0
+\langle 4x^3 - 4y, 4y³ - 4x \rangle = 0
+$$</p>
+<p>$$
+\begin{cases}
+4x^3 - 4y = 0 \newline
+4y^3 - 4x = 0
+\end{cases}
+$$</p>
+<p>Solving this equation system we find that:
 $$
-f(t) * \delta(t - T) = f(t - T)
+\begin{cases}
+x = 0 \newline
+x = \pm 1
+\end{cases}
+$$
+$$
+\begin{cases}
+y = 0 \newline
+y = \pm 1
+\end{cases}
 $$</p>
-<p>One of the most important properties is the width property. The width of the convolution will be the combined width of the functions.</p>
-<p>All of these apply for both the continuous and discrete, I&rsquo;ve just chosen to write it for continuous.</p>
+<p>Let&rsquo;s now find the 2nd order partial derivates:</p>
+<p>$$
+f_{xx} = 12x^2 \newline
+f_{yy} = 12y^2 \newline
+f_{xy} = f_{yx} = -4
+$$</p>
+<p>$$
+D = 144x^2y^2 - 16
+$$</p>
+<p>$$
+\begin{cases}
+D(0, 0) = -16 \ | \ \text{saddle point} \newline
+D(1, 1) = 128 \ | \ \text{local minimum} \newline
+D(-1, -1) = 128 \ | \ \text{local minimum} \newline
+\end{cases}
+$$</p>
 
 		</section>
   </article>

@@ -40,7 +40,7 @@ Vectors We all know that vectors have a direction and a magnitude (or length), f
       <description>Introduction In this part we will learn about the convolution operation and how it&amp;rsquo;s used.
 Let&amp;rsquo;s start at how it&amp;rsquo;s used.
 Use case Given this signal, we want to find activity on the graph, besides the notice. A kind of high-pass filter will do the job. A high-pass filter is precisely doing the convolution operation to filter.
-For example the output for this input can be: Definition Let&amp;rsquo;s call our input signal $x(t)$, our system operation for $h(t)$ and our output for $y(t)$.</description>
+For example the output for this input can be: Definition and properties Let&amp;rsquo;s call our input signal $x(t)$, our system operation for $h(t)$ and our output for $y(t)$.</description>
     </item>
     
     <item>
