@@ -6,7 +6,19 @@
     <description>Recent content in Schools on rezvan</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 12 Sep 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://rezvan.xyz/school/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 13 Sep 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://rezvan.xyz/school/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Mathematical analysis in several variables: Part 8 - Lagrange multipliers</title>
+      <link>https://rezvan.xyz/school/LMA017_8/</link>
+      <pubDate>Wed, 13 Sep 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://rezvan.xyz/school/LMA017_8/</guid>
+      <description>Introduction In this part we&amp;rsquo;ll cover the method of Lagrange multipliers. This is a strategy, for finding local minimum/maximums for a function with a constraint.
+Let&amp;rsquo;s define it properly
+Definition Say we have a function, $f(x, y)$, which we want to find the min/max points. But this function is subject of some constraint of the form, $g(x, y) = k$.
+Recall our rectangular box problem from the last part: $$ V(x, y, z) = xyz \newline 2zx + 2zy + yx = 12 $$</description>
+    </item>
+    
     <item>
       <title>Mathematical analysis in several variables: Part 7 - Absolute max and min values</title>
       <link>https://rezvan.xyz/school/LMA017_7/</link>

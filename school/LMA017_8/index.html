@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8"><meta property="og:site_name" content="rezvan"><title>Posts | rezvan</title>
-  <meta property="og:title" content="Posts | rezvan"><meta property="og:description" content="">
+	<meta charset="utf-8"><meta property="og:site_name" content="rezvan"><title>Mathematical analysis in several variables: Part 8 - Lagrange multipliers | rezvan</title>
+  <meta property="og:title" content="Mathematical analysis in several variables: Part 8 - Lagrange multipliers | rezvan"><meta property="og:description" content="">
   <meta property="og:type" content="blog">
-  <meta property="og:link" content="https://rezvan.xyz/posts/"><link rel="shortcut icon" type="image/png" href=https://rezvan.xyz//images/icon.png />
+  <meta property="og:link" content="https://rezvan.xyz/school/LMA017_8/"><link rel="shortcut icon" type="image/png" href=https://rezvan.xyz//images/icon.png />
   <meta property="og:image" content="https://rezvan.xyz//images/icon.png" /><meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="alternate" type="application/rss+xml" href="https://rezvan.xyz/posts/index.xml" title="rezvan" />
 	<link rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz//css/main.css" />
 
     <head>
@@ -223,10 +222,26 @@ body.dark-mode .title {
 </head>
 
 <body>
-    <div class="wrapper">
+  <div class="wrapper">
+	<div class="content">
 		<div class="header_main">
 
-    <a href="https://rezvan.xyz/"><p class="header_title">rezvan</p>
+    <a href="https://rezvan.xyz/"><p class="header_title">rezvan</p><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.3/dist/katex.min.css" integrity="sha384-Juol1FqnotbkyZUT5Z7gUPjQ9gzlwCENvUZTpQBAPxtusdwFLRy382PSDx5UUJ4/" crossorigin="anonymous">
+
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.3/dist/katex.min.js" integrity="sha384-97gW6UIJxnlKemYavrqDHSX3SiygeOwIZhwyOKRfSaf0JWKRVj9hLASHgFTzT+0O" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.3/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+            delimiters: [
+                {left: "$$", right: "$$", display: true},
+                {left: "$", right: "$", display: false}
+            ]
+        });
+    });
+</script>
+
     </a>
 
     <br>
@@ -245,76 +260,266 @@ body.dark-mode .title {
         
     </nav></div>
 
-                
-                
-                
-				<section class="post_listed">
-					<time class="post_time">09.13.23</time>
-					<a class="title" href="/school/LMA017_8/">Mathematical analysis in several variables: Part 8 - Lagrange multipliers</a>
-        </section>
-				
-				<section class="post_listed">
-					<time class="post_time">09.12.23</time>
-					<a class="title" href="/school/LMA017_7/">Mathematical analysis in several variables: Part 7 - Absolute max and min values</a>
-        </section>
-				
-				<section class="post_listed">
-					<time class="post_time">09.08.23</time>
-					<a class="title" href="/school/LMA017_6/">Mathematical analysis in several variables: Part 6 - Maximum and minimum values &amp; 2nd derivative test</a>
-        </section>
-				
-				<section class="post_listed">
-					<time class="post_time">09.06.23</time>
-					<a class="title" href="/school/LMA017_5/">Mathematical analysis in several variables: Part 5 - Directional derivatives and the gradient vector</a>
-        </section>
-				
-				<section class="post_listed">
-					<time class="post_time">09.05.23</time>
-					<a class="title" href="/school/SSY081_3/">Transforms, signals and systems: Part 3 - Convolution</a>
-        </section>
-				
-				<section class="post_listed">
-					<time class="post_time">09.05.23</time>
-					<a class="title" href="/school/LMA017_4/">Mathematical analysis in several variables: Part 4 - Chain rule &amp; implicit differentiation</a>
-        </section>
-				
-				<section class="post_listed">
-					<time class="post_time">09.04.23</time>
-					<a class="title" href="/school/SSY081_2/">Transforms, signals and systems: Part 2 - System properties &amp; LTI</a>
-        </section>
-				
-				<section class="post_listed">
-					<time class="post_time">09.01.23</time>
-					<a class="title" href="/school/LMA017_3/">Mathematical analysis in several variables: Part 3 - Higher partial derivatives &amp; differentiability</a>
-        </section>
-				
-				<section class="post_listed">
-					<time class="post_time">08.30.23</time>
-					<a class="title" href="/school/LMA017_2/">Mathematical analysis in several variables: Part 2 - Continuity &amp; partial derivatives.</a>
-        </section>
-				
-				<section class="post_listed">
-					<time class="post_time">08.29.23</time>
-					<a class="title" href="/school/SSY081/">Transforms, signals and systems: Part 1 - Signals</a>
-        </section>
-				
-				
+  <article><div class="title_wrapper">
+			<h1 class="title">Mathematical analysis in several variables: Part 8 - Lagrange multipliers</h1><p class="single_time">Sep 13, 2023</p></div>
+		<section class="post">
+			<h3 id="introduction">Introduction</h3>
+<p>In this part we&rsquo;ll cover the method of Lagrange multipliers. This is a strategy, for finding local minimum/maximums for a function with a constraint.</p>
+<p>Let&rsquo;s define it properly</p>
+<h3 id="definition">Definition</h3>
+<p>Say we have a function, $f(x, y)$, which we want to find the min/max points. But this function is subject of some constraint of the form, $g(x, y) = k$.</p>
+<p>Recall our rectangular box problem from the last part:
+$$
+V(x, y, z) = xyz \newline
+2zx + 2zy + yx = 12
+$$</p>
+<p>So if it&rsquo;s difficult to try to rewrite this using only two variables, we can instead use this method.</p>
+<p>Let&rsquo;s first get a geometrical sense.</p>
+<h3 id="geometrical-sense-of-lagrange-multipliers">Geometrical sense of Lagrange multipliers</h3>
+<p>If min/max of $f$, is subject to constraint, $g(x, y) = k$, which occurs at $(x_0, y_0)$, then the level curve containing $(x_0, y_0)$ must <em>touch</em> the constraint curve.</p>
+<p>If two curves are touching at $(x_0, y_0)$, in other words they have a common tangent line at $(x_0, y_0)$.</p>
+<p>Which is just equivalent of saying that they have a common perpendicular line at $(x_0, y_0)$, and what do we know which is orthogonal to the level curve?</p>
+<p>The gradient.</p>
+<p>Therefore, this means:
+$$
+\nabla f(x_0, y_0) || \nabla g(x_0, y_0)
+$$</p>
+<p>If two vectors are parallel, it&rsquo;s equivalent of saying:</p>
+<p>$$
+\boxed{\nabla f(x_0, y_0) || \lambda \nabla g(x_0, y_0)}
+$$</p>
+<p>All of this assuming that $\nabla g \neq 0$</p>
+<p>Let&rsquo;s properly define our method now.</p>
+<h3 id="lagrange-multiplier-method">Lagrange multiplier method</h3>
+<blockquote>
+<p>To find minimum/maximum values of function, $f$, subject to constraint, $g(x, y) = k$, assuming minimum/maximum points exists and $\nabla g \neq 0$</p>
+</blockquote>
+<ol>
+<li>
+<p>Find all numbers $x, y$ and $\lambda$, such that:
+$$
+\nabla f(x, y) = \lambda \nabla g(x, y) = k
+$$</p>
+</li>
+<li>
+<p>Compute values from step 1, choose the minimum/maximum value(s).</p>
+</li>
+</ol>
+<p>Let&rsquo;s do an example.</p>
+<h4 id="example">Example</h4>
+<p>Find the extreme values of, $f(x, y) = xy$ on the disc, $x^2 + y^2 \leq 1$.</p>
+<p>Step 1 - Find critical points (as usual):
+$$
+\nabla f = 0 \newline
+\lange y, x \rangle  = 0
+$$</p>
+<p>Which means:
+$$
+\begin{cases}
+y = 0 \newline
+x = 0
+\end{cases}
+$$</p>
+<p>So we have a critical point at $(0, 0)$. Let&rsquo;s compute the value:
+$$
+f(0, 0) = \boxed{0}
+$$</p>
+<p>Step 2 - Find absolute minimum/maximum values on boundary.</p>
+<p>Since we have a unit circle, with equation, $x^2 + y^2 = 1$, we can view this as a constraint.
+$$
+g(x, y) = k \newline
+x^2 + y^2 = 1
+$$</p>
+<p>Let&rsquo;s first see if all our assumptions hold, since this is a bounded closed set, by the extreme value theorem, absolute values must exists. So we know that they exists.</p>
+<p>Let&rsquo;s check that $\nabla g \neq 0$:
+$$
+\nabla g = \langle 2x, 2y \rangle
+$$</p>
+<p>Which is only $0$ at $(0, 0)$ which isn&rsquo;t on the boundary of the circle.</p>
+<p>So we can try our new method!</p>
+<p>$$
+\begin{cases}
+\langle y, x \rangle = \lambda \langle 2x, 2y \rangle \newline
+x^2 + y^2 = 1
+\end{cases}
+$$</p>
+<p>So we have a vector that must be equal to another vector, this means they share coordinates.</p>
+<p>Which means:
+$$
+\begin{cases}
+y = 2\lambda x \newline
+x = 2\lambda y \newline
+x^2 + y^2 = 1
+\end{cases}
+$$</p>
+<p>substitute and simplify:
+$$
+\begin{cases}
+x = 4\lambda^2 x \newline
+y = 2\lambda x \newline
+x^2 + y^2 = 1
+\end{cases}
+$$</p>
+<p>$$
+\begin{cases}
+x - 4\lambda^2 x = 0 \newline
+y = 2\lambda x \newline
+x^2 + y^2 = 1
+\end{cases}
+$$</p>
+<p>$$
+\begin{cases}
+x(1 - 4\lambda^2) = 0 \newline
+y = 2\lambda x \newline
+x^2 + y^2 = 1
+\end{cases}
+$$</p>
+<p>Case 1, $x = 0$, therefore, $y = 0$ as well, but our constraint is not fulfilled then.</p>
+<p>Case 2, $1 - 4\lambda^2 = 0$:
+$$
+\lambda = \pm \dfrac{1}{2}
+$$</p>
+<p>Case 2.1, $\lambda = \drac{1}{2}$
+$$
+\begin{cases}
+y = x
+x = y
+x^2 + y^2 = 1
+\end{cases}
+$$</p>
+<p>$$
+2x^2 = 1 \newline
+x = \pm \dfrac{1}{\sqrt{2}} \newline
+y = \pm \dfrac{1}{\sqrt{2}} \newline
+$$</p>
+<p>The constraint holds, so we have found another point, $\left( \dfrac{1}{\sqrt{2}}, \dfrac{1}{\sqrt{2}} \right)$ and $\left( - \dfrac{1}{\sqrt{2}}, - \dfrac{1}{\sqrt{2}} \right)$.</p>
+<p>Case 2.2, $\lambda = - \drac{1}{2}$
+$$
+\begin{cases}
+y = -x
+x = -y
+x^2 + y^2 = 1
+\end{cases}
+$$</p>
+<p>$$
+2x^2 = 1 \newline
+x = \pm \dfrac{1}{\sqrt{2}} \newline
+y = \pm \dfrac{1}{\sqrt{2}} \newline
+$$</p>
+<p>The constraint holds, $\left( \dfrac{1}{\sqrt{2}}, - \dfrac{1}{\sqrt{2}} \right)$ and $\left( - \dfrac{1}{\sqrt{2}}, \dfrac{1}{\sqrt{2}} \right)$.</p>
+<p>Now, we just compute the value of these points:
+$$
+f\left( \dfrac{1}{\sqrt{2}}, \dfrac{1}{\sqrt{2}} \right) = \dfrac{1}{2} \newline
+f\left( - \dfrac{1}{\sqrt{2}}, - \dfrac{1}{\sqrt{2}} \right) = \dfrac{1}{2} \newline
+f\left( \dfrac{1}{\sqrt{2}}, - \dfrac{1}{\sqrt{2}} \right) = - \dfrac{1}{2} \newline
+f\left( - \dfrac{1}{\sqrt{2}}, \dfrac{1}{\sqrt{2}} \right) = - \dfrac{1}{2}
+$$</p>
+<p>So, we have finally found our minimum and maximum values, $- \dfrac{1}{2}$ and $\dfrac{1}{2}$, respectively.</p>
+<h3 id="remark">Remark</h3>
+<p>A little remark, it is important that the constraint has to be of the form $g(x, y) = k$. For example, our rectangle problem from last time, we can not describe a rectangular box in that form.</p>
+<p>So no lagrange multiplier there. Let&rsquo;s look at more difficult example.</p>
+<h3 id="example-1">Example</h3>
+<p>Find the points on the sphere, $x^2 + y^2 + z^2 = 4$, that are closest and furthest from the point $(3, 1, -1)$.</p>
+<p>So we have to calculate the distance between these points, or in other words:
+$$
+d(x, y, z) = \sqrt{(x - 3)^2 + (y - 1)^2 + (z + 1)^2}
+$$</p>
+<p>But this function isn&rsquo;t really that pleasant, so instead, let&rsquo;s calculate the distance squared, or:
+$$
+d(x, y, z) = (x - 3)^2 + (y - 1)^2 + (z + 1)^2
+$$</p>
+<p>We can work with this function instead, so let&rsquo;s use our method. Let&rsquo;s first compute gradients:
+$$
+\nabla d = \langle 2(x - 3), 2(y - 1), 2(z + 1) \rangle
+$$</p>
+<p>$$
+\nabla g = \langle 2x, 2y, 2z \rangle
+$$</p>
+<p>So we have:
+$$
+\begin{cases}
+\langle 2(x - 3), 2(y - 1), 2(z + 1) \rangle = \lambda \langle 2x, 2y, 2z \rangle \newline
+x^2 + y^2 + z^2 = 4
+\end{cases}
+$$</p>
+<p>$$
+\begin{cases}
+2(x - 3) = 2\lambda x \newline
+2(y - 1) = 2\lambda y \newline
+2(z + 1) = 2\lambda z \newline
+x^2 + y^2 + z^2 = 4
+\end{cases}
+$$</p>
+<p>$$
+\begin{cases}
+x - 3 = \lambda x \newline
+y - 1 = \lambda y \newline
+z + 1 = \lambda z \newline
+x^2 + y^2 + z^2 = 4
+\end{cases}
+$$</p>
+<p>$$
+\begin{cases}
+x - \lambda x = 3 \newline
+y - \lambda y = 1 \newline
+z - \lambda z = -1 \newline
+x^2 + y^2 + z^2 = 4
+\end{cases}
+$$</p>
+<p>$$
+\begin{cases}
+x(1 - \lambda) = 3 \newline
+y(1 - \lambda) = 1 \newline
+z(1 - \lambda) = -1 \newline
+x^2 + y^2 + z^2 = 4
+\end{cases}
+$$</p>
+<p>$$
+\begin{cases}
+x = \dfrac{3}{1 - \lambda} \newline
+y = \dfrac{1}{1 - \lambda} \newline
+z = \dfrac{-1}{1 - \lambda} \newline
+x^2 + y^2 + z^2 = 4
+\end{cases}
+$$</p>
+<p>Let&rsquo;s substitute these into our constraint:
+$$
+\dfrac{9}{(1 - \lambda)^2} + \dfrac{1}{(1 - \lambda)^2} + \dfrac{1}{(1 - \lambda)^2} = 4
+$$</p>
+<p>$$
+\dfrac{11}{(1 - \lambda)^2} = 4
+$$</p>
+<p>$$
+(1 - \lambda)^2 = \dfrac{11}{4}
+$$</p>
+<p>$$
+1 - \lambda = \pm \dfrac{\sqrt{11}}{2}
+$$</p>
+<p>Compute vales of $x, y, z$, in case 1, $1 - \lambda = \dfrac{\sqrt{11}}{2}$:
+$$
+\begin{cases}
+x = \dfrac{6}{\sqrt{11}} \newline
+y = \dfrac{2}{\sqrt{11}} \newline
+z = -\dfrac{2}{\sqrt{11}} \newline
+\end{cases}
+$$</p>
+<p>Compute vales of $x, y, z$, in case 2, $1 - \lambda = -\dfrac{\sqrt{11}}{2}$:
+$$
+\begin{cases}
+x = -\dfrac{6}{\sqrt{11}} \newline
+y = -\dfrac{2}{\sqrt{11}} \newline
+z = \dfrac{2}{\sqrt{11}} \newline
+\end{cases}
+$$</p>
+<p>Now, we could plug these values into our $d$ function, however we can intuitively see which point is closest and furthest.</p>
+<p>Case 1 is the closest and case 2 is the furthest.</p>
 
-<ul class="pagination">
-	
-	
-    <a href="/posts/page/2/" class="page-next page-link" aria-label="Older Posts">Older Posts →</a>
-	
-	</span>
-</ul>
-
-
-			<footer><p class="footer_msg">memento mori</p></footer>
-
-		</div>
-    </div>
-		
+		</section>
+  </article>
 	</div>
-	
+
+	<footer><p class="footer_msg">memento mori</p></footer>
+
+  </div>
 </body>
 </html>
