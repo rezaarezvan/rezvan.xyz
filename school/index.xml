@@ -6,7 +6,18 @@
     <description>Recent content in Schools on rezvan</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 13 Sep 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://rezvan.xyz/school/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 14 Sep 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://rezvan.xyz/school/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Transforms, signals and systems: Part 4 - Differential equation models</title>
+      <link>https://rezvan.xyz/school/SSY081_4/</link>
+      <pubDate>Thu, 14 Sep 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://rezvan.xyz/school/SSY081_4/</guid>
+      <description>Introduction In this part we will learn about systems that can be modeled with differential equations.
+Definition Some systems whose input, $f(t)$, and output, $y(t)$, are related by linear differential equations, often have the form: $$ \dfrac{d^n y}{dt^n} + a_{n - 1} \dfrac{d^{n - 1}y}{dt^{n - 1}} + \ldots + a_1 \dfrac{dy}{dt} + a_0 y(t) = $$
+$$ b_m + \dfrac{d^m f}{dt^m} + b_{m - 1} + \dfrac{d^{m - 1} f}{dt^{m - 1}} + \ldots + b_1 \dfrac{df}{dt} + b_0 f(t) $$</description>
+    </item>
+    
     <item>
       <title>Mathematical analysis in several variables: Part 8 - Lagrange multipliers</title>
       <link>https://rezvan.xyz/school/LMA017_8/</link>
