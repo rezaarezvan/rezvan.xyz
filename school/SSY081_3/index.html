@@ -340,6 +340,44 @@ f(t) * \delta(t - T) = f(t - T)
 $$</p>
 <p>One of the most important properties is the width property. The width of the convolution will be the combined width of the functions.</p>
 <p>All of these apply for both the continuous and discrete, I&rsquo;ve just chosen to write it for continuous.</p>
+<h3 id="lti-system-properties">LTI system properties</h3>
+<p>Systems can also have properties, depending on the impulse response function, $h(t)$.</p>
+<p>We covered these in the systems part of this series, but let&rsquo;s redefine them again.</p>
+<h4 id="causality">Causality</h4>
+<p>For a causal continuous-time LTI system, the convolution integral:
+$$
+\int_{-\infty}^{\infty} f(t - \tau)h(\tau) \ d\tau = \int_{-\infty}^{\infty} f(\tau)h(t -\tau) \ d\tau
+$$</p>
+<p>Can be expressed as:
+$$
+\int_{0}^{\infty} f(t - \tau)h(\tau) \ d\tau = \int_{-\infty}^{t} f(\tau)h(t -\tau) \ d\tau
+$$</p>
+<h4 id="bibo-stability">BIBO-stability</h4>
+<p>For an LTI system to be BIBO stable, the impulse response
+must be absolutely integrable:</p>
+<p>$$
+\int_{-\infty}^{\infty} |h(t)|\ dt &lt; \infty
+$$</p>
+<p>If the system is also causal, then this integral is:
+$$
+\int_{0}^{\infty} |h(t)|\ dt &lt; \infty
+$$</p>
+<h4 id="instantaneous">Instantaneous</h4>
+<p>An LTI system is instantaneous if and only if:
+$$
+h(t) = K \delta(t)
+$$</p>
+<p>If this is the case, then:
+$$
+y(t) = K f(t)
+$$</p>
+<h4 id="invertibility">Invertibility</h4>
+<p>An LTI system with impulse response $h(t)$ is invertible if there is a $h_i(t)$ such that:
+$$
+h(t) * h_i(t) = \delta(t)
+$$</p>
+<h3 id="remark">Remark</h3>
+<p>As always, all of these also apply for discrete-time as well, just sum instead of an integral.</p>
 
 		</section>
   </article>
