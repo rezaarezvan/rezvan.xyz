@@ -22,6 +22,19 @@ In mathematical terms: $\{(x, y) | a \leq x \leq b, c \leq y \leq y \}$.</descri
     </item>
     
     <item>
+      <title>Transforms, signals and systems: Part 5 - Fourier series</title>
+      <link>https://rezvan.xyz/school/SSY081_5/</link>
+      <pubDate>Fri, 15 Sep 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://rezvan.xyz/school/SSY081_5/</guid>
+      <description>Introduction In this part we&amp;rsquo;ll try to understand the concept and power with Fourier series.
+Let&amp;rsquo;s firstly define the what, why and how with Fourier series.
+Definition Fourier series, is an expansion of a perodic function, into a sum of trigonometric functions.
+So the power is really, given a complex perodic function, we can easily represent it as a sum of simple trigonometric functions!
+However, before we mathematically define the Fourier series, let&amp;rsquo;s take a different approach to this.</description>
+    </item>
+    
+    <item>
       <title>Transforms, signals and systems: Part 4 - Differential equation models</title>
       <link>https://rezvan.xyz/school/SSY081_4/</link>
       <pubDate>Thu, 14 Sep 2023 00:00:00 +0000</pubDate>
