@@ -1,268 +1,108 @@
 <!DOCTYPE html>
-<html>
-<head>
-	<meta charset="utf-8"><meta property="og:site_name" content="rezvan"><title>DSA: Part 9 - Shortest Path Algortihms &amp; Spanning Trees | rezvan</title>
-  <meta property="og:title" content="DSA: Part 9 - Shortest Path Algortihms &amp; Spanning Trees | rezvan"><meta property="og:description" content="">
-  <meta property="og:type" content="blog">
-  <meta property="og:link" content="https://rezvan.xyz/school/DSA_9/"><link rel="shortcut icon" type="image/png" href=https://rezvan.xyz//images/icon.png />
-  <meta property="og:image" content="https://rezvan.xyz//images/icon.png" /><meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz//css/main.css" />
-
-    <head>
-    <link rel="stylesheet" href="../../themes/void/static/css/main.css">
-</head>
-
-<div class="js-toggle-wrapper">
-    <div class="js-toggle">
-        <div class="js-toggle-track">
-            <div class="js-toggle-track-check">
-                <img src="data:image/png;base64,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" role="presentation" style="pointer-events: none;" width="16" height="16">
-            </div>
-            <div class="js-toggle-track-x">
-                <img src="data:image/png;base64,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" role="presentation" style="pointer-events: none;" width="16" height="16">
-            </div>
-        </div>
-        <div class="js-toggle-thumb"></div>
-        <input class="js-toggle-screenreader-only" type="checkbox" aria-label="Switch between Dark and Light mode">
-    </div>
-</div>
-
-<style>
-
- 
-
-body.dark-mode,
-body.dark-mode main {
-    background-color: #0a0a0a;
-    color: #eee;
-}
-
-body.dark-mode a {
-    color: #eee;
-    text-decoration: none;
-}
-
-body.dark-mode p {
-    color: #eee;
-}
-
-body.dark-mode article a{
-    text-decoration: underline;
-}
-
-body.dark-mode .post_listed .title {
-    color: #eee;
-}
-
-body.dark-mode .post_listed .title:hover {
-    background-color: #eee;
-    color: #0a0a0a;
-}
-
-body.dark-mode .post_listed .post_time {
-    color: #aaa;
-}
-
-body.dark-mode .header_title {
-    color: #fff;
-}
-
-body.dark-mode .nav a {
-    color: #eee;
-}
-
-body.dark-mode .nav a:visited {
-    color: #eee;
-}
-
-body.dark-mode .nav a:hover {
-    color: #0a0a0a;
-}
-
- 
-body.dark-mode .title {
-    color: #eee;
-}
-
-
-.js-toggle-wrapper {
-    display: table;
-     
-    margin: 5px auto;
-}
-
-.js-toggle {
-    touch-action: pan-x;
-    display: inline-block;
-    position: relative;
-    cursor: pointer;
-    background-color: transparent;
-    border: 0;
-    padding: 0;
-    -webkit-touch-callout: none;
-    user-select: none;
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-    -webkit-tap-highlight-color: transparent;
-  }
-
-  .js-toggle-screenreader-only {
-    border: 0;
-    clip: rect(0 0 0 0);
-    height: 1px;
-    margin: -1px;
-    overflow: hidden;
-    padding: 0;
-    position: absolute;
-    width: 1px;
-  }
-
-  .js-toggle-track {
-    width: 50px;
-    height: 24px;
-    padding: 0;
-    border-radius: 30px;
-    background-color: hsl(222, 14%, 7%);
-    transition: all 0.2s ease;
-  }
-
-  .js-toggle-track-check {
-    position: absolute;
-    width: 17px;
-    height: 17px;
-    left: 5px;
-    top: 0px;
-    bottom: 0px;
-    margin-top: auto;
-    margin-bottom: auto;
-    line-height: 0;
-    opacity: 0;
-    transition: opacity 0.25s ease;
-  }
-
-  .js-toggle--checked .js-toggle-track-check {
-    opacity: 1;
-    transition: opacity 0.25s ease;
-  }
-
-  .js-toggle-track-x {
-    position: absolute;
-    width: 17px;
-    height: 17px;
-    right: 5px;
-    top: 0px;
-    bottom: 0px;
-    margin-top: auto;
-    margin-bottom: auto;
-    line-height: 0;
-    opacity: 1;
-    transition: opacity 0.25s ease;
-  }
-
-  .js-toggle--checked .js-toggle-track-x {
-    opacity: 0;
-  }
-
-  .js-toggle-thumb {
-    position: absolute;
-    top: 1px;
-    left: 1px;
-    width: 22px;
-    height: 22px;
-    border-radius: 50%;
-    background-color: #fafafa;
-    box-sizing: border-box;
-    transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1) 0ms;
-    transform: translateX(0);
-  }
-
-  .js-toggle--checked .js-toggle-thumb {
-    transform: translateX(26px);
-    border-color: #19ab27;
-  }
-
-  .js-toggle--focus .js-toggle-thumb {
-    box-shadow: 0px 0px 2px 3px rgb(255, 167, 196);
-  }
-
-  .js-toggle:active .js-toggle-thumb {
-    box-shadow: 0px 0px 5px 5px rgb(255, 167, 196);
-  }
-</style>
-
-<script>
-    var body = document.body;
-	var switcher = document.getElementsByClassName('js-toggle')[0];
+<html><head lang="en">
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>DSA: Part 9 - Shortest Path Algortihms &amp; Spanning Trees - rezvan</title><link rel="icon" type="image/png" href=images/icon.png /><meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="In this part we&rsquo;ll cover spanning trees along with how we can use these to solve pathfinding problems!
+Weighted Graphs As we have seen in the last part - graphs can we directed or undircted, the same thing goes for the weights on the edge. These represent some kind of &lsquo;cost&rsquo;, usually these are positive float numbers, but they could be anything - although many algortihms only work for positive weights." />
+	<meta property="og:image" content=""/>
+	<meta property="og:title" content="DSA: Part 9 - Shortest Path Algortihms &amp; Spanning Trees" />
+<meta property="og:description" content="In this part we&rsquo;ll cover spanning trees along with how we can use these to solve pathfinding problems!
+Weighted Graphs As we have seen in the last part - graphs can we directed or undircted, the same thing goes for the weights on the edge. These represent some kind of &lsquo;cost&rsquo;, usually these are positive float numbers, but they could be anything - although many algortihms only work for positive weights." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://rezvan.xyz/school/DSA_9/" /><meta property="article:section" content="school" />
+<meta property="article:published_time" content="2022-12-07T18:34:09+01:00" />
+<meta property="article:modified_time" content="2022-12-07T18:34:09+01:00" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="DSA: Part 9 - Shortest Path Algortihms &amp; Spanning Trees"/>
+<meta name="twitter:description" content="In this part we&rsquo;ll cover spanning trees along with how we can use these to solve pathfinding problems!
+Weighted Graphs As we have seen in the last part - graphs can we directed or undircted, the same thing goes for the weights on the edge. These represent some kind of &lsquo;cost&rsquo;, usually these are positive float numbers, but they could be anything - although many algortihms only work for positive weights."/>
+<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+	<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@1,500&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Fira+Sans&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
 
 	
-	switcher.addEventListener("click", function() {
-        this.classList.toggle('js-toggle--checked');
-        this.classList.add('js-toggle--focus');
-		
-		if (this.classList.contains('js-toggle--checked')) {
-			body.classList.add('dark-mode');
-			
-			localStorage.setItem('darkMode', 'true');
-		} else {
-			body.classList.remove('dark-mode');
-			setTimeout(function() {
-				localStorage.removeItem('darkMode');
-			}, 100);
-		}
-	})
+	<link rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/main.ded288734bf67c9f89d72102879afaadf50fed4138fb485737334085f5465104.css" />
+		<link id="darkModeStyle" rel="stylesheet" type="text/css" href="https://rezvan.xyz/css/dark.b47837a877382f31178bb7a2c2135fbe9c39b1d4a1cc529faee0363b6dbdc408.css"  disabled />
+	
 
 	
-	if (localStorage.getItem('darkMode')) {
+	
+		<script type="text/javascript"
+		src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+		</script>
+	
 		
-        switcher.classList.add('js-toggle--checked');
-        body.classList.add('dark-mode');
-	}
-</script>
+		<script type="text/x-mathjax-config">
+		MathJax.Hub.Config({
+			tex2jax: {
+				inlineMath: [['$','$'], ['\\(','\\)']],
+				displayMath: [['$$','$$'], ['\[','\]']],
+				processEscapes: true,
+				processEnvironments: true,
+				skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+				TeX: { equationNumbers: { autoNumber: "AMS" },
+						 extensions: ["AMSmath.js", "AMSsymbols.js"] }
+			}
+		});
+		</script>
+	
 
-
+	
+	
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css">
+		<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js"></script>
+		<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
+		
+		
+		<script>
+			document.addEventListener("DOMContentLoaded", function() {
+					renderMathInElement(document.body, {
+							delimiters: [
+									{left: "$$", right: "$$", display: true},
+									{left: "$", right: "$", display: false}
+							]
+					});
+			});
+			</script>
+	
+	
+	
 </head>
-
 <body>
-  <div class="wrapper">
-	<div class="content">
-		<div class="header_main">
+        <div class="content"><header>
+	<div class="main">
+		<a href="https://rezvan.xyz/">rezvan</a>
+	</div>
+	<nav>
+		
+		<a href="/">home</a>
+		
+		<a href="/about">about</a>
+		
+		<a href="/contact">contact</a>
+		
+		<a href="/cv">cv</a>
+		
+		<a href="/school">school</a>
+		
+		<a href="/tags">tags</a>
+		
+		| <span id="dark-mode-toggle" onclick="toggleTheme()"></span>
+		<script src="https://rezvan.xyz/js/themetoggle.js"></script>
+		
+	</nav>
+</header>
 
-    <a href="https://rezvan.xyz/"><p class="header_title">rezvan</p><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.3/dist/katex.min.css" integrity="sha384-Juol1FqnotbkyZUT5Z7gUPjQ9gzlwCENvUZTpQBAPxtusdwFLRy382PSDx5UUJ4/" crossorigin="anonymous">
+<main>
+	<article>
+		<div class="title">
+			<h1 class="title">DSA: Part 9 - Shortest Path Algortihms &amp; Spanning Trees</h1>
+			<div class="meta">Posted on Dec 7, 2022</div>
+		</div>
+		
 
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.3/dist/katex.min.js" integrity="sha384-97gW6UIJxnlKemYavrqDHSX3SiygeOwIZhwyOKRfSaf0JWKRVj9hLASHgFTzT+0O" crossorigin="anonymous"></script>
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.3/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script>
-
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        renderMathInElement(document.body, {
-            delimiters: [
-                {left: "$$", right: "$$", display: true},
-                {left: "$", right: "$", display: false}
-            ]
-        });
-    });
-</script>
-
-    </a>
-
-    <br>
-
-    <nav id="main">
-        
-        <a href="/">home</a>
-        
-        <a href="/about/">about</a>
-        
-        <a href="/contact/">contact</a>
-        
-        <a href="/cv/">cv</a>
-        
-        <a href="/school/">school</a>
-        
-    </nav></div>
-
-  <article><div class="title_wrapper">
-			<h1 class="title">DSA: Part 9 - Shortest Path Algortihms &amp; Spanning Trees</h1><p class="single_time">Dec 7, 2022</p></div>
-		<section class="post">
+		<section class="body">
 			<p>In this part we&rsquo;ll cover spanning trees along with how we can use these to solve pathfinding problems!</p>
 <h3 id="weighted-graphs">Weighted Graphs</h3>
 <p>As we have seen in the last part - graphs can we directed or undircted, the same thing goes for the <em>weights</em> on the edge.
@@ -355,26 +195,26 @@ These represent some kind of &lsquo;cost&rsquo;, usually these are positive floa
 <p>There&rsquo;s actually a good (and well-known) data strucute for this exact problem, the <em>disjoint-set</em> data structure.
 It supports merging and testing in $\mathcal{O}(log*\ n)$ time. (Note log* is an actual function, it&rsquo;s constant for all practical purpoes)</p>
 <p>A pseudo-code implementation would be:</p>
-<pre tabindex="0"><code>def kruskals(graph: Graph):
-    result = []
-    i, e = 0, 0
-    graph = sort(graph)
-    parent = []
-    rank = []
-    for vertex in range(graph.V):
-        parent.append(vertex)
-        rank.append(0)
-
-    while e &lt; graph.V - 1:
-        u, v, w = graph[i]
-        i = i + 1
-        x = graph.find(parent, u)
-        y = graph.find(parent, v)
-        if x != y:
-            e = e + 1
-            result.append([u, v, w])
-            graph.apply_union(parent, rank, x, y)
-</code></pre><h3 id="prims-algortim">Prim&rsquo;s algortim</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>def kruskals(graph: Graph):
+</span></span><span style="display:flex;"><span>    result = []
+</span></span><span style="display:flex;"><span>    i, e = 0, 0
+</span></span><span style="display:flex;"><span>    graph = sort(graph)
+</span></span><span style="display:flex;"><span>    parent = []
+</span></span><span style="display:flex;"><span>    rank = []
+</span></span><span style="display:flex;"><span>    for vertex in range(graph.V):
+</span></span><span style="display:flex;"><span>        parent.append(vertex)
+</span></span><span style="display:flex;"><span>        rank.append(0)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    while e &lt; graph.V - 1:
+</span></span><span style="display:flex;"><span>        u, v, w = graph[i]
+</span></span><span style="display:flex;"><span>        i = i + 1
+</span></span><span style="display:flex;"><span>        x = graph.find(parent, u)
+</span></span><span style="display:flex;"><span>        y = graph.find(parent, v)
+</span></span><span style="display:flex;"><span>        if x != y:
+</span></span><span style="display:flex;"><span>            e = e + 1
+</span></span><span style="display:flex;"><span>            result.append([u, v, w])
+</span></span><span style="display:flex;"><span>            graph.apply_union(parent, rank, x, y)
+</span></span></code></pre></div><h3 id="prims-algortim">Prim&rsquo;s algortim</h3>
 <p>The challenge here is instead to find and remove the min weight edge with exactly one endpoint in T.</p>
 <p>If try all edges we will ofcourse have a compleixty of $\mathcal{O}(E^2)$. So let&rsquo;s not do that :)</p>
 <p>However, if we use a priority queue, we can get a $\mathcal{O}(E\ log(E))$. This is still the &rsquo;lazy&rsquo; version but let&rsquo;s look at the idea:</p>
@@ -460,30 +300,30 @@ where priority of node $v$ = weight of shortest edge connecting $v$ to T.</p>
 Also if we have any restraints on cycles?</p>
 <p>But with all this in mind - let&rsquo;s simplifiy - Shorest path from S to each node V <strong>exists</strong>.</p>
 <p>If you remember, here&rsquo;s our ADT/API for directed graphs:</p>
-<pre tabindex="0"><code>class Graph&lt;Vertices&gt;:
-    // Adds an edge to the graph
-    add_edge(e: Edge&lt;Vertices&gt;)
-
-    // Removes an edge from the graph
-    remove_edge(e: Edge&lt;Vertices&gt;)
-
-    // Returns true if the edge is present in the graph, otherwise false
-    contains_edge(e: Edge&lt;Vertices&gt;) -&gt; boolean
-
-    // Returns all the edges which are connected with the vertices
-    outgoing_edges(from: Vertices) -&gt; Collection&lt;Edge&lt;Vertices&gt;&gt;
-
-    // Returns the number of vertices present in the graph
-    n_vertices() -&gt; Int
-
-    // Returns the number of edges present in the graph
-    n_edges() -&gt; Int
-
-class Edge&lt;Vertices&gt;:
-    from   : Vertices
-    to     : Vertices
-    weight : float = 1.0
-</code></pre><h3 id="single-source-shortest-paths">Single-source shortest paths</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>class Graph&lt;Vertices&gt;:
+</span></span><span style="display:flex;"><span>    // Adds an edge to the graph
+</span></span><span style="display:flex;"><span>    add_edge(e: Edge&lt;Vertices&gt;)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    // Removes an edge from the graph
+</span></span><span style="display:flex;"><span>    remove_edge(e: Edge&lt;Vertices&gt;)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    // Returns true if the edge is present in the graph, otherwise false
+</span></span><span style="display:flex;"><span>    contains_edge(e: Edge&lt;Vertices&gt;) -&gt; boolean
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    // Returns all the edges which are connected with the vertices
+</span></span><span style="display:flex;"><span>    outgoing_edges(from: Vertices) -&gt; Collection&lt;Edge&lt;Vertices&gt;&gt;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    // Returns the number of vertices present in the graph
+</span></span><span style="display:flex;"><span>    n_vertices() -&gt; Int
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    // Returns the number of edges present in the graph
+</span></span><span style="display:flex;"><span>    n_edges() -&gt; Int
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>class Edge&lt;Vertices&gt;:
+</span></span><span style="display:flex;"><span>    from   : Vertices
+</span></span><span style="display:flex;"><span>    to     : Vertices
+</span></span><span style="display:flex;"><span>    weight : float = 1.0
+</span></span></code></pre></div><h3 id="single-source-shortest-paths">Single-source shortest paths</h3>
 <p>The <em>single-source shortest path</em> problem or, SSSP for short. We want to find the shorest path from S to every other node.</p>
 <p>The solution is spanning trees! However, it&rsquo;s not the MST but the so called <strong>shortest-paths tree</strong>, SPT.</p>
 <p>In an SPT, the starting node $s$ is the root of the tree:</p>
@@ -512,38 +352,38 @@ class Edge&lt;Vertices&gt;:
 </li>
 </ul>
 <p>So a generalized generic graphsearch would be:</p>
-<pre tabindex="0"><code>GraphSearch(start: V):
-    put start in collection
-    repeat until the colletion is empty:
-        remove a vertex v
-        if v is not visited:
-            mark v as visited
-            add all unvisited adjacent nodes
-</code></pre><p>Now let&rsquo;s suppose this collection is a <strong>priorty queue</strong> - the weights are the <strong>total cost from s to v</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>GraphSearch(start: V):
+</span></span><span style="display:flex;"><span>    put start in collection
+</span></span><span style="display:flex;"><span>    repeat until the colletion is empty:
+</span></span><span style="display:flex;"><span>        remove a vertex v
+</span></span><span style="display:flex;"><span>        if v is not visited:
+</span></span><span style="display:flex;"><span>            mark v as visited
+</span></span><span style="display:flex;"><span>            add all unvisited adjacent nodes
+</span></span></code></pre></div><p>Now let&rsquo;s suppose this collection is a <strong>priorty queue</strong> - the weights are the <strong>total cost from s to v</strong></p>
 <p>This is the so called Dijkstra&rsquo;s/uniform cost algorithm/search.</p>
-<pre tabindex="0"><code>UCS(start: V):
-    Q = PQ // Order by the cost from start
-    Q.put(start)
-    while is not Q.isempty():
-        Q.remove_min()
-        if v not in visited:
-            visited.add(v) // mark as visited
-            for unvisited vertex w adjacent to v:
-                the cost from s to w = cost from s to v + the cost from v to w
-                Q.put(w)
-</code></pre><p>This is the so called <strong>single source</strong> algortihm, if we want a <strong>source-sink</strong> we just add:</p>
-<pre tabindex="0"><code>UCS(start: V):
-    Q = PQ // Order by the cost from start
-    Q.put(start)
-    while is not Q.isempty():
-        Q.remove_min()
-        if v is the goal, return the shortest path from s to v
-        if v not in visited:
-            visited.add(v) // mark as visited
-            for unvisited vertex w adjacent to v:
-                the cost from s to w = cost from s to v + the cost from v to w
-                Q.put(w)
-</code></pre><h3 id="shortest-path-in-a-dag">Shortest path in a DAG</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>UCS(start: V):
+</span></span><span style="display:flex;"><span>    Q = PQ // Order by the cost from start
+</span></span><span style="display:flex;"><span>    Q.put(start)
+</span></span><span style="display:flex;"><span>    while is not Q.isempty():
+</span></span><span style="display:flex;"><span>        Q.remove_min()
+</span></span><span style="display:flex;"><span>        if v not in visited:
+</span></span><span style="display:flex;"><span>            visited.add(v) // mark as visited
+</span></span><span style="display:flex;"><span>            for unvisited vertex w adjacent to v:
+</span></span><span style="display:flex;"><span>                the cost from s to w = cost from s to v + the cost from v to w
+</span></span><span style="display:flex;"><span>                Q.put(w)
+</span></span></code></pre></div><p>This is the so called <strong>single source</strong> algortihm, if we want a <strong>source-sink</strong> we just add:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>UCS(start: V):
+</span></span><span style="display:flex;"><span>    Q = PQ // Order by the cost from start
+</span></span><span style="display:flex;"><span>    Q.put(start)
+</span></span><span style="display:flex;"><span>    while is not Q.isempty():
+</span></span><span style="display:flex;"><span>        Q.remove_min()
+</span></span><span style="display:flex;"><span>        if v is the goal, return the shortest path from s to v
+</span></span><span style="display:flex;"><span>        if v not in visited:
+</span></span><span style="display:flex;"><span>            visited.add(v) // mark as visited
+</span></span><span style="display:flex;"><span>            for unvisited vertex w adjacent to v:
+</span></span><span style="display:flex;"><span>                the cost from s to w = cost from s to v + the cost from v to w
+</span></span><span style="display:flex;"><span>                Q.put(w)
+</span></span></code></pre></div><h3 id="shortest-path-in-a-dag">Shortest path in a DAG</h3>
 <p>If we know the graph doesn&rsquo;t contain any cycles, this problem become <strong>a lot</strong> easier.</p>
 <p>We use the same algortihm as a UCS - but we don&rsquo;t need a PQ and we can consider the nodes in a <em>toplogical order</em>.</p>
 <p>This reduces the complexity to $\mathcal{O}(E)$.</p>
@@ -654,11 +494,30 @@ we can almost alway use UCS/Dijkstras, since this is almost linear.</p>
 otherwise we can find <strong>some path</strong> via Bellman-ford.</p>
 
 		</section>
-  </article>
-	</div>
 
-	<footer><p class="footer_msg">memento mori</p></footer>
+		<div class="post-tags">
+			
+			
+			<nav class="nav tags">
+				<ul class="tags">
+					
+					<li><a href="/tags/Data-Structures-Algorithms">Data Structures &amp; Algorithms</a></li>
+					
+				</ul>
+			</nav>
+			
+			
+		</div>
+		</article>
+</main>
+<footer>
+    <div style="display:flex"><a class="soc" href="https://github.com/rezaarezvan" rel="me" title="GitHub"><i data-feather="github"></i></a>
+        <a class="border"></a><a class="soc" href="https://twitter.com/rzvan__/" rel="me" title="Twitter"><i data-feather="twitter"></i></a>
+        <a class="border"></a></div><p class="footer_msg">memento mori</p></footer>
 
-  </div>
-</body>
+
+<script>
+    feather.replace()
+</script></div>
+    </body>
 </html>

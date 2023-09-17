@@ -2,6 +2,9 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://rezvan.xyz/tags/Mathematical-analysis-in-several-variables/</loc>
+    <lastmod>2023-09-15T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>https://rezvan.xyz/school/LMA017_9/</loc>
     <lastmod>2023-09-15T00:00:00+00:00</lastmod>
   </url><url>
@@ -9,6 +12,12 @@
     <lastmod>2023-09-15T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://rezvan.xyz/school/</loc>
+    <lastmod>2023-09-15T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://rezvan.xyz/tags/</loc>
+    <lastmod>2023-09-15T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://rezvan.xyz/tags/Transforms-signals-and-systems/</loc>
     <lastmod>2023-09-15T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://rezvan.xyz/school/SSY081_5/</loc>
@@ -59,8 +68,14 @@
     <loc>https://rezvan.xyz/contact/</loc>
     <lastmod>2023-08-21T00:00:00+00:00</lastmod>
   </url><url>
+    <loc>https://rezvan.xyz/tags/Computer-System-Engineering/</loc>
+    <lastmod>2023-05-25T11:22:18+02:00</lastmod>
+  </url><url>
     <loc>https://rezvan.xyz/school/EDA333_summary/</loc>
     <lastmod>2023-05-25T11:22:18+02:00</lastmod>
+  </url><url>
+    <loc>https://rezvan.xyz/tags/Electrical-Circuits-and-Fields/</loc>
+    <lastmod>2023-05-19T16:57:46+02:00</lastmod>
   </url><url>
     <loc>https://rezvan.xyz/school/EEM076_summary/</loc>
     <lastmod>2023-05-19T16:57:46+02:00</lastmod>
@@ -128,8 +143,14 @@
     <loc>https://rezvan.xyz/school/EEM076/</loc>
     <lastmod>2023-03-20T00:00:00+00:00</lastmod>
   </url><url>
+    <loc>https://rezvan.xyz/tags/Digital-Design/</loc>
+    <lastmod>2023-03-05T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>https://rezvan.xyz/school/Digital_design_9/</loc>
     <lastmod>2023-03-05T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://rezvan.xyz/tags/Concurrent-Programming/</loc>
+    <lastmod>2023-02-19T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://rezvan.xyz/school/Concurrent_programming_10/</loc>
     <lastmod>2023-02-19T00:00:00+00:00</lastmod>
@@ -188,11 +209,17 @@
     <loc>https://rezvan.xyz/posts/programming_principles/</loc>
     <lastmod>2023-01-09T17:03:59+01:00</lastmod>
   </url><url>
+    <loc>https://rezvan.xyz/tags/Data-Structures-Algorithms/</loc>
+    <lastmod>2022-12-09T18:49:03+01:00</lastmod>
+  </url><url>
     <loc>https://rezvan.xyz/school/DSA_10/</loc>
     <lastmod>2022-12-09T18:49:03+01:00</lastmod>
   </url><url>
     <loc>https://rezvan.xyz/school/DSA_9/</loc>
     <lastmod>2022-12-07T18:34:09+01:00</lastmod>
+  </url><url>
+    <loc>https://rezvan.xyz/tags/Waves/</loc>
+    <lastmod>2022-12-07T17:55:57+01:00</lastmod>
   </url><url>
     <loc>https://rezvan.xyz/school/Waves_2/</loc>
     <lastmod>2022-12-07T17:55:57+01:00</lastmod>
@@ -214,6 +241,9 @@
   </url><url>
     <loc>https://rezvan.xyz/school/DSA_4/</loc>
     <lastmod>2022-11-28T20:30:47+01:00</lastmod>
+  </url><url>
+    <loc>https://rezvan.xyz/tags/Thermodynamics/</loc>
+    <lastmod>2022-11-28T18:14:58+01:00</lastmod>
   </url><url>
     <loc>https://rezvan.xyz/school/Thermodynamics_3/</loc>
     <lastmod>2022-11-28T18:14:58+01:00</lastmod>
@@ -246,7 +276,5 @@
     <lastmod>2022-07-29T17:18:30+02:00</lastmod>
   </url><url>
     <loc>https://rezvan.xyz/categories/</loc>
-  </url><url>
-    <loc>https://rezvan.xyz/tags/</loc>
   </url>
 </urlset>

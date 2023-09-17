@@ -5,6 +5,88 @@
     <link>https://rezvan.xyz/tags/</link>
     <description>Recent content in Tags on rezvan</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language><atom:link href="https://rezvan.xyz/tags/index.xml" rel="self" type="application/rss+xml" />
+    <language>en-us</language>
+    <lastBuildDate>Fri, 15 Sep 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://rezvan.xyz/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Mathematical analysis in several variables</title>
+      <link>https://rezvan.xyz/tags/Mathematical-analysis-in-several-variables/</link>
+      <pubDate>Fri, 15 Sep 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://rezvan.xyz/tags/Mathematical-analysis-in-several-variables/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Transforms signals and systems</title>
+      <link>https://rezvan.xyz/tags/Transforms-signals-and-systems/</link>
+      <pubDate>Fri, 15 Sep 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://rezvan.xyz/tags/Transforms-signals-and-systems/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Computer System Engineering</title>
+      <link>https://rezvan.xyz/tags/Computer-System-Engineering/</link>
+      <pubDate>Thu, 25 May 2023 11:22:18 +0200</pubDate>
+      
+      <guid>https://rezvan.xyz/tags/Computer-System-Engineering/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Electrical Circuits and Fields</title>
+      <link>https://rezvan.xyz/tags/Electrical-Circuits-and-Fields/</link>
+      <pubDate>Fri, 19 May 2023 16:57:46 +0200</pubDate>
+      
+      <guid>https://rezvan.xyz/tags/Electrical-Circuits-and-Fields/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Digital Design</title>
+      <link>https://rezvan.xyz/tags/Digital-Design/</link>
+      <pubDate>Sun, 05 Mar 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://rezvan.xyz/tags/Digital-Design/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Concurrent Programming</title>
+      <link>https://rezvan.xyz/tags/Concurrent-Programming/</link>
+      <pubDate>Sun, 19 Feb 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://rezvan.xyz/tags/Concurrent-Programming/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Data Structures &amp; Algorithms</title>
+      <link>https://rezvan.xyz/tags/Data-Structures-Algorithms/</link>
+      <pubDate>Fri, 09 Dec 2022 18:49:03 +0100</pubDate>
+      
+      <guid>https://rezvan.xyz/tags/Data-Structures-Algorithms/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Waves</title>
+      <link>https://rezvan.xyz/tags/Waves/</link>
+      <pubDate>Wed, 07 Dec 2022 17:55:57 +0100</pubDate>
+      
+      <guid>https://rezvan.xyz/tags/Waves/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Thermodynamics</title>
+      <link>https://rezvan.xyz/tags/Thermodynamics/</link>
+      <pubDate>Mon, 28 Nov 2022 18:14:58 +0100</pubDate>
+      
+      <guid>https://rezvan.xyz/tags/Thermodynamics/</guid>
+      <description></description>
+    </item>
+    
   </channel>
 </rss>

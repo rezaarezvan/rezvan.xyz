@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Transforms signals and systems on rezvan</title>
+    <link>https://rezvan.xyz/tags/Transforms-signals-and-systems/</link>
+    <description>Recent content in Transforms signals and systems on rezvan</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 15 Sep 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://rezvan.xyz/tags/Transforms-signals-and-systems/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Transforms, signals and systems: Part 5 - Fourier series</title>
+      <link>https://rezvan.xyz/school/SSY081_5/</link>
+      <pubDate>Fri, 15 Sep 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://rezvan.xyz/school/SSY081_5/</guid>
+      <description>Introduction In this part we&amp;rsquo;ll try to understand the concept and power with Fourier series.
+Let&amp;rsquo;s firstly define the what, why and how with Fourier series.
+Definition Fourier series, is an expansion of a perodic function, into a sum of trigonometric functions.
+So the power is really, given a complex perodic function, we can easily represent it as a sum of simple trigonometric functions!
+However, before we mathematically define the Fourier series, let&amp;rsquo;s take a different approach to this.</description>
+    </item>
+    
+    <item>
+      <title>Transforms, signals and systems: Part 4 - Differential equation models</title>
+      <link>https://rezvan.xyz/school/SSY081_4/</link>
+      <pubDate>Thu, 14 Sep 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://rezvan.xyz/school/SSY081_4/</guid>
+      <description>Introduction In this part we will learn about systems that can be modeled with differential equations.
+Definition Some systems whose input, $f(t)$, and output, $y(t)$, are related by linear differential equations, often have the form: $$ \dfrac{d^n y}{dt^n} + a_{n - 1} \dfrac{d^{n - 1}y}{dt^{n - 1}} + \ldots + a_1 \dfrac{dy}{dt} + a_0 y(t) = $$
+$$ b_m + \dfrac{d^m f}{dt^m} + b_{m - 1} + \dfrac{d^{m - 1} f}{dt^{m - 1}} + \ldots + b_1 \dfrac{df}{dt} + b_0 f(t) $$</description>
+    </item>
+    
+    <item>
+      <title>Transforms, signals and systems: Part 3 - Convolution</title>
+      <link>https://rezvan.xyz/school/SSY081_3/</link>
+      <pubDate>Tue, 05 Sep 2023 21:03:17 +0200</pubDate>
+      
+      <guid>https://rezvan.xyz/school/SSY081_3/</guid>
+      <description>Introduction In this part we will learn about the convolution operation and how it&amp;rsquo;s used.
+Let&amp;rsquo;s start at how it&amp;rsquo;s used.
+Use case Given this signal, we want to find activity on the graph, besides the notice. A kind of high-pass filter will do the job. A high-pass filter is precisely doing the convolution operation to filter.
+For example the output for this input can be: Definition and properties Let&amp;rsquo;s call our input signal $x(t)$, our system operation for $h(t)$ and our output for $y(t)$.</description>
+    </item>
+    
+    <item>
+      <title>Transforms, signals and systems: Part 2 - System properties &amp; LTI</title>
+      <link>https://rezvan.xyz/school/SSY081_2/</link>
+      <pubDate>Mon, 04 Sep 2023 22:03:17 +0200</pubDate>
+      
+      <guid>https://rezvan.xyz/school/SSY081_2/</guid>
+      <description>Introduction In this part we will learn to classify systems and recognize a Linear-Time Invariant System
+Let&amp;rsquo;s first define what a system is.
+Systems Our definition of a system will be:
+An entity that processes a signal/a set of signals to yield another signal/set of signals.
+The input, also called excitation, goes through the system and the system spits out an output, also called response.
+Interconnection We can have multiple systems.</description>
+    </item>
+    
+    <item>
+      <title>Transforms, signals and systems: Part 1 - Signals</title>
+      <link>https://rezvan.xyz/school/SSY081/</link>
+      <pubDate>Tue, 29 Aug 2023 16:12:51 +0200</pubDate>
+      
+      <guid>https://rezvan.xyz/school/SSY081/</guid>
+      <description>Introductions In this series we&amp;rsquo;ll cover what we mean with transforms, signals and systems. How they relate and are used in the real world.
+Signals In this part we&amp;rsquo;ll try to understand signals, classify these. Perform different signal operations and lastly understand and use signal models. Let&amp;rsquo;s first define what a signal is
+Definition A signal is a set of information or data. Any physical quantity that varies over time, space or any other variable or variables.</description>
+    </item>
+    
+  </channel>
+</rss>
