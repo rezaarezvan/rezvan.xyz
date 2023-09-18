@@ -49,7 +49,7 @@ Subtracting a positive from a negative operand - overflow if the results sign bi
         <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
 
 	
-	<link rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/main.ded288734bf67c9f89d72102879afaadf50fed4138fb485737334085f5465104.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/main.56d2207fad46e63050394b2c8df0d9e313c631c4cd55e1c1c163a8a772d9a1df.css" />
 		<link id="darkModeStyle" rel="stylesheet" type="text/css" href="https://rezvan.xyz/css/dark.b47837a877382f31178bb7a2c2135fbe9c39b1d4a1cc529faee0363b6dbdc408.css"  disabled />
 	
 
@@ -180,27 +180,27 @@ Subtracting a positive from a negative operand - overflow if the results sign bi
 <p><code>$HI</code>: 32 most significant bits.</p>
 <p><code>$LO</code>: 32 least significant bits.</p>
 <p>With the instructions:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span># 64-bits product in HI/LO
-</span></span><span style="display:flex;"><span>mult rs, rt
-</span></span><span style="display:flex;"><span>multu rs, rt
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span># &#34;Move from HI/LO&#34; to rd
-</span></span><span style="display:flex;"><span>mfhi rd
-</span></span><span style="display:flex;"><span>mflo rd
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span># Least significant 32-bits of product -&gt; rd
-</span></span><span style="display:flex;"><span>mul rd, rs, rt
-</span></span></code></pre></div><h3 id="division">Division</h3>
+<pre tabindex="0"><code># 64-bits product in HI/LO
+mult rs, rt
+multu rs, rt
+
+# &#34;Move from HI/LO&#34; to rd
+mfhi rd
+mflo rd
+
+# Least significant 32-bits of product -&gt; rd
+mul rd, rs, rt
+</code></pre><h3 id="division">Division</h3>
 <p>We will not cover division as well - but there are methods, the &ldquo;usual&rdquo; way we are thought - but also restoring division - which we cover <a href="https://www.rezvan.xyz/school/Digital_design_5/">here</a>.</p>
 <p>Now, <code>$HI</code> and <code>$LO</code>, also store the result after division.</p>
 <p><code>$HI</code>: 32-bit remainder
 <code>$LO</code>: 32-bit quotient</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>div rs, rt
-</span></span><span style="display:flex;"><span>divu rs, rt
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>mfhi rd
-</span></span><span style="display:flex;"><span>mflo rd
-</span></span></code></pre></div><p>One thing that we&rsquo;ll need to remember is that - there is no divide-by-0 control. This must be implemented either at hardware level, or as an exception routine.</p>
+<pre tabindex="0"><code>div rs, rt
+divu rs, rt
+
+mfhi rd
+mflo rd
+</code></pre><p>One thing that we&rsquo;ll need to remember is that - there is no divide-by-0 control. This must be implemented either at hardware level, or as an exception routine.</p>
 <h3 id="floating-point-representation">Floating-point representation</h3>
 <p>The standard for floating-point representation is the IEEE Std 754-1985.
 This is also important for portability of code.</p>
@@ -217,18 +217,18 @@ The exponent is 8 and 11-bits respectively.</p>
 <p>We also have separate floating-point registers, all of which are of 32-bit size.
 For double precision, we use them pairwise - meaning <code>$f0/$f1</code> will be one 64-bit floating-point number.</p>
 <p>For floating-point load and store we use:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span># Eqv to l.s, l.d, s.s, s.d
-</span></span><span style="display:flex;"><span>lwc1, ldc1, swc1, sdc1
-</span></span></code></pre></div><p>For arithmetic:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>add.s, sub.s, mul.s, div.s
-</span></span></code></pre></div><p>The same goes for double precision:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>add.d,.dub.d, mul.d, div.d
-</span></span></code></pre></div><p>Compares and branches:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span># condition can be eq, lt etc.
-</span></span><span style="display:flex;"><span>c.condition.s, c.condition.d
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>bc1t, bc1f
-</span></span></code></pre></div><p>It sets a special floating-point condition bit, therefore, the branches take no operands.</p>
+<pre tabindex="0"><code># Eqv to l.s, l.d, s.s, s.d
+lwc1, ldc1, swc1, sdc1
+</code></pre><p>For arithmetic:</p>
+<pre tabindex="0"><code>add.s, sub.s, mul.s, div.s
+</code></pre><p>The same goes for double precision:</p>
+<pre tabindex="0"><code>add.d,.dub.d, mul.d, div.d
+</code></pre><p>Compares and branches:</p>
+<pre tabindex="0"><code># condition can be eq, lt etc.
+c.condition.s, c.condition.d
+
+bc1t, bc1f
+</code></pre><p>It sets a special floating-point condition bit, therefore, the branches take no operands.</p>
 
 		</section>
 

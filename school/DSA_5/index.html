@@ -22,7 +22,7 @@ Sets and Maps in Context Just to refresh our memory - a set is a collection of i
         <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
 
 	
-	<link rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/main.ded288734bf67c9f89d72102879afaadf50fed4138fb485737334085f5465104.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/main.56d2207fad46e63050394b2c8df0d9e313c631c4cd55e1c1c163a8a772d9a1df.css" />
 		<link id="darkModeStyle" rel="stylesheet" type="text/css" href="https://rezvan.xyz/css/dark.b47837a877382f31178bb7a2c2135fbe9c39b1d4a1cc529faee0363b6dbdc408.css"  disabled />
 	
 
@@ -162,79 +162,79 @@ We&rsquo;ll see more of this later.</p>
 <h3 id="separate-chaining-hash-set">Separate Chaining: Hash Set</h3>
 <p>For our implementation of Hash tables using separate chaining we could use sets - and for the underlying collection, we usually use linked lists.</p>
 <p>So a kind of implementation (in pseudo-code) would be:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>class SeparateChainingHashSet &lt;Item&gt; implements Set&lt;Item&gt;:
-</span></span><span style="display:flex;"><span>    table: Array of Set&lt;Item&gt;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    // A given good hash function
-</span></span><span style="display:flex;"><span>    hash(x : Item) -&gt; int:
-</span></span><span style="display:flex;"><span>        // Returns good hash value
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    contains(x : Item) -&gt; boolean:
-</span></span><span style="display:flex;"><span>        bucket : Set&lt;Item&gt; = table[hash(x)]
-</span></span><span style="display:flex;"><span>        return bucket.contains(x)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    add(x : Item):
-</span></span><span style="display:flex;"><span>        bucket : Set&lt;Item&gt; = table[hash(x)]
-</span></span><span style="display:flex;"><span>        bucket.add(x)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    remove(x : Item):
-</span></span><span style="display:flex;"><span>        bucket : Set&lt;Item&gt; = table[hash(x)]
-</span></span><span style="display:flex;"><span>        bucket.remove(x)
-</span></span></code></pre></div><p>As we can there is quite a lot of &lsquo;mental overhead&rsquo;, using a ordinary map it also becomes faster since we have actual key-value pairs, therefore being faster.
+<pre tabindex="0"><code>class SeparateChainingHashSet &lt;Item&gt; implements Set&lt;Item&gt;:
+    table: Array of Set&lt;Item&gt;
+
+    // A given good hash function
+    hash(x : Item) -&gt; int:
+        // Returns good hash value
+
+    contains(x : Item) -&gt; boolean:
+        bucket : Set&lt;Item&gt; = table[hash(x)]
+        return bucket.contains(x)
+
+    add(x : Item):
+        bucket : Set&lt;Item&gt; = table[hash(x)]
+        bucket.add(x)
+
+    remove(x : Item):
+        bucket : Set&lt;Item&gt; = table[hash(x)]
+        bucket.remove(x)
+</code></pre><p>As we can there is quite a lot of &lsquo;mental overhead&rsquo;, using a ordinary map it also becomes faster since we have actual key-value pairs, therefore being faster.
 Also we need know the size of the Hash table and also handle null pointers so let&rsquo;s fix that as well!</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>class SeparateChainingHashMap&lt;Key, Value&gt; implements Map&lt;Key, Value&gt;:
-</span></span><span style="display:flex;"><span>    table: Array of Map&lt;Key, Value&gt;
-</span></span><span style="display:flex;"><span>    size : int = 0
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    hash(k : Key) -&gt; int:
-</span></span><span style="display:flex;"><span>        // Returns good hash value
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    contains(k : Key) -&gt; boolean:
-</span></span><span style="display:flex;"><span>        bucket : Map&lt;Key, Value&gt; = table[hash(k)]
-</span></span><span style="display:flex;"><span>        return bucket.contains(k)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    get(k : Key) -&gt; Value:
-</span></span><span style="display:flex;"><span>        bucket : Map&lt;Key, Value&gt; = table[hash(k)]
-</span></span><span style="display:flex;"><span>        return bucket.get(k)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    put(k : Key, v : Value):
-</span></span><span style="display:flex;"><span>        bucket : Map&lt;Key, Value&gt; = table[hash(k)]
-</span></span><span style="display:flex;"><span>        if bucket == NULL:
-</span></span><span style="display:flex;"><span>            bucket = table[hash(x)] = new Map()
-</span></span><span style="display:flex;"><span>        if not bucket.contains(k):
-</span></span><span style="display:flex;"><span>            bucket.put(k, v)
-</span></span><span style="display:flex;"><span>            size += 1
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    remove(k : Key):
-</span></span><span style="display:flex;"><span>        bucket : Map&lt;Key, Value&gt; = table[hash(k)]
-</span></span><span style="display:flex;"><span>        bucket.remove(k)
-</span></span></code></pre></div><p>If we actually try to implement it with the underlying data structure, the linked list, it would look something like:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>class SeparateChainingHashMap&lt;Key, Value&gt; implements Map&lt;Key, Value&gt;:
-</span></span><span style="display:flex;"><span>    ...
-</span></span><span style="display:flex;"><span>    class Node:
-</span></span><span style="display:flex;"><span>        key : Key
-</span></span><span style="display:flex;"><span>        val : Value
-</span></span><span style="display:flex;"><span>        next : Node
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    get(k : Key) -&gt; Value:
-</span></span><span style="display:flex;"><span>        node : Node = table[hash(k)]
-</span></span><span style="display:flex;"><span>        while node != NULL:
-</span></span><span style="display:flex;"><span>            if k == node.key
-</span></span><span style="display:flex;"><span>                return node.val
-</span></span><span style="display:flex;"><span>            node = node.next
-</span></span><span style="display:flex;"><span>        return NULL
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    put(k : Key, v : Value):
-</span></span><span style="display:flex;"><span>        h : int = hash(k)
-</span></span><span style="display:flex;"><span>        node : Node = table[h]
-</span></span><span style="display:flex;"><span>        while node != NULL:
-</span></span><span style="display:flex;"><span>            if k == node.key:
-</span></span><span style="display:flex;"><span>                node.val = v
-</span></span><span style="display:flex;"><span>                return
-</span></span><span style="display:flex;"><span>            node = node.next
-</span></span><span style="display:flex;"><span>        // If we are given a new key
-</span></span><span style="display:flex;"><span>        table[h] = Node(k, v, table[h])
-</span></span></code></pre></div><h3 id="load-factor">Load Factor</h3>
+<pre tabindex="0"><code>class SeparateChainingHashMap&lt;Key, Value&gt; implements Map&lt;Key, Value&gt;:
+    table: Array of Map&lt;Key, Value&gt;
+    size : int = 0
+
+    hash(k : Key) -&gt; int:
+        // Returns good hash value
+
+    contains(k : Key) -&gt; boolean:
+        bucket : Map&lt;Key, Value&gt; = table[hash(k)]
+        return bucket.contains(k)
+
+    get(k : Key) -&gt; Value:
+        bucket : Map&lt;Key, Value&gt; = table[hash(k)]
+        return bucket.get(k)
+
+    put(k : Key, v : Value):
+        bucket : Map&lt;Key, Value&gt; = table[hash(k)]
+        if bucket == NULL:
+            bucket = table[hash(x)] = new Map()
+        if not bucket.contains(k):
+            bucket.put(k, v)
+            size += 1
+
+    remove(k : Key):
+        bucket : Map&lt;Key, Value&gt; = table[hash(k)]
+        bucket.remove(k)
+</code></pre><p>If we actually try to implement it with the underlying data structure, the linked list, it would look something like:</p>
+<pre tabindex="0"><code>class SeparateChainingHashMap&lt;Key, Value&gt; implements Map&lt;Key, Value&gt;:
+    ...
+    class Node:
+        key : Key
+        val : Value
+        next : Node
+
+    get(k : Key) -&gt; Value:
+        node : Node = table[hash(k)]
+        while node != NULL:
+            if k == node.key
+                return node.val
+            node = node.next
+        return NULL
+
+    put(k : Key, v : Value):
+        h : int = hash(k)
+        node : Node = table[h]
+        while node != NULL:
+            if k == node.key:
+                node.val = v
+                return
+            node = node.next
+        // If we are given a new key
+        table[h] = Node(k, v, table[h])
+</code></pre><h3 id="load-factor">Load Factor</h3>
 <p>We should always assume that we have a good hash functions, since in most libraries, they are good! But to understand why it&rsquo;s &lsquo;good&rsquo; we need to understand something called <em>Load factor</em>.
 The load factor is the average number of elements per slot/index.</p>
 <p>So load factor = $\frac{N}{M}$, where N is # of elements and M is the array size.
@@ -242,37 +242,37 @@ We haven&rsquo;t discussed it yet but, what&rsquo;s the complexity of <code>cont
 <p>Therefore the complexity of each operation is $\mathcal{O}(\frac{N}{M})$</p>
 <p>Which tells us, if we can keep N and M roughly the same all of our operations will be constant! This is the magic with Hash tables.</p>
 <p>So our array size must grow when the hash table grows. To achieve this we use a dynamic array, when we need to resize the hash table array, we create a new array and copy all old elements using <code>add()</code>.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>put(k : Key, v : Value):
-</span></span><span style="display:flex;"><span>    if size ≥ 8 * table.length:
-</span></span><span style="display:flex;"><span>        resize(2 * table.length)
-</span></span><span style="display:flex;"><span>    bucket : Map&lt;Key, Value&gt; = table[hash(k)]
-</span></span><span style="display:flex;"><span>        if bucket == NULL:
-</span></span><span style="display:flex;"><span>            bucket = table[hash(x)] = new Map()
-</span></span><span style="display:flex;"><span>        if not bucket.contains(k):
-</span></span><span style="display:flex;"><span>            bucket.put(k, v)
-</span></span><span style="display:flex;"><span>            size += 1
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>remove(k : Key):
-</span></span><span style="display:flex;"><span>    if size ≤ 2 * table.length:
-</span></span><span style="display:flex;"><span>        resize(table.length / 2)
-</span></span><span style="display:flex;"><span>    bucket : Map&lt;Key, Value&gt; = table[hash(k)]
-</span></span><span style="display:flex;"><span>        bucket.remove(k)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>resize(buckets : int):
-</span></span><span style="display:flex;"><span>    oldtable = table
-</span></span><span style="display:flex;"><span>    table = new Array with size buckets
-</span></span><span style="display:flex;"><span>    size = 0
-</span></span><span style="display:flex;"><span>    for bucket in oldtable:
-</span></span><span style="display:flex;"><span>        for k,v in bucket:
-</span></span><span style="display:flex;"><span>            this.put(k, v)
-</span></span></code></pre></div><p>In this example I&rsquo;ve chosen to resize the table with a factor of 2. However, this is can actually lead to some problems.
+<pre tabindex="0"><code>put(k : Key, v : Value):
+    if size ≥ 8 * table.length:
+        resize(2 * table.length)
+    bucket : Map&lt;Key, Value&gt; = table[hash(k)]
+        if bucket == NULL:
+            bucket = table[hash(x)] = new Map()
+        if not bucket.contains(k):
+            bucket.put(k, v)
+            size += 1
+
+remove(k : Key):
+    if size ≤ 2 * table.length:
+        resize(table.length / 2)
+    bucket : Map&lt;Key, Value&gt; = table[hash(k)]
+        bucket.remove(k)
+
+resize(buckets : int):
+    oldtable = table
+    table = new Array with size buckets
+    size = 0
+    for bucket in oldtable:
+        for k,v in bucket:
+            this.put(k, v)
+</code></pre><p>In this example I&rsquo;ve chosen to resize the table with a factor of 2. However, this is can actually lead to some problems.
 The &lsquo;optimal&rsquo; way is choose <em>prime</em> closest to 2 * oldsize.</p>
 <h3 id="hash-and-compress">Hash and compress</h3>
 <p>In actuality, the hash functions is a composition of functions. First we get the <em>hash code</em> for a given object/value. Then we need to <em>compress</em> it to fit inside our hash table.</p>
 <p>How we compress our is quite simple (often) - it is:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>index = hash_code % array_size
-</span></span><span style="display:flex;"><span>i = h % M
-</span></span></code></pre></div><p>This is called &lsquo;modular&rsquo; hashing and it&rsquo;s the most common one. One thing to remember that the <em>hash code</em> <strong>never</strong> changes. Only the compressed version can change since we can change the size of it.</p>
+<pre tabindex="0"><code>index = hash_code % array_size
+i = h % M
+</code></pre><p>This is called &lsquo;modular&rsquo; hashing and it&rsquo;s the most common one. One thing to remember that the <em>hash code</em> <strong>never</strong> changes. Only the compressed version can change since we can change the size of it.</p>
 <p>So we might see different outputs for <code>hash(x)</code> depending on size - but remember, the actual <em>hash code</em> <strong>never</strong> changes.</p>
 <h3 id="requirements-on-hash-functions">Requirements on hash functions</h3>
 <p>There is one very strict requirement on hash functions:</p>
@@ -280,8 +280,8 @@ The &lsquo;optimal&rsquo; way is choose <em>prime</em> closest to 2 * oldsize.</
 <li>Equal objects must have equal hash codes</li>
 </ul>
 <p>Or in coding terms:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>if x === y then x.hash() == y.hash()
-</span></span></code></pre></div><p>There are some desirable properties:</p>
+<pre tabindex="0"><code>if x === y then x.hash() == y.hash()
+</code></pre><p>There are some desirable properties:</p>
 <ul>
 <li>
 <p>If x and y have the same <em>hash code</em>, then they are &rsquo;equal&rsquo;</p>
@@ -293,32 +293,32 @@ The &lsquo;optimal&rsquo; way is choose <em>prime</em> closest to 2 * oldsize.</
 <h3 id="open-addressing-probing">Open Addressing: Probing</h3>
 <p>As we defined earlier, open addressing is a method where we find a new empty slot if there&rsquo;s a conflict. Probing is how we find this empty slot.</p>
 <p>The easiest approach is so called <em>linear probing</em>, where we simply go to the next index (increase with some constant) and check if it&rsquo;s empty, with wrapping around the array.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>class LinearProbingHashSet&lt;Item&gt;:
-</span></span><span style="display:flex;"><span>    table: Array of Item
-</span></span><span style="display:flex;"><span>    size : int = 0
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    add(x : Item):
-</span></span><span style="display:flex;"><span>        i = hash(x)
-</span></span><span style="display:flex;"><span>        while table[i] != NULL:
-</span></span><span style="display:flex;"><span>                if x == table[i]:
-</span></span><span style="display:flex;"><span>                    return
-</span></span><span style="display:flex;"><span>                i = (i + 1) % table.length
-</span></span><span style="display:flex;"><span>        table[i] = x
-</span></span><span style="display:flex;"><span>        size += 1
-</span></span></code></pre></div><p>Or in the the Hash Map case:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>class LinearProbingHashMap&lt;Key, Value&gt;:
-</span></span><span style="display:flex;"><span>    table: Map&lt;Key, Value&gt;
-</span></span><span style="display:flex;"><span>    size : int = 0
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    add(k : Key, v : Value):
-</span></span><span style="display:flex;"><span>        i = hash(k)
-</span></span><span style="display:flex;"><span>        while table[i] != NULL:
-</span></span><span style="display:flex;"><span>                if k == table[i]:
-</span></span><span style="display:flex;"><span>                    return
-</span></span><span style="display:flex;"><span>                i = (i + 1) % table.length
-</span></span><span style="display:flex;"><span>        table[i] = value
-</span></span><span style="display:flex;"><span>        size += 1
-</span></span></code></pre></div><h3 id="open-addressing-compared-to-separate-chaining">Open Addressing compared to Separate Chaining</h3>
+<pre tabindex="0"><code>class LinearProbingHashSet&lt;Item&gt;:
+    table: Array of Item
+    size : int = 0
+
+    add(x : Item):
+        i = hash(x)
+        while table[i] != NULL:
+                if x == table[i]:
+                    return
+                i = (i + 1) % table.length
+        table[i] = x
+        size += 1
+</code></pre><p>Or in the the Hash Map case:</p>
+<pre tabindex="0"><code>class LinearProbingHashMap&lt;Key, Value&gt;:
+    table: Map&lt;Key, Value&gt;
+    size : int = 0
+
+    add(k : Key, v : Value):
+        i = hash(k)
+        while table[i] != NULL:
+                if k == table[i]:
+                    return
+                i = (i + 1) % table.length
+        table[i] = value
+        size += 1
+</code></pre><h3 id="open-addressing-compared-to-separate-chaining">Open Addressing compared to Separate Chaining</h3>
 <p>Let&rsquo;s now compare both of these approaches now that we have a grasp of them.</p>
 <ul>
 <li>
@@ -344,20 +344,20 @@ A short definition of clusters is, due to Open Addressing, we will get small &ls
 <p>But first to understand why, let&rsquo;s see how we <em>would</em> delete items.</p>
 <h4 id="naive-approach">Naive approach</h4>
 <p>Our naive approach would look something like:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>remove(x : Item):
-</span></span><span style="display:flex;"><span>    i = hash(x)
-</span></span><span style="display:flex;"><span>    while table[i] != NULL:
-</span></span><span style="display:flex;"><span>        if x == table[i]:
-</span></span><span style="display:flex;"><span>            table[i] = NULL
-</span></span><span style="display:flex;"><span>        i = (i + 1) % table.length
-</span></span></code></pre></div><p>And in the map case:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>remove(k : Key):
-</span></span><span style="display:flex;"><span>    i = hash(x)
-</span></span><span style="display:flex;"><span>    while table[i] != NULL:
-</span></span><span style="display:flex;"><span>        if k == table[i]:
-</span></span><span style="display:flex;"><span>            table[i] = NULL
-</span></span><span style="display:flex;"><span>        i = (i + 1) % table.length
-</span></span></code></pre></div><p>But this won&rsquo;t work - if we then want to find something to the <strong>right</strong> of this deleted cell - but their hash is <strong>before</strong> the deleted cell, we won&rsquo;t be able to, since we find the &lsquo;NULL&rsquo; value before we can find the actual object.</p>
+<pre tabindex="0"><code>remove(x : Item):
+    i = hash(x)
+    while table[i] != NULL:
+        if x == table[i]:
+            table[i] = NULL
+        i = (i + 1) % table.length
+</code></pre><p>And in the map case:</p>
+<pre tabindex="0"><code>remove(k : Key):
+    i = hash(x)
+    while table[i] != NULL:
+        if k == table[i]:
+            table[i] = NULL
+        i = (i + 1) % table.length
+</code></pre><p>But this won&rsquo;t work - if we then want to find something to the <strong>right</strong> of this deleted cell - but their hash is <strong>before</strong> the deleted cell, we won&rsquo;t be able to, since we find the &lsquo;NULL&rsquo; value before we can find the actual object.</p>
 <p>There are two possible solutions:</p>
 <ul>
 <li>
@@ -378,117 +378,117 @@ If this number exceeds some threshold we resize.</p>
 <h3 id="final-implementations">Final implementations</h3>
 <p>So we&rsquo;ve cover all topics and problems that comes with implementing Hash tables - so let&rsquo;s implement the final version.</p>
 <p>For a Hash <strong>Set</strong>:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>class LinearProbingHashSet&lt;Item&gt;:
-</span></span><span style="display:flex;"><span>    table: Array of HashCell
-</span></span><span style="display:flex;"><span>    size: int = 0
-</span></span><span style="display:flex;"><span>    n_deleted: int = 0
-</span></span><span style="display:flex;"><span>    DELETED: HashCell = HashCell(value = NULL)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    class HashCell:
-</span></span><span style="display:flex;"><span>        value: Item
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    load_factor() -&gt; float:
-</span></span><span style="display:flex;"><span>        return (size + deleted) / table.length
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    add(x : Item):
-</span></span><span style="display:flex;"><span>        if load_factor() &gt; 0.75:
-</span></span><span style="display:flex;"><span>            resize(2 * table.length)
-</span></span><span style="display:flex;"><span>        i = hash(x)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        while table[i] != NULL and table[i] != DELETED:
-</span></span><span style="display:flex;"><span>            if x == table[i].value:
-</span></span><span style="display:flex;"><span>                return
-</span></span><span style="display:flex;"><span>            i = (i + 1) % table.length
-</span></span><span style="display:flex;"><span>        size += 1
-</span></span><span style="display:flex;"><span>        if table[i] = DELETED:
-</span></span><span style="display:flex;"><span>            n_deleted -= 1
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        table[i] = HashCell(value = x)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    contains(x : Item) -&gt; boolean:
-</span></span><span style="display:flex;"><span>        i = hash(x)
-</span></span><span style="display:flex;"><span>        while table[i] != NULL:
-</span></span><span style="display:flex;"><span>            if x == table[i].value:
-</span></span><span style="display:flex;"><span>                return True
-</span></span><span style="display:flex;"><span>            i = (i + 1) % table.length
-</span></span><span style="display:flex;"><span>        return False
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    remove(x : Item):
-</span></span><span style="display:flex;"><span>        i = hash(x)
-</span></span><span style="display:flex;"><span>        while table[i] != NULL:
-</span></span><span style="display:flex;"><span>            if x == table[i].value:
-</span></span><span style="display:flex;"><span>                table[i] = DELETED
-</span></span><span style="display:flex;"><span>                size -= 1
-</span></span><span style="display:flex;"><span>                n_deleted += 1
-</span></span><span style="display:flex;"><span>                if load_factor() &lt; 0.25:
-</span></span><span style="display:flex;"><span>                    resize(table.length // 2)
-</span></span><span style="display:flex;"><span>                return
-</span></span><span style="display:flex;"><span>            i = (i + 1) % table.length
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    resize(buckets: int):
-</span></span><span style="display:flex;"><span>        oldtable = table
-</span></span><span style="display:flex;"><span>        table = new Array with size buckets
-</span></span><span style="display:flex;"><span>        size = n_deleted = 0
-</span></span><span style="display:flex;"><span>        for cell in oldtable:
-</span></span><span style="display:flex;"><span>            if cell != NULL and cell != DELETED:
-</span></span><span style="display:flex;"><span>                table.add(cell.value)
-</span></span></code></pre></div><p>And in the <strong>Map</strong> case:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>class LinearProbingHashMap&lt;Key, Value&gt;:
-</span></span><span style="display:flex;"><span>    table: Array of HashCell
-</span></span><span style="display:flex;"><span>    size: int = 0
-</span></span><span style="display:flex;"><span>    n_deleted: int = 0
-</span></span><span style="display:flex;"><span>    DELETED: HashCell = HashCell(key = NULL,value = NULL)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    class HashCell:
-</span></span><span style="display:flex;"><span>        key: Key
-</span></span><span style="display:flex;"><span>        value: Value
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    load_factor() -&gt; float:
-</span></span><span style="display:flex;"><span>        return (size + deleted) / table.length
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    put(k : Key, v : Value):
-</span></span><span style="display:flex;"><span>        if load_factor() &gt; 0.75:
-</span></span><span style="display:flex;"><span>            resize(2 * table.length)
-</span></span><span style="display:flex;"><span>        i = hash(k)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        while table[i] != NULL and table[i] != DELETED:
-</span></span><span style="display:flex;"><span>            if k == table[i].key:
-</span></span><span style="display:flex;"><span>                return
-</span></span><span style="display:flex;"><span>            i = (i + 1) % table.length
-</span></span><span style="display:flex;"><span>        size += 1
-</span></span><span style="display:flex;"><span>        if table[i] = DELETED:
-</span></span><span style="display:flex;"><span>            n_deleted -= 1
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        table[i] = HashCell(key = k, value = v)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    contains(k : Key) -&gt; boolean:
-</span></span><span style="display:flex;"><span>        i = hash(k)
-</span></span><span style="display:flex;"><span>        while table[i] != NULL:
-</span></span><span style="display:flex;"><span>            if k == table[i].key:
-</span></span><span style="display:flex;"><span>                return True
-</span></span><span style="display:flex;"><span>            i = (i + 1) % table.length
-</span></span><span style="display:flex;"><span>        return False
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    remove(k : Key):
-</span></span><span style="display:flex;"><span>        i = hash(k)
-</span></span><span style="display:flex;"><span>        while table[i] != NULL:
-</span></span><span style="display:flex;"><span>            if k == table[i].value:
-</span></span><span style="display:flex;"><span>                table[i] = DELETED
-</span></span><span style="display:flex;"><span>                size -= 1
-</span></span><span style="display:flex;"><span>                n_deleted += 1
-</span></span><span style="display:flex;"><span>                if load_factor() &lt; 0.25:
-</span></span><span style="display:flex;"><span>                    resize(table.length // 2)
-</span></span><span style="display:flex;"><span>                return
-</span></span><span style="display:flex;"><span>            i = (i + 1) % table.length
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    resize(buckets: int):
-</span></span><span style="display:flex;"><span>        oldtable = table
-</span></span><span style="display:flex;"><span>        table = new Array with size buckets
-</span></span><span style="display:flex;"><span>        size = n_deleted = 0
-</span></span><span style="display:flex;"><span>        for cell in oldtable:
-</span></span><span style="display:flex;"><span>            if cell != NULL and cell != DELETED:
-</span></span><span style="display:flex;"><span>                table.add(cell.key, cell.value)
-</span></span></code></pre></div><h3 id="clustering">Clustering</h3>
+<pre tabindex="0"><code>class LinearProbingHashSet&lt;Item&gt;:
+    table: Array of HashCell
+    size: int = 0
+    n_deleted: int = 0
+    DELETED: HashCell = HashCell(value = NULL)
+
+    class HashCell:
+        value: Item
+
+    load_factor() -&gt; float:
+        return (size + deleted) / table.length
+
+    add(x : Item):
+        if load_factor() &gt; 0.75:
+            resize(2 * table.length)
+        i = hash(x)
+
+        while table[i] != NULL and table[i] != DELETED:
+            if x == table[i].value:
+                return
+            i = (i + 1) % table.length
+        size += 1
+        if table[i] = DELETED:
+            n_deleted -= 1
+
+        table[i] = HashCell(value = x)
+
+    contains(x : Item) -&gt; boolean:
+        i = hash(x)
+        while table[i] != NULL:
+            if x == table[i].value:
+                return True
+            i = (i + 1) % table.length
+        return False
+
+    remove(x : Item):
+        i = hash(x)
+        while table[i] != NULL:
+            if x == table[i].value:
+                table[i] = DELETED
+                size -= 1
+                n_deleted += 1
+                if load_factor() &lt; 0.25:
+                    resize(table.length // 2)
+                return
+            i = (i + 1) % table.length
+
+    resize(buckets: int):
+        oldtable = table
+        table = new Array with size buckets
+        size = n_deleted = 0
+        for cell in oldtable:
+            if cell != NULL and cell != DELETED:
+                table.add(cell.value)
+</code></pre><p>And in the <strong>Map</strong> case:</p>
+<pre tabindex="0"><code>class LinearProbingHashMap&lt;Key, Value&gt;:
+    table: Array of HashCell
+    size: int = 0
+    n_deleted: int = 0
+    DELETED: HashCell = HashCell(key = NULL,value = NULL)
+
+    class HashCell:
+        key: Key
+        value: Value
+
+    load_factor() -&gt; float:
+        return (size + deleted) / table.length
+
+    put(k : Key, v : Value):
+        if load_factor() &gt; 0.75:
+            resize(2 * table.length)
+        i = hash(k)
+
+        while table[i] != NULL and table[i] != DELETED:
+            if k == table[i].key:
+                return
+            i = (i + 1) % table.length
+        size += 1
+        if table[i] = DELETED:
+            n_deleted -= 1
+
+        table[i] = HashCell(key = k, value = v)
+
+    contains(k : Key) -&gt; boolean:
+        i = hash(k)
+        while table[i] != NULL:
+            if k == table[i].key:
+                return True
+            i = (i + 1) % table.length
+        return False
+
+    remove(k : Key):
+        i = hash(k)
+        while table[i] != NULL:
+            if k == table[i].value:
+                table[i] = DELETED
+                size -= 1
+                n_deleted += 1
+                if load_factor() &lt; 0.25:
+                    resize(table.length // 2)
+                return
+            i = (i + 1) % table.length
+
+    resize(buckets: int):
+        oldtable = table
+        table = new Array with size buckets
+        size = n_deleted = 0
+        for cell in oldtable:
+            if cell != NULL and cell != DELETED:
+                table.add(cell.key, cell.value)
+</code></pre><h3 id="clustering">Clustering</h3>
 <p>As mentioned before - clusters is by-product of open addressing - but these make the search times slower, in the worst time it becomes linear!</p>
 <p>The famous Donald E. Knuth formulated the so called &lsquo;Knuth&rsquo;s parking problem&rsquo; which shows how rapid this cluster problem grows.</p>
 <h3 id="alternatives-to-linear-probing">Alternatives to linear probing</h3>

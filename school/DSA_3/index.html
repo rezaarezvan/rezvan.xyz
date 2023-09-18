@@ -22,7 +22,7 @@ But how are dynamic arrays actually implemented into a language? The ideas is ac
         <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
 
 	
-	<link rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/main.ded288734bf67c9f89d72102879afaadf50fed4138fb485737334085f5465104.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/main.56d2207fad46e63050394b2c8df0d9e313c631c4cd55e1c1c163a8a772d9a1df.css" />
 		<link id="darkModeStyle" rel="stylesheet" type="text/css" href="https://rezvan.xyz/css/dark.b47837a877382f31178bb7a2c2135fbe9c39b1d4a1cc529faee0363b6dbdc408.css"  disabled />
 	
 
@@ -133,38 +133,38 @@ But as we stated, our approach took $\mathcal{O}(n)$ for n calls - so we can say
 <p>Now that we&rsquo;ve defined how the most important feature of dynamic arrays should work - let&rsquo;s implement one!</p>
 <h3 id="implementation">Implementation</h3>
 <p>A python implementation of a dynamic array:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>class dynamic_array:
-</span></span><span style="display:flex;"><span>    def __init__(self):
-</span></span><span style="display:flex;"><span>        self.array = [None]
-</span></span><span style="display:flex;"><span>        self.size  = 0
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    def get(self, i):
-</span></span><span style="display:flex;"><span>        if 0 &lt;= i &lt; self.size:
-</span></span><span style="display:flex;"><span>            return &#34;Error, index out of bounds&#34;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        return self.array[i]
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    def set(self, i, val):
-</span></span><span style="display:flex;"><span>        if 0 &lt;= i &lt; self.size:
-</span></span><span style="display:flex;"><span>            return &#34;Error, index out of bounds&#34;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        self.array[i] = val
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    def append(self, val):
-</span></span><span style="display:flex;"><span>        if self.size == len(self.array):
-</span></span><span style="display:flex;"><span>            self.resize()
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        self.array[self.size] = val
-</span></span><span style="display:flex;"><span>        self.size += 1
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    def resize(self):
-</span></span><span style="display:flex;"><span>        new_array = [None] * 2
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        for i in range(len(self.array)):
-</span></span><span style="display:flex;"><span>            new_array[i] = self.array[i]
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        self.array = new_array
-</span></span></code></pre></div><p>Now this isn&rsquo;t a perfect implementation - but it works okay.</p>
+<pre tabindex="0"><code>class dynamic_array:
+    def __init__(self):
+        self.array = [None]
+        self.size  = 0
+
+    def get(self, i):
+        if 0 &lt;= i &lt; self.size:
+            return &#34;Error, index out of bounds&#34;
+
+        return self.array[i]
+
+    def set(self, i, val):
+        if 0 &lt;= i &lt; self.size:
+            return &#34;Error, index out of bounds&#34;
+
+        self.array[i] = val
+
+    def append(self, val):
+        if self.size == len(self.array):
+            self.resize()
+
+        self.array[self.size] = val
+        self.size += 1
+
+    def resize(self):
+        new_array = [None] * 2
+
+        for i in range(len(self.array)):
+            new_array[i] = self.array[i]
+
+        self.array = new_array
+</code></pre><p>Now this isn&rsquo;t a perfect implementation - but it works okay.</p>
 <p>Now that we understand <em>really</em> how dynamic arrays work - we can actually start implementing some more <em>interesting</em> data structures</p>
 <h3 id="stacks-and-queues">Stacks and Queues</h3>
 <p>Stacks and Queues are quite popular and powerful data structures. But just to refresh let&rsquo;s go over how both data structures work.</p>
@@ -186,16 +186,16 @@ Both stacks and queues can be implemented with Dynamic arrays as we covered - bu
 A singly linked list points to the first node and the last node in the list points to nothing (Nothing can for example be <code>Null</code>)
 Since it would be inefficient to calculate the size each time we call <code>size()</code>, since we would need to traverse the whole list, we instead keep a dynamic size variable that we can access.</p>
 <p>Here&rsquo;s how the boilerplate classes for a Linked List might look:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>class Node:
-</span></span><span style="display:flex;"><span>    def __init__(self, val, next = None):
-</span></span><span style="display:flex;"><span>        self.val = val
-</span></span><span style="display:flex;"><span>        self.next = next
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>class LinkedList:
-</span></span><span style="display:flex;"><span>    def __init__(self, val = None):
-</span></span><span style="display:flex;"><span>        self.head = None
-</span></span><span style="display:flex;"><span>        self.size = 0
-</span></span></code></pre></div><p>With our new knowledge about linked lists - we can return to stacks!</p>
+<pre tabindex="0"><code>class Node:
+    def __init__(self, val, next = None):
+        self.val = val
+        self.next = next
+
+class LinkedList:
+    def __init__(self, val = None):
+        self.head = None
+        self.size = 0
+</code></pre><p>With our new knowledge about linked lists - we can return to stacks!</p>
 <h4 id="stacks-as-linked-lists">Stacks as linked lists</h4>
 <p>An implementation with a linked list for a stack is perfect - we only care about the top element in stack, therefore, when we <code>push()</code>,
 we first make the new nodes next point to the current head. Then we redirect head to our new node and increase size. When we want to <code>pop()</code> -
@@ -203,164 +203,164 @@ we first store the value of our current head node temporarily, to return the val
 <p>In many languages we do not need to manually remove the node from the list - since it will be handled by garbage collection. But in a language like C, we would need to <code>free()</code> that node from memory.</p>
 <p>So let&rsquo;s implement a stack using a linked list.</p>
 <h4 id="implementation-of-a-stack-using-a-linked-list">Implementation of a stack using a linked list</h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>class Node:
-</span></span><span style="display:flex;"><span>    def __init__(self, val):
-</span></span><span style="display:flex;"><span>        self.val = val
-</span></span><span style="display:flex;"><span>        self.next = None
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>class Stack:
-</span></span><span style="display:flex;"><span>    def __init__(self):
-</span></span><span style="display:flex;"><span>        self.head = None
-</span></span><span style="display:flex;"><span>        self.size = 0
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    def is_empty(self):
-</span></span><span style="display:flex;"><span>        if self.head == None:
-</span></span><span style="display:flex;"><span>            return True
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        return False
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    def push(self, val):
-</span></span><span style="display:flex;"><span>        if self.head == None:
-</span></span><span style="display:flex;"><span>            self.head = Node(val)
-</span></span><span style="display:flex;"><span>            return
-</span></span><span style="display:flex;"><span> f
-</span></span><span style="display:flex;"><span>        new = Node(val)
-</span></span><span style="display:flex;"><span>        new.next = self.head
-</span></span><span style="display:flex;"><span>        self.head = new
-</span></span><span style="display:flex;"><span>        self.size += 1
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    def pop(self):
-</span></span><span style="display:flex;"><span>        if self.head == None:
-</span></span><span style="display:flex;"><span>            return None
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        pop = self.head.val
-</span></span><span style="display:flex;"><span>        self.head = self.head.next
-</span></span><span style="display:flex;"><span>        self.size -= 1
-</span></span><span style="display:flex;"><span>        return pop
-</span></span></code></pre></div><p>Now let&rsquo;s implement a stack using a dynamic array.</p>
+<pre tabindex="0"><code>class Node:
+    def __init__(self, val):
+        self.val = val
+        self.next = None
+
+
+class Stack:
+    def __init__(self):
+        self.head = None
+        self.size = 0
+
+    def is_empty(self):
+        if self.head == None:
+            return True
+
+        return False
+
+    def push(self, val):
+        if self.head == None:
+            self.head = Node(val)
+            return
+ f
+        new = Node(val)
+        new.next = self.head
+        self.head = new
+        self.size += 1
+
+    def pop(self):
+        if self.head == None:
+            return None
+
+        pop = self.head.val
+        self.head = self.head.next
+        self.size -= 1
+        return pop
+</code></pre><p>Now let&rsquo;s implement a stack using a dynamic array.</p>
 <h4 id="implementation-of-a-stack-using-a-dynamic-array">Implementation of a stack using a dynamic array</h4>
 <p>Before we start the implementation, let&rsquo;s consider <strong>how</strong> we should implement it before.
 One thing that might not be obvious might be that, using the first element as the top - will work - but be super slow.</p>
 <p>If we pop the first element - we would need to push forward the rest of the stack by 1 step. Which would take $\mathcal{O}(n)$. We want $\mathcal{O}(1)$!</p>
 <p>So instead let&rsquo;s use the last element as the top!</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>class Stack:
-</span></span><span style="display:flex;"><span>    def __init__(self):
-</span></span><span style="display:flex;"><span>        self.stack = [None]
-</span></span><span style="display:flex;"><span>        self.size = 0
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    def is_empty(self):
-</span></span><span style="display:flex;"><span>        return self.size == 0
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    def push(self, val):
-</span></span><span style="display:flex;"><span>        if self.size == len(self.stack):
-</span></span><span style="display:flex;"><span>            self.resize(2 * self.size)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        self.stack[self.size] = val
-</span></span><span style="display:flex;"><span>        self.size += 1
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    def pop(self):
-</span></span><span style="display:flex;"><span>        self.size -= 1
-</span></span><span style="display:flex;"><span>        pop = self.stack[self.size]
-</span></span><span style="display:flex;"><span>        self.stack[self.size] = None
-</span></span><span style="display:flex;"><span>        if self.size == (len(self.stack) // 4):
-</span></span><span style="display:flex;"><span>            self.resize(len(self.stack) // 2)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        return pop
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    def resize(self, factor):
-</span></span><span style="display:flex;"><span>        new_array = [None] * factor
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        for i in range(self.size):
-</span></span><span style="display:flex;"><span>            new_array[i] = self.stack[i]
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        self.stack = new_array
-</span></span></code></pre></div><h4 id="implementation-of-a-queue-using-linked-lists">Implementation of a queue using linked lists</h4>
+<pre tabindex="0"><code>class Stack:
+    def __init__(self):
+        self.stack = [None]
+        self.size = 0
+
+    def is_empty(self):
+        return self.size == 0
+
+    def push(self, val):
+        if self.size == len(self.stack):
+            self.resize(2 * self.size)
+
+        self.stack[self.size] = val
+        self.size += 1
+
+    def pop(self):
+        self.size -= 1
+        pop = self.stack[self.size]
+        self.stack[self.size] = None
+        if self.size == (len(self.stack) // 4):
+            self.resize(len(self.stack) // 2)
+
+        return pop
+
+    def resize(self, factor):
+        new_array = [None] * factor
+
+        for i in range(self.size):
+            new_array[i] = self.stack[i]
+
+        self.stack = new_array
+</code></pre><h4 id="implementation-of-a-queue-using-linked-lists">Implementation of a queue using linked lists</h4>
 <p>Now it&rsquo;s now to implement queues! Using a linked list seems as a very natural approach since we have a sequence of pointers forward.
 However, in a queue we always need to the first and the last element. Therefore, we need another pointer to the end of the list as well.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>class Node:
-</span></span><span style="display:flex;"><span>    def __init__(self, val):
-</span></span><span style="display:flex;"><span>        self.val = val
-</span></span><span style="display:flex;"><span>        self.next = None
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>class Queue:
-</span></span><span style="display:flex;"><span>    def __init__(self):
-</span></span><span style="display:flex;"><span>        self.last = None
-</span></span><span style="display:flex;"><span>        self.first = None
-</span></span><span style="display:flex;"><span>        self.size = 0
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    def is_empty(self):
-</span></span><span style="display:flex;"><span>        if self.first == None:
-</span></span><span style="display:flex;"><span>            return True
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        return False
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    def enqueue(self, val):
-</span></span><span style="display:flex;"><span>        new_node = Node(val)
-</span></span><span style="display:flex;"><span>        if self.is_empty():
-</span></span><span style="display:flex;"><span>            self.first = new_node
-</span></span><span style="display:flex;"><span>            self.last = new_node
-</span></span><span style="display:flex;"><span>        else:
-</span></span><span style="display:flex;"><span>            self.last.next = new_node
-</span></span><span style="display:flex;"><span>            self.last = new_node
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        self.size += 1
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    def dequeue(self):
-</span></span><span style="display:flex;"><span>        if self.is_empty():
-</span></span><span style="display:flex;"><span>            return None
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        exit = self.first
-</span></span><span style="display:flex;"><span>        self.first = self.first.next
-</span></span><span style="display:flex;"><span>        self.size -= 1
-</span></span><span style="display:flex;"><span>        return exit.val
-</span></span></code></pre></div><p>Quite simple and elegant!</p>
+<pre tabindex="0"><code>class Node:
+    def __init__(self, val):
+        self.val = val
+        self.next = None
+
+class Queue:
+    def __init__(self):
+        self.last = None
+        self.first = None
+        self.size = 0
+
+    def is_empty(self):
+        if self.first == None:
+            return True
+
+        return False
+
+    def enqueue(self, val):
+        new_node = Node(val)
+        if self.is_empty():
+            self.first = new_node
+            self.last = new_node
+        else:
+            self.last.next = new_node
+            self.last = new_node
+
+        self.size += 1
+
+    def dequeue(self):
+        if self.is_empty():
+            return None
+
+        exit = self.first
+        self.first = self.first.next
+        self.size -= 1
+        return exit.val
+</code></pre><p>Quite simple and elegant!</p>
 <h4 id="implementation-of-a-queue-using-a-dynamic-array">Implementation of a queue using a (dynamic) array</h4>
 <p>One thing we have go through first is that - our implementation will be a so called circular array. Our pointers to the head and tail can (and will cross).</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>class Queue:
-</span></span><span style="display:flex;"><span>    def __init__(self):
-</span></span><span style="display:flex;"><span>        self.queue = [None]
-</span></span><span style="display:flex;"><span>        self.head = 0
-</span></span><span style="display:flex;"><span>        self.tail = 1
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    def is_empty(self):
-</span></span><span style="display:flex;"><span>        return self.head == (self.tail + 1) % len(self.queue)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    def enqueue(self, val):
-</span></span><span style="display:flex;"><span>        if (self.tail + 1) % len(self.queue) == self.head:
-</span></span><span style="display:flex;"><span>            self.resize(2 * len(self.queue))
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        self.queue[self.tail] = val
-</span></span><span style="display:flex;"><span>        self.tail = (self.tail + 1) % len(self.queue)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    def dequeue(self):
-</span></span><span style="display:flex;"><span>        if self.is_empty():
-</span></span><span style="display:flex;"><span>            raise Exception(&#34;Queue is empty&#34;)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        result = self.queue[self.head]
-</span></span><span style="display:flex;"><span>        self.head = (self.head + 1) % len(self.queue)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        return result
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    def resize(self, new_size):
-</span></span><span style="display:flex;"><span>        old_queue = self.queue
-</span></span><span style="display:flex;"><span>        self.queue = [None] * new_size
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        if self.head &lt; self.tail:
-</span></span><span style="display:flex;"><span>            for i in range(self.tail - self.head):
-</span></span><span style="display:flex;"><span>                self.queue[i] = old_queue[(self.head + i) % len(old_queue)]
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>            self.head = 0
-</span></span><span style="display:flex;"><span>            self.tail = self.tail - self.head
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        else:
-</span></span><span style="display:flex;"><span>            for i in range(len(old_queue) - 1):
-</span></span><span style="display:flex;"><span>                _index = (self.head + i) % len(old_queue)
-</span></span><span style="display:flex;"><span>                self.queue[i] = old_queue[_index]
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>            self.head = 0
-</span></span><span style="display:flex;"><span>            self.tail = self.tail - self.head - 1
-</span></span></code></pre></div><p>That&rsquo;s it for this part - in the next part we&rsquo;ll cover something called &lsquo;<strong>A</strong>bstract <strong>D</strong>ata <strong>T</strong>ypes&rsquo; or for short ADTs.
+<pre tabindex="0"><code>class Queue:
+    def __init__(self):
+        self.queue = [None]
+        self.head = 0
+        self.tail = 1
+
+    def is_empty(self):
+        return self.head == (self.tail + 1) % len(self.queue)
+
+    def enqueue(self, val):
+        if (self.tail + 1) % len(self.queue) == self.head:
+            self.resize(2 * len(self.queue))
+
+        self.queue[self.tail] = val
+        self.tail = (self.tail + 1) % len(self.queue)
+
+    def dequeue(self):
+        if self.is_empty():
+            raise Exception(&#34;Queue is empty&#34;)
+
+        result = self.queue[self.head]
+        self.head = (self.head + 1) % len(self.queue)
+
+        return result
+
+    def resize(self, new_size):
+        old_queue = self.queue
+        self.queue = [None] * new_size
+
+        if self.head &lt; self.tail:
+            for i in range(self.tail - self.head):
+                self.queue[i] = old_queue[(self.head + i) % len(old_queue)]
+
+            self.head = 0
+            self.tail = self.tail - self.head
+
+        else:
+            for i in range(len(old_queue) - 1):
+                _index = (self.head + i) % len(old_queue)
+                self.queue[i] = old_queue[_index]
+
+            self.head = 0
+            self.tail = self.tail - self.head - 1
+</code></pre><p>That&rsquo;s it for this part - in the next part we&rsquo;ll cover something called &lsquo;<strong>A</strong>bstract <strong>D</strong>ata <strong>T</strong>ypes&rsquo; or for short ADTs.
 We&rsquo;ll define what a ADT is and what&rsquo;s the difference between them and ordinary data structures.</p>
 
 		</section>

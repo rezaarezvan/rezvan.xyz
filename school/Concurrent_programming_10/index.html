@@ -46,7 +46,7 @@ Lock-based implementations do not compose (easily)."/>
         <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
 
 	
-	<link rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/main.ded288734bf67c9f89d72102879afaadf50fed4138fb485737334085f5465104.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/main.56d2207fad46e63050394b2c8df0d9e313c631c4cd55e1c1c163a8a772d9a1df.css" />
 		<link id="darkModeStyle" rel="stylesheet" type="text/css" href="https://rezvan.xyz/css/dark.b47837a877382f31178bb7a2c2135fbe9c39b1d4a1cc529faee0363b6dbdc408.css"  disabled />
 	
 
@@ -201,119 +201,119 @@ synchronization costs – of magnitude comparable to those associated with locks
 </ul>
 <p>Let&rsquo;s see how we can parallelize linked lists!</p>
 <p>But before that, let&rsquo;s quickly just have our linked list defined:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>class SequentialNode&lt;T&gt; implements Node&lt;T&gt; {
-</span></span><span style="display:flex;"><span>    // Value stored in node
-</span></span><span style="display:flex;"><span>    private T item;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    // Hash code of item
-</span></span><span style="display:flex;"><span>    private int key;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    // Next node in chain
-</span></span><span style="display:flex;"><span>    private Node&lt;T&gt; next;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    T item() { return item; }
-</span></span><span style="display:flex;"><span>    int key() { return key; }
-</span></span><span style="display:flex;"><span>    Node&lt;T&gt; next() { return next; }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    void setItem(T item) { this.item = item; }
-</span></span><span style="display:flex;"><span>    void setKey(int key) { this.key = key; }
-</span></span><span style="display:flex;"><span>    void setNext(Node&lt;T&gt; next) { this.next = next; }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    protected Node&lt;T&gt;, Node&lt;T&gt; find(Node&lt;T&gt; start, int key) {
-</span></span><span style="display:flex;"><span>        Node&lt;T&gt; pred, curr;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        curr = start;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        do {
-</span></span><span style="display:flex;"><span>            pred = curr; curr = curr.next();
-</span></span><span style="display:flex;"><span>        } while (curr.key() &lt; key);
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        return (pred,curr);
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    public boolean has(T item) {
-</span></span><span style="display:flex;"><span>        int key = item.key();
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        // Find position of key from head:
-</span></span><span style="display:flex;"><span>        Node&lt;T&gt; pred, curr = find(head, key);
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        return curr.key() == key;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    public boolean add(T item) {
-</span></span><span style="display:flex;"><span>        // New node to be added
-</span></span><span style="display:flex;"><span>        Node&lt;T&gt; node = new Node&lt;&gt;(item);
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        // curr.key &gt;= item.key()
-</span></span><span style="display:flex;"><span>        Node&lt;T&gt; pred, curr = find(head, item.key());
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        if (curr.key() == item.key()) {
-</span></span><span style="display:flex;"><span>            return false;
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        else {
-</span></span><span style="display:flex;"><span>            node.setNext(curr);
-</span></span><span style="display:flex;"><span>            pred.setNext(node);
-</span></span><span style="display:flex;"><span>            return true;
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    public boolean remove(T item) {
-</span></span><span style="display:flex;"><span>        // curr.key() &gt;= item.key()
-</span></span><span style="display:flex;"><span>        Node&lt;T&gt; pred, curr = find(head, item.key());
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        if (curr.key() &gt; item.key()) {
-</span></span><span style="display:flex;"><span>            return false;
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        else {
-</span></span><span style="display:flex;"><span>            pred.setNext(curr.next());
-</span></span><span style="display:flex;"><span>            return true;
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><h3 id="coarse-grained-locking">Coarse grained locking</h3>
+<pre tabindex="0"><code>class SequentialNode&lt;T&gt; implements Node&lt;T&gt; {
+    // Value stored in node
+    private T item;
+
+    // Hash code of item
+    private int key;
+
+    // Next node in chain
+    private Node&lt;T&gt; next;
+
+    T item() { return item; }
+    int key() { return key; }
+    Node&lt;T&gt; next() { return next; }
+
+    void setItem(T item) { this.item = item; }
+    void setKey(int key) { this.key = key; }
+    void setNext(Node&lt;T&gt; next) { this.next = next; }
+
+    protected Node&lt;T&gt;, Node&lt;T&gt; find(Node&lt;T&gt; start, int key) {
+        Node&lt;T&gt; pred, curr;
+
+        curr = start;
+
+        do {
+            pred = curr; curr = curr.next();
+        } while (curr.key() &lt; key);
+
+        return (pred,curr);
+    }
+
+    public boolean has(T item) {
+        int key = item.key();
+
+        // Find position of key from head:
+        Node&lt;T&gt; pred, curr = find(head, key);
+
+        return curr.key() == key;
+    }
+
+    public boolean add(T item) {
+        // New node to be added
+        Node&lt;T&gt; node = new Node&lt;&gt;(item);
+
+        // curr.key &gt;= item.key()
+        Node&lt;T&gt; pred, curr = find(head, item.key());
+
+        if (curr.key() == item.key()) {
+            return false;
+        }
+
+        else {
+            node.setNext(curr);
+            pred.setNext(node);
+            return true;
+        }
+    }
+
+    public boolean remove(T item) {
+        // curr.key() &gt;= item.key()
+        Node&lt;T&gt; pred, curr = find(head, item.key());
+
+        if (curr.key() &gt; item.key()) {
+            return false;
+        }
+
+        else {
+            pred.setNext(curr.next());
+            return true;
+        }
+    }
+}
+</code></pre><h3 id="coarse-grained-locking">Coarse grained locking</h3>
 <p>The simple idea is to lock every method.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>class CoarseSet&lt;T&gt; extends SequentialSet&lt;T&gt; {
-</span></span><span style="display:flex;"><span>    // Lock controlling access to the whole set
-</span></span><span style="display:flex;"><span>    private Lock lock = new ReentrantLock();
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    public boolean add(T item) {
-</span></span><span style="display:flex;"><span>        lock.lock();
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        try {
-</span></span><span style="display:flex;"><span>            // Execute ‘add’ while locking
-</span></span><span style="display:flex;"><span>            return super.add(item);
-</span></span><span style="display:flex;"><span>        } finally {
-</span></span><span style="display:flex;"><span>            // Done: release lock
-</span></span><span style="display:flex;"><span>            lock.unlock();
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    public boolean remove(T item) {
-</span></span><span style="display:flex;"><span>        lock.lock();
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        try {
-</span></span><span style="display:flex;"><span>            // Execute ‘remove’ while locking
-</span></span><span style="display:flex;"><span>            return super.remove(item);
-</span></span><span style="display:flex;"><span>        } finally {
-</span></span><span style="display:flex;"><span>            // Done: release lock
-</span></span><span style="display:flex;"><span>            lock.unlock();
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    public boolean has(T item) {
-</span></span><span style="display:flex;"><span>        lock.lock();
-</span></span><span style="display:flex;"><span>        try {
-</span></span><span style="display:flex;"><span>            // Execute ‘has’ while locking
-</span></span><span style="display:flex;"><span>            return super.has(item);
-</span></span><span style="display:flex;"><span>        } finally {
-</span></span><span style="display:flex;"><span>            // Done: release lock
-</span></span><span style="display:flex;"><span>            lock.unlock();
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>Now this is a <strong>very</strong> naive approach - but let&rsquo;s list the pros and cons:</p>
+<pre tabindex="0"><code>class CoarseSet&lt;T&gt; extends SequentialSet&lt;T&gt; {
+    // Lock controlling access to the whole set
+    private Lock lock = new ReentrantLock();
+
+    public boolean add(T item) {
+        lock.lock();
+
+        try {
+            // Execute ‘add’ while locking
+            return super.add(item);
+        } finally {
+            // Done: release lock
+            lock.unlock();
+        }
+    }
+
+    public boolean remove(T item) {
+        lock.lock();
+
+        try {
+            // Execute ‘remove’ while locking
+            return super.remove(item);
+        } finally {
+            // Done: release lock
+            lock.unlock();
+        }
+    }
+
+    public boolean has(T item) {
+        lock.lock();
+        try {
+            // Execute ‘has’ while locking
+            return super.has(item);
+        } finally {
+            // Done: release lock
+            lock.unlock();
+        }
+    }
+}
+</code></pre><p>Now this is a <strong>very</strong> naive approach - but let&rsquo;s list the pros and cons:</p>
 <ul>
 <li>
 <p>Pros:</p>
@@ -344,74 +344,74 @@ synchronization costs – of magnitude comparable to those associated with locks
 <p>Now let&rsquo;s look at <code>CoarseSet</code> predecessor</p>
 <h3 id="fine-grained-locking">Fine-grained locking</h3>
 <p>The idea here is, instead of locking the whole list when doing operations, we just lock that specific node(s).</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>public class FineSet&lt;T&gt; extends SequentialSet&lt;T&gt; {
-</span></span><span style="display:flex;"><span>    public FineSet() {
-</span></span><span style="display:flex;"><span>        // Smallest key
-</span></span><span style="display:flex;"><span>        head = new LockableNode&lt;&gt;(Integer.MIN _ VALUE);
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        // Largest key
-</span></span><span style="display:flex;"><span>        tail = new LockableNode&lt;&gt;(Integer.MAX _ VALUE);
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        head.setNext(tail);
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>Since each node is lockable:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>class LockableNode&lt;T&gt; extends SequentialNode&lt;T&gt; {
-</span></span><span style="display:flex;"><span>    private Lock lock = new ReentrantLock();
-</span></span><span style="display:flex;"><span>        void lock() { lock.lock(); }
-</span></span><span style="display:flex;"><span>        void unlock() { lock.unlock(); }
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>Now let&rsquo;s see the implementations of each operation:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>// Find while locking pred and curr, return locked position
-</span></span><span style="display:flex;"><span>protected Node&lt;T&gt;, Node&lt;T&gt; find(Node&lt;T&gt; start, int key) {
-</span></span><span style="display:flex;"><span>    Node&lt;T&gt; pred, curr;
-</span></span><span style="display:flex;"><span>    pred = start; curr = start.next();
-</span></span><span style="display:flex;"><span>    pred.lock(); curr.lock();
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    while (curr.key &lt; key) {
-</span></span><span style="display:flex;"><span>        // Unlock pred node
-</span></span><span style="display:flex;"><span>        pred.unlock();
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        // Move to next node
-</span></span><span style="display:flex;"><span>        pred = curr; curr = curr.next();
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        // Lock next node
-</span></span><span style="display:flex;"><span>        curr.lock();
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    return (pred, curr);
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>public boolean add(T item) {
-</span></span><span style="display:flex;"><span>    Node&lt;T&gt; node = new LockableNode&lt;&gt;(item);
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    try {
-</span></span><span style="display:flex;"><span>        Node&lt;T&gt; pred, curr = find(head, item.key());
-</span></span><span style="display:flex;"><span>        // Add node as in SequentialSet, while locking
-</span></span><span style="display:flex;"><span>    } finally {
-</span></span><span style="display:flex;"><span>        pred.unlock(); curr.unlock();
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>public boolean remove(T item) {
-</span></span><span style="display:flex;"><span>    try {
-</span></span><span style="display:flex;"><span>        Node&lt;T&gt; pred, curr = find(head, item.key());
-</span></span><span style="display:flex;"><span>        // Remove node as in SequentialSet, while locking
-</span></span><span style="display:flex;"><span>    } finally {
-</span></span><span style="display:flex;"><span>        pred.unlock(); curr.unlock();
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>public boolean has(T item) {
-</span></span><span style="display:flex;"><span>    try {
-</span></span><span style="display:flex;"><span>        Node&lt;T&gt; pred, curr = find(head, item.key());
-</span></span><span style="display:flex;"><span>        // Check node as in SequentialSet, while locking
-</span></span><span style="display:flex;"><span>    } finally {
-</span></span><span style="display:flex;"><span>        pred.unlock(); curr.unlock();
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>As we see, it&rsquo;s all about the <code>find</code> operation.</p>
+<pre tabindex="0"><code>public class FineSet&lt;T&gt; extends SequentialSet&lt;T&gt; {
+    public FineSet() {
+        // Smallest key
+        head = new LockableNode&lt;&gt;(Integer.MIN _ VALUE);
+
+        // Largest key
+        tail = new LockableNode&lt;&gt;(Integer.MAX _ VALUE);
+
+        head.setNext(tail);
+    }
+}
+</code></pre><p>Since each node is lockable:</p>
+<pre tabindex="0"><code>class LockableNode&lt;T&gt; extends SequentialNode&lt;T&gt; {
+    private Lock lock = new ReentrantLock();
+        void lock() { lock.lock(); }
+        void unlock() { lock.unlock(); }
+    }
+}
+</code></pre><p>Now let&rsquo;s see the implementations of each operation:</p>
+<pre tabindex="0"><code>// Find while locking pred and curr, return locked position
+protected Node&lt;T&gt;, Node&lt;T&gt; find(Node&lt;T&gt; start, int key) {
+    Node&lt;T&gt; pred, curr;
+    pred = start; curr = start.next();
+    pred.lock(); curr.lock();
+
+    while (curr.key &lt; key) {
+        // Unlock pred node
+        pred.unlock();
+
+        // Move to next node
+        pred = curr; curr = curr.next();
+
+        // Lock next node
+        curr.lock();
+    }
+
+    return (pred, curr);
+}
+
+public boolean add(T item) {
+    Node&lt;T&gt; node = new LockableNode&lt;&gt;(item);
+
+    try {
+        Node&lt;T&gt; pred, curr = find(head, item.key());
+        // Add node as in SequentialSet, while locking
+    } finally {
+        pred.unlock(); curr.unlock();
+    }
+}
+
+public boolean remove(T item) {
+    try {
+        Node&lt;T&gt; pred, curr = find(head, item.key());
+        // Remove node as in SequentialSet, while locking
+    } finally {
+        pred.unlock(); curr.unlock();
+    }
+}
+
+public boolean has(T item) {
+    try {
+        Node&lt;T&gt; pred, curr = find(head, item.key());
+        // Check node as in SequentialSet, while locking
+    } finally {
+        pred.unlock(); curr.unlock();
+    }
+}
+</code></pre><p>As we see, it&rsquo;s all about the <code>find</code> operation.</p>
 <p>Pros and cons:</p>
 <ul>
 <li>
@@ -469,67 +469,67 @@ release locks.</p>
 <p>This approach is optimistic because it works well when validation is often successful
 (so we don’t have to repeat operations).</p>
 <p>Now let&rsquo;s implement these operations:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>// Find as in SequentialSet find
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>public boolean add(T item) {
-</span></span><span style="display:flex;"><span>    Node&lt;T&gt; node = new ReadWriteNode&lt;&gt;(item);
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    do {
-</span></span><span style="display:flex;"><span>        Node&lt;T&gt; pred, curr = find(head, item.key());
-</span></span><span style="display:flex;"><span>        pred.lock(); curr.lock();
-</span></span><span style="display:flex;"><span>        try {
-</span></span><span style="display:flex;"><span>            if (valid(pred, curr)) {
-</span></span><span style="display:flex;"><span>                // Physically add node
-</span></span><span style="display:flex;"><span>            }
-</span></span><span style="display:flex;"><span>        } finally {
-</span></span><span style="display:flex;"><span>            pred.unlock(); curr.unlock();
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>    } while (true);
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>public boolean remove(T item) {
-</span></span><span style="display:flex;"><span>    do {
-</span></span><span style="display:flex;"><span>        Node&lt;T&gt; pred, curr = find(head, item.key());
-</span></span><span style="display:flex;"><span>        pred.lock(); curr.lock();
-</span></span><span style="display:flex;"><span>        try {
-</span></span><span style="display:flex;"><span>            if (valid(pred, curr)) {
-</span></span><span style="display:flex;"><span>                // Physically remove node
-</span></span><span style="display:flex;"><span>            }
-</span></span><span style="display:flex;"><span>        } finally {
-</span></span><span style="display:flex;"><span>            pred.unlock(); curr.unlock();
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>    } while (true);
-</span></span><span style="display:flex;"><span>    // If not valid: try again!
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>public boolean has(T item) {
-</span></span><span style="display:flex;"><span>    do {
-</span></span><span style="display:flex;"><span>        Node&lt;T&gt; pred, curr = find(head, item.key());
-</span></span><span style="display:flex;"><span>        pred.lock(); curr.lock();
-</span></span><span style="display:flex;"><span>        try {
-</span></span><span style="display:flex;"><span>            if (valid(pred, curr)) {
-</span></span><span style="display:flex;"><span>                return curr.key() == item.key();
-</span></span><span style="display:flex;"><span>            }
-</span></span><span style="display:flex;"><span>        } finally {
-</span></span><span style="display:flex;"><span>            pred.unlock(); curr.unlock();
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>    } while (true);
-</span></span><span style="display:flex;"><span>    // If not valid: try again!
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>protected boolean valid(Node&lt;T&gt; pred, Node&lt;T&gt; curr) {
-</span></span><span style="display:flex;"><span>    Node&lt;T&gt; node = head;
-</span></span><span style="display:flex;"><span>    while (node.key() &lt;= pred.key()) {
-</span></span><span style="display:flex;"><span>        if (node == pred) {
-</span></span><span style="display:flex;"><span>            return pred.next() == curr;
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        node = node.next();
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    return false;
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><ul>
+<pre tabindex="0"><code>// Find as in SequentialSet find
+
+public boolean add(T item) {
+    Node&lt;T&gt; node = new ReadWriteNode&lt;&gt;(item);
+
+    do {
+        Node&lt;T&gt; pred, curr = find(head, item.key());
+        pred.lock(); curr.lock();
+        try {
+            if (valid(pred, curr)) {
+                // Physically add node
+            }
+        } finally {
+            pred.unlock(); curr.unlock();
+        }
+    } while (true);
+}
+
+public boolean remove(T item) {
+    do {
+        Node&lt;T&gt; pred, curr = find(head, item.key());
+        pred.lock(); curr.lock();
+        try {
+            if (valid(pred, curr)) {
+                // Physically remove node
+            }
+        } finally {
+            pred.unlock(); curr.unlock();
+        }
+    } while (true);
+    // If not valid: try again!
+}
+
+public boolean has(T item) {
+    do {
+        Node&lt;T&gt; pred, curr = find(head, item.key());
+        pred.lock(); curr.lock();
+        try {
+            if (valid(pred, curr)) {
+                return curr.key() == item.key();
+            }
+        } finally {
+            pred.unlock(); curr.unlock();
+        }
+    } while (true);
+    // If not valid: try again!
+}
+
+protected boolean valid(Node&lt;T&gt; pred, Node&lt;T&gt; curr) {
+    Node&lt;T&gt; node = head;
+    while (node.key() &lt;= pred.key()) {
+        if (node == pred) {
+            return pred.next() == curr;
+        }
+
+        node = node.next();
+    }
+
+    return false;
+}
+</code></pre><ul>
 <li>
 <p>Pros:</p>
 <ul>
@@ -576,45 +576,45 @@ without locking.</p>
 </li>
 </ul>
 <p>Let&rsquo;s start with the implementation:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>public class LazySet&lt;T&gt; extends OptimisticSet&lt;T&gt; {
-</span></span><span style="display:flex;"><span>    public LazySet() {
-</span></span><span style="display:flex;"><span>        head = new ValidatedNode&lt;&gt;(Integer.MIN_VALUE);
-</span></span><span style="display:flex;"><span>        tail = new ValidatedNode&lt;&gt;(Integer.MAX_VALUE);
-</span></span><span style="display:flex;"><span>        head.setNext(tail);
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>protected boolean valid(Node&lt;T&gt; pred, Node&lt;T&gt; curr) {
-</span></span><span style="display:flex;"><span>    return pred.valid() &amp;&amp; curr.valid() &amp;&amp; pred.next() == curr;
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>public boolean has(T item) {
-</span></span><span style="display:flex;"><span>    Node&lt;T&gt; pred, curr = find(head, item.key());
-</span></span><span style="display:flex;"><span>    return curr.valid() &amp;&amp; curr.key() == item.key();
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>public boolean remove(T item) {
-</span></span><span style="display:flex;"><span>    do {
-</span></span><span style="display:flex;"><span>        Node&lt;T&gt; pred, curr = find(head, item.key());
-</span></span><span style="display:flex;"><span>        pred.lock(); curr.lock();
-</span></span><span style="display:flex;"><span>        try {
-</span></span><span style="display:flex;"><span>            if (valid(pred, curr)) {
-</span></span><span style="display:flex;"><span>                if (curr.key() != item.key()) {
-</span></span><span style="display:flex;"><span>                    return false;
-</span></span><span style="display:flex;"><span>                }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>                else {
-</span></span><span style="display:flex;"><span>                    curr.setInvalid();
-</span></span><span style="display:flex;"><span>                    pred.setNext(curr.next());
-</span></span><span style="display:flex;"><span>                    return true;
-</span></span><span style="display:flex;"><span>                }
-</span></span><span style="display:flex;"><span>            }
-</span></span><span style="display:flex;"><span>        } finally {
-</span></span><span style="display:flex;"><span>            pred.unlock(); curr.unlock();
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>    } while (true);
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><ul>
+<pre tabindex="0"><code>public class LazySet&lt;T&gt; extends OptimisticSet&lt;T&gt; {
+    public LazySet() {
+        head = new ValidatedNode&lt;&gt;(Integer.MIN_VALUE);
+        tail = new ValidatedNode&lt;&gt;(Integer.MAX_VALUE);
+        head.setNext(tail);
+    }
+}
+
+protected boolean valid(Node&lt;T&gt; pred, Node&lt;T&gt; curr) {
+    return pred.valid() &amp;&amp; curr.valid() &amp;&amp; pred.next() == curr;
+}
+
+public boolean has(T item) {
+    Node&lt;T&gt; pred, curr = find(head, item.key());
+    return curr.valid() &amp;&amp; curr.key() == item.key();
+}
+
+public boolean remove(T item) {
+    do {
+        Node&lt;T&gt; pred, curr = find(head, item.key());
+        pred.lock(); curr.lock();
+        try {
+            if (valid(pred, curr)) {
+                if (curr.key() != item.key()) {
+                    return false;
+                }
+
+                else {
+                    curr.setInvalid();
+                    pred.setNext(curr.next());
+                    return true;
+                }
+            }
+        } finally {
+            pred.unlock(); curr.unlock();
+        }
+    } while (true);
+}
+</code></pre><ul>
 <li>
 <p>Pros:</p>
 <ul>
@@ -645,98 +645,98 @@ reduce the amount of parallelism.</li>
 <p>If we&rsquo;re not using locks we need to use stronger synchronization primitives than locks.</p>
 <p>Therefore we&rsquo;ll use the <code>compare-and-set</code> operation.</p>
 <p>Let&rsquo;s try to implement <code>remove</code> using this:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>public boolean remove(T item) {
-</span></span><span style="display:flex;"><span>    boolean done;
-</span></span><span style="display:flex;"><span>    do {
-</span></span><span style="display:flex;"><span>        Node&lt;T&gt; pred, curr = find(head, item.key());
-</span></span><span style="display:flex;"><span>        if (curr.key() &gt;= item.key()) {
-</span></span><span style="display:flex;"><span>            return false;
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        else {
-</span></span><span style="display:flex;"><span>            done = pred.next().compareAndSet(pred.next(), curr.next());
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    } while (!done);
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    return true;
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>This is however a naive approach and will not work, unfortunately. If two threads call <code>remove</code> at the same time,
+<pre tabindex="0"><code>public boolean remove(T item) {
+    boolean done;
+    do {
+        Node&lt;T&gt; pred, curr = find(head, item.key());
+        if (curr.key() &gt;= item.key()) {
+            return false;
+        }
+
+        else {
+            done = pred.next().compareAndSet(pred.next(), curr.next());
+        }
+
+    } while (!done);
+
+    return true;
+}
+</code></pre><p>This is however a naive approach and will not work, unfortunately. If two threads call <code>remove</code> at the same time,
 it is possible that only one of them are successful.</p>
 <p>We will need to borrow the idea of marking and updating nodes from <code>LazySet</code>.</p>
 <p>Which means:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>class AtomicMarkableReference&lt;V&gt; {
-</span></span><span style="display:flex;"><span>    // Current reference and mark
-</span></span><span style="display:flex;"><span>    V, boolean get();
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    // if reference == expectRef set mark to newMark and return true
-</span></span><span style="display:flex;"><span>    // otherwise do not change anything and return false.
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    boolean attemptMark(V expectRef, boolean newMark);
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    // if reference == expectRef and mark == expectMark,
-</span></span><span style="display:flex;"><span>    // set reference to newRef, mark to newMark and return true;
-</span></span><span style="display:flex;"><span>    // otherwise, do not change anything and return false.
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    boolean compareAndSet(V expectRef, V newRef, boolean expectMark, boolean newMark)
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>There are some more implementation details about our nodes, but let&rsquo;s skip that :).</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>public boolean remove(T item) {
-</span></span><span style="display:flex;"><span>    do {
-</span></span><span style="display:flex;"><span>        Node&lt;T&gt; pred, curr = find(head, item.key());
-</span></span><span style="display:flex;"><span>        if (curr.key() != item.key() || !curr.valid()) {
-</span></span><span style="display:flex;"><span>            return false;
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        if (!curr.setInvalid()) {
-</span></span><span style="display:flex;"><span>            continue;
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        pred.setNextIfValid(curr, curr.next());
-</span></span><span style="display:flex;"><span>        return true;
-</span></span><span style="display:flex;"><span>    } while (true);
-</span></span><span style="display:flex;"><span>    // changed during logical removal: try again!
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>public boolean add(T item) {
-</span></span><span style="display:flex;"><span>    do {
-</span></span><span style="display:flex;"><span>        Node&lt;T&gt; pred, curr = find(head, item.key());
-</span></span><span style="display:flex;"><span>        if (curr.key() == item.key() &amp;&amp; curr.valid()) {
-</span></span><span style="display:flex;"><span>            // already in set and valid
-</span></span><span style="display:flex;"><span>            return false;
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        Node&lt;T&gt; node = new LockFreeNode&lt;&gt;(item).setNext(curr);
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        if (pred.setNextIfValid(curr, node)) {
-</span></span><span style="display:flex;"><span>            return true;
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>    } while (true);
-</span></span><span style="display:flex;"><span>    // pred changed during add: try again!
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>public boolean has(T item) {
-</span></span><span style="display:flex;"><span>    Node&lt;T&gt; pred, curr = super.find(head, item.key());
-</span></span><span style="display:flex;"><span>    return curr.valid() &amp;&amp; curr.key() == item.key();
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>protected Node&lt;T&gt;, Node&lt;T&gt; find(Node&lt;T&gt; start, int key) {
-</span></span><span style="display:flex;"><span>    boolean valid;
-</span></span><span style="display:flex;"><span>    Node&lt;T&gt; pred, curr, succ;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    do {
-</span></span><span style="display:flex;"><span>        pred = start;
-</span></span><span style="display:flex;"><span>        curr = start.next();
-</span></span><span style="display:flex;"><span>        do {
-</span></span><span style="display:flex;"><span>            succ, valid = curr.nextValid();
-</span></span><span style="display:flex;"><span>            while (!valid) {
-</span></span><span style="display:flex;"><span>                if (!pred.setNextIfValid(curr, succ)) continue retry;
-</span></span><span style="display:flex;"><span>                curr = succ; succ, valid = curr.nextValid();
-</span></span><span style="display:flex;"><span>            }
-</span></span><span style="display:flex;"><span>        if (curr.key() &gt;= key) return (pred, curr);
-</span></span><span style="display:flex;"><span>        pred = curr; curr = succ;
-</span></span><span style="display:flex;"><span>        } while (true);
-</span></span><span style="display:flex;"><span>    } while (true);
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><ul>
+<pre tabindex="0"><code>class AtomicMarkableReference&lt;V&gt; {
+    // Current reference and mark
+    V, boolean get();
+
+    // if reference == expectRef set mark to newMark and return true
+    // otherwise do not change anything and return false.
+
+    boolean attemptMark(V expectRef, boolean newMark);
+
+    // if reference == expectRef and mark == expectMark,
+    // set reference to newRef, mark to newMark and return true;
+    // otherwise, do not change anything and return false.
+
+    boolean compareAndSet(V expectRef, V newRef, boolean expectMark, boolean newMark)
+}
+</code></pre><p>There are some more implementation details about our nodes, but let&rsquo;s skip that :).</p>
+<pre tabindex="0"><code>public boolean remove(T item) {
+    do {
+        Node&lt;T&gt; pred, curr = find(head, item.key());
+        if (curr.key() != item.key() || !curr.valid()) {
+            return false;
+        }
+
+        if (!curr.setInvalid()) {
+            continue;
+        }
+        pred.setNextIfValid(curr, curr.next());
+        return true;
+    } while (true);
+    // changed during logical removal: try again!
+}
+
+public boolean add(T item) {
+    do {
+        Node&lt;T&gt; pred, curr = find(head, item.key());
+        if (curr.key() == item.key() &amp;&amp; curr.valid()) {
+            // already in set and valid
+            return false;
+        }
+        Node&lt;T&gt; node = new LockFreeNode&lt;&gt;(item).setNext(curr);
+
+        if (pred.setNextIfValid(curr, node)) {
+            return true;
+        }
+    } while (true);
+    // pred changed during add: try again!
+}
+
+public boolean has(T item) {
+    Node&lt;T&gt; pred, curr = super.find(head, item.key());
+    return curr.valid() &amp;&amp; curr.key() == item.key();
+}
+
+protected Node&lt;T&gt;, Node&lt;T&gt; find(Node&lt;T&gt; start, int key) {
+    boolean valid;
+    Node&lt;T&gt; pred, curr, succ;
+
+    do {
+        pred = start;
+        curr = start.next();
+        do {
+            succ, valid = curr.nextValid();
+            while (!valid) {
+                if (!pred.setNextIfValid(curr, succ)) continue retry;
+                curr = succ; succ, valid = curr.nextValid();
+            }
+        if (curr.key() &gt;= key) return (pred, curr);
+        pred = curr; curr = succ;
+        } while (true);
+    } while (true);
+}
+</code></pre><ul>
 <li>
 <p>Pros:</p>
 <ul>

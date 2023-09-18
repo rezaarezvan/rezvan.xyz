@@ -28,7 +28,7 @@ In any tree there&rsquo;s always one root node."/>
         <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
 
 	
-	<link rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/main.ded288734bf67c9f89d72102879afaadf50fed4138fb485737334085f5465104.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/main.56d2207fad46e63050394b2c8df0d9e313c631c4cd55e1c1c163a8a772d9a1df.css" />
 		<link id="darkModeStyle" rel="stylesheet" type="text/css" href="https://rezvan.xyz/css/dark.b47837a877382f31178bb7a2c2135fbe9c39b1d4a1cc529faee0363b6dbdc408.css"  disabled />
 	
 
@@ -133,18 +133,18 @@ In any tree there&rsquo;s always one root node."/>
 <p>This means, child node (of the root node) $\rightarrow$ root of subtree. This also means that a tree can be empty (no nodes) - for some applications this is needed.</p>
 <h3 id="programming-with-trees">Programming with trees</h3>
 <p>Now that we have some basic knowledge about trees - let&rsquo;s try to represent them with code. A very natural representation would be a directory <strong>tree</strong>.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>class Tree:
-</span></span><span style="display:flex;"><span>    name: string
-</span></span><span style="display:flex;"><span>    size: int
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    children: list[Tree]
-</span></span></code></pre></div><p>If we now want to compute the total size of a directory (folder) we would need to:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>def total(tree: Tree) -&gt; int:
-</span></span><span style="display:flex;"><span>    n: int = tree.bytes
-</span></span><span style="display:flex;"><span>    for c in tree.children:
-</span></span><span style="display:flex;"><span>        n += total(c)
-</span></span><span style="display:flex;"><span>    return n
-</span></span></code></pre></div><p>And we can see that recursion and trees go hand in hand. Now let&rsquo;s see how we can traverse the tree.</p>
+<pre tabindex="0"><code>class Tree:
+    name: string
+    size: int
+
+    children: list[Tree]
+</code></pre><p>If we now want to compute the total size of a directory (folder) we would need to:</p>
+<pre tabindex="0"><code>def total(tree: Tree) -&gt; int:
+    n: int = tree.bytes
+    for c in tree.children:
+        n += total(c)
+    return n
+</code></pre><p>And we can see that recursion and trees go hand in hand. Now let&rsquo;s see how we can traverse the tree.</p>
 <p>There are main methods for traversing - <strong>Pre-order</strong> traversal - meaning you process each node <strong>before</strong> visiting its children.
 As well as <strong>Post-order</strong> traversal - meaning you process each node <strong>after</strong> visiting its children.</p>
 <h3 id="binary-trees">Binary Trees</h3>
@@ -169,97 +169,97 @@ Size is the number of nodes in the (sub)tree - height, is the number of <code>le
 <p>With these rules searching becomes really, really effective and natural. We just compare our key to each node&rsquo;s key and see if we traverse to the right or left.</p>
 <p>If we ever hit a &rsquo;null&rsquo; node, we can also say that the key we&rsquo;re searching for doesn&rsquo;t exist in this key.</p>
 <p>So let us implement a map using BSTs!</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>class BSTMap[Key, Value]:
-</span></span><span style="display:flex;"><span>    class Node:
-</span></span><span style="display:flex;"><span>        key: Key
-</span></span><span style="display:flex;"><span>        value: Value
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        left, right: Node
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    root: Node
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>def get(key: Key) -&gt; Value:
-</span></span><span style="display:flex;"><span>    return get(key, root)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>def put(key : Key, val : Value):
-</span></span><span style="display:flex;"><span>    root = put(key, val, root)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>def get(key, node) -&gt; Value:
-</span></span><span style="display:flex;"><span>    if node is None
-</span></span><span style="display:flex;"><span>        return None
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    if key &lt; node.key
-</span></span><span style="display:flex;"><span>        return get(key, node.left)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    if key &gt; node.key
-</span></span><span style="display:flex;"><span>        return get(key, node.right)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    else:
-</span></span><span style="display:flex;"><span>        return node.value
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>def put(key, val, node):
-</span></span><span style="display:flex;"><span>    if node is None
-</span></span><span style="display:flex;"><span>        return Node(key = key, value = val, left = None, right = None)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    elif key &lt; node.key:
-</span></span><span style="display:flex;"><span>        node.left = put(key, value, node.left)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    elif key &gt; node.key:
-</span></span><span style="display:flex;"><span>        node.right = put(key, value, node.right)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    else:
-</span></span><span style="display:flex;"><span>        node.value = value
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    return node
-</span></span></code></pre></div><h3 id="fin-maxmin-value-in-bst">Fin max/min value in BST</h3>
+<pre tabindex="0"><code>class BSTMap[Key, Value]:
+    class Node:
+        key: Key
+        value: Value
+
+        left, right: Node
+
+    root: Node
+
+def get(key: Key) -&gt; Value:
+    return get(key, root)
+
+def put(key : Key, val : Value):
+    root = put(key, val, root)
+
+def get(key, node) -&gt; Value:
+    if node is None
+        return None
+
+    if key &lt; node.key
+        return get(key, node.left)
+
+    if key &gt; node.key
+        return get(key, node.right)
+
+    else:
+        return node.value
+
+def put(key, val, node):
+    if node is None
+        return Node(key = key, value = val, left = None, right = None)
+
+    elif key &lt; node.key:
+        node.left = put(key, value, node.left)
+
+    elif key &gt; node.key:
+        node.right = put(key, value, node.right)
+
+    else:
+        node.value = value
+
+    return node
+</code></pre><h3 id="fin-maxmin-value-in-bst">Fin max/min value in BST</h3>
 <p>To find the max/min value in BST we just repeatedly go right/left until we hit a null node. Real simple!</p>
 <p>Or in code:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>def get_max(tree: BST):
-</span></span><span style="display:flex;"><span>    c_node = tree.root
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    while c_node != None:
-</span></span><span style="display:flex;"><span>        c_node = c_node.right
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    return c_node.value
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>def get_min(tree: BST):
-</span></span><span style="display:flex;"><span>    c_node = tree.root
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    while c_node != None:
-</span></span><span style="display:flex;"><span>        c_node = c_node.left
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    return c_node.value
-</span></span></code></pre></div><h3 id="sorting-a-bst">Sorting a BST</h3>
+<pre tabindex="0"><code>
+def get_max(tree: BST):
+    c_node = tree.root
+
+    while c_node != None:
+        c_node = c_node.right
+
+    return c_node.value
+
+def get_min(tree: BST):
+    c_node = tree.root
+
+    while c_node != None:
+        c_node = c_node.left
+
+    return c_node.value
+</code></pre><h3 id="sorting-a-bst">Sorting a BST</h3>
 <p>Sometimes we might want to print/store a BST in ascending order - the way to do this of course is via recursion!</p>
 <p>This is also known as <em>inorder</em> traversal - we print the left subtree, print the root then print the right subtree - we do this recursively.</p>
 <p>So for example:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>def print_sorted(node: Node):
-</span></span><span style="display:flex;"><span>    if node is None:
-</span></span><span style="display:flex;"><span>        return
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    print_sorted(node.left)
-</span></span><span style="display:flex;"><span>    print(node.key)
-</span></span><span style="display:flex;"><span>    print_sorted(node.right)
-</span></span></code></pre></div><p>We can also do a more general case - we make an <em>iterator</em> for the keys in the tree - by doing an inorder traversal and store the keys in a dynamic array.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>def keys() -&gt; list[Key]
-</span></span><span style="display:flex;"><span>    list = []
-</span></span><span style="display:flex;"><span>    inorder(root, list)
-</span></span><span style="display:flex;"><span>    return list
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>def inorder(node: Node, list: list[Key]):
-</span></span><span style="display:flex;"><span>    if node is None:
-</span></span><span style="display:flex;"><span>        return
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    inorder(node.left, list)
-</span></span><span style="display:flex;"><span>    list.add(node.key)
-</span></span><span style="display:flex;"><span>    inorder(node.right, list)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>...
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>for key in BST.keys():
-</span></span><span style="display:flex;"><span>    print(key)
-</span></span></code></pre></div><h3 id="deletion">Deletion</h3>
+<pre tabindex="0"><code>def print_sorted(node: Node):
+    if node is None:
+        return
+
+    print_sorted(node.left)
+    print(node.key)
+    print_sorted(node.right)
+</code></pre><p>We can also do a more general case - we make an <em>iterator</em> for the keys in the tree - by doing an inorder traversal and store the keys in a dynamic array.</p>
+<pre tabindex="0"><code>def keys() -&gt; list[Key]
+    list = []
+    inorder(root, list)
+    return list
+
+def inorder(node: Node, list: list[Key]):
+    if node is None:
+        return
+
+    inorder(node.left, list)
+    list.add(node.key)
+    inorder(node.right, list)
+
+...
+
+for key in BST.keys():
+    print(key)
+</code></pre><h3 id="deletion">Deletion</h3>
 <p>Deletion can be quite tricky in trees, and especially in BSTs - we can&rsquo;t just remove a node however, there are some rules.</p>
 <h4 id="deleting-a-leaf">Deleting a leaf</h4>
 <p>A so called leaf is a node with no children (or visually the leafs are the bottom nodes). These are fine to remove without any corrections.</p>
@@ -275,35 +275,35 @@ everything to the left should be smaller and everything to the right must be gre
 What we need to do in that case is: We first delete the parent node by replacing it with its child - after we have done this we can delete the node we wanted to delete with our old (deleted) parent node.</p>
 <p>So, not that hard logically - but can be a pain to implement correctly.</p>
 <p>So let&rsquo;s now do exactly that :)!</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>def delete(node: Node, key : Key):
-</span></span><span style="display:flex;"><span>	if node is None:
-</span></span><span style="display:flex;"><span>		return node
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>	if key &lt; node.key:
-</span></span><span style="display:flex;"><span>		node.left = delete(node.left, key)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>	elif(key &gt; node.key):
-</span></span><span style="display:flex;"><span>		node.right = delete(node.right, key)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>	else:
-</span></span><span style="display:flex;"><span>		if node.left is None:
-</span></span><span style="display:flex;"><span>			temp = node.right
-</span></span><span style="display:flex;"><span>			node = None
-</span></span><span style="display:flex;"><span>			return temp
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>		elif node.right is None:
-</span></span><span style="display:flex;"><span>			temp = node.left
-</span></span><span style="display:flex;"><span>			node = None
-</span></span><span style="display:flex;"><span>			return temp
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>		temp = get_max(node.left)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>		node.key = temp.key
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>		node.right = delete(node.right, temp.key)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>	return node
-</span></span></code></pre></div><h3 id="complexity">Complexity</h3>
+<pre tabindex="0"><code>def delete(node: Node, key : Key):
+	if node is None:
+		return node
+
+	if key &lt; node.key:
+		node.left = delete(node.left, key)
+
+	elif(key &gt; node.key):
+		node.right = delete(node.right, key)
+
+	else:
+		if node.left is None:
+			temp = node.right
+			node = None
+			return temp
+
+		elif node.right is None:
+			temp = node.left
+			node = None
+			return temp
+
+		temp = get_max(node.left)
+
+		node.key = temp.key
+
+		node.right = delete(node.right, temp.key)
+
+	return node
+</code></pre><h3 id="complexity">Complexity</h3>
 <p>The complexity of operations for BST are in the best case and average case, $\mathcal{O}(log\ n)$ which is great.
 In the worst case however, these operations will take $\mathcal{O}(n)$ since the items are in ascending order.</p>
 <h3 id="bst-summary">BST Summary</h3>
@@ -404,127 +404,127 @@ In the case of splitting, we may break the black balance which means we need to 
 <h4 id="case-3-red-root-node">Case 3: Red Root Node</h4>
 <p>After a split, we might end up with a red node as the <em>root</em> of the whole tree. In a case like this, the fix is simple, we just make the root a black node instead!</p>
 <h3 id="red-black-tree-implementation">Red-black Tree Implementation</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>class RBNode:
-</span></span><span style="display:flex;"><span>    def __init__(self, val):
-</span></span><span style="display:flex;"><span>        self.red = False
-</span></span><span style="display:flex;"><span>        self.parent = None
-</span></span><span style="display:flex;"><span>        self.val = val
-</span></span><span style="display:flex;"><span>        self.left = None
-</span></span><span style="display:flex;"><span>        self.right = None
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>class RBTree:
-</span></span><span style="display:flex;"><span>    def __init__(self):
-</span></span><span style="display:flex;"><span>        self.nil = RBNode(0)
-</span></span><span style="display:flex;"><span>        self.nil.red = False
-</span></span><span style="display:flex;"><span>        self.nil.left = None
-</span></span><span style="display:flex;"><span>        self.nil.right = None
-</span></span><span style="display:flex;"><span>        self.root = self.nil
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>def insert(self, val):
-</span></span><span style="display:flex;"><span>    new_node = RBNode(val)
-</span></span><span style="display:flex;"><span>    new_node.parent = None
-</span></span><span style="display:flex;"><span>    new_node.left = self.nil
-</span></span><span style="display:flex;"><span>    new_node.right = self.nil
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    # New node must be red
-</span></span><span style="display:flex;"><span>    new_node.red = True
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    parent = None
-</span></span><span style="display:flex;"><span>    current = self.root
-</span></span><span style="display:flex;"><span>    while current != self.nil:
-</span></span><span style="display:flex;"><span>        parent = current
-</span></span><span style="display:flex;"><span>        if new_node.val &lt; current.val:
-</span></span><span style="display:flex;"><span>            current = current.left
-</span></span><span style="display:flex;"><span>        elif new_node.val &gt; current.val:
-</span></span><span style="display:flex;"><span>            current = current.right
-</span></span><span style="display:flex;"><span>        else:
-</span></span><span style="display:flex;"><span>            return
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    new_node.parent = parent
-</span></span><span style="display:flex;"><span>    if parent == None:
-</span></span><span style="display:flex;"><span>        self.root = new_node
-</span></span><span style="display:flex;"><span>    elif new_node.val &lt; parent.val:
-</span></span><span style="display:flex;"><span>        parent.left = new_node
-</span></span><span style="display:flex;"><span>    else:
-</span></span><span style="display:flex;"><span>        parent.right = new_node
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    self.fix_insert(new_node)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>def rotate_left(self, x):
-</span></span><span style="display:flex;"><span>    y = x.right
-</span></span><span style="display:flex;"><span>    x.right = y.left
-</span></span><span style="display:flex;"><span>    if y.left != self.nil:
-</span></span><span style="display:flex;"><span>        y.left.parent = x
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    y.parent = x.parent
-</span></span><span style="display:flex;"><span>    if x.parent == None:
-</span></span><span style="display:flex;"><span>        self.root = y
-</span></span><span style="display:flex;"><span>    elif x == x.parent.left:
-</span></span><span style="display:flex;"><span>        x.parent.left = y
-</span></span><span style="display:flex;"><span>    else:
-</span></span><span style="display:flex;"><span>        x.parent.right = y
-</span></span><span style="display:flex;"><span>    y.left = x
-</span></span><span style="display:flex;"><span>    x.parent = y
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>def rotate_right(self, x):
-</span></span><span style="display:flex;"><span>    y = x.left
-</span></span><span style="display:flex;"><span>    x.left = y.right
-</span></span><span style="display:flex;"><span>    if y.right != self.nil:
-</span></span><span style="display:flex;"><span>        y.right.parent = x
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    y.parent = x.parent
-</span></span><span style="display:flex;"><span>    if x.parent == None:
-</span></span><span style="display:flex;"><span>        self.root = y
-</span></span><span style="display:flex;"><span>    elif x == x.parent.right:
-</span></span><span style="display:flex;"><span>        x.parent.right = y
-</span></span><span style="display:flex;"><span>    else:
-</span></span><span style="display:flex;"><span>        x.parent.left = y
-</span></span><span style="display:flex;"><span>    y.right = x
-</span></span><span style="display:flex;"><span>    x.parent = y
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>def fix_insert(self, new_node):
-</span></span><span style="display:flex;"><span>    while new_node != self.root and new_node.parent.red:
-</span></span><span style="display:flex;"><span>        if new_node.parent == new_node.parent.parent.right:
-</span></span><span style="display:flex;"><span>            u = new_node.parent.parent.left  # uncle
-</span></span><span style="display:flex;"><span>            if u.red:
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>                u.red = False
-</span></span><span style="display:flex;"><span>                new_node.parent.red = False
-</span></span><span style="display:flex;"><span>                new_node.parent.parent.red = True
-</span></span><span style="display:flex;"><span>                new_node = new_node.parent.parent
-</span></span><span style="display:flex;"><span>            else:
-</span></span><span style="display:flex;"><span>                if new_node == new_node.parent.left:
-</span></span><span style="display:flex;"><span>                    new_node = new_node.parent
-</span></span><span style="display:flex;"><span>                    self.rotate_right(new_node)
-</span></span><span style="display:flex;"><span>                new_node.parent.red = False
-</span></span><span style="display:flex;"><span>                new_node.parent.parent.red = True
-</span></span><span style="display:flex;"><span>                self.rotate_left(new_node.parent.parent)
-</span></span><span style="display:flex;"><span>        else:
-</span></span><span style="display:flex;"><span>            u = new_node.parent.parent.right  # uncle
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>            if u.red:
-</span></span><span style="display:flex;"><span>                u.red = False
-</span></span><span style="display:flex;"><span>                new_node.parent.red = False
-</span></span><span style="display:flex;"><span>                new_node.parent.parent.red = True
-</span></span><span style="display:flex;"><span>                new_node = new_node.parent.parent
-</span></span><span style="display:flex;"><span>            else:
-</span></span><span style="display:flex;"><span>                if new_node == new_node.parent.right:
-</span></span><span style="display:flex;"><span>                    new_node = new_node.parent
-</span></span><span style="display:flex;"><span>                    self.rotate_left(new_node)
-</span></span><span style="display:flex;"><span>                new_node.parent.red = False
-</span></span><span style="display:flex;"><span>                new_node.parent.parent.red = True
-</span></span><span style="display:flex;"><span>                self.rotate_right(new_node.parent.parent)
-</span></span><span style="display:flex;"><span>    self.root.red = False
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>def exists(self, val):
-</span></span><span style="display:flex;"><span>    curr = self.root
-</span></span><span style="display:flex;"><span>    while curr != self.nil and val != curr.val:
-</span></span><span style="display:flex;"><span>        if val &lt; curr.val:
-</span></span><span style="display:flex;"><span>            curr = curr.left
-</span></span><span style="display:flex;"><span>        else:
-</span></span><span style="display:flex;"><span>            curr = curr.right
-</span></span><span style="display:flex;"><span>    return curr
-</span></span></code></pre></div><h3 id="red-black-tree-summary">Red-black Tree Summary</h3>
+<pre tabindex="0"><code>class RBNode:
+    def __init__(self, val):
+        self.red = False
+        self.parent = None
+        self.val = val
+        self.left = None
+        self.right = None
+
+class RBTree:
+    def __init__(self):
+        self.nil = RBNode(0)
+        self.nil.red = False
+        self.nil.left = None
+        self.nil.right = None
+        self.root = self.nil
+
+def insert(self, val):
+    new_node = RBNode(val)
+    new_node.parent = None
+    new_node.left = self.nil
+    new_node.right = self.nil
+
+    # New node must be red
+    new_node.red = True
+
+    parent = None
+    current = self.root
+    while current != self.nil:
+        parent = current
+        if new_node.val &lt; current.val:
+            current = current.left
+        elif new_node.val &gt; current.val:
+            current = current.right
+        else:
+            return
+
+    new_node.parent = parent
+    if parent == None:
+        self.root = new_node
+    elif new_node.val &lt; parent.val:
+        parent.left = new_node
+    else:
+        parent.right = new_node
+
+    self.fix_insert(new_node)
+
+def rotate_left(self, x):
+    y = x.right
+    x.right = y.left
+    if y.left != self.nil:
+        y.left.parent = x
+
+    y.parent = x.parent
+    if x.parent == None:
+        self.root = y
+    elif x == x.parent.left:
+        x.parent.left = y
+    else:
+        x.parent.right = y
+    y.left = x
+    x.parent = y
+
+def rotate_right(self, x):
+    y = x.left
+    x.left = y.right
+    if y.right != self.nil:
+        y.right.parent = x
+
+    y.parent = x.parent
+    if x.parent == None:
+        self.root = y
+    elif x == x.parent.right:
+        x.parent.right = y
+    else:
+        x.parent.left = y
+    y.right = x
+    x.parent = y
+
+def fix_insert(self, new_node):
+    while new_node != self.root and new_node.parent.red:
+        if new_node.parent == new_node.parent.parent.right:
+            u = new_node.parent.parent.left  # uncle
+            if u.red:
+
+                u.red = False
+                new_node.parent.red = False
+                new_node.parent.parent.red = True
+                new_node = new_node.parent.parent
+            else:
+                if new_node == new_node.parent.left:
+                    new_node = new_node.parent
+                    self.rotate_right(new_node)
+                new_node.parent.red = False
+                new_node.parent.parent.red = True
+                self.rotate_left(new_node.parent.parent)
+        else:
+            u = new_node.parent.parent.right  # uncle
+
+            if u.red:
+                u.red = False
+                new_node.parent.red = False
+                new_node.parent.parent.red = True
+                new_node = new_node.parent.parent
+            else:
+                if new_node == new_node.parent.right:
+                    new_node = new_node.parent
+                    self.rotate_left(new_node)
+                new_node.parent.red = False
+                new_node.parent.parent.red = True
+                self.rotate_right(new_node.parent.parent)
+    self.root.red = False
+
+def exists(self, val):
+    curr = self.root
+    while curr != self.nil and val != curr.val:
+        if val &lt; curr.val:
+            curr = curr.left
+        else:
+            curr = curr.right
+    return curr
+</code></pre><h3 id="red-black-tree-summary">Red-black Tree Summary</h3>
 <p>Red-black trees are 2-3 trees implemented using a BST - they have the invariant that they have to correspond to a perfectly balanced 2-3 tree.</p>
 <p>Update strategy is: Insert in a way that break the rules on red nodes, then fix it.</p>
 <p>They have logarithmic performance - worst case they height is $2\ log(n)$</p>

@@ -31,7 +31,7 @@ Each philosopher alternates between thinking (non-critical section) and eating (
         <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
 
 	
-	<link rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/main.ded288734bf67c9f89d72102879afaadf50fed4138fb485737334085f5465104.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/main.56d2207fad46e63050394b2c8df0d9e313c631c4cd55e1c1c163a8a772d9a1df.css" />
 		<link id="darkModeStyle" rel="stylesheet" type="text/css" href="https://rezvan.xyz/css/dark.b47837a877382f31178bb7a2c2135fbe9c39b1d4a1cc529faee0363b6dbdc408.css"  disabled />
 	
 
@@ -137,99 +137,99 @@ In order to eat, a philosopher needs to pick up both forks that lie to the right
 </li>
 </ul>
 <p>Let&rsquo;s create an interface for the table.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>interface Table {
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    // Philosopher at idx picks up both forks
-</span></span><span style="display:flex;"><span>    void getForks(int idx);
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    // Philosopher at idx lies down both forks
-</span></span><span style="display:flex;"><span>    void putForks(int k);
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>Let&rsquo;s also represent each philosopher</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>class Philosopher {
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    int idx;
-</span></span><span style="display:flex;"><span>    Table table;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    void think() {
-</span></span><span style="display:flex;"><span>        .
-</span></span><span style="display:flex;"><span>        .
-</span></span><span style="display:flex;"><span>        .
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    void eat() {
-</span></span><span style="display:flex;"><span>        .
-</span></span><span style="display:flex;"><span>        .
-</span></span><span style="display:flex;"><span>        .
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    void run() {
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        while(true) {
-</span></span><span style="display:flex;"><span>            think();
-</span></span><span style="display:flex;"><span>            table.getForks();
-</span></span><span style="display:flex;"><span>            eat();
-</span></span><span style="display:flex;"><span>            table.putForks();
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>One possible solution is to number each fork and philosopher. That we can easily know what is right and left of each philosopher.</p>
+<pre tabindex="0"><code>interface Table {
+
+    // Philosopher at idx picks up both forks
+    void getForks(int idx);
+
+    // Philosopher at idx lies down both forks
+    void putForks(int k);
+
+}
+</code></pre><p>Let&rsquo;s also represent each philosopher</p>
+<pre tabindex="0"><code>class Philosopher {
+
+    int idx;
+    Table table;
+
+    void think() {
+        .
+        .
+        .
+    }
+
+    void eat() {
+        .
+        .
+        .
+    }
+
+    void run() {
+
+        while(true) {
+            think();
+            table.getForks();
+            eat();
+            table.putForks();
+        }
+
+    }
+
+}
+</code></pre><p>One possible solution is to number each fork and philosopher. That we can easily know what is right and left of each philosopher.</p>
 <p>For example:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>public int left(int k) {
-</span></span><span style="display:flex;"><span>    return k;
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>public int right(int k) {
-</span></span><span style="display:flex;"><span>    return (k + 1) % N;
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>To ensure mutual exclusion of the forks we can use semaphores.</p>
+<pre tabindex="0"><code>public int left(int k) {
+    return k;
+}
+
+public int right(int k) {
+    return (k + 1) % N;
+}
+</code></pre><p>To ensure mutual exclusion of the forks we can use semaphores.</p>
 <p>We can even begin with using simple locks:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>Lock[] forks = new Lock[N];
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>// To pick up fork i we do
-</span></span><span style="display:flex;"><span>forks[i].lock();
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>// To put down fork i we do
-</span></span><span style="display:flex;"><span>forks[i].unlock();
-</span></span></code></pre></div><p>If we now implement a solution which makes all philosophers take up the left fork then the right fork.</p>
+<pre tabindex="0"><code>Lock[] forks = new Lock[N];
+
+// To pick up fork i we do
+forks[i].lock();
+
+// To put down fork i we do
+forks[i].unlock();
+</code></pre><p>If we now implement a solution which makes all philosophers take up the left fork then the right fork.</p>
 <p>We have a potential for deadlock, since if everyone picks up their left fork first. We have a circular waiting condition.</p>
 <p>Instead, we implement a solution which ensures one philosopher picks up their right fork first, then left.
 By breaking the symmetry we break the deadlock.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>public void getForks(int k) {
-</span></span><span style="display:flex;"><span>    if (k == N) {
-</span></span><span style="display:flex;"><span>        forks[right(k)].lock();
-</span></span><span style="display:flex;"><span>        forks[left(k)].lock();
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    else {
-</span></span><span style="display:flex;"><span>        forks[left(k)].lock();
-</span></span><span style="display:flex;"><span>        forks[right(k)].lock();
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>Another strategy could be limiting the amount of philosophers that can sit at a table. If we pick <code>M &lt; N</code>, we also ensure deadlock freedom.</p>
+<pre tabindex="0"><code>public void getForks(int k) {
+    if (k == N) {
+        forks[right(k)].lock();
+        forks[left(k)].lock();
+    }
+
+    else {
+        forks[left(k)].lock();
+        forks[right(k)].lock();
+    }
+}
+</code></pre><p>Another strategy could be limiting the amount of philosophers that can sit at a table. If we pick <code>M &lt; N</code>, we also ensure deadlock freedom.</p>
 <p>We make each seat a semaphores like:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>// M &lt; N
-</span></span><span style="display:flex;"><span>Semaphore seats = new Semaphore(M);
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>public void getForks(int k) {
-</span></span><span style="display:flex;"><span>    seats.down()
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    forks[left(k)].lock();
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    forks[right(k)].lock();
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>public void putForks(int k) {
-</span></span><span style="display:flex;"><span>    forks[left(k)].lock();
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    forks[right(k)].lock();
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    seats.down()
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>One thing that might not be obvious at first glance is that these solutions also ensure starvation freedom.
+<pre tabindex="0"><code>// M &lt; N
+Semaphore seats = new Semaphore(M);
+
+public void getForks(int k) {
+    seats.down()
+
+    forks[left(k)].lock();
+
+    forks[right(k)].lock();
+}
+
+public void putForks(int k) {
+    forks[left(k)].lock();
+
+    forks[right(k)].lock();
+
+    seats.down()
+}
+</code></pre><p>One thing that might not be obvious at first glance is that these solutions also ensure starvation freedom.
 This is under the assumption that the locks/semaphores (and scheduling) are fair.</p>
 <h3 id="producer-consumer">Producer-Consumer</h3>
 <p>Producers and consumers exchange items through a so called shared (asynchronous) buffer.</p>
@@ -246,18 +246,18 @@ This is under the assumption that the locks/semaphores (and scheduling) are fair
 <p>Producers are blocked when the buffer is full (can&rsquo;t overproduce)</p>
 </li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>interface Buffer&lt;T&gt; {
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    // Add item onto buffer; If full block
-</span></span><span style="display:flex;"><span>    void put(T item);
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    // Extract item from buffer; If empty do nothing
-</span></span><span style="display:flex;"><span>    T get();
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    // Get current number of items in buffer
-</span></span><span style="display:flex;"><span>    int count();
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>Other properties that we would like:</p>
+<pre tabindex="0"><code>interface Buffer&lt;T&gt; {
+
+    // Add item onto buffer; If full block
+    void put(T item);
+
+    // Extract item from buffer; If empty do nothing
+    T get();
+
+    // Get current number of items in buffer
+    int count();
+}
+</code></pre><p>Other properties that we would like:</p>
 <ul>
 <li>
 <p>Support an arbitrary number of producers and consumers</p>
@@ -271,62 +271,62 @@ This is under the assumption that the locks/semaphores (and scheduling) are fair
 </ul>
 <h3 id="unbounded-shared-buffer">Unbounded shared buffer</h3>
 <p>One possible solution is using one lock and one semaphore:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>public class UnboundedBuffer&lt;T&gt; implements Buffer&lt;T&gt; {
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    // Any collection (list, set, ...)
-</span></span><span style="display:flex;"><span>    Collection storage = ...;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    // For exclusive access to buffer
-</span></span><span style="display:flex;"><span>    Lock lock = new Lock();
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    // Number of items in buffer
-</span></span><span style="display:flex;"><span>    Semaphore nItems = new Semaphore(0);
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    invariant {
-</span></span><span style="display:flex;"><span>        storage.count() == nItems.count() +
-</span></span><span style="display:flex;"><span>        at(nItems.up() in put,  lock.lock and T item = storage.remove() in get);
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    public void put(T item) {
-</span></span><span style="display:flex;"><span>        // Lock to gain access to buffer
-</span></span><span style="display:flex;"><span>        lock.lock();
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        /* Critical Section */
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        storage.add(item);
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        // update nItems
-</span></span><span style="display:flex;"><span>        nItems.up();
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        /* End of Critical Section */
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        // Release access to buffer to others
-</span></span><span style="display:flex;"><span>        lock.unlock();
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    public T get() {
-</span></span><span style="display:flex;"><span>        // Wait until there is items on the buffer
-</span></span><span style="display:flex;"><span>        nItems.down();
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        lock.lock();
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        /* Critical Section */
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        // Retrieve item
-</span></span><span style="display:flex;"><span>        T item =storage.remove();
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        /* End of Critical Section */
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        lock.unlock();
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        return item;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    public int count() {
-</span></span><span style="display:flex;"><span>        return nItems.count();
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>This solution ensures that all requirements are met. There are some LOC that you can swap around.</p>
+<pre tabindex="0"><code>public class UnboundedBuffer&lt;T&gt; implements Buffer&lt;T&gt; {
+
+    // Any collection (list, set, ...)
+    Collection storage = ...;
+
+    // For exclusive access to buffer
+    Lock lock = new Lock();
+
+    // Number of items in buffer
+    Semaphore nItems = new Semaphore(0);
+
+    invariant {
+        storage.count() == nItems.count() +
+        at(nItems.up() in put,  lock.lock and T item = storage.remove() in get);
+    }
+
+    public void put(T item) {
+        // Lock to gain access to buffer
+        lock.lock();
+
+        /* Critical Section */
+
+        storage.add(item);
+
+        // update nItems
+        nItems.up();
+
+        /* End of Critical Section */
+
+        // Release access to buffer to others
+        lock.unlock();
+    }
+
+    public T get() {
+        // Wait until there is items on the buffer
+        nItems.down();
+
+        lock.lock();
+
+        /* Critical Section */
+
+        // Retrieve item
+        T item =storage.remove();
+
+        /* End of Critical Section */
+
+        lock.unlock();
+
+        return item;
+    }
+
+    public int count() {
+        return nItems.count();
+    }
+}
+</code></pre><p>This solution ensures that all requirements are met. There are some LOC that you can swap around.</p>
 <p>But this will do. We can write a solution that is a so-called, bounded shared buffer, that uses two semaphores.</p>
 <p>One for keeping track of how many items there are in buffer. The other to know how many slots are <strong>left</strong>.</p>
 <p>It&rsquo;s essentially the same code.</p>
@@ -334,199 +334,199 @@ This is under the assumption that the locks/semaphores (and scheduling) are fair
 <p>A barrier in a concurrent program, is a form of synchronization where there is a point in a program&rsquo;s execution,
 where all threads in a group, need to reach <em>before</em> any of them are allowed to continue.</p>
 <p>A simple example is when we only have 2 threads. We use two binary semaphores:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>Semaphore[] done = {new Semaphore(0), new Semaphore(0)};
-</span></span></code></pre></div><p>$t_0$&rsquo;s code:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>// Indicate that t0 is done
-</span></span><span style="display:flex;"><span>done[t0].up();
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>// Wait until t1 is done
-</span></span><span style="display:flex;"><span>done[t1].down();
-</span></span></code></pre></div><p>$t_1$&rsquo;s code:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>// Indicate that t1 is done
-</span></span><span style="display:flex;"><span>done[t1].up();
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>// Wait until t0 is done
-</span></span><span style="display:flex;"><span>done[t0].down();
-</span></span></code></pre></div><p>We could also do:</p>
+<pre tabindex="0"><code>Semaphore[] done = {new Semaphore(0), new Semaphore(0)};
+</code></pre><p>$t_0$&rsquo;s code:</p>
+<pre tabindex="0"><code>// Indicate that t0 is done
+done[t0].up();
+
+// Wait until t1 is done
+done[t1].down();
+</code></pre><p>$t_1$&rsquo;s code:</p>
+<pre tabindex="0"><code>// Indicate that t1 is done
+done[t1].up();
+
+// Wait until t0 is done
+done[t0].down();
+</code></pre><p>We could also do:</p>
 <p>$t_0$&rsquo;s code:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>// Wait until t1 is done
-</span></span><span style="display:flex;"><span>done[t1].down();
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>// Indicate that t0 is done
-</span></span><span style="display:flex;"><span>done[t0].up();
-</span></span></code></pre></div><p>$t_1$&rsquo;s code:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>// Indicate that t1 is done
-</span></span><span style="display:flex;"><span>done[t1].up();
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>// Wait until t0 is done
-</span></span><span style="display:flex;"><span>done[t0].down();
-</span></span></code></pre></div><p>This works if $t_0$ does <code>down</code> before <code>up</code>, or symmetrically, if $t_1$ does the same.</p>
+<pre tabindex="0"><code>// Wait until t1 is done
+done[t1].down();
+
+// Indicate that t0 is done
+done[t0].up();
+</code></pre><p>$t_1$&rsquo;s code:</p>
+<pre tabindex="0"><code>// Indicate that t1 is done
+done[t1].up();
+
+// Wait until t0 is done
+done[t0].down();
+</code></pre><p>This works if $t_0$ does <code>down</code> before <code>up</code>, or symmetrically, if $t_1$ does the same.</p>
 <p>This is however, less efficient, since, the last thread to reach the barrier has to yield for the other.</p>
 <p>One thing that might not be obvious but, if we do:</p>
 <p>$t_0$&rsquo;s code:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>// Wait until t1 is done
-</span></span><span style="display:flex;"><span>done[t1].down();
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>// Indicate that t0 is done
-</span></span><span style="display:flex;"><span>done[t0].up();
-</span></span></code></pre></div><p>$t_1$&rsquo;s code:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>// Wait until t0 is done
-</span></span><span style="display:flex;"><span>done[t0].down();
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>// Indicate that t1 is done
-</span></span><span style="display:flex;"><span>done[t1].up();
-</span></span></code></pre></div><p>We will have a deadlock if $t_0$ and $t_1$ both perform <code>down</code> before any <code>up</code> calls.</p>
+<pre tabindex="0"><code>// Wait until t1 is done
+done[t1].down();
+
+// Indicate that t0 is done
+done[t0].up();
+</code></pre><p>$t_1$&rsquo;s code:</p>
+<pre tabindex="0"><code>// Wait until t0 is done
+done[t0].down();
+
+// Indicate that t1 is done
+done[t1].up();
+</code></pre><p>We will have a deadlock if $t_0$ and $t_1$ both perform <code>down</code> before any <code>up</code> calls.</p>
 <p>Let&rsquo;s try to create a reusable, general barrier</p>
 <h3 id="reusable-barriers">Reusable Barriers</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>interface Barrier {
-</span></span><span style="display:flex;"><span>    // Block until expect() threads have reached barrier
-</span></span><span style="display:flex;"><span>    void wait();
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    // Number of threads expected at the barrier
-</span></span><span style="display:flex;"><span>    int expect();
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>Let&rsquo;s try a naive approach and see what happens:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>public class NonBarrier1 implements Barrier {
-</span></span><span style="display:flex;"><span>    int nDone = 0; // number of done threads
-</span></span><span style="display:flex;"><span>    Semaphore open = new Semaphore(0);
-</span></span><span style="display:flex;"><span>    final int n;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    // initialize barrier for `n&#39; threads
-</span></span><span style="display:flex;"><span>    NonBarrier1(int n) {
-</span></span><span style="display:flex;"><span>        this.n = n;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    // number of threads expected at the barrier
-</span></span><span style="display:flex;"><span>    int expect() {
-</span></span><span style="display:flex;"><span>        return n;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    public void wait() {
-</span></span><span style="display:flex;"><span>        synchronized(this) {
-</span></span><span style="display:flex;"><span>            nDone += 1;
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        if (nDone == n) {
-</span></span><span style="display:flex;"><span>            // I&#39;m the last arrived: All can go!
-</span></span><span style="display:flex;"><span>            open.up();
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        // Proceed when possible
-</span></span><span style="display:flex;"><span>        open.down()
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        // Let the next one go
-</span></span><span style="display:flex;"><span>        open.up()
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        synchronized(this) {
-</span></span><span style="display:flex;"><span>            nDone -= 1;
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        if (nDone == 0) {
-</span></span><span style="display:flex;"><span>            // I&#39;m the last through: Close barrier!
-</span></span><span style="display:flex;"><span>            open.down();
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>This solution doesn&rsquo;t work perfectly though. If the n threads wait at <code>if(nDone == 0)</code>
+<pre tabindex="0"><code>interface Barrier {
+    // Block until expect() threads have reached barrier
+    void wait();
+
+    // Number of threads expected at the barrier
+    int expect();
+}
+</code></pre><p>Let&rsquo;s try a naive approach and see what happens:</p>
+<pre tabindex="0"><code>public class NonBarrier1 implements Barrier {
+    int nDone = 0; // number of done threads
+    Semaphore open = new Semaphore(0);
+    final int n;
+
+    // initialize barrier for `n&#39; threads
+    NonBarrier1(int n) {
+        this.n = n;
+    }
+
+    // number of threads expected at the barrier
+    int expect() {
+        return n;
+    }
+
+    public void wait() {
+        synchronized(this) {
+            nDone += 1;
+        }
+
+        if (nDone == n) {
+            // I&#39;m the last arrived: All can go!
+            open.up();
+        }
+
+        // Proceed when possible
+        open.down()
+
+        // Let the next one go
+        open.up()
+
+        synchronized(this) {
+            nDone -= 1;
+        }
+
+        if (nDone == 0) {
+            // I&#39;m the last through: Close barrier!
+            open.down();
+        }
+    }
+}
+</code></pre><p>This solution doesn&rsquo;t work perfectly though. If the n threads wait at <code>if(nDone == 0)</code>
 then more than one thread may try to close the barrier, which results in a deadlock.</p>
 <p>The same goes for opening the barrier, if more than one thread tries to open the barrier,
 it&rsquo;s possible that some threads may be executing <code>wait</code> again before the barrier is closed again.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>public class NonBarrier2 implements Barrier {
-</span></span><span style="display:flex;"><span>    int nDone = 0; // number of done threads
-</span></span><span style="display:flex;"><span>    Semaphore open = new Semaphore(0);
-</span></span><span style="display:flex;"><span>    final int n;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    // initialize barrier for `n&#39; threads
-</span></span><span style="display:flex;"><span>    NonBarrier1(int n) {
-</span></span><span style="display:flex;"><span>        this.n = n;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    // number of threads expected at the barrier
-</span></span><span style="display:flex;"><span>    int expect() {
-</span></span><span style="display:flex;"><span>        return n;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    public void wait() {
-</span></span><span style="display:flex;"><span>        synchronized(this) {
-</span></span><span style="display:flex;"><span>            nDone += 1;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>            if (nDone == n) {
-</span></span><span style="display:flex;"><span>                // I&#39;m the last arrived: All can go!
-</span></span><span style="display:flex;"><span>                open.up();
-</span></span><span style="display:flex;"><span>            }
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        // Proceed when possible
-</span></span><span style="display:flex;"><span>        open.down()
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        // Let the next one go
-</span></span><span style="display:flex;"><span>        open.up()
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        synchronized(this) {
-</span></span><span style="display:flex;"><span>            nDone -= 1;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>           if (nDone == 0) {
-</span></span><span style="display:flex;"><span>                // I&#39;m the last through: Close barrier!
-</span></span><span style="display:flex;"><span>                open.down();
-</span></span><span style="display:flex;"><span>            }
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>Now this solution fixes the past issues listed. This solution has a problem of its own though.</p>
+<pre tabindex="0"><code>public class NonBarrier2 implements Barrier {
+    int nDone = 0; // number of done threads
+    Semaphore open = new Semaphore(0);
+    final int n;
+
+    // initialize barrier for `n&#39; threads
+    NonBarrier1(int n) {
+        this.n = n;
+    }
+
+    // number of threads expected at the barrier
+    int expect() {
+        return n;
+    }
+
+    public void wait() {
+        synchronized(this) {
+            nDone += 1;
+
+            if (nDone == n) {
+                // I&#39;m the last arrived: All can go!
+                open.up();
+            }
+        }
+
+
+        // Proceed when possible
+        open.down()
+
+        // Let the next one go
+        open.up()
+
+        synchronized(this) {
+            nDone -= 1;
+
+           if (nDone == 0) {
+                // I&#39;m the last through: Close barrier!
+                open.down();
+            }
+        }
+
+    }
+}
+</code></pre><p>Now this solution fixes the past issues listed. This solution has a problem of its own though.</p>
 <p>If we have a thread which is incredibly fast, it may now get ahead of the other (slower) threads.
 Even if we use strong semaphores, we cannot prevent this. This is because this happens due to the
 last thread leaves the gate open.</p>
 <p>To fix this we use a kind of two gate mechanic.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>public class SemaphoreBarrier implements Barrier {
-</span></span><span style="display:flex;"><span>    int nDone = 0; // number of done threads
-</span></span><span style="display:flex;"><span>    Semaphore gate1 = new Semaphore(0);// first gate
-</span></span><span style="display:flex;"><span>    Semaphore gate2 = new Semaphore(1);// second gate
-</span></span><span style="display:flex;"><span>    final int n;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    // initialize barrier for `n&#39; threads
-</span></span><span style="display:flex;"><span>    SemaphoreBarrier(int n) {
-</span></span><span style="display:flex;"><span>        this.n = n;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    // number of threads expected at the barrier
-</span></span><span style="display:flex;"><span>    int expect() {
-</span></span><span style="display:flex;"><span>        return n;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>public void wait() {
-</span></span><span style="display:flex;"><span>    approach(); leave();
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>void approach() {
-</span></span><span style="display:flex;"><span>    synchronized (this) {
-</span></span><span style="display:flex;"><span>        nDone += 1; // arrived
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        if (nDone == n) { // if last in:
-</span></span><span style="display:flex;"><span>            gate1.up(); // open gate1
-</span></span><span style="display:flex;"><span>            gate2.down(); // close gate2
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    gate1.down(); // pass gate1
-</span></span><span style="display:flex;"><span>    gate1.up(); // let next pass
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>void leave() {
-</span></span><span style="display:flex;"><span>    synchronized (this) {
-</span></span><span style="display:flex;"><span>        nDone -= 1; // going out
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        if (nDone == 0) { // if last out:
-</span></span><span style="display:flex;"><span>            gate2.up(); // open gate2
-</span></span><span style="display:flex;"><span>            gate1.down(); // close gate1
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    gate2.down(); // pass gate2
-</span></span><span style="display:flex;"><span>    gate2.up(); // let next pass
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>This solution is what a good, reusable barrier should look like.</p>
+<pre tabindex="0"><code>public class SemaphoreBarrier implements Barrier {
+    int nDone = 0; // number of done threads
+    Semaphore gate1 = new Semaphore(0);// first gate
+    Semaphore gate2 = new Semaphore(1);// second gate
+    final int n;
+
+    // initialize barrier for `n&#39; threads
+    SemaphoreBarrier(int n) {
+        this.n = n;
+    }
+    // number of threads expected at the barrier
+    int expect() {
+        return n;
+    }
+
+public void wait() {
+    approach(); leave();
+}
+
+void approach() {
+    synchronized (this) {
+        nDone += 1; // arrived
+
+        if (nDone == n) { // if last in:
+            gate1.up(); // open gate1
+            gate2.down(); // close gate2
+        }
+
+    }
+
+    gate1.down(); // pass gate1
+    gate1.up(); // let next pass
+}
+
+void leave() {
+    synchronized (this) {
+        nDone -= 1; // going out
+
+        if (nDone == 0) { // if last out:
+            gate2.up(); // open gate2
+            gate1.down(); // close gate1
+        }
+    }
+
+    gate2.down(); // pass gate2
+    gate2.up(); // let next pass
+}
+</code></pre><p>This solution is what a good, reusable barrier should look like.</p>
 <h3 id="readers-writers">Readers-Writers</h3>
 <p>A problem which we can encounter every day, say we have a board displaying data.
 Readers and writers need to access this board to, read and write.</p>
@@ -543,93 +543,93 @@ Readers and writers need to access this board to, read and write.</p>
 </li>
 </ul>
 <p>A naive approach would be:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>public class SyncBoard&lt;T&gt; implements Board&lt;T&gt; {
-</span></span><span style="display:flex;"><span>    int nReaders = 0;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    // For exclusive access to nReaders
-</span></span><span style="display:flex;"><span>    Lock lock = new Lock();
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    // 1 if and only if no active threads
-</span></span><span style="display:flex;"><span>    Semaphore empty = new Semaphore(1);
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    T message;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    public T read() {
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        // Lock to update nReaders
-</span></span><span style="display:flex;"><span>        lock.lock();
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        if(nReaders == 0) {
-</span></span><span style="display:flex;"><span>            // If first reader, set not empty
-</span></span><span style="display:flex;"><span>            empty.down();
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        // Update nReaders
-</span></span><span style="display:flex;"><span>        nReaders += 1
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        // Release nReaders
-</span></span><span style="display:flex;"><span>        lock.unlock();
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        // Read (critical section)
-</span></span><span style="display:flex;"><span>        T msg = message;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        // Aquire nReaders
-</span></span><span style="display:flex;"><span>        lock.lock();
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        nReaders -= 1;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        if(nReaders == 0) {
-</span></span><span style="display:flex;"><span>            // If # of readers empty, set empty
-</span></span><span style="display:flex;"><span>            empty.up();
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        // Releaes nReaders
-</span></span><span style="display:flex;"><span>        lock.unlock();
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        return msg;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    public void write(T msg) {
-</span></span><span style="display:flex;"><span>        // Get exclusive access
-</span></span><span style="display:flex;"><span>        empty.down();
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        message = msg;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        // Release board
-</span></span><span style="display:flex;"><span>        empty.up();
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>This solution ensures almost everything we want, the only thing missing is that writers can now starve.</p>
+<pre tabindex="0"><code>public class SyncBoard&lt;T&gt; implements Board&lt;T&gt; {
+    int nReaders = 0;
+
+    // For exclusive access to nReaders
+    Lock lock = new Lock();
+
+    // 1 if and only if no active threads
+    Semaphore empty = new Semaphore(1);
+
+    T message;
+
+    public T read() {
+
+        // Lock to update nReaders
+        lock.lock();
+
+        if(nReaders == 0) {
+            // If first reader, set not empty
+            empty.down();
+        }
+
+        // Update nReaders
+        nReaders += 1
+
+        // Release nReaders
+        lock.unlock();
+
+        // Read (critical section)
+        T msg = message;
+
+        // Aquire nReaders
+        lock.lock();
+
+        nReaders -= 1;
+
+        if(nReaders == 0) {
+            // If # of readers empty, set empty
+            empty.up();
+        }
+
+        // Releaes nReaders
+        lock.unlock();
+
+        return msg;
+    }
+
+    public void write(T msg) {
+        // Get exclusive access
+        empty.down();
+
+        message = msg;
+
+        // Release board
+        empty.up();
+    }
+
+
+}
+</code></pre><p>This solution ensures almost everything we want, the only thing missing is that writers can now starve.</p>
 <p>If there is always one reader active, writers will not be able to access the board at all.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>public class FairBoard&lt;T&gt; extends SyncBoard&lt;T&gt; {
-</span></span><span style="display:flex;"><span>    Semaphore baton = new Semaphore(1, true);
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    public T read() {
-</span></span><span style="display:flex;"><span>        // Wait until you get baton
-</span></span><span style="display:flex;"><span>        baton.down();
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        // Release a waiting thread
-</span></span><span style="display:flex;"><span>        baton.up();
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        // Read as in SyncBoard
-</span></span><span style="display:flex;"><span>        return super.read();
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    public void write(T msg) {
-</span></span><span style="display:flex;"><span>        // Wait until you get baton
-</span></span><span style="display:flex;"><span>        baton.down();
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        // Write as in SyncBoard
-</span></span><span style="display:flex;"><span>        super.write(msg);
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        // Release
-</span></span><span style="display:flex;"><span>        baton.up();
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>This will ensure that readers and writers have the same priority.</p>
+<pre tabindex="0"><code>public class FairBoard&lt;T&gt; extends SyncBoard&lt;T&gt; {
+    Semaphore baton = new Semaphore(1, true);
+
+    public T read() {
+        // Wait until you get baton
+        baton.down();
+
+        // Release a waiting thread
+        baton.up();
+
+        // Read as in SyncBoard
+        return super.read();
+    }
+
+    public void write(T msg) {
+        // Wait until you get baton
+        baton.down();
+
+        // Write as in SyncBoard
+        super.write(msg);
+
+        // Release
+        baton.up();
+
+    }
+}
+</code></pre><p>This will ensure that readers and writers have the same priority.</p>
 <h3 id="summary">Summary</h3>
 <p>A looong part, but as we can see, all solution uses locks and semaphores.
 When writing solutions to concurrent programs, we will always need to use these.

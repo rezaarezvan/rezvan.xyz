@@ -28,7 +28,7 @@ One to thing to note is that, the structural properties in these diagrams, captu
         <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
 
 	
-	<link rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/main.ded288734bf67c9f89d72102879afaadf50fed4138fb485737334085f5465104.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/main.56d2207fad46e63050394b2c8df0d9e313c631c4cd55e1c1c163a8a772d9a1df.css" />
 		<link id="darkModeStyle" rel="stylesheet" type="text/css" href="https://rezvan.xyz/css/dark.b47837a877382f31178bb7a2c2135fbe9c39b1d4a1cc529faee0363b6dbdc408.css"  disabled />
 	
 
@@ -165,25 +165,25 @@ But can we achieve mutual exclusion in programs using only atomic read and write
 <p>It is in fact possible - but it&rsquo;s tricky however - but let&rsquo;s try to implement it.</p>
 <h4 id="problem-description">Problem description</h4>
 <p>Lets quickly go over what our problem is, so we have an easier time solving it.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>while(true) {
-</span></span><span style="display:flex;"><span>    entry protocol
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    critical section {
-</span></span><span style="display:flex;"><span>        .
-</span></span><span style="display:flex;"><span>        .
-</span></span><span style="display:flex;"><span>        .
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    exit protocol
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>We want to design a (concurrent) program were we achieve, mutual exclusion,
+<pre tabindex="0"><code>while(true) {
+    entry protocol
+
+    critical section {
+        .
+        .
+        .
+    }
+
+    exit protocol
+}
+</code></pre><p>We want to design a (concurrent) program were we achieve, mutual exclusion,
 freedom from deadlocks and freedom from starvation, in the following program.</p>
 <h4 id="busy-waiting">Busy-waiting</h4>
 <p>In the following attempts, we&rsquo;ll use something called busy-waiting.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>while(!condition) {
-</span></span><span style="display:flex;"><span>    // Do nothing
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>We will use the keyword <code>await(c)</code> which is not an actual keyword.
+<pre tabindex="0"><code>while(!condition) {
+    // Do nothing
+}
+</code></pre><p>We will use the keyword <code>await(c)</code> which is not an actual keyword.
 But we will use it as a synonym to the busy wait loop.</p>
 <p>Note, we don&rsquo;t really want to use this in actual programs since there are better ways of waiting.
 But for now this will do.</p>
@@ -192,18 +192,18 @@ But for now this will do.</p>
 <code>enter</code>.</p>
 <p>So when thread $t_k$ wants to enter it sets <code>enter[k]</code>to true.</p>
 <p>For example, if we use <code>k = 2</code> a program could look like:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>while(true) {
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    await(!enter[1]);
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    enter[0] = true;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    critical section { ... }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    enter[0] = false;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>In this, $t_0$ will wait until <code>enter[1]</code> becomes false.</p>
+<pre tabindex="0"><code>while(true) {
+
+    await(!enter[1]);
+
+    enter[0] = true;
+
+    critical section { ... }
+
+    enter[0] = false;
+
+}
+</code></pre><p>In this, $t_0$ will wait until <code>enter[1]</code> becomes false.</p>
 <p>While it seems like it <em>should</em> work, in reality it doesn&rsquo;t.
 This does not guarantee mutual exclusion.</p>
 <p>For example, this diagram illustrates well how:
@@ -213,18 +213,18 @@ But then $t_1$ does the same, before <code>enter[0]</code> actually becomes <cod
 <p>So they will, in sequence set their respective flag to entered, and both enter the critical section.</p>
 <p>So the problem seems to be that we have <code>await</code>.</p>
 <h3 id="second-naive-attempt">Second naive attempt</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>while(true) {
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    enter[0] = true;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    await(!enter[1]);
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    critical section { ... }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    enter[0] = false;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>So, if we make the change we noticed.</p>
+<pre tabindex="0"><code>while(true) {
+
+    enter[0] = true;
+
+    await(!enter[1]);
+
+    critical section { ... }
+
+    enter[0] = false;
+
+}
+</code></pre><p>So, if we make the change we noticed.</p>
 <p>This solution actually achieves mutual exclusion! However, we still have a problem.
 It does not guarantee freedom from deadlock.</p>
 <p>It&rsquo;s quite easy to see a scenario where that happens, if $t_0$ first sets <code>enter[0]</code>to <code>true</code>,
@@ -233,14 +233,14 @@ then in turn $t_1$ sets <code>enter[1]</code> to <code>true</code>. They both no
 <h3 id="third-naive-attempt">Third naive attempt</h3>
 <p>By introducing a variable <code>yield</code> we can make sure that $t_k$ waits for its turn
 while <code>yield</code> is <code>k</code>.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>while(true) {
-</span></span><span style="display:flex;"><span>    await(yield != 0);
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    critical section { ... }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    yield = 0;
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>It&rsquo;s important now that <code>await(condition)</code> was short for <code>while(!condition) { }</code>.
+<pre tabindex="0"><code>while(true) {
+    await(yield != 0);
+
+    critical section { ... }
+
+    yield = 0;
+}
+</code></pre><p>It&rsquo;s important now that <code>await(condition)</code> was short for <code>while(!condition) { }</code>.
 This means we will keep waiting until <code>yield</code>is something other than 0.</p>
 <p>This means we either make the starting value of yield random, or just choose a default.</p>
 <p>Thus, this solution does guarantee mutual exclusion, and freedom from deadlock.
@@ -250,26 +250,26 @@ But however, not from starvation.</p>
 <p>Our final solution will be a combination of our second and third attempt.</p>
 <p>This means:</p>
 <p>$t_k$ <em>first</em> sets <code>enter[k]</code> to <code>true</code>, but then <em>lets other threads go first</em>, by setting <code>yield</code>.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>while(true) {
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    enter[0] = true;
-</span></span><span style="display:flex;"><span>    yield = 0;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    await(!enter[1] || yield != 0);
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    /* Eqv. to
-</span></span><span style="display:flex;"><span>        while(enter[1] = true &amp;&amp; yield 0) { }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        Which means only enter when:
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        enter[1] = false OR yield = 1
-</span></span><span style="display:flex;"><span>    */
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    critical section { ... }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    enter[0] = false;
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>Peterson&rsquo;s algorithm ensure all three points that we want to achieve.</p>
+<pre tabindex="0"><code>while(true) {
+
+    enter[0] = true;
+    yield = 0;
+
+    await(!enter[1] || yield != 0);
+
+    /* Eqv. to
+        while(enter[1] = true &amp;&amp; yield 0) { }
+
+        Which means only enter when:
+
+        enter[1] = false OR yield = 1
+    */
+
+    critical section { ... }
+
+    enter[0] = false;
+}
+</code></pre><p>Peterson&rsquo;s algorithm ensure all three points that we want to achieve.</p>
 <p>We can prove this but really isn&rsquo;t that interesting :P. However, we can use Peterson&rsquo;s algorithm
 for <code>N</code>threads as well. It&rsquo;s a bit tricker to implement, but the idea is that we use a kind of &ldquo;filtering&rdquo;.
 At each &ldquo;level&rdquo; we &ldquo;remove&rdquo; (yield) 1 thread and keep doing this until we have one singular thread left who &ldquo;won&rdquo;.</p>
@@ -314,70 +314,70 @@ section before $t$ is less than $r + 1$</li>
 <p>Now that we know the theory behind it - we would want to implement it right?
 Well, no, there are great implementations already out there,
 but sometimes we can&rsquo;t always rely on exisiting libraries.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>class PetersonLock implements Lock {
-</span></span><span style="display:flex;"><span>    private volatile boolean enter0 = false, enter1 = false;
-</span></span><span style="display:flex;"><span>    private volatile int yield;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    public void lock() {
-</span></span><span style="display:flex;"><span>        int myID = getThreadId();
-</span></span><span style="display:flex;"><span>        if (myID == 0) {
-</span></span><span style="display:flex;"><span>            enter0 = true;
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        else {
-</span></span><span style="display:flex;"><span>            enter1 = true;
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        yield = myID;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        while ((myID == 0) ? (enter1 &amp;&amp; yield == 0)
-</span></span><span style="display:flex;"><span>            : (enter0 &amp;&amp; yield == 1)) {
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>            // Do nothing
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    public void unlock() {
-</span></span><span style="display:flex;"><span>        int myID = getThreadId();
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        if (me == 0) {
-</span></span><span style="display:flex;"><span>            enter0 = false;
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        else {
-</span></span><span style="display:flex;"><span>            enter1 = false;
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    private volatile long id0 = 0;
-</span></span></code></pre></div><p>Now the thing is that we humans assume that the program will execute in the same order we wrote it.</p>
+<pre tabindex="0"><code>class PetersonLock implements Lock {
+    private volatile boolean enter0 = false, enter1 = false;
+    private volatile int yield;
+
+    public void lock() {
+        int myID = getThreadId();
+        if (myID == 0) {
+            enter0 = true;
+        }
+
+        else {
+            enter1 = true;
+        }
+
+        yield = myID;
+
+        while ((myID == 0) ? (enter1 &amp;&amp; yield == 0)
+            : (enter0 &amp;&amp; yield == 1)) {
+
+            // Do nothing
+        }
+    }
+
+    public void unlock() {
+        int myID = getThreadId();
+
+        if (me == 0) {
+            enter0 = false;
+        }
+
+        else {
+            enter1 = false;
+        }
+
+    }
+
+    private volatile long id0 = 0;
+</code></pre><p>Now the thing is that we humans assume that the program will execute in the same order we wrote it.</p>
 <p>This isn&rsquo;t always the case, especially not with concurrent programs. The compiler likes to do a lot of optimizations,
 that we may find odd, but it thinks it&rsquo;s better.</p>
 <p>This is where we need to use the <code>volatile</code> keyword, which says to the compiler to not optimize this variable at all.</p>
 <p>In Java however we can&rsquo;t have volatile arrays, but there is so called <code>AtomicArrays</code> we can use.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>class PetersonAtomicLock implements Lock {
-</span></span><span style="display:flex;"><span>    private AtomicIntegerArray
-</span></span><span style="display:flex;"><span>        enter = new AtomicIntegerArray(2);
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    private volatile int yield;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    public void lock() {
-</span></span><span style="display:flex;"><span>        int myID = getThreadId();
-</span></span><span style="display:flex;"><span>        int otherID = 1 - myID;
-</span></span><span style="display:flex;"><span>        enter.set(myID, 1);
-</span></span><span style="display:flex;"><span>        yield = myID;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        while (enter.get(otherID) == 1 &amp;&amp; yield == myID) {
-</span></span><span style="display:flex;"><span>            // Do nothing
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    public void unlock() {
-</span></span><span style="display:flex;"><span>        int myID = getThreadId();
-</span></span><span style="display:flex;"><span>        enter.set(myID, 0);
-</span></span><span style="display:flex;"><span>    }
-</span></span></code></pre></div><h3 id="summary">Summary</h3>
+<pre tabindex="0"><code>class PetersonAtomicLock implements Lock {
+    private AtomicIntegerArray
+        enter = new AtomicIntegerArray(2);
+
+    private volatile int yield;
+
+    public void lock() {
+        int myID = getThreadId();
+        int otherID = 1 - myID;
+        enter.set(myID, 1);
+        yield = myID;
+
+        while (enter.get(otherID) == 1 &amp;&amp; yield == myID) {
+            // Do nothing
+        }
+    }
+
+    public void unlock() {
+        int myID = getThreadId();
+        enter.set(myID, 0);
+    }
+</code></pre><h3 id="summary">Summary</h3>
 <p>This concludes this part, there was a lot of info in this one - but writing and implementating
 good concurrent programs from scratch is a pain. I even left out how to implement a semaphore from scratch.</p>
 <p>I&rsquo;ll maybe update and put it in later :).</p>

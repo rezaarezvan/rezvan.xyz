@@ -28,7 +28,7 @@ What is Erlang? Erlang is a functional programming language with message-passing
         <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
 
 	
-	<link rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/main.ded288734bf67c9f89d72102879afaadf50fed4138fb485737334085f5465104.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/main.56d2207fad46e63050394b2c8df0d9e313c631c4cd55e1c1c163a8a772d9a1df.css" />
 		<link id="darkModeStyle" rel="stylesheet" type="text/css" href="https://rezvan.xyz/css/dark.b47837a877382f31178bb7a2c2135fbe9c39b1d4a1cc529faee0363b6dbdc408.css"  disabled />
 	
 
@@ -119,16 +119,16 @@ specifically, <em>message-passing</em> concurrency.</p>
 The message-passing part is concurrent and implements the <em>actor model</em>, where Erlang processes are actors.</p>
 <p>This post won&rsquo;t cover functional languages in general, so I hope you remember good &lsquo;ol Haskell.</p>
 <p>Let&rsquo;s look at a little code snippet from Erlang:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>-module(power).
-</span></span><span style="display:flex;"><span>-export([power/2]).
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>power(X, 0) -&gt; 1;
-</span></span><span style="display:flex;"><span>power(X, N) -&gt; X * power(X, N - 1).
-</span></span></code></pre></div><p>Then if we enter the erl shell by <code>erl</code> and doing:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>c(power).
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>power:power(2, 3).
-</span></span></code></pre></div><p>We see the output 8!</p>
+<pre tabindex="0"><code>-module(power).
+-export([power/2]).
+
+power(X, 0) -&gt; 1;
+power(X, N) -&gt; X * power(X, N - 1).
+</code></pre><p>Then if we enter the erl shell by <code>erl</code> and doing:</p>
+<pre tabindex="0"><code>c(power).
+
+power:power(2, 3).
+</code></pre><p>We see the output 8!</p>
 <h3 id="types-in-erlang">Types in Erlang</h3>
 <p>Erlang has 8 primitives types and 5 compound types:</p>
 <ul>
@@ -227,64 +227,64 @@ Instead, the <em>atoms</em> <code>true</code> and <code>false</code> are used fo
 which are the &ldquo;normal&rdquo; equal we associate with.</p>
 <h3 id="order-between-types">Order between types</h3>
 <p>In Erlang, types have a distinct order relation:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>number &lt; atom &lt; reference &lt; funs &lt; port &lt; pid &lt; tuple &lt; map &lt; list
-</span></span></code></pre></div><p>Which means that for example:
+<pre tabindex="0"><code>number &lt; atom &lt; reference &lt; funs &lt; port &lt; pid &lt; tuple &lt; map &lt; list
+</code></pre><p>Which means that for example:
 <code>3 &lt; true</code> is true.</p>
 <h3 id="tuples">Tuples</h3>
 <p>Tuples are written like this in Erlang:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>{ }
-</span></span><span style="display:flex;"><span>{10, 12, 98}
-</span></span><span style="display:flex;"><span>{8.88, false, aToM}
-</span></span><span style="display:flex;"><span>{10, {-1, true}}
-</span></span></code></pre></div><p>They are also 1-indexed.</p>
+<pre tabindex="0"><code>{ }
+{10, 12, 98}
+{8.88, false, aToM}
+{10, {-1, true}}
+</code></pre><p>They are also 1-indexed.</p>
 <h3 id="lists">Lists</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>[ ]
-</span></span><span style="display:flex;"><span>[10, 12, 98]
-</span></span><span style="display:flex;"><span>[8.88, false, aToM]
-</span></span><span style="display:flex;"><span>[10, [-1, true]]
-</span></span></code></pre></div><p>They have the following nice operators as well:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>% A copy of L with H added as head element
-</span></span><span style="display:flex;"><span>[H | L]
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>% Get head element
-</span></span><span style="display:flex;"><span>hd(L)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>% Get tail element
-</span></span><span style="display:flex;"><span>tl(L)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>% Concatenation and deletion
-</span></span><span style="display:flex;"><span>L1 ++ L2
-</span></span><span style="display:flex;"><span>L1 -- L2
-</span></span></code></pre></div><h3 id="records">Records</h3>
+<pre tabindex="0"><code>[ ]
+[10, 12, 98]
+[8.88, false, aToM]
+[10, [-1, true]]
+</code></pre><p>They have the following nice operators as well:</p>
+<pre tabindex="0"><code>% A copy of L with H added as head element
+[H | L]
+
+% Get head element
+hd(L)
+
+% Get tail element
+tl(L)
+
+% Concatenation and deletion
+L1 ++ L2
+L1 -- L2
+</code></pre><h3 id="records">Records</h3>
 <p>Records are ordered sequences with a fixed number of elements, where each element has an
 atom as name</p>
 <ul>
 <li>Records are just syntactic sugar for tuples where positions are named</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>-record(person, { name=&#34;add name&#34;, age })
-</span></span></code></pre></div><h3 id="multiple-expressions">Multiple expressions</h3>
+<pre tabindex="0"><code>-record(person, { name=&#34;add name&#34;, age })
+</code></pre><h3 id="multiple-expressions">Multiple expressions</h3>
 <p>The <code>,</code> operator in Erlang makes it so we can combine expressions, for example:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>% Evalutes 3 &lt; 0 and returns 2
-</span></span><span style="display:flex;"><span>3 &lt; 0, 2.
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>% Evaluates 3 + true and fails (because of 3 + true)
-</span></span><span style="display:flex;"><span>3 + true, 2.
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>% Binds 10 to R, binds 3.14 to Pi, returns 62.8...
-</span></span><span style="display:flex;"><span>R = 10, Pi = 3.14, 2*Pi*R.
-</span></span></code></pre></div><h3 id="modules">Modules</h3>
+<pre tabindex="0"><code>% Evalutes 3 &lt; 0 and returns 2
+3 &lt; 0, 2.
+
+% Evaluates 3 + true and fails (because of 3 + true)
+3 + true, 2.
+
+% Binds 10 to R, binds 3.14 to Pi, returns 62.8...
+R = 10, Pi = 3.14, 2*Pi*R.
+</code></pre><h3 id="modules">Modules</h3>
 <p>In our power example you may have noticed the <code>module</code> and <code>export</code> keywords.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>-module(foo).
-</span></span><span style="display:flex;"><span>-export([bar/1, baz/0]).
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>bar(X) -&gt; X.
-</span></span><span style="display:flex;"><span>baz()  -&gt; 0.
-</span></span></code></pre></div><p>As you can the, <code>f/n</code>, declares the function name and number of parameters (or arity n, with patterns).</p>
+<pre tabindex="0"><code>-module(foo).
+-export([bar/1, baz/0]).
+
+bar(X) -&gt; X.
+baz()  -&gt; 0.
+</code></pre><p>As you can the, <code>f/n</code>, declares the function name and number of parameters (or arity n, with patterns).</p>
 <h3 id="guards">Guards</h3>
 <p>This is something we should be familiar with from Haskell:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>can_drive(Name, Age) when Age &gt;= 18 -&gt; Name ++ &#34; can drive&#34;;
-</span></span><span style="display:flex;"><span>can_drive(Name, _) -&gt; Name ++ &#34; cannot drive&#34;.
-</span></span></code></pre></div><p>Erlang is very similar to Haskell in its clauses, gaurds, pattern matchings.
+<pre tabindex="0"><code>can_drive(Name, Age) when Age &gt;= 18 -&gt; Name ++ &#34; can drive&#34;;
+can_drive(Name, _) -&gt; Name ++ &#34; cannot drive&#34;.
+</code></pre><p>Erlang is very similar to Haskell in its clauses, gaurds, pattern matchings.
 Since it&rsquo;s functional as well, we can pass around functions as values, but also remember higher-order functions etc etc.</p>
 <p>This is mostly so, I remember the Erlang syntax itself, and not a post on functional languages as I said :).</p>
 <h3 id="erlangs-principles">Erlang&rsquo;s principles</h3>
@@ -371,60 +371,60 @@ Since it&rsquo;s functional as well, we can pass around functions as values, but
 it is identified by its PID (Process identifier) and executes its behavioral function, <code>f</code>, (which is passed as a parameter into <code>spawn</code>).
 When the function terminates the process <code>ends</code>.</p>
 <p>Let&rsquo;s take a look at the <code>spawn</code> function:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>spawn(M, F, Args)
-</span></span></code></pre></div><p>When creating a process, the newly created process runs the function <code>F</code> in module <code>M</code> with arguments <code>Args</code>.</p>
+<pre tabindex="0"><code>spawn(M, F, Args)
+</code></pre><p>When creating a process, the newly created process runs the function <code>F</code> in module <code>M</code> with arguments <code>Args</code>.</p>
 <p>Let&rsquo;s look at an example:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>-module(procs).
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>print_sum(X,Y) -&gt;
-</span></span><span style="display:flex;"><span>    io:format(&#34;~p~n&#34;, [X+Y]).
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>compute_sum(X,Y) -&gt; X + Y.
-</span></span></code></pre></div><p>then in the shell we just do:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>spawn(procs, print_sum, [3, 4]).
-</span></span></code></pre></div><p>And we should see the result <code>7</code>.</p>
+<pre tabindex="0"><code>-module(procs).
+
+print_sum(X,Y) -&gt;
+    io:format(&#34;~p~n&#34;, [X+Y]).
+
+compute_sum(X,Y) -&gt; X + Y.
+</code></pre><p>then in the shell we just do:</p>
+<pre tabindex="0"><code>spawn(procs, print_sum, [3, 4]).
+</code></pre><p>And we should see the result <code>7</code>.</p>
 <p>Messages are as simple, typically a message is the result of evaluting an expression:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>Pid ! Message
-</span></span></code></pre></div><p>This sends the evaluation, <code>T</code>, of <code>Message</code> to the process with PID, <code>Pid</code>, and returns <code>T</code> as a result.</p>
+<pre tabindex="0"><code>Pid ! Message
+</code></pre><p>This sends the evaluation, <code>T</code>, of <code>Message</code> to the process with PID, <code>Pid</code>, and returns <code>T</code> as a result.</p>
 <p>Note that the, <code>!</code>, or &ldquo;bang&rdquo; operator is <em>right-associative</em></p>
 <h3 id="mailboxes">Mailboxes</h3>
 <p>Every process has a mailbox, this is how it becomes asynchronous,
 a process never needs to wait to read a message, we only need to check our mailbox.</p>
 <p>To check a process with Pid, <code>Pid</code>, we can use:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>% How many elements are in the mailbox
-</span></span><span style="display:flex;"><span>process_info(Pid, message_queue_len)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>% List of messages in the mailbox (oldest to newest)
-</span></span><span style="display:flex;"><span>process_info(Pid, messages)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>% Empty the current process&#39;s mailbox
-</span></span><span style="display:flex;"><span>flush()
-</span></span></code></pre></div><p>For example:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>% Send &#39;hello&#39; twice to self
-</span></span><span style="display:flex;"><span>self() ! self() ! hello.
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>% send &#39;world&#39; to self
-</span></span><span style="display:flex;"><span>self() ! world.
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>process_info(self(), message).
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>&gt; {messages, [hello, hello, world]}
-</span></span></code></pre></div><p>To <em>receive</em> a message, we can use the <code>receive</code> expression:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>receive
-</span></span><span style="display:flex;"><span>    P1 when C1 -&gt; E1;
-</span></span><span style="display:flex;"><span>        .
-</span></span><span style="display:flex;"><span>        .
-</span></span><span style="display:flex;"><span>        .
-</span></span><span style="display:flex;"><span>    PN when CN -&gt; EN
-</span></span><span style="display:flex;"><span>end
-</span></span></code></pre></div><p>Evaluating the <code>recieve</code> expression, selects the <strong>oldest</strong> message in our mailbox, that matches the pattern.
+<pre tabindex="0"><code>% How many elements are in the mailbox
+process_info(Pid, message_queue_len)
+
+% List of messages in the mailbox (oldest to newest)
+process_info(Pid, messages)
+
+% Empty the current process&#39;s mailbox
+flush()
+</code></pre><p>For example:</p>
+<pre tabindex="0"><code>% Send &#39;hello&#39; twice to self
+self() ! self() ! hello.
+
+% send &#39;world&#39; to self
+self() ! world.
+
+process_info(self(), message).
+
+&gt; {messages, [hello, hello, world]}
+</code></pre><p>To <em>receive</em> a message, we can use the <code>receive</code> expression:</p>
+<pre tabindex="0"><code>receive
+    P1 when C1 -&gt; E1;
+        .
+        .
+        .
+    PN when CN -&gt; EN
+end
+</code></pre><p>Evaluating the <code>recieve</code> expression, selects the <strong>oldest</strong> message in our mailbox, that matches the pattern.
 If we don&rsquo;t find any match we <em>block</em> until a suitable message arrives.</p>
 <p>For example, a simple echo function:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>echo() -&gt;
-</span></span><span style="display:flex;"><span>    recieve Msg -&gt; io:format(&#34;Receive: ~p~n&#34;, [Msg]) end.
-</span></span><span style="display:flex;"><span>    % To make this permanent we just do this:
-</span></span><span style="display:flex;"><span>    echo().
-</span></span></code></pre></div><p>Note that Erlang&rsquo;s runtime only provides weak guarantees of message delivery <em>order</em>.
+<pre tabindex="0"><code>echo() -&gt;
+    recieve Msg -&gt; io:format(&#34;Receive: ~p~n&#34;, [Msg]) end.
+    % To make this permanent we just do this:
+    echo().
+</code></pre><p>Note that Erlang&rsquo;s runtime only provides weak guarantees of message delivery <em>order</em>.
 So it&rsquo;s not guaranteed that the messages are received in the same order as sent.
 This is in the case when sending to multiple <em>different</em> processes, if we are only sending to a single process, the order will be the same.</p>
 <h3 id="stateful-processes">Stateful processes</h3>
@@ -432,16 +432,16 @@ This is in the case when sending to multiple <em>different</em> processes, if we
 thus we need to store the state information using arguments.</p>
 <p>These values gets updates by the recursive calls used to make a process permanently running.</p>
 <p>An example makes this clear, let&rsquo;s implement our beloved counter program:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>base_counter(N) -&gt;
-</span></span><span style="display:flex;"><span>recieve {From, Command} -&gt; case Command of
-</span></span><span style="display:flex;"><span>    increment -&gt; base_counter(N + 1);
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    count     -&gt; From ! {self(), N},
-</span></span><span style="display:flex;"><span>                 base_counter(N);
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    % Unrecongnized command
-</span></span><span style="display:flex;"><span>    U         -&gt; io:format(&#34;? ~p~n&#34;, [U])
-</span></span></code></pre></div><h3 id="clients-and-servers">Clients and servers</h3>
+<pre tabindex="0"><code>base_counter(N) -&gt;
+recieve {From, Command} -&gt; case Command of
+    increment -&gt; base_counter(N + 1);
+
+    count     -&gt; From ! {self(), N},
+                 base_counter(N);
+
+    % Unrecongnized command
+    U         -&gt; io:format(&#34;? ~p~n&#34;, [U])
+</code></pre><h3 id="clients-and-servers">Clients and servers</h3>
 <p>The client/server architecture is widely used, so let&rsquo;s go!</p>
 <ol>
 <li>
@@ -482,68 +482,68 @@ thus we need to store the state information using arguments.</p>
 </ul>
 <h3 id="math-server">Math server</h3>
 <p>Let&rsquo;s make a simple math server:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>% Interface for the server/commands
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>start(): start a math server, and return the server&#39;s PID
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>factorial(S, M): compute the factorial of M on server with PID, S
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>status(S): return the number of requests server so far on the server with PID, S
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>stop(S): shutdown server with PID, S
-</span></span></code></pre></div><p>The main/event loop would be:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>loop(N) -&gt;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    receive% ‘factorial’ command:
-</span></span><span style="display:flex;"><span>    {factorial, From, Ref, M} -&gt;
-</span></span><span style="display:flex;"><span>        From ! {response, Ref, compute_factorial(M)},
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        % increment request number
-</span></span><span style="display:flex;"><span>        loop(N+1);
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    % ‘status’ command:
-</span></span><span style="display:flex;"><span>    {status, From, Ref} -&gt;
-</span></span><span style="display:flex;"><span>        From ! {response, Ref, N},
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        % don’t increment request number
-</span></span><span style="display:flex;"><span>        loop(N);
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    % ‘stop’ command:
-</span></span><span style="display:flex;"><span>    {stop, _From, _Ref} -&gt; ok
-</span></span><span style="display:flex;"><span>end.
-</span></span></code></pre></div><p>The starting and stopping:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>% start a server, return server’s pid
-</span></span><span style="display:flex;"><span>start() -&gt;
-</span></span><span style="display:flex;"><span>    spawn(fun () -&gt; loop(0) end).
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>% shutdown ‘Server’
-</span></span><span style="display:flex;"><span>stop(Server) -&gt;
-</span></span><span style="display:flex;"><span>    % Ref is not needed
-</span></span><span style="display:flex;"><span>    Server ! {stop, self(), 0},
-</span></span><span style="display:flex;"><span>    ok.
-</span></span></code></pre></div><p>Factorial and status:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>% compute factorial(M) on ‘Server’:
-</span></span><span style="display:flex;"><span>factorial(Server, M) -&gt;
-</span></span><span style="display:flex;"><span>    % unique reference number
-</span></span><span style="display:flex;"><span>    Ref = make_ref(),
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    % send request to server:
-</span></span><span style="display:flex;"><span>    Server ! {factorial, self(), Ref, M},
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    % wait for response, and return it:
-</span></span><span style="display:flex;"><span>    receive {response, Ref, Result} -&gt; Result end.
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>% return number of requests served so far by ‘Server’:
-</span></span><span style="display:flex;"><span>status(Server) -&gt;
-</span></span><span style="display:flex;"><span>    % unique reference number
-</span></span><span style="display:flex;"><span>    Ref = make_ref(),
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    % send request to server:
-</span></span><span style="display:flex;"><span>    Server ! {status, self(), Ref},
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    % wait for response, and return it:
-</span></span><span style="display:flex;"><span>    receive {response, Ref, Result} -&gt; Result end.
-</span></span></code></pre></div>
+<pre tabindex="0"><code>% Interface for the server/commands
+
+start(): start a math server, and return the server&#39;s PID
+
+factorial(S, M): compute the factorial of M on server with PID, S
+
+status(S): return the number of requests server so far on the server with PID, S
+
+stop(S): shutdown server with PID, S
+</code></pre><p>The main/event loop would be:</p>
+<pre tabindex="0"><code>loop(N) -&gt;
+
+    receive% ‘factorial’ command:
+    {factorial, From, Ref, M} -&gt;
+        From ! {response, Ref, compute_factorial(M)},
+
+        % increment request number
+        loop(N+1);
+
+    % ‘status’ command:
+    {status, From, Ref} -&gt;
+        From ! {response, Ref, N},
+
+        % don’t increment request number
+        loop(N);
+
+    % ‘stop’ command:
+    {stop, _From, _Ref} -&gt; ok
+end.
+</code></pre><p>The starting and stopping:</p>
+<pre tabindex="0"><code>% start a server, return server’s pid
+start() -&gt;
+    spawn(fun () -&gt; loop(0) end).
+
+% shutdown ‘Server’
+stop(Server) -&gt;
+    % Ref is not needed
+    Server ! {stop, self(), 0},
+    ok.
+</code></pre><p>Factorial and status:</p>
+<pre tabindex="0"><code>% compute factorial(M) on ‘Server’:
+factorial(Server, M) -&gt;
+    % unique reference number
+    Ref = make_ref(),
+
+    % send request to server:
+    Server ! {factorial, self(), Ref, M},
+
+    % wait for response, and return it:
+    receive {response, Ref, Result} -&gt; Result end.
+
+% return number of requests served so far by ‘Server’:
+status(Server) -&gt;
+    % unique reference number
+    Ref = make_ref(),
+
+    % send request to server:
+    Server ! {status, self(), Ref},
+
+    % wait for response, and return it:
+    receive {response, Ref, Result} -&gt; Result end.
+</code></pre>
 		</section>
 
 		<div class="post-tags">

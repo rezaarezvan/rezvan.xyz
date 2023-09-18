@@ -25,7 +25,7 @@ So what kind of resources could we quantify from an input? Of course the runtime
         <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
 
 	
-	<link rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/main.ded288734bf67c9f89d72102879afaadf50fed4138fb485737334085f5465104.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/main.56d2207fad46e63050394b2c8df0d9e313c631c4cd55e1c1c163a8a772d9a1df.css" />
 		<link id="darkModeStyle" rel="stylesheet" type="text/css" href="https://rezvan.xyz/css/dark.b47837a877382f31178bb7a2c2135fbe9c39b1d4a1cc529faee0363b6dbdc408.css"  disabled />
 	
 
@@ -178,30 +178,30 @@ $$</p>
 <p>Now that we have understood properly what the Big O notation is and how we can operate with it - the next step is being able to find the complexity in code!
 How we do this properly is going through each line/operation in an algorithm and see what the complexity of each is. This is very time consuming though - so, luckily, there are short cuts.</p>
 <p>Sequence of statements (arithmetic and logical operations, function calls, etc), gives us addition between them.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>func whats_the_complexity(int n):
-</span></span><span style="display:flex;"><span>    n = n + 5;                // This takes O(1)
-</span></span><span style="display:flex;"><span>    n = n / 10;               // This takes O(1)
-</span></span><span style="display:flex;"><span>    n = do_something(n, 100); // Say this take O(n)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    return n
-</span></span></code></pre></div><p>The total complexity of <code>whats_the_complexity</code> would in this case be:
+<pre tabindex="0"><code>func whats_the_complexity(int n):
+    n = n + 5;                // This takes O(1)
+    n = n / 10;               // This takes O(1)
+    n = do_something(n, 100); // Say this take O(n)
+
+    return n
+</code></pre><p>The total complexity of <code>whats_the_complexity</code> would in this case be:
 $\mathcal{O}(1) + \mathcal{O}(1) + \mathcal{O}(n)$ and from our first rule that would mean a total (Asymptotic) complexity of, $\mathcal{O}(n)$ for $n \geq 1$</p>
 <p>Nested loops gives multiplication</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>func whats_the_complexity(int[][] arr):
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    // Suppose arr is a n x x matrix
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    sum = 0;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    for i in arr:      // Takes O(n)
-</span></span><span style="display:flex;"><span>        for j in i:    // Takes O(n)
-</span></span><span style="display:flex;"><span>            sum += j;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    for i in arr:      // Takes O(n)
-</span></span><span style="display:flex;"><span>        sum += i;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    return n
-</span></span></code></pre></div><p>The total complexity of <code>whats_the_complexity</code> would in this case be:
+<pre tabindex="0"><code>func whats_the_complexity(int[][] arr):
+
+    // Suppose arr is a n x x matrix
+
+    sum = 0;
+
+    for i in arr:      // Takes O(n)
+        for j in i:    // Takes O(n)
+            sum += j;
+
+    for i in arr:      // Takes O(n)
+        sum += i;
+
+    return n
+</code></pre><p>The total complexity of <code>whats_the_complexity</code> would in this case be:
 $\mathcal{O}(n) \times \mathcal{O}(n) + \mathcal{O}(n)$ and from our first and second rule that would mean a total (Asymptotic) complexity of, $\mathcal{O}(n^2)$</p>
 <h3 id="relatives-of-o-notation">Relatives of O-notation</h3>
 <p>What we have gone through is only a part of a bigger set of notations. The &lsquo;real&rsquo; definitions are the following:</p>

@@ -49,7 +49,7 @@ $sp - Stack pointer"/>
         <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
 
 	
-	<link rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/main.ded288734bf67c9f89d72102879afaadf50fed4138fb485737334085f5465104.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/main.56d2207fad46e63050394b2c8df0d9e313c631c4cd55e1c1c163a8a772d9a1df.css" />
 		<link id="darkModeStyle" rel="stylesheet" type="text/css" href="https://rezvan.xyz/css/dark.b47837a877382f31178bb7a2c2135fbe9c39b1d4a1cc529faee0363b6dbdc408.css"  disabled />
 	
 
@@ -152,39 +152,39 @@ $$</p>
 <p><code>$sp</code> - Stack pointer</p>
 <p><code>$ra</code> - Return address</p>
 <p>Arithmetic:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>add     $t0, $t0, $t1   #t0 = t0 + t1
-</span></span><span style="display:flex;"><span>addi    $t0, $t0, 5     #t0 = t0 + 5
-</span></span><span style="display:flex;"><span>addu    $t0, $t0, $t1   #t0 = t0 + t1 (unsigned)
-</span></span><span style="display:flex;"><span>addiu   $t0, $t0, 5     #t0 = t0 + 5  (unsigned)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>sub     $t0, $t0, $t1   #t0 = t0 - t1
-</span></span><span style="display:flex;"><span>subi    $t0, $t0, 5     #t0 = t0 - 5
-</span></span><span style="display:flex;"><span>subu    $t0, $t0, $t1   #t0 = t0 - t1 (unsigned)
-</span></span><span style="display:flex;"><span>subiu   $t0, $t0, 5     #t0 = t0 - 5  (unsigned)
-</span></span></code></pre></div><p>Memory:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>lw $s0, 0($a0)  # s0 = MEM[a0] (word)
-</span></span><span style="display:flex;"><span>sw $s0, 0($a0)  # MEM[a0] = $s0 (word)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>l.d $s0, 0($a0)  # s0, s1 = MEM[a0] (Double word)
-</span></span><span style="display:flex;"><span>s.d $s0, 0($a0)  # MEM[a0] = $s0, $s1 (Double word)
-</span></span></code></pre></div><p>Logical:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>sll $t0, $t1, 2     # t0 := t1 * 4
-</span></span><span style="display:flex;"><span>srl $t0, $t1, 2     # t0 := t1 / 4
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>and $t0, $t1, $t2   # t0 := t1 &amp; t2
-</span></span><span style="display:flex;"><span>andi $t0, $t1, 2   # t0 := t1 &amp; 2
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>or $t0, $t1, $t2   # t0 := t1 | t2
-</span></span><span style="display:flex;"><span>ori $t0, $t1, 2   # t0 := t1 | 2
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>nor $t0, $t1, $zero # := ~(t1)
-</span></span></code></pre></div><p>Conditionals:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>beq rs, rt, L1 # if(rs == rt); Jump to L1
-</span></span><span style="display:flex;"><span>bne rs, rt, L1 # if(rs != rt); Jump to L1
-</span></span><span style="display:flex;"><span>j L1           # Jump to L1
-</span></span></code></pre></div><p>Remember:</p>
+<pre tabindex="0"><code>add     $t0, $t0, $t1   #t0 = t0 + t1
+addi    $t0, $t0, 5     #t0 = t0 + 5
+addu    $t0, $t0, $t1   #t0 = t0 + t1 (unsigned)
+addiu   $t0, $t0, 5     #t0 = t0 + 5  (unsigned)
+
+
+sub     $t0, $t0, $t1   #t0 = t0 - t1
+subi    $t0, $t0, 5     #t0 = t0 - 5
+subu    $t0, $t0, $t1   #t0 = t0 - t1 (unsigned)
+subiu   $t0, $t0, 5     #t0 = t0 - 5  (unsigned)
+</code></pre><p>Memory:</p>
+<pre tabindex="0"><code>lw $s0, 0($a0)  # s0 = MEM[a0] (word)
+sw $s0, 0($a0)  # MEM[a0] = $s0 (word)
+
+
+l.d $s0, 0($a0)  # s0, s1 = MEM[a0] (Double word)
+s.d $s0, 0($a0)  # MEM[a0] = $s0, $s1 (Double word)
+</code></pre><p>Logical:</p>
+<pre tabindex="0"><code>sll $t0, $t1, 2     # t0 := t1 * 4
+srl $t0, $t1, 2     # t0 := t1 / 4
+
+and $t0, $t1, $t2   # t0 := t1 &amp; t2
+andi $t0, $t1, 2   # t0 := t1 &amp; 2
+
+or $t0, $t1, $t2   # t0 := t1 | t2
+ori $t0, $t1, 2   # t0 := t1 | 2
+
+nor $t0, $t1, $zero # := ~(t1)
+</code></pre><p>Conditionals:</p>
+<pre tabindex="0"><code>beq rs, rt, L1 # if(rs == rt); Jump to L1
+bne rs, rt, L1 # if(rs != rt); Jump to L1
+j L1           # Jump to L1
+</code></pre><p>Remember:</p>
 <ul>
 <li>
 <p>Incrementing with 1 and not 4!</p>

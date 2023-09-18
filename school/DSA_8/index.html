@@ -28,7 +28,7 @@ Another basic term that we&rsquo;ll encounter is a cycle."/>
         <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
 
 	
-	<link rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/main.ded288734bf67c9f89d72102879afaadf50fed4138fb485737334085f5465104.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/main.56d2207fad46e63050394b2c8df0d9e313c631c4cd55e1c1c163a8a772d9a1df.css" />
 		<link id="darkModeStyle" rel="stylesheet" type="text/css" href="https://rezvan.xyz/css/dark.b47837a877382f31178bb7a2c2135fbe9c39b1d4a1cc529faee0363b6dbdc408.css"  disabled />
 	
 
@@ -121,30 +121,30 @@ A cycle is just as it sounds, a <em>cycle</em>, meaning that you start in a cert
 We&rsquo;ll mainly look at the use cases for directed graphs.</p>
 <h3 id="pseudo-code-for-graphs">Pseudo Code for Graphs</h3>
 <p>There are a lot of different ADT/API&rsquo;s for graphs, we&rsquo;ll be using this:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>class Graph&lt;Vertices&gt;:
-</span></span><span style="display:flex;"><span>    // Adds an edge to the graph
-</span></span><span style="display:flex;"><span>    add_edge(e: Edge&lt;Vertices&gt;)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    // Removes an edge from the graph
-</span></span><span style="display:flex;"><span>    remove_edge(e: Edge&lt;Vertices&gt;)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    // Returns true if the edge is present in the graph, otherwise false
-</span></span><span style="display:flex;"><span>    contains_edge(e: Edge&lt;Vertices&gt;) -&gt; boolean
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    // Returns all the edges which are connected with the vertices
-</span></span><span style="display:flex;"><span>    outgoing_edges(from: Vertices) -&gt; Collection&lt;Edge&lt;Vertices&gt;&gt;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    // Returns the number of vertices present in the graph
-</span></span><span style="display:flex;"><span>    n_vertices() -&gt; Int
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    // Returns the number of edges present in the graph
-</span></span><span style="display:flex;"><span>    n_edges() -&gt; Int
-</span></span></code></pre></div><p>Now this depends on the <code>Edge</code> class which will be implemented as:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>class Edge&lt;Vertices&gt;:
-</span></span><span style="display:flex;"><span>    from   : Vertices
-</span></span><span style="display:flex;"><span>    to     : Vertices
-</span></span><span style="display:flex;"><span>    weight : float = 1.0
-</span></span></code></pre></div><h3 id="graph-representation">Graph Representation</h3>
+<pre tabindex="0"><code>class Graph&lt;Vertices&gt;:
+    // Adds an edge to the graph
+    add_edge(e: Edge&lt;Vertices&gt;)
+
+    // Removes an edge from the graph
+    remove_edge(e: Edge&lt;Vertices&gt;)
+
+    // Returns true if the edge is present in the graph, otherwise false
+    contains_edge(e: Edge&lt;Vertices&gt;) -&gt; boolean
+
+    // Returns all the edges which are connected with the vertices
+    outgoing_edges(from: Vertices) -&gt; Collection&lt;Edge&lt;Vertices&gt;&gt;
+
+    // Returns the number of vertices present in the graph
+    n_vertices() -&gt; Int
+
+    // Returns the number of edges present in the graph
+    n_edges() -&gt; Int
+</code></pre><p>Now this depends on the <code>Edge</code> class which will be implemented as:</p>
+<pre tabindex="0"><code>class Edge&lt;Vertices&gt;:
+    from   : Vertices
+    to     : Vertices
+    weight : float = 1.0
+</code></pre><h3 id="graph-representation">Graph Representation</h3>
 <p>We can represent a graph by doing:</p>
 <ul>
 <li>A set of edges</li>
@@ -157,20 +157,20 @@ This is a quite good implementation for undirected graphs,
 since the complexity of finding all adjacent neighbors to a vertex v would be $\mathcal{O}(E)$,
 where E is the total number of edges in the graph.</p>
 <p>It can look something like:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>0 1
-</span></span><span style="display:flex;"><span>0 2
-</span></span><span style="display:flex;"><span>0 5
-</span></span><span style="display:flex;"><span>0 6
-</span></span><span style="display:flex;"><span>3 4
-</span></span><span style="display:flex;"><span>3 5
-</span></span><span style="display:flex;"><span>4 5
-</span></span><span style="display:flex;"><span>4 6
-</span></span><span style="display:flex;"><span>7 8
-</span></span><span style="display:flex;"><span>9 10
-</span></span><span style="display:flex;"><span>9 11
-</span></span><span style="display:flex;"><span>9 12
-</span></span><span style="display:flex;"><span>11 12
-</span></span></code></pre></div><p>We can look at these as tuples, where $(v_1, v_2)$ means that $v_1$ has a connecting edge to $v_2$.
+<pre tabindex="0"><code>0 1
+0 2
+0 5
+0 6
+3 4
+3 5
+4 5
+4 6
+7 8
+9 10
+9 11
+9 12
+11 12
+</code></pre><p>We can look at these as tuples, where $(v_1, v_2)$ means that $v_1$ has a connecting edge to $v_2$.
 This is directed, but as we said, if we have an undirected graph, then it is enough to store just one of them.</p>
 <h4 id="representation-adjacency-list">Representation: Adjacency list</h4>
 <p>We maintain a <em>map</em> from vertices to collections of edges, we could alternatively also do a collection of vertices.</p>
@@ -185,32 +185,32 @@ So it&rsquo;s really good, note this is if the lookup for the key is $\mathcal{O
 <p>In most real-world cases we use adjacency lists</p>
 <h3 id="implementation">implementation</h3>
 <p>So let&rsquo;s try to implement a directed graph using a adjacency list!</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>class Graph&lt;V&gt;:
-</span></span><span style="display:flex;"><span>    all_edges    : Map&lt;V, Collection&lt;Edge&lt;V&gt;&gt;&gt;
-</span></span><span style="display:flex;"><span>    n_edges      : int
-</span></span><span style="display:flex;"><span>    all_vertices : Set&lt;V&gt;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    outgoing_edges(from: V) -&gt; Collection&lt;Edge&lt;V&gt;&gt;:
-</span></span><span style="display:flex;"><span>        return all_edges.get(from)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    contains_edge(e: Edge&lt;V&gt;) -&gt; boolean:
-</span></span><span style="display:flex;"><span>        return e in outgoing_edges(edge.from)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    add(e: Edge&lt;V&gt;):
-</span></span><span style="display:flex;"><span>        outgoing = outgoing_edges(e.from)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        if e not in outgoing:
-</span></span><span style="display:flex;"><span>            outgoing.add(e)
-</span></span><span style="display:flex;"><span>            n_edges += 1
-</span></span><span style="display:flex;"><span>            all_vertices.add(e.from)
-</span></span><span style="display:flex;"><span>            all_vertices.add(e.to)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    remove(e: Edge&lt;V&gt;):
-</span></span><span style="display:flex;"><span>        outgoing = outgoing_edges(e.from)
-</span></span><span style="display:flex;"><span>        if edge in outgoing:
-</span></span><span style="display:flex;"><span>            outgoing.remove(e)
-</span></span><span style="display:flex;"><span>            n_edges -= 1
-</span></span></code></pre></div><h3 id="searching-in-graphs">Searching in Graphs</h3>
+<pre tabindex="0"><code>class Graph&lt;V&gt;:
+    all_edges    : Map&lt;V, Collection&lt;Edge&lt;V&gt;&gt;&gt;
+    n_edges      : int
+    all_vertices : Set&lt;V&gt;
+
+    outgoing_edges(from: V) -&gt; Collection&lt;Edge&lt;V&gt;&gt;:
+        return all_edges.get(from)
+
+    contains_edge(e: Edge&lt;V&gt;) -&gt; boolean:
+        return e in outgoing_edges(edge.from)
+
+    add(e: Edge&lt;V&gt;):
+        outgoing = outgoing_edges(e.from)
+
+        if e not in outgoing:
+            outgoing.add(e)
+            n_edges += 1
+            all_vertices.add(e.from)
+            all_vertices.add(e.to)
+
+    remove(e: Edge&lt;V&gt;):
+        outgoing = outgoing_edges(e.from)
+        if edge in outgoing:
+            outgoing.remove(e)
+            n_edges -= 1
+</code></pre><h3 id="searching-in-graphs">Searching in Graphs</h3>
 <p>In many real-world applications, graphs will represent some sort of maze, or other structure, where we want to find a path.
 Sometimes the path with least resistance/weight/length. There are two primary search algorithms for graphs.</p>
 <p>So called <strong>D</strong>epth-<strong>F</strong>irst <strong>S</strong>earch or DFS for short. The other called <strong>B</strong>readth-<strong>F</strong>irst <strong>S</strong>earch or BFS for short.</p>
@@ -218,50 +218,50 @@ Sometimes the path with least resistance/weight/length. There are two primary se
 <h4 id="depth-first-search">Depth-first search</h4>
 <p>Depth-first search is a way to traverse a graph systematically.</p>
 <p>A short pseudo-code of a DFS would be:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>DFS(to visit a vertex v):
-</span></span><span style="display:flex;"><span>    mark v as visited
-</span></span><span style="display:flex;"><span>    recursively visit all unmarked vertices w adjacent to v
-</span></span></code></pre></div><p>We&rsquo;ve encountered DFS for trees, the difference here as we can see is that we &lsquo;mark&rsquo; each vertex we visit.
+<pre tabindex="0"><code>DFS(to visit a vertex v):
+    mark v as visited
+    recursively visit all unmarked vertices w adjacent to v
+</code></pre><p>We&rsquo;ve encountered DFS for trees, the difference here as we can see is that we &lsquo;mark&rsquo; each vertex we visit.
 Because in a graph, there might be cycles, so we don&rsquo;t want to be stuck in them.</p>
 <p>Applications of using a DFS are usually,
 finding all vertices connected to a source vertex, or simply, finding a path between two vertices.</p>
 <h4 id="implementation-1">Implementation</h4>
 <p>To implement this we need data structures! To store all marked vertices, we will use a Set.
 To keep track of the path we&rsquo;ve taken, we&rsquo;ll use a map which contains vertices tuples.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>recursiveDFS(v : V):
-</span></span><span style="display:flex;"><span>    add v to visited
-</span></span><span style="display:flex;"><span>    for edge in outgoing_edges(v):
-</span></span><span style="display:flex;"><span>        w = endpoint of edge
-</span></span><span style="display:flex;"><span>        if v not in visited:
-</span></span><span style="display:flex;"><span>            recursiveDFS(w)
-</span></span><span style="display:flex;"><span>            cameFrom[w] = v
-</span></span></code></pre></div><h3 id="breadth-first-search">Breadth-First Search</h3>
+<pre tabindex="0"><code>recursiveDFS(v : V):
+    add v to visited
+    for edge in outgoing_edges(v):
+        w = endpoint of edge
+        if v not in visited:
+            recursiveDFS(w)
+            cameFrom[w] = v
+</code></pre><h3 id="breadth-first-search">Breadth-First Search</h3>
 <p>For our DFS we used a underlying stack for our recursive calls, the function stack.</p>
 <p>BFS uses a <em>queue</em> instead of stack, so we have to implement this ourselves.</p>
 <p>So a break down of what we have to do:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>BFS(from a starting vertex s):
-</span></span><span style="display:flex;"><span>    put s into FIFO queue, mark as visited
-</span></span><span style="display:flex;"><span>    while queue not empty:
-</span></span><span style="display:flex;"><span>        dequeue a vertex v
-</span></span><span style="display:flex;"><span>        for each unmarked vertex w adjacent to v:
-</span></span><span style="display:flex;"><span>            enqueue w, mark it as visited
-</span></span></code></pre></div><p>So really, the only difference for BFS in trees compared to graphs is that we have to keep track of the visited vertices.</p>
+<pre tabindex="0"><code>BFS(from a starting vertex s):
+    put s into FIFO queue, mark as visited
+    while queue not empty:
+        dequeue a vertex v
+        for each unmarked vertex w adjacent to v:
+            enqueue w, mark it as visited
+</code></pre><p>So really, the only difference for BFS in trees compared to graphs is that we have to keep track of the visited vertices.</p>
 <h4 id="implementation-2">Implementation</h4>
 <p>So a pseudo-code implementation would look something like:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>iterativeBFS(start: V):
-</span></span><span style="display:flex;"><span>    visited = new Set&lt;V&gt;
-</span></span><span style="display:flex;"><span>    agenda = new Queue&lt;V&gt;
-</span></span><span style="display:flex;"><span>    agenda.enqueue(start)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    while agenda is not empty:
-</span></span><span style="display:flex;"><span>        agenda.dequeue(v)
-</span></span><span style="display:flex;"><span>        if v not in visited:
-</span></span><span style="display:flex;"><span>            add v to visited
-</span></span><span style="display:flex;"><span>            for edge in outgoing_edges(v):
-</span></span><span style="display:flex;"><span>                w = endpoint of edge
-</span></span><span style="display:flex;"><span>                if w not in visited:
-</span></span><span style="display:flex;"><span>                    add w to agenda
-</span></span></code></pre></div><p>If we want to retrace our steps, we would need a <code>cameFrom</code> Map as in the DFS.</p>
+<pre tabindex="0"><code>iterativeBFS(start: V):
+    visited = new Set&lt;V&gt;
+    agenda = new Queue&lt;V&gt;
+    agenda.enqueue(start)
+
+    while agenda is not empty:
+        agenda.dequeue(v)
+        if v not in visited:
+            add v to visited
+            for edge in outgoing_edges(v):
+                w = endpoint of edge
+                if w not in visited:
+                    add w to agenda
+</code></pre><p>If we want to retrace our steps, we would need a <code>cameFrom</code> Map as in the DFS.</p>
 <p>Also one thing to note, if we replace the queue, with a stack, we&rsquo;ll just end up with a <code>iterativeDFS</code> instead!</p>
 <h4 id="bfs-properties">BFS properties</h4>
 <p>In a BFS search, what do we actually get/perform? We get a path yes -
@@ -270,26 +270,26 @@ It actually does this in $\mathcal{O}(E + V)$</p>
 <h4 id="implementation-calculating-the-distance">Implementation: Calculating the distance</h4>
 <p>In this implementation we&rsquo;ll add a map that hold the distances between every vertex.
 (I also added that cameFrom map that I discussed earlier)</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>iterativeBFS(start: V):
-</span></span><span style="display:flex;"><span>    visited = new Set&lt;V&gt;
-</span></span><span style="display:flex;"><span>    agenda = new Queue&lt;V&gt;
-</span></span><span style="display:flex;"><span>    cameFrom = new Map&lt;V,V&gt;
-</span></span><span style="display:flex;"><span>    distTo = new empty Map&lt;V, Int&gt;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    agenda.enqueue(start)
-</span></span><span style="display:flex;"><span>    distTo[start] = 0
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    while agenda is not empty:
-</span></span><span style="display:flex;"><span>        agenda.dequeue(v)
-</span></span><span style="display:flex;"><span>        if v not in visited:
-</span></span><span style="display:flex;"><span>            add v to visited
-</span></span><span style="display:flex;"><span>            for edge in outgoing_edges(v):
-</span></span><span style="display:flex;"><span>                w = endpoint of edge
-</span></span><span style="display:flex;"><span>                if w not in visited:
-</span></span><span style="display:flex;"><span>                    add w to agenda
-</span></span><span style="display:flex;"><span>                    cameFrom[w] = v
-</span></span><span style="display:flex;"><span>                    distTo[w] = 1 + distTo[v]
-</span></span></code></pre></div><h3 id="example-problems">Example Problems</h3>
+<pre tabindex="0"><code>iterativeBFS(start: V):
+    visited = new Set&lt;V&gt;
+    agenda = new Queue&lt;V&gt;
+    cameFrom = new Map&lt;V,V&gt;
+    distTo = new empty Map&lt;V, Int&gt;
+
+    agenda.enqueue(start)
+    distTo[start] = 0
+
+    while agenda is not empty:
+        agenda.dequeue(v)
+        if v not in visited:
+            add v to visited
+            for edge in outgoing_edges(v):
+                w = endpoint of edge
+                if w not in visited:
+                    add w to agenda
+                    cameFrom[w] = v
+                    distTo[w] = 1 + distTo[v]
+</code></pre><h3 id="example-problems">Example Problems</h3>
 <p>So now that we&rsquo;ve seen DFS, BFS and understood graphs - let&rsquo;s see what we can do with them.</p>
 <p>A very important kind of graph is a <strong>DAG</strong>, or a Directed <strong>acyclic</strong> graph. This means the graph doesn&rsquo;t contain any cycles.</p>
 <p>This is especially useful for scheduling, for example. But we need to know if a graph contains a cycle - how can we detect a cycle?</p>
@@ -298,15 +298,15 @@ There are multiple ways of detecting a cycle in a graph, for example,
 we can use a DFS, and if we encounter a node that we&rsquo;ve visited before, we know that we have a cycle.</p>
 <p>Also a good note here, If we ever want the <em>preorder</em>, <em>postorder</em> or <em>reverse postorder</em> we just modify our DFS by one line -
 we change where the enqueue/push goes.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>DFS(v : V):
-</span></span><span style="display:flex;"><span>    visited.add(v)
-</span></span><span style="display:flex;"><span>    preorder.enqueue(v)
-</span></span><span style="display:flex;"><span>    for w in outgoing_edges(v):
-</span></span><span style="display:flex;"><span>        if w not in visited:
-</span></span><span style="display:flex;"><span>            visited.add(w)
-</span></span><span style="display:flex;"><span>    postorder.enqueue(v)
-</span></span><span style="display:flex;"><span>    reversePostorder.push(v)
-</span></span></code></pre></div><p>Note that the reversePostorder is a stack, therefore we will get the reverse order.</p>
+<pre tabindex="0"><code>DFS(v : V):
+    visited.add(v)
+    preorder.enqueue(v)
+    for w in outgoing_edges(v):
+        if w not in visited:
+            visited.add(w)
+    postorder.enqueue(v)
+    reversePostorder.push(v)
+</code></pre><p>Note that the reversePostorder is a stack, therefore we will get the reverse order.</p>
 <p>There are many finding &lsquo;connected components&rsquo; problems, here&rsquo;s a good picture to illustrate what we can use and not:
 <img src="/school/images/Graphs.png" alt="Graphs"></p>
 <h3 id="conclusion">Conclusion</h3>

@@ -28,7 +28,7 @@ Often, we are prone to deadlocks or incorrect behavior, it&rsquo;s easy to forge
         <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
 
 	
-	<link rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/main.ded288734bf67c9f89d72102879afaadf50fed4138fb485737334085f5465104.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/main.56d2207fad46e63050394b2c8df0d9e313c631c4cd55e1c1c163a8a772d9a1df.css" />
 		<link id="darkModeStyle" rel="stylesheet" type="text/css" href="https://rezvan.xyz/css/dark.b47837a877382f31178bb7a2c2135fbe9c39b1d4a1cc529faee0363b6dbdc408.css"  disabled />
 	
 
@@ -154,32 +154,32 @@ one thread is active on a monitor at any time</p>
 <p>To gain access to these critical section methods, we have a so called <em>entry-queue</em>
 for these monitor objects. This is to ensure mutual access to the methods.</p>
 <p>Let&rsquo;s write a simple monitor class in pseudocode:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>monitor class Counter {
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    // Attribute, implicitly private
-</span></span><span style="display:flex;"><span>    (private) int count = 0;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    // Methods, implicitly atomic
-</span></span><span style="display:flex;"><span>    public void increment() {
-</span></span><span style="display:flex;"><span>        count = count + 1;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    public void decrement() {
-</span></span><span style="display:flex;"><span>        count = count - 1;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>What&rsquo;s really powerful with monitors are <em>conditions variables</em>, sometimes we require more complex synchronization patterns.</p>
+<pre tabindex="0"><code>monitor class Counter {
+
+    // Attribute, implicitly private
+    (private) int count = 0;
+
+    // Methods, implicitly atomic
+    public void increment() {
+        count = count + 1;
+    }
+
+    public void decrement() {
+        count = count - 1;
+    }
+}
+</code></pre><p>What&rsquo;s really powerful with monitors are <em>conditions variables</em>, sometimes we require more complex synchronization patterns.</p>
 <p>We can define a condition using an interface:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>interface Condition {
-</span></span><span style="display:flex;"><span>    // Block until signal
-</span></span><span style="display:flex;"><span>    void wait();
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    // Signal to unblock
-</span></span><span style="display:flex;"><span>    void signal();
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    // Is no thread waiting on this condition?
-</span></span><span style="display:flex;"><span>    boolean isEmpty(); }
-</span></span></code></pre></div><p>Each condition variable also has a FIFO queue, <code>blocked</code> which stores all the blocked threads.</p>
+<pre tabindex="0"><code>interface Condition {
+    // Block until signal
+    void wait();
+
+    // Signal to unblock
+    void signal();
+
+    // Is no thread waiting on this condition?
+    boolean isEmpty(); }
+</code></pre><p>Each condition variable also has a FIFO queue, <code>blocked</code> which stores all the blocked threads.</p>
 <p>Which means:</p>
 <ul>
 <li>
@@ -193,70 +193,70 @@ for these monitor objects. This is to ensure mutual access to the methods.</p>
 </li>
 </ul>
 <h3 id="producer-consumer-problem">Producer-Consumer problem</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>interface Buffer&lt;T&gt; {
-</span></span><span style="display:flex;"><span>    // add item to buffer; block if full
-</span></span><span style="display:flex;"><span>    void put(T item);
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    // remove item from buffer; block if empty
-</span></span><span style="display:flex;"><span>    T get();
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    // number of items in buffer
-</span></span><span style="display:flex;"><span>    int count();
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>Let&rsquo;s solve this problem we have encountered earlier, using monitors now!</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>monitor class MonitorBuffer&lt;T&gt; implements Buffer&lt;T&gt; {
-</span></span><span style="display:flex;"><span>    // Any collection (list, set, ...)
-</span></span><span style="display:flex;"><span>    Collection storage = ...;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    // Signal when not empty
-</span></span><span style="display:flex;"><span>    Condition notEmpty = new Condition();
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    public void put(T item) {
-</span></span><span style="display:flex;"><span>        // Store item
-</span></span><span style="display:flex;"><span>        storage.add(item);
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        // Signal buffer not empty
-</span></span><span style="display:flex;"><span>        notEmpty.signal();
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    public T get() {
-</span></span><span style="display:flex;"><span>        if (storage.count() == 0) {
-</span></span><span style="display:flex;"><span>            // Wait until buffer not empty
-</span></span><span style="display:flex;"><span>            notEmpty.wait();
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        // Retrieve item
-</span></span><span style="display:flex;"><span>        return storage.remove();
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    invariant {
-</span></span><span style="display:flex;"><span>        # of storage.add == # notEmpty.signal
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>And the bounded buffer:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>monitor class BoundedMonitorBuffer&lt;T&gt; extends MonitorBuffer&lt;T&gt; {
-</span></span><span style="display:flex;"><span>    // Signal when not full
-</span></span><span style="display:flex;"><span>    Condition notFull = new Condition();
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    public void put(T item) {
-</span></span><span style="display:flex;"><span>        if (storage.count() == capacity) {
-</span></span><span style="display:flex;"><span>            // Wait until buffer not full
-</span></span><span style="display:flex;"><span>            notFull.wait();
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        super.put(item); // do as in MonitorBuffer.put(item)
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    public T get() {
-</span></span><span style="display:flex;"><span>        // Do as in MonitorBuffer.get()
-</span></span><span style="display:flex;"><span>        T item = super.get();
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        // Signal buffer not full
-</span></span><span style="display:flex;"><span>        notFull.signal()
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        return item;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><h3 id="signaling-disciplines">Signaling disciplines</h3>
+<pre tabindex="0"><code>interface Buffer&lt;T&gt; {
+    // add item to buffer; block if full
+    void put(T item);
+
+    // remove item from buffer; block if empty
+    T get();
+
+    // number of items in buffer
+    int count();
+}
+</code></pre><p>Let&rsquo;s solve this problem we have encountered earlier, using monitors now!</p>
+<pre tabindex="0"><code>monitor class MonitorBuffer&lt;T&gt; implements Buffer&lt;T&gt; {
+    // Any collection (list, set, ...)
+    Collection storage = ...;
+
+    // Signal when not empty
+    Condition notEmpty = new Condition();
+
+    public void put(T item) {
+        // Store item
+        storage.add(item);
+
+        // Signal buffer not empty
+        notEmpty.signal();
+    }
+
+    public T get() {
+        if (storage.count() == 0) {
+            // Wait until buffer not empty
+            notEmpty.wait();
+        }
+
+        // Retrieve item
+        return storage.remove();
+    }
+
+    invariant {
+        # of storage.add == # notEmpty.signal
+    }
+}
+</code></pre><p>And the bounded buffer:</p>
+<pre tabindex="0"><code>monitor class BoundedMonitorBuffer&lt;T&gt; extends MonitorBuffer&lt;T&gt; {
+    // Signal when not full
+    Condition notFull = new Condition();
+
+    public void put(T item) {
+        if (storage.count() == capacity) {
+            // Wait until buffer not full
+            notFull.wait();
+        }
+
+        super.put(item); // do as in MonitorBuffer.put(item)
+    }
+    public T get() {
+        // Do as in MonitorBuffer.get()
+        T item = super.get();
+
+        // Signal buffer not full
+        notFull.signal()
+
+        return item;
+    }
+}
+</code></pre><h3 id="signaling-disciplines">Signaling disciplines</h3>
 <p>When a thread, s, calls <code>signal()</code> it now signals to a thread that its being unblocked.</p>
 <p>Say the thread, u, being unblocked by s.
 The signaling discipline determines what happens to a signaling thread, s, <em>after</em> it unblocks thread u.</p>
@@ -284,9 +284,9 @@ other threads, may change the state while continuing</p>
 execution after a <code>wait</code>, will find that this condition has been met (true). The <code>signal</code> is like a hint.</p>
 <p>Therefore, most monitor implementations use the <strong>signal and continue</strong> discipline.
 Often when using the <strong>signal and continue</strong> discipline you will have access to a method called:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>// Unblock all threads blocked on this condition
-</span></span><span style="display:flex;"><span>void singalAll();
-</span></span></code></pre></div><p>This is inefficient most of the time, but it <em>just works</em> for the given pattern.</p>
+<pre tabindex="0"><code>// Unblock all threads blocked on this condition
+void singalAll();
+</code></pre><p>This is inefficient most of the time, but it <em>just works</em> for the given pattern.</p>
 <p>There is also the <strong>signal and urgent wait</strong> discipline:</p>
 <ul>
 <li>
@@ -327,79 +327,79 @@ Often when using the <strong>signal and continue</strong> discipline you will ha
 <p>Where, S - signaling thread(s), U - unblocked thread(s), E - thread(s) in the entry queue.</p>
 <h3 id="implementation">Implementation</h3>
 <p>Let&rsquo;s implement monitors now using semaphores!</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>class Counter {
-</span></span><span style="display:flex;"><span>    // Strong/fair semaphore, initially 1
-</span></span><span style="display:flex;"><span>    Semaphore entry = new Semaphore(1, true);
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    private int x = 0;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    public void inc() {
-</span></span><span style="display:flex;"><span>        entry.down();
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        x = x + 1;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        entry.up();
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>Simple right!</p>
+<pre tabindex="0"><code>class Counter {
+    // Strong/fair semaphore, initially 1
+    Semaphore entry = new Semaphore(1, true);
+
+    private int x = 0;
+
+    public void inc() {
+        entry.down();
+
+        x = x + 1;
+
+        entry.up();
+    }
+}
+</code></pre><p>Simple right!</p>
 <p>Now let&rsquo;s look at conditions variables:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>abstract class WaitVariable implements Condition {
-</span></span><span style="display:flex;"><span>    // Queue of blocked threads
-</span></span><span style="display:flex;"><span>    Queue blocked = new Queue&lt;Thread&gt;();
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    // Block until signal
-</span></span><span style="display:flex;"><span>    public void wait() {
-</span></span><span style="display:flex;"><span>        // Release monitor lock
-</span></span><span style="display:flex;"><span>        entry.up();
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        // Enqueue running thread
-</span></span><span style="display:flex;"><span>        blocked.add(running);
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        // Set state as blocked
-</span></span><span style="display:flex;"><span>        running.state = BLOCKED;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    // Is no thread waiting?
-</span></span><span style="display:flex;"><span>    public boolean isEmpty() {
-</span></span><span style="display:flex;"><span>        return blocked.isEmpty();
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>Quite simple :)!</p>
+<pre tabindex="0"><code>abstract class WaitVariable implements Condition {
+    // Queue of blocked threads
+    Queue blocked = new Queue&lt;Thread&gt;();
+
+    // Block until signal
+    public void wait() {
+        // Release monitor lock
+        entry.up();
+
+        // Enqueue running thread
+        blocked.add(running);
+
+        // Set state as blocked
+        running.state = BLOCKED;
+    }
+
+    // Is no thread waiting?
+    public boolean isEmpty() {
+        return blocked.isEmpty();
+    }
+}
+</code></pre><p>Quite simple :)!</p>
 <p>Now let&rsquo;s try to implement two different disciplines:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>class SCVariable extends WaitVariable {
-</span></span><span style="display:flex;"><span>    // Signal to unblock
-</span></span><span style="display:flex;"><span>    public void signal() {
-</span></span><span style="display:flex;"><span>        if (!blocked.isEmpty()) {
-</span></span><span style="display:flex;"><span>            // u is the unblocked thread
-</span></span><span style="display:flex;"><span>            Thread u = blocked.remove();
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>            // u gets moved to entry queue
-</span></span><span style="display:flex;"><span>            entry.blocked.add(u);
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>            // the running, signaling thread continues executing
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>And a signal wait:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>class SWVariable extends WaitVariable {
-</span></span><span style="display:flex;"><span>    // Signal to unblocked
-</span></span><span style="display:flex;"><span>    public void signal() {
-</span></span><span style="display:flex;"><span>        if(!blocked.isEmpty()) {
-</span></span><span style="display:flex;"><span>            // Add the running, signaling  thread, to the entry queue
-</span></span><span style="display:flex;"><span>            entry.blocked.add(running);
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>            // New unblocked thread, u
-</span></span><span style="display:flex;"><span>            Thread u = blocked.remove();
-</span></span><span style="display:flex;"><span>            // Set thread u to ready
-</span></span><span style="display:flex;"><span>            u.state = READY;
-</span></span><span style="display:flex;"><span>            // Block the old running thread
-</span></span><span style="display:flex;"><span>            running.state = BLOCKED;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>            // the unblocked, signaled thread, u, continues executing
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>One fun little thing that one might have thought of is, can we implement semaphores <em>from</em> monitors?</p>
+<pre tabindex="0"><code>class SCVariable extends WaitVariable {
+    // Signal to unblock
+    public void signal() {
+        if (!blocked.isEmpty()) {
+            // u is the unblocked thread
+            Thread u = blocked.remove();
+
+            // u gets moved to entry queue
+            entry.blocked.add(u);
+
+            // the running, signaling thread continues executing
+        }
+    }
+}
+</code></pre><p>And a signal wait:</p>
+<pre tabindex="0"><code>class SWVariable extends WaitVariable {
+    // Signal to unblocked
+    public void signal() {
+        if(!blocked.isEmpty()) {
+            // Add the running, signaling  thread, to the entry queue
+            entry.blocked.add(running);
+
+            // New unblocked thread, u
+            Thread u = blocked.remove();
+            // Set thread u to ready
+            u.state = READY;
+            // Block the old running thread
+            running.state = BLOCKED;
+
+            // the unblocked, signaled thread, u, continues executing
+        }
+    }
+}
+</code></pre><p>One fun little thing that one might have thought of is, can we implement semaphores <em>from</em> monitors?</p>
 <p>The answer is yes! But it&rsquo;s quite useless and impractical, but in theory one can!</p>
 <h3 id="summary">Summary</h3>
 <p>Let&rsquo;s try to write up all the pros and cons with monitors!</p>

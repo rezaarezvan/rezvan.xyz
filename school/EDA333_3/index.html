@@ -46,7 +46,7 @@ Read / Write from / to memory for load/store instructions."/>
         <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
 
 	
-	<link rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/main.ded288734bf67c9f89d72102879afaadf50fed4138fb485737334085f5465104.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/main.56d2207fad46e63050394b2c8df0d9e313c631c4cd55e1c1c163a8a772d9a1df.css" />
 		<link id="darkModeStyle" rel="stylesheet" type="text/css" href="https://rezvan.xyz/css/dark.b47837a877382f31178bb7a2c2135fbe9c39b1d4a1cc529faee0363b6dbdc408.css"  disabled />
 	
 
@@ -256,9 +256,9 @@ $$</p>
 </ul>
 <h4 id="data-hazards">Data hazards</h4>
 <p>If we have the following MIPS:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>add    $s0, $t0, $t1
-</span></span><span style="display:flex;"><span>add    $t2, $s0, $t3
-</span></span></code></pre></div><p>Notice that both instructions either write or read <code>$s0</code>.</p>
+<pre tabindex="0"><code>add    $s0, $t0, $t1
+add    $t2, $s0, $t3
+</code></pre><p>Notice that both instructions either write or read <code>$s0</code>.</p>
 <p>A data hazard occurs specifically after a RAW (<strong>R</strong>ead <strong>A</strong>fter <strong>W</strong>rite)</p>
 <p>There are two solutions:</p>
 <ul>
@@ -297,22 +297,22 @@ $$</p>
 </li>
 </ul>
 <p>But consider this following example:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>lw  $t1, 0($t0)
-</span></span><span style="display:flex;"><span>lw  $t2, 4($t0)
-</span></span><span style="display:flex;"><span>add $t3, $t1, $t2
-</span></span><span style="display:flex;"><span>sw  $t3, 12($t0)
-</span></span><span style="display:flex;"><span>lw  $t4, 8($t0)
-</span></span><span style="display:flex;"><span>add $t5, $t1, $t4
-</span></span><span style="display:flex;"><span>sw  $t5, 16($t0)
-</span></span></code></pre></div><p>In this we&rsquo;ll have two stalling cycles, but with some smart thinking (or a smart compiler) we can instead do:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>lw  $t1, 0($t0)
-</span></span><span style="display:flex;"><span>lw  $t2, 4($t0)
-</span></span><span style="display:flex;"><span>lw  $t4, 8($t0)
-</span></span><span style="display:flex;"><span>add $t3, $t1, $t2
-</span></span><span style="display:flex;"><span>sw  $t3, 12($t0)
-</span></span><span style="display:flex;"><span>add $t5, $t1, $t4
-</span></span><span style="display:flex;"><span>sw  $t5, 16($t0)
-</span></span></code></pre></div><p>Just by changing one line we reduced our clock cycle count from 9 to 7!</p>
+<pre tabindex="0"><code>lw  $t1, 0($t0)
+lw  $t2, 4($t0)
+add $t3, $t1, $t2
+sw  $t3, 12($t0)
+lw  $t4, 8($t0)
+add $t5, $t1, $t4
+sw  $t5, 16($t0)
+</code></pre><p>In this we&rsquo;ll have two stalling cycles, but with some smart thinking (or a smart compiler) we can instead do:</p>
+<pre tabindex="0"><code>lw  $t1, 0($t0)
+lw  $t2, 4($t0)
+lw  $t4, 8($t0)
+add $t3, $t1, $t2
+sw  $t3, 12($t0)
+add $t5, $t1, $t4
+sw  $t5, 16($t0)
+</code></pre><p>Just by changing one line we reduced our clock cycle count from 9 to 7!</p>
 <h4 id="control-hazards">Control hazards</h4>
 <ul>
 <li>
@@ -391,8 +391,8 @@ $$</p>
 </li>
 </ul>
 <p>That last one might not be so clear from the start, but if we had very complex functions like</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>add M[$t0], M[$t1], M[$t2]
-</span></span></code></pre></div><p>This would be a headache, since then we are in the execute stage and read/write to memory simultaneously.</p>
+<pre tabindex="0"><code>add M[$t0], M[$t1], M[$t2]
+</code></pre><p>This would be a headache, since then we are in the execute stage and read/write to memory simultaneously.</p>
 
 		</section>
 

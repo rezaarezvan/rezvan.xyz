@@ -31,7 +31,7 @@ The answer is sending along the register&rsquo;s number in the pipeline!"/>
         <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
 
 	
-	<link rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/main.ded288734bf67c9f89d72102879afaadf50fed4138fb485737334085f5465104.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/main.56d2207fad46e63050394b2c8df0d9e313c631c4cd55e1c1c163a8a772d9a1df.css" />
 		<link id="darkModeStyle" rel="stylesheet" type="text/css" href="https://rezvan.xyz/css/dark.b47837a877382f31178bb7a2c2135fbe9c39b1d4a1cc529faee0363b6dbdc408.css"  disabled />
 	
 
@@ -115,18 +115,18 @@ The answer is sending along the register&rsquo;s number in the pipeline!"/>
 			<p>In this part we&rsquo;ll cover the actual hardware specifications/solutions to our potential problems with our newly pipelined CPU.</p>
 <h3 id="data-hazards">Data hazards</h3>
 <p>If we have the following scenario:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>sub    $2, $1, $3
-</span></span><span style="display:flex;"><span>and    $12, $2, $5
-</span></span></code></pre></div><p>Here we will have a data hazard. As we covered in the last part the solution here is so-called &ldquo;forwarding&rdquo;.</p>
+<pre tabindex="0"><code>sub    $2, $1, $3
+and    $12, $2, $5
+</code></pre><p>Here we will have a data hazard. As we covered in the last part the solution here is so-called &ldquo;forwarding&rdquo;.</p>
 <p>But how do we detect how to forward our result immediately?</p>
 <p>The answer is sending along the register&rsquo;s number in the pipeline!</p>
 <p>We use the convention that when we&rsquo;re in the registers in between stages we use the notation, <code>ID/EX</code>, for example.</p>
 <p>So, we get data hazards when:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>EX/MEM.RegisteRd = ID/EX.RegisterRs
-</span></span><span style="display:flex;"><span>EX/MEM.RegisteRd = ID/EX.RegisterRt
-</span></span><span style="display:flex;"><span>MEM/WB.RegisteRd = ID/EX.RegisterRs
-</span></span><span style="display:flex;"><span>MEM/WB.RegisteRd = ID/EX.RegisterRt
-</span></span></code></pre></div><p>So we need to detect <em>when</em> we need to forward, it shall only forward if:</p>
+<pre tabindex="0"><code>EX/MEM.RegisteRd = ID/EX.RegisterRs
+EX/MEM.RegisteRd = ID/EX.RegisterRt
+MEM/WB.RegisteRd = ID/EX.RegisterRs
+MEM/WB.RegisteRd = ID/EX.RegisterRt
+</code></pre><p>So we need to detect <em>when</em> we need to forward, it shall only forward if:</p>
 <ul>
 <li>
 <p>Only if we&rsquo;re writing to one register:</p>
@@ -149,16 +149,16 @@ The answer is sending along the register&rsquo;s number in the pipeline!"/>
 <p><code>EX</code> Hazard</p>
 <ul>
 <li>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>If(EX/MEM.RegWrite and (EX/MEM.RegisterRd != 0)
-</span></span><span style="display:flex;"><span>  and(EX/MEM.RegisterRd = ID/EX.RegisterRs))
-</span></span></code></pre></div><ul>
+<pre tabindex="0"><code>If(EX/MEM.RegWrite and (EX/MEM.RegisterRd != 0)
+  and(EX/MEM.RegisterRd = ID/EX.RegisterRs))
+</code></pre><ul>
 <li>→ <code>ForwardA = 10</code></li>
 </ul>
 </li>
 <li>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>If(EX/MEM.RegWrite and (EX/MEM.RegisterRd != 0)
-</span></span><span style="display:flex;"><span>  and(EX/MEM.RegisterRd = ID/EX.RegisterRt))
-</span></span></code></pre></div><ul>
+<pre tabindex="0"><code>If(EX/MEM.RegWrite and (EX/MEM.RegisterRd != 0)
+  and(EX/MEM.RegisterRd = ID/EX.RegisterRt))
+</code></pre><ul>
 <li>→ <code>ForwardB = 10</code></li>
 </ul>
 </li>
@@ -168,16 +168,16 @@ The answer is sending along the register&rsquo;s number in the pipeline!"/>
 <p><code>MEM</code> Hazard</p>
 <ul>
 <li>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>If(MEM/WB.RegWrite and (MEM/WB.RegisterRd != 0)
-</span></span><span style="display:flex;"><span>  and(MEM/WB.RegisterRd = ID/EX.RegisterRs))
-</span></span></code></pre></div><ul>
+<pre tabindex="0"><code>If(MEM/WB.RegWrite and (MEM/WB.RegisterRd != 0)
+  and(MEM/WB.RegisterRd = ID/EX.RegisterRs))
+</code></pre><ul>
 <li>→ <code>ForwardA = 01</code></li>
 </ul>
 </li>
 <li>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>If(MEM/WB.RegWrite and (MEM/WB.RegisterRd != 0)
-</span></span><span style="display:flex;"><span>  and(MEM/WB.RegisterRd = ID/EX.RegisterRt))
-</span></span></code></pre></div><ul>
+<pre tabindex="0"><code>If(MEM/WB.RegWrite and (MEM/WB.RegisterRd != 0)
+  and(MEM/WB.RegisterRd = ID/EX.RegisterRt))
+</code></pre><ul>
 <li>→ <code>ForwardB = 01</code></li>
 </ul>
 </li>
@@ -186,30 +186,30 @@ The answer is sending along the register&rsquo;s number in the pipeline!"/>
 </ul>
 <p>But there is another case we haven&rsquo;t talked about yet, that doesn&rsquo;t get solved with this solution, the double data hazard.</p>
 <p>If we have the following MIPS:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>add $1, $2, $3
-</span></span><span style="display:flex;"><span>add $1, $1, $3
-</span></span><span style="display:flex;"><span>add $1, $1, $4
-</span></span></code></pre></div><p>Here we have two hazards, both will occur, but we want to use the <em>latest</em> result.</p>
+<pre tabindex="0"><code>add $1, $2, $3
+add $1, $1, $3
+add $1, $1, $4
+</code></pre><p>Here we have two hazards, both will occur, but we want to use the <em>latest</em> result.</p>
 <p>Therefore, we need to update our conditions for <code>MEM</code> hazards: Only forward from MEM <em>if</em> no EX hazards!</p>
 <ul>
 <li>
 <p><code>MEM</code> Hazard</p>
 <ul>
 <li>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>If(MEM/WB.RegWrite and (MEM/WB.RegisterRd != 0)
-</span></span><span style="display:flex;"><span>  and not(EX/MEM.RegWrite and (EX/MEM.RegisterRd != 0)
-</span></span><span style="display:flex;"><span>      and(EX/MEM.RegisterRd = ID/EX.Register.Rs))
-</span></span><span style="display:flex;"><span>  and(MEM/WB.RegisterRd = ID/EX.RegisterRs))
-</span></span></code></pre></div><ul>
+<pre tabindex="0"><code>If(MEM/WB.RegWrite and (MEM/WB.RegisterRd != 0)
+  and not(EX/MEM.RegWrite and (EX/MEM.RegisterRd != 0)
+      and(EX/MEM.RegisterRd = ID/EX.Register.Rs))
+  and(MEM/WB.RegisterRd = ID/EX.RegisterRs))
+</code></pre><ul>
 <li>→ <code>ForwardA = 01</code></li>
 </ul>
 </li>
 <li>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>If(MEM/WB.RegWrite and (MEM/WB.RegisterRd != 0)
-</span></span><span style="display:flex;"><span>  and not(EX/MEM.RegWrite and (EX/MEM.RegisterRd != 0)
-</span></span><span style="display:flex;"><span>      and(EX/MEM.RegisterRd = ID/EX.Register.Rt))
-</span></span><span style="display:flex;"><span>  and(MEM/WB.RegisterRd = ID/EX.RegisterRt))
-</span></span></code></pre></div><ul>
+<pre tabindex="0"><code>If(MEM/WB.RegWrite and (MEM/WB.RegisterRd != 0)
+  and not(EX/MEM.RegWrite and (EX/MEM.RegisterRd != 0)
+      and(EX/MEM.RegisterRd = ID/EX.Register.Rt))
+  and(MEM/WB.RegisterRd = ID/EX.RegisterRt))
+</code></pre><ul>
 <li>→ <code>ForwardB = 01</code></li>
 </ul>
 </li>
@@ -220,9 +220,9 @@ The answer is sending along the register&rsquo;s number in the pipeline!"/>
 <img src="/school/images/FU2.png#center" alt=""></p>
 <h3 id="load-use-data-hazards">Load-use data hazards</h3>
 <p>As we discussed in the last part when we have:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>lw $2, 20($1)
-</span></span><span style="display:flex;"><span>and $4, $2, $5
-</span></span></code></pre></div><p>We either need to stall one whole clock cycle, or, place an uncorrelated instruction in between.
+<pre tabindex="0"><code>lw $2, 20($1)
+and $4, $2, $5
+</code></pre><p>We either need to stall one whole clock cycle, or, place an uncorrelated instruction in between.
 So we need a way to detect this:</p>
 <ul>
 <li>
@@ -238,10 +238,10 @@ So we need a way to detect this:</p>
 <p>We have a load-use hazard if:</p>
 <ul>
 <li>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>ID/EX.MemRead and
-</span></span><span style="display:flex;"><span>((ID/EX.RegisterRd = IF/ID.RegisterRs) or
-</span></span><span style="display:flex;"><span> (ID/EX.RegisterRd = IF/ID.RegisterRt))
-</span></span></code></pre></div></li>
+<pre tabindex="0"><code>ID/EX.MemRead and
+((ID/EX.RegisterRd = IF/ID.RegisterRs) or
+ (ID/EX.RegisterRd = IF/ID.RegisterRt))
+</code></pre></li>
 <li>If true, stall the pipeline.</li>
 </ul>
 </li>
@@ -295,8 +295,8 @@ This instruction is called the &ldquo;delayed slot&rdquo;.</p>
 <p>This approach works for a non-pipelined version.</p>
 <p>Let&rsquo;s look at how we should handle it from a pipelined version.</p>
 <p>Say we have an overflow exception in the <code>EX</code> stage from:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>add $s1, $s2, $s1
-</span></span></code></pre></div><p>What we need to make sure:</p>
+<pre tabindex="0"><code>add $s1, $s2, $s1
+</code></pre><p>What we need to make sure:</p>
 <ul>
 <li>
 <p>Do no update the <code>$s1</code> register.</p>

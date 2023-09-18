@@ -22,7 +22,7 @@ Weighted Graphs As we have seen in the last part - graphs can we directed or und
         <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
 
 	
-	<link rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/main.ded288734bf67c9f89d72102879afaadf50fed4138fb485737334085f5465104.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/main.56d2207fad46e63050394b2c8df0d9e313c631c4cd55e1c1c163a8a772d9a1df.css" />
 		<link id="darkModeStyle" rel="stylesheet" type="text/css" href="https://rezvan.xyz/css/dark.b47837a877382f31178bb7a2c2135fbe9c39b1d4a1cc529faee0363b6dbdc408.css"  disabled />
 	
 
@@ -195,26 +195,26 @@ These represent some kind of &lsquo;cost&rsquo;, usually these are positive floa
 <p>There&rsquo;s actually a good (and well-known) data strucute for this exact problem, the <em>disjoint-set</em> data structure.
 It supports merging and testing in $\mathcal{O}(log*\ n)$ time. (Note log* is an actual function, it&rsquo;s constant for all practical purpoes)</p>
 <p>A pseudo-code implementation would be:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>def kruskals(graph: Graph):
-</span></span><span style="display:flex;"><span>    result = []
-</span></span><span style="display:flex;"><span>    i, e = 0, 0
-</span></span><span style="display:flex;"><span>    graph = sort(graph)
-</span></span><span style="display:flex;"><span>    parent = []
-</span></span><span style="display:flex;"><span>    rank = []
-</span></span><span style="display:flex;"><span>    for vertex in range(graph.V):
-</span></span><span style="display:flex;"><span>        parent.append(vertex)
-</span></span><span style="display:flex;"><span>        rank.append(0)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    while e &lt; graph.V - 1:
-</span></span><span style="display:flex;"><span>        u, v, w = graph[i]
-</span></span><span style="display:flex;"><span>        i = i + 1
-</span></span><span style="display:flex;"><span>        x = graph.find(parent, u)
-</span></span><span style="display:flex;"><span>        y = graph.find(parent, v)
-</span></span><span style="display:flex;"><span>        if x != y:
-</span></span><span style="display:flex;"><span>            e = e + 1
-</span></span><span style="display:flex;"><span>            result.append([u, v, w])
-</span></span><span style="display:flex;"><span>            graph.apply_union(parent, rank, x, y)
-</span></span></code></pre></div><h3 id="prims-algortim">Prim&rsquo;s algortim</h3>
+<pre tabindex="0"><code>def kruskals(graph: Graph):
+    result = []
+    i, e = 0, 0
+    graph = sort(graph)
+    parent = []
+    rank = []
+    for vertex in range(graph.V):
+        parent.append(vertex)
+        rank.append(0)
+
+    while e &lt; graph.V - 1:
+        u, v, w = graph[i]
+        i = i + 1
+        x = graph.find(parent, u)
+        y = graph.find(parent, v)
+        if x != y:
+            e = e + 1
+            result.append([u, v, w])
+            graph.apply_union(parent, rank, x, y)
+</code></pre><h3 id="prims-algortim">Prim&rsquo;s algortim</h3>
 <p>The challenge here is instead to find and remove the min weight edge with exactly one endpoint in T.</p>
 <p>If try all edges we will ofcourse have a compleixty of $\mathcal{O}(E^2)$. So let&rsquo;s not do that :)</p>
 <p>However, if we use a priority queue, we can get a $\mathcal{O}(E\ log(E))$. This is still the &rsquo;lazy&rsquo; version but let&rsquo;s look at the idea:</p>
@@ -300,30 +300,30 @@ where priority of node $v$ = weight of shortest edge connecting $v$ to T.</p>
 Also if we have any restraints on cycles?</p>
 <p>But with all this in mind - let&rsquo;s simplifiy - Shorest path from S to each node V <strong>exists</strong>.</p>
 <p>If you remember, here&rsquo;s our ADT/API for directed graphs:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>class Graph&lt;Vertices&gt;:
-</span></span><span style="display:flex;"><span>    // Adds an edge to the graph
-</span></span><span style="display:flex;"><span>    add_edge(e: Edge&lt;Vertices&gt;)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    // Removes an edge from the graph
-</span></span><span style="display:flex;"><span>    remove_edge(e: Edge&lt;Vertices&gt;)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    // Returns true if the edge is present in the graph, otherwise false
-</span></span><span style="display:flex;"><span>    contains_edge(e: Edge&lt;Vertices&gt;) -&gt; boolean
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    // Returns all the edges which are connected with the vertices
-</span></span><span style="display:flex;"><span>    outgoing_edges(from: Vertices) -&gt; Collection&lt;Edge&lt;Vertices&gt;&gt;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    // Returns the number of vertices present in the graph
-</span></span><span style="display:flex;"><span>    n_vertices() -&gt; Int
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    // Returns the number of edges present in the graph
-</span></span><span style="display:flex;"><span>    n_edges() -&gt; Int
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>class Edge&lt;Vertices&gt;:
-</span></span><span style="display:flex;"><span>    from   : Vertices
-</span></span><span style="display:flex;"><span>    to     : Vertices
-</span></span><span style="display:flex;"><span>    weight : float = 1.0
-</span></span></code></pre></div><h3 id="single-source-shortest-paths">Single-source shortest paths</h3>
+<pre tabindex="0"><code>class Graph&lt;Vertices&gt;:
+    // Adds an edge to the graph
+    add_edge(e: Edge&lt;Vertices&gt;)
+
+    // Removes an edge from the graph
+    remove_edge(e: Edge&lt;Vertices&gt;)
+
+    // Returns true if the edge is present in the graph, otherwise false
+    contains_edge(e: Edge&lt;Vertices&gt;) -&gt; boolean
+
+    // Returns all the edges which are connected with the vertices
+    outgoing_edges(from: Vertices) -&gt; Collection&lt;Edge&lt;Vertices&gt;&gt;
+
+    // Returns the number of vertices present in the graph
+    n_vertices() -&gt; Int
+
+    // Returns the number of edges present in the graph
+    n_edges() -&gt; Int
+
+class Edge&lt;Vertices&gt;:
+    from   : Vertices
+    to     : Vertices
+    weight : float = 1.0
+</code></pre><h3 id="single-source-shortest-paths">Single-source shortest paths</h3>
 <p>The <em>single-source shortest path</em> problem or, SSSP for short. We want to find the shorest path from S to every other node.</p>
 <p>The solution is spanning trees! However, it&rsquo;s not the MST but the so called <strong>shortest-paths tree</strong>, SPT.</p>
 <p>In an SPT, the starting node $s$ is the root of the tree:</p>
@@ -352,38 +352,38 @@ Also if we have any restraints on cycles?</p>
 </li>
 </ul>
 <p>So a generalized generic graphsearch would be:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>GraphSearch(start: V):
-</span></span><span style="display:flex;"><span>    put start in collection
-</span></span><span style="display:flex;"><span>    repeat until the colletion is empty:
-</span></span><span style="display:flex;"><span>        remove a vertex v
-</span></span><span style="display:flex;"><span>        if v is not visited:
-</span></span><span style="display:flex;"><span>            mark v as visited
-</span></span><span style="display:flex;"><span>            add all unvisited adjacent nodes
-</span></span></code></pre></div><p>Now let&rsquo;s suppose this collection is a <strong>priorty queue</strong> - the weights are the <strong>total cost from s to v</strong></p>
+<pre tabindex="0"><code>GraphSearch(start: V):
+    put start in collection
+    repeat until the colletion is empty:
+        remove a vertex v
+        if v is not visited:
+            mark v as visited
+            add all unvisited adjacent nodes
+</code></pre><p>Now let&rsquo;s suppose this collection is a <strong>priorty queue</strong> - the weights are the <strong>total cost from s to v</strong></p>
 <p>This is the so called Dijkstra&rsquo;s/uniform cost algorithm/search.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>UCS(start: V):
-</span></span><span style="display:flex;"><span>    Q = PQ // Order by the cost from start
-</span></span><span style="display:flex;"><span>    Q.put(start)
-</span></span><span style="display:flex;"><span>    while is not Q.isempty():
-</span></span><span style="display:flex;"><span>        Q.remove_min()
-</span></span><span style="display:flex;"><span>        if v not in visited:
-</span></span><span style="display:flex;"><span>            visited.add(v) // mark as visited
-</span></span><span style="display:flex;"><span>            for unvisited vertex w adjacent to v:
-</span></span><span style="display:flex;"><span>                the cost from s to w = cost from s to v + the cost from v to w
-</span></span><span style="display:flex;"><span>                Q.put(w)
-</span></span></code></pre></div><p>This is the so called <strong>single source</strong> algortihm, if we want a <strong>source-sink</strong> we just add:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>UCS(start: V):
-</span></span><span style="display:flex;"><span>    Q = PQ // Order by the cost from start
-</span></span><span style="display:flex;"><span>    Q.put(start)
-</span></span><span style="display:flex;"><span>    while is not Q.isempty():
-</span></span><span style="display:flex;"><span>        Q.remove_min()
-</span></span><span style="display:flex;"><span>        if v is the goal, return the shortest path from s to v
-</span></span><span style="display:flex;"><span>        if v not in visited:
-</span></span><span style="display:flex;"><span>            visited.add(v) // mark as visited
-</span></span><span style="display:flex;"><span>            for unvisited vertex w adjacent to v:
-</span></span><span style="display:flex;"><span>                the cost from s to w = cost from s to v + the cost from v to w
-</span></span><span style="display:flex;"><span>                Q.put(w)
-</span></span></code></pre></div><h3 id="shortest-path-in-a-dag">Shortest path in a DAG</h3>
+<pre tabindex="0"><code>UCS(start: V):
+    Q = PQ // Order by the cost from start
+    Q.put(start)
+    while is not Q.isempty():
+        Q.remove_min()
+        if v not in visited:
+            visited.add(v) // mark as visited
+            for unvisited vertex w adjacent to v:
+                the cost from s to w = cost from s to v + the cost from v to w
+                Q.put(w)
+</code></pre><p>This is the so called <strong>single source</strong> algortihm, if we want a <strong>source-sink</strong> we just add:</p>
+<pre tabindex="0"><code>UCS(start: V):
+    Q = PQ // Order by the cost from start
+    Q.put(start)
+    while is not Q.isempty():
+        Q.remove_min()
+        if v is the goal, return the shortest path from s to v
+        if v not in visited:
+            visited.add(v) // mark as visited
+            for unvisited vertex w adjacent to v:
+                the cost from s to w = cost from s to v + the cost from v to w
+                Q.put(w)
+</code></pre><h3 id="shortest-path-in-a-dag">Shortest path in a DAG</h3>
 <p>If we know the graph doesn&rsquo;t contain any cycles, this problem become <strong>a lot</strong> easier.</p>
 <p>We use the same algortihm as a UCS - but we don&rsquo;t need a PQ and we can consider the nodes in a <em>toplogical order</em>.</p>
 <p>This reduces the complexity to $\mathcal{O}(E)$.</p>

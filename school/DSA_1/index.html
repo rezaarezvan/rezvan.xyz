@@ -25,7 +25,7 @@ With this we began with simple sorting and searching algorithms. Firstly we bega
         <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
 
 	
-	<link rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/main.ded288734bf67c9f89d72102879afaadf50fed4138fb485737334085f5465104.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/main.56d2207fad46e63050394b2c8df0d9e313c631c4cd55e1c1c163a8a772d9a1df.css" />
 		<link id="darkModeStyle" rel="stylesheet" type="text/css" href="https://rezvan.xyz/css/dark.b47837a877382f31178bb7a2c2135fbe9c39b1d4a1cc529faee0363b6dbdc408.css"  disabled />
 	
 
@@ -114,113 +114,113 @@ to sort millions of data gathered by an AI.</p>
 <p>With this we began with simple sorting and searching algorithms. Firstly we began with binary search.
 Binary search is a simple yet powerful search algorithm for finding a value in a <strong>sorted</strong> array.</p>
 <p>Pseudo Code for a Binary Search:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>func binary_search(array, search_value):
-</span></span><span style="display:flex;"><span>    low  = first index of array
-</span></span><span style="display:flex;"><span>    high = last index of array
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    # If our low and high pointers ever cross, we know that the element is not in the array
-</span></span><span style="display:flex;"><span>    while low &lt;= high:
-</span></span><span style="display:flex;"><span>        mid  = mid index of array; (low + high) / 2
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        if(search_value is to the left of mid value):
-</span></span><span style="display:flex;"><span>            continue search to the left of the array
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        else if(search_value is to the right of mid value):
-</span></span><span style="display:flex;"><span>            continue search to the right of the array
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        else:
-</span></span><span style="display:flex;"><span>            return mid
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    return Not in array
-</span></span></code></pre></div><p>And an actual Python implementation:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>def binary_search(arr, val):
-</span></span><span style="display:flex;"><span>    low  = 0
-</span></span><span style="display:flex;"><span>    high = len(arr) - 1
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    while low &lt;= high:
-</span></span><span style="display:flex;"><span>        mid = (low + high) // 2
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        if(val &lt; arr[mid]):
-</span></span><span style="display:flex;"><span>            high = mid - 1
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        elif(val &gt; arr[mid]):
-</span></span><span style="display:flex;"><span>            low = mid + 1
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        else:
-</span></span><span style="display:flex;"><span>            return mid
-</span></span><span style="display:flex;"><span>    return -1
-</span></span></code></pre></div><p>The next step was Selection and Insertion sort, simple naive sorting algorithms.</p>
+<pre tabindex="0"><code>func binary_search(array, search_value):
+    low  = first index of array
+    high = last index of array
+
+    # If our low and high pointers ever cross, we know that the element is not in the array
+    while low &lt;= high:
+        mid  = mid index of array; (low + high) / 2
+
+        if(search_value is to the left of mid value):
+            continue search to the left of the array
+
+        else if(search_value is to the right of mid value):
+            continue search to the right of the array
+
+        else:
+            return mid
+
+    return Not in array
+</code></pre><p>And an actual Python implementation:</p>
+<pre tabindex="0"><code>def binary_search(arr, val):
+    low  = 0
+    high = len(arr) - 1
+
+    while low &lt;= high:
+        mid = (low + high) // 2
+
+        if(val &lt; arr[mid]):
+            high = mid - 1
+
+        elif(val &gt; arr[mid]):
+            low = mid + 1
+
+        else:
+            return mid
+    return -1
+</code></pre><p>The next step was Selection and Insertion sort, simple naive sorting algorithms.</p>
 <p>The selection sort algorithm is: Find the smallest element in the list and swap it to the first index, then continue for the next-smallest etc.</p>
 <p>An implementation:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>def selection_sort(arr):
-</span></span><span style="display:flex;"><span>    size = len(arr)
-</span></span><span style="display:flex;"><span>    for index in range(size):
-</span></span><span style="display:flex;"><span>        min_index = index
-</span></span><span style="display:flex;"><span>        for j in range(index + 1, size):
-</span></span><span style="display:flex;"><span>            if(arr[j] &lt; arr[min_index]):
-</span></span><span style="display:flex;"><span>                min_index = j
-</span></span><span style="display:flex;"><span>        (arr[index], arr[min_index]) = (arr[min_index], arr[index])
-</span></span></code></pre></div><p>After that it was time for insertion sort, which builds on the idea of inserting a value in an array.
+<pre tabindex="0"><code>def selection_sort(arr):
+    size = len(arr)
+    for index in range(size):
+        min_index = index
+        for j in range(index + 1, size):
+            if(arr[j] &lt; arr[min_index]):
+                min_index = j
+        (arr[index], arr[min_index]) = (arr[min_index], arr[index])
+</code></pre><p>After that it was time for insertion sort, which builds on the idea of inserting a value in an array.
 The idea is that we start by saying that the first element is the &lsquo;sorted&rsquo; part. Then we begin looking the the &lsquo;unsorted&rsquo; part,
 at seeing where it should be inserted into the sorted array. A simple, yet, powerful algorithm. We will see how important the idea of inserting will be later on.</p>
 <p>An implementation:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>def insertion_sort(arr):
-</span></span><span style="display:flex;"><span>    # Begin by saying the first element is sorted
-</span></span><span style="display:flex;"><span>    # We call the
-</span></span><span style="display:flex;"><span>    for i in range(1, len(arr)):
-</span></span><span style="display:flex;"><span>        val = arr[i]
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        j = i - 1
-</span></span><span style="display:flex;"><span>        while j &gt;= 0 and val &lt; arr[j]:
-</span></span><span style="display:flex;"><span>            arr[j + 1] = arr[j]
-</span></span><span style="display:flex;"><span>            j -= 1
-</span></span><span style="display:flex;"><span>        arr[j+ 1] = val
-</span></span></code></pre></div><p>Although these algorithms are simple, they are unfortunately really slow, when the array becomes larges.
+<pre tabindex="0"><code>def insertion_sort(arr):
+    # Begin by saying the first element is sorted
+    # We call the
+    for i in range(1, len(arr)):
+        val = arr[i]
+
+        j = i - 1
+        while j &gt;= 0 and val &lt; arr[j]:
+            arr[j + 1] = arr[j]
+            j -= 1
+        arr[j+ 1] = val
+</code></pre><p>Although these algorithms are simple, they are unfortunately really slow, when the array becomes larges.
 For now we can just say that why this is because: The number of operations needed to check and sort grows quadratic with the array size.</p>
 <p>Imagine we have two sorted lists and we want to merge them - what&rsquo;s the algorithm for this?
 Quite simple actually, we use two pointers for knowing where we are in both arrays, starting at the first index and both and compare which value we insert into the new (bigger) array).
 Then we move the pointers accordingly, until we reach the end. Reaching the end here means we either hit the end of the array of both arrays simultaneously,
 or reaching the end of one array - if we do that we know there&rsquo;s nothing left to compare to, therefore we can just put the rest of the elements in.</p>
 <p>An implementation of a merge function:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>def merge(arr1, arr2):
-</span></span><span style="display:flex;"><span>    # We can cheat a little bit using python - but the idea is still the same
-</span></span><span style="display:flex;"><span>    output = []
-</span></span><span style="display:flex;"><span>    p1     = 0
-</span></span><span style="display:flex;"><span>    p2     = 0
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    while p1 &lt; len(arr1) and p2 &lt; len(arr2):
-</span></span><span style="display:flex;"><span>        if(arr1[p1] &lt;= arr2[p2]):
-</span></span><span style="display:flex;"><span>            output.append(arr1[p1])
-</span></span><span style="display:flex;"><span>            p1 += 1
-</span></span><span style="display:flex;"><span>        else:
-</span></span><span style="display:flex;"><span>            output.append(arr2[p2])
-</span></span><span style="display:flex;"><span>            p2 += 1
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    while p1 &lt; len(arr1):
-</span></span><span style="display:flex;"><span>        output.append(arr1[p1])
-</span></span><span style="display:flex;"><span>        p1 += 1
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    while p2 &lt; len(arr2):
-</span></span><span style="display:flex;"><span>        output.append(arr2[p2])
-</span></span><span style="display:flex;"><span>        p2 += 1
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    return output
-</span></span></code></pre></div><p>Now that we&rsquo;re familiar with this algorithm - we can use this by divide and conquering a unsorted array with a bit of modifications.
+<pre tabindex="0"><code>def merge(arr1, arr2):
+    # We can cheat a little bit using python - but the idea is still the same
+    output = []
+    p1     = 0
+    p2     = 0
+
+    while p1 &lt; len(arr1) and p2 &lt; len(arr2):
+        if(arr1[p1] &lt;= arr2[p2]):
+            output.append(arr1[p1])
+            p1 += 1
+        else:
+            output.append(arr2[p2])
+            p2 += 1
+
+    while p1 &lt; len(arr1):
+        output.append(arr1[p1])
+        p1 += 1
+
+    while p2 &lt; len(arr2):
+        output.append(arr2[p2])
+        p2 += 1
+
+    return output
+</code></pre><p>Now that we&rsquo;re familiar with this algorithm - we can use this by divide and conquering a unsorted array with a bit of modifications.
 We can imagine that we divide the unsorted array into a left and right part and <strong>recursively</strong> mergesort() them as well.</p>
 <p>In practice it means that we get a sorted left array and a sorted right array, then we finally merge them for the final result.</p>
 <p>An implementation of merge sort:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>def merge_sort(arr: list) -&gt; list:
-</span></span><span style="display:flex;"><span>    if len(arr) &lt; 2:
-</span></span><span style="display:flex;"><span>        return arr[:]
-</span></span><span style="display:flex;"><span>    else:
-</span></span><span style="display:flex;"><span>        mid = len(arr) // 2
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        L = merge_sort(arr[:mid])
-</span></span><span style="display:flex;"><span>        R = merge_sort(arr[mid:])
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>	result = merge(L, R)
-</span></span><span style="display:flex;"><span>        return result
-</span></span></code></pre></div><p>Merge sort is great, but sometimes, if the list is <em>almost</em> sorted or worse, already sorted and you call this function sort it - it will be incredibly slow, this is due to merge sort not being a so called in place algorithm.
+<pre tabindex="0"><code>def merge_sort(arr: list) -&gt; list:
+    if len(arr) &lt; 2:
+        return arr[:]
+    else:
+        mid = len(arr) // 2
+
+        L = merge_sort(arr[:mid])
+        R = merge_sort(arr[mid:])
+
+	result = merge(L, R)
+        return result
+</code></pre><p>Merge sort is great, but sometimes, if the list is <em>almost</em> sorted or worse, already sorted and you call this function sort it - it will be incredibly slow, this is due to merge sort not being a so called in place algorithm.
 A algorithm which has the same divide and conquerer strategy but is in-place is Quicksort!</p>
 <p>Quicksort builds on the idea that you <em>partition</em> your array into one part which is lower than the <em>pivot</em> element and one part which is higher.</p>
 <p>In practice this means you sort it by recursively partitioning the sub-arrays.</p>
@@ -228,32 +228,32 @@ A algorithm which has the same divide and conquerer strategy but is in-place is 
 If we choose a good pivot our algorithm becomes much faster. A common (and good) strategy is either choosing a random pivot, or the median of three.</p>
 <p>In this example I will choose the pivot element as the last element of the list.
 An implementation of Quicksort:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>def partition(arr, low, high):
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    def swap(i, j):
-</span></span><span style="display:flex;"><span>        arr[i], arr[j] = arr[j], arr[i]
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    pivot = arr[high]
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    i = low - 1
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    for j in range(low, high):
-</span></span><span style="display:flex;"><span>        if arr[j] &lt;= pivot:
-</span></span><span style="display:flex;"><span>            i += 1
-</span></span><span style="display:flex;"><span>            swap(i, j)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    swap(i + 1, high)
-</span></span><span style="display:flex;"><span>    return i + 1
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>def quick_sort(arr, low, high):
-</span></span><span style="display:flex;"><span>    if low &lt; high:
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        p = partition(arr, low, high)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        quick_sort(arr, low, p - 1)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        quick_sort(arr, p + 1, high)
-</span></span></code></pre></div><p>This concludes this part, next time I&rsquo;ll write about (short) about Complexity - after that the major part of this course, actual data structures and how we use them as well as implement them.</p>
+<pre tabindex="0"><code>def partition(arr, low, high):
+
+    def swap(i, j):
+        arr[i], arr[j] = arr[j], arr[i]
+
+    pivot = arr[high]
+
+    i = low - 1
+
+    for j in range(low, high):
+        if arr[j] &lt;= pivot:
+            i += 1
+            swap(i, j)
+
+    swap(i + 1, high)
+    return i + 1
+
+def quick_sort(arr, low, high):
+    if low &lt; high:
+
+        p = partition(arr, low, high)
+
+        quick_sort(arr, low, p - 1)
+
+        quick_sort(arr, p + 1, high)
+</code></pre><p>This concludes this part, next time I&rsquo;ll write about (short) about Complexity - after that the major part of this course, actual data structures and how we use them as well as implement them.</p>
 
 		</section>
 

@@ -31,7 +31,7 @@ Determines number of operations required, which directly impacts the performance
         <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
 
 	
-	<link rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/main.ded288734bf67c9f89d72102879afaadf50fed4138fb485737334085f5465104.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/main.56d2207fad46e63050394b2c8df0d9e313c631c4cd55e1c1c163a8a772d9a1df.css" />
 		<link id="darkModeStyle" rel="stylesheet" type="text/css" href="https://rezvan.xyz/css/dark.b47837a877382f31178bb7a2c2135fbe9c39b1d4a1cc529faee0363b6dbdc408.css"  disabled />
 	
 
@@ -172,79 +172,79 @@ These two approaches are known as RISC and CISC.</p>
 <p>In this series we will use a MIPS instruction set, MIPS is still used widely in the real world, but it&rsquo;s slowly fading away to due RISC V&rsquo;s popularity.</p>
 <p>Let&rsquo;s see some MIPS operations:</p>
 <h4 id="arithmetic-operations">Arithmetic operations</h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>add a, b, c # a := b + c
-</span></span></code></pre></div><p>All arithmetic operations have this form, two source register and one destination registers.</p>
+<pre tabindex="0"><code>add a, b, c # a := b + c
+</code></pre><p>All arithmetic operations have this form, two source register and one destination registers.</p>
 <p>We also see that comments are denoted by a <code>#</code> in MIPS programs.</p>
 <h4 id="register-operations">Register operations</h4>
 <p>All operations in assembly languages utilize <em>registers</em>.</p>
 <p>MIPS has a 32 x 32 bit <strong>register file</strong> (RF)</p>
 <p>They are numbered 0 to 31 and, just a refresher, 32-bit data is called a &ldquo;word&rdquo;.</p>
 <p>Example:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>f = (g + h) - (i + j);
-</span></span></code></pre></div><p>Given that $f, \ldots, j$ are in registers $s_0, \ldots, s_4$, in MIPS this will become:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>add $t0, $s1, $s2 # temp0 := g + h
-</span></span><span style="display:flex;"><span>add $t1, $s3, $s4 # temp1 := i + j
-</span></span><span style="display:flex;"><span>sub $s0, $t0, $t1 # f := t0 - t1
-</span></span></code></pre></div><h4 id="memory-operations">Memory operations</h4>
+<pre tabindex="0"><code>f = (g + h) - (i + j);
+</code></pre><p>Given that $f, \ldots, j$ are in registers $s_0, \ldots, s_4$, in MIPS this will become:</p>
+<pre tabindex="0"><code>add $t0, $s1, $s2 # temp0 := g + h
+add $t1, $s3, $s4 # temp1 := i + j
+sub $s0, $t0, $t1 # f := t0 - t1
+</code></pre><h4 id="memory-operations">Memory operations</h4>
 <p>Since MIPS is byte addressable, it means that each &ldquo;word&rdquo; has 4 bytes.
 Also good to note here is that MIPS uses <strong>big endian</strong></p>
 <p>Example:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>g = h + A[8];
-</span></span></code></pre></div><p>Given that g is in $s_1$, h in $s_2$ and, the starting address for A is at $s_3$</p>
+<pre tabindex="0"><code>g = h + A[8];
+</code></pre><p>Given that g is in $s_1$, h in $s_2$ and, the starting address for A is at $s_3$</p>
 <p>We will get the following MIPS code:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>lw $t0, 32($s3)     # load word
-</span></span><span style="display:flex;"><span>add $s1, $s2, $t0
-</span></span></code></pre></div><p>Example 2:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>A[12] = h + A[8];
-</span></span></code></pre></div><p>Given that h is in $s_2$, and, the starting address for A is at $s_3$</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>lw $t0, 32($s3)     # load word
-</span></span><span style="display:flex;"><span>add $t0, $s2, $t0
-</span></span><span style="display:flex;"><span>sw $t0, 48($s3)     # store word
-</span></span></code></pre></div><h4 id="immediate-operations">Immediate operations</h4>
+<pre tabindex="0"><code>lw $t0, 32($s3)     # load word
+add $s1, $s2, $t0
+</code></pre><p>Example 2:</p>
+<pre tabindex="0"><code>A[12] = h + A[8];
+</code></pre><p>Given that h is in $s_2$, and, the starting address for A is at $s_3$</p>
+<pre tabindex="0"><code>lw $t0, 32($s3)     # load word
+add $t0, $s2, $t0
+sw $t0, 48($s3)     # store word
+</code></pre><h4 id="immediate-operations">Immediate operations</h4>
 <p>Instead of, for example, adding two registers, we may just want to add a constant, this can be done via:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>addi $s3, $s3, 4
-</span></span></code></pre></div><p>For subtracting we just do:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>addi $s2, $s1, -1
-</span></span></code></pre></div><h4 id="zero-register">Zero register</h4>
+<pre tabindex="0"><code>addi $s3, $s3, 4
+</code></pre><p>For subtracting we just do:</p>
+<pre tabindex="0"><code>addi $s2, $s1, -1
+</code></pre><h4 id="zero-register">Zero register</h4>
 <p>In MIPS there is a hard-coded zero register, that always contains the value zero, this can be used to quickly move values between registers:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>add $t2, $s1, $zero     # t2 := s1
-</span></span></code></pre></div><h4 id="logical-operations">Logical operations</h4>
+<pre tabindex="0"><code>add $t2, $s1, $zero     # t2 := s1
+</code></pre><h4 id="logical-operations">Logical operations</h4>
 <p>In MIPS there are of course logical operations:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span># Logical Shifts
-</span></span><span style="display:flex;"><span>sll $t0, $t1, 2     # t0 := t1 * 4
-</span></span><span style="display:flex;"><span>srl $t0, $t1, 2     # t0 := t1 / 4
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span># Logical AND
-</span></span><span style="display:flex;"><span>and $t0, $t1, $t2   # t0 := t1 &amp; t2
-</span></span><span style="display:flex;"><span>andi $t0, $t1, 2   # t0 := t1 &amp; 2
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span># Logical OR
-</span></span><span style="display:flex;"><span>or $t0, $t1, $t2   # t0 := t1 | t2
-</span></span><span style="display:flex;"><span>ori $t0, $t1, 2   # t0 := t1 | 2
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span># Logical NOT
-</span></span><span style="display:flex;"><span>nor $t0, $t1, $zero # := NOT(t1)
-</span></span></code></pre></div><p>Notice there isn&rsquo;t an explicit <code>not</code> operation, but rather we use a <code>nor</code> operation with the zero register.</p>
+<pre tabindex="0"><code># Logical Shifts
+sll $t0, $t1, 2     # t0 := t1 * 4
+srl $t0, $t1, 2     # t0 := t1 / 4
+
+# Logical AND
+and $t0, $t1, $t2   # t0 := t1 &amp; t2
+andi $t0, $t1, 2   # t0 := t1 &amp; 2
+
+# Logical OR
+or $t0, $t1, $t2   # t0 := t1 | t2
+ori $t0, $t1, 2   # t0 := t1 | 2
+
+# Logical NOT
+nor $t0, $t1, $zero # := NOT(t1)
+</code></pre><p>Notice there isn&rsquo;t an explicit <code>not</code> operation, but rather we use a <code>nor</code> operation with the zero register.</p>
 <h4 id="conditional-jumps">Conditional jumps</h4>
 <p>In MIPS there is only two conditional jumps, <code>beq</code> and <code>bne</code>:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>beq rs, rt, L1 # if(rs == rt); Jump to L1
-</span></span><span style="display:flex;"><span>bne rs, rt, L1 # if(rs != rt); Jump to L1
-</span></span><span style="display:flex;"><span>j L1           # Jump to L1
-</span></span></code></pre></div><p>So for example the following C-code:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>if(i == j) {
-</span></span><span style="display:flex;"><span>    f = g + h;
-</span></span><span style="display:flex;"><span>} else {
-</span></span><span style="display:flex;"><span>    f = g - h;
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>Given that $f, g, \ldots$ is in $s_0, s_1, \ldots$</p>
+<pre tabindex="0"><code>beq rs, rt, L1 # if(rs == rt); Jump to L1
+bne rs, rt, L1 # if(rs != rt); Jump to L1
+j L1           # Jump to L1
+</code></pre><p>So for example the following C-code:</p>
+<pre tabindex="0"><code>if(i == j) {
+    f = g + h;
+} else {
+    f = g - h;
+}
+</code></pre><p>Given that $f, g, \ldots$ is in $s_0, s_1, \ldots$</p>
 <p>MIPS:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>bne $s3, $s4, Else # if(i == j) jump to Else
-</span></span><span style="display:flex;"><span>add $s0, $s1, $s2  # f = g + h
-</span></span><span style="display:flex;"><span>j Exit             # Jump to exit
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>Else: sub $s0, $s1, $s2 # f = g - h
-</span></span><span style="display:flex;"><span>Exit: ...
-</span></span></code></pre></div><p>Notice how there isn&rsquo;t any usual <code>blt, bge</code>, since MIPS is of RISC architecture, we don&rsquo;t need those.</p>
+<pre tabindex="0"><code>bne $s3, $s4, Else # if(i == j) jump to Else
+add $s0, $s1, $s2  # f = g + h
+j Exit             # Jump to exit
+
+Else: sub $s0, $s1, $s2 # f = g - h
+Exit: ...
+</code></pre><p>Notice how there isn&rsquo;t any usual <code>blt, bge</code>, since MIPS is of RISC architecture, we don&rsquo;t need those.</p>
 <p>Instead, what we can do is using <code>slt</code>. Which stands for set less than, we can now use this to replicate a <code>blt</code> or <code>bge</code>.</p>
 <p>However, <code>blt, bge</code> are still pseudo-keywords in MIPS. The assembler will still be able to interpret these.</p>
 <p>On the topic of pseudo-keywords, things like <code>move</code> and <code>li</code> are also pseudo-keywords.</p>

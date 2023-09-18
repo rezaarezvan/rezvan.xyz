@@ -25,7 +25,7 @@ Add an item to the queue Find the smallest item in the queue Remove the smallest
         <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
 
 	
-	<link rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/main.ded288734bf67c9f89d72102879afaadf50fed4138fb485737334085f5465104.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/main.56d2207fad46e63050394b2c8df0d9e313c631c4cd55e1c1c163a8a772d9a1df.css" />
 		<link id="darkModeStyle" rel="stylesheet" type="text/css" href="https://rezvan.xyz/css/dark.b47837a877382f31178bb7a2c2135fbe9c39b1d4a1cc529faee0363b6dbdc408.css"  disabled />
 	
 
@@ -148,18 +148,18 @@ but there&rsquo;s also a max-priority queue which gets/removes the maximum item 
 </ul>
 <p>For this last application - say each operation takes $\mathcal{O}(log\ n)$, then this algorithm takes $\mathcal{O}(n\ log(n))$, which is good!</p>
 <p>This algortihm would look something like:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>sort(arr: list) -&gt; list:
-</span></span><span style="display:flex;"><span>    prio_q = new min_prio_q()
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    for x in arr:
-</span></span><span style="display:flex;"><span>        pq.add(x)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    result = []
-</span></span><span style="display:flex;"><span>    while not pq.empty():
-</span></span><span style="display:flex;"><span>        result.add(pq.remove_min())
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    return result
-</span></span></code></pre></div><p>There are loads more application, we&rsquo;ll be looking into the graph searching and more A.I applications.</p>
+<pre tabindex="0"><code>sort(arr: list) -&gt; list:
+    prio_q = new min_prio_q()
+
+    for x in arr:
+        pq.add(x)
+
+    result = []
+    while not pq.empty():
+        result.add(pq.remove_min())
+
+    return result
+</code></pre><p>There are loads more application, we&rsquo;ll be looking into the graph searching and more A.I applications.</p>
 <h3 id="implementation-of-a-priority-queue">Implementation of a Priority Queue</h3>
 <p>One&rsquo;s first approach might be using a sorted/unsorted array, but the complexity becomes really bad quickly..</p>
 <p>As we covered in the last part, a balanced BST seems lika good approach - and it is, however it will quickly become painful since we need to allow duplicates&hellip;</p>
@@ -180,49 +180,49 @@ but there&rsquo;s also a max-priority queue which gets/removes the maximum item 
 <p>So, if we have node $i$, the child is at index $2i + 1$ and the right child at $2i + 2$. You can test this for yourself, but this just indexing left to right level by level.</p>
 <p>We can also use that the <em>parent</em> of node <em>i</em> is at index $(i - 1) / 2$</p>
 <h3 id="implementation">Implementation</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>class min_prio_q[Item]:
-</span></span><span style="display:flex;"><span>    heap: list[Item] = []
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    greater(i: int, j: int) -&gt; boolean:
-</span></span><span style="display:flex;"><span>        return heap[i] &gt; heap[j]
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    get_min() -&gt; Item:
-</span></span><span style="display:flex;"><span>        return heap[0]
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    add(item: Item):
-</span></span><span style="display:flex;"><span>        // Add the item to the end of list (The end of the heap)
-</span></span><span style="display:flex;"><span>        heap.append(item)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        // Swap child with parent if the child is greater than the parent.
-</span></span><span style="display:flex;"><span>        // To achieve completeness that may have been lost
-</span></span><span style="display:flex;"><span>        while k &gt; 0 and greater((k - 1) / 2, k):
-</span></span><span style="display:flex;"><span>            swap heap[(k - 1) / 2] and heap[k]
-</span></span><span style="display:flex;"><span>            k = (k - 1) / 2
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    remove_min() -&gt; Item:
-</span></span><span style="display:flex;"><span>        min: Item = heap[0]
-</span></span><span style="display:flex;"><span>        n: int = len(heap) - 1
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        // Swap root with the end node to fix the invariant that may have been lost
-</span></span><span style="display:flex;"><span>        swap heap[0] and heap[n]
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        k: int = 0
-</span></span><span style="display:flex;"><span>        // While child to the left is in tree
-</span></span><span style="display:flex;"><span>        while 2 * k + 1 &lt;= n:
-</span></span><span style="display:flex;"><span>            j: int = 2 * k + 1
-</span></span><span style="display:flex;"><span>            // If right child &lt; left child, set j to the right child instead
-</span></span><span style="display:flex;"><span>            if j &lt; n and greater(j, j + 1):
-</span></span><span style="display:flex;"><span>                j += 1
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>            // If parent is larger than smallest child, swap and descend into j
-</span></span><span style="display:flex;"><span>            if not greater(k, j):
-</span></span><span style="display:flex;"><span>                break
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>            swap heap[k] and heap[j]
-</span></span><span style="display:flex;"><span>            k = j
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        return min
-</span></span></code></pre></div><p>So this is the implementation of a min-heap. If we instead want a max-heap we only change the sign of the <code>greater</code> function - that&rsquo;s it!</p>
+<pre tabindex="0"><code>class min_prio_q[Item]:
+    heap: list[Item] = []
+
+    greater(i: int, j: int) -&gt; boolean:
+        return heap[i] &gt; heap[j]
+
+    get_min() -&gt; Item:
+        return heap[0]
+
+    add(item: Item):
+        // Add the item to the end of list (The end of the heap)
+        heap.append(item)
+
+        // Swap child with parent if the child is greater than the parent.
+        // To achieve completeness that may have been lost
+        while k &gt; 0 and greater((k - 1) / 2, k):
+            swap heap[(k - 1) / 2] and heap[k]
+            k = (k - 1) / 2
+
+    remove_min() -&gt; Item:
+        min: Item = heap[0]
+        n: int = len(heap) - 1
+
+        // Swap root with the end node to fix the invariant that may have been lost
+        swap heap[0] and heap[n]
+
+        k: int = 0
+        // While child to the left is in tree
+        while 2 * k + 1 &lt;= n:
+            j: int = 2 * k + 1
+            // If right child &lt; left child, set j to the right child instead
+            if j &lt; n and greater(j, j + 1):
+                j += 1
+
+            // If parent is larger than smallest child, swap and descend into j
+            if not greater(k, j):
+                break
+
+            swap heap[k] and heap[j]
+            k = j
+
+        return min
+</code></pre><p>So this is the implementation of a min-heap. If we instead want a max-heap we only change the sign of the <code>greater</code> function - that&rsquo;s it!</p>
 <p>We could also use the &lsquo;heap&rsquo; mind-set to convert an array into a heap, using an in-place algoritm. Heaps are really powerfull when it comes to sorting as well, <em>heap sort</em> for example.</p>
 <h3 id="summary--conclusion">Summary &amp; Conclusion</h3>
 <p>So to summarize:</p>

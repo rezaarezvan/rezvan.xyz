@@ -25,7 +25,7 @@ Introduction Concurrency, in its very definition is, the fact of two or more eve
         <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
 
 	
-	<link rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/main.ded288734bf67c9f89d72102879afaadf50fed4138fb485737334085f5465104.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/main.56d2207fad46e63050394b2c8df0d9e313c631c4cd55e1c1c163a8a772d9a1df.css" />
 		<link id="darkModeStyle" rel="stylesheet" type="text/css" href="https://rezvan.xyz/css/dark.b47837a877382f31178bb7a2c2135fbe9c39b1d4a1cc529faee0363b6dbdc408.css"  disabled />
 	
 
@@ -118,61 +118,61 @@ Executing two or more events at the same time is something we would love. The on
 <h4 id="simple-example">Simple example</h4>
 <p>Let&rsquo;s look at a Java program which increments a simple counter:</p>
 <p>In a sequential (non-concurrent) program this would be:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>public class Counter {
-</span></span><span style="display:flex;"><span>    private int counter = 0;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    public void run() {
-</span></span><span style="display:flex;"><span>        int cnt = counter;
-</span></span><span style="display:flex;"><span>        counter = cnt + 1;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    public int counter() {
-</span></span><span style="display:flex;"><span>        return counter;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>public class SequentialCount {
-</span></span><span style="display:flex;"><span>    public static void main(String[] args) {
-</span></span><span style="display:flex;"><span>        Counter counter = new Counter();
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        counter.run();
-</span></span><span style="display:flex;"><span>        counter.run();
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        System.out.println(counter.counter());
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>This program will <strong>always</strong> print out 2. There&rsquo;s no doubt in that.</p>
+<pre tabindex="0"><code>public class Counter {
+    private int counter = 0;
+
+    public void run() {
+        int cnt = counter;
+        counter = cnt + 1;
+    }
+
+    public int counter() {
+        return counter;
+    }
+}
+</code></pre><pre tabindex="0"><code>public class SequentialCount {
+    public static void main(String[] args) {
+        Counter counter = new Counter();
+
+        counter.run();
+        counter.run();
+
+        System.out.println(counter.counter());
+    }
+}
+</code></pre><p>This program will <strong>always</strong> print out 2. There&rsquo;s no doubt in that.</p>
 <p>If we now introduce concurrency, we will now run these at the same time, or in <em>parallel</em>, do not confuse this with parallelism.
 They&rsquo;re not the same.</p>
 <p>So the idea is that we run the block of code we have on <strong>independent</strong> execution units (so-called threads in Java).</p>
 <p>Specifically, in Java, these threads will run on the <strong>same</strong> <code>counter</code> object. So they will share the global variable called <code>counter</code>.</p>
 <p>We, the programmers, don&rsquo;t have any control in what order these threads will be executed, this is the <em>schedulers</em> job.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>public class ConcurrentCounter extends Counter implements Runnable {
-</span></span><span style="display:flex;"><span>    /*
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    threads will execute run()
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    */
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>public class ConcurrentCount {
-</span></span><span style="display:flex;"><span>    public static void main(String[] args) {
-</span></span><span style="display:flex;"><span>        ConcurrentCounter counter = new ConcurrentCounter();
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        Thread t = new Thread(counter);
-</span></span><span style="display:flex;"><span>        Thread u = new Thread(counter);
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        t.start();
-</span></span><span style="display:flex;"><span>        u.start();
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        try { t.join(); u.join(); }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        catch (InterruptedException e) {
-</span></span><span style="display:flex;"><span>            System.out.println(&#34;Interrupted!&#34;);
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        System.out.println(counter.counter());
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>If we compile and run this, we necessarily won&rsquo;t always get the expected answer, 2. In some (rare) cases, we will get the answer 1.</p>
+<pre tabindex="0"><code>public class ConcurrentCounter extends Counter implements Runnable {
+    /*
+
+    threads will execute run()
+
+    */
+}
+</code></pre><pre tabindex="0"><code>public class ConcurrentCount {
+    public static void main(String[] args) {
+        ConcurrentCounter counter = new ConcurrentCounter();
+
+        Thread t = new Thread(counter);
+        Thread u = new Thread(counter);
+
+        t.start();
+        u.start();
+
+        try { t.join(); u.join(); }
+
+        catch (InterruptedException e) {
+            System.out.println(&#34;Interrupted!&#34;);
+        }
+
+        System.out.println(counter.counter());
+    }
+}
+</code></pre><p>If we compile and run this, we necessarily won&rsquo;t always get the expected answer, 2. In some (rare) cases, we will get the answer 1.</p>
 <p>But if there is a risk for failure, why would we even want to write concurrent programs? We&rsquo;ll the answer can be described in 3 keypoints.</p>
 <ul>
 <li>

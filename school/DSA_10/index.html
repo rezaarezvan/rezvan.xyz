@@ -28,7 +28,7 @@ The next rule we can apply is, &ldquo;the most dominating factor &lsquo;wins&rsq
         <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
 
 	
-	<link rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/main.ded288734bf67c9f89d72102879afaadf50fed4138fb485737334085f5465104.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/main.56d2207fad46e63050394b2c8df0d9e313c631c4cd55e1c1c163a8a772d9a1df.css" />
 		<link id="darkModeStyle" rel="stylesheet" type="text/css" href="https://rezvan.xyz/css/dark.b47837a877382f31178bb7a2c2135fbe9c39b1d4a1cc529faee0363b6dbdc408.css"  disabled />
 	
 
@@ -196,54 +196,54 @@ $$</p>
 </ul>
 <h3 id="complexity-analysis">Complexity Analysis</h3>
 <p>Let&rsquo;s analyze the following snippet of code and it&rsquo;s complexity.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>found = false
-</span></span><span style="display:flex;"><span>for x in list:
-</span></span><span style="display:flex;"><span>    for y in list:
-</span></span><span style="display:flex;"><span>        if x + y == 0:
-</span></span><span style="display:flex;"><span>            found = true
-</span></span></code></pre></div><p>If we say that the length of <code>list</code> is $n$. In the first loop we will have a complexity of $\mathcal{O}(n)$.
+<pre tabindex="0"><code>found = false
+for x in list:
+    for y in list:
+        if x + y == 0:
+            found = true
+</code></pre><p>If we say that the length of <code>list</code> is $n$. In the first loop we will have a complexity of $\mathcal{O}(n)$.
 The inner loop will follow, using our previous rule of &rsquo;nested loops means multiplication&rsquo;.
 This means our final program will have the complexity of $\mathcal{O}(n^2)$.</p>
 <p>Now let&rsquo;s see over this code snippet:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>found = false
-</span></span><span style="display:flex;"><span>for i in 0 .. n - 1:
-</span></span><span style="display:flex;"><span>    for j in i .. n - 1:
-</span></span><span style="display:flex;"><span>        x = list[i]
-</span></span><span style="display:flex;"><span>        y = list[j]
-</span></span><span style="display:flex;"><span>        if x + y == 0:
-</span></span><span style="display:flex;"><span>            found = true
-</span></span></code></pre></div><p>In this snippet - we&rsquo;ll have the first loop iterating $n$ times -
+<pre tabindex="0"><code>found = false
+for i in 0 .. n - 1:
+    for j in i .. n - 1:
+        x = list[i]
+        y = list[j]
+        if x + y == 0:
+            found = true
+</code></pre><p>In this snippet - we&rsquo;ll have the first loop iterating $n$ times -
 however, the second loop, it will iterate $(0, \dots ,n -1), (1, \dots , n - 2), \dots$</p>
 <p>This means that the number of times the second loop will run is between 1 and $n$ times - using our definition of complexity.
 Let&rsquo;s call the number of times our loop runs $m$, $m \leq n$ which means m has an complexity of $\mathcal{O}(n)$.</p>
 <p>This finally means we have a total complexity of $\mathcal{O}(n^2)$</p>
 <p>Now let&rsquo;s do the same, but for three numbers!</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>found = false
-</span></span><span style="display:flex;"><span>for i in 0 .. n - 1:
-</span></span><span style="display:flex;"><span>    for j in i .. n - 1:
-</span></span><span style="display:flex;"><span>        for k in j .. n - 1:
-</span></span><span style="display:flex;"><span>            x = list[i]
-</span></span><span style="display:flex;"><span>            y = list[j]
-</span></span><span style="display:flex;"><span>            z = list[k]
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>            if x + y + z == 0:
-</span></span><span style="display:flex;"><span>                found = true
-</span></span></code></pre></div><p>Exactly the same logic goes as from the last question to this, we can prove that each loop has a complexity of $\mathcal{O}(n)$.</p>
+<pre tabindex="0"><code>found = false
+for i in 0 .. n - 1:
+    for j in i .. n - 1:
+        for k in j .. n - 1:
+            x = list[i]
+            y = list[j]
+            z = list[k]
+
+            if x + y + z == 0:
+                found = true
+</code></pre><p>Exactly the same logic goes as from the last question to this, we can prove that each loop has a complexity of $\mathcal{O}(n)$.</p>
 <p>Which gives the total complexity of $\mathcal{O}(n^3)$.</p>
 <p>Now let&rsquo;s look at a similar program:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>pairs_list = []
-</span></span><span style="display:flex;"><span>for i in 0 .. n - 1:
-</span></span><span style="display:flex;"><span>    for j in i .. n - 1:
-</span></span><span style="display:flex;"><span>        x = list[i]
-</span></span><span style="display:flex;"><span>        y = list[j]
-</span></span><span style="display:flex;"><span>        pairs_list.add(x + y)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>found = false
-</span></span><span style="display:flex;"><span>for xplusy in pairs_list:
-</span></span><span style="display:flex;"><span>    for zplusw in pairs_list:
-</span></span><span style="display:flex;"><span>        if xplusy + zplusw == 0:
-</span></span><span style="display:flex;"><span>            found = true
-</span></span></code></pre></div><p>As we&rsquo;ve have stated above, the first part of the program will have a complexity of $\mathcal{O}(n^2)$.
+<pre tabindex="0"><code>pairs_list = []
+for i in 0 .. n - 1:
+    for j in i .. n - 1:
+        x = list[i]
+        y = list[j]
+        pairs_list.add(x + y)
+
+found = false
+for xplusy in pairs_list:
+    for zplusw in pairs_list:
+        if xplusy + zplusw == 0:
+            found = true
+</code></pre><p>As we&rsquo;ve have stated above, the first part of the program will have a complexity of $\mathcal{O}(n^2)$.
 Note that the <code>add()</code> function takes $\mathcal{O}(1)$ for dynamic arrays.</p>
 <p>However, in the next block, the new array length is $n^2$, since we have added all possible permutations of pairs.
 So the loops will now through $n^2$ elements. Which in total results a complexity of $\mathcal{O}(n^4)$.</p>
@@ -372,20 +372,20 @@ Which means the resulting complexity becomes $\mathcal{O}(n^4)$.</p>
 </ul>
 <h3 id="analyzing-more-complexities">Analyzing more complexities</h3>
 <p>Let&rsquo;s take a look at program which utilise different data structures now:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>pairs_list = []
-</span></span><span style="display:flex;"><span>for i in 0 .. n - 1:
-</span></span><span style="display:flex;"><span>    for j in i .. n - 1:
-</span></span><span style="display:flex;"><span>        x = list[i]
-</span></span><span style="display:flex;"><span>        y = list[j]
-</span></span><span style="display:flex;"><span>        pairs_list.add(x + y)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>merge_sort(pairs_list)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>found = false
-</span></span><span style="display:flex;"><span>for xplusy in pairs_list:
-</span></span><span style="display:flex;"><span>    if binary_search(pairs_list, -xplusy):
-</span></span><span style="display:flex;"><span>        found = true
-</span></span></code></pre></div><p>So, we&rsquo;ve seen that first part, we know it&rsquo;s $\mathcal{O}(n^2)$.
+<pre tabindex="0"><code>pairs_list = []
+for i in 0 .. n - 1:
+    for j in i .. n - 1:
+        x = list[i]
+        y = list[j]
+        pairs_list.add(x + y)
+
+merge_sort(pairs_list)
+
+found = false
+for xplusy in pairs_list:
+    if binary_search(pairs_list, -xplusy):
+        found = true
+</code></pre><p>So, we&rsquo;ve seen that first part, we know it&rsquo;s $\mathcal{O}(n^2)$.
 But now we see a <code>merge_sort()</code> - this has a complexity of $\mathcal{O}(n\ log(n))$.
 As we stated before, the list after the first block has a length of $n^2$.
 Which means <code>merge_sort()</code> will have a complexity of $\mathcal{O}(n^2\ log(n^2))$</p>
@@ -404,45 +404,45 @@ $$
 $$</p>
 <p>So finally our answer is, $\mathcal{O}(n^2 log(n))$</p>
 <p>Let&rsquo;s now look at a case using a tree:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>pairs_set = empty AVL_tree
-</span></span><span style="display:flex;"><span>for i in 0 .. n - 1:
-</span></span><span style="display:flex;"><span>    for j in i .. n - 1:
-</span></span><span style="display:flex;"><span>        x = pairs_set[i]
-</span></span><span style="display:flex;"><span>        y = pairs_set[j]
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        if pairs_set.contains(-(x+y)):
-</span></span><span style="display:flex;"><span>            return true
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        pairs_set.add(x+y)
-</span></span></code></pre></div><p>As we&rsquo;ve seen before, the loops are $\mathcal{O}(n^2)$ - now the interesting part is the <code>contains()</code> to check if an element is present.
+<pre tabindex="0"><code>pairs_set = empty AVL_tree
+for i in 0 .. n - 1:
+    for j in i .. n - 1:
+        x = pairs_set[i]
+        y = pairs_set[j]
+
+        if pairs_set.contains(-(x+y)):
+            return true
+
+        pairs_set.add(x+y)
+</code></pre><p>As we&rsquo;ve seen before, the loops are $\mathcal{O}(n^2)$ - now the interesting part is the <code>contains()</code> to check if an element is present.
 To check whether an element is present in a tree, has a complexity of $\mathcal{O}(log(n))$.
 The rest of the operations are constant so we can ignore them (including the <code>add()</code> for the AVL tree).</p>
 <p>So therefore the final complexity is $\mathcal{O}(n^2\ log(n))$. In the absolute worst case the <code>contains()</code> will be $\mathcal{O}(n)$, but let&rsquo;s ignore that :).</p>
 <p>Now let&rsquo;s look at a hash table:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>pairs_set = empty Hash_table
-</span></span><span style="display:flex;"><span>for i in 0 .. n - 1:
-</span></span><span style="display:flex;"><span>    for j in i .. n - 1:
-</span></span><span style="display:flex;"><span>        x = pairs.set[i]
-</span></span><span style="display:flex;"><span>        y = pairs_set[j]
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        if pairs_set.contains(-(x + y)):
-</span></span><span style="display:flex;"><span>            return true
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        pairs_set.add(x + y)
-</span></span></code></pre></div><p>As per usual, the loops makes this $\mathcal{O}(n^2)$, now, a search in a hash table is $\mathcal{O}(1)$, if our hash function is &lsquo;good&rsquo;.</p>
+<pre tabindex="0"><code>pairs_set = empty Hash_table
+for i in 0 .. n - 1:
+    for j in i .. n - 1:
+        x = pairs.set[i]
+        y = pairs_set[j]
+
+        if pairs_set.contains(-(x + y)):
+            return true
+
+        pairs_set.add(x + y)
+</code></pre><p>As per usual, the loops makes this $\mathcal{O}(n^2)$, now, a search in a hash table is $\mathcal{O}(1)$, if our hash function is &lsquo;good&rsquo;.</p>
 <p>The rest of the operations are constant. So therefore the overall complexity is $\mathcal{O}(n^2)$.</p>
 <p>Now let&rsquo;s look at a BST example:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>pairs_set = empty BST
-</span></span><span style="display:flex;"><span>for i in 0 .. n - 1:
-</span></span><span style="display:flex;"><span>    for j in i .. n - 1:
-</span></span><span style="display:flex;"><span>        x = pairs_set[i]
-</span></span><span style="display:flex;"><span>        y = pairs_set[j]
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        if pairs_set.contains(-(x + y)):
-</span></span><span style="display:flex;"><span>            return true
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        pairs_set.add(x + y)
-</span></span></code></pre></div><p>The usual $\mathcal{O}(n^2)$ loops :). Now the <code>contains()</code> is the interesting part.
+<pre tabindex="0"><code>pairs_set = empty BST
+for i in 0 .. n - 1:
+    for j in i .. n - 1:
+        x = pairs_set[i]
+        y = pairs_set[j]
+
+        if pairs_set.contains(-(x + y)):
+            return true
+
+        pairs_set.add(x + y)
+</code></pre><p>The usual $\mathcal{O}(n^2)$ loops :). Now the <code>contains()</code> is the interesting part.
 Since this is a BST, the <code>contains()</code> will have a complexity of $\mathcal{O}(n)$ in the worst case, since the BST can become unbalanced.</p>
 <p>The same applies for <code>add()</code>. Since the rest of the operations are constant so therefore it will be, $\mathcal{O}(n^4)$.</p>
 <h3 id="different-kinds-of-complexiites">Different kinds of complexiites</h3>
