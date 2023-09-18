@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html><head lang="en">
-	<meta charset="utf-8" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>Concurrent Programming: Part 4 - Synchronization problems with semaphores - rezvan</title><link rel="icon" type="image/png" href=images/icon.png /><meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="description" content="In this part we&rsquo;ll cover how to solve some classical synchronization problems using threads and semaphores.
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"><title>rezvan | Concurrent Programming: Part 4 - Synchronization problems with semaphores</title><link rel="icon" type="image/png" href=images/icon.png /><meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description"
+        content="In this part we&rsquo;ll cover how to solve some classical synchronization problems using threads and semaphores.
 Dining Philosophers To refresh our memory on the problem let&rsquo;s cover it again:
 The dining philosophers problem describes how to avoid deadlock (circular conditions).
 We have five philosophers (threads) sitting at a dining table. A fork is between each adjacent pair of philosophers.
 Each philosopher alternates between thinking (non-critical section) and eating (critical section). In order to eat, a philosopher needs to pick up both forks that lie to the right and left of the philosopher." />
-	<meta property="og:image" content="https://raw.githubusercontent.com/rezaarezvan/rezvan.xyz/main/images/icon.png"/>
-	<meta property="og:title" content="Concurrent Programming: Part 4 - Synchronization problems with semaphores" />
+    <meta property="og:image" content="https://raw.githubusercontent.com/rezaarezvan/rezvan.xyz/main/images/icon.png" />
+    <meta property="og:title" content="Concurrent Programming: Part 4 - Synchronization problems with semaphores" />
 <meta property="og:description" content="In this part we&rsquo;ll cover how to solve some classical synchronization problems using threads and semaphores.
 Dining Philosophers To refresh our memory on the problem let&rsquo;s cover it again:
 The dining philosophers problem describes how to avoid deadlock (circular conditions).
@@ -26,23 +27,23 @@ The dining philosophers problem describes how to avoid deadlock (circular condit
 We have five philosophers (threads) sitting at a dining table. A fork is between each adjacent pair of philosophers.
 Each philosopher alternates between thinking (non-critical section) and eating (critical section). In order to eat, a philosopher needs to pick up both forks that lie to the right and left of the philosopher."/>
 <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
-	<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@1,500&display=swap" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css2?family=Fira+Sans&display=swap" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@1,500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
 
-	
-	<link rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/main.56d2207fad46e63050394b2c8df0d9e313c631c4cd55e1c1c163a8a772d9a1df.css" />
-		<link id="darkModeStyle" rel="stylesheet" type="text/css" href="https://rezvan.xyz/css/dark.b47837a877382f31178bb7a2c2135fbe9c39b1d4a1cc529faee0363b6dbdc408.css"  disabled />
-	
+    
+    <link rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/main.ba569590e8c731bede38299aded75c13e50d4852941d3a5e4c6a6af2ebd4edc9.css" />
+    <link id="darkModeStyle" rel="stylesheet" type="text/css" href="https://rezvan.xyz/css/dark.32a857cf41536a621cbe7a4c130af2ca2a8a07e56700231118a06897aaefb2d5.css"  disabled />
+    
 
-	
-	
-		<script type="text/javascript"
-		src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-		</script>
+    
+    
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+        </script>
 
-		
-		<script type="text/x-mathjax-config">
+    
+    <script type="text/x-mathjax-config">
 		MathJax.Hub.Config({
 			tex2jax: {
 				inlineMath: [['$','$'], ['\\(','\\)']],
@@ -55,64 +56,65 @@ Each philosopher alternates between thinking (non-critical section) and eating (
 			}
 		});
 		</script>
-	
+    
 
-	
-	
-		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css">
-		<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js"></script>
-		<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
+    
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js"
+        onload="renderMathInElement(document.body);"></script>
 
-		
-		<script>
-			document.addEventListener("DOMContentLoaded", function() {
-					renderMathInElement(document.body, {
-							delimiters: [
-									{left: "$$", right: "$$", display: true},
-									{left: "$", right: "$", display: false}
-							]
-					});
-			});
-			</script>
-	
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            renderMathInElement(document.body, {
+                delimiters: [
+                    {left: "$$", right: "$$", display: true},
+                    {left: "$", right: "$", display: false}
+                ]
+            });
+        });
+    </script>
+    
 
-	
+    
 </head>
 <body>
-        <div class="content"><header>
-	<div class="main">
-		<a href="https://rezvan.xyz/">rezvan</a>
-	</div>
-	<nav>
-		
-		<a href="/">home</a>
-		
-		<a href="/about">about</a>
-		
-		<a href="/contact">contact</a>
-		
-		<a href="/cv">cv</a>
-		
-		<a href="/school">school</a>
-		
-		<a href="/tags">tags</a>
-		
-		| <span id="dark-mode-toggle" onclick="toggleTheme()"></span>
-		<script src="https://rezvan.xyz/js/themetoggle.js"></script>
-		
-	</nav>
+    <div class="content"><header>
+    <div class="main">
+        <a href="https://rezvan.xyz/">rezvan</a>
+    </div>
+    <nav>
+        
+        <a href="/">home</a>
+        
+        <a href="/about">about</a>
+        
+        <a href="/contact">contact</a>
+        
+        <a href="/cv">cv</a>
+        
+        <a href="/school">school</a>
+        
+        <a href="/tags">tags</a>
+        
+        | <span id="dark-mode-toggle" onclick="toggleTheme()"></span>
+        <script src="https://rezvan.xyz/js/themetoggle.js"></script>
+        
+    </nav>
 </header>
 
 <main>
-	<article>
-		<div class="title">
-			<h1 class="title">Concurrent Programming: Part 4 - Synchronization problems with semaphores</h1>
-			<div class="meta">Posted on Feb 1, 2023</div>
-		</div>
-		
+    <article>
+        <div class="title">
+            <h1 class="title">Concurrent Programming: Part 4 - Synchronization problems with semaphores</h1>
+            <div class="meta">Posted on Feb 1, 2023</div>
+        </div>
+        
 
-		<section class="body">
-			<p>In this part we&rsquo;ll cover how to solve some classical synchronization problems using threads and semaphores.</p>
+        <section class="body">
+            <p>In this part we&rsquo;ll cover how to solve some classical synchronization problems using threads and semaphores.</p>
 <h3 id="dining-philosophers">Dining Philosophers</h3>
 <p>To refresh our memory on the problem let&rsquo;s cover it again:</p>
 <p>The dining philosophers problem describes how to avoid deadlock (circular conditions).</p>
@@ -635,22 +637,22 @@ Readers and writers need to access this board to, read and write.</p>
 When writing solutions to concurrent programs, we will always need to use these.
 To lock and gain exclusive access.</p>
 
-		</section>
+        </section>
 
-		<div class="post-tags">
-			
-			
-			<nav class="nav tags">
-				<ul class="tags">
-					
-					<li><a href="/tags/Concurrent-Programming">Concurrent Programming</a></li>
-					
-				</ul>
-			</nav>
-			
-			
-		</div>
-		</article>
+        <div class="post-tags">
+            
+            
+            <nav class="nav tags">
+                <ul class="tags">
+                    
+                    <li><a href="/%20/tags/Concurrent-Programming">Concurrent Programming</a></li>
+                    
+                </ul>
+            </nav>
+            
+            
+        </div>
+        </article>
 </main>
 <footer>
     <div style="display:flex"><a class="soc" href="https://github.com/rezaarezvan" rel="me" title="GitHub"><i data-feather="github"></i></a>
@@ -661,5 +663,6 @@ To lock and gain exclusive access.</p>
 <script>
     feather.replace()
 </script></div>
-    </body>
+</body>
+
 </html>

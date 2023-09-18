@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html><head lang="en">
-	<meta charset="utf-8" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>DSA: Part 2 - Complexity (1) - rezvan</title><link rel="icon" type="image/png" href=images/icon.png /><meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="description" content="Introduction What do we mean by an &lsquo;Algorithmic complexity&rsquo;, a good (but not fully formal) definition would be - &ldquo;How much resources does the algorithm use in relation to quantitative properties of its input&rdquo;
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"><title>rezvan | DSA: Part 2 - Complexity (1)</title><link rel="icon" type="image/png" href=images/icon.png /><meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description"
+        content="Introduction What do we mean by an &lsquo;Algorithmic complexity&rsquo;, a good (but not fully formal) definition would be - &ldquo;How much resources does the algorithm use in relation to quantitative properties of its input&rdquo;
 And just to be clear, the definition of an algorithm: any well-defined procedure to solve a given problem.
 So what kind of resources could we quantify from an input? Of course the runtime of a algorithm is important." />
-	<meta property="og:image" content="https://raw.githubusercontent.com/rezaarezvan/rezvan.xyz/main/images/icon.png"/>
-	<meta property="og:title" content="DSA: Part 2 - Complexity (1)" />
+    <meta property="og:image" content="https://raw.githubusercontent.com/rezaarezvan/rezvan.xyz/main/images/icon.png" />
+    <meta property="og:title" content="DSA: Part 2 - Complexity (1)" />
 <meta property="og:description" content="Introduction What do we mean by an &lsquo;Algorithmic complexity&rsquo;, a good (but not fully formal) definition would be - &ldquo;How much resources does the algorithm use in relation to quantitative properties of its input&rdquo;
 And just to be clear, the definition of an algorithm: any well-defined procedure to solve a given problem.
 So what kind of resources could we quantify from an input? Of course the runtime of a algorithm is important." />
@@ -20,23 +21,23 @@ So what kind of resources could we quantify from an input? Of course the runtime
 And just to be clear, the definition of an algorithm: any well-defined procedure to solve a given problem.
 So what kind of resources could we quantify from an input? Of course the runtime of a algorithm is important."/>
 <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
-	<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@1,500&display=swap" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css2?family=Fira+Sans&display=swap" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@1,500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
 
-	
-	<link rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/main.56d2207fad46e63050394b2c8df0d9e313c631c4cd55e1c1c163a8a772d9a1df.css" />
-		<link id="darkModeStyle" rel="stylesheet" type="text/css" href="https://rezvan.xyz/css/dark.b47837a877382f31178bb7a2c2135fbe9c39b1d4a1cc529faee0363b6dbdc408.css"  disabled />
-	
+    
+    <link rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/main.ba569590e8c731bede38299aded75c13e50d4852941d3a5e4c6a6af2ebd4edc9.css" />
+    <link id="darkModeStyle" rel="stylesheet" type="text/css" href="https://rezvan.xyz/css/dark.32a857cf41536a621cbe7a4c130af2ca2a8a07e56700231118a06897aaefb2d5.css"  disabled />
+    
 
-	
-	
-		<script type="text/javascript"
-		src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-		</script>
+    
+    
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+        </script>
 
-		
-		<script type="text/x-mathjax-config">
+    
+    <script type="text/x-mathjax-config">
 		MathJax.Hub.Config({
 			tex2jax: {
 				inlineMath: [['$','$'], ['\\(','\\)']],
@@ -49,64 +50,65 @@ So what kind of resources could we quantify from an input? Of course the runtime
 			}
 		});
 		</script>
-	
+    
 
-	
-	
-		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css">
-		<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js"></script>
-		<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
+    
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js"
+        onload="renderMathInElement(document.body);"></script>
 
-		
-		<script>
-			document.addEventListener("DOMContentLoaded", function() {
-					renderMathInElement(document.body, {
-							delimiters: [
-									{left: "$$", right: "$$", display: true},
-									{left: "$", right: "$", display: false}
-							]
-					});
-			});
-			</script>
-	
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            renderMathInElement(document.body, {
+                delimiters: [
+                    {left: "$$", right: "$$", display: true},
+                    {left: "$", right: "$", display: false}
+                ]
+            });
+        });
+    </script>
+    
 
-	
+    
 </head>
 <body>
-        <div class="content"><header>
-	<div class="main">
-		<a href="https://rezvan.xyz/">rezvan</a>
-	</div>
-	<nav>
-		
-		<a href="/">home</a>
-		
-		<a href="/about">about</a>
-		
-		<a href="/contact">contact</a>
-		
-		<a href="/cv">cv</a>
-		
-		<a href="/school">school</a>
-		
-		<a href="/tags">tags</a>
-		
-		| <span id="dark-mode-toggle" onclick="toggleTheme()"></span>
-		<script src="https://rezvan.xyz/js/themetoggle.js"></script>
-		
-	</nav>
+    <div class="content"><header>
+    <div class="main">
+        <a href="https://rezvan.xyz/">rezvan</a>
+    </div>
+    <nav>
+        
+        <a href="/">home</a>
+        
+        <a href="/about">about</a>
+        
+        <a href="/contact">contact</a>
+        
+        <a href="/cv">cv</a>
+        
+        <a href="/school">school</a>
+        
+        <a href="/tags">tags</a>
+        
+        | <span id="dark-mode-toggle" onclick="toggleTheme()"></span>
+        <script src="https://rezvan.xyz/js/themetoggle.js"></script>
+        
+    </nav>
 </header>
 
 <main>
-	<article>
-		<div class="title">
-			<h1 class="title">DSA: Part 2 - Complexity (1)</h1>
-			<div class="meta">Posted on Nov 25, 2022</div>
-		</div>
-		
+    <article>
+        <div class="title">
+            <h1 class="title">DSA: Part 2 - Complexity (1)</h1>
+            <div class="meta">Posted on Nov 25, 2022</div>
+        </div>
+        
 
-		<section class="body">
-			<h3 id="introduction">Introduction</h3>
+        <section class="body">
+            <h3 id="introduction">Introduction</h3>
 <p>What do we mean by an &lsquo;Algorithmic complexity&rsquo;, a good (but not fully formal) definition would be -
 &ldquo;<em>How much resources does the algorithm use in <strong>relation</strong> to quantitative properties of its input</em>&rdquo;</p>
 <p>And just to be clear, the definition of an <strong>algorithm</strong>: any well-defined procedure to solve a given problem.</p>
@@ -230,22 +232,22 @@ $f(n) \in \Theta(g(n))$ the function $f(n)$ eventually has both a <strong>lower<
 and to get a somewhat accurate answer about the, for example, runtime of a program.</p>
 <p>Next part will be about dynamic arrays and how we use them - especially how to implement a stack and queues.</p>
 
-		</section>
+        </section>
 
-		<div class="post-tags">
-			
-			
-			<nav class="nav tags">
-				<ul class="tags">
-					
-					<li><a href="/tags/Data-Structures-Algorithms">Data Structures &amp; Algorithms</a></li>
-					
-				</ul>
-			</nav>
-			
-			
-		</div>
-		</article>
+        <div class="post-tags">
+            
+            
+            <nav class="nav tags">
+                <ul class="tags">
+                    
+                    <li><a href="/%20/tags/Data-Structures-Algorithms">Data Structures &amp; Algorithms</a></li>
+                    
+                </ul>
+            </nav>
+            
+            
+        </div>
+        </article>
 </main>
 <footer>
     <div style="display:flex"><a class="soc" href="https://github.com/rezaarezvan" rel="me" title="GitHub"><i data-feather="github"></i></a>
@@ -256,5 +258,6 @@ and to get a somewhat accurate answer about the, for example, runtime of a progr
 <script>
     feather.replace()
 </script></div>
-    </body>
+</body>
+
 </html>

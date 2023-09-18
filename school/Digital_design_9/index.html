@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html><head lang="en">
-	<meta charset="utf-8" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>Digital Design: Part 9 - Testing - rezvan</title><link rel="icon" type="image/png" href=images/icon.png /><meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="description" content="When creating digital circuits, there are a lot of things that can go wrong.
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"><title>rezvan | Digital Design: Part 9 - Testing</title><link rel="icon" type="image/png" href=images/icon.png /><meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description"
+        content="When creating digital circuits, there are a lot of things that can go wrong.
 When designing the circuit, it may happen that the designers have implemented a bug into the circuit.
 We call these design bugs. On the other hand, when physically making the chip, it may happen that we get permanent (implementation) fault, or other (transient) faults.
 In the first case we need to perform verification, in the latter case, it&rsquo;s testing and fault tolerance." />
-	<meta property="og:image" content="https://raw.githubusercontent.com/rezaarezvan/rezvan.xyz/main/images/icon.png"/>
-	<meta property="og:title" content="Digital Design: Part 9 - Testing" />
+    <meta property="og:image" content="https://raw.githubusercontent.com/rezaarezvan/rezvan.xyz/main/images/icon.png" />
+    <meta property="og:title" content="Digital Design: Part 9 - Testing" />
 <meta property="og:description" content="When creating digital circuits, there are a lot of things that can go wrong.
 When designing the circuit, it may happen that the designers have implemented a bug into the circuit.
 We call these design bugs. On the other hand, when physically making the chip, it may happen that we get permanent (implementation) fault, or other (transient) faults.
@@ -23,23 +24,23 @@ When designing the circuit, it may happen that the designers have implemented a 
 We call these design bugs. On the other hand, when physically making the chip, it may happen that we get permanent (implementation) fault, or other (transient) faults.
 In the first case we need to perform verification, in the latter case, it&rsquo;s testing and fault tolerance."/>
 <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
-	<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@1,500&display=swap" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css2?family=Fira+Sans&display=swap" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@1,500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
 
-	
-	<link rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/main.56d2207fad46e63050394b2c8df0d9e313c631c4cd55e1c1c163a8a772d9a1df.css" />
-		<link id="darkModeStyle" rel="stylesheet" type="text/css" href="https://rezvan.xyz/css/dark.b47837a877382f31178bb7a2c2135fbe9c39b1d4a1cc529faee0363b6dbdc408.css"  disabled />
-	
+    
+    <link rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/main.ba569590e8c731bede38299aded75c13e50d4852941d3a5e4c6a6af2ebd4edc9.css" />
+    <link id="darkModeStyle" rel="stylesheet" type="text/css" href="https://rezvan.xyz/css/dark.32a857cf41536a621cbe7a4c130af2ca2a8a07e56700231118a06897aaefb2d5.css"  disabled />
+    
 
-	
-	
-		<script type="text/javascript"
-		src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-		</script>
+    
+    
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+        </script>
 
-		
-		<script type="text/x-mathjax-config">
+    
+    <script type="text/x-mathjax-config">
 		MathJax.Hub.Config({
 			tex2jax: {
 				inlineMath: [['$','$'], ['\\(','\\)']],
@@ -52,64 +53,65 @@ In the first case we need to perform verification, in the latter case, it&rsquo;
 			}
 		});
 		</script>
-	
+    
 
-	
-	
-		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css">
-		<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js"></script>
-		<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
+    
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js"
+        onload="renderMathInElement(document.body);"></script>
 
-		
-		<script>
-			document.addEventListener("DOMContentLoaded", function() {
-					renderMathInElement(document.body, {
-							delimiters: [
-									{left: "$$", right: "$$", display: true},
-									{left: "$", right: "$", display: false}
-							]
-					});
-			});
-			</script>
-	
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            renderMathInElement(document.body, {
+                delimiters: [
+                    {left: "$$", right: "$$", display: true},
+                    {left: "$", right: "$", display: false}
+                ]
+            });
+        });
+    </script>
+    
 
-	
+    
 </head>
 <body>
-        <div class="content"><header>
-	<div class="main">
-		<a href="https://rezvan.xyz/">rezvan</a>
-	</div>
-	<nav>
-		
-		<a href="/">home</a>
-		
-		<a href="/about">about</a>
-		
-		<a href="/contact">contact</a>
-		
-		<a href="/cv">cv</a>
-		
-		<a href="/school">school</a>
-		
-		<a href="/tags">tags</a>
-		
-		| <span id="dark-mode-toggle" onclick="toggleTheme()"></span>
-		<script src="https://rezvan.xyz/js/themetoggle.js"></script>
-		
-	</nav>
+    <div class="content"><header>
+    <div class="main">
+        <a href="https://rezvan.xyz/">rezvan</a>
+    </div>
+    <nav>
+        
+        <a href="/">home</a>
+        
+        <a href="/about">about</a>
+        
+        <a href="/contact">contact</a>
+        
+        <a href="/cv">cv</a>
+        
+        <a href="/school">school</a>
+        
+        <a href="/tags">tags</a>
+        
+        | <span id="dark-mode-toggle" onclick="toggleTheme()"></span>
+        <script src="https://rezvan.xyz/js/themetoggle.js"></script>
+        
+    </nav>
 </header>
 
 <main>
-	<article>
-		<div class="title">
-			<h1 class="title">Digital Design: Part 9 - Testing</h1>
-			<div class="meta">Posted on Mar 5, 2023</div>
-		</div>
-		
+    <article>
+        <div class="title">
+            <h1 class="title">Digital Design: Part 9 - Testing</h1>
+            <div class="meta">Posted on Mar 5, 2023</div>
+        </div>
+        
 
-		<section class="body">
-			<p>When creating digital circuits, there are a lot of things that can go wrong.</p>
+        <section class="body">
+            <p>When creating digital circuits, there are a lot of things that can go wrong.</p>
 <p>When designing the circuit, it may happen that the designers have implemented a <em>bug</em> into the circuit.</p>
 <p>We call these <em>design bugs</em>. On the other hand, when physically making the chip, it may happen that we
 get permanent (implementation) fault, or other (transient) faults.</p>
@@ -313,22 +315,22 @@ require different values assigned to a node.</p>
 </li>
 </ul>
 
-		</section>
+        </section>
 
-		<div class="post-tags">
-			
-			
-			<nav class="nav tags">
-				<ul class="tags">
-					
-					<li><a href="/tags/Digital-Design">Digital Design</a></li>
-					
-				</ul>
-			</nav>
-			
-			
-		</div>
-		</article>
+        <div class="post-tags">
+            
+            
+            <nav class="nav tags">
+                <ul class="tags">
+                    
+                    <li><a href="/%20/tags/Digital-Design">Digital Design</a></li>
+                    
+                </ul>
+            </nav>
+            
+            
+        </div>
+        </article>
 </main>
 <footer>
     <div style="display:flex"><a class="soc" href="https://github.com/rezaarezvan" rel="me" title="GitHub"><i data-feather="github"></i></a>
@@ -339,5 +341,6 @@ require different values assigned to a node.</p>
 <script>
     feather.replace()
 </script></div>
-    </body>
+</body>
+
 </html>

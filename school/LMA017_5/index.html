@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html><head lang="en">
-	<meta charset="utf-8" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>Mathematical analysis in several variables: Part 5 - Directional derivatives and the gradient vector - rezvan</title><link rel="icon" type="image/png" href=images/icon.png /><meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="description" content="Introduction In this part we&rsquo;ll cover directional derivatives and the gradient vector.
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"><title>rezvan | Mathematical analysis in several variables: Part 5 - Directional derivatives and the gradient vector</title><link rel="icon" type="image/png" href=images/icon.png /><meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description"
+        content="Introduction In this part we&rsquo;ll cover directional derivatives and the gradient vector.
 Directional derivatives To understand this part, we&rsquo;ll first need to recall vectors from linear algebra. Warning: In this series we&rsquo;ll use notation that is not that common.
 Vectors We all know that vectors have a direction and a magnitude (or length), from physics and linear algebra. Let&rsquo;s just quickly define these: $$ \vec{a} = \langle a, b \rangle $$" />
-	<meta property="og:image" content="https://raw.githubusercontent.com/rezaarezvan/rezvan.xyz/main/images/icon.png"/>
-	<meta property="og:title" content="Mathematical analysis in several variables: Part 5 - Directional derivatives and the gradient vector" />
+    <meta property="og:image" content="https://raw.githubusercontent.com/rezaarezvan/rezvan.xyz/main/images/icon.png" />
+    <meta property="og:title" content="Mathematical analysis in several variables: Part 5 - Directional derivatives and the gradient vector" />
 <meta property="og:description" content="Introduction In this part we&rsquo;ll cover directional derivatives and the gradient vector.
 Directional derivatives To understand this part, we&rsquo;ll first need to recall vectors from linear algebra. Warning: In this series we&rsquo;ll use notation that is not that common.
 Vectors We all know that vectors have a direction and a magnitude (or length), from physics and linear algebra. Let&rsquo;s just quickly define these: $$ \vec{a} = \langle a, b \rangle $$" />
@@ -20,23 +21,23 @@ Vectors We all know that vectors have a direction and a magnitude (or length), f
 Directional derivatives To understand this part, we&rsquo;ll first need to recall vectors from linear algebra. Warning: In this series we&rsquo;ll use notation that is not that common.
 Vectors We all know that vectors have a direction and a magnitude (or length), from physics and linear algebra. Let&rsquo;s just quickly define these: $$ \vec{a} = \langle a, b \rangle $$"/>
 <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
-	<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@1,500&display=swap" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css2?family=Fira+Sans&display=swap" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@1,500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
 
-	
-	<link rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/main.56d2207fad46e63050394b2c8df0d9e313c631c4cd55e1c1c163a8a772d9a1df.css" />
-		<link id="darkModeStyle" rel="stylesheet" type="text/css" href="https://rezvan.xyz/css/dark.b47837a877382f31178bb7a2c2135fbe9c39b1d4a1cc529faee0363b6dbdc408.css"  disabled />
-	
+    
+    <link rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/main.ba569590e8c731bede38299aded75c13e50d4852941d3a5e4c6a6af2ebd4edc9.css" />
+    <link id="darkModeStyle" rel="stylesheet" type="text/css" href="https://rezvan.xyz/css/dark.32a857cf41536a621cbe7a4c130af2ca2a8a07e56700231118a06897aaefb2d5.css"  disabled />
+    
 
-	
-	
-		<script type="text/javascript"
-		src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-		</script>
+    
+    
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+        </script>
 
-		
-		<script type="text/x-mathjax-config">
+    
+    <script type="text/x-mathjax-config">
 		MathJax.Hub.Config({
 			tex2jax: {
 				inlineMath: [['$','$'], ['\\(','\\)']],
@@ -49,64 +50,65 @@ Vectors We all know that vectors have a direction and a magnitude (or length), f
 			}
 		});
 		</script>
-	
+    
 
-	
-	
-		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css">
-		<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js"></script>
-		<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
+    
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js"
+        onload="renderMathInElement(document.body);"></script>
 
-		
-		<script>
-			document.addEventListener("DOMContentLoaded", function() {
-					renderMathInElement(document.body, {
-							delimiters: [
-									{left: "$$", right: "$$", display: true},
-									{left: "$", right: "$", display: false}
-							]
-					});
-			});
-			</script>
-	
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            renderMathInElement(document.body, {
+                delimiters: [
+                    {left: "$$", right: "$$", display: true},
+                    {left: "$", right: "$", display: false}
+                ]
+            });
+        });
+    </script>
+    
 
-	
+    
 </head>
 <body>
-        <div class="content"><header>
-	<div class="main">
-		<a href="https://rezvan.xyz/">rezvan</a>
-	</div>
-	<nav>
-		
-		<a href="/">home</a>
-		
-		<a href="/about">about</a>
-		
-		<a href="/contact">contact</a>
-		
-		<a href="/cv">cv</a>
-		
-		<a href="/school">school</a>
-		
-		<a href="/tags">tags</a>
-		
-		| <span id="dark-mode-toggle" onclick="toggleTheme()"></span>
-		<script src="https://rezvan.xyz/js/themetoggle.js"></script>
-		
-	</nav>
+    <div class="content"><header>
+    <div class="main">
+        <a href="https://rezvan.xyz/">rezvan</a>
+    </div>
+    <nav>
+        
+        <a href="/">home</a>
+        
+        <a href="/about">about</a>
+        
+        <a href="/contact">contact</a>
+        
+        <a href="/cv">cv</a>
+        
+        <a href="/school">school</a>
+        
+        <a href="/tags">tags</a>
+        
+        | <span id="dark-mode-toggle" onclick="toggleTheme()"></span>
+        <script src="https://rezvan.xyz/js/themetoggle.js"></script>
+        
+    </nav>
 </header>
 
 <main>
-	<article>
-		<div class="title">
-			<h1 class="title">Mathematical analysis in several variables: Part 5 - Directional derivatives and the gradient vector</h1>
-			<div class="meta">Posted on Sep 6, 2023</div>
-		</div>
-		
+    <article>
+        <div class="title">
+            <h1 class="title">Mathematical analysis in several variables: Part 5 - Directional derivatives and the gradient vector</h1>
+            <div class="meta">Posted on Sep 6, 2023</div>
+        </div>
+        
 
-		<section class="body">
-			<h3 id="introduction">Introduction</h3>
+        <section class="body">
+            <h3 id="introduction">Introduction</h3>
 <p>In this part we&rsquo;ll cover directional derivatives and the gradient vector.</p>
 <h3 id="directional-derivatives">Directional derivatives</h3>
 <p>To understand this part, we&rsquo;ll first need to recall vectors from linear algebra. <strong>Warning</strong>: In this series we&rsquo;ll use notation that is not that common.</p>
@@ -333,22 +335,22 @@ $$</p>
 <h4 id="explanation">Explanation</h4>
 <p>We already know that the shortest way up the mountain is to go in the direction of the gradient. On the other hand, the shortest way is to go from level curve to level curve as fast as possible. But shortest way between two lines is the perpendicular way!</p>
 
-		</section>
+        </section>
 
-		<div class="post-tags">
-			
-			
-			<nav class="nav tags">
-				<ul class="tags">
-					
-					<li><a href="/tags/Mathematical-analysis-in-several-variables">Mathematical analysis in several variables</a></li>
-					
-				</ul>
-			</nav>
-			
-			
-		</div>
-		</article>
+        <div class="post-tags">
+            
+            
+            <nav class="nav tags">
+                <ul class="tags">
+                    
+                    <li><a href="/%20/tags/Mathematical-analysis-in-several-variables">Mathematical analysis in several variables</a></li>
+                    
+                </ul>
+            </nav>
+            
+            
+        </div>
+        </article>
 </main>
 <footer>
     <div style="display:flex"><a class="soc" href="https://github.com/rezaarezvan" rel="me" title="GitHub"><i data-feather="github"></i></a>
@@ -359,5 +361,6 @@ $$</p>
 <script>
     feather.replace()
 </script></div>
-    </body>
+</body>
+
 </html>
