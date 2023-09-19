@@ -128,18 +128,18 @@ In mathematical terms: $\{(x, y) | a \leq x \leq b, c \leq y \leq y \}$."/>
 <p>In mathematical terms: $\{(x, y) | a \leq x \leq b, c \leq y \leq y \}$.</p>
 <p>Let&rsquo;s now imagine we divide, $[a, b]$ into $n$ subintervals, of width $\Delta x = \dfrac{b - a}{n}$.</p>
 <p>Divide $[c, d]$ into $m$ subintervals, of width $\Delta y = \dfrac{d - c}{m}$.</p>
-<p>Now our rectangle is divided into nm  subrectangles, let&rsquo;s call them, $R_{ij}$, with area, $\Delta A = \Delta x \Delta y$.</p>
+<p>Now our rectangle is divided into $nm$ subrectangles, let&rsquo;s call them, $R_{ij}$, with area, $\Delta A = \Delta x \Delta y$.</p>
 <p>In each $R_{ij}$, let&rsquo;s choose a point denoted as, $(x_{i}^{*}, y_{j}^{*})$.</p>
 <p>If we sum up these rectangles:
 $$
 \sum_{j = 1}^{m} \sum_{i = 1}^{n} f(x_{i}^{*}, y_{j}^{*}) \Delta A
 $$</p>
-<p>We might something that reminds us of the volume under the graph, taking the limit of these we get:
+<p>We get something that reminds us of the volume under the graph, taking the limit of these we get:
 $$
 \lim_{\substack{m \to \infty \newline n \to \infty}} \sum_{j = 1}^{m} \sum_{i = 1}^{n} f(x_{i}^{*}, y_{j}^{*}) \Delta A
 $$</p>
 <p>We get the exact volume under the graph (above the rectangle).</p>
-<p>We usually write this as:
+<p>Usually, we write this as:
 $$
 \lim_{\substack{\Delta x \to 0 \newline \Delta y \to 0}} \sum_{j = 1}^{m} \sum_{i = 1}^{n} f(x_{i}^{*}, y_{j}^{*}) \Delta A
 $$</p>
