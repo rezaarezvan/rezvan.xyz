@@ -6,7 +6,18 @@
     <description>Recent content in Schools on rezvan</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 19 Sep 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://rezvan.xyz/school/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 20 Sep 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://rezvan.xyz/school/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Transforms, signals and systems: Part 6 - Fourier Transform</title>
+      <link>https://rezvan.xyz/school/SSY081_6/</link>
+      <pubDate>Wed, 20 Sep 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://rezvan.xyz/school/SSY081_6/</guid>
+      <description>Introduction In this part we&amp;rsquo;ll define and understand Fourier transforms. In the last part we covered the concept of Fourier series.
+Which was a way of describing periodic functions as a linear combination (sum) of simple trigonometric functions. The Fourier transform takes this one step further, it&amp;rsquo;s a way to extend the Fourier series of non-periodic functions.
+Definition Given a function in the time-domain, the equivalent function in the frequency domain is: $$ F(\omega) = \int_{-\infty}^{\infty} f(t) e^{-j\omega t}\ dt $$</description>
+    </item>
+    
     <item>
       <title>Mathematical analysis in several variables: Part 10 - Double  integrals over general regions</title>
       <link>https://rezvan.xyz/school/LMA017_10/</link>
