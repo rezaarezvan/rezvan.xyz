@@ -6,7 +6,17 @@
     <description>Recent content in Mathematical analysis in several variables on rezvan</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 19 Sep 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://rezvan.xyz/tags/Mathematical-analysis-in-several-variables/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 20 Sep 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://rezvan.xyz/tags/Mathematical-analysis-in-several-variables/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Mathematical analysis in several variables: Part 11 - Computing volumes and Triple integrals over general regions</title>
+      <link>https://rezvan.xyz/school/LMA017_11/</link>
+      <pubDate>Wed, 20 Sep 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://rezvan.xyz/school/LMA017_11/</guid>
+      <description>Introduction In this part we&amp;rsquo;ll cover how to compute volumes using double integrals, as well as defining the triple integral over general regions.
+Properties of double integral $\iint_D (f(x, y) + g(x, y))\ dA = \iint_D f(x, y)\ dA + \iint_D g(x, y)\ dA$ Quick proof: $$ \iint_D (f(x, y) + g(x, y))\ dA = \lim_{\substack{\Delta x \to 0 \newline \Delta y \to 0}} \sum_{j = 1}^{m} \sum_{i = 1}^{n} (f(x_{i}^{*}, y_{j}^{*}) + g(x_{i}^{*}, y_{j}^{*})) (\Delta A)_{ij} $$</description>
+    </item>
+    
     <item>
       <title>Mathematical analysis in several variables: Part 10 - Double  integrals over general regions</title>
       <link>https://rezvan.xyz/school/LMA017_10/</link>
