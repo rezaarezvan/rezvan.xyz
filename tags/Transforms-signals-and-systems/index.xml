@@ -6,7 +6,20 @@
     <description>Recent content in Transforms signals and systems on rezvan</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 20 Sep 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://rezvan.xyz/tags/Transforms-signals-and-systems/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 21 Sep 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://rezvan.xyz/tags/Transforms-signals-and-systems/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Transforms, signals and systems: Part 7 - Filters and Nyquist-Shannon sampling theorem</title>
+      <link>https://rezvan.xyz/school/SSY081_7/</link>
+      <pubDate>Thu, 21 Sep 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://rezvan.xyz/school/SSY081_7/</guid>
+      <description>Introduction In this part we&amp;rsquo;ll cover the important Nyquist-Shannon sampling theorem. This is a fundamental theorem within digital signal processing.
+However, to understand the theorem, we firstly need to understand filters.
+Transfer function Say we have a system which can be modeled as: $$ y(t) = f(t) * h(t) $$
+The same system, but in the frequency domain is therefore: $$ Y(\omega) = F(\omega)\ H(\omega) $$
+Just as we call, $h(t)$, the system response function, we call $H(\omega)$ for the spectral response of the system.</description>
+    </item>
+    
     <item>
       <title>Transforms, signals and systems: Part 6 - Fourier Transform</title>
       <link>https://rezvan.xyz/school/SSY081_6/</link>
