@@ -6,7 +6,21 @@
     <description>Recent content in Mathematical analysis in several variables on rezvan</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 20 Sep 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://rezvan.xyz/tags/Mathematical-analysis-in-several-variables/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 22 Sep 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://rezvan.xyz/tags/Mathematical-analysis-in-several-variables/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Mathematical analysis in several variables: Part 12 - Change of variables &amp; Polar coordinates</title>
+      <link>https://rezvan.xyz/school/LMA017_12/</link>
+      <pubDate>Fri, 22 Sep 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://rezvan.xyz/school/LMA017_12/</guid>
+      <description>Introduction In this part we&amp;rsquo;ll cover how to perform change of variables for double and triple integrals, as well as the idea and power with polar coordinates.
+Change of variable For functions of one variable:
+$$ \int_a^b f(g(x))g&amp;rsquo;(x)\ dx $$
+Let $u = g(x)$ and therefore $du = g&amp;rsquo;(x)\ dx$.
+Then: $$ \int_{g(a)}^{g(b)} f(u)\ du $$
+But in two variables, this is a bit tricker, we&amp;rsquo;ll have to use polar coordinates.</description>
+    </item>
+    
     <item>
       <title>Mathematical analysis in several variables: Part 11 - Computing volumes and Triple integrals over general regions</title>
       <link>https://rezvan.xyz/school/LMA017_11/</link>

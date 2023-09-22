@@ -239,6 +239,53 @@ $$</p>
 <p>$$
 \iiint_E f(x, y, z)\ dV = \iint_D \int_{g_1(x, y)}^{g_2(x, y)} f(x, y, z)\ dz\ dA
 $$</p>
+<h3 id="example-1">Example</h3>
+<p>Find $\iiint_E x\ dV$, where $E$ is the ball $x^2 + y^2 + z^2 \leq 1$. E lies between the upper hemisphere and lower hemisphere above the unit disc, with radius 1 in the $xy$-plane.</p>
+<p>Let&rsquo;s see how $z$ changes:
+$$
+z^2 = 1 - x^2 - y^2 \newline
+z = \pm \sqrt{1 - x^2 - y^2}
+$$</p>
+<p>$$
+E = \{(x, y) | (x, y) \in D, -\sqrt{1 - x^2 - y^2} \leq z \leq \sqrt{1 - x^2 - y^2} \}
+$$</p>
+<p>Let&rsquo;s make $z$ our inner variable:
+$$
+\iiint_E x\ dV = \iint_D \int_{-\sqrt{1 - x^2 - y^2}}^{\sqrt{1 - x^2 - y^2}} x\ dz\ dA
+$$</p>
+<p>$$
+\iint_D xz \bigg\rvert_{z = -\sqrt{1 - x^2 - y^2}}^{z = \sqrt{1 - x^2 - y^2}}\ dA
+$$</p>
+<p>$$
+\iint_D 2x\sqrt{1 - x^2 - y^2}\ dA
+$$</p>
+<p>Let&rsquo;s find this double integral. Looking at this integral, one can see that, if we integrate with respect to $x$ first, it will be alot easier.</p>
+<p>Since the unit disc is of both type I and II, let&rsquo;s perform a type II double integral.</p>
+<p>$$
+\int_{-1}^{1} \int_{-\sqrt{1 - y^2}}^{\sqrt{1 - y^2}} 2x\sqrt{1 - x^2 - y^2}\ dx\ dy
+$$</p>
+<p>Let $u = x^2$ and therefore $du = 2x\ dx$. Our new limits are therefore $1 - y^2$.</p>
+<p>$$
+\int_{-1}^{1} \int_{1 - y^2}^{1 - y^2} \sqrt{1 - y^2 - u}\ du\ dy
+$$</p>
+<p>We have a integral from and to the same limit, therefore this entire integral becomes 0.</p>
+<h3 id="properties-of-triple-integrals">Properties of triple integrals</h3>
+<p>As we have seen with double integrals, we have some properties.</p>
+<ol>
+<li>
+<ul>
+<li>
+<ol start="4">
+<li>same as double integral properties.</li>
+</ol>
+</li>
+</ul>
+</li>
+</ol>
+<p>However:
+5) $\iint_D 1\ dA$ = Area over D.</p>
+<p>In the triple integral case:
+5) $\iiint_E 1\ dV$ = Volume over solid.</p>
 
         </section>
 
