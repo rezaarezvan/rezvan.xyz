@@ -149,6 +149,66 @@ $$</p>
 <ol start="2">
 <li>$D$ looks nice in polar coordinates</li>
 </ol>
+<h3 id="example">Example</h3>
+<p>Say we have the unit circle:
+$$
+D = \{(x, y) | x^2 + y^2 \leq 1\}
+$$</p>
+<p>In polar coordinates:
+$$
+S = \{(r, \theta) | 0 \leq r \leq 1, 0 \leq \theta \leq 2\pi \}
+$$</p>
+<p>Which is just a rectangle! Which we know how to integrate over!</p>
+<p>$$
+D = \{(x, y) | 1 \leq x^2 + y^2 \leq 4\}
+$$</p>
+<p>In polar coordinates:
+$$
+S = \{(r, \theta) | 1 \leq r \leq 2, 0 \leq \theta \leq 2\pi \}
+$$</p>
+<p>Or something even more complex:
+$$
+S = \{(r, \theta) | 0 \leq r \leq 1, \theta_1 \leq \theta \leq \theta_2 \}
+$$</p>
+<h3 id="naive-guess">Naive guess</h3>
+<p>But, how do we change to polar coordinates?</p>
+<p>Let&rsquo;s take a naive guess:
+$$
+\iint_D f(x, y)\ dA = \iint_S f(r cos(\theta), r sin(\theta))\ dA
+$$</p>
+<p>Let&rsquo;s try!</p>
+<p>Given $f(x, y) = 1$ and $D = \{(x,y) | x^2 + y^2 \leq 1\}$.</p>
+<p>$$
+\iint_D 1\ dA = \text{Area of D} = \pi r^2 = \pi
+$$</p>
+<p>Polar:
+$$
+S = \{(r, \theta) | 0 \leq r \leq 1, 0 \leq \theta \leq 2\pi \}
+$$</p>
+<p>$$
+\iint_S 1\ dA = \int_0^{2\pi} \int_0^1 r\ dr\ d\theta = \ldots = \pi
+$$</p>
+<p>So this doesn&rsquo;t yield the same result.</p>
+<h3 id="proof">Proof</h3>
+<p>TODO</p>
+<h3 id="definition">Definition</h3>
+<p>$$
+\iint_S g(r, \theta)\ dA = \iint_S f(r cos(\theta), r sin(\theta)) \cdot r\ dA
+$$</p>
+<h3 id="example-1">Example</h3>
+<p>Find $\iint_D x^2(x^2 + y^2)^7\ dA$ where $D$ is the region in the upperhalf plane, bounded by the circles, $x^2 + y^2 =1$ and $x^2 + y^2 = 4$.</p>
+<p>$$
+S = \{(r, \theta) | 1 \leq r \leq 2, 0 \leq \theta \leq \pi \}
+$$</p>
+<p>Which means:
+$$
+\int_0^{\pi} \int_1^2 (r^2 cos^2(\theta) \cdot (r^2)^7) \cdot r\ dA
+$$</p>
+<p>$$
+\int_0^{\pi} \int_1^2 r^{17} cos^2(\theta)\ dr\ d\theta = \ldots = \boxed{\pi}
+$$</p>
+<h3 id="general-case">General case</h3>
+<p>TODO</p>
 
         </section>
 
