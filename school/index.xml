@@ -6,7 +6,19 @@
     <description>Recent content in Schools on rezvan</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 22 Sep 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://rezvan.xyz/school/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 25 Sep 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://rezvan.xyz/school/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Transforms, signals and systems: Part 8 - Signal reconstruction</title>
+      <link>https://rezvan.xyz/school/SSY081_8/</link>
+      <pubDate>Mon, 25 Sep 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://rezvan.xyz/school/SSY081_8/</guid>
+      <description>Introduction In this part we&amp;rsquo;ll cover how we can recover a signal from a sampled signal, given that it follows Nyquist-Shannons theorem.
+Signal reconstruction If we want to reconstruct a signal from a sampled version, assuming it follows Nyquist-Shannos theorem.
+We have two options. Let&amp;rsquo;s start with the first option.
+Filter Given the spectrum of the signal, we can isolate the replica and perform the inverse Fourier transform on this.</description>
+    </item>
+    
     <item>
       <title>Mathematical analysis in several variables: Part 12 - Change of variables &amp; Polar coordinates</title>
       <link>https://rezvan.xyz/school/LMA017_12/</link>
