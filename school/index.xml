@@ -6,7 +6,22 @@
     <description>Recent content in Schools on rezvan</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 27 Sep 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://rezvan.xyz/school/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 28 Sep 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://rezvan.xyz/school/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Transforms, signals and systems: Part 9 - Laplace transform</title>
+      <link>https://rezvan.xyz/school/SSY081_9/</link>
+      <pubDate>Thu, 28 Sep 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://rezvan.xyz/school/SSY081_9/</guid>
+      <description>Introduction In this part we&amp;rsquo;ll cover the Laplace transform and how we&amp;rsquo;ll use it.
+Before that, let&amp;rsquo;s understand why we&amp;rsquo;ll use it.
+What the Laplace transform will allow us to solve are linear differential equations with constant coefficients.
+From what we&amp;rsquo;ve learned so far, we have no way to synthesize exponentially growing signals.
+Therefore: $$ e^{j\omega t} \rarr e^{st} $$
+Where $s = \sigma + j\omega$.
+Definition The Laplace transformation is a unilateral transform, which just means it is one-sided.</description>
+    </item>
+    
     <item>
       <title>Mathematical analysis in several variables: Part 14 - Curves</title>
       <link>https://rezvan.xyz/school/LMA017_14/</link>
