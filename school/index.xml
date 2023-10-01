@@ -6,7 +6,20 @@
     <description>Recent content in Schools on rezvan</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 28 Sep 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://rezvan.xyz/school/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 01 Oct 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://rezvan.xyz/school/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Mathematical analysis in several variables: Part 15 - Line integrals</title>
+      <link>https://rezvan.xyz/school/LMA017_15/</link>
+      <pubDate>Sun, 01 Oct 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://rezvan.xyz/school/LMA017_15/</guid>
+      <description>Introduction In this part we&amp;rsquo;ll cover a new concept with integrals, the so-called line integral.
+Definition A curve, $C$, parameterized as $\vec{r}(t) = \langle x(t), y(t) \rangle$, for an interval $t \in [a, b]$ and a continuous function, $f: C \rarr \mathbb{R}$.
+Assuming $x(t)$ and $y(t)$ are differentiable.
+$$ \int_C f(x, y) ds = \int_a^b f(x(t), y(t)) \sqrt{x^\prime(t)^2 + y^\prime(t)^2}\ dt $$
+Geometrical sense Just as an integral over an interval $[a, b]$ describes the area under a curve on that interval.</description>
+    </item>
+    
     <item>
       <title>Transforms, signals and systems: Part 9 - Laplace transform</title>
       <link>https://rezvan.xyz/school/SSY081_9/</link>
