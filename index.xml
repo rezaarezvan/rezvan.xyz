@@ -6,7 +6,19 @@
     <description>Recent content on rezvan</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 01 Oct 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://rezvan.xyz/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 03 Oct 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://rezvan.xyz/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Mathematical analysis in several variables: Part 16 - Vector fields</title>
+      <link>https://rezvan.xyz/school/LMA017_16/</link>
+      <pubDate>Tue, 03 Oct 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://rezvan.xyz/school/LMA017_16/</guid>
+      <description>Introduction In this part we&amp;rsquo;ll cover so-called vector fields.
+Definition A vector field is a function, $F$: $$ F: D \subset \mathbb{R}^2 \rarr \mathbb{R}^2 \ | \ \text{2D} \\ F: D \subset \mathbb{R}^3 \rarr \mathbb{R}^3 \ | \ \text{3D} $$
+Example Consider $F(x, y) = (-y, x)$ (which is the same as $-y \vec{i} + x\vec{j}$).
+The graph for this looks like: Gradient field By this definiton, we can say that.</description>
+    </item>
+    
     <item>
       <title>Mathematical analysis in several variables: Part 15 - Line integrals</title>
       <link>https://rezvan.xyz/school/LMA017_15/</link>
