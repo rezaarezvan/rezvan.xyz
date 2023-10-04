@@ -6,7 +6,21 @@
     <description>Recent content in Schools on rezvan</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 03 Oct 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://rezvan.xyz/school/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 04 Oct 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://rezvan.xyz/school/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Mathematical analysis in several variables: Part 17 - The fundamental theorem of line integrals</title>
+      <link>https://rezvan.xyz/school/LMA017_17/</link>
+      <pubDate>Wed, 04 Oct 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://rezvan.xyz/school/LMA017_17/</guid>
+      <description>Introduction In this part we&amp;rsquo;ll cover the fundamental theorem of line integrals.
+Definition Recall the fundamental theorem of calculus: $$ \int_a^b f^\prime(x)\ dx = f(b) - f(a) $$
+For line integrals: Let $f: D \subset \mathbb{R}^2 \rarr \mathbb{R}$
+Let $C = D$ be parameterized as $\vec{r}(t)$, for $a \leq t \leq b$.
+$$ \boxed{\int_C \nabla f \cdot dr = f(\vec{r}(b)) - f(\vec{r}(a))} $$
+Notice how this doesn&amp;rsquo;t depend on the actual curve, but only of the start and endpoint.</description>
+    </item>
+    
     <item>
       <title>Mathematical analysis in several variables: Part 16 - Vector fields</title>
       <link>https://rezvan.xyz/school/LMA017_16/</link>
