@@ -6,7 +6,18 @@
     <description>Recent content on rezvan</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 04 Oct 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://rezvan.xyz/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 10 Oct 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://rezvan.xyz/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Mathematical analysis in several variables: Part 18 - Green&#39;s Theorem</title>
+      <link>https://rezvan.xyz/school/LMA017_18/</link>
+      <pubDate>Tue, 10 Oct 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://rezvan.xyz/school/LMA017_18/</guid>
+      <description>Introduction In this part we&amp;rsquo;ll cover Green&amp;rsquo;s Theorem, which will allow us to have a relationship between integrals and double integrals.
+Before starting, we will only work with simple curves. Which essentially just means that the curves have no self-injections (only exception is when it starts and ends at the same point).
+If $C$ is a simple and closed curve, e.g a circle. Then $C$ determines a inner region, $D$. In this case, we write $\partial D = C$.</description>
+    </item>
+    
     <item>
       <title>Mathematical analysis in several variables: Part 17 - The fundamental theorem of line integrals</title>
       <link>https://rezvan.xyz/school/LMA017_17/</link>
