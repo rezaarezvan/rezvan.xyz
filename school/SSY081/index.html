@@ -121,18 +121,10 @@ Let&rsquo;s first define what a signal is</p>
 <h3 id="signal-classifications">Signal classifications</h3>
 <p>There are different types of signals and representations of signals. Let&rsquo;s list these:</p>
 <ul>
-<li>
-<p>Continuous VS Discrete (Time)</p>
-</li>
-<li>
-<p>Continuous VS Discrete (Amplitude)</p>
-</li>
-<li>
-<p>Periodic VS Aperiodic</p>
-</li>
-<li>
-<p>Deterministic VS Stochastic</p>
-</li>
+<li>Continuous VS Discrete (Time)</li>
+<li>Continuous VS Discrete (Amplitude)</li>
+<li>Periodic VS Aperiodic</li>
+<li>Deterministic VS Stochastic</li>
 </ul>
 <p>We&rsquo;ll properly define each of these, let&rsquo;s start with the time representation:</p>
 <h4 id="continuous-vs-discrete-time">Continuous VS Discrete (Time)</h4>
@@ -145,18 +137,18 @@ Let&rsquo;s first define what a signal is</p>
 <p>Let&rsquo;s also define what an even, odd and periodic functions are.</p>
 <p>An even function is <em>symmetrical</em> about the vertical axis. Mathematically this means:
 $$
-f(t) = f(-t)
+f(t) = f(-t) \\
 f[k] = f[-k]
 $$
 An odd function is <em>anti-symmetrical</em> about the vertical axis. Mathematically this means:
 $$
-f(t) = -f(t)
+f(t) = -f(t) \\
 f[k] = -f[k]
 $$</p>
 <p><img src="/school/images/even.png#center" alt=""></p>
 <p>A periodic function has a <em>fundamental period</em> (minimum), $T_0$. Which also means it has a <em>fundamental frequency</em>, $f_0 = \dfrac{1}{T_0}$.
 $$
-f(t) = f(t + nT_0)
+f(t) = f(t + nT_0) \\
 f[k] = f[k + nK_0]
 $$</p>
 <p>We sometimes define the fundamental frequency in angular velocity instead of Hz, which means, $\omega_0 = 2\pi f_0 = \dfrac{2\pi}{T_0}$.
