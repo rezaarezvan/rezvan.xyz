@@ -248,15 +248,9 @@ release(Resources) -&gt;
 </code></pre><h3 id="producer-consumer">Producer-consumer</h3>
 <p>Recap; Implement a <code>buffer</code> such that:</p>
 <ul>
-<li>
-<p>Producers and consumers access the buffer atomically</p>
-</li>
-<li>
-<p>Consumers block when the buffer is empty</p>
-</li>
-<li>
-<p>Producers block when the buffer is full (bounded buffer variant)</p>
-</li>
+<li>Producers and consumers access the buffer atomically</li>
+<li>Consumers block when the buffer is empty</li>
+<li>Producers block when the buffer is full (bounded buffer variant)</li>
 </ul>
 <pre tabindex="0"><code>-module(buffer).
 
@@ -366,35 +360,23 @@ this doesn&rsquo;t prevent starvation due to this version prioritizes readers.</
 <p>The solution based on two monitors is a approach here, but it&rsquo;s quite cumbersome for a message-passing program.</p>
 <p>We instead implement two <strong>macro states</strong>:</p>
 <ul>
-<li>
-<p>Empty - no readers or writers</p>
-</li>
-<li>
-<p>Readers - Readers but no writers</p>
-</li>
+<li>Empty - no readers or writers</li>
+<li>Readers - Readers but no writers</li>
 </ul>
 <p>The initial board is in empty state, then:</p>
 <ul>
-<li>
-<p>When board is in state <code>emtpy</code>:</p>
+<li>When board is in state <code>emtpy</code>:
 <ul>
-<li>
-<p>Read requests - served immediately, then switches to <code>readers</code> state.</p>
-</li>
-<li>
-<p>Write requests - served immediately and <strong>synchronously</strong>, wait until writing ends, then go into <code>empty</code> state.</p>
-</li>
+<li>Read requests - served immediately, then switches to <code>readers</code> state.</li>
+<li>Write requests - served immediately and <strong>synchronously</strong>, wait until writing ends, then go into <code>empty</code> state.</li>
 </ul>
 </li>
-<li>
-<p>When board is in state <code>readers</code>:</p>
+</ul>
 <ul>
-<li>
-<p>Read requests - served immediately and stays in <code>readers</code>.</p>
-</li>
-<li>
-<p>Write requests - served <em>as soon as possible</em>, board waits until all reading ends, <em>then</em> request is served. Back to <code>empty</code> state.</p>
-</li>
+<li>When board is in state <code>readers</code>:
+<ul>
+<li>Read requests - served immediately and stays in <code>readers</code>.</li>
+<li>Write requests - served <em>as soon as possible</em>, board waits until all reading ends, <em>then</em> request is served. Back to <code>empty</code> state.</li>
 </ul>
 </li>
 </ul>
@@ -576,7 +558,7 @@ init(N) -&gt;
             <nav class="nav tags">
                 <ul class="tags">
                     
-                    <li><a href="/%20/tags/Concurrent-Programming">Concurrent Programming</a></li>
+                    <li><a href="/tags/Concurrent-Programming">Concurrent Programming</a></li>
                     
                 </ul>
             </nav>

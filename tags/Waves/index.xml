@@ -28,9 +28,7 @@ If we look at light like usual mechanical waves, it quickly becomes very clutter
       <description>The next chapter in our physics course is about waves, especially mechanical waves.
 General about Waves In this chapter we&amp;rsquo;ll cover mechanical waves but also electromagnetic waves, in this case only (visible) light.
 There&amp;rsquo;s two types of waves we&amp;rsquo;ll be covering:
-Transverse waves
-They have &amp;rsquo;noise&amp;rsquo; orthogonal against the wave&amp;rsquo;s propagation speed. Longitudinal waves
-They have &amp;rsquo;noise&amp;rsquo; parallel with the waves&amp;rsquo; propagation speed. We can describe this noise with the function $y(x, t) = f(x + vt)$.</description>
+Transverse waves They have &amp;rsquo;noise&amp;rsquo; orthogonal against the wave&amp;rsquo;s propagation speed. Longitudinal waves They have &amp;rsquo;noise&amp;rsquo; parallel with the waves&amp;rsquo; propagation speed. We can describe this noise with the function $y(x, t) = f(x + vt)$.</description>
     </item>
     
   </channel>

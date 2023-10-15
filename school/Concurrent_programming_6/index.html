@@ -134,87 +134,85 @@ power:power(2, 3).
 <h3 id="types-in-erlang">Types in Erlang</h3>
 <p>Erlang has 8 primitives types and 5 compound types:</p>
 <ul>
-<li>
-<p>Primitives</p>
+<li>Primitives
 <ul>
-<li>
-<p>Integers</p>
+<li>Integers
 <ul>
 <li>Arbitrary sized integers with the usual operations</li>
 </ul>
 </li>
-<li>
-<p>Atoms</p>
-<pre><code>  * A type which can be thought of as a type of *identifier*
-</code></pre>
-</li>
-<li>
-<p>Floats</p>
+</ul>
+<ul>
+<li>Atoms</li>
+</ul>
+<ul>
+<li>Floats
 <ul>
 <li>64-bit floating point numbers</li>
 </ul>
 </li>
-<li>
-<p>References</p>
+</ul>
+<ul>
+<li>References
 <ul>
 <li>Globally unique symbols</li>
 </ul>
 </li>
-<li>
-<p>Binaries</p>
+</ul>
+<ul>
+<li>Binaries
 <ul>
 <li>Sequence of bytes</li>
 </ul>
 </li>
-<li>
-<p>Pids</p>
+</ul>
+<ul>
+<li>Pids
 <ul>
 <li>Process identifiers</li>
 </ul>
 </li>
-<li>
-<p>Ports</p>
+</ul>
+<ul>
+<li>Ports
 <ul>
 <li>Used for communication</li>
 </ul>
 </li>
-<li>
-<p>Funs</p>
+</ul>
+<ul>
+<li>Funs
 <ul>
 <li>Function closures</li>
 </ul>
 </li>
 </ul>
 </li>
-<li>
-<p>Compound types</p>
+</ul>
 <ul>
-<li>
-<p>Tuples</p>
+<li>Compound types
+<ul>
+<li>Tuples
 <ul>
 <li>Fixed size containers</li>
 </ul>
 </li>
-<li>
-<p>Lists</p>
+<li>Lists
 <ul>
 <li>Dynamically sized containers</li>
 </ul>
 </li>
-<li>
-<p>Maps</p>
+<li>Maps
 <ul>
 <li>Key-value tables</li>
 </ul>
 </li>
-<li>
-<p>Strings</p>
+<li>Strings
 <ul>
 <li>Syntactic sugar for sequence of characters</li>
 </ul>
 </li>
-<li>
-<p>Records</p>
+<li>Records
 <ul>
 <li>Syntactic sugar to access tuples elements by name</li>
 </ul>
@@ -292,41 +290,25 @@ Since it&rsquo;s functional as well, we can pass around functions as values, but
 <h3 id="erlangs-principles">Erlang&rsquo;s principles</h3>
 <p>Erlang has some principles that it follows, let&rsquo;s take a look:</p>
 <ul>
-<li>
-<p>Processes are strongly isolated.</p>
-</li>
-<li>
-<p>Process creation and destruction is a lightweight operation.</p>
-</li>
-<li>
-<p>Message passing is the only way for processes to interact with each other.</p>
-</li>
-<li>
-<p>Processes have unique names.</p>
-</li>
-<li>
-<p>If you know the name of a process, you can send it a message to it.</p>
-</li>
-<li>
-<p>Processes share no resources.</p>
-</li>
-<li>
-<p>Error handling is non-local.</p>
-</li>
-<li>
-<p>Processes do what they are supposed to do or fail.</p>
-</li>
+<li>Processes are strongly isolated.</li>
+<li>Process creation and destruction is a lightweight operation.</li>
+<li>Message passing is the only way for processes to interact with each other.</li>
+<li>Processes have unique names.</li>
+<li>If you know the name of a process, you can send it a message to it.</li>
+<li>Processes share no resources.</li>
+<li>Error handling is non-local.</li>
+<li>Processes do what they are supposed to do or fail.</li>
 </ul>
 <p>Let&rsquo;s quickly compare the different concurrent models:</p>
 <ul>
-<li>
-<p>Shared memory</p>
+<li>Shared memory
 <ul>
 <li>Synchronize by <em>writing to</em> and <em>reading from shared</em> memory.</li>
 </ul>
 </li>
-<li>
-<p>Message passing</p>
+</ul>
+<ul>
+<li>Message passing
 <ul>
 <li>Synchronize by <em>exchanging messages</em></li>
 </ul>
@@ -335,38 +317,22 @@ Since it&rsquo;s functional as well, we can pass around functions as values, but
 <h3 id="the-actor-model">The actor model</h3>
 <p>Erlang&rsquo;s message-passing model is based on the <em>actor model</em>:</p>
 <ul>
-<li>
-<p>Actors are just abstractions of processes</p>
-</li>
-<li>
-<p><strong>No</strong> shared state or resources between actors (processes)</p>
-</li>
-<li>
-<p>Actors (processes) <em>communicate</em> by <strong>exchanging messages</strong> - <em>asynchronous</em> messages passing at that.</p>
-</li>
+<li>Actors are just abstractions of processes</li>
+<li><strong>No</strong> shared state or resources between actors (processes)</li>
+<li>Actors (processes) <em>communicate</em> by <strong>exchanging messages</strong> - <em>asynchronous</em> messages passing at that.</li>
 </ul>
-<p>Let&rsquo;s cleary define the actors and messages:</p>
+<p>Let&rsquo;s clearly define the actors and messages:</p>
 <p>Each actor is identified by their <em>address</em>, we can think of this as their unique ID.</p>
 <p>An <strong>actor</strong> can:</p>
 <ul>
-<li>
-<p><code>send</code> messages to other actors via their addresses/IDs.</p>
-</li>
-<li>
-<p><code>change</code> its <em>behavior</em>, what it computes/how it reacts to messages.</p>
-</li>
-<li>
-<p><code>create</code> new actors</p>
-</li>
+<li><code>send</code> messages to other actors via their addresses/IDs.</li>
+<li><code>change</code> its <em>behavior</em>, what it computes/how it reacts to messages.</li>
+<li><code>create</code> new actors</li>
 </ul>
 <p>A message <em>includes</em>:</p>
 <ul>
-<li>
-<p>A <em>recipient</em>, the identifier address/ID</p>
-</li>
-<li>
-<p><em>Content</em>, arbitrary information necessary for the actors</p>
-</li>
+<li>A <em>recipient</em>, the identifier address/ID</li>
+<li><em>Content</em>, arbitrary information necessary for the actors</li>
 </ul>
 <h3 id="sending-and-receiving-messages">Sending and receiving messages</h3>
 <p>A process (actor) in Erlang is created by calling <code>spawn</code>,
@@ -456,31 +422,17 @@ recieve {From, Command} -&gt; case Command of
 <h3 id="servers">Servers</h3>
 <p>A server is a process that:</p>
 <ul>
-<li>
-<p>Responds to a fixed number of <em>commands</em></p>
-</li>
-<li>
-<p>Runs indefinitely, serving an arbitrary number of <em>requests</em>, until it recieves a <strong>shutdown</strong> command.</p>
-</li>
-<li>
-<p>Can serve an arbitrary number of clients</p>
-</li>
+<li>Responds to a fixed number of <em>commands</em></li>
+<li>Runs indefinitely, serving an arbitrary number of <em>requests</em>, until it recieves a <strong>shutdown</strong> command.</li>
+<li>Can serve an arbitrary number of clients</li>
 </ul>
 <p>Each <em>command</em> is a message of the form:</p>
 <p><code>{Command, From, Ref, Arg1, ..., ArgN}</code></p>
 <ul>
-<li>
-<p><code>Command</code> is the command&rsquo;s name.</p>
-</li>
-<li>
-<p><code>From</code> is the PID of the client.</p>
-</li>
-<li>
-<p><code>Ref</code> is a unique identifier of the request.</p>
-</li>
-<li>
-<p><code>Arg1, ..., ArgN</code> are arguments to the command.</p>
-</li>
+<li><code>Command</code> is the command&rsquo;s name.</li>
+<li><code>From</code> is the PID of the client.</li>
+<li><code>Ref</code> is a unique identifier of the request.</li>
+<li><code>Arg1, ..., ArgN</code> are arguments to the command.</li>
 </ul>
 <h3 id="math-server">Math server</h3>
 <p>Let&rsquo;s make a simple math server:</p>
@@ -554,7 +506,7 @@ status(Server) -&gt;
             <nav class="nav tags">
                 <ul class="tags">
                     
-                    <li><a href="/%20/tags/Concurrent-Programming">Concurrent Programming</a></li>
+                    <li><a href="/tags/Concurrent-Programming">Concurrent Programming</a></li>
                     
                 </ul>
             </nav>

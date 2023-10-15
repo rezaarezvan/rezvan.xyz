@@ -70,8 +70,7 @@ What is Erlang? Erlang is a functional programming language with message-passing
       <guid>https://rezvan.xyz/school/Concurrent_programming_5/</guid>
       <description>In this series we&amp;rsquo;ve covered locks and semaphores as synchronization mechanism. Although these are essential in concurrent programs, they&amp;rsquo;re quite low-level synchronization mechanisms.
 Semaphores for example have the problem that:
-They are global and unstructured, it can be quite difficult to understand what a certain semaphore does in a given piece of code.
-Often, we are prone to deadlocks or incorrect behavior, it&amp;rsquo;s easy to forget a simple up() or down() call in your programs.</description>
+They are global and unstructured, it can be quite difficult to understand what a certain semaphore does in a given piece of code. Often, we are prone to deadlocks or incorrect behavior, it&amp;rsquo;s easy to forget a simple up() or down() call in your programs.</description>
     </item>
     
     <item>
@@ -85,6 +84,18 @@ Dining Philosophers To refresh our memory on the problem let&amp;rsquo;s cover i
 The dining philosophers problem describes how to avoid deadlock (circular conditions).
 We have five philosophers (threads) sitting at a dining table. A fork is between each adjacent pair of philosophers.
 Each philosopher alternates between thinking (non-critical section) and eating (critical section). In order to eat, a philosopher needs to pick up both forks that lie to the right and left of the philosopher.</description>
+    </item>
+    
+    <item>
+      <title>Concurrent Programming: Part 3 - Models of concurrency &amp; synchronization algorithms</title>
+      <link>https://rezvan.xyz/school/Concurrent_programming_3/</link>
+      <pubDate>Tue, 31 Jan 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://rezvan.xyz/school/Concurrent_programming_3/</guid>
+      <description>In this part we&amp;rsquo;ll cover how we can achieve mutual exclusion in a program using only atomic read and writes.
+Analyzing Concurrency When analyzing concurrent programs we often look at states and transitions.
+A state in these diagrams are possible program states. Transitions on the other hand, connects these states to an execution order.
+One to thing to note is that, the structural properties in these diagrams, captures the semantics properties of the corresponding program.</description>
     </item>
     
     <item>

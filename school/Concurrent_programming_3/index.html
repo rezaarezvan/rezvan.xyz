@@ -134,26 +134,28 @@ lock and unlock will have their own visible transition.</p>
 the semantics properties about the program.</p>
 <p>This means for example that:</p>
 <ul>
-<li>
-<p>Mutual Exclusion:</p>
+<li>Mutual Exclusion:
 <ul>
 <li>If there are no states where two (or more) threads are in their critical section</li>
 </ul>
 </li>
-<li>
-<p>Deadlock Freedom:</p>
+</ul>
+<ul>
+<li>Deadlock Freedom:
 <ul>
 <li>For every (non-final) state, there is at least one outgoing transition to another state.</li>
 </ul>
 </li>
-<li>
-<p>Starvation Freedom:</p>
+</ul>
+<ul>
+<li>Starvation Freedom:
 <ul>
 <li>There is (looping) path such that a thread never enters its critical section while trying to do so.</li>
 </ul>
 </li>
-<li>
-<p>No Race Conditions:</p>
+</ul>
+<ul>
+<li>No Race Conditions:
 <ul>
 <li>All the final states have the same correct result.</li>
 </ul>
@@ -281,31 +283,33 @@ At each &ldquo;level&rdquo; we &ldquo;remove&rdquo; (yield) 1 thread and keep do
 but threads may access the critical section again before &ldquo;older&rdquo; threads.</p>
 <p>There are several methods to make sure the algorithm is fair:</p>
 <ul>
-<li>
-<p>Finite waiting:</p>
+<li>Finite waiting:
 <ul>
 <li>When a thread, $t$, is waiting to enter its critical section,
 it will <em>eventually</em> enter it</li>
 </ul>
 </li>
-<li>
-<p>Bounded waiting:</p>
+</ul>
+<ul>
+<li>Bounded waiting:
 <ul>
 <li>When a thread, $t$ is waiting to enter its critical section, the maximum
 number of times <em>others</em> arriving threads are allowed to enter their critical section
 before $t$, is <strong>bounded</strong> by a function of the number of contending threads.</li>
 </ul>
 </li>
-<li>
-<p>$r$-Bounded waiting:</p>
+</ul>
+<ul>
+<li>$r$-Bounded waiting:
 <ul>
 <li>when a thread $t$ is waiting to enter its critical section, the
 maximum number of times other arriving threads are allowed to enter their critical
 section before $t$ is less than $r + 1$</li>
 </ul>
 </li>
-<li>
-<p>First-come-first-served:</p>
+</ul>
+<ul>
+<li>First-come-first-served:
 <ul>
 <li>0-bounded waiting</li>
 </ul>
@@ -388,6 +392,14 @@ good concurrent programs from scratch is a pain. I even left out how to implemen
 
         <div class="post-tags">
             
+            
+            <nav class="nav tags">
+                <ul class="tags">
+                    
+                    <li><a href="/tags/Concurrent-Programming">Concurrent Programming</a></li>
+                    
+                </ul>
+            </nav>
             
             
         </div>

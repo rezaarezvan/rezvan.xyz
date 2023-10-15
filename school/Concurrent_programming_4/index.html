@@ -125,18 +125,16 @@ In order to eat, a philosopher needs to pick up both forks that lie to the right
 <h4 id="solution">Solution</h4>
 <p>A good solution would allow:</p>
 <ul>
-<li>
-<p>Having an arbitrary number of philosophers</p>
-</li>
-<li>
-<p>Deadlock freedom</p>
-</li>
-<li>
-<p>Starvation freedom</p>
-</li>
-<li>
-<p>Reasonable efficiency, it is possible to eat in parallel.</p>
-</li>
+<li>Having an arbitrary number of philosophers</li>
+</ul>
+<ul>
+<li>Deadlock freedom</li>
+</ul>
+<ul>
+<li>Starvation freedom</li>
+</ul>
+<ul>
+<li>Reasonable efficiency, it is possible to eat in parallel.</li>
 </ul>
 <p>Let&rsquo;s create an interface for the table.</p>
 <pre tabindex="0"><code>interface Table {
@@ -238,15 +236,13 @@ This is under the assumption that the locks/semaphores (and scheduling) are fair
 <p>The producer (asynchronously) produces items and places them on the buffer. While the consumer (asynchronously) consumes (removes) the items from the buffer.</p>
 <p>So it&rsquo;s clear that the buffer needs to be shared. Therefore, we need a buffer that:</p>
 <ul>
-<li>
-<p>Producers and consumers access the buffer in <strong>mutual exclusion</strong></p>
-</li>
-<li>
-<p>Consumers are blocked when the buffer is empty (can&rsquo;t consume emptiness)</p>
-</li>
-<li>
-<p>Producers are blocked when the buffer is full (can&rsquo;t overproduce)</p>
-</li>
+<li>Producers and consumers access the buffer in <strong>mutual exclusion</strong></li>
+</ul>
+<ul>
+<li>Consumers are blocked when the buffer is empty (can&rsquo;t consume emptiness)</li>
+</ul>
+<ul>
+<li>Producers are blocked when the buffer is full (can&rsquo;t overproduce)</li>
 </ul>
 <pre tabindex="0"><code>interface Buffer&lt;T&gt; {
 
@@ -261,15 +257,13 @@ This is under the assumption that the locks/semaphores (and scheduling) are fair
 }
 </code></pre><p>Other properties that we would like:</p>
 <ul>
-<li>
-<p>Support an arbitrary number of producers and consumers</p>
-</li>
-<li>
-<p>Deadlock freedom</p>
-</li>
-<li>
-<p>Starvation freedom</p>
-</li>
+<li>Support an arbitrary number of producers and consumers</li>
+</ul>
+<ul>
+<li>Deadlock freedom</li>
+</ul>
+<ul>
+<li>Starvation freedom</li>
 </ul>
 <h3 id="unbounded-shared-buffer">Unbounded shared buffer</h3>
 <p>One possible solution is using one lock and one semaphore:</p>
@@ -645,7 +639,7 @@ To lock and gain exclusive access.</p>
             <nav class="nav tags">
                 <ul class="tags">
                     
-                    <li><a href="/%20/tags/Concurrent-Programming">Concurrent Programming</a></li>
+                    <li><a href="/tags/Concurrent-Programming">Concurrent Programming</a></li>
                     
                 </ul>
             </nav>

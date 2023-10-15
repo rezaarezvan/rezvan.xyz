@@ -833,8 +833,7 @@ What is Erlang? Erlang is a functional programming language with message-passing
       <guid>https://rezvan.xyz/school/Concurrent_programming_5/</guid>
       <description>In this series we&amp;rsquo;ve covered locks and semaphores as synchronization mechanism. Although these are essential in concurrent programs, they&amp;rsquo;re quite low-level synchronization mechanisms.
 Semaphores for example have the problem that:
-They are global and unstructured, it can be quite difficult to understand what a certain semaphore does in a given piece of code.
-Often, we are prone to deadlocks or incorrect behavior, it&amp;rsquo;s easy to forget a simple up() or down() call in your programs.</description>
+They are global and unstructured, it can be quite difficult to understand what a certain semaphore does in a given piece of code. Often, we are prone to deadlocks or incorrect behavior, it&amp;rsquo;s easy to forget a simple up() or down() call in your programs.</description>
     </item>
     
     <item>
@@ -1021,9 +1020,7 @@ Add an item to the queue Find the smallest item in the queue Remove the smallest
       <description>The next chapter in our physics course is about waves, especially mechanical waves.
 General about Waves In this chapter we&amp;rsquo;ll cover mechanical waves but also electromagnetic waves, in this case only (visible) light.
 There&amp;rsquo;s two types of waves we&amp;rsquo;ll be covering:
-Transverse waves
-They have &amp;rsquo;noise&amp;rsquo; orthogonal against the wave&amp;rsquo;s propagation speed. Longitudinal waves
-They have &amp;rsquo;noise&amp;rsquo; parallel with the waves&amp;rsquo; propagation speed. We can describe this noise with the function $y(x, t) = f(x + vt)$.</description>
+Transverse waves They have &amp;rsquo;noise&amp;rsquo; orthogonal against the wave&amp;rsquo;s propagation speed. Longitudinal waves They have &amp;rsquo;noise&amp;rsquo; parallel with the waves&amp;rsquo; propagation speed. We can describe this noise with the function $y(x, t) = f(x + vt)$.</description>
     </item>
     
     <item>
