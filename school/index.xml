@@ -6,7 +6,18 @@
     <description>Recent content in Schools on rezvan</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 11 Oct 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://rezvan.xyz/school/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 15 Oct 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://rezvan.xyz/school/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Transforms, signals and systems: Summary</title>
+      <link>https://rezvan.xyz/school/SSY081_summary/</link>
+      <pubDate>Sun, 15 Oct 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://rezvan.xyz/school/SSY081_summary/</guid>
+      <description>Signals A signal is a set of information or data. Any physical quantity that varies over time, space or any other variable or variables.
+Even, Odd &amp;amp; Periodic An even function is symmetrical about the vertical axis. Mathematically this means: $$ f(t) = f(-t) \\ f[k] = f[-k] $$
+An odd function is anti-symmetrical about the vertical axis. Mathematically this means: $$ f(t) = -f(-t) \\ f[k] = -f[-k] $$</description>
+    </item>
+    
     <item>
       <title>Mathematical analysis in several variables: Part 19 - Surface integrals</title>
       <link>https://rezvan.xyz/school/LMA017_19/</link>
@@ -338,7 +349,7 @@ In functions with several variables, it&amp;rsquo;s the same: $$ \lim_{(x, y) \t
       <pubDate>Tue, 29 Aug 2023 16:12:51 +0200</pubDate>
       
       <guid>https://rezvan.xyz/school/SSY081/</guid>
-      <description>Introductions In this series we&amp;rsquo;ll cover what we mean with transforms, signals and systems. How they relate and are used in the real world.
+      <description>Introduction In this series we&amp;rsquo;ll cover what we mean with transforms, signals and systems. How they relate and are used in the real world.
 Signals In this part we&amp;rsquo;ll try to understand signals, classify these. Perform different signal operations and lastly understand and use signal models. Let&amp;rsquo;s first define what a signal is
 Definition A signal is a set of information or data. Any physical quantity that varies over time, space or any other variable or variables.</description>
     </item>
