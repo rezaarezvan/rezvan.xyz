@@ -6,7 +6,21 @@
     <description>Recent content on rezvan</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 18 Oct 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://rezvan.xyz/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 19 Oct 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://rezvan.xyz/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Mathematical analysis in several variables: Summary</title>
+      <link>https://rezvan.xyz/school/LMA017_Summary/</link>
+      <pubDate>Thu, 19 Oct 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://rezvan.xyz/school/LMA017_Summary/</guid>
+      <description>Limits Let&amp;rsquo;s compare limits in one variable to several. $$ \lim_{x \to a} f(x) = L $$
+$$ \lim_{(x, y) \to (a, b)} f(x) = L $$
+They work quite similiar, let&amp;rsquo;s see the limit laws:
+$$ \lim_{(x, y) \to (a, b)} f(x, y) \pm h(x, y) = L + M $$
+$$ \lim_{(x, y) \to (a, b)} f(x, y) \cdot h(x, y) = L \cdot M $$
+$$ \lim_{(x, y) \to (a, b)} \dfrac{f(x, y)}{h(x, y} = \dfrac{L}{M} , M \neq 0 $$</description>
+    </item>
+    
     <item>
       <title>Mathematical analysis in several variables: Part 20 - Divergence Theorem and Stokes Theorem</title>
       <link>https://rezvan.xyz/school/LMA017_20/</link>
@@ -213,7 +227,6 @@ Therefore, let&amp;rsquo;s enclose $D$, with a rectangle, let&amp;rsquo;s call t
 For now, let&amp;rsquo;s stick to rectangles and rectangular boxes.
 Let&amp;rsquo;s define our approach.
 Double integrals Say we have a function, $f(x, y)$ with rectangular domain, $R = [a, b] \cdot [c, d]$.
-This notation means we have a rectangle of form:
 In mathematical terms: $\{(x, y) | a \leq x \leq b, c \leq y \leq y \}$.</description>
     </item>
     
