@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Control theory on rezvan</title>
+    <link>https://rezvan.xyz/tags/Control-theory/</link>
+    <description>Recent content in Control theory on rezvan</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 30 Oct 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://rezvan.xyz/tags/Control-theory/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Control theory: Part 1 - Introduction</title>
+      <link>https://rezvan.xyz/school/ERE103/</link>
+      <pubDate>Mon, 30 Oct 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://rezvan.xyz/school/ERE103/</guid>
+      <description>Introduction Control theory plays a pivotal role in modern systems, ranging from electronics to transportation and industry. In this series, we&amp;rsquo;ll explore the fundamentals of how we can effectively control systems to achieve desired behaviors.
+Definitions Throughout this series, we will delve into methods that ensure systems behave in a desirable manner.
+In a typical system, we encounter:
+$v(t)$ - Interference $u(t)$ - Control signal/Input signal $y(t)$ - Response signal/Output signal Control Control involves producing the output signal solely from the control signal, without any feedback or compensation for disturbances.</description>
+    </item>
+    
+  </channel>
+</rss>
