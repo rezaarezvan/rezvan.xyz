@@ -6,7 +6,20 @@
     <description>Recent content on rezvan</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 30 Oct 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://rezvan.xyz/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 31 Oct 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://rezvan.xyz/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Control theory: Part 2 - Transfer functions</title>
+      <link>https://rezvan.xyz/school/ERE103_2/</link>
+      <pubDate>Tue, 31 Oct 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://rezvan.xyz/school/ERE103_2/</guid>
+      <description>Introduction In this part we&amp;rsquo;ll define what a transfer function is for a system, and why they are important.
+Let&amp;rsquo;s firstly cover feedback again.
+Feedback system As we discussed last time we&amp;rsquo;ll encounter:
+$v(t)$ - Interference $u(t)$ - Control signal/Input signal $y(t)$ - Response signal/Output signal $r(t)$ - Reference value $e(t)$ - Control error Let&amp;rsquo;s take a real world example
+Example Say that we have a system which regulates temperature. We have an initial temperature for 19$^\circ$a.</description>
+    </item>
+    
     <item>
       <title>Control theory: Part 1 - Introduction</title>
       <link>https://rezvan.xyz/school/ERE103/</link>
