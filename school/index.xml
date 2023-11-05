@@ -6,12 +6,23 @@
     <description>Recent content in Schools on rezvan</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 31 Oct 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://rezvan.xyz/school/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 05 Nov 2023 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://rezvan.xyz/school/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Control theory: Part 3 - Regulators</title>
+      <link>https://rezvan.xyz/school/ERE103_3/</link>
+      <pubDate>Sun, 05 Nov 2023 00:00:00 +0000</pubDate>
+      <guid>https://rezvan.xyz/school/ERE103_3/</guid>
+      <description>Introduction In this part we&amp;rsquo;ll define regulators in the Laplace domain.
+Let&amp;rsquo;s firstly cover feedback again.
+$N$th-Order systems In controls, we&amp;rsquo;ll often study system which can be described with differential equations. A $N$th-order system means we can describe said system with a $N$th-order differential equation.
+We also say that the transfer function has degree $N$.
+Feedback system Let&amp;rsquo;s find the general transfer function for a feedback system, from $r(t)$ to $y(t)$.</description>
+    </item>
     <item>
       <title>Control theory: Part 2 - Transfer functions</title>
       <link>https://rezvan.xyz/school/ERE103_2/</link>
       <pubDate>Tue, 31 Oct 2023 00:00:00 +0000</pubDate>
-      
       <guid>https://rezvan.xyz/school/ERE103_2/</guid>
       <description>Introduction In this part we&amp;rsquo;ll define what a transfer function is for a system, and why they are important.
 Let&amp;rsquo;s firstly cover feedback again.
@@ -19,24 +30,20 @@ Feedback system As we discussed last time we&amp;rsquo;ll encounter:
 $v(t)$ - Interference $u(t)$ - Control signal/Input signal $y(t)$ - Response signal/Output signal $r(t)$ - Reference value $e(t)$ - Control error Let&amp;rsquo;s take a real world example
 Example Say that we have a system which regulates temperature. We have an initial temperature for 19$^\circ$a.</description>
     </item>
-    
     <item>
       <title>Control theory: Part 1 - Introduction</title>
       <link>https://rezvan.xyz/school/ERE103/</link>
       <pubDate>Mon, 30 Oct 2023 00:00:00 +0000</pubDate>
-      
       <guid>https://rezvan.xyz/school/ERE103/</guid>
       <description>Introduction Control theory plays a pivotal role in modern systems, ranging from electronics to transportation and industry. In this series, we&amp;rsquo;ll explore the fundamentals of how we can effectively control systems to achieve desired behaviors.
 Definitions Throughout this series, we will delve into methods that ensure systems behave in a desirable manner.
 In a typical system, we encounter:
 $v(t)$ - Interference $u(t)$ - Control signal/Input signal $y(t)$ - Response signal/Output signal Control Control involves producing the output signal solely from the control signal, without any feedback or compensation for disturbances.</description>
     </item>
-    
     <item>
       <title>Mathematical analysis in several variables: Summary</title>
       <link>https://rezvan.xyz/school/LMA017_Summary/</link>
       <pubDate>Thu, 19 Oct 2023 00:00:00 +0000</pubDate>
-      
       <guid>https://rezvan.xyz/school/LMA017_Summary/</guid>
       <description>Limits Let&amp;rsquo;s compare limits in one variable to several. $$ \lim_{x \to a} f(x) = L $$
 $$ \lim_{(x, y) \to (a, b)} f(x) = L $$
@@ -45,34 +52,28 @@ $$ \lim_{(x, y) \to (a, b)} f(x, y) \pm h(x, y) = L + M $$
 $$ \lim_{(x, y) \to (a, b)} f(x, y) \cdot h(x, y) = L \cdot M $$
 $$ \lim_{(x, y) \to (a, b)} \dfrac{f(x, y)}{h(x, y} = \dfrac{L}{M} , M \neq 0 $$</description>
     </item>
-    
     <item>
       <title>Mathematical analysis in several variables: Part 20 - Divergence Theorem and Stokes Theorem</title>
       <link>https://rezvan.xyz/school/LMA017_20/</link>
       <pubDate>Wed, 18 Oct 2023 00:00:00 +0000</pubDate>
-      
       <guid>https://rezvan.xyz/school/LMA017_20/</guid>
       <description>Introduction In this part we&amp;rsquo;ll cover surface integrals over vector fields as well as two very important theorems.
 Surface integrals over vector fields Let $S$ be a parametric surface, parameterized by, $\vec{r}: D \rarr \mathbb{R}^2$ and $F: \mathbb{R}^3 \rarr \mathbb{R}^3$, be a vector field. Then: $$ \iint_S \vec{F} \cdot dS = \iint_D \vec{F}(\vec{r}(u, v)) \cdot \vec{r_u} \times \vec{r_v}\ du\ dv $$
 We call this the flux of $\vec{F}$ through $S$.</description>
     </item>
-    
     <item>
       <title>Transforms, signals and systems: Summary</title>
       <link>https://rezvan.xyz/school/SSY081_summary/</link>
       <pubDate>Sun, 15 Oct 2023 00:00:00 +0000</pubDate>
-      
       <guid>https://rezvan.xyz/school/SSY081_summary/</guid>
       <description>Signals A signal is a set of information or data. Any physical quantity that varies over time, space or any other variable or variables.
 Even, Odd &amp;amp; Periodic An even function is symmetrical about the vertical axis. Mathematically this means: $$ f(t) = f(-t) \\ f[k] = f[-k] $$
 An odd function is anti-symmetrical about the vertical axis. Mathematically this means: $$ f(t) = -f(-t) \\ f[k] = -f[-k] $$</description>
     </item>
-    
     <item>
       <title>Mathematical analysis in several variables: Part 19 - Surface integrals</title>
       <link>https://rezvan.xyz/school/LMA017_19/</link>
       <pubDate>Wed, 11 Oct 2023 00:00:00 +0000</pubDate>
-      
       <guid>https://rezvan.xyz/school/LMA017_19/</guid>
       <description>Introduction In this part we&amp;rsquo;ll cover surface integrals.
 Let&amp;rsquo;s first start with tanget planes to surfaces.
@@ -80,23 +81,19 @@ Tangent planes to surfaces. Suppose $S$ is a parametric surface with parameteriz
 $$ \vec{r}(u, v) = x(u, v) \vec{i} + y(u, v) \vec{j} + z(u, v) \vec{k} $$
 We define $\vec{r_u}(u, v)$ as: $$ \vec{r_u} = x_u(u, v) \vec{i} + y_u(u, v) \vec{j} + z_u(u, v) \vec{k} $$</description>
     </item>
-    
     <item>
       <title>Mathematical analysis in several variables: Part 18 - Green&#39;s Theorem</title>
       <link>https://rezvan.xyz/school/LMA017_18/</link>
       <pubDate>Tue, 10 Oct 2023 00:00:00 +0000</pubDate>
-      
       <guid>https://rezvan.xyz/school/LMA017_18/</guid>
       <description>Introduction In this part we&amp;rsquo;ll cover Green&amp;rsquo;s Theorem, which will allow us to have a relationship between integrals and double integrals.
 Before starting, we will only work with simple curves. Which essentially just means that the curves have no self-injections (only exception is when it starts and ends at the same point).
 If $C$ is a simple and closed curve, e.g a circle. Then $C$ determines a inner region, $D$. In this case, we write $\partial D = C$.</description>
     </item>
-    
     <item>
       <title>Mathematical analysis in several variables: Part 17 - The fundamental theorem of line integrals</title>
       <link>https://rezvan.xyz/school/LMA017_17/</link>
       <pubDate>Wed, 04 Oct 2023 00:00:00 +0000</pubDate>
-      
       <guid>https://rezvan.xyz/school/LMA017_17/</guid>
       <description>Introduction In this part we&amp;rsquo;ll cover the fundamental theorem of line integrals.
 Definition Recall the fundamental theorem of calculus: $$ \int_a^b f^\prime(x)\ dx = f(b) - f(a) $$
@@ -105,24 +102,20 @@ Let $C = D$ be parameterized as $\vec{r}(t)$, for $a \leq t \leq b$.
 $$ \boxed{\int_C \nabla f \cdot dr = f(\vec{r}(b)) - f(\vec{r}(a))} $$
 Notice how this doesn&amp;rsquo;t depend on the actual curve, but only of the start and endpoint.</description>
     </item>
-    
     <item>
       <title>Mathematical analysis in several variables: Part 16 - Vector fields</title>
       <link>https://rezvan.xyz/school/LMA017_16/</link>
       <pubDate>Tue, 03 Oct 2023 00:00:00 +0000</pubDate>
-      
       <guid>https://rezvan.xyz/school/LMA017_16/</guid>
       <description>Introduction In this part we&amp;rsquo;ll cover so-called vector fields.
 Definition A vector field is a function, $F$: $$ F: D \subset \mathbb{R}^2 \rarr \mathbb{R}^2 \ | \ \text{2D} \\ F: D \subset \mathbb{R}^3 \rarr \mathbb{R}^3 \ | \ \text{3D} $$
 Example Consider $F(x, y) = (-y, x)$ (which is the same as $-y \vec{i} + x\vec{j}$).
 The graph for this looks like: Gradient field By this definiton, we can say that.</description>
     </item>
-    
     <item>
       <title>Mathematical analysis in several variables: Part 15 - Line integrals</title>
       <link>https://rezvan.xyz/school/LMA017_15/</link>
       <pubDate>Sun, 01 Oct 2023 00:00:00 +0000</pubDate>
-      
       <guid>https://rezvan.xyz/school/LMA017_15/</guid>
       <description>Introduction In this part we&amp;rsquo;ll cover a new concept with integrals, the so-called line integral.
 Definition A curve, $C$, parameterized as $\vec{r}(t) = \langle x(t), y(t) \rangle$, for an interval $t \in [a, b]$ and a continuous function, $f: C \rarr \mathbb{R}$.
@@ -130,12 +123,10 @@ Assuming $x(t)$ and $y(t)$ are differentiable.
 $$ \int_C f(x, y) ds = \int_a^b f(x(t), y(t)) \sqrt{x^\prime(t)^2 + y^\prime(t)^2}\ dt $$
 Geometrical sense Just as an integral over an interval $[a, b]$ describes the area under a curve on that interval.</description>
     </item>
-    
     <item>
       <title>Transforms, signals and systems: Part 9 - Laplace transform</title>
       <link>https://rezvan.xyz/school/SSY081_9/</link>
       <pubDate>Thu, 28 Sep 2023 00:00:00 +0000</pubDate>
-      
       <guid>https://rezvan.xyz/school/SSY081_9/</guid>
       <description>Introduction In this part we&amp;rsquo;ll cover the Laplace transform and how we&amp;rsquo;ll use it.
 Before that, let&amp;rsquo;s understand why we&amp;rsquo;ll use it.
@@ -145,48 +136,40 @@ Therefore: $$ e^{j\omega t} \rarr e^{st} $$
 Where $s = \sigma + j\omega$.
 Definition The Laplace transformation is a unilateral transform, which just means it is one-sided.</description>
     </item>
-    
     <item>
       <title>Mathematical analysis in several variables: Part 14 - Curves</title>
       <link>https://rezvan.xyz/school/LMA017_14/</link>
       <pubDate>Wed, 27 Sep 2023 00:00:00 +0000</pubDate>
-      
       <guid>https://rezvan.xyz/school/LMA017_14/</guid>
       <description>Introduction In this part we&amp;rsquo;ll cover curves and how we can parameterize curve.
 Definition Let, $f(t)$, $g(t)$ and $h(t)$ be continuous functions on some interval, $I$. The connection of points $(x, y, z)$, where $x = f(t)$, $y = g(t)$ and $z = h(t)$, is a curve.
 Equivalently, we can say that: $$ \vec{r}(t) = \langle f(t), g(t), h(t) \rangle $$
 We call this the parameterization of the curve. Where $t$ is the parameter.</description>
     </item>
-    
     <item>
       <title>Mathematical analysis in several variables: Part 13 - The jacobian matrix, cylindrical coordinates and spherical coordinates</title>
       <link>https://rezvan.xyz/school/LMA017_13/</link>
       <pubDate>Tue, 26 Sep 2023 00:00:00 +0000</pubDate>
-      
       <guid>https://rezvan.xyz/school/LMA017_13/</guid>
       <description>Introduction In this part we&amp;rsquo;ll cover how we change our variables into others, in the most general case.
 General case of variable change $$ \iint_D f(x, y)\ dA $$
 We want to rewrite this in terms of $u$ and $v$. Let&amp;rsquo;s say that: $$ x = g(u, v) \newline y = h(u, v) $$
 We can say that we have a transformation, $T$, from the $uv$-plane to the $xy$-plane, given by our functions $g$ and $h$.</description>
     </item>
-    
     <item>
       <title>Transforms, signals and systems: Part 8 - Signal reconstruction</title>
       <link>https://rezvan.xyz/school/SSY081_8/</link>
       <pubDate>Mon, 25 Sep 2023 00:00:00 +0000</pubDate>
-      
       <guid>https://rezvan.xyz/school/SSY081_8/</guid>
       <description>Introduction In this part we&amp;rsquo;ll cover how we can recover a signal from a sampled signal, given that it follows Nyquist-Shannons theorem.
 Signal reconstruction If we want to reconstruct a signal from a sampled version, assuming it follows Nyquist-Shannos theorem.
 We have two options. Let&amp;rsquo;s start with the first option.
 Filter Given the spectrum of the signal, we can isolate the replica and perform the inverse Fourier transform on this.</description>
     </item>
-    
     <item>
       <title>Mathematical analysis in several variables: Part 12 - Change of variables &amp; Polar coordinates</title>
       <link>https://rezvan.xyz/school/LMA017_12/</link>
       <pubDate>Fri, 22 Sep 2023 00:00:00 +0000</pubDate>
-      
       <guid>https://rezvan.xyz/school/LMA017_12/</guid>
       <description>Introduction In this part we&amp;rsquo;ll cover how to perform change of variables for double and triple integrals, as well as the idea and power with polar coordinates.
 Change of variable For functions of one variable:
@@ -195,12 +178,10 @@ Let $u = g(x)$ and therefore $du = g&amp;rsquo;(x)\ dx$.
 Then: $$ \int_{g(a)}^{g(b)} f(u)\ du $$
 But in two variables, this is a bit tricker, we&amp;rsquo;ll have to use polar coordinates.</description>
     </item>
-    
     <item>
       <title>Transforms, signals and systems: Part 7 - Filters and Nyquist-Shannon sampling theorem</title>
       <link>https://rezvan.xyz/school/SSY081_7/</link>
       <pubDate>Thu, 21 Sep 2023 00:00:00 +0000</pubDate>
-      
       <guid>https://rezvan.xyz/school/SSY081_7/</guid>
       <description>Introduction In this part we&amp;rsquo;ll cover the important Nyquist-Shannon sampling theorem. This is a fundamental theorem within digital signal processing.
 However, to understand the theorem, we firstly need to understand filters.
@@ -208,45 +189,37 @@ Transfer function Say we have a system which can be modeled as: $$ y(t) = f(t) *
 The same system, but in the frequency domain is therefore: $$ Y(\omega) = F(\omega)\ H(\omega) $$
 Just as we call, $h(t)$, the system response function, we call $H(\omega)$ for the spectral response of the system.</description>
     </item>
-    
     <item>
       <title>Mathematical analysis in several variables: Part 11 - Computing volumes and Triple integrals over general regions</title>
       <link>https://rezvan.xyz/school/LMA017_11/</link>
       <pubDate>Wed, 20 Sep 2023 00:00:00 +0000</pubDate>
-      
       <guid>https://rezvan.xyz/school/LMA017_11/</guid>
       <description>Introduction In this part we&amp;rsquo;ll cover how to compute volumes using double integrals, as well as defining the triple integral over general regions.
 Properties of double integral $\iint_D (f(x, y) + g(x, y))\ dA = \iint_D f(x, y)\ dA + \iint_D g(x, y)\ dA$ Quick proof: $$ \iint_D (f(x, y) + g(x, y))\ dA = \lim_{\substack{\Delta x \to 0 \newline \Delta y \to 0}} \sum_{j = 1}^{m} \sum_{i = 1}^{n} (f(x_{i}^{*}, y_{j}^{*}) + g(x_{i}^{*}, y_{j}^{*})) (\Delta A)_{ij} $$</description>
     </item>
-    
     <item>
       <title>Transforms, signals and systems: Part 6 - Fourier Transform</title>
       <link>https://rezvan.xyz/school/SSY081_6/</link>
       <pubDate>Wed, 20 Sep 2023 00:00:00 +0000</pubDate>
-      
       <guid>https://rezvan.xyz/school/SSY081_6/</guid>
       <description>Introduction In this part we&amp;rsquo;ll define and understand Fourier transforms. In the last part we covered the concept of Fourier series.
 Which was a way of describing periodic functions as a linear combination (sum) of simple trigonometric functions. The Fourier transform takes this one step further, it&amp;rsquo;s a way to extend the Fourier series of non-periodic functions.
 Definition Given a function in the time-domain, the equivalent function in the frequency domain is: $$ F(\omega) = \int_{-\infty}^{\infty} f(t) e^{-j\omega t}\ dt $$</description>
     </item>
-    
     <item>
       <title>Mathematical analysis in several variables: Part 10 - Double  integrals over general regions</title>
       <link>https://rezvan.xyz/school/LMA017_10/</link>
       <pubDate>Tue, 19 Sep 2023 00:00:00 +0000</pubDate>
-      
       <guid>https://rezvan.xyz/school/LMA017_10/</guid>
       <description>Introduction In this part we&amp;rsquo;ll cover how to compute the double integral over general regions.
 Double integrals over general regions Let $f(x, y)$ be defined on the domain, $D$, where $D$ is a bounded region. $D$ is a general region, meaning it can have any geometrical shape.
 However, if we reduce our problem into something we know, a rectangular region, we know how to compute the double integral.
 Therefore, let&amp;rsquo;s enclose $D$, with a rectangle, let&amp;rsquo;s call this rectangle for $R$.</description>
     </item>
-    
     <item>
       <title>Mathematical analysis in several variables: Part 9 - Double and triple integrals</title>
       <link>https://rezvan.xyz/school/LMA017_9/</link>
       <pubDate>Fri, 15 Sep 2023 00:00:00 +0000</pubDate>
-      
       <guid>https://rezvan.xyz/school/LMA017_9/</guid>
       <description>Introduction In this part we&amp;rsquo;ll cover how we integrate functions of several variables, specifically, over a rectangular domain. We&amp;rsquo;ll later cover general domains.
 For now, let&amp;rsquo;s stick to rectangles and rectangular boxes.
@@ -254,12 +227,10 @@ Let&amp;rsquo;s define our approach.
 Double integrals Say we have a function, $f(x, y)$ with rectangular domain, $R = [a, b] \cdot [c, d]$.
 In mathematical terms: $\{(x, y) | a \leq x \leq b, c \leq y \leq y \}$.</description>
     </item>
-    
     <item>
       <title>Transforms, signals and systems: Part 5 - Fourier series</title>
       <link>https://rezvan.xyz/school/SSY081_5/</link>
       <pubDate>Fri, 15 Sep 2023 00:00:00 +0000</pubDate>
-      
       <guid>https://rezvan.xyz/school/SSY081_5/</guid>
       <description>Introduction In this part we&amp;rsquo;ll try to understand the concept and power with Fourier series.
 Let&amp;rsquo;s firstly define the what, why and how with Fourier series.
@@ -267,35 +238,29 @@ Definition Fourier series, is an expansion of a perodic function, into a sum of 
 So the power is really, given a complex perodic function, we can easily represent it as a sum of simple trigonometric functions!
 However, before we mathematically define the Fourier series, let&amp;rsquo;s take a different approach to this.</description>
     </item>
-    
     <item>
       <title>Transforms, signals and systems: Part 4 - Differential equation models</title>
       <link>https://rezvan.xyz/school/SSY081_4/</link>
       <pubDate>Thu, 14 Sep 2023 00:00:00 +0000</pubDate>
-      
       <guid>https://rezvan.xyz/school/SSY081_4/</guid>
       <description>Introduction In this part we will learn about systems that can be modeled with differential equations.
 Definition Some systems whose input, $f(t)$, and output, $y(t)$, are related by linear differential equations, often have the form: $$ \dfrac{d^n y}{dt^n} + a_{n - 1} \dfrac{d^{n - 1}y}{dt^{n - 1}} + \ldots + a_1 \dfrac{dy}{dt} + a_0 y(t) = $$
 $$ b_m + \dfrac{d^m f}{dt^m} + b_{m - 1} + \dfrac{d^{m - 1} f}{dt^{m - 1}} + \ldots + b_1 \dfrac{df}{dt} + b_0 f(t) $$</description>
     </item>
-    
     <item>
       <title>Mathematical analysis in several variables: Part 8 - Lagrange multipliers</title>
       <link>https://rezvan.xyz/school/LMA017_8/</link>
       <pubDate>Wed, 13 Sep 2023 00:00:00 +0000</pubDate>
-      
       <guid>https://rezvan.xyz/school/LMA017_8/</guid>
       <description>Introduction In this part we&amp;rsquo;ll cover the method of Lagrange multipliers. This is a strategy, for finding local minimum/maximums for a function with a constraint.
 Let&amp;rsquo;s define it properly
 Definition Say we have a function, $f(x, y)$, which we want to find the min/max points. But this function is subject of some constraint of the form, $g(x, y) = k$.
 Recall our rectangular box problem from the last part: $$ V(x, y, z) = xyz \newline 2zx + 2zy + yx = 12 $$</description>
     </item>
-    
     <item>
       <title>Mathematical analysis in several variables: Part 7 - Absolute max and min values</title>
       <link>https://rezvan.xyz/school/LMA017_7/</link>
       <pubDate>Tue, 12 Sep 2023 00:00:00 +0000</pubDate>
-      
       <guid>https://rezvan.xyz/school/LMA017_7/</guid>
       <description>Introduction In this part we&amp;rsquo;ll cover how we find absolute maximum and minimum values for a function.
 Absolute minimum/maximum values Let&amp;rsquo;s start with an example to understand why it&amp;rsquo;s important to find these values:
@@ -303,12 +268,10 @@ A rectangular box is to be made from $12m^2$ of cardboard. Find the maximum volu
 We can describe the volume of the rectangular box as $V = xyz$.
 We also assume we don&amp;rsquo;t have a top side, therefore the total surface area will be: $$ 2zx + 2zy + yx = 12 $$</description>
     </item>
-    
     <item>
       <title>Mathematical analysis in several variables: Part 6 - Maximum and minimum values &amp; 2nd derivative test</title>
       <link>https://rezvan.xyz/school/LMA017_6/</link>
       <pubDate>Fri, 08 Sep 2023 00:00:00 +0000</pubDate>
-      
       <guid>https://rezvan.xyz/school/LMA017_6/</guid>
       <description>Introduction In this part we&amp;rsquo;ll cover how we find maximum and minimum values for a function, we&amp;rsquo;ll also see how this is related to the 2nd derivative.
 Maximum and minimum values Let&amp;rsquo;s first recall how we define maximum and minimum values for functions of one variable.
@@ -316,35 +279,29 @@ Definition For maximum:
 A function of one variable has local maximum at $a$, if $f(a) \geq f(x)$ when $x$ is near $a$.
 For minimum: A function of one variable has local minimum at $a$, if $f(a) \leq f(x)$ when $x$ is near $a$.</description>
     </item>
-    
     <item>
       <title>Mathematical analysis in several variables: Part 5 - Directional derivatives and the gradient vector</title>
       <link>https://rezvan.xyz/school/LMA017_5/</link>
       <pubDate>Wed, 06 Sep 2023 00:00:00 +0000</pubDate>
-      
       <guid>https://rezvan.xyz/school/LMA017_5/</guid>
       <description>Introduction In this part we&amp;rsquo;ll cover directional derivatives and the gradient vector.
 Directional derivatives To understand this part, we&amp;rsquo;ll first need to recall vectors from linear algebra. Warning: In this series we&amp;rsquo;ll use notation that is not that common.
 Vectors We all know that vectors have a direction and a magnitude (or length), from physics and linear algebra. Let&amp;rsquo;s just quickly define these: $$ \vec{a} = \langle a, b \rangle $$</description>
     </item>
-    
     <item>
       <title>Transforms, signals and systems: Part 3 - Convolution</title>
       <link>https://rezvan.xyz/school/SSY081_3/</link>
       <pubDate>Tue, 05 Sep 2023 21:03:17 +0200</pubDate>
-      
       <guid>https://rezvan.xyz/school/SSY081_3/</guid>
       <description>Introduction In this part we will learn about the convolution operation and how it&amp;rsquo;s used.
 Let&amp;rsquo;s start at how it&amp;rsquo;s used.
 Use case Given this signal, we want to find activity on the graph, besides the notice. A kind of high-pass filter will do the job. A high-pass filter is precisely doing the convolution operation to filter.
 For example the output for this input can be: Definition and properties Let&amp;rsquo;s call our input signal $x(t)$, our system operation for $h(t)$ and our output for $y(t)$.</description>
     </item>
-    
     <item>
       <title>Mathematical analysis in several variables: Part 4 - Chain rule &amp; implicit differentiation</title>
       <link>https://rezvan.xyz/school/LMA017_4/</link>
       <pubDate>Tue, 05 Sep 2023 00:00:00 +0000</pubDate>
-      
       <guid>https://rezvan.xyz/school/LMA017_4/</guid>
       <description>Introduction In this part we&amp;rsquo;ll define the chain rule for functions with several variables. We will also cover something called implicit differentiation.
 Chain rule Let&amp;rsquo;s recall the chain rule for functions with one variable. $$ f(x) = h(g(x)) \newline f&amp;rsquo;(x) = h&amp;rsquo;(g(x)) \cdot g&amp;rsquo;(x) $$
@@ -352,12 +309,10 @@ Alternative notation: $$ y = f(x) \newline x = g(t) $$
 $$ \dfrac{dy}{dt} = \dfrac{dy}{dx} \cdot \dfrac{dx}{dt} $$
 For functions with two variables. $$ z = f(x, y),\ x = g(t),\ y = h(t) $$</description>
     </item>
-    
     <item>
       <title>Transforms, signals and systems: Part 2 - System properties &amp; LTI</title>
       <link>https://rezvan.xyz/school/SSY081_2/</link>
       <pubDate>Mon, 04 Sep 2023 22:03:17 +0200</pubDate>
-      
       <guid>https://rezvan.xyz/school/SSY081_2/</guid>
       <description>Introduction In this part we will learn to classify systems and recognize a Linear-Time Invariant System
 Let&amp;rsquo;s first define what a system is.
@@ -366,24 +321,20 @@ An entity that processes a signal/a set of signals to yield another signal/set o
 The input, also called excitation, goes through the system and the system spits out an output, also called response.
 Interconnection We can have multiple systems.</description>
     </item>
-    
     <item>
       <title>Mathematical analysis in several variables: Part 3 - Higher partial derivatives &amp; differentiability</title>
       <link>https://rezvan.xyz/school/LMA017_3/</link>
       <pubDate>Fri, 01 Sep 2023 10:53:01 +0200</pubDate>
-      
       <guid>https://rezvan.xyz/school/LMA017_3/</guid>
       <description>Introduction In this part we&amp;rsquo;ll define higher partial derivatives and how we define if a function with several variables is differentiable.
 Higher partial derivatives In the last part we defined what partial derivatives were: $$ f_x = \lim{h \to 0} \dfrac{f(x + h, y) - f(x, y)}{h} $$
 We can now derive this function again: $$ f_{xx} = \lim{h \to 0} \dfrac{f_x(x + h, y) - f_x(x, y)}{h} $$
 $$ f_{xy} = \lim{h \to 0} \dfrac{f_x(x, y + h) - f_x(x, y)}{h} $$</description>
     </item>
-    
     <item>
       <title>Mathematical analysis in several variables: Part 2 - Continuity &amp; partial derivatives.</title>
       <link>https://rezvan.xyz/school/LMA017_2/</link>
       <pubDate>Wed, 30 Aug 2023 10:53:01 +0200</pubDate>
-      
       <guid>https://rezvan.xyz/school/LMA017_2/</guid>
       <description>Introduction In this part we&amp;rsquo;ll define continuity when dealing with functions with several variables. We&amp;rsquo;ll also start looking at derivatives of functions of several variables.
 Continuity Let&amp;rsquo;s recall what continuity of a function with one variable is defined:
@@ -391,23 +342,19 @@ A function of one variable is continuous at a point, $a \in D$ if:
 $$ \lim_{x \to a} f(x) = f(a) $$
 In functions with several variables, it&amp;rsquo;s the same: $$ \lim_{(x, y) \to (a, b)} f(x, y) = f(a, b) $$</description>
     </item>
-    
     <item>
       <title>Transforms, signals and systems: Part 1 - Signals</title>
       <link>https://rezvan.xyz/school/SSY081/</link>
       <pubDate>Tue, 29 Aug 2023 16:12:51 +0200</pubDate>
-      
       <guid>https://rezvan.xyz/school/SSY081/</guid>
       <description>Introduction In this series we&amp;rsquo;ll cover what we mean with transforms, signals and systems. How they relate and are used in the real world.
 Signals In this part we&amp;rsquo;ll try to understand signals, classify these. Perform different signal operations and lastly understand and use signal models. Let&amp;rsquo;s first define what a signal is
 Definition A signal is a set of information or data. Any physical quantity that varies over time, space or any other variable or variables.</description>
     </item>
-    
     <item>
       <title>Mathematical analysis in several variables: Part 1 - Functions of several variables, level curves and limits.</title>
       <link>https://rezvan.xyz/school/LMA017/</link>
       <pubDate>Tue, 29 Aug 2023 10:53:01 +0200</pubDate>
-      
       <guid>https://rezvan.xyz/school/LMA017/</guid>
       <description>Introduction Analysis of one variable is very powerful, but most of the time, functions will have several variables.
 This series will cover analysis in several variables.
@@ -415,12 +362,10 @@ Formal definition Let&amp;rsquo;s properly define what a function of several var
 A function of two variables is a rule that associates to each pair, $(x, y)$ of real numbers, in a set, $D$, a unique number denoted as, $f(x, y)$.
 $D$ is the so-called domain.</description>
     </item>
-    
     <item>
       <title>Computer System Engineering: Summary</title>
       <link>https://rezvan.xyz/school/EDA333_summary/</link>
       <pubDate>Thu, 25 May 2023 11:22:18 +0200</pubDate>
-      
       <guid>https://rezvan.xyz/school/EDA333_summary/</guid>
       <description>Performance and MIPS CPU Time for a program: $$ \text{CPU Time} = \frac{\text{Instructions}}{\text{Program}} \cdot\ \frac{\text{Clock cycles}}{\text{Instruction}} \cdot\ \frac{\text{Seconds}}{\text{Clock cycle}} $$
 $$ \text{CPU Time} = IC \cdot\ CPI \cdot\ T_c $$
@@ -434,12 +379,10 @@ $t0-7 - Temporary registers
 $s0-7 - Content registers, save for later use
 $sp - Stack pointer</description>
     </item>
-    
     <item>
       <title>Electrical Circuits and Fields: Summary</title>
       <link>https://rezvan.xyz/school/EEM076_summary/</link>
       <pubDate>Fri, 19 May 2023 16:57:46 +0200</pubDate>
-      
       <guid>https://rezvan.xyz/school/EEM076_summary/</guid>
       <description>Electrical Circuits and Fields DC Current:
 The rate of flow of electrical charge.
@@ -453,35 +396,29 @@ $$ V = \dfrac{\Delta E_p}{q} = \dfrac{W}{q}\ [V] $$
 Resistance:
 Is the opposition to the flow of current.</description>
     </item>
-    
     <item>
       <title>Electrical Circuits and Fields: Part 13 - Circuit Response, Passive Filters, and Amplifiers</title>
       <link>https://rezvan.xyz/school/EEM076_13/</link>
       <pubDate>Fri, 19 May 2023 11:34:16 +0200</pubDate>
-      
       <guid>https://rezvan.xyz/school/EEM076_13/</guid>
       <description>In this part we&amp;rsquo;ll cover circuit response, filter and amplifiers.
 Transfer Function Recall from the last part that, the transfer function is defined as: $$ H(f) = \dfrac{V_{out}}{V_{in}} $$
 Let&amp;rsquo;s find the transfer function of this circuit: Let&amp;rsquo;s find $V_{out}$ $$ \begin{align*} V_{out} &amp;amp; = I \cdot\ Z_C \newline &amp;amp; = \left(\dfrac{V_{in}}{Z_R + Z_C}\right) Z_C \newline &amp;amp; = \left(\dfrac{V_{in}}{R + \dfrac{1}{j2\pi fC}}\right) \left(\dfrac{1}{j2\pi fC}\right) \end{align*} $$
 Which means that $H(f)$: $$ \begin{align*} H(f) &amp;amp; = \dfrac{V_{out}}{V_{in}} &amp;amp; = \dfrac{\left(\dfrac{V_{in}}{R + \dfrac{1}{j2\pi fC}}\right) \left(\dfrac{1}{j2\pi fC}\right)}{V_{in}} \newline &amp;amp; = \cdots &amp;amp; = \dfrac{1}{1 + j2\pi fRC} \end{align*} $$</description>
     </item>
-    
     <item>
       <title>Electrical Circuits and Fields: Part 12 - Power in AC Circuits</title>
       <link>https://rezvan.xyz/school/EEM076_12/</link>
       <pubDate>Fri, 12 May 2023 10:06:12 +0200</pubDate>
-      
       <guid>https://rezvan.xyz/school/EEM076_12/</guid>
       <description>In this part we&amp;rsquo;ll define Power for AC circuits, we&amp;rsquo;ve had all the tools now for a while, but just never applied them.
 Power in AC circuits and be divided into three categories:
 Resistive load $(\theta = 0)$. Inductive load $(Z = \omega L \angle 90^{\circ})$. Capacitive load* $(Z = \dfrac{1}{\omega C} \angle -90^{\circ})$. Resistive Load When we have a resistive load, meaning no phase shift. Then our Voltage and Current are: $$ V(t) = V_m cos(\omega t) \newline I(t) = I_m cos(\omega t) $$</description>
     </item>
-    
     <item>
       <title>Electrical Circuits and Fields: Part 11 - Calculation methods for AC-circuits</title>
       <link>https://rezvan.xyz/school/EEM076_11/</link>
       <pubDate>Mon, 08 May 2023 16:36:54 +0200</pubDate>
-      
       <guid>https://rezvan.xyz/school/EEM076_11/</guid>
       <description>In this part we&amp;rsquo;ll cover all calculation methods that we&amp;rsquo;ll use for AC-circuits.
 Equivalent Impedance Given the circuit and that $\omega = 5 \dfrac{rad}{s}$ - find the equivalent output impedance:
@@ -489,12 +426,10 @@ As we discussed in the last part, our resistor rules, for series and parallel ap
 Let&amp;rsquo;s first quickly convert the capacitor and inductor to Ohm.
 For our capacitor: $$ \begin{align*} Z_{C} &amp;amp; = \dfrac{1}{j\omega C} \newline &amp;amp; = -j \cdot\ \dfrac{1}{\omega C} \newline &amp;amp; = -j \cdot\ \dfrac{1}{5 \cdot\ 500 \cdot\ 10^{-3}}\ [\Omega] \newline &amp;amp; = -j 0.</description>
     </item>
-    
     <item>
       <title>Electrical Circuits and Fields: Part 10 - Steady-state sinusoidal analysis</title>
       <link>https://rezvan.xyz/school/EEM076_10/</link>
       <pubDate>Tue, 02 May 2023 15:33:02 +0200</pubDate>
-      
       <guid>https://rezvan.xyz/school/EEM076_10/</guid>
       <description>In this part we&amp;rsquo;ll properly define and understand what alternating-current (AC) is.
 Alternating-current As we have seen, AC is defined using sinusoidal functions: $$ V(t) = V_m sin(\omega t) $$
@@ -502,24 +437,20 @@ Where: $$ V_m - \text{Amplitude}\ [V] \newline \omega - \text{Angular frequency}
 We can write: $$ T = \dfrac{2\pi}{\omega} = \dfrac{1}{f} $$
 If we want to write this even more generally we also add a constant: $$ V(t) = V_m sin(\omega t + \theta) $$</description>
     </item>
-    
     <item>
       <title>Computer System Engineering: Part 8 - Parallel Processors</title>
       <link>https://rezvan.xyz/school/EDA333_8/</link>
       <pubDate>Fri, 28 Apr 2023 18:12:01 +0200</pubDate>
-      
       <guid>https://rezvan.xyz/school/EDA333_8/</guid>
       <description>In this part we&amp;rsquo;ll talk about parallel processors, multithreading and other different techniques that we can use to speed up our programs and computers.
 Multithreading We&amp;rsquo;ve seen and learned about threads when we covered concurrent programming.
 The idea here is same, if we can utilize threads to parallelize our programs, we can achieve a higher efficiency rate on our clock cycles.
 But when and how do we decide choose what thread?</description>
     </item>
-    
     <item>
       <title>Electrical Circuits and Fields: Part 9 - Electromagnetic Waves</title>
       <link>https://rezvan.xyz/school/EEM076_9/</link>
       <pubDate>Tue, 25 Apr 2023 19:40:29 +0200</pubDate>
-      
       <guid>https://rezvan.xyz/school/EEM076_9/</guid>
       <description>In this part we&amp;rsquo;ll cover electromagnetic waves - we&amp;rsquo;ll see why electrical and magnetic fields always appear together.
 Displacement current If we recall Faraday&amp;rsquo;s law: $$ \oint \mathbf{\vec{E}} \cdot d\mathbf{\vec{s}} = -\dfrac{d \Phi_B}{dt} $$
@@ -527,12 +458,10 @@ This says that a change in the magnetic field will produce an electrical field. 
 Does a change in an electrical field produce a magnetic field?
 If we consider this example with a capacitor being charged:</description>
     </item>
-    
     <item>
       <title>Computer System Engineering: Part 7 - Floating-point arithmetic</title>
       <link>https://rezvan.xyz/school/EDA333_7/</link>
       <pubDate>Tue, 25 Apr 2023 15:18:21 +0200</pubDate>
-      
       <guid>https://rezvan.xyz/school/EDA333_7/</guid>
       <description>In this part we&amp;rsquo;ll cover some basics for floating-point arithmetic.
 Integer addition Just some basics:
@@ -546,12 +475,10 @@ Overflow if:
 Subtracting two positive or negative operands - no overflow.
 Subtracting a positive from a negative operand - overflow if the results sign bit is 0.</description>
     </item>
-    
     <item>
       <title>Electrical Circuits and Fields: Part 8 - Magnetic fields</title>
       <link>https://rezvan.xyz/school/EEM076_8/</link>
       <pubDate>Mon, 24 Apr 2023 17:33:32 +0200</pubDate>
-      
       <guid>https://rezvan.xyz/school/EEM076_8/</guid>
       <description>In this part we&amp;rsquo;ll cover more in-depth about magnetic fields and their interactions.
 Recall Biot-Savart&amp;rsquo;s Law: $$ \mathbf{\vec{B}} = \int d\mathbf{\vec{B}} = \dfrac{\mu_0 I}{4\pi}\ \int \dfrac{d\mathbf{\vec{s}} \times \mathbf{\vec{r}}}{r^2} $$
@@ -559,35 +486,29 @@ This means that, the magnetic field strength, $B$, at any given is: $$ B = \dfra
 The direction, $\mathbf{\vec{B}}$, is given by the (lazy) right-hand rule.
 Magnetic field from a solenoid First, let&amp;rsquo;s draw how the field lines would look like:</description>
     </item>
-    
     <item>
       <title>Computer System Engineering: Part 6 - Virtual Memory</title>
       <link>https://rezvan.xyz/school/EDA333_6/</link>
       <pubDate>Fri, 21 Apr 2023 19:28:25 +0200</pubDate>
-      
       <guid>https://rezvan.xyz/school/EDA333_6/</guid>
       <description>In this part we&amp;rsquo;ll cover so-called virtual memory - which is an essential technique used in computer engineering.
 Virtual memory is a technique used by computers to allow them to use more memory than physically exists in the system. Now, this may seem odd at a first glance, how can we use more memory than physically exists?
 It works by temporarily transferring data from the computer&amp;rsquo;s main memory (RAM) to a designated area on the secondary memory (hard-drive).</description>
     </item>
-    
     <item>
       <title>Electrical Circuits and Fields: Part 7 - Electrical &amp; Magnetic fields</title>
       <link>https://rezvan.xyz/school/EEM076_7/</link>
       <pubDate>Tue, 18 Apr 2023 16:54:06 +0200</pubDate>
-      
       <guid>https://rezvan.xyz/school/EEM076_7/</guid>
       <description>In this part we&amp;rsquo;ll finally cover magnetic fields and some very important laws for these. We&amp;rsquo;ll see how electrical and magnetic fields interact with each other as well.
 Materials in electrical fields We have lightly touched on this before but - different type of materials will behave differently in electrical fields.
 We can roughly say we have three categories of types - conductors, semiconductors and insulators.
 A conductor is, as the name suggest, where the electrons are weakly bound to the atoms.</description>
     </item>
-    
     <item>
       <title>Electrical Circuits and Fields: Part 6 - Work, Voltage and Capacitance</title>
       <link>https://rezvan.xyz/school/EEM076_6/</link>
       <pubDate>Tue, 18 Apr 2023 12:05:29 +0200</pubDate>
-      
       <guid>https://rezvan.xyz/school/EEM076_6/</guid>
       <description>In this part we&amp;rsquo;ll work in electrical fields, the connection between electrical fields and voltages as well as how we can use electrical fields with capacitors.
 Work We&amp;rsquo;ve briefly went over work before in this series - but let&amp;rsquo;s consider the work required to move charges apart from eachother.
@@ -595,12 +516,10 @@ For example: $$ W = F \cdot\ d\mathbf{\vec{r}} \newline $$
 $$ \mathbf{\vec{F_{12}}} = k_{e}\ \dfrac{q_1 q_2}{r^2} \mathbf{\vec{r_{12}}} $$
 $$ \begin{align*} W &amp;amp; = \int_{R}^{\infty} \mathbf{\vec{F}} \cdot\ d\mathbf{\vec{r}} \newline &amp;amp; = -k_e q_1 q_2 \int_{R}^{\infty} \dfrac{d\mathbf{\vec{r}}}{r^2} \newline &amp;amp; = k_e q_1 q_2 \cdot\ \dfrac{-1}{r} \Big|_R^{\infty} \newline &amp;amp; = \boxed{\dfrac{k_e q_1 q_2}{R}} \end{align*} $$</description>
     </item>
-    
     <item>
       <title>Computer System Engineering: Part 5 - Cache memory</title>
       <link>https://rezvan.xyz/school/EDA333_5/</link>
       <pubDate>Thu, 13 Apr 2023 20:04:58 +0200</pubDate>
-      
       <guid>https://rezvan.xyz/school/EDA333_5/</guid>
       <description>In this part we will cover one of the most important solutions in computer science, the cache memory, but also memory in general.
 Memory types Before we dive in - let&amp;rsquo;s quickly recap the different types of memory there are:
@@ -608,12 +527,10 @@ Static RAM (SRAM)
 0.5 ns - 2.5 ns | $2000 - $5000 per GB Dynamic RAM (DRAM)
 50 ns - 70 ns | $20 - $75 per GB Magnetic storage</description>
     </item>
-    
     <item>
       <title>Computer System Engineering: Part 4 - Pipeline hardware</title>
       <link>https://rezvan.xyz/school/EDA333_4/</link>
       <pubDate>Tue, 28 Mar 2023 00:00:00 +0000</pubDate>
-      
       <guid>https://rezvan.xyz/school/EDA333_4/</guid>
       <description>In this part we&amp;rsquo;ll cover the actual hardware specifications/solutions to our potential problems with our newly pipelined CPU.
 Data hazards If we have the following scenario:
@@ -621,24 +538,20 @@ sub $2, $1, $3 and $12, $2, $5 Here we will have a data hazard. As we covered in
 But how do we detect how to forward our result immediately?
 The answer is sending along the register&amp;rsquo;s number in the pipeline!</description>
     </item>
-    
     <item>
       <title>Electrical Circuits and Fields: Part 5 - Electrical fields</title>
       <link>https://rezvan.xyz/school/EEM076_5/</link>
       <pubDate>Mon, 27 Mar 2023 17:20:46 +0100</pubDate>
-      
       <guid>https://rezvan.xyz/school/EEM076_5/</guid>
       <description>In this part we&amp;rsquo;ll discuss electrical fields and some tools we&amp;rsquo;ll begin to use.
 So far we&amp;rsquo;ve only analyzed the electrical circuits at a macro level. In this part we&amp;rsquo;ll try to dissect them at a micro-level, so let&amp;rsquo;s zoom in!
 Electrical charge To understand electrical circuits, let&amp;rsquo;s first understand electrical charge.
 As we&amp;rsquo;ve seen, we use $q$, as the notation for charge. The elementary charge (the charge carried by a single proton) is: $$ e^{-} = 1.</description>
     </item>
-    
     <item>
       <title>Computer System Engineering: Part 3 - Pipelining</title>
       <link>https://rezvan.xyz/school/EDA333_3/</link>
       <pubDate>Mon, 27 Mar 2023 00:00:00 +0000</pubDate>
-      
       <guid>https://rezvan.xyz/school/EDA333_3/</guid>
       <description>In this part we&amp;rsquo;ll cover the idea of pipelining - and it&amp;rsquo;s performance effects it has on computer systems.
 Let&amp;rsquo;s first cover what every computer does to perform complex tasks.
@@ -651,12 +564,10 @@ Computation of effective memory address.
 Computation of jump address/conditional address.
 Read / Write from / to memory for load/store instructions.</description>
     </item>
-    
     <item>
       <title>Electrical Circuits and Fields: Part 4 - Capacitance, inductance, timevarying currents and voltages</title>
       <link>https://rezvan.xyz/school/EEM076_4/</link>
       <pubDate>Sun, 26 Mar 2023 00:00:00 +0000</pubDate>
-      
       <guid>https://rezvan.xyz/school/EEM076_4/</guid>
       <description>In this part we&amp;rsquo;ll cover two very crucial component that are often used in electrical circuits.
 Capacitors and inductors, we will see why these are so important later on as well.
@@ -664,12 +575,10 @@ Let&amp;rsquo;s start with looking at capacitors.
 Capacitors Let&amp;rsquo;s start by properly defining what a capacitor is:
 A capacitor is a device that stores electric charge by creating an electric field between two conductive plates separated by an insulating material.</description>
     </item>
-    
     <item>
       <title>Electrical Circuits and Fields: Part 3 - Node-voltage analysis, superposition, equivalent circuits</title>
       <link>https://rezvan.xyz/school/EEM076_3/</link>
       <pubDate>Fri, 24 Mar 2023 00:00:00 +0000</pubDate>
-      
       <guid>https://rezvan.xyz/school/EEM076_3/</guid>
       <description>When analyzing and computing with circuits, it&amp;rsquo;s often a good idea to try to simply as much as possible.
 But when met with a circuit like: We can try all we want to simplify it, with our current knowledge, we simply can&amp;rsquo;t.
@@ -677,24 +586,20 @@ So let&amp;rsquo;s learn about Node-Voltage analysis.
 Node-Voltage analysis Below is a picture that illustrates the idea: Here&amp;rsquo;s the idea:
 Find the nodes Assign a reference node (usually, we pick the node with most connections) Assign node voltages (Note, in a circuit with, $N$, nodes we have, $N - 1$, voltages) Then we solve these using KCL on each node ($\sum\ i_{out} = \sum\ i_{in}$) The convention is also the following:</description>
     </item>
-    
     <item>
       <title>Computer System Engineering: Part 2 - MIPS</title>
       <link>https://rezvan.xyz/school/EDA333_2/</link>
       <pubDate>Wed, 22 Mar 2023 00:00:00 +0000</pubDate>
-      
       <guid>https://rezvan.xyz/school/EDA333_2/</guid>
       <description>In this part we&amp;rsquo;ll properly cover the MIPS architecture in depth.
 Parameter transferring When calling a function in C code, what is happening at the assembler level is, calling a subroutine (usually).
 What we need to do before a subroutine call, is the following:
 Place the input parameters into their respective registers Call the function/subroutine Allocate memory for eventual saved and local variables Execute the function/procedure Place the result in a register Reset the stack, if needed Return to where the function/subroutine got called.</description>
     </item>
-    
     <item>
       <title>Computer System Engineering: Part 1 - Introduction</title>
       <link>https://rezvan.xyz/school/EDA333/</link>
       <pubDate>Tue, 21 Mar 2023 00:00:00 +0000</pubDate>
-      
       <guid>https://rezvan.xyz/school/EDA333/</guid>
       <description>In this series we&amp;rsquo;ll understand and learn how to compute, quantify and, measure the performance of different systems and programs.
 To compute, quantify and, measure performance let&amp;rsquo;s start by first defining what performance depends on.
@@ -702,12 +607,10 @@ Performance dependencies When we&amp;rsquo;re making a system or a program a lot
 The underlying algorithm
 Determines number of operations required, which directly impacts the performance. Programming language, compile, and, architecture of choice.</description>
     </item>
-    
     <item>
       <title>Electrical Circuits and Fields: Part 2 - Power &amp; Energy</title>
       <link>https://rezvan.xyz/school/EEM076_2/</link>
       <pubDate>Tue, 21 Mar 2023 00:00:00 +0000</pubDate>
-      
       <guid>https://rezvan.xyz/school/EEM076_2/</guid>
       <description>In this part we&amp;rsquo;ll cover and properly define a very misunderstood concept in physics, power and energy.
 Let&amp;rsquo;s start with defining power properly.
@@ -716,12 +619,10 @@ Rate of energy transferred, or work done, per unit of time.
 In electrial circuits, we can define power, $P$, as: $$ P = V \cdot\ I $$
 We measure power in watts, which we can define as: $$ 1\ W = \frac{1\ J}{s} = \frac{1\ N \cdot\ m}{s} = 1 kg \cdot\ m^{2} \cdot\ s^{-3} $$</description>
     </item>
-    
     <item>
       <title>Electrical Circuits and Fields: Part 1 - Introduction</title>
       <link>https://rezvan.xyz/school/EEM076/</link>
       <pubDate>Mon, 20 Mar 2023 00:00:00 +0000</pubDate>
-      
       <guid>https://rezvan.xyz/school/EEM076/</guid>
       <description>In this series we&amp;rsquo;ll explore and cover the world of electrical circuit (and later on fields as well).
 Fundamental definitions We&amp;rsquo;ll begin with covering the three basic factors that we&amp;rsquo;ll analyze in all circuits, current, voltage and, resistance.
@@ -730,24 +631,20 @@ Current Current is defined as:
 The rate of flow of electrical charge.
 We measure current in Ampere, 1 A is defined as, 1 coulomb of charge per 1 second.</description>
     </item>
-    
     <item>
       <title>Digital Design: Part 9 - Testing</title>
       <link>https://rezvan.xyz/school/Digital_design_9/</link>
       <pubDate>Sun, 05 Mar 2023 00:00:00 +0000</pubDate>
-      
       <guid>https://rezvan.xyz/school/Digital_design_9/</guid>
       <description>When creating digital circuits, there are a lot of things that can go wrong.
 When designing the circuit, it may happen that the designers have implemented a bug into the circuit.
 We call these design bugs. On the other hand, when physically making the chip, it may happen that we get permanent (implementation) fault, or other (transient) faults.
 In the first case we need to perform verification, in the latter case, it&amp;rsquo;s testing and fault tolerance.</description>
     </item>
-    
     <item>
       <title>Concurrent Programming: Part 10 - Parallel linked lists</title>
       <link>https://rezvan.xyz/school/Concurrent_programming_10/</link>
       <pubDate>Sun, 19 Feb 2023 00:00:00 +0000</pubDate>
-      
       <guid>https://rezvan.xyz/school/Concurrent_programming_10/</guid>
       <description>In this part we&amp;rsquo;ll cover the synchronization challenges that arise when designing (correct) and efficient parallelizations.
 But let&amp;rsquo;s first see the burdens with locks
@@ -760,12 +657,10 @@ Too much locking: not enough parallelism.
 Risk of deadlock and starvation.
 Lock-based implementations do not compose (easily).</description>
     </item>
-    
     <item>
       <title>Digital Design: Part 8 - Interfaces, Interconnects and Memories</title>
       <link>https://rezvan.xyz/school/Digital_design_8/</link>
       <pubDate>Sun, 19 Feb 2023 00:00:00 +0000</pubDate>
-      
       <guid>https://rezvan.xyz/school/Digital_design_8/</guid>
       <description>In this part we&amp;rsquo;ll cover interfaces, interconnects as well as memory.
 Interface timing In digital circuits, we often want to send data, from a sender, to a receiver.
@@ -777,12 +672,10 @@ Serialized
 In an open loop, we either have so that it&amp;rsquo;s always &amp;ldquo;valid&amp;rdquo; to send data, or periodically.
 In flow control, as the name suggests, the data-flow is controlled.</description>
     </item>
-    
     <item>
       <title>Concurrent Programming: Part 9 - Parallelizing computations</title>
       <link>https://rezvan.xyz/school/Concurrent_programming_9/</link>
       <pubDate>Mon, 13 Feb 2023 00:00:00 +0000</pubDate>
-      
       <guid>https://rezvan.xyz/school/Concurrent_programming_9/</guid>
       <description>Concurrent programming introduces:
 The potential for parallel execution (faster, better resource usage) The risk of race conditions (incorrect, unpredictable computations) The challenge of concurrent programming is introducing parallelism without affecting correctness.
@@ -790,12 +683,10 @@ Let&amp;rsquo;s define how to parallelize:
 A task $(F, D)$ consists in computing the result F $(D)$ of applying function $F$ to input data $D$
 A parallelization of $(F, D)$ is a collection $(F_1 , D_1 ),\ (F_2 , D_2),\ \dots$ of tasks such that $F (D)$ equals the composition of $F_1 (D_1),\ F_2 (D_2),\ \dots $</description>
     </item>
-    
     <item>
       <title>Digital Design: Part 7 - Timing, delay &amp; power</title>
       <link>https://rezvan.xyz/school/Digital_design_7/</link>
       <pubDate>Wed, 08 Feb 2023 00:00:00 +0000</pubDate>
-      
       <guid>https://rezvan.xyz/school/Digital_design_7/</guid>
       <description>When designing digital circuits, the timing, delay and power usage of the circuit are important. In this part we&amp;rsquo;ll cover how we usually measure and compare these.
 Timing and delay In an arbitrary synchronous circuit, we usually have:
@@ -805,24 +696,20 @@ The clock will be distributed to all flip-flops
 Combinational logic
 No internal state</description>
     </item>
-    
     <item>
       <title>Concurrent Programming: Part 8 - Synchronization problems with message-passing</title>
       <link>https://rezvan.xyz/school/Concurrent_programming_8/</link>
       <pubDate>Tue, 07 Feb 2023 14:05:43 +0100</pubDate>
-      
       <guid>https://rezvan.xyz/school/Concurrent_programming_8/</guid>
       <description>In this part we&amp;rsquo;ll cover the classical problems that occur when dealing with synchronization.
 But within this paradigm, we don&amp;rsquo;t encounter the same problems as when using semaphores. Mutual exclusion is not an issue, since we never share any resource, the big problem today will be synchronization and coordination.
 We&amp;rsquo;ll see that many problems have the solution of a server-client architecture.
 Barriers Let&amp;rsquo;s quickly recap what our barriers should be able to do:</description>
     </item>
-    
     <item>
       <title>Digital Design: Part 6 - Reconfigurable Hardware</title>
       <link>https://rezvan.xyz/school/Digital_design_6/</link>
       <pubDate>Sun, 05 Feb 2023 15:28:10 +0100</pubDate>
-      
       <guid>https://rezvan.xyz/school/Digital_design_6/</guid>
       <description>As we discussed in the first part of this series, there two main paradigms.
 ASIC and reconfigurable Hardware
@@ -840,35 +727,29 @@ Advantages
 Very flexible to change. Disadvantages
 Performance can suffer if the clock speed isn&amp;rsquo;t fast enough.</description>
     </item>
-    
     <item>
       <title>Concurrent Programming: Part 6 &amp; 7 - Message-Passing Concurrency</title>
       <link>https://rezvan.xyz/school/Concurrent_programming_6/</link>
       <pubDate>Sat, 04 Feb 2023 00:00:00 +0000</pubDate>
-      
       <guid>https://rezvan.xyz/school/Concurrent_programming_6/</guid>
       <description>So far we have looked at threads which share memory. The so-called shared memory model, but in this part we&amp;rsquo;ll cover distributed memory model, specifically, message-passing concurrency.
 For this we&amp;rsquo;ll cover and use the programming language, Erlang!
 So let&amp;rsquo;s quickly have a crash course over Erlang!
 What is Erlang? Erlang is a functional programming language with message-passing features. The message-passing part is concurrent and implements the actor model, where Erlang processes are actors.</description>
     </item>
-    
     <item>
       <title>Concurrent Programming: Part 5 - Monitors</title>
       <link>https://rezvan.xyz/school/Concurrent_programming_5/</link>
       <pubDate>Fri, 03 Feb 2023 18:16:30 +0100</pubDate>
-      
       <guid>https://rezvan.xyz/school/Concurrent_programming_5/</guid>
       <description>In this series we&amp;rsquo;ve covered locks and semaphores as synchronization mechanism. Although these are essential in concurrent programs, they&amp;rsquo;re quite low-level synchronization mechanisms.
 Semaphores for example have the problem that:
 They are global and unstructured, it can be quite difficult to understand what a certain semaphore does in a given piece of code. Often, we are prone to deadlocks or incorrect behavior, it&amp;rsquo;s easy to forget a simple up() or down() call in your programs.</description>
     </item>
-    
     <item>
       <title>Digital Design: Part 5 - Arithmetic Units</title>
       <link>https://rezvan.xyz/school/Digital_design_5/</link>
       <pubDate>Fri, 03 Feb 2023 00:00:00 +0000</pubDate>
-      
       <guid>https://rezvan.xyz/school/Digital_design_5/</guid>
       <description>In this part we&amp;rsquo;ll cover arithmetic units. Specifically multipliers and divers.
 We&amp;rsquo;ll also cover some number representations.
@@ -876,12 +757,10 @@ Arithmetic Units It may be common knowledge that, when we want to perform multip
 If we for example want to multiply a number with the binary number 100, or 4 in decimal.
 We would just shift all bits two steps to the left.</description>
     </item>
-    
     <item>
       <title>Concurrent Programming: Part 4 - Synchronization problems with semaphores</title>
       <link>https://rezvan.xyz/school/Concurrent_programming_4/</link>
       <pubDate>Wed, 01 Feb 2023 00:00:00 +0000</pubDate>
-      
       <guid>https://rezvan.xyz/school/Concurrent_programming_4/</guid>
       <description>In this part we&amp;rsquo;ll cover how to solve some classical synchronization problems using threads and semaphores.
 Dining Philosophers To refresh our memory on the problem let&amp;rsquo;s cover it again:
@@ -889,12 +768,10 @@ The dining philosophers problem describes how to avoid deadlock (circular condit
 We have five philosophers (threads) sitting at a dining table. A fork is between each adjacent pair of philosophers.
 Each philosopher alternates between thinking (non-critical section) and eating (critical section). In order to eat, a philosopher needs to pick up both forks that lie to the right and left of the philosopher.</description>
     </item>
-    
     <item>
       <title>Digital  Design: Part 4 - Finite State Machines</title>
       <link>https://rezvan.xyz/school/Digital_design_4/</link>
       <pubDate>Tue, 31 Jan 2023 21:12:55 +0100</pubDate>
-      
       <guid>https://rezvan.xyz/school/Digital_design_4/</guid>
       <description>In the last part we covered sequential circuits, in this part we&amp;rsquo;ll cover Finite State Machines.
 FSMs are type of sequential circuits, there are two main type of FSMs, Moore and Mealy.
@@ -902,184 +779,152 @@ Moore FSMs
 Outputs depends only on the state. Mealy FSMs
 Outputs depend on both state and primary inputs. 1-1 Detector A 1-1 detector, generates an output, $z = 1$, whenever the input, $w$ is 1 twice in a row (clock cycles).</description>
     </item>
-    
     <item>
       <title>Concurrent Programming: Part 3 - Models of concurrency &amp; synchronization algorithms</title>
       <link>https://rezvan.xyz/school/Concurrent_programming_3/</link>
       <pubDate>Tue, 31 Jan 2023 00:00:00 +0000</pubDate>
-      
       <guid>https://rezvan.xyz/school/Concurrent_programming_3/</guid>
       <description>In this part we&amp;rsquo;ll cover how we can achieve mutual exclusion in a program using only atomic read and writes.
 Analyzing Concurrency When analyzing concurrent programs we often look at states and transitions.
 A state in these diagrams are possible program states. Transitions on the other hand, connects these states to an execution order.
 One to thing to note is that, the structural properties in these diagrams, captures the semantics properties of the corresponding program.</description>
     </item>
-    
     <item>
       <title>Digital Design: Part 3 - Sequential Circuits</title>
       <link>https://rezvan.xyz/school/Digital_design_3/</link>
       <pubDate>Tue, 24 Jan 2023 00:00:00 +0000</pubDate>
-      
       <guid>https://rezvan.xyz/school/Digital_design_3/</guid>
       <description>Sequential Circuits When we usually look at circuits we have an input and output who are independent on each other. In a sequential circuit, as the name suggest, we have a sequence. Meaning we feed back our output as input.
 We can easily define this as: Our output no longer depends on the present input - but on the past behavior of the circuit.
 State-Holding Memory Elements We&amp;rsquo;ve encountered latches and flip-flops before, they have a so-called memory element to them.</description>
     </item>
-    
     <item>
       <title>Concurrent Programming: Part 2 - Races, Locks, and Semaphores</title>
       <link>https://rezvan.xyz/school/Concurrent_programming_2/</link>
       <pubDate>Thu, 19 Jan 2023 00:00:00 +0000</pubDate>
-      
       <guid>https://rezvan.xyz/school/Concurrent_programming_2/</guid>
       <description>In the last part we covered the basics and some principles for concurrent programs. In this part we&amp;rsquo;ll cover how we define concurrent problems, the outcome we want and some solutions.
 Races As we saw in the last part - a different trace leads to a different outcome - this means that concurrent programs are non-deterministic.
 Why concurrent programs are non-deterministic is due to the scheduler&amp;rsquo;s decisions.
 When we have a problem with different possible outcomes, we need to label what is a faulty run and a successful run.</description>
     </item>
-    
     <item>
       <title>Digital Design: Part 2- Binary Adders</title>
       <link>https://rezvan.xyz/school/Digital_design_2/</link>
       <pubDate>Wed, 18 Jan 2023 00:00:00 +0000</pubDate>
-      
       <guid>https://rezvan.xyz/school/Digital_design_2/</guid>
       <description>In this part we&amp;rsquo;ll cover different kind of (binary) adders that digital circuits use. They&amp;rsquo;re an essential part for all the arithmetic operations which are needed.
 Full Adder The (1-bit) full adder is the simplest adder unit we can create.
 It takes two input bits $a$ and $b$, with $c_{in}$ (carry in) - it outputs two bit signals, $c_{out}$ and $r$
 If we use a truth table and find a boolean function for it, we find that: $$ r = a\ \bar{b}\ \bar{c_{in}} + \bar{a}\ b\ \bar{c_{in}} + a\ b\ c_{in} + \bar{a}\ \bar{b}\ c_{in} $$</description>
     </item>
-    
     <item>
       <title>Concurrent Programming: Part 1 - Introduction</title>
       <link>https://rezvan.xyz/school/Concurrent_programming/</link>
       <pubDate>Mon, 16 Jan 2023 00:00:00 +0000</pubDate>
-      
       <guid>https://rezvan.xyz/school/Concurrent_programming/</guid>
       <description>Concurrency, multi-threading, parallelism. These are all big terms thrown around in the computer-science world. For an outsider it can be quite confusing what these exactly are and how they differ from each other. In this series we&amp;rsquo;ll cover and dive into concurrency and its applications.
 Let&amp;rsquo;s start by defining what we mean by concurrency.
 Introduction Concurrency, in its very definition is, the fact of two or more events or circumstances happening or existing at the same time.</description>
     </item>
-    
     <item>
       <title>Digital Design: Part 1 - Introduction &amp; Boolean Algebra</title>
       <link>https://rezvan.xyz/school/Digital_design/</link>
       <pubDate>Mon, 16 Jan 2023 00:00:00 +0000</pubDate>
-      
       <guid>https://rezvan.xyz/school/Digital_design/</guid>
       <description>In our day-to-day lives, we use digital circuits all the time, without really thinking about them.
 Even most software developers do not appreciate the abstraction which digital circuits are built upon. What are digital circuits built from then? Chips! What are chips built from then? Logical gates! What are logical gates built from then? Transistor circuits! What are these circuits built from? Transistors! (duh).
 As you can see it&amp;rsquo;s quite a few steps.</description>
     </item>
-    
     <item>
       <title>DSA: Part 10 - Complexity (2)</title>
       <link>https://rezvan.xyz/school/DSA_10/</link>
       <pubDate>Fri, 09 Dec 2022 18:49:03 +0100</pubDate>
-      
       <guid>https://rezvan.xyz/school/DSA_10/</guid>
       <description>We have actually covered everything in this course - in this part we&amp;rsquo;ll do some exercises!
 Order of growth of Functions Let&amp;rsquo;s find out the complexity ($\mathcal{O}$) of: $$ T(n) = 5(3n^2 + 2n + 6)(4\ log_{10}(n) + 1) $$
 Since we seek the growth rate - we can use our rules about complexity. We can remove all constants: $$ T(n) = (n^2 + n)(log_{10}(n)) $$
 The next rule we can apply is, &amp;ldquo;the most dominating factor &amp;lsquo;wins&amp;rsquo;&amp;rdquo; as I like to call it.</description>
     </item>
-    
     <item>
       <title>DSA: Part 9 - Shortest Path Algortihms &amp; Spanning Trees</title>
       <link>https://rezvan.xyz/school/DSA_9/</link>
       <pubDate>Wed, 07 Dec 2022 18:34:09 +0100</pubDate>
-      
       <guid>https://rezvan.xyz/school/DSA_9/</guid>
       <description>In this part we&amp;rsquo;ll cover spanning trees along with how we can use these to solve pathfinding problems!
 Weighted Graphs As we have seen in the last part - graphs can we directed or undircted, the same thing goes for the weights on the edge. These represent some kind of &amp;lsquo;cost&amp;rsquo;, usually these are positive float numbers, but they could be anything - although many algortihms only work for positive weights.</description>
     </item>
-    
     <item>
       <title>Waves: Part 2 - Light waves</title>
       <link>https://rezvan.xyz/school/Waves_2/</link>
       <pubDate>Wed, 07 Dec 2022 17:55:57 +0100</pubDate>
-      
       <guid>https://rezvan.xyz/school/Waves_2/</guid>
       <description>In this part we&amp;rsquo;ll cover light waves and it&amp;rsquo;s properties.
 Light is actually electromagnetic radiation. The visible light we can see is usually between 380 - 740 nm
 General Conventions As we remember from mechanical waves $v = \lambda f$, this also applies for light waves, but our $v$ is instead $c$. $$ c = \lambda f = 3 \cdot 10^8 m/s $$
 If we look at light like usual mechanical waves, it quickly becomes very cluttered in our sketch.</description>
     </item>
-    
     <item>
       <title>DSA: Part 8 - Graphs</title>
       <link>https://rezvan.xyz/school/DSA_8/</link>
       <pubDate>Tue, 06 Dec 2022 13:08:43 +0100</pubDate>
-      
       <guid>https://rezvan.xyz/school/DSA_8/</guid>
       <description>In this part we&amp;rsquo;ll so called graphs and their applications.
 Introduction of Graphs A graph is a set of vertices connected pairwise by edges. So a very natural thing is that these edged can be either undirected or directed!
 A node can have a so called degree describing how many in/outgoing edges it has. In the directed case we split this variable to &amp;lsquo;out degree&amp;rsquo; and &amp;lsquo;in degree&amp;rsquo;.
 Another basic term that we&amp;rsquo;ll encounter is a cycle.</description>
     </item>
-    
     <item>
       <title>DSA: Part 7 - Binary Heaps</title>
       <link>https://rezvan.xyz/school/DSA_7/</link>
       <pubDate>Sun, 04 Dec 2022 18:18:49 +0100</pubDate>
-      
       <guid>https://rezvan.xyz/school/DSA_7/</guid>
       <description>In this part we&amp;rsquo;ll cover priority queues, binary heaps, and lastly heaps as arrays. So let&amp;rsquo;s begin with priority queues!
 Priority Queues A priority queues is a collection of items which we can:
 Add an item to the queue Find the smallest item in the queue Remove the smallest item in the queue In this we&amp;rsquo;ll handle a priority queue as a min-priority queue, but there&amp;rsquo;s also a max-priority queue which gets/removes the maximum item in the queue as well.</description>
     </item>
-    
     <item>
       <title>Waves: Part 1 - Mechanical Waves</title>
       <link>https://rezvan.xyz/school/Waves/</link>
       <pubDate>Sun, 04 Dec 2022 17:23:27 +0100</pubDate>
-      
       <guid>https://rezvan.xyz/school/Waves/</guid>
       <description>The next chapter in our physics course is about waves, especially mechanical waves.
 General about Waves In this chapter we&amp;rsquo;ll cover mechanical waves but also electromagnetic waves, in this case only (visible) light.
 There&amp;rsquo;s two types of waves we&amp;rsquo;ll be covering:
 Transverse waves They have &amp;rsquo;noise&amp;rsquo; orthogonal against the wave&amp;rsquo;s propagation speed. Longitudinal waves They have &amp;rsquo;noise&amp;rsquo; parallel with the waves&amp;rsquo; propagation speed. We can describe this noise with the function $y(x, t) = f(x + vt)$.</description>
     </item>
-    
     <item>
       <title>DSA: Part 6 - Trees</title>
       <link>https://rezvan.xyz/school/DSA_6/</link>
       <pubDate>Wed, 30 Nov 2022 18:08:48 +0100</pubDate>
-      
       <guid>https://rezvan.xyz/school/DSA_6/</guid>
       <description>In this part we&amp;rsquo;ll cover so called &amp;rsquo;trees&amp;rsquo; in computer science. Warning, this will be a quite long part soooo&amp;hellip;
 Trees The formal definition of a &amp;rsquo;tree&amp;rsquo; is: &amp;ldquo;A hierarchical data structure built up from nodes&amp;rdquo;.
 So unlike a real tree which has its root at the bottom - the computer scientist flipped it - the root node is at the top of the tree.
 In any tree there&amp;rsquo;s always one root node.</description>
     </item>
-    
     <item>
       <title>DSA: Part 5 - Hash Tables</title>
       <link>https://rezvan.xyz/school/DSA_5/</link>
       <pubDate>Tue, 29 Nov 2022 18:50:23 +0100</pubDate>
-      
       <guid>https://rezvan.xyz/school/DSA_5/</guid>
       <description>Hash Tables Hash tables are one of the most famous (and widely used) data structures. But why are they so popular and powerful? Before we can answer that question we need to look back at sets and maps.
 Sets and Maps in Context Just to refresh our memory - a set is a collection of items, where duplicates aren&amp;rsquo;t allowed. Maps are sets of keys, each having a associate value - or you can formulate it as - a set of key-value pairs.</description>
     </item>
-    
     <item>
       <title>DSA: Part 4 - Abstract Data Types</title>
       <link>https://rezvan.xyz/school/DSA_4/</link>
       <pubDate>Mon, 28 Nov 2022 20:30:47 +0100</pubDate>
-      
       <guid>https://rezvan.xyz/school/DSA_4/</guid>
       <description>ADT vs Data Structures So what&amp;rsquo;s the difference betwen a Abstract Data Type and an actual datastructure?
 An ADT is a kind of specification of something - it specifies how we can intertact with that object, like an API.
 It consits of methods and constructors but also plain-text specifications (like the complexity for example) and explainations.
 A data structure on the other hand is an actual implementation of an ADT. It specifies how the object works interally.</description>
     </item>
-    
     <item>
       <title>Thermodynamics: Lecture 3</title>
       <link>https://rezvan.xyz/school/Thermodynamics_3/</link>
       <pubDate>Mon, 28 Nov 2022 18:14:58 +0100</pubDate>
-      
       <guid>https://rezvan.xyz/school/Thermodynamics_3/</guid>
       <description>In this part we&amp;rsquo;ll cover the 2nd law of thermodynamics - as well as summarize this field of physics.
 Direction for $W$ and $Q$ As we&amp;rsquo;ve seen the work, $W$ and $Q$ is quite important. So let&amp;rsquo;s set up some general guide lines.
@@ -1087,60 +932,49 @@ Generally, in a given thermal system:
 A expansion, $(V_f &amp;gt; V_i), \rightarrow W &amp;gt; 0$ A compression, $(V_f &amp;lt; V_i), \rightarrow W &amp;lt; 0$
 Increase in temperature $\Delta T &amp;gt; 0, (T_f &amp;gt; T_i), \rightarrow Q &amp;gt; 0$ Decrease in temperature $\Delta T &amp;lt; 0, (T_f &amp;lt; T_i), \rightarrow Q &amp;lt; 0$</description>
     </item>
-    
     <item>
       <title>DSA: Part 3 - Dynamic Arrays</title>
       <link>https://rezvan.xyz/school/DSA_3/</link>
       <pubDate>Sun, 27 Nov 2022 17:26:09 +0100</pubDate>
-      
       <guid>https://rezvan.xyz/school/DSA_3/</guid>
       <description>Dynamic arrays Finally we have arrived at the DS of DSA. In (almost) all programming languages the most common built in data structure are arrays. We have seen them, worked with them - nothing new. We&amp;rsquo;ve probably even worked with dynamic arrays, they are an essential data structure - sometimes we don&amp;rsquo;t know how much data we&amp;rsquo;ll need.
 But how are dynamic arrays actually implemented into a language? The ideas is actually quite simple - we use a fixed length array and make a larger, fixed length, array when we have ran out of space.</description>
     </item>
-    
     <item>
       <title>Thermodynamics: Lecture 2</title>
       <link>https://rezvan.xyz/school/Thermodynamics_2/</link>
       <pubDate>Sat, 26 Nov 2022 00:04:21 +0100</pubDate>
-      
       <guid>https://rezvan.xyz/school/Thermodynamics_2/</guid>
       <description>Ideal gases An &amp;lsquo;ideal&amp;rsquo; gas is a gas that is not subject to interparticle interactions. Also commonly said to not being subject to &amp;lsquo;react with other substances&amp;rsquo;.
 In many applications of thermodynamics, ideal gases often come up, so it&amp;rsquo;s natural to understand them within a thermodynamic perspective.
 Gases and Pressure Before we begin with the real thermodynamical part of gases we need a bit of background with gases. Boyle&amp;rsquo;s law gives us a mathematical formula for our intuition of gases.</description>
     </item>
-    
     <item>
       <title>DSA: Part 2 - Complexity (1)</title>
       <link>https://rezvan.xyz/school/DSA_2/</link>
       <pubDate>Fri, 25 Nov 2022 17:20:46 +0100</pubDate>
-      
       <guid>https://rezvan.xyz/school/DSA_2/</guid>
       <description>Introduction What do we mean by an &amp;lsquo;Algorithmic complexity&amp;rsquo;, a good (but not fully formal) definition would be - &amp;ldquo;How much resources does the algorithm use in relation to quantitative properties of its input&amp;rdquo;
 And just to be clear, the definition of an algorithm: any well-defined procedure to solve a given problem.
 So what kind of resources could we quantify from an input? Of course the runtime of a algorithm is important.</description>
     </item>
-    
     <item>
       <title>DSA: Part 1 - Sorting</title>
       <link>https://rezvan.xyz/school/DSA_1/</link>
       <pubDate>Thu, 24 Nov 2022 19:57:27 +0100</pubDate>
-      
       <guid>https://rezvan.xyz/school/DSA_1/</guid>
       <description>My other course for this study period is a course in Data Structures &amp;amp; Algorithms.
 Sorting &amp;amp; Searching We began this course with sorting and why it&amp;rsquo;s an important topic for a computer scientist. Sorting data comes up in all fields of computer science, everything from low-level, simple, array sorting - to sort millions of data gathered by an AI.
 With this we began with simple sorting and searching algorithms. Firstly we began with binary search.</description>
     </item>
-    
     <item>
       <title>Thermodynamics: Lecture 1</title>
       <link>https://rezvan.xyz/school/Thermodynamics/</link>
       <pubDate>Thu, 24 Nov 2022 17:57:38 +0100</pubDate>
-      
       <guid>https://rezvan.xyz/school/Thermodynamics/</guid>
       <description>In my physics course we have recently began with the thermodynamics part of physics.
 It&amp;rsquo;s quite overwhelming but at the same time it&amp;rsquo;s really fun. So I&amp;rsquo;ll just post and explain everything I learn in class here - since it&amp;rsquo;s a really good way of learning, explaining. As the late and incredible Richard Feynman once said:
 If you cannot explain something in simple terms, you don&amp;rsquo;t understand it - Richard Feynman</description>
     </item>
-    
   </channel>
 </rss>
