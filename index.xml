@@ -6,10 +6,22 @@
     <description>Recent content on rezvan</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 05 Nov 2023 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 06 Nov 2023 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://rezvan.xyz/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Control theory: Part 3 - Regulators</title>
+      <title>Control theory: Part 4 - Models for mechanical systems</title>
+      <link>https://rezvan.xyz/school/ERE103_4/</link>
+      <pubDate>Mon, 06 Nov 2023 00:00:00 +0000</pubDate>
+      <guid>https://rezvan.xyz/school/ERE103_4/</guid>
+      <description>Introduction In this part we&amp;rsquo;ll see how we can model mechanical systems with controls.
+Models for mechanical systems In this series we&amp;rsquo;ll mainly deal with springs and dampers. Mainly translation motion.
+For springs, we&amp;rsquo;ll of course use Hooke&amp;rsquo;s law: $$ F_s = ky $$
+Where $k$ is the spring constant in $\left[\dfrac{N}{m}\right]$.
+For dampers, we&amp;rsquo;ll use: $$ F_y = b \dot{y} $$
+Where $b$ is the damping constant in $\left[\dfrac{Ns}{m}\right]$.</description>
+    </item>
+    <item>
+      <title>Control theory: Part 3 - Regulators in the Laplace domain</title>
       <link>https://rezvan.xyz/school/ERE103_3/</link>
       <pubDate>Sun, 05 Nov 2023 00:00:00 +0000</pubDate>
       <guid>https://rezvan.xyz/school/ERE103_3/</guid>
