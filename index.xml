@@ -6,8 +6,18 @@
     <description>Recent content on rezvan</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 06 Nov 2023 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 07 Nov 2023 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://rezvan.xyz/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Control theory: Part 5 - Space-state representation and linearization</title>
+      <link>https://rezvan.xyz/school/ERE103_5/</link>
+      <pubDate>Tue, 07 Nov 2023 00:00:00 +0000</pubDate>
+      <guid>https://rezvan.xyz/school/ERE103_5/</guid>
+      <description>Introduction In this part we&amp;rsquo;ll see how we can represent systems using matrix notation, also called space-state representation. Along with how we linearize non-linear systems.
+State variables If we use the spring-mass system from last time, with $F_d$ as input signal and $y$ as output signal.
+We obtained the following differential equation: $$ \ddot{y} = \dfrac{1}{m}(F_d - b\dot{y} - ky) $$
+If we want to represent this system using a set of first-order differential equations instead, we can do the following:</description>
+    </item>
     <item>
       <title>Control theory: Part 4 - Models for mechanical systems</title>
       <link>https://rezvan.xyz/school/ERE103_4/</link>

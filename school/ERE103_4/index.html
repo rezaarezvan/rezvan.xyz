@@ -155,8 +155,37 @@ $$</p>
 F_d(s) = Y(s) (ms^2 + bs + k)
 $$</p>
 <p>$$
-\boxed{G_{F_dy}(s) = \dfrac{Y(s)}{F_d(s)}$ = \dfrac{1}{ms^2 + bs + k}}
+\boxed{G_{F_{dy}}(s) = \dfrac{Y(s)}{F_d(s)} = \dfrac{1}{ms^2 + bs + k}}
 $$</p>
+<h3 id="example-tank-system">Example tank system</h3>
+<p>Given a tank system, we can write using Bernoulli&rsquo;s equation as:
+$$
+P_1 + \rho g h_1 + \dfrac{\rho v_1^2}{2} = P_2 + \rho g h_2 + \dfrac{\rho v_2^2}{2}
+$$</p>
+<p>Let $q_out$ and $q_in$ be volume flow. Let $h_2 = 0$, $P_1 = P_2 = P$ and that $v_1 \approx 0$.</p>
+<p>This yields:
+$$
+\rho g h_1 = \dfrac{\rho v_2^2}{2}
+$$</p>
+<p>$$
+v_2 = \sqrt{2gh_1}
+$$</p>
+<p>We define $q_out$ with $q_{out}= a \cdot v$, where $a$ is the area.
+$$
+q_{out} = a \sqrt{2gh_1} = a \sqrt{2g} \cdot \sqrt{h_1} \ | \ \text{non-linear}
+$$</p>
+<p>Let $V = A \cdot h_1$. This means that $\dot{V}$ is the rate of change of the volume per second. $\dot{V} = q_{in} - q_{out}$.</p>
+<p>Which means:
+$$
+A\dot{h} = q_{in} - q_{out}
+$$</p>
+<p>$$
+\dot{h} = \dfrac{1}{A}(q_{in} - q_{out})
+$$</p>
+<p>$$
+\dot{h} = \dfrac{1}{A}(q_{in} - a \sqrt{2g} \cdot \sqrt{h_1})
+$$</p>
+<p>In the next part, we&rsquo;ll see how we can linearize this function to obtain the so-called space-state representation of this system.</p>
 
         </section>
 
