@@ -6,8 +6,18 @@
     <description>Recent content in Control theory on rezvan</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 07 Nov 2023 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 09 Nov 2023 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://rezvan.xyz/tags/Control-theory/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Control theory: Part 6 - Space-state representation to transfer function</title>
+      <link>https://rezvan.xyz/school/ERE103_6/</link>
+      <pubDate>Thu, 09 Nov 2023 00:00:00 +0000</pubDate>
+      <guid>https://rezvan.xyz/school/ERE103_6/</guid>
+      <description>Introduction In this part we&amp;rsquo;ll see how we can go from a given space-state representation to the systems transfer function and vice-versa.
+From space-state to transfer function Given this space-state representation: $$ \begin{cases} \dot{x} &amp;amp; = Ax + Bu &amp;amp; (1) \\ y &amp;amp; = Cx + Du &amp;amp; (2) \end{cases} $$
+We want to find $G_{uy}(s) = \dfrac{Y(s)}{U(s)}$
+Let&amp;rsquo;s Laplace our equation system: $$ \begin{cases} sX(s) &amp;amp; = AX(s) + BU(s) &amp;amp; (1) \\ Y(s) &amp;amp; = CX(s) + DU(S) &amp;amp; (2) \end{cases} $$</description>
+    </item>
     <item>
       <title>Control theory: Part 5 - Space-state representation and linearization</title>
       <link>https://rezvan.xyz/school/ERE103_5/</link>
