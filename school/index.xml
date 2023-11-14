@@ -6,8 +6,18 @@
     <description>Recent content in Schools on rezvan</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 09 Nov 2023 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 13 Nov 2023 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://rezvan.xyz/school/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Control theory: Part 7 - Bode plot</title>
+      <link>https://rezvan.xyz/school/ERE103_7/</link>
+      <pubDate>Mon, 13 Nov 2023 00:00:00 +0000</pubDate>
+      <guid>https://rezvan.xyz/school/ERE103_7/</guid>
+      <description>Introduction In this part we&amp;rsquo;ll begin with the part about frequency analysis.
+Test functions Often when we want to test our system to determine the overall stability, time it takes and the response we get.
+We often test with our unit step function: $$ \sigma(t) = \begin{cases} 1 &amp;amp; t \leq 0 \\ 0 &amp;amp; t &amp;lt; 0 \end{cases} $$
+We call a system response to the unit step function for unit step response.</description>
+    </item>
     <item>
       <title>Control theory: Part 6 - Space-state representation to transfer function</title>
       <link>https://rezvan.xyz/school/ERE103_6/</link>
