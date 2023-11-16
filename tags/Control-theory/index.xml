@@ -6,8 +6,21 @@
     <description>Recent content in Control theory on rezvan</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 13 Nov 2023 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 16 Nov 2023 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://rezvan.xyz/tags/Control-theory/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Control theory: Part 8 - Stability</title>
+      <link>https://rezvan.xyz/school/ERE103_8/</link>
+      <pubDate>Thu, 16 Nov 2023 00:00:00 +0000</pubDate>
+      <guid>https://rezvan.xyz/school/ERE103_8/</guid>
+      <description>Introduction In this part we&amp;rsquo;ll properly define what stability is for different kind of systems.
+Stability $G(s)$ is a stable system when:
+$$ \lim_{t \to \infty} g(t) = 0 $$
+Where $g(t)$ is the system impulse response, meaning $u(t) = \delta(t)$, which yields:
+$$ g(t) = \mathcal{L}^{-1}\{G(s) = \dfrac{Y(s)}{U(s)} = Y(s) \} $$
+Example $G(s) = \dfrac{1}{s^2 + 4s - 5}$
+We can rewrite it as: $$ G(s) = \dfrac{1}{s^2 + 4s - 5} = \dfrac{1}{(s - 1)(s + 5)} $$</description>
+    </item>
     <item>
       <title>Control theory: Part 7 - Bode plot</title>
       <link>https://rezvan.xyz/school/ERE103_7/</link>
