@@ -160,6 +160,53 @@ $$</p>
 $$
 \lim_{t \to \infty} \{\text{Impulse response}\} = 0
 $$</p>
+<h3 id="ramp-function">Ramp function</h3>
+<p>Another function that we&rsquo;ll perform a lot of tests with is the ramp function. Which we define as:
+$$
+t\ \sigma(t)
+$$</p>
+<p>The Laplace transform of this is (using partial integration):
+$$
+\mathcal{L} \{t\ \sigma(t) \} = \dfrac{1}{s^2}
+$$</p>
+<h4 id="example">Example</h4>
+<p>Determine the long term error, when the insignal is a ramp function, $t\ \sigma(t)$.</p>
+<p>Given that:
+$$
+F(s) = \dfrac{s + 2}{s}
+$$</p>
+<p>$$
+G(s) = \dfrac{1}{s + 1}
+$$</p>
+<p>We know that:
+$$
+E(s) = R(s) - Y(s)
+$$</p>
+<p>$$
+Y(s) = \dfrac{L(s)}{1 + L(s)} \cdot R(s)
+$$</p>
+<p>$$
+L(s) = F(s)G(s) = \dfrac{s + 2}{s(s + 1)}
+$$</p>
+<p>So:
+$$
+\begin{align*}
+E(s) &amp; = R(s) - \dfrac{L(s)}{1 + L(s)} \cdot R(s) \\
+&amp; = R(s) \left(1 - \dfrac{L(s)}{1 + L(s)} \right) \\
+&amp; = R(s) \left(\dfrac{1}{1 + L(s)} \right) \\
+&amp; = \dfrac{1}{s^2} \left(\frac{1}{1 + \frac{s + 2}{s(s + 1)}} \right) \\
+&amp; = \dfrac{1}{s^2} \left(\frac{s(s + 1)}{s(s + 1) + s + 2} \right) \\
+&amp; = \dfrac{1}{s^2} \left(\frac{s(s + 1)}{s^2 + 2s + 2} \right) \\
+&amp; = \frac{(s + 1)}{s(s^2 + 2s + 2)} \\
+\end{align*}
+$$</p>
+<p>Using the final value theorem:
+$$
+\lim_{t \to \infty} e(t) = \lim_{s \to 0} s \cdot E(s) \\
+e(\infty) = \lim_{s \to 0} s \cdot \frac{(s + 1)}{s(s^2 + 2s + 2)} \\
+e(\infty) = \lim_{s \to 0} \frac{(s + 1)}{(s^2 + 2s + 2)} \\
+e(\infty) = \boxed{\dfrac{1}{2}}
+$$</p>
 <h3 id="frequency-analysis">Frequency analysis</h3>
 <p>The frequency function, $G(j\omega)$ for a system is given by:
 $$
@@ -169,7 +216,7 @@ $$</p>
 $$
 G(j\omega) = |G(j\omega)| \cdot e^{arg(G(j\omega))}
 $$</p>
-<h3 id="example">Example</h3>
+<h3 id="example-1">Example</h3>
 <p>Let $u(t) = A sin(\omega t + \phi)$ with the system, $G(s)$ what will our $y(t)$ be?</p>
 <p>$$
 y(t) = |G(j\omega)| \cdot A sin(\omega t + \phi + arg(G(j\omega)) (+ e^{-\lambda t})
@@ -178,14 +225,171 @@ $$</p>
 <h3 id="bode-plot">Bode plot</h3>
 <p>Bode plots are plots that show the system magnitude and phase shift in a system.</p>
 <p>Usually the magnitude can/will be in decibels.</p>
-<h4 id="example-1">Example</h4>
+<h4 id="example-2">Example</h4>
 <p><img src="/school/images/bode.png#center" alt=""></p>
 <p>Where the $y$-axis is either the phase ($arg(G(j\omega))$) or the magnitude ($|G(j \omega)|$).</p>
 <p>Remember that decibels are just:
 $$
 dB = 20 log(|G(j\omega)|)
 $$</p>
-<p>TODO</p>
+<h3 id="example-3">Example</h3>
+<p>Given:
+$$
+G(s) = \dfrac{1}{s(s + 2)}
+$$</p>
+<p>This means that:
+$$
+G(j\omega) = \dfrac{1}{j\omega(j\omega + 2)}
+$$</p>
+<p>The magnitude is:
+$$
+|G(j\omega)| = \dfrac{1}{\omega \sqrt{\omega^2 + 2^2}} = \dfrac{1}{\omega \sqrt{4 + \omega^2}}
+$$</p>
+<p>The phase is:
+$$
+\begin{align*}
+arg(G(j\omega)) &amp; = arg\left( \dfrac{1}{j\omega(j\omega + 2)} \right) \\
+&amp; = \dfrac{arg(1)}{arg(j\omega(j\omega + 2))} \\
+&amp; = arg(1) - arg(j\omega(j\omega + 2)) \\
+&amp; = arg(1) - (arg(j\omega) + arg(j\omega + 2)) \\
+&amp; = 0^\circ - \left(90^\circ + \arctan{\left(\dfrac{\omega}{2}\right)}\right) \\
+&amp; = -90^\circ - \arctan{\left(\dfrac{\omega}{2}\right)}
+\end{align*}
+$$</p>
+<p>If we now plot these:
+<img src="/school/images/bode2.png#center" alt=""></p>
+<h3 id="type-of-factors">Type of factors</h3>
+<p>In our systems we&rsquo;ll deal/want these type of factors:
+$$
+s, 1 + \dfrac{s}{\omega_1}, e^{-Ts}, s^2 + 2 \zeta \omega_n s + \omega_n^2
+$$</p>
+<p>Also, good to remember, if $\zeta &gt; 1$, then we can split up this second-order term into first-order term(s).</p>
+<p>Let&rsquo;s do the bode plot for each term.</p>
+<p>$$
+G(s) = s
+$$</p>
+<p>$$
+G(j\omega) = j\omega
+$$</p>
+<p>$$
+|G(j\omega)| = \omega
+$$</p>
+<p>$$
+arg(G(j\omega)) = 90^\circ
+$$</p>
+<p>Plotting this:
+<img src="/school/images/bode3.png#center" alt=""></p>
+<p>Simple!</p>
+<p>Now, for $\dfrac{1}{s}$
+$$
+G(s) = \dfrac{1}{s}
+$$</p>
+<p>$$
+G(j\omega) = \dfrac{1}{j\omega}
+$$</p>
+<p>$$
+|G(j\omega)| = \dfrac{1}{\omega}
+$$</p>
+<p>$$
+arg(G(j\omega)) = -90^\circ
+$$</p>
+<p>Plotting this:
+<img src="/school/images/bode4.png#center" alt=""></p>
+<p>Now for $1 + \dfrac{s}{\omega_1}$
+$$
+G(s) = 1 + \dfrac{s}{\omega_1}
+$$</p>
+<p>$$
+G(j\omega) = 1 + \dfrac{j\omega}{\omega_1}
+$$</p>
+<p>For this we&rsquo;ll need to understand some cases.</p>
+<p>Case $\omega \ll \omega_1$:
+$$
+G(j\omega) \approx 1
+$$</p>
+<p>$$
+|G(j\omega)| = 1
+$$</p>
+<p>$$
+arg(G(j\omega)) = 0^\circ
+$$</p>
+<p>Case $\omega = \omega_1$:
+$$
+G(j\omega) =  1 + j
+$$</p>
+<p>$$
+|G(j\omega)| = \sqrt{1^2 + 1^2} = \sqrt{2}
+$$</p>
+<p>$$
+arg(G(j\omega)) = 45^\circ
+$$</p>
+<p>Case $\omega \gg \omega_1$:
+$$
+G(j\omega) \approx j \dfrac{\omega}{\omega_1}
+$$</p>
+<p>$$
+|G(j\omega)| = \dfrac{\omega}{\omega_1}
+$$</p>
+<p>$$
+arg(G(j\omega)) = 90^\circ
+$$</p>
+<p>Plotting for $\omega_1 = 2$:
+<img src="/school/images/bode5.png#center" alt=""></p>
+<p>This is what we&rsquo;ll call for low and high frequency asymptotes.</p>
+<p>Last factor before an example
+$$
+G(s) = \dfrac{1}{1 + \dfrac{s}{\omega_1}}
+$$</p>
+<p>$$
+G(j\omega) = \dfrac{1}{1 + \dfrac{j\omega}{\omega_1}}
+$$</p>
+<p>Case $\omega \ll \omega_1$:
+$$
+G(j\omega) \approx 1
+$$</p>
+<p>$$
+|G(j\omega)| = 1
+$$</p>
+<p>$$
+arg(G(j\omega)) = 0^\circ
+$$</p>
+<p>Case $\omega = \omega_1$:
+$$
+G(j\omega) =  \dfrac{1}{1 + j}
+$$</p>
+<p>$$
+|G(j\omega)| = \dfrac{1}{\sqrt{1^2 + 1^2}} = \dfrac{1}{\sqrt{2}}
+$$</p>
+<p>$$
+arg(G(j\omega)) = -45^\circ
+$$</p>
+<p>Case $\omega \gg \omega_1$:
+$$
+G(j\omega) \approx \dfrac{1}{j \dfrac{\omega}{\omega_1}}
+$$</p>
+<p>$$
+|G(j\omega)| = \dfrac{1}{\dfrac{\omega}{\omega_1}} = \dfrac{\omega_1}{\omega}
+$$</p>
+<p>$$
+arg(G(j\omega)) = -90^\circ
+$$</p>
+<p><img src="/school/images/bode6.png#center" alt=""></p>
+<h3 id="standard-form">Standard form</h3>
+<p>We&rsquo;ll usually want to rewrite our transfer functions into these standard factor forms.</p>
+<p>Let&rsquo;s take an example to see why</p>
+<h4 id="example-4">Example</h4>
+<p>$$
+\begin{align*}
+G(s) &amp; = \dfrac{3(1 + s)e^{-0.5s}}{s(s + 2)(s + 3)} \\
+&amp; = \dfrac{3(1 + s)e^{-0.5s}}{2s(1 + \frac{s}{2})(s + 3)} \\
+&amp; = \dfrac{3(1 + s)e^{-0.5s}}{6s(1 + \frac{s}{2})(1 + \frac{s}{3})} \\
+&amp; = \boxed{\dfrac{0.5(1 + s)e^{-0.5s}}{s(1 + \frac{s}{2})(1 + \frac{s}{3})}}
+\end{align*}
+$$</p>
+<p>This is now in standard form.
+$$
+G(j\omega) = \boxed{\dfrac{0.5(1 + j\omega)e^{-0.5j\omega}}{j\omega(1 + \frac{j\omega}{2})(1 + \frac{j\omega}{3})}}
+$$</p>
 
         </section>
 
