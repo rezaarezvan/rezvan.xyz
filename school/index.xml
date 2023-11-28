@@ -6,8 +6,18 @@
     <description>Recent content in Schools on rezvan</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 16 Nov 2023 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 23 Nov 2023 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://rezvan.xyz/school/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Control theory: Part 9 - General controller structure</title>
+      <link>https://rezvan.xyz/school/ERE103_9/</link>
+      <pubDate>Thu, 23 Nov 2023 00:00:00 +0000</pubDate>
+      <guid>https://rezvan.xyz/school/ERE103_9/</guid>
+      <description>Introduction In this part we&amp;rsquo;ll see how we define a general feedback loop.
+General controller structure Assume the general structure for a feedback loop.
+However, we now have some noise that is added (in theory the sign can be whatever) to our out signal. Additionally, the noise, $V(s)$ will go through a process, $G_v(s)$.
+Along with this noise we have some noise in the feedback loop as well, so-called measurement error.</description>
+    </item>
     <item>
       <title>Control theory: Part 8 - Stability</title>
       <link>https://rezvan.xyz/school/ERE103_8/</link>
