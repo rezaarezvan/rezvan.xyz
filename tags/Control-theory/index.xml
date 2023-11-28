@@ -6,12 +6,22 @@
     <description>Recent content in Control theory on rezvan</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 23 Nov 2023 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 28 Nov 2023 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://rezvan.xyz/tags/Control-theory/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Control theory: Part 11 - Design of controllers (2)</title>
+      <link>https://rezvan.xyz/school/ERE103_11/</link>
+      <pubDate>Tue, 28 Nov 2023 00:00:00 +0000</pubDate>
+      <guid>https://rezvan.xyz/school/ERE103_11/</guid>
+      <description>PD-controller Given that $u(t) = K_p(e(t) + T_d \dot{e}(t))$
+In the $s$-domain, the PD controller is: $$ F_{PD}(s) = \dfrac{U(s)}{E(s)} = K_p(1 + T_d s) $$
+PD-controller are often paired with low-pass filters (LP), so that $\dot{e}(t)$ doesn&amp;rsquo;t become to large.
+$$ \begin{align*} F_{PD}(s) &amp;amp; = K_p(1 + \dfrac{T_d s}{1 + T_f s}) \\ &amp;amp; = K_p(\dfrac{1 + (T_d + T_f) s}{1 + T_f s}) \\ &amp;amp; = K_p(\dfrac{1 + \tau_d s}{1 + \frac{\tau_d}{b} s}) \ | \ \tau_d = T_d + T_f, b = \frac{T_d + T_f}{T_f} \end{align*} $$</description>
+    </item>
     <item>
       <title>Control theory: Part 10 - Design of controllers</title>
       <link>https://rezvan.xyz/school/ERE103_10/</link>
-      <pubDate>Thu, 23 Nov 2023 00:00:00 +0000</pubDate>
+      <pubDate>Mon, 27 Nov 2023 00:00:00 +0000</pubDate>
       <guid>https://rezvan.xyz/school/ERE103_10/</guid>
       <description>Introduction In this part we&amp;rsquo;ll see how we can design different type of controllers to make a system behave as wanted.
 PD-controller $$ G(s) = \dfrac{K}{s(1 + sT)} $$
