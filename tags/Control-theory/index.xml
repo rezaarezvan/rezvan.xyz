@@ -9,6 +9,17 @@
     <lastBuildDate>Thu, 23 Nov 2023 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://rezvan.xyz/tags/Control-theory/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>Control theory: Part 10 - Design of controllers</title>
+      <link>https://rezvan.xyz/school/ERE103_10/</link>
+      <pubDate>Thu, 23 Nov 2023 00:00:00 +0000</pubDate>
+      <guid>https://rezvan.xyz/school/ERE103_10/</guid>
+      <description>Introduction In this part we&amp;rsquo;ll see how we can design different type of controllers to make a system behave as wanted.
+PD-controller $$ G(s) = \dfrac{K}{s(1 + sT)} $$
+$$ F(s) = K_p + K_d s $$
+The loop transfer function is: $$ L(s) = F(s)G(s) = \dfrac{K(K_p + K_d s)}{s(1 + sT)} = \dfrac{\frac{K}{T} (K_p + K_d s)}{s^2 + \frac{1}{T} s} $$
+$$ G_{ry}(s) = \dfrac{L(s)}{1 + L(s)} = \dfrac{\dfrac{\frac{K}{T} (K_p + K_d s)}{s^2 + \frac{1}{T} s}}{1 + \dfrac{\frac{K}{T} (K_p + K_d s)}{s^2 + \frac{1}{T} s}} = \dfrac{\frac{K}{T}(K_p + K_d s)}{s^2 + \frac{1}{T} s + \frac{K}{T}(K_p + K_d s)} = \dfrac{K_p \frac{K}{T} + K_d \frac{K}{T} s}{s^2 + (1 + K_d K) s + K_p \frac{K}{T}} $$</description>
+    </item>
+    <item>
       <title>Control theory: Part 9 - General controller structure</title>
       <link>https://rezvan.xyz/school/ERE103_9/</link>
       <pubDate>Thu, 23 Nov 2023 00:00:00 +0000</pubDate>
