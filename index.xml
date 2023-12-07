@@ -6,8 +6,15 @@
     <description>Recent content on rezvan</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 05 Dec 2023 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 06 Dec 2023 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://rezvan.xyz/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Control theory: Part 13 - Discretization</title>
+      <link>https://rezvan.xyz/school/ERE103_13/</link>
+      <pubDate>Wed, 06 Dec 2023 00:00:00 +0000</pubDate>
+      <guid>https://rezvan.xyz/school/ERE103_13/</guid>
+      <description>Introduction In this part we&amp;rsquo;ll see how all of this theory will actually be represented when we need to use a computer for calculations.&#xA;Implementation When we want to implement discrete controllers and systems we need to sample.&#xA;Sampling is when we sample points from our signal with a certain time period.&#xA;We call our sampling period for: $$ h = \dfrac{1}{f_s} $$&#xA;Where $f_s$ is the so-called sampling frequency.</description>
+    </item>
     <item>
       <title>Control theory: Part 12 - State feedback</title>
       <link>https://rezvan.xyz/school/ERE103_12/</link>
