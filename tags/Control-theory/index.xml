@@ -6,8 +6,15 @@
     <description>Recent content in Control theory on rezvan</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 06 Dec 2023 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 07 Dec 2023 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://rezvan.xyz/tags/Control-theory/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Control theory: Part 14 - Filters</title>
+      <link>https://rezvan.xyz/school/ERE103_14/</link>
+      <pubDate>Thu, 07 Dec 2023 00:00:00 +0000</pubDate>
+      <guid>https://rezvan.xyz/school/ERE103_14/</guid>
+      <description>Introduction In this part we&amp;rsquo;ll understand the concept of filters.&#xA;Filters We usually use filters for two different purposes:&#xA;Frequency elimination Frequency detection Example Say we have the following system: $$ G(s) = \dfrac{a}{s + a} $$&#xA;What type of filter is this? Let&amp;rsquo;s find out. Plotting the bode plot will help us.&#xA;Note: This is for $a = 1$&#xA;We can see that this is a low-pass filter! We will call the part that lets through the frequency for passband.</description>
+    </item>
     <item>
       <title>Control theory: Part 13 - Discretization</title>
       <link>https://rezvan.xyz/school/ERE103_13/</link>

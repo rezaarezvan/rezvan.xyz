@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html><head lang="en">
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"><title>rezvan | Control theory: Part 14 - Filters</title><link rel="icon" type="image/png" href="/icon.png" /><meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description"
+        content="Introduction In this part we&rsquo;ll understand the concept of filters.
+Filters We usually use filters for two different purposes:
+Frequency elimination Frequency detection Example Say we have the following system: $$ G(s) = \dfrac{a}{s &#43; a} $$
+What type of filter is this? Let&rsquo;s find out. Plotting the bode plot will help us.
+Note: This is for $a = 1$
+We can see that this is a low-pass filter! We will call the part that lets through the frequency for passband." />
+    <meta property="og:image" content="https://raw.githubusercontent.com/rezaarezvan/rezvan.xyz/main/images/icon.png" />
+    <meta property="og:title" content="Control theory: Part 14 - Filters" />
+<meta property="og:description" content="Introduction In this part we&rsquo;ll understand the concept of filters.
+Filters We usually use filters for two different purposes:
+Frequency elimination Frequency detection Example Say we have the following system: $$ G(s) = \dfrac{a}{s &#43; a} $$
+What type of filter is this? Let&rsquo;s find out. Plotting the bode plot will help us.
+Note: This is for $a = 1$
+We can see that this is a low-pass filter! We will call the part that lets through the frequency for passband." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://rezvan.xyz/school/ERE103_14/" /><meta property="article:section" content="school" />
+<meta property="article:published_time" content="2023-12-07T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-12-07T00:00:00+00:00" />
+
+<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Control theory: Part 14 - Filters"/>
+<meta name="twitter:description" content="Introduction In this part we&rsquo;ll understand the concept of filters.
+Filters We usually use filters for two different purposes:
+Frequency elimination Frequency detection Example Say we have the following system: $$ G(s) = \dfrac{a}{s &#43; a} $$
+What type of filter is this? Let&rsquo;s find out. Plotting the bode plot will help us.
+Note: This is for $a = 1$
+We can see that this is a low-pass filter! We will call the part that lets through the frequency for passband."/>
+<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@1,500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
+
+    
+    <link rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/main.55ceafd1ab15172b8770201b55c83270fac8611fcdae31fccb3a7fd94ac6da6e.css" />
+    <link id="darkModeStyle" rel="stylesheet" type="text/css" href="https://rezvan.xyz/css/dark.b95ac7b1169ab6755ef14c75e8e49c983d2d56c40ee0c3d69d357d42339b5e31.css"  disabled />
+    
+
+    
+    
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+        </script>
+
+    
+    <script type="text/x-mathjax-config">
+		MathJax.Hub.Config({
+			tex2jax: {
+				inlineMath: [['$','$'], ['\\(','\\)']],
+				displayMath: [['$$','$$'], ['\[','\]']],
+				processEscapes: true,
+				processEnvironments: true,
+				skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+				TeX: { equationNumbers: { autoNumber: "AMS" },
+						 extensions: ["AMSmath.js", "AMSsymbols.js"] }
+			}
+		});
+		</script>
+    
+
+    
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js"
+        onload="renderMathInElement(document.body);"></script>
+
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            renderMathInElement(document.body, {
+                delimiters: [
+                    {left: "$$", right: "$$", display: true},
+                    {left: "$", right: "$", display: false}
+                ]
+            });
+        });
+    </script>
+    
+
+    
+</head>
+<body>
+    <div class="content"><header>
+    <div class="main">
+        <a href="https://rezvan.xyz/">rezvan</a>
+    </div>
+    <nav id="site-navbar">
+        
+        <a href="/">home</a>
+        
+        <a href="/about">about</a>
+        
+        <a href="/principles">principles</a>
+        
+        <a href="/contact">contact</a>
+        
+        <a href="/cv">cv</a>
+        
+        <a href="/school">school</a>
+        
+        <a href="/tags">tags</a>
+        
+        | <span id="dark-mode-toggle" onclick="toggleTheme()"></span>
+        <script src="https://rezvan.xyz/js/themetoggle.js"></script>
+        
+    </nav>
+</header>
+
+<main>
+    <article>
+        <div class="title">
+            <h1 class="title">Control theory: Part 14 - Filters</h1>
+            <div class="meta">Posted on Dec 7, 2023</div>
+        </div>
+        
+
+        <section class="body">
+            <h3 id="introduction">Introduction</h3>
+<p>In this part we&rsquo;ll understand the concept of filters.</p>
+<h3 id="filters">Filters</h3>
+<p>We usually use filters for two different purposes:</p>
+<ul>
+<li>Frequency elimination</li>
+<li>Frequency detection</li>
+</ul>
+<h3 id="example">Example</h3>
+<p>Say we have the following system:
+$$
+G(s) = \dfrac{a}{s + a}
+$$</p>
+<p>What type of filter is this? Let&rsquo;s find out. Plotting the bode plot will help us.</p>
+<p><img src="/school/images/lowpass.png#center" alt="">
+Note: This is for $a = 1$</p>
+<p>We can see that this is a low-pass filter! We will call the part that lets through the frequency for passband.
+The range that gets eliminated/attenuated is the stopband.</p>
+<p>For a high-pass filter, the general form is:
+$$
+G(s) = \dfrac{s}{s + b} = \dfrac{\frac{s}{b}}{1 + \frac{s}{b}}
+$$</p>
+<p><img src="/school/images/highpass.png#center" alt="">
+Note: This is for $b = 1$</p>
+<h3 id="filter-types">Filter types</h3>
+<p>So far we&rsquo;ve seen low-pass and high-pass filters. Let&rsquo;s list all the filters that we&rsquo;ll work with:</p>
+<ul>
+<li>Low-pass (LP - low pass, high gets filtered out)</li>
+<li>High-pass (HP - high pass, low gets filtered out)</li>
+<li>Band-stop filter (BS - frequencies within a specific range gets attenuated, rest are unfiltered)</li>
+<li>Band-pass filter (BP - frequencies within a specific range pass, rest are attenuated)</li>
+<li>Notch filter (Filters exactly one frequency)</li>
+</ul>
+<h3 id="butterworth-filters">Butterworth filters</h3>
+<p>When we need to perform filter realization, we usually will restort to Butterworth:</p>
+<p>$$
+\text{Order 1: } G(s) = \dfrac{\omega_1}{s + \omega_1} \\
+\text{Order 2: } G(s) = \dfrac{\omega_1^2}{s^2 + 2 \zeta \omega_1 s + \omega_1^2} \ | \ \zeta = \frac{1}{\sqrt{2}}
+$$</p>
+<h3 id="filter-transformation">Filter transformation</h3>
+<p>Say we have this filter:
+$$
+G(s) = \dfrac{1}{s + 1}
+$$</p>
+<p>This is a low-pass filter. Say we want another type of filter from this - what should we do?</p>
+<ol>
+<li>Switch of break-frequency point to $\omega_c$ (cut-off)</li>
+</ol>
+<p>Say we want to go from LP $\to$ HP, then we need to set:
+$$
+s \to \frac{s}{\omega_c}
+$$</p>
+<p>$$
+G(s) = \dfrac{1}{\frac{s}{\omega_c} + 1} = \dfrac{\omega_c}{s + \omega_c}
+$$</p>
+<p>In the case we had a second order filter:
+$$
+G(s) = \dfrac{1}{\frac{s^2}{\omega_c^2} + \sqrt{2} \frac{s}{\omega_c} + 1} = \dfrac{\omega_c^2}{s^2 + \sqrt{2}\omega_c s + \omega_c^2}
+$$</p>
+<p>Now, we have HP filters!</p>
+<p>TODO</p>
+
+        </section>
+
+        <div class="post-tags">
+            
+            
+            <nav class="nav tags">
+                <ul class="tags">
+                    
+                    <li><a href="/tags/Control-theory">Control theory</a></li>
+                    
+                </ul>
+            </nav>
+            
+            
+        </div>
+        </article>
+</main>
+<footer>
+    <div style="display:flex"><a class="soc" href="https://github.com/rezaarezvan" rel="me" title="GitHub"><i data-feather="github"></i></a>
+        <a class="border"></a><a class="soc" href="https://twitter.com/rzvan__/" rel="me" title="Twitter"><i data-feather="twitter"></i></a>
+        <a class="border"></a></div><p class="footer_msg">memento mori</p></footer>
+
+
+<script>
+    feather.replace()
+</script></div>
+</body>
+
+</html>
