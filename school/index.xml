@@ -6,8 +6,15 @@
     <description>Recent content in Schools on rezvan</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 07 Dec 2023 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 30 Dec 2023 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://rezvan.xyz/school/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Control theory: Summary</title>
+      <link>https://rezvan.xyz/school/ERE103_summary/</link>
+      <pubDate>Sat, 30 Dec 2023 00:00:00 +0000</pubDate>
+      <guid>https://rezvan.xyz/school/ERE103_summary/</guid>
+      <description>Dynamic systems $u(t)$ - Input signal&#xA;$y(t)$ - Output signal&#xA;We usually represent our systems with ODEs of the form: $$ \dot{y} + ay = bu $$&#xA;Feedback systems Using (positive or negative) feedback, meaning our input depends on the output as well!&#xA;$r(t)$ - Reference value/Setpoint&#xA;$e(t)$ = $r(t) - y(t)$ - Control error&#xA;Laplace Domain $F(s)$ - Controller&#xA;$G_{uy}(s)$ = $\dfrac{Y(s)}{U(s)}$ - Transfer function&#xA;$L(s) = G_{uy}(s) F(s)$ - Loop transfer function</description>
+    </item>
     <item>
       <title>Control theory: Part 14 - Filters</title>
       <link>https://rezvan.xyz/school/ERE103_14/</link>
