@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html><head lang="en">
     <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"><title>rezvan | Control theory: Part 3 - Regulators in the Laplace domain</title><link rel="icon" type="image/png" href="/icon.png" /><meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"><title>rezvan | Control theory: Part 3 - Controllers in the Laplace domain</title><link rel="icon" type="image/png" href="/icon.png" /><meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description"
-        content="Introduction In this part we&rsquo;ll define regulators in the Laplace domain.
+        content="Introduction In this part we&rsquo;ll define controllers in the Laplace domain.
 Let&rsquo;s firstly cover feedback again.
 $N$th-Order systems In controls, we&rsquo;ll often study system which can be described with differential equations. A $N$th-order system means we can describe said system with a $N$th-order differential equation.
 We also say that the transfer function has degree $N$.
 Feedback system Let&rsquo;s find the general transfer function for a feedback system, from $r(t)$ to $y(t)$." />
     <meta property="og:image" content="https://raw.githubusercontent.com/rezaarezvan/rezvan.xyz/main/images/icon.png" />
-    <meta property="og:title" content="Control theory: Part 3 - Regulators in the Laplace domain" />
-<meta property="og:description" content="Introduction In this part we&rsquo;ll define regulators in the Laplace domain.
+    <meta property="og:title" content="Control theory: Part 3 - Controllers in the Laplace domain" />
+<meta property="og:description" content="Introduction In this part we&rsquo;ll define controllers in the Laplace domain.
 Let&rsquo;s firstly cover feedback again.
 $N$th-Order systems In controls, we&rsquo;ll often study system which can be described with differential equations. A $N$th-order system means we can describe said system with a $N$th-order differential equation.
 We also say that the transfer function has degree $N$.
@@ -20,8 +20,8 @@ Feedback system Let&rsquo;s find the general transfer function for a feedback sy
 <meta property="article:published_time" content="2023-11-05T00:00:00+00:00" />
 <meta property="article:modified_time" content="2023-11-05T00:00:00+00:00" />
 
-<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Control theory: Part 3 - Regulators in the Laplace domain"/>
-<meta name="twitter:description" content="Introduction In this part we&rsquo;ll define regulators in the Laplace domain.
+<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Control theory: Part 3 - Controllers in the Laplace domain"/>
+<meta name="twitter:description" content="Introduction In this part we&rsquo;ll define controllers in the Laplace domain.
 Let&rsquo;s firstly cover feedback again.
 $N$th-Order systems In controls, we&rsquo;ll often study system which can be described with differential equations. A $N$th-order system means we can describe said system with a $N$th-order differential equation.
 We also say that the transfer function has degree $N$.
@@ -110,14 +110,14 @@ Feedback system Let&rsquo;s find the general transfer function for a feedback sy
 <main>
     <article>
         <div class="title">
-            <h1 class="title">Control theory: Part 3 - Regulators in the Laplace domain</h1>
+            <h1 class="title">Control theory: Part 3 - Controllers in the Laplace domain</h1>
             <div class="meta">Posted on Nov 5, 2023</div>
         </div>
         
 
         <section class="body">
             <h3 id="introduction">Introduction</h3>
-<p>In this part we&rsquo;ll define regulators in the Laplace domain.</p>
+<p>In this part we&rsquo;ll define controllers in the Laplace domain.</p>
 <p>Let&rsquo;s firstly cover feedback again.</p>
 <h3 id="nth-order-systems">$N$th-Order systems</h3>
 <p>In controls, we&rsquo;ll often study system which can be described with differential equations. A $N$th-order system means we can describe said system with a $N$th-order differential equation.</p>
@@ -126,7 +126,7 @@ Feedback system Let&rsquo;s find the general transfer function for a feedback sy
 <p>Let&rsquo;s find the general transfer function for a feedback system, from $r(t)$ to $y(t)$.</p>
 <ul>
 <li>$G(s)$ - System/Process</li>
-<li>$F(s)$ - Regulator</li>
+<li>$F(s)$ - Controller</li>
 <li>$R(s)$ - Reference value</li>
 <li>$U(s)$ - Input signal</li>
 <li>$Y(s)$ - Output signal</li>
@@ -175,7 +175,7 @@ $$</p>
 <h3 id="feedback-system-1">Feedback system</h3>
 <p>Pros:</p>
 <ul>
-<li>$y(t)$ can be equal to $r(t)$ (with the right regulators).</li>
+<li>$y(t)$ can be equal to $r(t)$ (with the right controller).</li>
 <li>Can compensate for interference</li>
 </ul>
 <p>Cons:</p>
@@ -190,19 +190,19 @@ $$</p>
 <p>The zeros are given by the equation $B(s) = 0$.</p>
 <p>The poles are given by the equation $A(s)$.</p>
 <p>We&rsquo;ll see later on how zeros and the poles affect the stability of a system.</p>
-<h3 id="regulators-in-laplace">Regulators in Laplace</h3>
+<h3 id="controllers-in-laplace">Controllers in Laplace</h3>
 <ul>
-<li>P-regulator - $u(t) = K_p\ e(t)$</li>
-<li>I-regulator - $u(t) = K_i\ \int_0^t e(\tau)\ d\tau$</li>
-<li>PI-regulator - $u(t) = K_p\ e(t) + K_i \int_0^t e(\tau)\ d\tau$</li>
+<li>P-controller - $u(t) = K_p\ e(t)$</li>
+<li>I-controller - $u(t) = K_i\ \int_0^t e(\tau)\ d\tau$</li>
+<li>PI-controller - $u(t) = K_p\ e(t) + K_i \int_0^t e(\tau)\ d\tau$</li>
 </ul>
 <p>In Laplace:</p>
 <ul>
-<li>P-regulator - $U(s) = K_p\ E(s)$</li>
-<li>I-regulator - $U(s) = K_i\ \dfrac{1}{s}\ E(s)$</li>
-<li>PI-regulator - $U(s) = K_p\ E(s) + \dfrac{K_i}{s}\ E(s)$</li>
+<li>P-controller - $U(s) = K_p\ E(s)$</li>
+<li>I-controller - $U(s) = K_i\ \dfrac{1}{s}\ E(s)$</li>
+<li>PI-controller - $U(s) = K_p\ E(s) + \dfrac{K_i}{s}\ E(s)$</li>
 </ul>
-<p>Let&rsquo;s rewrite the PI regulator a bit:
+<p>Let&rsquo;s rewrite the PI controller a bit:
 $$
 \begin{align*}
 U(s) &amp; = K_p\ E(s) + \dfrac{K_i}{s}\ E(s) \\
@@ -243,8 +243,8 @@ $$</p>
 <p>$$
 G_{uy}(s) = \dfrac{10^3}{(10^3s + 200)(1 + s)} = \ldots = \boxed{\dfrac{50}{(1 + 5s)(1 + s)}}
 $$</p>
-<h3 id="p-regulator">P-regulator</h3>
-<p>Say that our regulator was a P-regulator.</p>
+<h3 id="p-controller">P-controller</h3>
+<p>Say that our controller was a P-controller.</p>
 <p>Let&rsquo;s find $G_{ry}(s)$.</p>
 <p>$L(s) = K_p \cdot G_{uy}(s)$</p>
 <p>$$
@@ -282,9 +282,9 @@ $$</p>
 $$
 \lim_{t \to \infty} y(t) = \lim_{s \to 0} \dfrac{10K_p}{\dfrac{1}{5} + 10K_p} \cdot r_0 &lt; r_0
 $$</p>
-<p>This means that, a P-regulator will never be enough for a system to get an output that is exactly the same as the reference value.</p>
-<p>Let&rsquo;s see how a PI-regulator behaves.</p>
-<h3 id="example-pi-regulator">Example PI-regulator</h3>
+<p>This means that, a P-controller will never be enough for a system to get an output that is exactly the same as the reference value.</p>
+<p>Let&rsquo;s see how a PI-controller behaves.</p>
+<h3 id="example-pi-controller">Example PI-controller</h3>
 <p>If we use the same system.</p>
 <p>$G_{ry}(s)$ is a 2nd order transfer function. (The denominator is a polynomial of degree 2).</p>
 <p>The general formula for 2nd order transfer functions can be written as:
@@ -304,7 +304,7 @@ $$
 K = \dfrac{10K_p}{0.2 + 10 K_p} \\
 \zeta = \dfrac{1.2}{2\ \sqrt{0.2 + 10 K_p}}
 $$</p>
-<p>Back to the PI-regulator example.</p>
+<p>Back to the PI-controller example.</p>
 <p>$$
 G_{ry}(s) = \dfrac{L(s)}{1 + L(s)}
 $$</p>
@@ -361,7 +361,7 @@ $$</p>
 <p>$$
 \boxed{\lim_{t \to \infty} y(t) = r_0}
 $$</p>
-<p>So, we see that a PI-regulator gets us exactly the reference value.</p>
+<p>So, we see that a PI-controller gets us exactly the reference value.</p>
 
         </section>
 

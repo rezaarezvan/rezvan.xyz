@@ -7,14 +7,14 @@
 Let&rsquo;s firstly cover feedback again.
 Feedback system As we discussed last time we&rsquo;ll encounter:
 $v(t)$ - Interference $u(t)$ - Control signal/Input signal $y(t)$ - Response signal/Output signal $r(t)$ - Reference value $e(t)$ - Control error Let&rsquo;s take a real world example
-Example Say that we have a system which regulates temperature. We have an initial temperature for 19$^\circ$a." />
+Example Say that we have a system which controls temperature. We have an initial temperature for 19$^\circ$a." />
     <meta property="og:image" content="https://raw.githubusercontent.com/rezaarezvan/rezvan.xyz/main/images/icon.png" />
     <meta property="og:title" content="Control theory: Part 2 - Transfer functions" />
 <meta property="og:description" content="Introduction In this part we&rsquo;ll define what a transfer function is for a system, and why they are important.
 Let&rsquo;s firstly cover feedback again.
 Feedback system As we discussed last time we&rsquo;ll encounter:
 $v(t)$ - Interference $u(t)$ - Control signal/Input signal $y(t)$ - Response signal/Output signal $r(t)$ - Reference value $e(t)$ - Control error Let&rsquo;s take a real world example
-Example Say that we have a system which regulates temperature. We have an initial temperature for 19$^\circ$a." />
+Example Say that we have a system which controls temperature. We have an initial temperature for 19$^\circ$a." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://rezvan.xyz/school/ERE103_2/" /><meta property="article:section" content="school" />
 <meta property="article:published_time" content="2023-10-31T00:00:00+00:00" />
@@ -25,7 +25,7 @@ Example Say that we have a system which regulates temperature. We have an initia
 Let&rsquo;s firstly cover feedback again.
 Feedback system As we discussed last time we&rsquo;ll encounter:
 $v(t)$ - Interference $u(t)$ - Control signal/Input signal $y(t)$ - Response signal/Output signal $r(t)$ - Reference value $e(t)$ - Control error Let&rsquo;s take a real world example
-Example Say that we have a system which regulates temperature. We have an initial temperature for 19$^\circ$a."/>
+Example Say that we have a system which controls temperature. We have an initial temperature for 19$^\circ$a."/>
 <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@1,500&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Fira+Sans&display=swap" rel="stylesheet">
@@ -130,7 +130,7 @@ Example Say that we have a system which regulates temperature. We have an initia
 </ul>
 <p>Let&rsquo;s take a real world example</p>
 <h3 id="example">Example</h3>
-<p>Say that we have a system which regulates temperature. We have an initial temperature for 19$^\circ$a.</p>
+<p>Say that we have a system which controls temperature. We have an initial temperature for 19$^\circ$a.</p>
 <p>At the time instance, $t_0$, we change $r(t)$ (via a knob) to be at 21$^\circ$.</p>
 <p>From a time period, $t_1$ to $t_2$, we open a window which cools down the room.</p>
 <p>From this real world example we can describe the system as:</p>
@@ -139,33 +139,33 @@ Example Say that we have a system which regulates temperature. We have an initia
 <p>$t = t_1$, The window is opened, which means we have $v(t) &lt; 0$, or in other words, the temperature decreases. This means again that $e(t) &gt; 0$. The control device needs to readjust to this change.</p>
 <p>$t = t_2$, The window is closed, which will yield a control error, the control device will readjust to this change as well.</p>
 <p>$t &gt; t_2$, The system will remain stable at 21$^\circ$ again.</p>
-<h3 id="regulators">Regulators</h3>
-<p>But how do we actually regulate a control error? There are many different types of regulators, but the most common are the PID variants.</p>
+<h3 id="controllers">Controllers</h3>
+<p>But how do we actually control a control error? There are many different types of controllers, but the most common are the PID variants.</p>
 <ul>
-<li>P-regulator
+<li>P-controller
 $$
 u(t) = K_p\ e(t)
 $$</li>
-<li>I-regulator
+<li>I-controller
 $$
 u(t) = K_i \int_0^t e(\tau)\ d\tau
 $$</li>
-<li>D-regulator
+<li>D-controller
 $$
 u(t) = K_d\ \dfrac{d\ e(t)}{dt}
 $$</li>
 </ul>
 <p>We also have the combinations:</p>
 <ul>
-<li>PI-regulator
+<li>PI-controller
 $$
 u(t) = K_p\ e(t) + K_i \int_0^t e(\tau)\ d\tau
 $$</li>
-<li>PD-regulator
+<li>PD-controller
 $$
 u(t) = K_p\ e(t) + K_d\ \dfrac{d\ e(t)}{dt}
 $$</li>
-<li>PID-regulator
+<li>PID-controller
 $$
 u(t) = K_p\ e(t) + K_i \int_0^t e(\tau)\ d\tau + K_d\ \dfrac{d\ e(t)}{dt}
 $$</li>

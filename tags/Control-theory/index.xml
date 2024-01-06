@@ -93,18 +93,18 @@
       <description>Introduction In this part we&amp;rsquo;ll see how we can model mechanical systems with controls.&#xA;Models for mechanical systems In this series we&amp;rsquo;ll mainly deal with springs and dampers. Mainly translation motion.&#xA;For springs, we&amp;rsquo;ll of course use Hooke&amp;rsquo;s law: $$ F_s = ky $$&#xA;Where $k$ is the spring constant in $\left[\dfrac{N}{m}\right]$.&#xA;For dampers, we&amp;rsquo;ll use: $$ F_y = b \dot{y} $$&#xA;Where $b$ is the damping constant in $\left[\dfrac{Ns}{m}\right]$.</description>
     </item>
     <item>
-      <title>Control theory: Part 3 - Regulators in the Laplace domain</title>
+      <title>Control theory: Part 3 - Controllers in the Laplace domain</title>
       <link>https://rezvan.xyz/school/ERE103_3/</link>
       <pubDate>Sun, 05 Nov 2023 00:00:00 +0000</pubDate>
       <guid>https://rezvan.xyz/school/ERE103_3/</guid>
-      <description>Introduction In this part we&amp;rsquo;ll define regulators in the Laplace domain.&#xA;Let&amp;rsquo;s firstly cover feedback again.&#xA;$N$th-Order systems In controls, we&amp;rsquo;ll often study system which can be described with differential equations. A $N$th-order system means we can describe said system with a $N$th-order differential equation.&#xA;We also say that the transfer function has degree $N$.&#xA;Feedback system Let&amp;rsquo;s find the general transfer function for a feedback system, from $r(t)$ to $y(t)$.</description>
+      <description>Introduction In this part we&amp;rsquo;ll define controllers in the Laplace domain.&#xA;Let&amp;rsquo;s firstly cover feedback again.&#xA;$N$th-Order systems In controls, we&amp;rsquo;ll often study system which can be described with differential equations. A $N$th-order system means we can describe said system with a $N$th-order differential equation.&#xA;We also say that the transfer function has degree $N$.&#xA;Feedback system Let&amp;rsquo;s find the general transfer function for a feedback system, from $r(t)$ to $y(t)$.</description>
     </item>
     <item>
       <title>Control theory: Part 2 - Transfer functions</title>
       <link>https://rezvan.xyz/school/ERE103_2/</link>
       <pubDate>Tue, 31 Oct 2023 00:00:00 +0000</pubDate>
       <guid>https://rezvan.xyz/school/ERE103_2/</guid>
-      <description>Introduction In this part we&amp;rsquo;ll define what a transfer function is for a system, and why they are important.&#xA;Let&amp;rsquo;s firstly cover feedback again.&#xA;Feedback system As we discussed last time we&amp;rsquo;ll encounter:&#xA;$v(t)$ - Interference $u(t)$ - Control signal/Input signal $y(t)$ - Response signal/Output signal $r(t)$ - Reference value $e(t)$ - Control error Let&amp;rsquo;s take a real world example&#xA;Example Say that we have a system which regulates temperature. We have an initial temperature for 19$^\circ$a.</description>
+      <description>Introduction In this part we&amp;rsquo;ll define what a transfer function is for a system, and why they are important.&#xA;Let&amp;rsquo;s firstly cover feedback again.&#xA;Feedback system As we discussed last time we&amp;rsquo;ll encounter:&#xA;$v(t)$ - Interference $u(t)$ - Control signal/Input signal $y(t)$ - Response signal/Output signal $r(t)$ - Reference value $e(t)$ - Control error Let&amp;rsquo;s take a real world example&#xA;Example Say that we have a system which controls temperature. We have an initial temperature for 19$^\circ$a.</description>
     </item>
     <item>
       <title>Control theory: Part 1 - Introduction</title>
