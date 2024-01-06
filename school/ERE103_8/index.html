@@ -195,39 +195,51 @@ G_{ry}(s) = \dfrac{L(s)}{1 + L(s)}
 $$</p>
 <p>What happens if $L(s) = -1$?</p>
 <p>This means that $|L(j\omega)| = 1$ and $arg(L(j\omega)) = -180^\circ$</p>
-<p>We will call $\omega_c$ crossover frequency.</p>
+<p>Let&rsquo;s call those specific frequencies for $\omega_c$ and $\omega_\pi$. We&rsquo;ll call them the crossover and phase crossover frequency respectievly.</p>
+<p>Meaning that:
+$$
+|L(j\omega_c)| = 1 \\
+arg(L(j\omega_\pi)) = -180^\circ
+$$</p>
 <p>If $L(j\omega) = -1$, it is equivalent to $\omega_c = \omega_\pi$. If this happens, the system is unstable.</p>
 <p>Therefore, we will introduce two new variables that will tell us how near instability we are.</p>
-<p>$\phi_m$ - phase margin (How far away from $-180^\circ arg(L(j\omega))$ is given that $|L(j\omega)| = 1$)</p>
-<p>$A_m$ - amplitude margin (How far away from 1 $|L(j\omega)|$ is given that $arg(L(j\omega)) = -180^\circ$)</p>
+<p>Phase margin:
+$$
+\phi_m = arg(L(j\omega_c)) - -180^\circ = arg(L(j\omega_C)) + 180^\circ \ | \ \text{ given that } |L(j\omega_c)| = 1
+$$</p>
+<p>Amplitude margin:</p>
+<p>$$
+A_m = \dfrac{1}{|L(j\omega_\pi)|} \ | \ \text{ given that } arg(L(j\omega_\pi)) = -180^\circ
+$$</p>
 <h3 id="example-2">Example</h3>
 <p>Given
 $$
-L(s) \dfrac{K}{s(s + 1)^2}, K &gt; 0
+L(s) = \dfrac{K}{s(s + 1)^2} \ K &gt; 0
 $$</p>
 <p>Given that $A_m = 2$, find $K$.</p>
-<p>If $A_m = 2$ this means that $L(j\omega_\pi) = \dfrac{1}{2}$</p>
+<p>$$
+2 = \dfrac{1}{|L(j\omega_\pi)|}
+$$</p>
+<p>This means that $|L(j\omega_\pi)| = \dfrac{1}{2}$</p>
 <p>$$
 L(j\omega) = \dfrac{K}{j\omega(j\omega + 1)^2}
 $$</p>
 <p>$$
 arg(L(j\omega)) = 0 - 90^\circ - 2 \cdot arctan(\omega)
 $$</p>
+<p>Let&rsquo;s find $\omega_\pi$</p>
 <p>$$
--90^\circ - 2 \cdot arctan(\omega) = -180^\circ \\
--2 \cdot arctan(\omega) = -90^\circ \\
-arctan(\omega) = 45^\circ \\
-\omega_c = 1
+-90^\circ - 2 \cdot arctan(\omega_\pi) = -180^\circ \\
+-2 \cdot arctan(\omega_\pi) = -90^\circ \\
+arctan(\omega_\pi) = 45^\circ \\
+\omega_\pi = 1
 $$</p>
 <p>Therefore:
 $$
-\left| \dfrac{K}{j(1 + j)^2} \right| = \dfrac{1}{2}
+|L(j\omega_\pi)| = \left| \dfrac{K}{j(1 + j)^2} \right| = \dfrac{1}{2}
 $$</p>
 <p>$$
-\dfrac{K}{1 \cdot \sqrt{1^2 + j^2}^2} = \dfrac{1}{2}
-$$</p>
-<p>$$
-\dfrac{K}{1 \cdot \sqrt{1^2 + 1^2}^2} = \dfrac{1}{2}
+\dfrac{K}{1 \cdot \left(\sqrt{1^2 + 1^2}\right)^2} = \dfrac{1}{2}
 $$</p>
 <p>$$
 \dfrac{K}{2} = \dfrac{1}{2}
@@ -241,7 +253,7 @@ $$</p>
 <p>Using this method we can easily find if a system is stable or not.</p>
 <p>$1 + L(s)$ is a polynomial of degree higher than 2.
 $$
-a_0 s^n + a_1 s^{n - 1} + a_2 s^{n - 2} + \ldots + a_n = 1 + L(s)
+1 + L(s) = a_0 s^n + a_1 s^{n - 1} + a_2 s^{n - 2} + \ldots + a_n
 $$</p>
 <p>To find the poles we set:
 $$
@@ -305,7 +317,7 @@ $$</p>
 <h3 id="example-3">Example</h3>
 <p>For what $K$ values is the system stable?
 $$
-L(s) = \dfrac{K}{s} \cdot \dfrac{3}{(s + 1)^2} = \dfrac{3K}{s(s^2 + 2s + 1} = \dfrac{3K}{s^3 + 2s^2 + s}
+L(s) = \dfrac{K}{s} \cdot \dfrac{3}{(s + 1)^2} = \dfrac{3K}{s(s^2 + 2s + 1)} = \dfrac{3K}{s^3 + 2s^2 + s}
 $$</p>
 <p>$$
 1 + L(s) = 0\\
@@ -382,8 +394,87 @@ $$</p>
 </ul>
 <h3 id="nyquists-simplified-criterion">Nyquists simplified criterion</h3>
 <p>This is only applicable if $L(s)$ does not have any poles in the right-hand plane.</p>
-<p>What you will do is that you plot $L(j\omega)$.</p>
+<p>What you will do is that you plot $L(j\omega)$ for $0 \leq \omega \leq \infty$.</p>
 <p>If the curve for $L(j\omega)$ passes through the negative real-axis with the point $(-1, 0)$ to the <strong>left</strong>, it is stable. If it is to the <strong>right</strong>, then it is unstable.</p>
+<h3 id="example-4">Example</h3>
+<p>$$
+L(s) = \dfrac{e^{-s}}{s(1 + s)}
+$$</p>
+<p>Gives us the following plot:
+<img src="/school/images/nyquist.png#center" alt=""></p>
+<p>Which means this system is stable!</p>
+<h3 id="example-5">Example</h3>
+<p>Say we have the process, $G(s) = \dfrac{1}{(s + 1)(s + 2)}$. Say we have the controller, $F(s) = \dfrac{K}{s}$.</p>
+<p>For what values on $K$ is the system stable?</p>
+<p>$$
+L(s) = \dfrac{K}{s(s + 1)(s + 2)}
+$$</p>
+<p>All poles lie in the left-hand plane, we can use the simplified criterion.</p>
+<p>$$
+L(j\omega) = \dfrac{K}{j\omega(j\omega + 1)(j\omega + 2)}
+$$</p>
+<p>Let&rsquo;s now split this fraction into the real and imaginary part. For this we&rsquo;ll need to multiply by the conjugates:
+$$
+L(j\omega) = \dfrac{K(1 - j\omega)(2 - j\omega)}{j\omega(1 + \omega^2)(2^2 + \omega^2)}
+$$</p>
+<p>Let&rsquo;s simplify:
+$$
+L(j\omega) = \dfrac{K(2 - 3j\omega -\omega^2)}{j\omega(1 + \omega^2)(2^2 + \omega^2)}
+$$</p>
+<p>$$
+L(j\omega) = \dfrac{2K - 3Kj\omega - K\omega^2}{j\omega(1 + \omega^2)(2^2 + \omega^2)}
+$$</p>
+<p>$$
+L(j\omega) = \dfrac{-3Kj\omega - K(2 - \omega^2)}{j\omega(1 + \omega^2)(2^2 + \omega^2)}
+$$</p>
+<p>$$
+L(j\omega) = \dfrac{-3Kj\omega - K(2 - \omega^2)}{j\omega(1 + \omega^2)(2^2 + \omega^2)}
+$$</p>
+<p>$$
+L(j\omega) = \dfrac{-3Kj\omega}{j\omega(1 + \omega^2)(2^2 + \omega^2)} - \dfrac{K(2 - \omega^2)}{j\omega(1 + \omega^2)(2^2 + \omega^2)}
+$$</p>
+<p>$$
+L(j\omega) = \dfrac{-3K}{(1 + \omega^2)(2^2 + \omega^2)} + j\dfrac{K(2 - \omega^2)}{\omega(1 + \omega^2)(2^2 + \omega^2)}
+$$</p>
+<p>When we cross the negative real-axis is equivalent to $\Im(L(j\omega)) = 0$</p>
+<p>$$
+\dfrac{K(2 - \omega^2)}{\omega(1 + \omega^2)(2^2 + \omega^2)} = 0 \\
+K(2 - \omega^2) = 0
+$$</p>
+<p>This means that when $\omega = \sqrt{2}$</p>
+<p>This means that:
+$$
+\Re(L(j\sqrt{2})) = \dfrac{-3K}{1 + \sqrt{2})^2(4 + \sqrt{2})^2} = \ldots = -\dfrac{K}{6}
+$$</p>
+<p>We want this to the <strong>left</strong>, meaning:
+$$
+-\dfrac{K}{6} &gt; -1 \\
+-K &gt; -6 \\
+K &lt; 6 \\
+$$</p>
+<p>Let&rsquo;s plot for different K values and see.</p>
+<p>For $K = 2$:
+<img src="/school/images/k2.png#center" alt=""></p>
+<p>For $K = 6$:
+<img src="/school/images/k6.png#center" alt=""></p>
+<p>For $K = 12$:
+<img src="/school/images/k12.png#center" alt=""></p>
+<h3 id="nyquist-criterion">Nyquist criterion</h3>
+<p>The proof and intution behind the Nyquist criterion is quite a lot and requires knowledge in complex analysis. We don&rsquo;t do that here.</p>
+<p>Simply, if we have a system with poles in the right-hand plane, we will need to use the general Nyquist criterion.</p>
+<p>What we will use is:
+$$
+Z = N + P
+$$</p>
+<p>Where:</p>
+<p>$Z$ is the number of <strong>zeroes</strong> $1 + L(s)$ has in the right-hand plane.
+$P$ is the number of <strong>poles</strong> $L(s)$ has in the right-hand plane.
+$N$ is the number of turns $L(s)$ has around $(-1, 0)$ in the clockwise direction.</p>
+<p>If:
+$$
+Z = N + P = 0
+$$</p>
+<p>Then the system is said to be stable.</p>
 
         </section>
 
