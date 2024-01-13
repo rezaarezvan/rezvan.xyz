@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html><head lang="en">
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"><title>rezvan | Control theory: Part 2 - Transfer functions</title><link rel="icon" type="image/png" href="/icon.png" /><meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description"
+        content="Introduction In this part we&rsquo;ll define what a transfer function is for a system, and why they are important.
+Let&rsquo;s firstly cover feedback again.
+Feedback system As we discussed last time we&rsquo;ll encounter:
+$v(t)$ - Interference $u(t)$ - Control signal/Input signal $y(t)$ - Response signal/Output signal $r(t)$ - Reference value $e(t)$ - Control error Let&rsquo;s take a real world example
+Example Say that we have a system which controls temperature. We have an initial temperature for 19$^\circ$a." />
+    <meta property="og:image" content="https://raw.githubusercontent.com/rezaarezvan/rezvan.xyz/main/images/icon.png" />
+    <meta property="og:title" content="Control theory: Part 2 - Transfer functions" />
+<meta property="og:description" content="Introduction In this part we&rsquo;ll define what a transfer function is for a system, and why they are important.
+Let&rsquo;s firstly cover feedback again.
+Feedback system As we discussed last time we&rsquo;ll encounter:
+$v(t)$ - Interference $u(t)$ - Control signal/Input signal $y(t)$ - Response signal/Output signal $r(t)$ - Reference value $e(t)$ - Control error Let&rsquo;s take a real world example
+Example Say that we have a system which controls temperature. We have an initial temperature for 19$^\circ$a." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://rezvan.xyz/school/ERE103/ERE103_2/" /><meta property="article:section" content="school" />
+<meta property="article:published_time" content="2023-10-31T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-10-31T00:00:00+00:00" />
+
+<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Control theory: Part 2 - Transfer functions"/>
+<meta name="twitter:description" content="Introduction In this part we&rsquo;ll define what a transfer function is for a system, and why they are important.
+Let&rsquo;s firstly cover feedback again.
+Feedback system As we discussed last time we&rsquo;ll encounter:
+$v(t)$ - Interference $u(t)$ - Control signal/Input signal $y(t)$ - Response signal/Output signal $r(t)$ - Reference value $e(t)$ - Control error Let&rsquo;s take a real world example
+Example Say that we have a system which controls temperature. We have an initial temperature for 19$^\circ$a."/>
+<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@1,500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
+
+    
+    <link rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/main.55ceafd1ab15172b8770201b55c83270fac8611fcdae31fccb3a7fd94ac6da6e.css" />
+    <link id="darkModeStyle" rel="stylesheet" type="text/css" href="https://rezvan.xyz/css/dark.b95ac7b1169ab6755ef14c75e8e49c983d2d56c40ee0c3d69d357d42339b5e31.css"  disabled />
+    
+
+    
+    
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+        </script>
+
+    
+    <script type="text/x-mathjax-config">
+		MathJax.Hub.Config({
+			tex2jax: {
+				inlineMath: [['$','$'], ['\\(','\\)']],
+				displayMath: [['$$','$$'], ['\[','\]']],
+				processEscapes: true,
+				processEnvironments: true,
+				skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+				TeX: { equationNumbers: { autoNumber: "AMS" },
+						 extensions: ["AMSmath.js", "AMSsymbols.js"] }
+			}
+		});
+		</script>
+    
+
+    
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js"
+        onload="renderMathInElement(document.body);"></script>
+
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            renderMathInElement(document.body, {
+                delimiters: [
+                    {left: "$$", right: "$$", display: true},
+                    {left: "$", right: "$", display: false}
+                ]
+            });
+        });
+    </script>
+    
+
+    
+</head>
+<body>
+    <div class="content"><header>
+    <div class="main">
+        <a href="https://rezvan.xyz/">rezvan</a>
+    </div>
+    <nav id="site-navbar">
+        
+        <a href="/">home</a>
+        
+        <a href="/about">about</a>
+        
+        <a href="/principles">principles</a>
+        
+        <a href="/contact">contact</a>
+        
+        <a href="/cv">cv</a>
+        
+        <a href="/school">school</a>
+        
+        <a href="/tags">tags</a>
+        
+        | <span id="dark-mode-toggle" onclick="toggleTheme()"></span>
+        <script src="https://rezvan.xyz/js/themetoggle.js"></script>
+        
+    </nav>
+</header>
+
+<main>
+    <article>
+        <div class="title">
+            <h1 class="title">Control theory: Part 2 - Transfer functions</h1>
+            <div class="meta">Posted on Oct 31, 2023</div>
+        </div>
+        
+
+        <section class="body">
+            <h3 id="introduction">Introduction</h3>
+<p>In this part we&rsquo;ll define what a transfer function is for a system, and why they are important.</p>
+<p>Let&rsquo;s firstly cover feedback again.</p>
+<h3 id="feedback-system">Feedback system</h3>
+<p>As we discussed last time we&rsquo;ll encounter:</p>
+<ul>
+<li>$v(t)$ - Interference</li>
+<li>$u(t)$ - Control signal/Input signal</li>
+<li>$y(t)$ - Response signal/Output signal</li>
+<li>$r(t)$ - Reference value</li>
+<li>$e(t)$ - Control error</li>
+</ul>
+<p>Let&rsquo;s take a real world example</p>
+<h3 id="example">Example</h3>
+<p>Say that we have a system which controls temperature. We have an initial temperature for 19$^\circ$a.</p>
+<p>At the time instance, $t_0$, we change $r(t)$ (via a knob) to be at 21$^\circ$.</p>
+<p>From a time period, $t_1$ to $t_2$, we open a window which cools down the room.</p>
+<p>From this real world example we can describe the system as:</p>
+<p>$t &lt; t_0$, the system is stable at 19$^\circ$</p>
+<p>$t = t_0$, $r(t) = 21^\circ$. We will get a control error, $e(t) &gt; 0$. The control device steps in and increases the temperature, which will stablize at 21$^\circ$.</p>
+<p>$t = t_1$, The window is opened, which means we have $v(t) &lt; 0$, or in other words, the temperature decreases. This means again that $e(t) &gt; 0$. The control device needs to readjust to this change.</p>
+<p>$t = t_2$, The window is closed, which will yield a control error, the control device will readjust to this change as well.</p>
+<p>$t &gt; t_2$, The system will remain stable at 21$^\circ$ again.</p>
+<h3 id="controllers">Controllers</h3>
+<p>But how do we actually control a control error? There are many different types of controllers, but the most common are the PID variants.</p>
+<ul>
+<li>P-controller
+$$
+u(t) = K_p\ e(t)
+$$</li>
+<li>I-controller
+$$
+u(t) = K_i \int_0^t e(\tau)\ d\tau
+$$</li>
+<li>D-controller
+$$
+u(t) = K_d\ \dfrac{d\ e(t)}{dt}
+$$</li>
+</ul>
+<p>We also have the combinations:</p>
+<ul>
+<li>PI-controller
+$$
+u(t) = K_p\ e(t) + K_i \int_0^t e(\tau)\ d\tau
+$$</li>
+<li>PD-controller
+$$
+u(t) = K_p\ e(t) + K_d\ \dfrac{d\ e(t)}{dt}
+$$</li>
+<li>PID-controller
+$$
+u(t) = K_p\ e(t) + K_i \int_0^t e(\tau)\ d\tau + K_d\ \dfrac{d\ e(t)}{dt}
+$$</li>
+</ul>
+<h3 id="laplace-transform">Laplace transform</h3>
+<p>We&rsquo;ve already covered the definition and the formality of the Laplace transform so let&rsquo;s quickly recover it.
+$$
+F(s) = \int_0^{\infty} f(t)\ e^{-st}\ dt
+$$</p>
+<p>Where $s = \mu + j\omega$</p>
+<h3 id="transfer-function">Transfer function</h3>
+<p>Let&rsquo;s define the transfer function in words first.</p>
+<p>The transfer function for a system is equal to the Laplace transformation of the output signal divided by the Laplace transformation of the input signal.</p>
+<p>In other words:
+$$
+G(s) = \dfrac{Y(s)}{U(s)}
+$$</p>
+<p>$$
+Y(s) = G(s) U(s)
+$$</p>
+<h4 id="properties">Properties</h4>
+<p>We denote the Laplace transform as $\mathcal{L}$</p>
+<ul>
+<li>$\mathcal{L} \{\dot{y}\} = sY(s) - y(0)$</li>
+<li>$\mathcal{L} \{\ddot{y}\} = s^2Y(s) - sy(0) - \dot{y}(0)$</li>
+<li>$\mathcal{L} \{\int_0^t y(\tau)\ d\tau \} = \dfrac{1}{s} Y(s)$</li>
+</ul>
+<h3 id="initial-value-theorem">Initial value theorem</h3>
+<p>$$
+y(0) = \lim_{s \to \infty} s \cdot Y(s)
+$$</p>
+<h3 id="final-value-theorem">Final Value theorem</h3>
+<p>$$
+\lim_{t \to \infty} y(t) = \lim_{s \to 0} s \cdot Y(s)
+$$</p>
+<p>Given that, $\lim_{t \to \infty} y(t)$ exists.</p>
+<h3 id="example-1">Example</h3>
+<p>Say that we have a car that moves, we have $u(t)$ which is the driving force forward. $y(t)$ is the speed of the car, and of course we have friction/air resistence which we&rsquo;ll denote $v(t)$.</p>
+<p>Let&rsquo;s find the transfer function of this system.</p>
+<p>From Newtons second law of motion we know that:
+$$
+F = ma
+$$</p>
+<p>We know from high-school physics that:
+$$
+a = \dfrac{d\ y(t)}{dt} = \dot{y}(t)
+$$</p>
+<p>Now the tricky part, $v(t)$, let&rsquo;s define a simple model which is that the air resistence is proportional to the speed with some constant:
+$$
+v(t) = b \cdot y(t)
+$$</p>
+<p>Therefore:
+$$
+u(t) - b \cdot y(t) = m \cdot \dot{y}(t)
+$$</p>
+<p>$$
+m \cdot \dot{y}(t) + b \cdot y(t) = u(t)
+$$</p>
+<p>Let&rsquo;s transform into Laplace (NB: All our initial conditions are zero!).</p>
+<p>$$
+ms \cdot Y(s) + b \cdot Y(s)  = U(s)
+$$</p>
+<p>$$
+(ms + b)Y(s)  = U(s)
+$$</p>
+<p>$$
+G(s) = \dfrac{Y(s)}{U(s)} = \dfrac{1}{ms + b}
+$$</p>
+<p>Let&rsquo;s introduce $T = \dfrac{m}{b}$ and $K = \dfrac{1}{b}$. Therefore:
+$$
+G(s) = \dfrac{K}{1 + sT}
+$$</p>
+<h3 id="unit-step-function">Unit step function</h3>
+<p>In this series we&rsquo;ll denote the unit step function with $\sigma(t)$.</p>
+<p>The definition for the unit step is:
+$$
+\sigma(t) = \begin{cases}
+1 &amp; t \geq 0 \\
+0 &amp; t &lt; 0
+\end{cases}
+$$</p>
+<p>Let $u(t) = \sigma(t)$ now.</p>
+<p>$U(s) = \dfrac{1}{s}$</p>
+<p>This means that:
+$$
+G(s) = \dfrac{K}{s(1 + sT)}
+$$</p>
+<p>Using partial fraction decomposition:
+$$
+G(s) = \dfrac{K}{s} - \dfrac{KT}{1 + sT}
+$$</p>
+
+        </section>
+
+        <div class="post-tags">
+            
+            
+            <nav class="nav tags">
+                <ul class="tags">
+                    
+                    <li><a href="/tags/Control-theory">Control theory</a></li>
+                    
+                </ul>
+            </nav>
+            
+            
+        </div>
+        </article>
+</main>
+<footer>
+    <div style="display:flex"><a class="soc" href="https://github.com/rezaarezvan" rel="me" title="GitHub"><i data-feather="github"></i></a>
+        <a class="border"></a><a class="soc" href="https://twitter.com/rzvan__/" rel="me" title="Twitter"><i data-feather="twitter"></i></a>
+        <a class="border"></a></div><p class="footer_msg">memento mori</p></footer>
+
+
+<script>
+    feather.replace()
+</script></div>
+</body>
+
+</html>

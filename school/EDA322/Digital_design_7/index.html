@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html><head lang="en">
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"><title>rezvan | Digital Design: Part 7 - Timing, delay &amp; power</title><link rel="icon" type="image/png" href="/icon.png" /><meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description"
+        content="When designing digital circuits, the timing, delay and power usage of the circuit are important. In this part we&rsquo;ll cover how we usually measure and compare these.
+Timing and delay In an arbitrary synchronous circuit, we usually have:
+A single-bit clock, all other wires may be multiple bits wide.
+Registers (Which is just a collection of flip-flops).
+The clock will be distributed to all flip-flops
+Combinational logic
+No internal state" />
+    <meta property="og:image" content="https://raw.githubusercontent.com/rezaarezvan/rezvan.xyz/main/images/icon.png" />
+    <meta property="og:title" content="Digital Design: Part 7 - Timing, delay &amp; power" />
+<meta property="og:description" content="When designing digital circuits, the timing, delay and power usage of the circuit are important. In this part we&rsquo;ll cover how we usually measure and compare these.
+Timing and delay In an arbitrary synchronous circuit, we usually have:
+A single-bit clock, all other wires may be multiple bits wide.
+Registers (Which is just a collection of flip-flops).
+The clock will be distributed to all flip-flops
+Combinational logic
+No internal state" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://rezvan.xyz/school/EDA322/Digital_design_7/" /><meta property="article:section" content="school" />
+<meta property="article:published_time" content="2023-02-08T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-02-08T00:00:00+00:00" />
+
+<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Digital Design: Part 7 - Timing, delay &amp; power"/>
+<meta name="twitter:description" content="When designing digital circuits, the timing, delay and power usage of the circuit are important. In this part we&rsquo;ll cover how we usually measure and compare these.
+Timing and delay In an arbitrary synchronous circuit, we usually have:
+A single-bit clock, all other wires may be multiple bits wide.
+Registers (Which is just a collection of flip-flops).
+The clock will be distributed to all flip-flops
+Combinational logic
+No internal state"/>
+<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@1,500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
+
+    
+    <link rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/main.55ceafd1ab15172b8770201b55c83270fac8611fcdae31fccb3a7fd94ac6da6e.css" />
+    <link id="darkModeStyle" rel="stylesheet" type="text/css" href="https://rezvan.xyz/css/dark.b95ac7b1169ab6755ef14c75e8e49c983d2d56c40ee0c3d69d357d42339b5e31.css"  disabled />
+    
+
+    
+    
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+        </script>
+
+    
+    <script type="text/x-mathjax-config">
+		MathJax.Hub.Config({
+			tex2jax: {
+				inlineMath: [['$','$'], ['\\(','\\)']],
+				displayMath: [['$$','$$'], ['\[','\]']],
+				processEscapes: true,
+				processEnvironments: true,
+				skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+				TeX: { equationNumbers: { autoNumber: "AMS" },
+						 extensions: ["AMSmath.js", "AMSsymbols.js"] }
+			}
+		});
+		</script>
+    
+
+    
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js"
+        onload="renderMathInElement(document.body);"></script>
+
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            renderMathInElement(document.body, {
+                delimiters: [
+                    {left: "$$", right: "$$", display: true},
+                    {left: "$", right: "$", display: false}
+                ]
+            });
+        });
+    </script>
+    
+
+    
+</head>
+<body>
+    <div class="content"><header>
+    <div class="main">
+        <a href="https://rezvan.xyz/">rezvan</a>
+    </div>
+    <nav id="site-navbar">
+        
+        <a href="/">home</a>
+        
+        <a href="/about">about</a>
+        
+        <a href="/principles">principles</a>
+        
+        <a href="/contact">contact</a>
+        
+        <a href="/cv">cv</a>
+        
+        <a href="/school">school</a>
+        
+        <a href="/tags">tags</a>
+        
+        | <span id="dark-mode-toggle" onclick="toggleTheme()"></span>
+        <script src="https://rezvan.xyz/js/themetoggle.js"></script>
+        
+    </nav>
+</header>
+
+<main>
+    <article>
+        <div class="title">
+            <h1 class="title">Digital Design: Part 7 - Timing, delay &amp; power</h1>
+            <div class="meta">Posted on Feb 8, 2023</div>
+        </div>
+        
+
+        <section class="body">
+            <p>When designing digital circuits, the timing, delay and power usage of the circuit are important.
+In this part we&rsquo;ll cover how we usually measure and compare these.</p>
+<h3 id="timing-and-delay">Timing and delay</h3>
+<p>In an arbitrary synchronous circuit, we usually have:</p>
+<ul>
+<li>
+<p>A single-bit clock, all other wires may be multiple bits wide.</p>
+</li>
+<li>
+<p>Registers (Which is just a collection of flip-flops).</p>
+</li>
+<li>
+<p>The clock will be distributed to all flip-flops</p>
+</li>
+<li>
+<p>Combinational logic</p>
+<ul>
+<li>
+<p>No internal state</p>
+</li>
+<li>
+<p>Output only a function of input(s)</p>
+</li>
+</ul>
+</li>
+<li>
+<p>Particular inputs/outputs are optional</p>
+</li>
+<li>
+<p>Optional feedback(-loops).</p>
+</li>
+</ul>
+<p>So how do we measure the performance/how fast a circuit is? We could do,
+operations/sec, or cycles/sec? But we need to know what limits the clock rate and what happens if we increase the clock rate.</p>
+<p>If we break this down, what causes delay?</p>
+<ul>
+<li>
+<p>Logic gate delay</p>
+</li>
+<li>
+<p>(Physical) Wire delay</p>
+</li>
+<li>
+<p>Delays in flip-flops</p>
+</li>
+</ul>
+<p>Only one of these delays can cause a faulty cycle. Since flip-flops require a setup time and a clock to Q delay.
+We can have situations where, if the clock is too fast, the flip-flops outputs the wrong things.</p>
+<p>When analysing circuits, we only care about the critical path - if the clock is too fast for this path, the whole circuit falls.</p>
+<p>There are 4 general cases:</p>
+<ul>
+<li>
+<p>Input -&gt; CL -&gt; Output</p>
+</li>
+<li>
+<p>Input -&gt; CL -&gt; Register</p>
+</li>
+<li>
+<p>Register -&gt; CL -&gt; Output</p>
+</li>
+<li>
+<p>Register -&gt; CL -&gt; Register</p>
+</li>
+</ul>
+<p>Therefore, in general the clock period, $T$, should be:</p>
+<p>T &gt; time(input setup) + time(CL) + time(wire) + time(output setup)</p>
+<h3 id="gate-delay">Gate delay</h3>
+<p>The time needed for the output of a gate to change from the moment an input of the gate changes depends on:</p>
+<ul>
+<li>
+<p>Transistor parameters</p>
+</li>
+<li>
+<p>Fan-out: how many wires it will drive</p>
+</li>
+<li>
+<p>Fan-in: number of inputs of a gate</p>
+</li>
+</ul>
+<h3 id="wire-delay">Wire Delay</h3>
+<p>In general, wires behave as the transmission lines,
+signal wave-front moves close to the speed of light.</p>
+<p>Wire delay is also proportional to the square of its length, $\mathcal{O}(L²)$</p>
+<h3 id="flip-flop-delay">Flip-flop delay</h3>
+<p>As we earlier covered, flip-flops have a certain delay.</p>
+<p>These are:</p>
+<ul>
+<li>
+<p>Setup time</p>
+<ul>
+<li>The time the input of a flip-flop needs to be stable,
+before the clock edge to be stored correctly</li>
+</ul>
+</li>
+<li>
+<p>Hold time</p>
+<ul>
+<li>The time the input of a flip-flop needs to be held,
+after the clock edge to be stored correctly</li>
+</ul>
+</li>
+<li>
+<p>Propagation time</p>
+<ul>
+<li>The time a flip-flop needs to propagate a value stored to the output</li>
+</ul>
+</li>
+</ul>
+<h3 id="metastability">Metastability</h3>
+<p>Asynchronous inputs can be really dangerous, therefore synchronous inputs are preferred.</p>
+<p>The solution to this is having a so-called <strong>synchronizer</strong> blocks (usually two registers).</p>
+<p>A synchronizer design is characterised by its <strong>M</strong>ean <strong>T</strong>ime <strong>B</strong>etween <strong>F</strong>ailure (MTBF).</p>
+<p>There is a nice equation:
+$$
+MTBF(t_r) = \frac{e^{\frac{t_r}{\tau}}}{T_0 \cdot\ f \cdot\ a}
+$$</p>
+<p>Where:
+$$
+t_r = \text{resolution time (clock period - FF setup time)} \newline
+T_0, \tau = \text{flip-flop characteristic constants} \newline
+f = \text{clock frequency} \newline
+a = \text{average input rate of change}
+$$</p>
+<h3 id="power">Power</h3>
+<p>Time for a bit of math and physics:)</p>
+<p>The power supply provides energy for charging and discharging wires and transistor gates.
+The energy is stored and dissipated as heat.</p>
+<p>Let&rsquo;s remember that:
+$$
+P = \frac{dE}{dt}
+$$</p>
+<p>And that, voltage (potential of the charge) is increased the amount of energy,
+$dE$, needed to move an amount of charge, $dq$.</p>
+<p>$$
+V = \frac{dE}{dq}
+$$</p>
+<p>And <em>current</em> is:
+$$
+I = \frac{dq}{dt}
+$$</p>
+<p>Then:
+$$
+\frac{dE}{dt} = \frac{dE}{dq} \cdot\ \frac{dq}{dt} = \boxed{P = V \cdot\ I}
+$$</p>
+<p>Which means:
+$$
+E = \int_{-\infty}^t\ P\ dt
+$$</p>
+<p>Remember that power and energy is not the same in the physics world,
+even if we may use them interchangeably in every-day terms.</p>
+<h3 id="metrics">Metrics</h3>
+<p>These are some of the metrics that we usually study in digital circuits</p>
+<p>Average power:
+$$
+P_{avg} = \frac{\Delta E}{\Delta t}
+$$</p>
+<p>Peak power:
+$$
+P_{peak} = max(\lim_{\Delta t \rightarrow 0}\ \frac{\Delta E}{\Delta T}) = max(\frac{dE}{dt})
+$$</p>
+<p>One of the most popular metrics is <strong>performance per watt</strong> (measures energy efficiency).</p>
+
+        </section>
+
+        <div class="post-tags">
+            
+            
+            <nav class="nav tags">
+                <ul class="tags">
+                    
+                    <li><a href="/tags/Digital-Design">Digital Design</a></li>
+                    
+                </ul>
+            </nav>
+            
+            
+        </div>
+        </article>
+</main>
+<footer>
+    <div style="display:flex"><a class="soc" href="https://github.com/rezaarezvan" rel="me" title="GitHub"><i data-feather="github"></i></a>
+        <a class="border"></a><a class="soc" href="https://twitter.com/rzvan__/" rel="me" title="Twitter"><i data-feather="twitter"></i></a>
+        <a class="border"></a></div><p class="footer_msg">memento mori</p></footer>
+
+
+<script>
+    feather.replace()
+</script></div>
+</body>
+
+</html>

@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html><head lang="en">
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"><title>rezvan | Computer System Engineering: Summary</title><link rel="icon" type="image/png" href="/icon.png" /><meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description"
+        content="Performance and MIPS CPU Time for a program: $$ \text{CPU Time} = \frac{\text{Instructions}}{\text{Program}} \cdot\ \frac{\text{Clock cycles}}{\text{Instruction}} \cdot\ \frac{\text{Seconds}}{\text{Clock cycle}} $$
+$$ \text{CPU Time} = IC \cdot\ CPI \cdot\ T_c $$
+Geometric mean: $$ \sqrt[n]{\prod_{i = 1}^{n} \text{Execution time ratio}_i} $$
+MIPS Cheat Sheet:
+Register convention:
+$zero - Always 0
+$v0-1 - Result registers
+$a0-3 - Argument registers
+$t0-7 - Temporary registers
+$s0-7 - Content registers, save for later use
+$sp - Stack pointer" />
+    <meta property="og:image" content="https://raw.githubusercontent.com/rezaarezvan/rezvan.xyz/main/images/icon.png" />
+    <meta property="og:title" content="Computer System Engineering: Summary" />
+<meta property="og:description" content="Performance and MIPS CPU Time for a program: $$ \text{CPU Time} = \frac{\text{Instructions}}{\text{Program}} \cdot\ \frac{\text{Clock cycles}}{\text{Instruction}} \cdot\ \frac{\text{Seconds}}{\text{Clock cycle}} $$
+$$ \text{CPU Time} = IC \cdot\ CPI \cdot\ T_c $$
+Geometric mean: $$ \sqrt[n]{\prod_{i = 1}^{n} \text{Execution time ratio}_i} $$
+MIPS Cheat Sheet:
+Register convention:
+$zero - Always 0
+$v0-1 - Result registers
+$a0-3 - Argument registers
+$t0-7 - Temporary registers
+$s0-7 - Content registers, save for later use
+$sp - Stack pointer" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://rezvan.xyz/school/EDA333/EDA333_summary/" /><meta property="article:section" content="school" />
+<meta property="article:published_time" content="2023-05-25T11:22:18+02:00" />
+<meta property="article:modified_time" content="2023-05-25T11:22:18+02:00" />
+
+<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Computer System Engineering: Summary"/>
+<meta name="twitter:description" content="Performance and MIPS CPU Time for a program: $$ \text{CPU Time} = \frac{\text{Instructions}}{\text{Program}} \cdot\ \frac{\text{Clock cycles}}{\text{Instruction}} \cdot\ \frac{\text{Seconds}}{\text{Clock cycle}} $$
+$$ \text{CPU Time} = IC \cdot\ CPI \cdot\ T_c $$
+Geometric mean: $$ \sqrt[n]{\prod_{i = 1}^{n} \text{Execution time ratio}_i} $$
+MIPS Cheat Sheet:
+Register convention:
+$zero - Always 0
+$v0-1 - Result registers
+$a0-3 - Argument registers
+$t0-7 - Temporary registers
+$s0-7 - Content registers, save for later use
+$sp - Stack pointer"/>
+<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@1,500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
+
+    
+    <link rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/main.55ceafd1ab15172b8770201b55c83270fac8611fcdae31fccb3a7fd94ac6da6e.css" />
+    <link id="darkModeStyle" rel="stylesheet" type="text/css" href="https://rezvan.xyz/css/dark.b95ac7b1169ab6755ef14c75e8e49c983d2d56c40ee0c3d69d357d42339b5e31.css"  disabled />
+    
+
+    
+    
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+        </script>
+
+    
+    <script type="text/x-mathjax-config">
+		MathJax.Hub.Config({
+			tex2jax: {
+				inlineMath: [['$','$'], ['\\(','\\)']],
+				displayMath: [['$$','$$'], ['\[','\]']],
+				processEscapes: true,
+				processEnvironments: true,
+				skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+				TeX: { equationNumbers: { autoNumber: "AMS" },
+						 extensions: ["AMSmath.js", "AMSsymbols.js"] }
+			}
+		});
+		</script>
+    
+
+    
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js"
+        onload="renderMathInElement(document.body);"></script>
+
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            renderMathInElement(document.body, {
+                delimiters: [
+                    {left: "$$", right: "$$", display: true},
+                    {left: "$", right: "$", display: false}
+                ]
+            });
+        });
+    </script>
+    
+
+    
+</head>
+<body>
+    <div class="content"><header>
+    <div class="main">
+        <a href="https://rezvan.xyz/">rezvan</a>
+    </div>
+    <nav id="site-navbar">
+        
+        <a href="/">home</a>
+        
+        <a href="/about">about</a>
+        
+        <a href="/principles">principles</a>
+        
+        <a href="/contact">contact</a>
+        
+        <a href="/cv">cv</a>
+        
+        <a href="/school">school</a>
+        
+        <a href="/tags">tags</a>
+        
+        | <span id="dark-mode-toggle" onclick="toggleTheme()"></span>
+        <script src="https://rezvan.xyz/js/themetoggle.js"></script>
+        
+    </nav>
+</header>
+
+<main>
+    <article>
+        <div class="title">
+            <h1 class="title">Computer System Engineering: Summary</h1>
+            <div class="meta">Posted on May 25, 2023</div>
+        </div>
+        
+
+        <section class="body">
+            <h3 id="performance-and-mips">Performance and MIPS</h3>
+<p>CPU Time for a program:
+$$
+\text{CPU Time} = \frac{\text{Instructions}}{\text{Program}} \cdot\ \frac{\text{Clock cycles}}{\text{Instruction}} \cdot\ \frac{\text{Seconds}}{\text{Clock cycle}}
+$$</p>
+<p>$$
+\text{CPU Time} = IC \cdot\ CPI \cdot\ T_c
+$$</p>
+<p>Geometric mean:
+$$
+\sqrt[n]{\prod_{i = 1}^{n} \text{Execution time ratio}_i}
+$$</p>
+<p>MIPS Cheat Sheet:</p>
+<p>Register convention:</p>
+<p><code>$zero</code> - Always 0</p>
+<p><code>$v0-1</code> - Result registers</p>
+<p><code>$a0-3</code> - Argument registers</p>
+<p><code>$t0-7</code> - Temporary registers</p>
+<p><code>$s0-7</code> - Content registers, save for later use</p>
+<p><code>$sp</code> - Stack pointer</p>
+<p><code>$ra</code> - Return address</p>
+<p>Arithmetic:</p>
+<pre tabindex="0"><code>add     $t0, $t0, $t1   #t0 = t0 + t1
+addi    $t0, $t0, 5     #t0 = t0 + 5
+addu    $t0, $t0, $t1   #t0 = t0 + t1 (unsigned)
+addiu   $t0, $t0, 5     #t0 = t0 + 5  (unsigned)
+
+
+sub     $t0, $t0, $t1   #t0 = t0 - t1
+subi    $t0, $t0, 5     #t0 = t0 - 5
+subu    $t0, $t0, $t1   #t0 = t0 - t1 (unsigned)
+subiu   $t0, $t0, 5     #t0 = t0 - 5  (unsigned)
+</code></pre><p>Memory:</p>
+<pre tabindex="0"><code>lw $s0, 0($a0)  # s0 = MEM[a0] (word)
+sw $s0, 0($a0)  # MEM[a0] = $s0 (word)
+
+
+l.d $s0, 0($a0)  # s0, s1 = MEM[a0] (Double word)
+s.d $s0, 0($a0)  # MEM[a0] = $s0, $s1 (Double word)
+</code></pre><p>Logical:</p>
+<pre tabindex="0"><code>sll $t0, $t1, 2     # t0 := t1 * 4
+srl $t0, $t1, 2     # t0 := t1 / 4
+
+and $t0, $t1, $t2   # t0 := t1 &amp; t2
+andi $t0, $t1, 2   # t0 := t1 &amp; 2
+
+or $t0, $t1, $t2   # t0 := t1 | t2
+ori $t0, $t1, 2   # t0 := t1 | 2
+
+nor $t0, $t1, $zero # := ~(t1)
+</code></pre><p>Conditionals:</p>
+<pre tabindex="0"><code>beq rs, rt, L1 # if(rs == rt); Jump to L1
+bne rs, rt, L1 # if(rs != rt); Jump to L1
+j L1           # Jump to L1
+</code></pre><p>Remember:</p>
+<ul>
+<li>Incrementing with 1 and not 4!</li>
+<li>MIPS uses byte addressing</li>
+</ul>
+<h3 id="pipeline">Pipeline</h3>
+<ol>
+<li>
+<p><strong>Fetch</strong> Instruction. PC → Instruction memory.</p>
+</li>
+<li>
+<p><strong>Decode</strong> the instruction and read from registers.</p>
+</li>
+<li>
+<p><strong>Execute</strong> the instruction.</p>
+<ul>
+<li>Arithmetic/logical computation.</li>
+<li>Computation of effective memory address.</li>
+<li>Computation of jump address/conditional address.</li>
+</ul>
+</li>
+<li>
+<p><strong>Read / Write from / to memory</strong> for load/store instructions.</p>
+</li>
+<li>
+<p><strong>Write back</strong> the result into the result register (RF).</p>
+</li>
+</ol>
+<p>$$
+\textbf{Speedup} = \frac{T_{c \quad | \quad \text{Non-pipelined version}}}{T_{c \quad | \quad \text{Pipelined version}}} \approx \text{Number of pipeline stages}
+$$</p>
+<ul>
+<li>Structural hazards
+<ul>
+<li>A stage is currently busy doing an operation</li>
+</ul>
+</li>
+<li>Data hazards
+<ul>
+<li>An instruction that depends on a earlier instruction.</li>
+</ul>
+</li>
+<li>Control hazards
+<ul>
+<li>The condition and potential address of a jump has not yet by the instruction fetch.</li>
+</ul>
+</li>
+</ul>
+<h3 id="caches">Caches</h3>
+<p>$$
+h_x = \textbf{Hit rate} = \text{Percentage of hits in memory x} \newline
+(1 - h_x) = m_x = \textbf{Miss rate} = \text{Percentage of misses in memory x}
+$$</p>
+<p>$$
+T_x = \textbf{Hit time} = \text{Acces time for memory x} \newline
+(T_2 - T_1) = \textbf{Miss penalty} = \text{Miss penalty for a miss in memory 1}
+$$</p>
+<p><em>Average Memory Access Time</em> (AMAT):
+$$
+\text{AMAT} = h_1\ T_1 + m_1\ T_2 = h_1\ T_1 + (1 - h_1)T_2
+$$</p>
+<p>$$
+\frac{\text{Memory size}}{\text{Cache size}} = N \newline
+$$</p>
+<p>$$
+\text{Tag bits} = log_2(N)
+$$</p>
+<h3 id="prep-for-exam">Prep for exam</h3>
+<ul>
+<li>MIPS
+<ul>
+<li>Calculate the amount of access calls to data cache (read and writes) and instruction cache.</li>
+</ul>
+</li>
+<li>Pipleline
+<ul>
+<li>TODO: Understand each stage in depth</li>
+<li>Learn how to do a pipeline diagram</li>
+<li>Iterate and go over optimizations and how to avoid stalls.</li>
+</ul>
+</li>
+<li>Performance calculations
+<ul>
+<li>$CPI = CPI_{base} + CPI_{miss}$</li>
+<li>$CPI_{miss} = CPI_{D\ miss} + CPI_{I\ miss}$</li>
+</ul>
+</li>
+<li>Memory and cache
+<ul>
+<li>Iterate and go over all the different types, and how to calculate size/amount of bits.</li>
+<li>Go over how to calculate how long time/amount of time it takes for certain misses, with certain sizes etc.</li>
+</ul>
+</li>
+</ul>
+<h3 id="notes">Notes</h3>
+<p>Page table size = Number of virtual pages $\times$ Size of each page table entry</p>
+<p>Number of virtual pages = Total virtual address space / Page size
+Number of virtual pages = (Number of processes $\times$ Size of each virtual address space) / Page size</p>
+<p>Cache Offset: If block size is B bytes, offset = log2(B).</p>
+<p>Cache Index: Given by how many blocks/sets there are.</p>
+<p>If direct mapped, meaning 1 block per set:</p>
+<p>Number of blocks = Total Cache Size / Sizer per block</p>
+<p>Number of sets = (Total Cache Size / Sizer per block) / Associativity level</p>
+<p>Cache Index = log2(Number of blocks/sets)</p>
+<p>Cache Tag: If A is the total amount of address bits, tag = A - offset - index.</p>
+<p>A = tag + offset + index</p>
+<p>TLB Index: If there are E pages, index = log2(E).</p>
+<p>TLB Tag: Tag is the rest of bits. So, if we have V virtual address bits, tag = V - index.</p>
+<p>Calculate the size of each <strong>block entry</strong>. = Number of status bits (valid, dirt etc). + Tag bits + Data bits (Usually block size (in bytes) * 8).</p>
+<p>Calculate the size of the cache. = Number of status bits (valid, dirt etc). + Tag bits + Data bits (Usually block size (in bytes) * 8).</p>
+
+        </section>
+
+        <div class="post-tags">
+            
+            
+            <nav class="nav tags">
+                <ul class="tags">
+                    
+                    <li><a href="/tags/Computer-System-Engineering">Computer System Engineering</a></li>
+                    
+                </ul>
+            </nav>
+            
+            
+        </div>
+        </article>
+</main>
+<footer>
+    <div style="display:flex"><a class="soc" href="https://github.com/rezaarezvan" rel="me" title="GitHub"><i data-feather="github"></i></a>
+        <a class="border"></a><a class="soc" href="https://twitter.com/rzvan__/" rel="me" title="Twitter"><i data-feather="twitter"></i></a>
+        <a class="border"></a></div><p class="footer_msg">memento mori</p></footer>
+
+
+<script>
+    feather.replace()
+</script></div>
+</body>
+
+</html>

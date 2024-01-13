@@ -10,65 +10,65 @@
     <atom:link href="https://rezvan.xyz/tags/Computer-System-Engineering/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Computer System Engineering: Summary</title>
-      <link>https://rezvan.xyz/school/EDA333_summary/</link>
+      <link>https://rezvan.xyz/school/EDA333/EDA333_summary/</link>
       <pubDate>Thu, 25 May 2023 11:22:18 +0200</pubDate>
-      <guid>https://rezvan.xyz/school/EDA333_summary/</guid>
+      <guid>https://rezvan.xyz/school/EDA333/EDA333_summary/</guid>
       <description>Performance and MIPS CPU Time for a program: $$ \text{CPU Time} = \frac{\text{Instructions}}{\text{Program}} \cdot\ \frac{\text{Clock cycles}}{\text{Instruction}} \cdot\ \frac{\text{Seconds}}{\text{Clock cycle}} $$&#xA;$$ \text{CPU Time} = IC \cdot\ CPI \cdot\ T_c $$&#xA;Geometric mean: $$ \sqrt[n]{\prod_{i = 1}^{n} \text{Execution time ratio}_i} $$&#xA;MIPS Cheat Sheet:&#xA;Register convention:&#xA;$zero - Always 0&#xA;$v0-1 - Result registers&#xA;$a0-3 - Argument registers&#xA;$t0-7 - Temporary registers&#xA;$s0-7 - Content registers, save for later use&#xA;$sp - Stack pointer</description>
     </item>
     <item>
       <title>Computer System Engineering: Part 8 - Parallel Processors</title>
-      <link>https://rezvan.xyz/school/EDA333_8/</link>
+      <link>https://rezvan.xyz/school/EDA333/EDA333_8/</link>
       <pubDate>Fri, 28 Apr 2023 18:12:01 +0200</pubDate>
-      <guid>https://rezvan.xyz/school/EDA333_8/</guid>
+      <guid>https://rezvan.xyz/school/EDA333/EDA333_8/</guid>
       <description>In this part we&amp;rsquo;ll talk about parallel processors, multithreading and other different techniques that we can use to speed up our programs and computers.&#xA;Multithreading We&amp;rsquo;ve seen and learned about threads when we covered concurrent programming.&#xA;The idea here is same, if we can utilize threads to parallelize our programs, we can achieve a higher efficiency rate on our clock cycles.&#xA;But when and how do we decide choose what thread?</description>
     </item>
     <item>
       <title>Computer System Engineering: Part 7 - Floating-point arithmetic</title>
-      <link>https://rezvan.xyz/school/EDA333_7/</link>
+      <link>https://rezvan.xyz/school/EDA333/EDA333_7/</link>
       <pubDate>Tue, 25 Apr 2023 15:18:21 +0200</pubDate>
-      <guid>https://rezvan.xyz/school/EDA333_7/</guid>
-      <description>In this part we&amp;rsquo;ll cover some basics for floating-point arithmetic.&#xA;Integer addition Just some basics:&#xA;When performing addition&#xA;Overflow if:&#xA;Adding a positive and negative operand - no overflow.&#xA;Adding two positive operands - if the carry-out bit is 1.&#xA;Adding two negative operands - if the carry-out bit is 0.&#xA;When performing subtraction:&#xA;Overflow if:&#xA;Subtracting two positive or negative operands - no overflow.&#xA;Subtracting a positive from a negative operand - overflow if the results sign bit is 0.</description>
+      <guid>https://rezvan.xyz/school/EDA333/EDA333_7/</guid>
+      <description>In this part we&amp;rsquo;ll cover some basics for floating-point arithmetic.&#xA;Integer addition Just some basics:&#xA;When performing addition Overflow if: Adding a positive and negative operand - no overflow. Adding two positive operands - if the carry-out bit is 1. Adding two negative operands - if the carry-out bit is 0. When performing subtraction: Overflow if: Subtracting two positive or negative operands - no overflow. Subtracting a positive from a negative operand - overflow if the results sign bit is 0.</description>
     </item>
     <item>
       <title>Computer System Engineering: Part 6 - Virtual Memory</title>
-      <link>https://rezvan.xyz/school/EDA333_6/</link>
+      <link>https://rezvan.xyz/school/EDA333/EDA333_6/</link>
       <pubDate>Fri, 21 Apr 2023 19:28:25 +0200</pubDate>
-      <guid>https://rezvan.xyz/school/EDA333_6/</guid>
+      <guid>https://rezvan.xyz/school/EDA333/EDA333_6/</guid>
       <description>In this part we&amp;rsquo;ll cover so-called virtual memory - which is an essential technique used in computer engineering.&#xA;Virtual memory is a technique used by computers to allow them to use more memory than physically exists in the system. Now, this may seem odd at a first glance, how can we use more memory than physically exists?&#xA;It works by temporarily transferring data from the computer&amp;rsquo;s main memory (RAM) to a designated area on the secondary memory (hard-drive).</description>
     </item>
     <item>
       <title>Computer System Engineering: Part 5 - Cache memory</title>
-      <link>https://rezvan.xyz/school/EDA333_5/</link>
+      <link>https://rezvan.xyz/school/EDA333/EDA333_5/</link>
       <pubDate>Thu, 13 Apr 2023 20:04:58 +0200</pubDate>
-      <guid>https://rezvan.xyz/school/EDA333_5/</guid>
-      <description>In this part we will cover one of the most important solutions in computer science, the cache memory, but also memory in general.&#xA;Memory types Before we dive in - let&amp;rsquo;s quickly recap the different types of memory there are:&#xA;Static RAM (SRAM)&#xA;0.5 ns - 2.5 ns | $2000 - $5000 per GB Dynamic RAM (DRAM)&#xA;50 ns - 70 ns | $20 - $75 per GB Magnetic storage</description>
+      <guid>https://rezvan.xyz/school/EDA333/EDA333_5/</guid>
+      <description>In this part we will cover one of the most important solutions in computer science, the cache memory, but also memory in general.&#xA;Memory types Before we dive in - let&amp;rsquo;s quickly recap the different types of memory there are:&#xA;Static RAM (SRAM) 0.5 ns - 2.5 ns | $2000 - $5000 per GB Dynamic RAM (DRAM) 50 ns - 70 ns | $20 - $75 per GB Magnetic storage 5 ms - 20 ms | $0.</description>
     </item>
     <item>
       <title>Computer System Engineering: Part 4 - Pipeline hardware</title>
-      <link>https://rezvan.xyz/school/EDA333_4/</link>
+      <link>https://rezvan.xyz/school/EDA333/EDA333_4/</link>
       <pubDate>Tue, 28 Mar 2023 00:00:00 +0000</pubDate>
-      <guid>https://rezvan.xyz/school/EDA333_4/</guid>
+      <guid>https://rezvan.xyz/school/EDA333/EDA333_4/</guid>
       <description>In this part we&amp;rsquo;ll cover the actual hardware specifications/solutions to our potential problems with our newly pipelined CPU.&#xA;Data hazards If we have the following scenario:&#xA;sub $2, $1, $3 and $12, $2, $5 Here we will have a data hazard. As we covered in the last part the solution here is so-called &amp;ldquo;forwarding&amp;rdquo;.&#xA;But how do we detect how to forward our result immediately?&#xA;The answer is sending along the register&amp;rsquo;s number in the pipeline!</description>
     </item>
     <item>
       <title>Computer System Engineering: Part 3 - Pipelining</title>
-      <link>https://rezvan.xyz/school/EDA333_3/</link>
+      <link>https://rezvan.xyz/school/EDA333/EDA333_3/</link>
       <pubDate>Mon, 27 Mar 2023 00:00:00 +0000</pubDate>
-      <guid>https://rezvan.xyz/school/EDA333_3/</guid>
+      <guid>https://rezvan.xyz/school/EDA333/EDA333_3/</guid>
       <description>In this part we&amp;rsquo;ll cover the idea of pipelining - and it&amp;rsquo;s performance effects it has on computer systems.&#xA;Let&amp;rsquo;s first cover what every computer does to perform complex tasks.&#xA;Instruction execution Every computer does these five stages:&#xA;Fetch Instruction. PC → Instruction memory.&#xA;Decode the instruction and read from registers.&#xA;Execute the instruction.&#xA;Arithmetic/logical computation.&#xA;Computation of effective memory address.&#xA;Computation of jump address/conditional address.&#xA;Read / Write from / to memory for load/store instructions.</description>
     </item>
     <item>
       <title>Computer System Engineering: Part 2 - MIPS</title>
-      <link>https://rezvan.xyz/school/EDA333_2/</link>
+      <link>https://rezvan.xyz/school/EDA333/EDA333_2/</link>
       <pubDate>Wed, 22 Mar 2023 00:00:00 +0000</pubDate>
-      <guid>https://rezvan.xyz/school/EDA333_2/</guid>
+      <guid>https://rezvan.xyz/school/EDA333/EDA333_2/</guid>
       <description>In this part we&amp;rsquo;ll properly cover the MIPS architecture in depth.&#xA;Parameter transferring When calling a function in C code, what is happening at the assembler level is, calling a subroutine (usually).&#xA;What we need to do before a subroutine call, is the following:&#xA;Place the input parameters into their respective registers Call the function/subroutine Allocate memory for eventual saved and local variables Execute the function/procedure Place the result in a register Reset the stack, if needed Return to where the function/subroutine got called.</description>
     </item>
     <item>
       <title>Computer System Engineering: Part 1 - Introduction</title>
-      <link>https://rezvan.xyz/school/EDA333/</link>
+      <link>https://rezvan.xyz/school/EDA333/EDA333/</link>
       <pubDate>Tue, 21 Mar 2023 00:00:00 +0000</pubDate>
-      <guid>https://rezvan.xyz/school/EDA333/</guid>
+      <guid>https://rezvan.xyz/school/EDA333/EDA333/</guid>
       <description>In this series we&amp;rsquo;ll understand and learn how to compute, quantify and, measure the performance of different systems and programs.&#xA;To compute, quantify and, measure performance let&amp;rsquo;s start by first defining what performance depends on.&#xA;Performance dependencies When we&amp;rsquo;re making a system or a program a lot of different factors will weigh in the total performance:&#xA;The underlying algorithm&#xA;Determines number of operations required, which directly impacts the performance. Programming language, compile, and, architecture of choice.</description>
     </item>
   </channel>

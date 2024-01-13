@@ -10,65 +10,65 @@
     <atom:link href="https://rezvan.xyz/tags/Digital-Design/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Digital Design: Part 9 - Testing</title>
-      <link>https://rezvan.xyz/school/Digital_design_9/</link>
+      <link>https://rezvan.xyz/school/EDA322/Digital_design_9/</link>
       <pubDate>Sun, 05 Mar 2023 00:00:00 +0000</pubDate>
-      <guid>https://rezvan.xyz/school/Digital_design_9/</guid>
+      <guid>https://rezvan.xyz/school/EDA322/Digital_design_9/</guid>
       <description>When creating digital circuits, there are a lot of things that can go wrong.&#xA;When designing the circuit, it may happen that the designers have implemented a bug into the circuit.&#xA;We call these design bugs. On the other hand, when physically making the chip, it may happen that we get permanent (implementation) fault, or other (transient) faults.&#xA;In the first case we need to perform verification, in the latter case, it&amp;rsquo;s testing and fault tolerance.</description>
     </item>
     <item>
       <title>Digital Design: Part 8 - Interfaces, Interconnects and Memories</title>
-      <link>https://rezvan.xyz/school/Digital_design_8/</link>
+      <link>https://rezvan.xyz/school/EDA322/Digital_design_8/</link>
       <pubDate>Sun, 19 Feb 2023 00:00:00 +0000</pubDate>
-      <guid>https://rezvan.xyz/school/Digital_design_8/</guid>
+      <guid>https://rezvan.xyz/school/EDA322/Digital_design_8/</guid>
       <description>In this part we&amp;rsquo;ll cover interfaces, interconnects as well as memory.&#xA;Interface timing In digital circuits, we often want to send data, from a sender, to a receiver.&#xA;How can we achieve this data passing from one module to another?&#xA;The answer is:&#xA;Open loop&#xA;Flow Control&#xA;Serialized&#xA;In an open loop, we either have so that it&amp;rsquo;s always &amp;ldquo;valid&amp;rdquo; to send data, or periodically.&#xA;In flow control, as the name suggests, the data-flow is controlled.</description>
     </item>
     <item>
       <title>Digital Design: Part 7 - Timing, delay &amp; power</title>
-      <link>https://rezvan.xyz/school/Digital_design_7/</link>
+      <link>https://rezvan.xyz/school/EDA322/Digital_design_7/</link>
       <pubDate>Wed, 08 Feb 2023 00:00:00 +0000</pubDate>
-      <guid>https://rezvan.xyz/school/Digital_design_7/</guid>
+      <guid>https://rezvan.xyz/school/EDA322/Digital_design_7/</guid>
       <description>When designing digital circuits, the timing, delay and power usage of the circuit are important. In this part we&amp;rsquo;ll cover how we usually measure and compare these.&#xA;Timing and delay In an arbitrary synchronous circuit, we usually have:&#xA;A single-bit clock, all other wires may be multiple bits wide.&#xA;Registers (Which is just a collection of flip-flops).&#xA;The clock will be distributed to all flip-flops&#xA;Combinational logic&#xA;No internal state</description>
     </item>
     <item>
       <title>Digital Design: Part 6 - Reconfigurable Hardware</title>
-      <link>https://rezvan.xyz/school/Digital_design_6/</link>
+      <link>https://rezvan.xyz/school/EDA322/Digital_design_6/</link>
       <pubDate>Sun, 05 Feb 2023 15:28:10 +0100</pubDate>
-      <guid>https://rezvan.xyz/school/Digital_design_6/</guid>
+      <guid>https://rezvan.xyz/school/EDA322/Digital_design_6/</guid>
       <description>As we discussed in the first part of this series, there two main paradigms.&#xA;ASIC and reconfigurable Hardware&#xA;ASIC&#xA;Advantages&#xA;Very high performance and efficient. Disadvantages&#xA;Not flexible (can&amp;rsquo;t be altered after fabrication).&#xA;High cost.&#xA;Reconfigurable computing&#xA;Advantages&#xA;Much higher performance than software, lower than ASIC.&#xA;Higher level of flexibility than ASIC, more difficult to program than software.&#xA;Software-programmed processors&#xA;Advantages&#xA;Very flexible to change. Disadvantages&#xA;Performance can suffer if the clock speed isn&amp;rsquo;t fast enough.</description>
     </item>
     <item>
       <title>Digital Design: Part 5 - Arithmetic Units</title>
-      <link>https://rezvan.xyz/school/Digital_design_5/</link>
+      <link>https://rezvan.xyz/school/EDA322/Digital_design_5/</link>
       <pubDate>Fri, 03 Feb 2023 00:00:00 +0000</pubDate>
-      <guid>https://rezvan.xyz/school/Digital_design_5/</guid>
+      <guid>https://rezvan.xyz/school/EDA322/Digital_design_5/</guid>
       <description>In this part we&amp;rsquo;ll cover arithmetic units. Specifically multipliers and divers.&#xA;We&amp;rsquo;ll also cover some number representations.&#xA;Arithmetic Units It may be common knowledge that, when we want to perform multiplication and division, by powers of 2, we perform so-called shift operations on the bits.&#xA;If we for example want to multiply a number with the binary number 100, or 4 in decimal.&#xA;We would just shift all bits two steps to the left.</description>
     </item>
     <item>
       <title>Digital  Design: Part 4 - Finite State Machines</title>
-      <link>https://rezvan.xyz/school/Digital_design_4/</link>
+      <link>https://rezvan.xyz/school/EDA322/Digital_design_4/</link>
       <pubDate>Tue, 31 Jan 2023 21:12:55 +0100</pubDate>
-      <guid>https://rezvan.xyz/school/Digital_design_4/</guid>
+      <guid>https://rezvan.xyz/school/EDA322/Digital_design_4/</guid>
       <description>In the last part we covered sequential circuits, in this part we&amp;rsquo;ll cover Finite State Machines.&#xA;FSMs are type of sequential circuits, there are two main type of FSMs, Moore and Mealy.&#xA;Moore FSMs&#xA;Outputs depends only on the state. Mealy FSMs&#xA;Outputs depend on both state and primary inputs. 1-1 Detector A 1-1 detector, generates an output, $z = 1$, whenever the input, $w$ is 1 twice in a row (clock cycles).</description>
     </item>
     <item>
       <title>Digital Design: Part 3 - Sequential Circuits</title>
-      <link>https://rezvan.xyz/school/Digital_design_3/</link>
+      <link>https://rezvan.xyz/school/EDA322/Digital_design_3/</link>
       <pubDate>Tue, 24 Jan 2023 00:00:00 +0000</pubDate>
-      <guid>https://rezvan.xyz/school/Digital_design_3/</guid>
+      <guid>https://rezvan.xyz/school/EDA322/Digital_design_3/</guid>
       <description>Sequential Circuits When we usually look at circuits we have an input and output who are independent on each other. In a sequential circuit, as the name suggest, we have a sequence. Meaning we feed back our output as input.&#xA;We can easily define this as: Our output no longer depends on the present input - but on the past behavior of the circuit.&#xA;State-Holding Memory Elements We&amp;rsquo;ve encountered latches and flip-flops before, they have a so-called memory element to them.</description>
     </item>
     <item>
       <title>Digital Design: Part 2- Binary Adders</title>
-      <link>https://rezvan.xyz/school/Digital_design_2/</link>
+      <link>https://rezvan.xyz/school/EDA322/Digital_design_2/</link>
       <pubDate>Wed, 18 Jan 2023 00:00:00 +0000</pubDate>
-      <guid>https://rezvan.xyz/school/Digital_design_2/</guid>
+      <guid>https://rezvan.xyz/school/EDA322/Digital_design_2/</guid>
       <description>In this part we&amp;rsquo;ll cover different kind of (binary) adders that digital circuits use. They&amp;rsquo;re an essential part for all the arithmetic operations which are needed.&#xA;Full Adder The (1-bit) full adder is the simplest adder unit we can create.&#xA;It takes two input bits $a$ and $b$, with $c_{in}$ (carry in) - it outputs two bit signals, $c_{out}$ and $r$&#xA;If we use a truth table and find a boolean function for it, we find that: $$ r = a\ \bar{b}\ \bar{c_{in}} + \bar{a}\ b\ \bar{c_{in}} + a\ b\ c_{in} + \bar{a}\ \bar{b}\ c_{in} $$</description>
     </item>
     <item>
       <title>Digital Design: Part 1 - Introduction &amp; Boolean Algebra</title>
-      <link>https://rezvan.xyz/school/Digital_design/</link>
+      <link>https://rezvan.xyz/school/EDA322/Digital_design/</link>
       <pubDate>Mon, 16 Jan 2023 00:00:00 +0000</pubDate>
-      <guid>https://rezvan.xyz/school/Digital_design/</guid>
+      <guid>https://rezvan.xyz/school/EDA322/Digital_design/</guid>
       <description>In our day-to-day lives, we use digital circuits all the time, without really thinking about them.&#xA;Even most software developers do not appreciate the abstraction which digital circuits are built upon. What are digital circuits built from then? Chips! What are chips built from then? Logical gates! What are logical gates built from then? Transistor circuits! What are these circuits built from? Transistors! (duh).&#xA;As you can see it&amp;rsquo;s quite a few steps.</description>
     </item>
   </channel>

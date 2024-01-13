@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html><head lang="en">
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"><title>rezvan | DSA: Part 2 - Complexity (1)</title><link rel="icon" type="image/png" href="/icon.png" /><meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description"
+        content="Introduction What do we mean by an &lsquo;Algorithmic complexity&rsquo;, a good (but not fully formal) definition would be - &ldquo;How much resources does the algorithm use in relation to quantitative properties of its input&rdquo;
+And just to be clear, the definition of an algorithm: any well-defined procedure to solve a given problem.
+So what kind of resources could we quantify from an input? Of course the runtime of an algorithm is important." />
+    <meta property="og:image" content="https://raw.githubusercontent.com/rezaarezvan/rezvan.xyz/main/images/icon.png" />
+    <meta property="og:title" content="DSA: Part 2 - Complexity (1)" />
+<meta property="og:description" content="Introduction What do we mean by an &lsquo;Algorithmic complexity&rsquo;, a good (but not fully formal) definition would be - &ldquo;How much resources does the algorithm use in relation to quantitative properties of its input&rdquo;
+And just to be clear, the definition of an algorithm: any well-defined procedure to solve a given problem.
+So what kind of resources could we quantify from an input? Of course the runtime of an algorithm is important." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://rezvan.xyz/school/DAT038/DSA_2/" /><meta property="article:section" content="school" />
+<meta property="article:published_time" content="2022-11-25T17:20:46+01:00" />
+<meta property="article:modified_time" content="2022-11-25T17:20:46+01:00" />
+
+<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="DSA: Part 2 - Complexity (1)"/>
+<meta name="twitter:description" content="Introduction What do we mean by an &lsquo;Algorithmic complexity&rsquo;, a good (but not fully formal) definition would be - &ldquo;How much resources does the algorithm use in relation to quantitative properties of its input&rdquo;
+And just to be clear, the definition of an algorithm: any well-defined procedure to solve a given problem.
+So what kind of resources could we quantify from an input? Of course the runtime of an algorithm is important."/>
+<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@1,500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
+
+    
+    <link rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/main.55ceafd1ab15172b8770201b55c83270fac8611fcdae31fccb3a7fd94ac6da6e.css" />
+    <link id="darkModeStyle" rel="stylesheet" type="text/css" href="https://rezvan.xyz/css/dark.b95ac7b1169ab6755ef14c75e8e49c983d2d56c40ee0c3d69d357d42339b5e31.css"  disabled />
+    
+
+    
+    
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+        </script>
+
+    
+    <script type="text/x-mathjax-config">
+		MathJax.Hub.Config({
+			tex2jax: {
+				inlineMath: [['$','$'], ['\\(','\\)']],
+				displayMath: [['$$','$$'], ['\[','\]']],
+				processEscapes: true,
+				processEnvironments: true,
+				skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+				TeX: { equationNumbers: { autoNumber: "AMS" },
+						 extensions: ["AMSmath.js", "AMSsymbols.js"] }
+			}
+		});
+		</script>
+    
+
+    
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js"
+        onload="renderMathInElement(document.body);"></script>
+
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            renderMathInElement(document.body, {
+                delimiters: [
+                    {left: "$$", right: "$$", display: true},
+                    {left: "$", right: "$", display: false}
+                ]
+            });
+        });
+    </script>
+    
+
+    
+</head>
+<body>
+    <div class="content"><header>
+    <div class="main">
+        <a href="https://rezvan.xyz/">rezvan</a>
+    </div>
+    <nav id="site-navbar">
+        
+        <a href="/">home</a>
+        
+        <a href="/about">about</a>
+        
+        <a href="/principles">principles</a>
+        
+        <a href="/contact">contact</a>
+        
+        <a href="/cv">cv</a>
+        
+        <a href="/school">school</a>
+        
+        <a href="/tags">tags</a>
+        
+        | <span id="dark-mode-toggle" onclick="toggleTheme()"></span>
+        <script src="https://rezvan.xyz/js/themetoggle.js"></script>
+        
+    </nav>
+</header>
+
+<main>
+    <article>
+        <div class="title">
+            <h1 class="title">DSA: Part 2 - Complexity (1)</h1>
+            <div class="meta">Posted on Nov 25, 2022</div>
+        </div>
+        
+
+        <section class="body">
+            <h3 id="introduction">Introduction</h3>
+<p>What do we mean by an &lsquo;Algorithmic complexity&rsquo;, a good (but not fully formal) definition would be -
+&ldquo;<em>How much resources does the algorithm use in <strong>relation</strong> to quantitative properties of its input</em>&rdquo;</p>
+<p>And just to be clear, the definition of an <strong>algorithm</strong>: any well-defined procedure to solve a given problem.</p>
+<p>So what kind of resources could we quantify from an input? Of course the runtime of an algorithm is important.
+How much memory/space an algorithm requires to operate, is often important as well. These are the main two resources that are looked upon when writing new algorithms -
+but we could also look at, # of comparisons, # of array accesses, # of arithmetic operations performed etc.</p>
+<p>The quantitative properties of the input are important here as well, the time it takes to find the first 10 digits of $\pi$ is obviously going to be less than the first 100 000 digits of $\pi$</p>
+<p>Therefore, we can view the complexity as a mathematical function; Which takes an input of (size) n - maps it to the function T(n) that outputs the given runtime/space it takes for an input of n.</p>
+<p>In pure mathematics (and Computer Science) this type of functions are called <a href="https://en.wikipedia.org/wiki/Big_O_notation">&lsquo;Big O Notation&rsquo;</a></p>
+<p>One thing to remember is - that in the real world the only thing that determines the output isn&rsquo;t just the output. For example a input of n doesn&rsquo;t always give T(n) for a given quicksort algorithm.</p>
+<p>That&rsquo;s why computer scientists use <strong>Worst-case</strong>, <strong>Best-case</strong>, and <strong>Average-case</strong> complexities.</p>
+<p>As said before the <strong>exact</strong> runtime of a program depends on so many things - that&rsquo;s why we introduce the so-called <strong>Asymptotic complexity</strong>.
+Which is the <strong>order of growth</strong> of the complexity function - which holds true for all complexity functions within the same &lsquo;class&rsquo;.
+This is often what computer scientists mean when they say that an algorithm has a complexity of $\dots$.</p>
+<h3 id="a-computer-scientist-definition-of-complexity">A Computer Scientist Definition of Complexity</h3>
+<p>Let $f$ and $g$ be functions:
+$f$ has an <strong>order of growth</strong> of $g$ if:
+There are constants $C$ and $n_0$ such that:
+$$
+f(n) \leq C\ g(n) \text{ for } n \geq n_0
+$$</p>
+<p>What this means if we decipher the math; $f(n)$ is eventually bounded by $C\ g(n)$, after a certain point, $n_0$</p>
+<p>With this in our toolkit we can now use the O-notation:
+$$
+f(n) \in \mathcal{O}(g(n))
+$$</p>
+<h4 id="a-example">A Example</h4>
+<p>Say we have the function $f(n) = 13n + 37$ - I claim that the (Asymptotic) complexity of this function is $\mathcal{O}(n)$</p>
+<h5 id="proof">Proof</h5>
+<p>We need a $C$ and $n_0$ so that $13n + 37 \leq C\ n$ for $n \geq n_0$</p>
+<p>If we pick $C = 14$ and say $n_0 = 37$</p>
+<p>Then $13n + 37 \leq 13n + n \Longleftrightarrow 13n + 37 \leq 14n$ for $n \geq n_0$</p>
+<h4 id="orders-of-growth">Orders of growth</h4>
+<p>One with a background in Calculus soon realizes that <em>order</em> of this Big O functions will be the following:</p>
+<p>$$
+\mathcal{O}(1)
+\newline
+\mathcal{O}(log(n))
+\newline
+\dots
+\newline
+\mathcal{O}(n)
+\newline
+\mathcal{O}(n\ log(n))
+\newline
+\mathcal{O}(n^2)
+\newline
+\dots
+\newline
+\mathcal{O}(2^n)
+\newline
+\dots
+$$</p>
+<h3 id="rules-of-asymptotic-complexity">Rules of (Asymptotic) Complexity</h3>
+<p>Some arithmetic rules for using the Big O Notation are the following:</p>
+<h4 id="addition">Addition</h4>
+<p>$$
+\mathcal{O}(f) + \mathcal{O}(g) = \mathcal{O}(f + g) = \mathcal{O}(max(f,g)) = max(\mathcal{O}(f), \mathcal{O}(g))
+$$</p>
+<h4 id="multiplication">Multiplication</h4>
+<p>$$
+\mathcal{O}(f) \times \mathcal{O}(g) = \mathcal{O}(f \times g)
+$$</p>
+<p>And</p>
+<p>$$
+C \times \mathcal{O}(f) = \mathcal{O}(f)
+$$</p>
+<h3 id="how-to-find-the-complexity-of-code">How to find the Complexity of code</h3>
+<p>Now that we have understood properly what the Big O notation is and how we can operate with it - the next step is being able to find the complexity in code!
+How we do this properly is going through each line/operation in an algorithm and see what the complexity of each is. This is very time-consuming though - so, luckily, there are shortcuts.</p>
+<p>Sequence of statements (arithmetic and logical operations, function calls, etc.), gives us addition between them.</p>
+<pre tabindex="0"><code>func whats_the_complexity(int n):
+    n = n + 5;                // This takes O(1)
+    n = n / 10;               // This takes O(1)
+    n = do_something(n, 100); // Say this take O(n)
+
+    return n
+</code></pre><p>The total complexity of <code>whats_the_complexity</code> would in this case be:
+$\mathcal{O}(1) + \mathcal{O}(1) + \mathcal{O}(n)$ and from our first rule that would mean a total (Asymptotic) complexity of, $\mathcal{O}(n)$ for $n \geq 1$</p>
+<p>Nested loops gives multiplication</p>
+<pre tabindex="0"><code>func whats_the_complexity(int[][] arr):
+
+    // Suppose arr is a n x x matrix
+
+    sum = 0;
+
+    for i in arr:      // Takes O(n)
+        for j in i:    // Takes O(n)
+            sum += j;
+
+    for i in arr:      // Takes O(n)
+        sum += i;
+
+    return n
+</code></pre><p>The total complexity of <code>whats_the_complexity</code> would in this case be:
+$\mathcal{O}(n) \times \mathcal{O}(n) + \mathcal{O}(n)$ and from our first and second rule that would mean a total (Asymptotic) complexity of, $\mathcal{O}(n^2)$</p>
+<h3 id="relatives-of-o-notation">Relatives of O-notation</h3>
+<p>What we have gone through is only a part of a bigger set of notations. The &lsquo;real&rsquo; definitions are the following:</p>
+<p>Let $f$ and $g$ be functions</p>
+<p>$f(n) \in \mathcal{O}(g(n))$ if:
+$$
+f(n) \leq C\ g(n) \text{ for } n \geq n_0
+$$</p>
+<p>Now let&rsquo;s introduce:</p>
+<p>$f(n) \in \Omega(g(n))$ if:
+$$
+f(n) \geq c\ g(n) \text{ for } n \geq n_0
+$$</p>
+<p>$f(n) \in \Theta(g(n))$ if:
+$$
+c\ g(n) \leq f(n) \leq C\ g(n) \text{ for } n \geq n_0
+$$</p>
+<p>This means:
+$f(n) \in \Theta(g(n))$ means $f(n) \in \mathcal{O}(g(n))$ <strong>and</strong> $f(n) \in \Omega(g(n))$</p>
+<p>What does this mean is</p>
+<p>$f(n) \in \mathcal{O}(g(n))$ the function $f(n)$ eventually has an <strong>upper bound</strong>
+$f(n) \in \Omega(g(n))$ the function $f(n)$ eventually has a <strong>lower bound</strong>
+$f(n) \in \Theta(g(n))$ the function $f(n)$ eventually has both a <strong>lower</strong> and <strong>upper bound</strong></p>
+<h3 id="conclusion">Conclusion</h3>
+<p>This concludes the first part of our complexity journey - complexities are, as we can see, a very powerful tool to identify what kind of algorithm we&rsquo;re working with
+and to get a somewhat accurate answer about question one can have about programs, for example, runtime of a program.</p>
+<p>Next part will be about dynamic arrays and how we use them - especially how to implement a stack and queues.</p>
+
+        </section>
+
+        <div class="post-tags">
+            
+            
+            <nav class="nav tags">
+                <ul class="tags">
+                    
+                    <li><a href="/tags/Data-Structures-Algorithms">Data Structures &amp; Algorithms</a></li>
+                    
+                </ul>
+            </nav>
+            
+            
+        </div>
+        </article>
+</main>
+<footer>
+    <div style="display:flex"><a class="soc" href="https://github.com/rezaarezvan" rel="me" title="GitHub"><i data-feather="github"></i></a>
+        <a class="border"></a><a class="soc" href="https://twitter.com/rzvan__/" rel="me" title="Twitter"><i data-feather="twitter"></i></a>
+        <a class="border"></a></div><p class="footer_msg">memento mori</p></footer>
+
+
+<script>
+    feather.replace()
+</script></div>
+</body>
+
+</html>

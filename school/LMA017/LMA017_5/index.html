@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html><head lang="en">
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"><title>rezvan | Mathematical analysis in several variables: Part 5 - Directional derivatives and the gradient vector</title><link rel="icon" type="image/png" href="/icon.png" /><meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description"
+        content="Introduction In this part we&rsquo;ll cover directional derivatives and the gradient vector.
+Directional derivatives To understand this part, we&rsquo;ll first need to recall vectors from linear algebra. Warning: In this series we&rsquo;ll use notation that is not that common.
+Vectors We all know that vectors have a direction and a magnitude (or length), from physics and linear algebra. Let&rsquo;s just quickly define these: $$ \vec{a} = \langle a, b \rangle $$" />
+    <meta property="og:image" content="https://raw.githubusercontent.com/rezaarezvan/rezvan.xyz/main/images/icon.png" />
+    <meta property="og:title" content="Mathematical analysis in several variables: Part 5 - Directional derivatives and the gradient vector" />
+<meta property="og:description" content="Introduction In this part we&rsquo;ll cover directional derivatives and the gradient vector.
+Directional derivatives To understand this part, we&rsquo;ll first need to recall vectors from linear algebra. Warning: In this series we&rsquo;ll use notation that is not that common.
+Vectors We all know that vectors have a direction and a magnitude (or length), from physics and linear algebra. Let&rsquo;s just quickly define these: $$ \vec{a} = \langle a, b \rangle $$" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://rezvan.xyz/school/LMA017/LMA017_5/" /><meta property="article:section" content="school" />
+<meta property="article:published_time" content="2023-09-06T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-09-06T00:00:00+00:00" />
+
+<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Mathematical analysis in several variables: Part 5 - Directional derivatives and the gradient vector"/>
+<meta name="twitter:description" content="Introduction In this part we&rsquo;ll cover directional derivatives and the gradient vector.
+Directional derivatives To understand this part, we&rsquo;ll first need to recall vectors from linear algebra. Warning: In this series we&rsquo;ll use notation that is not that common.
+Vectors We all know that vectors have a direction and a magnitude (or length), from physics and linear algebra. Let&rsquo;s just quickly define these: $$ \vec{a} = \langle a, b \rangle $$"/>
+<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@1,500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
+
+    
+    <link rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/main.55ceafd1ab15172b8770201b55c83270fac8611fcdae31fccb3a7fd94ac6da6e.css" />
+    <link id="darkModeStyle" rel="stylesheet" type="text/css" href="https://rezvan.xyz/css/dark.b95ac7b1169ab6755ef14c75e8e49c983d2d56c40ee0c3d69d357d42339b5e31.css"  disabled />
+    
+
+    
+    
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+        </script>
+
+    
+    <script type="text/x-mathjax-config">
+		MathJax.Hub.Config({
+			tex2jax: {
+				inlineMath: [['$','$'], ['\\(','\\)']],
+				displayMath: [['$$','$$'], ['\[','\]']],
+				processEscapes: true,
+				processEnvironments: true,
+				skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+				TeX: { equationNumbers: { autoNumber: "AMS" },
+						 extensions: ["AMSmath.js", "AMSsymbols.js"] }
+			}
+		});
+		</script>
+    
+
+    
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js"
+        onload="renderMathInElement(document.body);"></script>
+
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            renderMathInElement(document.body, {
+                delimiters: [
+                    {left: "$$", right: "$$", display: true},
+                    {left: "$", right: "$", display: false}
+                ]
+            });
+        });
+    </script>
+    
+
+    
+</head>
+<body>
+    <div class="content"><header>
+    <div class="main">
+        <a href="https://rezvan.xyz/">rezvan</a>
+    </div>
+    <nav id="site-navbar">
+        
+        <a href="/">home</a>
+        
+        <a href="/about">about</a>
+        
+        <a href="/principles">principles</a>
+        
+        <a href="/contact">contact</a>
+        
+        <a href="/cv">cv</a>
+        
+        <a href="/school">school</a>
+        
+        <a href="/tags">tags</a>
+        
+        | <span id="dark-mode-toggle" onclick="toggleTheme()"></span>
+        <script src="https://rezvan.xyz/js/themetoggle.js"></script>
+        
+    </nav>
+</header>
+
+<main>
+    <article>
+        <div class="title">
+            <h1 class="title">Mathematical analysis in several variables: Part 5 - Directional derivatives and the gradient vector</h1>
+            <div class="meta">Posted on Sep 6, 2023</div>
+        </div>
+        
+
+        <section class="body">
+            <h3 id="introduction">Introduction</h3>
+<p>In this part we&rsquo;ll cover directional derivatives and the gradient vector.</p>
+<h3 id="directional-derivatives">Directional derivatives</h3>
+<p>To understand this part, we&rsquo;ll first need to recall vectors from linear algebra. <strong>Warning</strong>: In this series we&rsquo;ll use notation that is not that common.</p>
+<h4 id="vectors">Vectors</h4>
+<p>We all know that vectors have a direction and a magnitude (or length), from physics and linear algebra. Let&rsquo;s just quickly define these:
+$$
+\vec{a} = \langle a, b \rangle
+$$</p>
+<p>$$
+a = x_2 - x_1 \newline
+b = y_2 - y_1
+$$</p>
+<p>Length of $\vec{a}$:
+$$
+|\vec{a}| = \sqrt{a^2 + b^2}
+$$</p>
+<p>Important note, we call a vector a <strong>unit</strong> vector if it has the length one, meaning:
+$$
+|\vec{a}| = \sqrt{a^2 + b^2} = 1
+$$</p>
+<p>We will also use the dot product (also called scalar product) which is the operation denoted with $\cdot$
+$$
+\vec{a} =  \langle a_1, a_2, a_3 \rangle \newline
+\vec{b} = \langle b_1, b_2, b_3 \rangle \newline
+\vec{a} \cdot \vec{b} = a_1b_1 + a_2b_2 + a_3b_3
+$$</p>
+<p>We can also geometrically define the dot product with:
+$$
+\vec{a} \cdot \vec{b} = |\vec{a}| |\vec{b}| cos(\alpha)
+$$</p>
+<p>Where $\alpha$ is the angle between the vectors.</p>
+<p>Let&rsquo;s quickly also recall the standard basis vectors:
+$$
+\vec{i} = \langle 1, 0, 0 \rangle \newline
+\vec{j} = \langle 0, 1, 0 \rangle \newline
+\vec{k} = \langle 0, 0, 1 \rangle
+$$</p>
+<p>Okay that&rsquo;s all the linear algebra that we need. Let&rsquo;s look at the definition of partial derivatives:
+$$
+f_x(x_0, y_0) = \lim_{h \to 0} \dfrac{f(x_0 + h, y_0) - f(x_0, y_0)}{h}
+$$</p>
+<p>For $y$:
+$$
+f_y(x_0, y_0) = \lim_{h \to 0} \dfrac{f(x_0, y_0 + h) - f(x_0, y_0)}{h}
+$$</p>
+<p>As we defined, we can interpret this as:</p>
+<blockquote>
+<p>Rate of change of, $f$, in the $\vec{i}/\vec{j}$ direction - near the point $(x_0, y_0)$.</p>
+</blockquote>
+<p>Therefore, we can ask the question. What is the rate of change of, $f$, in any arbitrary direction?</p>
+<p>Which we&rsquo;ll now define.</p>
+<h3 id="definition-of-directional-derivatives">Definition of directional derivatives</h3>
+<p>The directional derivative of a function, $f$, of two variables, at point $(x_0, y_0)$ in the direction of a <strong>unit</strong> vector, $\vec{u}$.
+$$
+\vec{u} \langle a, b \rangle
+$$</p>
+<p>We denoted the directional derivative with a $D_{\vec{u}} f$.
+$$
+D_{\vec{u}} f(x_0, y_0) = \lim_{h \to 0} \dfrac{f(x_0 + ha, y_0 + hb) - f(x_0, y_0)}{h}
+$$</p>
+<h4 id="reminder">Reminder</h4>
+<p>Since the definition is a limit, this limit may not exist, the directional derivative may not exist in a certain direction.</p>
+<p>This also means that $f_x$ and $f_y$ are special cases for directional derivatives:
+$$
+D_{\vec{i}} f(x_0, y_0) = \lim_{h \to 0} \dfrac{f(x_0 + ha, y_0 + hb) - f(x_0, y_0)}{h} = f_x
+$$</p>
+<p>$$
+D_{\vec{j}} f(x_0, y_0) = \lim_{h \to 0} \dfrac{f(x_0 + ha, y_0 + hb) - f(x_0, y_0)}{h} = f_y
+$$</p>
+<h3 id="how-to-compute-the-directional-derivative">How to compute the directional derivative</h3>
+<p>How do we efficiently compute the directional derivate? We can use the limit definition, but this is tedious.</p>
+<p>Let&rsquo;s denote $f(x_0 + ha, y_0 + hb)$ with $g(h)$. This means $g(0) = f(x_0, y_0)$.</p>
+<p>Which means we can write the equation as:
+$$
+D_{\vec{u}} f(x_0, y_0) = \lim_{h \to 0} \dfrac{g(h) - g(0)}{h}
+$$</p>
+<p>Which is just:
+$$
+D_{\vec{u}} f(x_0, y_0) = \lim_{h \to 0} \dfrac{g(h) - g(0)}{h} = g&rsquo;(0)
+$$</p>
+<p>Let us call $x = x_0 + ha$ and $y = y_0 + hb$. By the chain rule this means!
+$$
+\dfrac{dg}{dh} = \dfrac{\partial f}{\partial x} \dfrac{dx}{dh} + \dfrac{\partial f}{\partial y} \dfrac{dy}{dh}
+$$</p>
+<p>Which is just:
+$$
+\dfrac{dg}{dh} = f_x a + f_y b
+$$</p>
+<p>Which means:
+$$
+g&rsquo;(0) = f_x(x_0, y_0) a + f_y(x_0, y_0) b
+$$</p>
+<p>$$
+D_{\vec{u}} f = f_x a + f_y b
+$$</p>
+<p>Let&rsquo;s rewrite this properly.</p>
+<h3 id="computation-of-directional-derivate">Computation of directional derivate</h3>
+<p>Let, $f$, be a differentiable function of two variables. The directional derivate in the direction of unit vector, $\vec{u} = \langle a, b \rangle$ is:
+$$
+\boxed{D_{\vec{u}} f = f_x a + f_y b}
+$$</p>
+<p>We can also express this as:
+$$
+D_{\vec{u}} f = \langle f_x, f_y \rangle \cdot \langle a, b \rangle
+$$</p>
+<p>This vector has a special name, it&rsquo;s called the <em>gradient</em> and is denoted by nabla symbol, $\nabla$.</p>
+<h3 id="definition-of-gradient">Definition of gradient</h3>
+<p>The gradient of, $f$, is the vector-function:
+$$
+\nabla f = \langle f_x, f_y \rangle
+$$</p>
+<p>Therefore, we usually write:
+$$
+\boxed{D_{\vec{u}} f = \nabla f \cdot \vec{u}}
+$$</p>
+<p>Let&rsquo;s try an example now</p>
+<h4 id="example">Example</h4>
+<p>Find the directional derivate of the function $f(x, y) = x^2y^3 - 4y$ at $(2, -1)$ in the direction:
+$$
+a)\ \vec{v} = \langle \dfrac{1}{\sqrt{2}}, \dfrac{1}{\sqrt{2}} \rangle
+$$</p>
+<p>$$
+b)\ \vec{v} = 2\vec{i} + 5\vec{j}
+$$</p>
+<p>Solution:
+$$
+a) D_{\vec{v}} f = \nabla f \cdot \vec{v}
+$$</p>
+<p>Let&rsquo;s first compute the gradient:
+$$
+\nabla f = \langle f_x, f_y \rangle = \langle 2xy^3, 3x^2y^2 - 4 \rangle
+$$</p>
+<p>At point $(2, -1)$:
+$$
+\nabla f(2, -1) = \langle -4, 8 \rangle
+$$</p>
+<p>Now we need to check if our vector is a unit vector:
+$$
+|\vec{v}| = \sqrt{\left( \dfrac{1}{\sqrt{2}}\right)^2 + \left(\dfrac{1}{\sqrt{2}}\right)^2} = 1 \ | \ \text{unit vector}
+$$</p>
+<p>$$
+\begin{align*}
+D_{\vec{v}} f(2, -1) &amp; = \langle -4, 8 \rangle \cdot \langle \dfrac{1}{\sqrt{2}}, \dfrac{1}{\sqrt{2}} \rangle \newline
+&amp; = \dfrac{-4}{\sqrt{2}} + \dfrac{8}{\sqrt{2}} \newline
+&amp; = \boxed{\dfrac{4}{\sqrt{2}}}
+\end{align*}
+$$</p>
+<p>For b):
+$$
+\vec{v} = 2\vec{i} + 5\vec{j} = \ldots = \langle 2, 5 \rangle
+$$</p>
+<p>Let&rsquo;s check if this is a unit vector:
+$$
+|\vec{v}| = \sqrt{2^2 + 5^2} = \sqrt{29} \neq 1
+$$</p>
+<p>This means we need to normalize:
+$$
+\vec{u} = \dfrac{\vec{v}}{|\vec{v}|} = \langle \dfrac{2}{\sqrt{29}}, \dfrac{5}{\sqrt{29}} \rangle
+$$</p>
+<p>$$
+\begin{align*}
+D_{\vec{u}} f(2, -1) &amp; = \langle -4, 8 \rangle \cdot \langle \dfrac{2}{\sqrt{29}}, \dfrac{5}{\sqrt{29}} \rangle \newline
+&amp; = \dfrac{-8}{\sqrt{29}} + \dfrac{40}{\sqrt{29}} \newline
+&amp; = \boxed{\dfrac{38}{\sqrt{29}}}
+\end{align*}
+$$</p>
+<p>Let&rsquo;s take one more example:</p>
+<h4 id="example-1">Example</h4>
+<p>Find the rate of change of the function, $f(x, y) = xy^2 + x$ at the point $P(2, 0)$ in the direction from $P$ to $Q\left(\dfrac{1}{2}, 2\right)$</p>
+<p>The direction vector is:
+$$
+\vec{v} = \langle \dfrac{1}{2} - 2, 2 - 0 \rangle = \langle -\dfrac{3}{2}, 2 \rangle
+$$</p>
+<p>$$
+\nabla f = \langle f_x, f_y \rangle = \langle  y^2 + 1, 2xy \rangle
+$$</p>
+<p>$$
+\nabla f(2, 0) = \langle 1, 0 \rangle
+$$</p>
+<p>$$
+|\vec{v}| = \sqrt{\left(-\dfrac{3}{2}\right)^2 + 2^2} = \ldots = \dfrac{5}{2}
+$$</p>
+<p>We need to normalize:
+$$
+\vec{u} = \dfrac{\vec{v}}{|\vec{v}|} = \langle -\dfrac{3}{5}, \dfrac{4}{5} \rangle
+$$</p>
+<p>$$
+D_{\vec{u}} f(2, 0) = \langle 1, 0 \rangle \cdot \langle -\dfrac{3}{5}, \dfrac{4}{5} \rangle = -\dfrac{3}{5} + 0 = \boxed{-\dfrac{3}{5}}
+$$</p>
+<h3 id="maximum-rate-of-change">Maximum rate of change</h3>
+<p>If we ask ourselves the question, in what direction is $D_{\vec{u}} f(x_0, y_0)$ the largest?</p>
+<p>If we look at the definition:
+$$
+D_{\vec{u}} f(x_0, y_0) = \nabla f(x_0, y_0) \cdot \vec{u}
+$$</p>
+<p>If we use the geometrical definition:
+$$
+D_{\vec{u}} f(x_0, y_0) = |\nabla f(x_0, y_0)| |\vec{u}| cos(\alpha)
+$$</p>
+<p>This expression is the largest when $cos(\alpha) = 1$, which means $\alpha = 0$. In other words, the directional derivative is the largest when $\vec{u}$ is the same direction as $\nabla f(x_0, y_0)$.</p>
+<h3 id="geometrical-interpretition">Geometrical interpretition</h3>
+<p>Suppose we have a graph like a mountain, where $(x_0, y_0, f(x_0, y_0)$ is our position. The fastest way to get to the top of the mountain is going in the direction of the gradient.</p>
+<p>To go down the mountain, in the fastest way possible, we go in the direction of $-\nabla f$.</p>
+<h4 id="example-2">Example</h4>
+<p>Given $f(x, y) = xe^y$ and $P(2, 0)$.</p>
+<p>a) In what direction is the rate of change the largest?</p>
+<p>b) What is the maximum rate of change?</p>
+<p>a):</p>
+<p>In the direction of the gradient at the point:
+$$
+\nabla f(2, 0) = \langle f_x(2, 0), f_y(2, 0) \rangle \newline
+\nabla f(2, 0) = \langle e^0, 2e^0 \rangle = \langle 1, 2 \rangle
+$$</p>
+<p>b):
+$$
+|\nabla f(2, 0)| = \sqrt{1^2 + 2^2} = \boxed{\sqrt{5}}
+$$</p>
+<h3 id="gradient-and-level-curves">Gradient and level curves</h3>
+<p>Recall that level curves are curves with the equation:
+$$
+f(x, y) = k
+$$</p>
+<p>Where $k$ is just any constant. For each point $(x_0, y_0)$, $\nabla f(x_0, y_0)$ is orthogonal to the level curve that contains $(x_0, y_0)$</p>
+<h4 id="explanation">Explanation</h4>
+<p>We already know that the shortest way up the mountain is to go in the direction of the gradient. On the other hand, the shortest way is to go from level curve to level curve as fast as possible. But shortest way between two lines is the perpendicular way!</p>
+
+        </section>
+
+        <div class="post-tags">
+            
+            
+            <nav class="nav tags">
+                <ul class="tags">
+                    
+                    <li><a href="/tags/Mathematical-analysis-in-several-variables">Mathematical analysis in several variables</a></li>
+                    
+                </ul>
+            </nav>
+            
+            
+        </div>
+        </article>
+</main>
+<footer>
+    <div style="display:flex"><a class="soc" href="https://github.com/rezaarezvan" rel="me" title="GitHub"><i data-feather="github"></i></a>
+        <a class="border"></a><a class="soc" href="https://twitter.com/rzvan__/" rel="me" title="Twitter"><i data-feather="twitter"></i></a>
+        <a class="border"></a></div><p class="footer_msg">memento mori</p></footer>
+
+
+<script>
+    feather.replace()
+</script></div>
+</body>
+
+</html>
