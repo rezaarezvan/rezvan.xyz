@@ -6,8 +6,15 @@
     <description>Recent content on rezvan</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 30 Dec 2023 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 16 Jan 2024 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://rezvan.xyz/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Introduction to data science and AI: Part 1 - Introduction</title>
+      <link>https://rezvan.xyz/school/DAT565/</link>
+      <pubDate>Tue, 16 Jan 2024 00:00:00 +0000</pubDate>
+      <guid>https://rezvan.xyz/school/DAT565/</guid>
+      <description>Introduction In this series we&amp;rsquo;ll cover the very large and mystical field of data science and AI. We&amp;rsquo;re going to spend these first few parts to understand what data science is.&#xA;Data science What is data science? (Theoretical) Computer science is method-driven and often abstract. In data science, the question is often answered with insights derived from the data.&#xA;Data scientists aim for results that can describe the world, or a business sector, that needs it.</description>
+    </item>
     <item>
       <title>Control theory: Summary</title>
       <link>https://rezvan.xyz/school/ERE103/ERE103_summary/</link>
