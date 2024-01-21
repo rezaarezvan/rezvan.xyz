@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html><head lang="en">
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"><title>rezvan | Introduction to data science and AI: Part 2 - Python tools for data science</title><link rel="icon" type="image/png" href="/icon.png" /><meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description"
+        content="Introduction In this part we&rsquo;re going to explore some popular Python tools for data science.
+NumPy Numerical Python, is the standard package for computation and array operations.
+Low-level functions are written in C, therefore, very fast.
+Basic operations in NumPy We usually import as:
+import numpy as np NumPy arrays can be constructed with the following:
+A = np.array([69, 420, 1337, 42]) A NumPy array is defined by:
+The number of dimensions it has (ndim) The number of elements it has (size) Its shape (number of elements along an axis) Its dtype A = np." />
+    <meta property="og:image" content="https://raw.githubusercontent.com/rezaarezvan/rezvan.xyz/main/images/icon.png" />
+    <meta property="og:title" content="Introduction to data science and AI: Part 2 - Python tools for data science" />
+<meta property="og:description" content="Introduction In this part we&rsquo;re going to explore some popular Python tools for data science.
+NumPy Numerical Python, is the standard package for computation and array operations.
+Low-level functions are written in C, therefore, very fast.
+Basic operations in NumPy We usually import as:
+import numpy as np NumPy arrays can be constructed with the following:
+A = np.array([69, 420, 1337, 42]) A NumPy array is defined by:
+The number of dimensions it has (ndim) The number of elements it has (size) Its shape (number of elements along an axis) Its dtype A = np." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://rezvan.xyz/school/DAT565/DAT565_2/" /><meta property="article:section" content="school" />
+<meta property="article:published_time" content="2024-01-19T00:00:00+00:00" />
+<meta property="article:modified_time" content="2024-01-19T00:00:00+00:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Introduction to data science and AI: Part 2 - Python tools for data science"/>
+<meta name="twitter:description" content="Introduction In this part we&rsquo;re going to explore some popular Python tools for data science.
+NumPy Numerical Python, is the standard package for computation and array operations.
+Low-level functions are written in C, therefore, very fast.
+Basic operations in NumPy We usually import as:
+import numpy as np NumPy arrays can be constructed with the following:
+A = np.array([69, 420, 1337, 42]) A NumPy array is defined by:
+The number of dimensions it has (ndim) The number of elements it has (size) Its shape (number of elements along an axis) Its dtype A = np."/>
+<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@1,500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
+
+    
+    <link rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/main.55ceafd1ab15172b8770201b55c83270fac8611fcdae31fccb3a7fd94ac6da6e.css" />
+    <link id="darkModeStyle" rel="stylesheet" type="text/css" href="https://rezvan.xyz/css/dark.b95ac7b1169ab6755ef14c75e8e49c983d2d56c40ee0c3d69d357d42339b5e31.css"  disabled />
+    
+
+    
+    
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+        </script>
+
+    
+    <script type="text/x-mathjax-config">
+		MathJax.Hub.Config({
+			tex2jax: {
+				inlineMath: [['$','$'], ['\\(','\\)']],
+				displayMath: [['$$','$$'], ['\[','\]']],
+				processEscapes: true,
+				processEnvironments: true,
+				skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+				TeX: { equationNumbers: { autoNumber: "AMS" },
+						 extensions: ["AMSmath.js", "AMSsymbols.js"] }
+			}
+		});
+		</script>
+    
+
+    
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js"
+        onload="renderMathInElement(document.body);"></script>
+
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            renderMathInElement(document.body, {
+                delimiters: [
+                    {left: "$$", right: "$$", display: true},
+                    {left: "$", right: "$", display: false}
+                ]
+            });
+        });
+    </script>
+    
+
+    
+</head>
+<body>
+    <div class="content"><header>
+    <div class="main">
+        <a href="https://rezvan.xyz/">rezvan</a>
+    </div>
+    <nav id="site-navbar">
+        
+        <a href="/">home</a>
+        
+        <a href="/about">about</a>
+        
+        <a href="/principles">principles</a>
+        
+        <a href="/contact">contact</a>
+        
+        <a href="/cv">cv</a>
+        
+        <a href="/school">school</a>
+        
+        <a href="/tags">tags</a>
+        
+        | <span id="dark-mode-toggle" onclick="toggleTheme()"></span>
+        <script src="https://rezvan.xyz/js/themetoggle.js"></script>
+        
+    </nav>
+</header>
+
+<main>
+    <article>
+        <div class="title">
+            <h1 class="title">Introduction to data science and AI: Part 2 - Python tools for data science</h1>
+            <div class="meta">Posted on Jan 19, 2024</div>
+        </div>
+        
+
+        <section class="body">
+            <h3 id="introduction">Introduction</h3>
+<p>In this part we&rsquo;re going to explore some popular Python tools for data science.</p>
+<h4 id="numpy">NumPy</h4>
+<p><strong>Num</strong>erical <strong>Py</strong>thon, is the standard package for computation and array operations.</p>
+<p>Low-level functions are written in C, therefore, very fast.</p>
+<h3 id="basic-operations-in-numpy">Basic operations in NumPy</h3>
+<p>We usually import as:</p>
+<pre tabindex="0"><code>import numpy as np
+</code></pre><p>NumPy arrays can be constructed with the following:</p>
+<pre tabindex="0"><code>A = np.array([69, 420, 1337, 42])
+</code></pre><p>A NumPy array is defined by:</p>
+<ul>
+<li>The number of dimensions it has (<code>ndim</code>)</li>
+<li>The number of elements it has (<code>size</code>)</li>
+<li>Its <code>shape</code> (number of elements along an axis)</li>
+<li>Its <code>dtype</code></li>
+</ul>
+<pre tabindex="0"><code>A = np.array([69, 420, 1337, 42])
+# A.ndim = 1
+# A.size = 4
+# A.shape = (4, )
+# A.dtype = int64
+</code></pre><p>We can either specify the <code>dtype</code> or let NumPy automatically assign it.</p>
+<p>Different ways to create NumPy arrays that we usually use:</p>
+<ul>
+<li><code>arange</code> construct numbers from a range.</li>
+<li><code>zeros</code> creates an array full of zeros, with any shape.</li>
+<li><code>ones</code> creates an array full of ones, with any shape.</li>
+<li><code>eye</code> creates the identity array.</li>
+<li><code>full</code> creates an array filled with a specific element/array.</li>
+</ul>
+<p>We can <code>reshape</code> our arrays and matrix, the new shape must have equal size (product of the shape).</p>
+<pre tabindex="0"><code>A = np.array([69, 420, 1337, 42])
+A.reshape(2, 2)
+&#39;&#39;&#39;
+[[69, 420],
+ [1337, 42]]
+&#39;&#39;&#39;
+</code></pre><p>This does not make a copy, this returns a <em>view</em> (basically a pointer).</p>
+<p>We can <em>transpose</em> our arrays and matrix as well:</p>
+<pre tabindex="0"><code>A = np.array([69, 420, 1337, 42])
+A.reshape(2, 2).T
+&#39;&#39;&#39;
+[[69, 1337],
+ [420, 42]]
+&#39;&#39;&#39;
+</code></pre><p>We can change the dtype with the <code>.astype()</code> function:</p>
+<pre tabindex="0"><code>A = np.array([69, 420, 1337, 42])
+A.astype(np.float32)
+&#39;&#39;&#39;
+[69.0, 420.0, 1337.0, 42.0]
+&#39;&#39;&#39;
+</code></pre><p>We access elements in NumPy arrays with usual bracket notation:</p>
+<pre tabindex="0"><code>A = np.array([69, 420, 1337, 42])
+A[0]
+&#39;&#39;&#39;
+69
+&#39;&#39;&#39;
+</code></pre><p>NumPy supports Python style slicing:</p>
+<pre tabindex="0"><code>A = np.array([69, 420, 1337, 42])
+# A[1:-1] = [420, 1337]
+# A[::2] = [69, 1337]
+</code></pre><p>NumPy supports all basic math operations:</p>
+<pre tabindex="0"><code>A = np.array([69, 420, 1337, 42])
+# A + 1 = [70, 421, 1338, 43]
+</code></pre><p>There are a lot more functions to <a href="https://numpy.org/doc/">explore</a> :)</p>
+<h3 id="matplotlib">Matplotlib</h3>
+<p>Matplotlib is the standard way of plotting figures and graphs in Python.
+Used for ploting any kind of plot you can think of, scatter plots, line plots, contour plots, etc.</p>
+<p>It comes with multiple APIs, but the standard one for Python is the <code>pyplot</code> API. Let&rsquo;s take a look at a practical example.</p>
+<h4 id="anscombes-quartet">Anscombe&rsquo;s quartet</h4>
+<p><a href="https://en.wikipedia.org/wiki/Anscombe%27s_quartet">Anscombe&rsquo;s quartet</a> is a small dataset that shows the importance of graphing your data when dealing with statistics.</p>
+<p>To understand we&rsquo;ll graph this dataset for ourselves:</p>
+<pre tabindex="0"><code>import numpy as np
+import matplotlib.pyplot as plt
+</code></pre><p>Firstly, let&rsquo;s import numpy for the data processing and matplot for the plotting.</p>
+<pre tabindex="0"><code>anscombe_data = np.array([10.0, 8.04, 10.0, 9.14, 10.0, 7.46, 8.0, 6.58,
+8.0, 6.95, 8.0, 8.14, 8.0, 6.77, 8.0, 5.76,
+13.0, 7.58, 13.0, 8.74, 13.0, 12.74, 8.0, 7.71,
+9.0, 8.81, 9.0, 8.77, 9.0, 7.11, 8.0, 8.84,
+11.0, 8.33, 11.0, 9.26, 11.0, 7.81, 8.0, 8.47,
+14.0, 9.96, 14.0, 8.10, 14.0, 8.84, 8.0, 7.04,
+6.0, 7.24, 6.0, 6.13, 6.0, 6.08, 8.0, 5.25,
+4.0, 4.26, 4.0, 3.10, 4.0, 5.39, 19.0, 12.50,
+12.0, 10.84, 12.0, 9.13, 12.0, 8.15, 8.0, 5.56,
+7.0, 4.82, 7.0, 7.26, 7.0, 6.42, 8.0, 7.91,
+5.0, 5.68, 5.0, 4.74, 5.0, 5.73, 8.0, 6.89])
+</code></pre><p>Let&rsquo;s reshape our NumPy array so it is a bit more readble and how it looks in Wikipedia.</p>
+<pre tabindex="0"><code>anscombe_data = anscombe_data.reshape(11, 4, 2).transpose(1, 0, 2)
+&#39;&#39;&#39;
+[[[10.    8.04]
+  [ 8.    6.95]
+  [13.    7.58]
+  [ 9.    8.81]
+  [11.    8.33]
+  [14.    9.96]
+  [ 6.    7.24]
+  [ 4.    4.26]
+  [12.   10.84]
+  [ 7.    4.82]
+  [ 5.    5.68]]
+
+ [[10.    9.14]
+  [ 8.    8.14]
+  [13.    8.74]
+  [ 9.    8.77]
+  [11.    9.26]
+  [14.    8.1 ]
+  [ 6.    6.13]
+  [ 4.    3.1 ]
+  [12.    9.13]
+  [ 7.    7.26]
+  [ 5.    4.74]]
+
+ [[10.    7.46]
+  [ 8.    6.77]
+  [13.   12.74]
+  [ 9.    7.11]
+  [11.    7.81]
+  [14.    8.84]
+  [ 6.    6.08]
+  [ 4.    5.39]
+  [12.    8.15]
+  [ 7.    6.42]
+  [ 5.    5.73]]
+
+ [[ 8.    6.58]
+  [ 8.    5.76]
+  [ 8.    7.71]
+  [ 8.    8.84]
+  [ 8.    8.47]
+  [ 8.    7.04]
+  [ 8.    5.25]
+  [19.   12.5 ]
+  [ 8.    5.56]
+  [ 8.    7.91]
+  [ 8.    6.89]]]
+&#39;&#39;&#39;
+</code></pre><p>Let&rsquo;s break it up into the four indviual datasets:</p>
+<pre tabindex="0"><code>anscombe = {&#39;I&#39;: anscombe_data[0, :, :],
+            &#39;II&#39;: anscombe_data[1, :, :],
+            &#39;III&#39;: anscombe_data[2, :, :],
+            &#39;IV&#39;: anscombe_data[3, :, :]}
+</code></pre><p>Before we plot the actual graphs, let&rsquo;s take a loook at the mean, standard devation and variance for all four of the datasets.</p>
+<pre tabindex="0"><code>for key, value in anscombe.items():
+    print(key)
+    print(&#39;Mean: &#39;, np.mean(value, axis=0))
+    print(&#39;Standard deviation: &#39;, np.std(value, ddof=1, axis=0))
+    print(&#39;Variance: &#39;, np.var(value, axis=0))
+    print(&#39;Correlation coefficient: &#39;, np.corrcoef(
+        value[:, 0], value[:, 1])[0, 1])
+    print()
+&#39;&#39;&#39;
+I
+Mean:  [9.         7.50090909]
+Standard deviation:  [3.31662479 2.03156814]
+Variance:  [10.          3.75206281]
+Correlation coefficient:  0.81642051634484
+
+II
+Mean:  [9.         7.50090909]
+Standard deviation:  [3.31662479 2.03165674]
+Variance:  [10.          3.75239008]
+Correlation coefficient:  0.8162365060002428
+
+III
+Mean:  [9.  7.5]
+Standard deviation:  [3.31662479 2.0304236 ]
+Variance:  [10.          3.74783636]
+Correlation coefficient:  0.8162867394895984
+
+IV
+Mean:  [9.         7.50090909]
+Standard deviation:  [3.31662479 2.03057851]
+Variance:  [10.          3.74840826]
+Correlation coefficient:  0.8165214368885028
+&#39;&#39;&#39;
+</code></pre><p>So, from a purerly statistical view, we would think that all these datasets should look <em>somewhat</em> similar, right?</p>
+<p>Let&rsquo;s plot them and see. Let&rsquo;s plot them as scatter plots:</p>
+<pre tabindex="0"><code>for key, value in anscombe.items():
+    plt.scatter(value[:, 0], value[:, 1])
+    plt.show()
+</code></pre><p><img src="/school/images/viv.png#center" alt="">
+<img src="/school/images/ii.png#center" alt="">
+<img src="/school/images/ii.png#center" alt="">
+<img src="/school/images/iv.png#center" alt=""></p>
+<p>Let&rsquo;s plot them all together:</p>
+<pre tabindex="0"><code>fig, axs = plt.subplots(2, 2)
+for (ax, (key, value)) in zip(axs.ravel(), anscombe.items()):
+    ax.scatter(value[:, 0], value[:, 1])
+    ax.set_xlabel(&#39;$x$&#39;)
+    ax.set_ylabel(&#39;$y$&#39;)
+    ax.set_title(key)
+
+fig.tight_layout()
+plt.show()
+</code></pre><p><img src="/school/images/anscombe.png#center" alt=""></p>
+<p>So, we can see that these datasets, in reality, differ a lot from each other, but seem to have equivalent statistical properties.
+We&rsquo;ll look into more statistics later on :).</p>
+<h3 id="pandas">Pandas</h3>
+<p>The last library we&rsquo;ll cover is the data analysis library Pandas.
+When dealing with large datasets, we&rsquo;ll usually want to use common convient functions to read, write and manipulate data fast.</p>
+<p>Pandas can make use of NumPy as a backend for some data.</p>
+<p>Before jumping into a practial example we&rsquo;re we&rsquo;ll use Pandas, let&rsquo;s first understand how we&rsquo;ll represent data.</p>
+<h3 id="wide-and-long-format">Wide and long format</h3>
+<p>When we want to represent data, we have two options:</p>
+<ul>
+<li>In wide format, the data is indexed by first column where the values do not repeat.
+<ul>
+<li>Different variables for observations are placed on different columns.</li>
+</ul>
+</li>
+<li>In long format, a column indexes the different kinds of observations and another column contains the respective values.</li>
+</ul>
+<p>Converting data to wide format is called <strong>pivoting</strong>.</p>
+<p>Converting data to long format is <strong>unpivoting</strong> or <strong>melting</strong>.</p>
+<pre tabindex="0"><code>&#39;&#39;&#39;
+Wide format
+
+  Person  Age  Weight  Height
+0    Bob   32     168     180
+1  Alice   24     150     175
+2  Steve   64     144     165
+
+Long format
+
+  Person Attribute  Value
+0    Bob       Age     32
+1    Bob    Weight    168
+2  Alice       Age     24
+3  Alice    Weight    150
+4  Steve       Age     64
+5  Steve    Weight    144
+&#39;&#39;&#39;
+</code></pre><h3 id="palmer-penguins">Palmer penguins</h3>
+<p>We&rsquo;ll use the <a href="https://www.kaggle.com/datasets/parulpandey/palmer-archipelago-antarctica-penguin-data">palmer penguins</a> data set.</p>
+<p>Let&rsquo;s import Pandas, note that we don&rsquo;t import NumPy here!</p>
+<pre tabindex="0"><code>import pandas as pd
+</code></pre><p>Pandas offers a great selection of reading methods for different file formats.</p>
+<pre tabindex="0"><code>df = pd.read_csv(&#39;penguins_size.csv&#39;)
+print(df)
+&#39;&#39;&#39;
+    species     island  culmen_length_mm  culmen_depth_mm  flipper_length_mm  body_mass_g     sex
+0    Adelie  Torgersen              39.1             18.7              181.0       3750.0    MALE
+1    Adelie  Torgersen              39.5             17.4              186.0       3800.0  FEMALE
+2    Adelie  Torgersen              40.3             18.0              195.0       3250.0  FEMALE
+3    Adelie  Torgersen               NaN              NaN                NaN          NaN     NaN
+4    Adelie  Torgersen              36.7             19.3              193.0       3450.0  FEMALE
+..      ...        ...               ...              ...                ...          ...     ...
+339  Gentoo     Biscoe               NaN              NaN                NaN          NaN     NaN
+340  Gentoo     Biscoe              46.8             14.3              215.0       4850.0  FEMALE
+341  Gentoo     Biscoe              50.4             15.7              222.0       5750.0    MALE
+342  Gentoo     Biscoe              45.2             14.8              212.0       5200.0  FEMALE
+343  Gentoo     Biscoe              49.9             16.1              213.0       5400.0    MALE
+&#39;&#39;&#39;
+</code></pre><p>To get an overview we can use the <code>.describe()</code> function.</p>
+<pre tabindex="0"><code>print(df.describe())
+&#39;&#39;&#39;
+       culmen_length_mm  culmen_depth_mm  flipper_length_mm  body_mass_g
+count        342.000000       342.000000         342.000000   342.000000
+mean          43.921930        17.151170         200.915205  4201.754386
+std            5.459584         1.974793          14.061714   801.954536
+min           32.100000        13.100000         172.000000  2700.000000
+25%           39.225000        15.600000         190.000000  3550.000000
+50%           44.450000        17.300000         197.000000  4050.000000
+75%           48.500000        18.700000         213.000000  4750.000000
+max           59.600000        21.500000         231.000000  6300.00000
+&#39;&#39;&#39;
+</code></pre><p>To select a column we can do:</p>
+<pre tabindex="0"><code>print(df[&#39;species&#39;])
+&#39;&#39;&#39;
+0      Adelie
+1      Adelie
+2      Adelie
+3      Adelie
+4      Adelie
+        ...
+339    Gentoo
+340    Gentoo
+341    Gentoo
+342    Gentoo
+343    Gentoo
+Name: species, Length: 344, dtype: object
+&#39;&#39;&#39;
+</code></pre><p>We can also select data with <code>.iloc</code> and <code>.loc</code>. <code>iloc</code> is index based.</p>
+<pre tabindex="0"><code>print(df.iloc[0])
+&#39;&#39;&#39;
+species                 Adelie
+island               Torgersen
+culmen_length_mm          39.1
+culmen_depth_mm           18.7
+flipper_length_mm        181.0
+body_mass_g             3750.0
+sex                       MALE
+Name: 0, dtype: object
+&#39;&#39;&#39;
+</code></pre><p>Where as <code>.loc</code> is string based, in this case both <code>iloc</code> and <code>loc</code> yields the same answer since we group the data with index.
+In other datasets we could have a string based index.</p>
+<p>We can easily filter and choose the right data with:</p>
+<pre tabindex="0"><code>print(df.loc[df[&#39;culmen_length_mm&#39;] &lt; 40])
+&#39;&#39;&#39;
+    species     island  culmen_length_mm  culmen_depth_mm  flipper_length_mm  body_mass_g     sex
+0    Adelie  Torgersen              39.1             18.7              181.0       3750.0    MALE
+1    Adelie  Torgersen              39.5             17.4              186.0       3800.0  FEMALE
+4    Adelie  Torgersen              36.7             19.3              193.0       3450.0  FEMALE
+5    Adelie  Torgersen              39.3             20.6              190.0       3650.0    MALE
+6    Adelie  Torgersen              38.9             17.8              181.0       3625.0  FEMALE
+..      ...        ...               ...              ...                ...          ...     ...
+146  Adelie      Dream              39.2             18.6              190.0       4250.0    MALE
+147  Adelie      Dream              36.6             18.4              184.0       3475.0  FEMALE
+148  Adelie      Dream              36.0             17.8              195.0       3450.0  FEMALE
+149  Adelie      Dream              37.8             18.1              193.0       3750.0    MALE
+150  Adelie      Dream              36.0             17.1              187.0       3700.0  FEMALE
+
+[100 rows x 7 columns]
+&#39;&#39;&#39;
+</code></pre><p>We can have chained boolean expressions with <code>&amp;</code> for AND, <code>|</code> for OR, and <code>~</code> for NOT.</p>
+<pre tabindex="0"><code>print(df.loc[(df[&#39;culmen_length_mm&#39;] &lt; 60) &amp; (df[&#39;species&#39;] == &#39;Gentoo&#39;)])
+&#39;&#39;&#39;
+    species  island  culmen_length_mm  culmen_depth_mm  flipper_length_mm  body_mass_g     sex
+220  Gentoo  Biscoe              46.1             13.2              211.0       4500.0  FEMALE
+221  Gentoo  Biscoe              50.0             16.3              230.0       5700.0    MALE
+222  Gentoo  Biscoe              48.7             14.1              210.0       4450.0  FEMALE
+223  Gentoo  Biscoe              50.0             15.2              218.0       5700.0    MALE
+224  Gentoo  Biscoe              47.6             14.5              215.0       5400.0    MALE
+..      ...     ...               ...              ...                ...          ...     ...
+338  Gentoo  Biscoe              47.2             13.7              214.0       4925.0  FEMALE
+340  Gentoo  Biscoe              46.8             14.3              215.0       4850.0  FEMALE
+341  Gentoo  Biscoe              50.4             15.7              222.0       5750.0    MALE
+342  Gentoo  Biscoe              45.2             14.8              212.0       5200.0  FEMALE
+343  Gentoo  Biscoe              49.9             16.1              213.0       5400.0    MALE
+
+[123 rows x 7 columns]
+&#39;&#39;&#39;
+</code></pre><p>Very often it is useful to sort/index the raw data based on some metric, let&rsquo;s group the numerical data by the species and take the mean:</p>
+<pre tabindex="0"><code>print(df.groupby(&#39;species&#39;)[[&#39;culmen_length_mm&#39;, &#39;culmen_depth_mm&#39;, &#39;flipper_length_mm&#39;, &#39;body_mass_g&#39;]].mean())
+&#39;&#39;&#39;
+           culmen_length_mm  culmen_depth_mm  flipper_length_mm  body_mass_g
+species
+Adelie            38.791391        18.346358         189.953642  3700.662252
+Chinstrap         48.833824        18.420588         195.823529  3733.088235
+Gentoo            47.504878        14.982114         217.186992  5076.016260
+&#39;&#39;&#39;
+</code></pre><p>Let&rsquo;s format this into long format:</p>
+<pre tabindex="0"><code>df2 = df.groupby(&#39;species&#39;)[[&#39;culmen_length_mm&#39;, &#39;culmen_depth_mm&#39;, &#39;flipper_length_mm&#39;, &#39;body_mass_g&#39;]].mean()
+print(df2.reset_index().melt(id_vars=[&#39;species&#39;], var_name=&#39;measurement&#39;, value_name=&#39;value&#39;))
+&#39;&#39;&#39;
+      species        measurement        value
+0      Adelie   culmen_length_mm    38.791391
+1   Chinstrap   culmen_length_mm    48.833824
+2      Gentoo   culmen_length_mm    47.504878
+3      Adelie    culmen_depth_mm    18.346358
+4   Chinstrap    culmen_depth_mm    18.420588
+5      Gentoo    culmen_depth_mm    14.982114
+6      Adelie  flipper_length_mm   189.953642
+7   Chinstrap  flipper_length_mm   195.823529
+8      Gentoo  flipper_length_mm   217.186992
+9      Adelie        body_mass_g  3700.662252
+10  Chinstrap        body_mass_g  3733.088235
+11     Gentoo        body_mass_g  5076.016260
+&#39;&#39;&#39;
+</code></pre><p>Lastly, let&rsquo;s make a simple plot that shows the culmen depth vs culmen length for all the species in one scatter plot.</p>
+<pre tabindex="0"><code>import matplotlib.pyplot as plt
+import numpy as np
+colors = [&#39;red&#39;, &#39;green&#39;, &#39;blue&#39;]
+species_to_num = {v: k for (k, v) in enumerate(df[&#39;species&#39;].unique())}
+
+for species, group in df.groupby(&#39;species&#39;):
+    plt.scatter(group[&#39;culmen_length_mm&#39;], group[&#39;culmen_depth_mm&#39;],
+                color=colors[species_to_num[species]], label=species)
+    plt.xlabel(&#39;Culmen Length (mm)&#39;)
+    plt.ylabel(&#39;Culmen Depth (mm)&#39;)
+    plt.title(&#39;Culmen Depth vs Culmen Length by pengiun species&#39;)
+    plt.legend()
+
+plt.show()
+</code></pre><p><img src="/school/images/palmer.png#center" alt=""></p>
+
+        </section>
+
+        <div class="post-tags">
+            
+            
+            <nav class="nav tags">
+                <ul class="tags">
+                    
+                    <li><a href="/tags/Introduction-to-data-science-and-AI">Introduction to data science and AI</a></li>
+                    
+                </ul>
+            </nav>
+            
+            
+        </div>
+        </article>
+</main>
+<footer>
+    <div style="display:flex"><a class="soc" href="https://github.com/rezaarezvan" rel="me" title="GitHub"><i data-feather="github"></i></a>
+        <a class="border"></a><a class="soc" href="https://twitter.com/rzvan__/" rel="me" title="Twitter"><i data-feather="twitter"></i></a>
+        <a class="border"></a></div><p class="footer_msg">memento mori</p></footer>
+
+
+<script>
+    feather.replace()
+</script></div>
+</body>
+
+</html>

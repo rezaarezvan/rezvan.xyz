@@ -6,14 +6,29 @@
     <description>Recent content in Introduction to data science and AI on rezvan</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 16 Jan 2024 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 19 Jan 2024 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://rezvan.xyz/tags/Introduction-to-data-science-and-AI/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>Introduction to data science and AI: Part 2 - Python tools for data science</title>
+      <link>https://rezvan.xyz/school/DAT565/DAT565_2/</link>
+      <pubDate>Fri, 19 Jan 2024 00:00:00 +0000</pubDate>
+      <guid>https://rezvan.xyz/school/DAT565/DAT565_2/</guid>
+      <description>Introduction In this part we&amp;rsquo;re going to explore some popular Python tools for data science.
+NumPy Numerical Python, is the standard package for computation and array operations.
+Low-level functions are written in C, therefore, very fast.
+Basic operations in NumPy We usually import as:
+import numpy as np NumPy arrays can be constructed with the following:
+A = np.array([69, 420, 1337, 42]) A NumPy array is defined by:
+The number of dimensions it has (ndim) The number of elements it has (size) Its shape (number of elements along an axis) Its dtype A = np.</description>
+    </item>
+    <item>
       <title>Introduction to data science and AI: Part 1 - Introduction</title>
-      <link>https://rezvan.xyz/school/DAT565/</link>
+      <link>https://rezvan.xyz/school/DAT565/DAT565/</link>
       <pubDate>Tue, 16 Jan 2024 00:00:00 +0000</pubDate>
-      <guid>https://rezvan.xyz/school/DAT565/</guid>
-      <description>Introduction In this series we&amp;rsquo;ll cover the very large and mystical field of data science and AI. We&amp;rsquo;re going to spend these first few parts to understand what data science is.&#xA;Data science What is data science? (Theoretical) Computer science is method-driven and often abstract. In data science, the question is often answered with insights derived from the data.&#xA;Data scientists aim for results that can describe the world, or a business sector, that needs it.</description>
+      <guid>https://rezvan.xyz/school/DAT565/DAT565/</guid>
+      <description>Introduction In this series we&amp;rsquo;ll cover the very large and mystical field of data science and AI. We&amp;rsquo;re going to spend these first few parts to understand what data science is.
+Data science What is data science? (Theoretical) Computer science is method-driven and often abstract. In data science, the question is often answered with insights derived from the data.
+Data scientists aim for results that can describe the world, or a business sector, that needs it.</description>
     </item>
   </channel>
 </rss>
