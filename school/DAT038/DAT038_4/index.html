@@ -232,18 +232,18 @@ For example, iterating through a queue. Note that some data structures actually 
 One thing to note is that iterables and iterators are different. An <em>iterator</em> has a method that returns the next element, and a way of telling when the iteration is exhausted.</p>
 <p>So, an <em>iterator</em> can only be iterated over once, while an <em>iterable</em> can be iterated many times, because it creates new iterators. Quite a mouthful.</p>
 <p>So in Python for example a simple:</p>
-<pre tabindex="0"><code>for x in elements:
-    # do something with x
-</code></pre><p>is translated to:</p>
-<pre tabindex="0"><code>it = elements.__iter__()
-while True:
-    try:
-        x = it.__next__()
-    expect StopIteration():
-        break
-
-    # do something  with x
-</code></pre><p>A same kind of logic is applied when we want to compare items. If something is comparable they implement a <em>comparable</em> interface for example.
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">elements</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># do something with x</span>
+</span></span></code></pre></div><p>is translated to:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">it</span> <span class="o">=</span> <span class="n">elements</span><span class="o">.</span><span class="fm">__iter__</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="k">try</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">x</span> <span class="o">=</span> <span class="n">it</span><span class="o">.</span><span class="fm">__next__</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="n">expect</span> <span class="ne">StopIteration</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">        <span class="k">break</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># do something  with x</span>
+</span></span></code></pre></div><p>A same kind of logic is applied when we want to compare items. If something is comparable they implement a <em>comparable</em> interface for example.
 But often we want our own comparisons to something rather than the &rsquo;natural ordering&rsquo; the comparable interface provides. In these cases we need to implement different <em>comparators</em>.</p>
 <p>Now sorting becomes quite trivial - the built-in sorting methods either use the &rsquo;natural ordering&rsquo; comparator, or can take a comparator as an argument to sort it how we want.</p>
 <h4 id="unordered-collections-maps-sets-and-graphs">Unordered collections: Maps, sets, and graphs</h4>

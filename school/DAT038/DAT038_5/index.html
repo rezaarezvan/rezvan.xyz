@@ -248,7 +248,7 @@ We haven&rsquo;t discussed it yet but, what&rsquo;s the complexity of <code>cont
 <p>Which tells us, if we can keep N and M roughly the same all of our operations will be constant! This is the magic with Hash tables.</p>
 <p>So our array size must grow when the hash table grows. To achieve this we use a dynamic array, when we need to resize the hash table array, we create a new array and copy all old elements using <code>add()</code>.</p>
 <pre tabindex="0"><code>put(k : Key, v : Value):
-    if size ≥ 8 * table.length:
+    if size &gt;= 8 * table.length:
         resize(2 * table.length)
     bucket : Map&lt;Key, Value&gt; = table[hash(k)]
         if bucket == NULL:
