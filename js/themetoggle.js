@@ -1,14 +1,23 @@
 function setTheme(mode) {
     localStorage.setItem("theme-storage", mode);
+
+    var darkModeStyle = document.getElementById("darkModeStyle");
+    var lightSyntaxStyle = document.getElementById("lightSyntaxStyle");
+    var darkSyntaxStyle = document.getElementById("darkSyntaxStyle");
+
     if (mode === "dark") {
-        document.getElementById("darkModeStyle").disabled = false;
+        darkModeStyle.disabled = false;
+        lightSyntaxStyle.disabled = true;
+        darkSyntaxStyle.disabled = false;
         document.getElementById("dark-mode-toggle").innerHTML = "<i data-feather=\"sun\"></i>";
-        feather.replace()
     } else if (mode === "light") {
-        document.getElementById("darkModeStyle").disabled = true;
+        darkModeStyle.disabled = true;
+        lightSyntaxStyle.disabled = false;
+        darkSyntaxStyle.disabled = true;
         document.getElementById("dark-mode-toggle").innerHTML = "<i data-feather=\"moon\"></i>";
-        feather.replace()
     }
+
+    feather.replace();
 }
 
 function toggleTheme() {

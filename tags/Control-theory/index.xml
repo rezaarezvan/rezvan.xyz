@@ -13,169 +13,105 @@
       <link>https://rezvan.xyz/school/ERE103/ERE103_summary/</link>
       <pubDate>Sat, 30 Dec 2023 00:00:00 +0000</pubDate>
       <guid>https://rezvan.xyz/school/ERE103/ERE103_summary/</guid>
-      <description>Dynamic systems $u(t)$ - Input signal
-$y(t)$ - Output signal
-We usually represent our systems with ODEs of the form: $$ \dot{y} + ay = bu $$
-Feedback systems Using (positive or negative) feedback, meaning our input depends on the output as well!
-$r(t)$ - Reference value/Setpoint
-$e(t)$ = $r(t) - y(t)$ - Control error
-Laplace Domain $F(s)$ - Controller
-$G_{uy}(s)$ = $\dfrac{Y(s)}{U(s)}$ - Transfer function
-$L(s) = G_{uy}(s) F(s)$ - Loop transfer function</description>
+      <description>Dynamic systems $u(t)$ - Input signal&#xA;$y(t)$ - Output signal&#xA;We usually represent our systems with ODEs of the form: $$ \dot{y} + ay = bu $$&#xA;Feedback systems Using (positive or negative) feedback, meaning our input depends on the output as well!&#xA;$r(t)$ - Reference value/Setpoint&#xA;$e(t)$ = $r(t) - y(t)$ - Control error&#xA;Laplace Domain $F(s)$ - Controller&#xA;$G_{uy}(s)$ = $\dfrac{Y(s)}{U(s)}$ - Transfer function&#xA;$L(s) = G_{uy}(s) F(s)$ - Loop transfer function</description>
     </item>
     <item>
       <title>Control theory: Part 14 - Filters</title>
       <link>https://rezvan.xyz/school/ERE103/ERE103_14/</link>
       <pubDate>Thu, 07 Dec 2023 00:00:00 +0000</pubDate>
       <guid>https://rezvan.xyz/school/ERE103/ERE103_14/</guid>
-      <description>Introduction In this part we&amp;rsquo;ll understand the concept of filters.
-Filters We usually use filters for two different purposes:
-Frequency elimination Frequency detection Example Say we have the following system: $$ G(s) = \dfrac{a}{s + a} $$
-What type of filter is this? Let&amp;rsquo;s find out. Plotting the bode plot will help us.
-Note: This is for $a = 1$
-We can see that this is a low-pass filter! We will call the part that lets through the frequency for passband.</description>
+      <description>Introduction In this part we&amp;rsquo;ll understand the concept of filters.&#xA;Filters We usually use filters for two different purposes:&#xA;Frequency elimination Frequency detection Example Say we have the following system: $$ G(s) = \dfrac{a}{s + a} $$&#xA;What type of filter is this? Let&amp;rsquo;s find out. Plotting the bode plot will help us.&#xA;Note: This is for $a = 1$&#xA;We can see that this is a low-pass filter! We will call the part that lets through the frequency for passband.</description>
     </item>
     <item>
       <title>Control theory: Part 13 - Discretization</title>
       <link>https://rezvan.xyz/school/ERE103/ERE103_13/</link>
       <pubDate>Wed, 06 Dec 2023 00:00:00 +0000</pubDate>
       <guid>https://rezvan.xyz/school/ERE103/ERE103_13/</guid>
-      <description>Introduction In this part we&amp;rsquo;ll see how all of this theory will actually be represented when we need to use a computer for calculations.
-Implementation When we want to implement discrete controllers and systems we need to sample.
-Sampling is when we sample points from our signal with a certain time period.
-We call our sampling period for: $$ h = \dfrac{1}{f_s} $$
-Where $f_s$ is the so-called sampling frequency.</description>
+      <description>Introduction In this part we&amp;rsquo;ll see how all of this theory will actually be represented when we need to use a computer for calculations.&#xA;Implementation When we want to implement discrete controllers and systems we need to sample.&#xA;Sampling is when we sample points from our signal with a certain time period.&#xA;We call our sampling period for: $$ h = \dfrac{1}{f_s} $$&#xA;Where $f_s$ is the so-called sampling frequency.</description>
     </item>
     <item>
       <title>Control theory: Part 12 - State feedback</title>
       <link>https://rezvan.xyz/school/ERE103/ERE103_12/</link>
       <pubDate>Tue, 05 Dec 2023 00:00:00 +0000</pubDate>
       <guid>https://rezvan.xyz/school/ERE103/ERE103_12/</guid>
-      <description>Introduction In this part we&amp;rsquo;ll see how we can represent a system using its states.
-State feedback We can represent a system using its space-state representation.
-Given an input signal, $r(t)$, that we multiply with a constant, $K_r$.
-We also have noise in the system.
-Our feedback is also multiplied with a matrix $L_u$.
-$$ x = \begin{bmatrix} x_1 \\ x_2 \\ \vdots \\ x_n \end{bmatrix} $$
-We can represent our system as: $$ \begin{cases} \dot{x} &amp;amp; = Ax + Bu + B_v \cdot v \\ y &amp;amp; = Cx \end{cases} $$</description>
+      <description>Introduction In this part we&amp;rsquo;ll see how we can represent a system using its states.&#xA;State feedback We can represent a system using its space-state representation.&#xA;Given an input signal, $r(t)$, that we multiply with a constant, $K_r$.&#xA;We also have noise in the system.&#xA;Our feedback is also multiplied with a matrix $L_u$.&#xA;$$ x = \begin{bmatrix} x_1 \\ x_2 \\ \vdots \\ x_n \end{bmatrix} $$&#xA;We can represent our system as: $$ \begin{cases} \dot{x} &amp;amp; = Ax + Bu + B_v \cdot v \\ y &amp;amp; = Cx \end{cases} $$</description>
     </item>
     <item>
       <title>Control theory: Part 11 - Design of controllers (2)</title>
       <link>https://rezvan.xyz/school/ERE103/ERE103_11/</link>
       <pubDate>Tue, 28 Nov 2023 00:00:00 +0000</pubDate>
       <guid>https://rezvan.xyz/school/ERE103/ERE103_11/</guid>
-      <description>PD-controller Given that $u(t) = K_p(e(t) + T_d \dot{e}(t))$
-In the $s$-domain, the PD controller is: $$ F_{PD}(s) = \dfrac{U(s)}{E(s)} = K_p(1 + T_d s) $$
-PD-controller are often paired with low-pass filters (LP), so that $\dot{e}(t)$ doesn&amp;rsquo;t become to large.
-$$ \begin{align*} F_{PD}(s) &amp;amp; = K_p(1 + \dfrac{T_d s}{1 + T_f s}) \\ &amp;amp; = K_p(\dfrac{1 + (T_d + T_f) s}{1 + T_f s}) \\ &amp;amp; = K_p(\dfrac{1 + \tau_d s}{1 + \frac{\tau_d}{b} s}) \ | \ \tau_d = T_d + T_f, b = \frac{T_d + T_f}{T_f} \end{align*} $$</description>
+      <description>PD-controller Given that $u(t) = K_p(e(t) + T_d \dot{e}(t))$&#xA;In the $s$-domain, the PD controller is: $$ F_{PD}(s) = \dfrac{U(s)}{E(s)} = K_p(1 + T_d s) $$&#xA;PD-controller are often paired with low-pass filters (LP), so that $\dot{e}(t)$ doesn&amp;rsquo;t become to large.&#xA;$$ \begin{align*} F_{PD}(s) &amp;amp; = K_p(1 + \dfrac{T_d s}{1 + T_f s}) \\ &amp;amp; = K_p(\dfrac{1 + (T_d + T_f) s}{1 + T_f s}) \\ &amp;amp; = K_p(\dfrac{1 + \tau_d s}{1 + \frac{\tau_d}{b} s}) \ | \ \tau_d = T_d + T_f, b = \frac{T_d + T_f}{T_f} \end{align*} $$</description>
     </item>
     <item>
       <title>Control theory: Part 10 - Design of controllers</title>
       <link>https://rezvan.xyz/school/ERE103/ERE103_10/</link>
       <pubDate>Mon, 27 Nov 2023 00:00:00 +0000</pubDate>
       <guid>https://rezvan.xyz/school/ERE103/ERE103_10/</guid>
-      <description>Introduction In this part we&amp;rsquo;ll see how we can design different type of controllers to make a system behave as wanted.
-PD-controller $$ G(s) = \dfrac{K}{s(1 + sT)} $$
-$$ F(s) = K_p + K_d s $$
-The loop transfer function is: $$ L(s) = F(s)G(s) = \dfrac{K(K_p + K_d s)}{s(1 + sT)} = \dfrac{\frac{K}{T} (K_p + K_d s)}{s^2 + \frac{1}{T} s} $$
-$$ G_{ry}(s) = \dfrac{L(s)}{1 + L(s)} = \dfrac{\dfrac{\frac{K}{T} (K_p + K_d s)}{s^2 + \frac{1}{T} s}}{1 + \dfrac{\frac{K}{T} (K_p + K_d s)}{s^2 + \frac{1}{T} s}} = \dfrac{\frac{K}{T}(K_p + K_d s)}{s^2 + \frac{1}{T} s + \frac{K}{T}(K_p + K_d s)} = \dfrac{K_p \frac{K}{T} + K_d \frac{K}{T} s}{s^2 + (1 + K_d K) s + K_p \frac{K}{T}} $$</description>
+      <description>Introduction In this part we&amp;rsquo;ll see how we can design different type of controllers to make a system behave as wanted.&#xA;PD-controller $$ G(s) = \dfrac{K}{s(1 + sT)} $$&#xA;$$ F(s) = K_p + K_d s $$&#xA;The loop transfer function is: $$ L(s) = F(s)G(s) = \dfrac{K(K_p + K_d s)}{s(1 + sT)} = \dfrac{\frac{K}{T} (K_p + K_d s)}{s^2 + \frac{1}{T} s} $$&#xA;$$ G_{ry}(s) = \dfrac{L(s)}{1 + L(s)} = \dfrac{\dfrac{\frac{K}{T} (K_p + K_d s)}{s^2 + \frac{1}{T} s}}{1 + \dfrac{\frac{K}{T} (K_p + K_d s)}{s^2 + \frac{1}{T} s}} = \dfrac{\frac{K}{T}(K_p + K_d s)}{s^2 + \frac{1}{T} s + \frac{K}{T}(K_p + K_d s)} = \dfrac{K_p \frac{K}{T} + K_d \frac{K}{T} s}{s^2 + (1 + K_d K) s + K_p \frac{K}{T}} $$</description>
     </item>
     <item>
       <title>Control theory: Part 9 - General controller structure</title>
       <link>https://rezvan.xyz/school/ERE103/ERE103_9/</link>
       <pubDate>Thu, 23 Nov 2023 00:00:00 +0000</pubDate>
       <guid>https://rezvan.xyz/school/ERE103/ERE103_9/</guid>
-      <description>Introduction In this part we&amp;rsquo;ll see how we define a general feedback loop.
-General controller structure Assume the general structure for a feedback loop.
-However, we now have some noise that is added (in theory the sign can be whatever) to our out signal. Additionally, the noise, $V(s)$ will go through a process, $G_v(s)$.
-Along with this noise we have some noise in the feedback loop as well, so-called measurement error.</description>
+      <description>Introduction In this part we&amp;rsquo;ll see how we define a general feedback loop.&#xA;General controller structure Assume the general structure for a feedback loop.&#xA;However, we now have some noise that is added (in theory the sign can be whatever) to our out signal. Additionally, the noise, $V(s)$ will go through a process, $G_v(s)$.&#xA;Along with this noise we have some noise in the feedback loop as well, so-called measurement error.</description>
     </item>
     <item>
       <title>Control theory: Part 8 - Stability</title>
       <link>https://rezvan.xyz/school/ERE103/ERE103_8/</link>
       <pubDate>Thu, 16 Nov 2023 00:00:00 +0000</pubDate>
       <guid>https://rezvan.xyz/school/ERE103/ERE103_8/</guid>
-      <description>Introduction In this part we&amp;rsquo;ll properly define what stability is for different kind of systems.
-Stability $G(s)$ is a stable system when:
-$$ \lim_{t \to \infty} g(t) = 0 $$
-Where $g(t)$ is the system impulse response, meaning $u(t) = \delta(t)$, which yields:
-$$ g(t) = \mathcal{L}^{-1}\{G(s) = \dfrac{Y(s)}{U(s)} = Y(s) \} $$
-Example $G(s) = \dfrac{1}{s^2 + 4s - 5}$
-We can rewrite it as: $$ G(s) = \dfrac{1}{s^2 + 4s - 5} = \dfrac{1}{(s - 1)(s + 5)} $$</description>
+      <description>Introduction In this part we&amp;rsquo;ll properly define what stability is for different kind of systems.&#xA;Stability $G(s)$ is a stable system when:&#xA;$$ \lim_{t \to \infty} g(t) = 0 $$&#xA;Where $g(t)$ is the system impulse response, meaning $u(t) = \delta(t)$, which yields:&#xA;$$ g(t) = \mathcal{L}^{-1}\{G(s) = \dfrac{Y(s)}{U(s)} = Y(s) \} $$&#xA;Example $G(s) = \dfrac{1}{s^2 + 4s - 5}$&#xA;We can rewrite it as: $$ G(s) = \dfrac{1}{s^2 + 4s - 5} = \dfrac{1}{(s - 1)(s + 5)} $$</description>
     </item>
     <item>
       <title>Control theory: Part 7 - Bode plot</title>
       <link>https://rezvan.xyz/school/ERE103/ERE103_7/</link>
       <pubDate>Mon, 13 Nov 2023 00:00:00 +0000</pubDate>
       <guid>https://rezvan.xyz/school/ERE103/ERE103_7/</guid>
-      <description>Introduction In this part we&amp;rsquo;ll begin with the part about frequency analysis.
-Test functions Often when we want to test our system to determine the overall stability, time it takes and the response we get.
-We often test with our unit step function: $$ \sigma(t) = \begin{cases} 1 &amp;amp; t \leq 0 \\ 0 &amp;amp; t &amp;lt; 0 \end{cases} $$
-We call a system response to the unit step function for unit step response.</description>
+      <description>Introduction In this part we&amp;rsquo;ll begin with the part about frequency analysis.&#xA;Test functions Often when we want to test our system to determine the overall stability, time it takes and the response we get.&#xA;We often test with our unit step function: $$ \sigma(t) = \begin{cases} 1 &amp;amp; t \leq 0 \\ 0 &amp;amp; t &amp;lt; 0 \end{cases} $$&#xA;We call a system response to the unit step function for unit step response.</description>
     </item>
     <item>
       <title>Control theory: Part 6 - Space-state representation to transfer function</title>
       <link>https://rezvan.xyz/school/ERE103/ERE103_6/</link>
       <pubDate>Thu, 09 Nov 2023 00:00:00 +0000</pubDate>
       <guid>https://rezvan.xyz/school/ERE103/ERE103_6/</guid>
-      <description>Introduction In this part we&amp;rsquo;ll see how we can go from a given space-state representation to the systems transfer function and vice-versa.
-From space-state to transfer function Given this space-state representation: $$ \begin{cases} \dot{x} &amp;amp; = Ax + Bu &amp;amp; (1) \\ y &amp;amp; = Cx + Du &amp;amp; (2) \end{cases} $$
-We want to find $G_{uy}(s) = \dfrac{Y(s)}{U(s)}$
-Let&amp;rsquo;s Laplace our equation system: $$ \begin{cases} sX(s) &amp;amp; = AX(s) + BU(s) &amp;amp; (1) \\ Y(s) &amp;amp; = CX(s) + DU(S) &amp;amp; (2) \end{cases} $$</description>
+      <description>Introduction In this part we&amp;rsquo;ll see how we can go from a given space-state representation to the systems transfer function and vice-versa.&#xA;From space-state to transfer function Given this space-state representation: $$ \begin{cases} \dot{x} &amp;amp; = Ax + Bu &amp;amp; (1) \\ y &amp;amp; = Cx + Du &amp;amp; (2) \end{cases} $$&#xA;We want to find $G_{uy}(s) = \dfrac{Y(s)}{U(s)}$&#xA;Let&amp;rsquo;s Laplace our equation system: $$ \begin{cases} sX(s) &amp;amp; = AX(s) + BU(s) &amp;amp; (1) \\ Y(s) &amp;amp; = CX(s) + DU(S) &amp;amp; (2) \end{cases} $$</description>
     </item>
     <item>
       <title>Control theory: Part 5 - Space-state representation and linearization</title>
       <link>https://rezvan.xyz/school/ERE103/ERE103_5/</link>
       <pubDate>Tue, 07 Nov 2023 00:00:00 +0000</pubDate>
       <guid>https://rezvan.xyz/school/ERE103/ERE103_5/</guid>
-      <description>Introduction In this part we&amp;rsquo;ll see how we can represent systems using matrix notation, also called space-state representation. Along with how we linearize non-linear systems.
-State variables If we use the spring-mass system from last time, with $F_d$ as input signal and $y$ as output signal.
-We obtained the following differential equation: $$ \ddot{y} = \dfrac{1}{m}(F_d - b\dot{y} - ky) $$
-If we want to represent this system using a set of first-order differential equations instead, we can do the following:</description>
+      <description>Introduction In this part we&amp;rsquo;ll see how we can represent systems using matrix notation, also called space-state representation. Along with how we linearize non-linear systems.&#xA;State variables If we use the spring-mass system from last time, with $F_d$ as input signal and $y$ as output signal.&#xA;We obtained the following differential equation: $$ \ddot{y} = \dfrac{1}{m}(F_d - b\dot{y} - ky) $$&#xA;If we want to represent this system using a set of first-order differential equations instead, we can do the following:</description>
     </item>
     <item>
       <title>Control theory: Part 4 - Models for mechanical systems</title>
       <link>https://rezvan.xyz/school/ERE103/ERE103_4/</link>
       <pubDate>Mon, 06 Nov 2023 00:00:00 +0000</pubDate>
       <guid>https://rezvan.xyz/school/ERE103/ERE103_4/</guid>
-      <description>Introduction In this part we&amp;rsquo;ll see how we can model mechanical systems with controls.
-Models for mechanical systems In this series we&amp;rsquo;ll mainly deal with springs and dampers. Mainly translation motion.
-For springs, we&amp;rsquo;ll of course use Hooke&amp;rsquo;s law: $$ F_s = ky $$
-Where $k$ is the spring constant in $\left[\dfrac{N}{m}\right]$.
-For dampers, we&amp;rsquo;ll use: $$ F_y = b \dot{y} $$
-Where $b$ is the damping constant in $\left[\dfrac{Ns}{m}\right]$.</description>
+      <description>Introduction In this part we&amp;rsquo;ll see how we can model mechanical systems with controls.&#xA;Models for mechanical systems In this series we&amp;rsquo;ll mainly deal with springs and dampers. Mainly translation motion.&#xA;For springs, we&amp;rsquo;ll of course use Hooke&amp;rsquo;s law: $$ F_s = ky $$&#xA;Where $k$ is the spring constant in $\left[\dfrac{N}{m}\right]$.&#xA;For dampers, we&amp;rsquo;ll use: $$ F_y = b \dot{y} $$&#xA;Where $b$ is the damping constant in $\left[\dfrac{Ns}{m}\right]$.</description>
     </item>
     <item>
       <title>Control theory: Part 3 - Controllers in the Laplace domain</title>
       <link>https://rezvan.xyz/school/ERE103/ERE103_3/</link>
       <pubDate>Sun, 05 Nov 2023 00:00:00 +0000</pubDate>
       <guid>https://rezvan.xyz/school/ERE103/ERE103_3/</guid>
-      <description>Introduction In this part we&amp;rsquo;ll define controllers in the Laplace domain.
-Let&amp;rsquo;s firstly cover feedback again.
-$N$th-Order systems In controls, we&amp;rsquo;ll often study system which can be described with differential equations. A $N$th-order system means we can describe said system with a $N$th-order differential equation.
-We also say that the transfer function has degree $N$.
-Feedback system Let&amp;rsquo;s find the general transfer function for a feedback system, from $r(t)$ to $y(t)$.</description>
+      <description>Introduction In this part we&amp;rsquo;ll define controllers in the Laplace domain.&#xA;Let&amp;rsquo;s firstly cover feedback again.&#xA;$N$th-Order systems In controls, we&amp;rsquo;ll often study system which can be described with differential equations. A $N$th-order system means we can describe said system with a $N$th-order differential equation.&#xA;We also say that the transfer function has degree $N$.&#xA;Feedback system Let&amp;rsquo;s find the general transfer function for a feedback system, from $r(t)$ to $y(t)$.</description>
     </item>
     <item>
       <title>Control theory: Part 2 - Transfer functions</title>
       <link>https://rezvan.xyz/school/ERE103/ERE103_2/</link>
       <pubDate>Tue, 31 Oct 2023 00:00:00 +0000</pubDate>
       <guid>https://rezvan.xyz/school/ERE103/ERE103_2/</guid>
-      <description>Introduction In this part we&amp;rsquo;ll define what a transfer function is for a system, and why they are important.
-Let&amp;rsquo;s firstly cover feedback again.
-Feedback system As we discussed last time we&amp;rsquo;ll encounter:
-$v(t)$ - Interference $u(t)$ - Control signal/Input signal $y(t)$ - Response signal/Output signal $r(t)$ - Reference value $e(t)$ - Control error Let&amp;rsquo;s take a real world example
-Example Say that we have a system which controls temperature. We have an initial temperature for 19$^\circ$a.</description>
+      <description>Introduction In this part we&amp;rsquo;ll define what a transfer function is for a system, and why they are important.&#xA;Let&amp;rsquo;s firstly cover feedback again.&#xA;Feedback system As we discussed last time we&amp;rsquo;ll encounter:&#xA;$v(t)$ - Interference $u(t)$ - Control signal/Input signal $y(t)$ - Response signal/Output signal $r(t)$ - Reference value $e(t)$ - Control error Let&amp;rsquo;s take a real world example&#xA;Example Say that we have a system which controls temperature. We have an initial temperature for 19$^\circ$a.</description>
     </item>
     <item>
       <title>Control theory: Part 1 - Introduction</title>
       <link>https://rezvan.xyz/school/ERE103/ERE103/</link>
       <pubDate>Mon, 30 Oct 2023 00:00:00 +0000</pubDate>
       <guid>https://rezvan.xyz/school/ERE103/ERE103/</guid>
-      <description>Introduction Control theory plays a pivotal role in modern systems, ranging from electronics to transportation and industry. In this series, we&amp;rsquo;ll explore the fundamentals of how we can effectively control systems to achieve desired behaviors.
-Definitions Throughout this series, we will delve into methods that ensure systems behave in a desirable manner.
-In a typical system, we encounter:
-$v(t)$ - Interference $u(t)$ - Control signal/Input signal $y(t)$ - Response signal/Output signal Control Control involves producing the output signal solely from the control signal, without any feedback or compensation for disturbances.</description>
+      <description>Introduction Control theory plays a pivotal role in modern systems, ranging from electronics to transportation and industry. In this series, we&amp;rsquo;ll explore the fundamentals of how we can effectively control systems to achieve desired behaviors.&#xA;Definitions Throughout this series, we will delve into methods that ensure systems behave in a desirable manner.&#xA;In a typical system, we encounter:&#xA;$v(t)$ - Interference $u(t)$ - Control signal/Input signal $y(t)$ - Response signal/Output signal Control Control involves producing the output signal solely from the control signal, without any feedback or compensation for disturbances.</description>
     </item>
   </channel>
 </rss>

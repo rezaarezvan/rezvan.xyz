@@ -13,20 +13,14 @@
       <link>https://rezvan.xyz/school/TIF085/TIF085_5/</link>
       <pubDate>Wed, 07 Dec 2022 17:55:57 +0100</pubDate>
       <guid>https://rezvan.xyz/school/TIF085/TIF085_5/</guid>
-      <description>In this part we&amp;rsquo;ll cover light waves and it&amp;rsquo;s properties.
-Light is actually electromagnetic radiation. The visible light we can see is usually between 380 - 740 nm
-General Conventions As we remember from mechanical waves $v = \lambda f$, this also applies for light waves, but our $v$ is instead $c$. $$ c = \lambda f = 3 \cdot 10^8 m/s $$
-If we look at light like usual mechanical waves, it quickly becomes very cluttered in our sketch.</description>
+      <description>In this part we&amp;rsquo;ll cover light waves and it&amp;rsquo;s properties.&#xA;Light is actually electromagnetic radiation. The visible light we can see is usually between 380 - 740 nm&#xA;General Conventions As we remember from mechanical waves $v = \lambda f$, this also applies for light waves, but our $v$ is instead $c$. $$ c = \lambda f = 3 \cdot 10^8 m/s $$&#xA;If we look at light like usual mechanical waves, it quickly becomes very cluttered in our sketch.</description>
     </item>
     <item>
       <title>Waves: Part 1 - Mechanical Waves</title>
       <link>https://rezvan.xyz/school/TIF085/TIF085_4/</link>
       <pubDate>Sun, 04 Dec 2022 17:23:27 +0100</pubDate>
       <guid>https://rezvan.xyz/school/TIF085/TIF085_4/</guid>
-      <description>The next chapter in our physics course is about waves, especially mechanical waves.
-General about Waves In this chapter we&amp;rsquo;ll cover mechanical waves but also electromagnetic waves, in this case only (visible) light.
-There&amp;rsquo;s two types of waves we&amp;rsquo;ll be covering:
-Transverse waves They have &amp;rsquo;noise&amp;rsquo; orthogonal against the wave&amp;rsquo;s propagation speed. Longitudinal waves They have &amp;rsquo;noise&amp;rsquo; parallel with the waves&amp;rsquo; propagation speed. We can describe this noise with the function $y(x, t) = f(x + vt)$.</description>
+      <description>The next chapter in our physics course is about waves, especially mechanical waves.&#xA;General about Waves In this chapter we&amp;rsquo;ll cover mechanical waves but also electromagnetic waves, in this case only (visible) light.&#xA;There&amp;rsquo;s two types of waves we&amp;rsquo;ll be covering:&#xA;Transverse waves They have &amp;rsquo;noise&amp;rsquo; orthogonal against the wave&amp;rsquo;s propagation speed. Longitudinal waves They have &amp;rsquo;noise&amp;rsquo; parallel with the waves&amp;rsquo; propagation speed. We can describe this noise with the function $y(x, t) = f(x + vt)$.</description>
     </item>
   </channel>
 </rss>
