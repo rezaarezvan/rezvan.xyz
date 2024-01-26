@@ -3,12 +3,7 @@ body {
     background-color: #0f0f0f;
 }
 
-::-moz-selection {
-    background: var(--hovercolor);
-    color: #fff;
-    text-shadow: none;
-}
-
+::-moz-selection,
 ::selection {
     background: var(--hovercolor);
     color: #fff;
@@ -25,6 +20,11 @@ img {
     display: block;
     margin: auto;
     width: 80%;
+}
+
+
+footer {
+    border-color: var(--darkMaincolor);
 }
 
 span.katex {
@@ -63,31 +63,24 @@ h6 {
     color: #ddd;
 }
 
-a {
-    border-bottom: 3px solid var(--darkMaincolor);
+a,
+.site-description a,
+.tags a,
+.site-title a {
     color: inherit;
+    text-decoration: none;
 }
 
-a:hover {
+a:hover,
+.tags a:hover,
+.site-description a:hover {
     background-color: var(--hovercolor);
     color: black;
 }
 
-.site-description a {
-    color: #ddd;
-}
-
-.site-description a:hover {
-    color: black;
-}
-
+a,
 .tags a {
     border-bottom: 3px solid var(--darkMaincolor);
-}
-
-.tags a:hover {
-    background-color: var(--hovercolor);
-    color: black;
 }
 
 .site-title a {
@@ -110,13 +103,14 @@ a:hover {
 }
 
 #site-navbar>a:before,
-#site-footer>a:before {
+#site-footer>a:before,
+#site-navbar>a:after,
+#site-footer>a:after {
     display: inline-block;
     content: "[";
 }
 
 #site-navbar>a:after,
 #site-footer>a:after {
-    display: inline-block;
     content: "]";
 }
