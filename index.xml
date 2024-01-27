@@ -6,8 +6,15 @@
     <description>Recent content on rezvan</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 23 Jan 2024 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 26 Jan 2024 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://rezvan.xyz/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Introduction to data science and AI: Part 4 - Data visualization</title>
+      <link>https://rezvan.xyz/school/DAT565/DAT565_4/</link>
+      <pubDate>Fri, 26 Jan 2024 00:00:00 +0000</pubDate>
+      <guid>https://rezvan.xyz/school/DAT565/DAT565_4/</guid>
+      <description>Introduction In this part we&amp;rsquo;ll discuss some principles when it comes to data visualization&#xA;Five-point summary The five-point summary is a very common and effective summary of data to get a quick overview and feeling for the data.&#xA;To understand what the five-point summary tells us, let&amp;rsquo;s first understand quantiles and quartiles.&#xA;A quantile is a cut-point of a distribution (or a dataset). Quantiles are usually obtained by sorting the data and selecting an appropriate value at an appropriate rank.</description>
+    </item>
     <item>
       <title>Introduction to data science and AI: Part 3 - Data munging</title>
       <link>https://rezvan.xyz/school/DAT565/DAT565_3/</link>
