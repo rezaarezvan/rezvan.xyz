@@ -6,8 +6,15 @@
     <description>Recent content in Schools on rezvan</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 19 Jan 2024 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 23 Jan 2024 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://rezvan.xyz/school/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Introduction to data science and AI: Part 3 - Data munging</title>
+      <link>https://rezvan.xyz/school/DAT565/DAT565_3/</link>
+      <pubDate>Tue, 23 Jan 2024 00:00:00 +0000</pubDate>
+      <guid>https://rezvan.xyz/school/DAT565/DAT565_3/</guid>
+      <description>Introduction In this part we&amp;rsquo;re going to discuss different data munging techniques.&#xA;Data munging is the process of transforming &amp;ldquo;raw&amp;rdquo; data into a readable format.&#xA;One of the most common processes is when we want to scrape data from a website.&#xA;HTML The web is built on Hypertext Markup Language.&#xA;HTML form a tree of nested elements, marked with tags.&#xA;&amp;lt;p class=&amp;#34;foo&amp;#34;&amp;gt; bar &amp;lt;/p&amp;gt; This creates a paragraph element.&#xA;&amp;lt;img src=&amp;#34;url&amp;#34; alt=&amp;#34;text&amp;#34;&amp;gt; This creates an image element.</description>
+    </item>
     <item>
       <title>Introduction to data science and AI: Part 2 - Python tools for data science</title>
       <link>https://rezvan.xyz/school/DAT565/DAT565_2/</link>
