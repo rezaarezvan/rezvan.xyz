@@ -6,8 +6,15 @@
     <description>Recent content in Introduction to data science and AI on rezvan</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 26 Jan 2024 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 27 Jan 2024 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://rezvan.xyz/tags/Introduction-to-data-science-and-AI/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Introduction to data science and AI: Part 5 - Statistical analysis</title>
+      <link>https://rezvan.xyz/school/DAT565/DAT565_5/</link>
+      <pubDate>Sat, 27 Jan 2024 00:00:00 +0000</pubDate>
+      <guid>https://rezvan.xyz/school/DAT565/DAT565_5/</guid>
+      <description>Introduction In this part we&amp;rsquo;ll cover some very central and fundamental concepts and theorems from statistics that are used.&#xA;The statistic paradigm The bread and butter of statistics is inferring the properties of the population from a random sample.&#xA;Properties of the random sample are determined by the underlying properties of the population and probability. The random sample can be described in terms of descriptive statistics, such as summary statistics e.</description>
+    </item>
     <item>
       <title>Introduction to data science and AI: Part 4 - Data visualization</title>
       <link>https://rezvan.xyz/school/DAT565/DAT565_4/</link>
