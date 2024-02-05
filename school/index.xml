@@ -6,8 +6,15 @@
     <description>Recent content in Schools on rezvan</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 27 Jan 2024 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 02 Feb 2024 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://rezvan.xyz/school/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Introduction to data science and AI: Part 6 - Mathematical models</title>
+      <link>https://rezvan.xyz/school/DAT565/DAT565_6/</link>
+      <pubDate>Fri, 02 Feb 2024 00:00:00 +0000</pubDate>
+      <guid>https://rezvan.xyz/school/DAT565/DAT565_6/</guid>
+      <description>Introduction In this part we&amp;rsquo;ll cover some central mathematical models and their applications.&#xA;Mathematical models All models are wrong, but some models are useful - George Box&#xA;Before we start, let&amp;rsquo;s remember that a model is not perfect by any means, and it is just a tool for a subset of tasks.&#xA;Linear VS. Non-linear models Let&amp;rsquo;s define what a linear and non-linear model is.&#xA;In mathematics, a linear polynomial has the form $f(x) = ax + b$ for some constants $a, b$, so it corresponds to a line drawn on the Cartesian plane.</description>
+    </item>
     <item>
       <title>Introduction to data science and AI: Part 5 - Statistical analysis</title>
       <link>https://rezvan.xyz/school/DAT565/DAT565_5/</link>
