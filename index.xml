@@ -804,14 +804,14 @@
       <link>https://rezvan.xyz/posts/julia/</link>
       <pubDate>Tue, 23 Aug 2022 21:00:47 +0200</pubDate>
       <guid>https://rezvan.xyz/posts/julia/</guid>
-      <description>I&amp;rsquo;ve recently felt the urge to make some math-related projects and visualization projects. So I picked up Julia and have so far learned the basics of the language - it&amp;rsquo;s a quite simple and dynamic language which I appreciate, especially after my most recent projects have been in C/C++ and Rust - it&amp;rsquo;s a great refresh in programming. So far I&amp;rsquo;ve made quite small projects with a lot of built-in libraries.</description>
+      <description>I&amp;rsquo;ve recently felt the urge to make some math-related projects and visualization projects. So I picked up Julia and have so far learned the basics of the language - it&amp;rsquo;s a quite simple and dynamic language which I appreciate, especially after my most recent projects have been in C/C++ and Rust - it&amp;rsquo;s a great refresh in programming.&#xA;So far I&amp;rsquo;ve made quite small projects with a lot of built-in libraries.</description>
     </item>
     <item>
       <title>Vim-like editor</title>
       <link>https://rezvan.xyz/posts/editor/</link>
       <pubDate>Wed, 10 Aug 2022 21:04:50 +0200</pubDate>
       <guid>https://rezvan.xyz/posts/editor/</guid>
-      <description>I&amp;rsquo;ve wanted to learn Rust for a long time - I&amp;rsquo;ve dabbled and manged to learn the basic syntax a while ago. However you haven&amp;rsquo;t truly learnt a language until you made a project and the code would be considered &amp;lsquo;idiomatic&amp;rsquo; - or at least in my opinion. So I decided to make a Vim-like text editor. I took a lot of inspiration from this post from medium, so all credits to Kofi.</description>
+      <description>I&amp;rsquo;ve wanted to learn Rust for a long time - I&amp;rsquo;ve dabbled and manged to learn the basic syntax a while ago. However, you haven&amp;rsquo;t truly learned a language until you made a project and the code would be considered &amp;lsquo;idiomatic&amp;rsquo; - or at least in my opinion.&#xA;So I decided to make a Vim-like text editor. I took a lot of inspiration from this post from medium, so all credits to Kofi.</description>
     </item>
     <item>
       <title>My personal bucket list</title>
@@ -825,7 +825,7 @@
       <link>https://rezvan.xyz/posts/initialpost/</link>
       <pubDate>Fri, 29 Jul 2022 17:18:30 +0200</pubDate>
       <guid>https://rezvan.xyz/posts/initialpost/</guid>
-      <description>This is just a initial post - I&amp;rsquo;ll mainly write about things I find fascinating/interesting on this site :).</description>
+      <description>This is just an initial post - I&amp;rsquo;ll mainly write about things I find fascinating/interesting on this site :).</description>
     </item>
   </channel>
 </rss>
