@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Thermodynamics on rezvan</title>
+    <link>https://rezvan.xyz/school/thermodynamics/</link>
+    <description>Recent content in Thermodynamics on rezvan</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 28 Nov 2022 18:14:58 +0100</lastBuildDate>
+    <atom:link href="https://rezvan.xyz/school/thermodynamics/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Thermodynamics: Lecture 3</title>
+      <link>https://rezvan.xyz/school/tif085/tif085_3/</link>
+      <pubDate>Mon, 28 Nov 2022 18:14:58 +0100</pubDate>
+      <guid>https://rezvan.xyz/school/tif085/tif085_3/</guid>
+      <description>In this part we&amp;rsquo;ll cover the 2nd law of thermodynamics - as well as summarize this field of physics.&#xA;Direction for $W$ and $Q$ As we&amp;rsquo;ve seen the work, $W$ and $Q$ is quite important. So let&amp;rsquo;s set up some general guide lines.&#xA;Generally, in a given thermal system:&#xA;A expansion, $(V_f &amp;gt; V_i), \rightarrow W &amp;gt; 0$ A compression, $(V_f &amp;lt; V_i), \rightarrow W &amp;lt; 0$&#xA;Increase in temperature $\Delta T &amp;gt; 0, (T_f &amp;gt; T_i), \rightarrow Q &amp;gt; 0$ Decrease in temperature $\Delta T &amp;lt; 0, (T_f &amp;lt; T_i), \rightarrow Q &amp;lt; 0$</description>
+    </item>
+    <item>
+      <title>Thermodynamics: Lecture 2</title>
+      <link>https://rezvan.xyz/school/tif085/tif085_2/</link>
+      <pubDate>Sat, 26 Nov 2022 00:04:21 +0100</pubDate>
+      <guid>https://rezvan.xyz/school/tif085/tif085_2/</guid>
+      <description>Ideal gases An &amp;lsquo;ideal&amp;rsquo; gas is a gas that is not subject to interparticle interactions. Also commonly said to not being subject to &amp;lsquo;react with other substances&amp;rsquo;.&#xA;In many applications of thermodynamics, ideal gases often come up, so it&amp;rsquo;s natural to understand them within a thermodynamic perspective.&#xA;Gases and Pressure Before we begin with the real thermodynamical part of gases we need a bit of background with gases. Boyle&amp;rsquo;s law gives us a mathematical formula for our intuition of gases.</description>
+    </item>
+    <item>
+      <title>Thermodynamics: Lecture 1</title>
+      <link>https://rezvan.xyz/school/tif085/tif085/</link>
+      <pubDate>Thu, 24 Nov 2022 17:57:38 +0100</pubDate>
+      <guid>https://rezvan.xyz/school/tif085/tif085/</guid>
+      <description>In my physics course we have recently began with the thermodynamics part of physics.&#xA;It&amp;rsquo;s quite overwhelming but at the same time it&amp;rsquo;s really fun. So I&amp;rsquo;ll just post and explain everything I learn in class here - since it&amp;rsquo;s a really good way of learning, explaining. As the late and incredible Richard Feynman once said:&#xA;If you cannot explain something in simple terms, you don&amp;rsquo;t understand it - Richard Feynman</description>
+    </item>
+  </channel>
+</rss>

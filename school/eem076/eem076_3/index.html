@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html><head lang="en">
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"><title>rezvan | Electrical Circuits and Fields: Part 3 - Node-voltage analysis, superposition, equivalent circuits</title><link rel="icon" type="image/png" href="https://rezvan.xyz/images/icon.png" /><meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description"
+        content="When analyzing and computing with circuits, it&rsquo;s often a good idea to try to simply as much as possible.
+But when met with a circuit like: We can try all we want to simplify it, with our current knowledge, we simply can&rsquo;t.
+So let&rsquo;s learn about Node-Voltage analysis.
+Node-Voltage analysis Below is a picture that illustrates the idea: Here&rsquo;s the idea:
+Find the nodes Assign a reference node (usually, we pick the node with most connections) Assign node voltages (Note, in a circuit with, $N$, nodes we have, $N - 1$, voltages) Then we solve these using KCL on each node ($\sum\ i_{out} = \sum\ i_{in}$) The convention is also the following:" />
+    <meta property="og:image" content="https://raw.githubusercontent.com/rezaarezvan/rezvan.xyz/main/images/icon.png" />
+    <meta property="og:title" content="Electrical Circuits and Fields: Part 3 - Node-voltage analysis, superposition, equivalent circuits" />
+<meta property="og:description" content="When analyzing and computing with circuits, it&rsquo;s often a good idea to try to simply as much as possible.
+But when met with a circuit like: We can try all we want to simplify it, with our current knowledge, we simply can&rsquo;t.
+So let&rsquo;s learn about Node-Voltage analysis.
+Node-Voltage analysis Below is a picture that illustrates the idea: Here&rsquo;s the idea:
+Find the nodes Assign a reference node (usually, we pick the node with most connections) Assign node voltages (Note, in a circuit with, $N$, nodes we have, $N - 1$, voltages) Then we solve these using KCL on each node ($\sum\ i_{out} = \sum\ i_{in}$) The convention is also the following:" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://rezvan.xyz/school/eem076/eem076_3/" /><meta property="article:section" content="school" />
+<meta property="article:published_time" content="2023-03-24T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-03-24T00:00:00+00:00" />
+
+<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Electrical Circuits and Fields: Part 3 - Node-voltage analysis, superposition, equivalent circuits"/>
+<meta name="twitter:description" content="When analyzing and computing with circuits, it&rsquo;s often a good idea to try to simply as much as possible.
+But when met with a circuit like: We can try all we want to simplify it, with our current knowledge, we simply can&rsquo;t.
+So let&rsquo;s learn about Node-Voltage analysis.
+Node-Voltage analysis Below is a picture that illustrates the idea: Here&rsquo;s the idea:
+Find the nodes Assign a reference node (usually, we pick the node with most connections) Assign node voltages (Note, in a circuit with, $N$, nodes we have, $N - 1$, voltages) Then we solve these using KCL on each node ($\sum\ i_{out} = \sum\ i_{in}$) The convention is also the following:"/>
+<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@1,500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
+
+    
+    
+    <link rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/main.1c8bcd5d4ada46afe0c47c75ab955bba6342e70592bc9462fe26a21c59920c6b.css" />
+    <link id="lightSyntaxStyle" rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/light_syntax.65408cc3a5c02070b661c3e4e79306fc261cc63620f4adce9a30eafcba4ab79e.css" />
+    
+    <link id="darkModeStyle" rel="stylesheet" type="text/css" href="https://rezvan.xyz/css/dark.f21f1f72304fd4373b0a82b421dac836220c43b1e924ed3811cbe84f5c8a1b3f.css"  disabled />
+    <link id="darkSyntaxStyle" rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/dark_syntax.2b10cc1a2156b30874a063b7439a993bc3b43d476c5e1d8598d769c929c7b381.css" />
+    
+
+    
+    
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+        </script>
+
+    
+    <script type="text/x-mathjax-config">
+		MathJax.Hub.Config({
+			tex2jax: {
+				inlineMath: [['$','$'], ['\\(','\\)']],
+				displayMath: [['$$','$$'], ['\[','\]']],
+				processEscapes: true,
+				processEnvironments: true,
+				skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+				TeX: { equationNumbers: { autoNumber: "AMS" },
+						 extensions: ["AMSmath.js", "AMSsymbols.js"] }
+			}
+		});
+		</script>
+    
+
+    
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js"
+        onload="renderMathInElement(document.body);"></script>
+
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            renderMathInElement(document.body, {
+                delimiters: [
+                    {left: "$$", right: "$$", display: true},
+                    {left: "$", right: "$", display: false}
+                ]
+            });
+        });
+    </script>
+    
+
+    
+</head>
+<body>
+    <div class="content"><header>
+    <nav id="site-navbar">
+        
+        <a href="/">home</a>
+        
+        <a href="/about">about</a>
+        
+        <a href="/principles">principles</a>
+        
+        <a href="/contact">contact</a>
+        
+        <a href="/cv">cv</a>
+        
+        <a href="/school">school</a>
+        
+        | <span id="dark-mode-toggle" onclick="toggleTheme()"></span>
+        <script src="https://rezvan.xyz/js/themetoggle.js"></script>
+        
+    </nav>
+</header>
+
+<main>
+    <article>
+        <div class="title">
+            <h1>Electrical Circuits and Fields: Part 3 - Node-voltage analysis, superposition, equivalent circuits</h1>
+            <div class="meta">Posted on Mar 24, 2023</div>
+        </div>
+        
+        <section class="body">
+            <p>When analyzing and computing with circuits, it&rsquo;s often a good idea to try to simply as much as possible.</p>
+<p>But when met with a circuit like:
+<img src="/school/images/MS.png#center" alt=""></p>
+<p>We can try all we want to simplify it, with our current knowledge, we simply can&rsquo;t.</p>
+<p>So let&rsquo;s learn about <strong>Node-Voltage</strong> analysis.</p>
+<h3 id="node-voltage-analysis">Node-Voltage analysis</h3>
+<p>Below is a picture that illustrates the idea:
+<img src="/school/images/NVA.png#center" alt=""></p>
+<p>Here&rsquo;s the idea:</p>
+<ol>
+<li>Find the nodes</li>
+<li>Assign a reference node (usually, we pick the node with most connections)</li>
+<li>Assign node voltages (Note, in a circuit with, $N$, nodes we have, $N - 1$, voltages)</li>
+<li>Then we solve these using KCL on each node ($\sum\ i_{out} = \sum\ i_{in}$)</li>
+</ol>
+<p>The convention is also the following:</p>
+<ul>
+<li>
+<p>Consider $i_{out}$ in resistors</p>
+</li>
+<li>
+<p>Consider $i_{out}$ as positive</p>
+</li>
+<li>
+<p>$V_{current} - V_{adjacent}$</p>
+</li>
+</ul>
+<p>So, if we solve the example we get:</p>
+<p>Using KCL on the first node:
+$$
+\frac{v_1}{2} + \frac{v_1 - v_2}{5} = 3.1
+$$</p>
+<p>For the second node:
+$$
+\frac{v_2}{1} + \frac{v_2 - v_1}{5} = -(-1.4)
+$$</p>
+<p>Solving for $v_1$ and $v_2$ we get:
+$$
+v_1 = 5 V \newline
+v_2 = 2 V \newline
+$$</p>
+<p>Notice that we can do this in a matrix form as well:
+$$
+\begin{bmatrix}
+0.7 &amp; -0.2 \newline
+-0.2 &amp; 1.2
+\end{bmatrix}
+$$</p>
+<h3 id="supernode">Supernode</h3>
+<p>Voltage source between nodes that are not the reference node.</p>
+<p>Solution: we treat it as one node.</p>
+<h3 id="mesh-current-analysis">Mesh-Current analysis</h3>
+<p>Is the opposite of Node-voltage analysis. Therefore, we just apply KVL instead of KCL. Note that this only forks for <strong>planar circuits</strong>.</p>
+<blockquote>
+<p>Planar circuit: It is possible to draw it in a plane without crossing wires.</p>
+</blockquote>
+<p>Example:
+<img src="/school/images/MCA.png#center" alt="">
+$$
+-5 + 4i_1 + 2(i_1 - i_2) - 2 = 0 \newline
+2 + 2(i_2 - i_1) + 5i_2 + 1 = 0
+$$</p>
+<h3 id="supermesh">Supermesh</h3>
+<p>Same principle as super node but for the mesh-current.</p>
+<h3 id="superposition">Superposition</h3>
+<p>As the name suggest, it&rsquo;s the principle that, given a linear system, the net response caused by two or more stimuli is the sum of these respones.</p>
+<p>In our case, the stimuli are voltage/current sources.</p>
+<p>So our method is:</p>
+<ul>
+<li>
+<p>Leave <strong>one</strong> source ON and turn all other sources OFF.</p>
+<ul>
+<li>
+<p>Voltage sources: $v = 0$, these become <em>short circuits</em>.</p>
+</li>
+<li>
+<p>Current sources: $i = 0$, these become <em>open circuits</em>.</p>
+</li>
+</ul>
+</li>
+<li>
+<p>Add the resulting responses to find the total response.</p>
+</li>
+</ul>
+<p>Example:
+<img src="/school/images/SP1.png#center" alt=""></p>
+<p>Let&rsquo;s call the circuit when we turn off the current source for $i^\prime_{x}$,
+and the circuit when we turn off the voltage source for $i^{\prime \prime}_{x}$.</p>
+<p>The circuit for $i^\prime_x$ becomes:
+<img src="/school/images/SP2.png#center" alt=""></p>
+<p>We can easily solve this:</p>
+<p>$$
+V   = R \cdot\ I \newline
+3 V = R_{eq} \cdot\ i^{\prime}_{x} \newline
+i^\prime_x = \frac{3 V}{6 \Omega + 9 \Omega} = 0.2 A
+$$</p>
+<p>The circuit for $i^{\prime \prime}_x$ becomes:a
+<img src="/school/images/SP3.png#center" alt=""></p>
+<p>We can solve this by:
+$$
+R_{eq} = \frac{R_1 R_2}{(R_1 + R_2)} \newline
+V = i_{total} \cdot\ R_{eq} \newline
+$$</p>
+<p>$$
+i_x^{\prime \prime}= \frac{V}{R_{i^{\prime \prime}_x}}
+$$</p>
+<p>$$
+i_x^{\prime \prime} = i_{total} \cdot\ \frac{R_6}{(R_6 + R_{i^{\prime \prime}_x})} \newline
+i_x^{\prime \prime} = 2 A \cdot\ \frac{6 \Omega}{6 \Omega + 9 \Omega} = 0.8 A
+$$</p>
+<p>Finally, using the actual superposition principle:
+$$
+i_x = i^\prime_x + i^{\prime \prime}_x = 0.2 + 0.8 A = \boxed{1.0 A}
+$$</p>
+<h3 id="equivalent-circuits">Equivalent circuits</h3>
+<p>When dealing with complex circuits, like the one we encountered earlier, with our current knowledge it takes a lot of time and effort to simplify circuits.</p>
+<p>Luckily, there&rsquo;s more powerful method to find equivalent circuits.</p>
+<p>It&rsquo;s called the <em>Thévenin equivalent circuits</em> and <em>Norton equivalent circuits</em>.</p>
+<p>The idea is the following:
+<img src="/school/images/TN.png#center" alt=""></p>
+<p>We take a complex network and transform it to just a single voltage source and resistor.</p>
+<p>These are called the Thévenin voltage and resistance. We&rsquo;ll see later why we&rsquo;ll want to name these.</p>
+<p>But how do we actually do this transformation?</p>
+<ol>
+<li>
+<p>Disconnect the &ldquo;load&rdquo;, $R_L$.</p>
+</li>
+<li>
+<p>Find the open circuit voltage, $V_{oc}$.</p>
+</li>
+<li>
+<p>Find the equivalent resistance, $R_{eq}$, of the network with all independent sources turned off.</p>
+</li>
+<li>
+<p>Then:</p>
+<ul>
+<li>
+<p>$V_{TH} = V_{oc}$</p>
+</li>
+<li>
+<p>$R_{TH} = R_{eq}$</p>
+</li>
+</ul>
+</li>
+</ol>
+<p>Example:
+<img src="/school/images/TEC.png#center" alt=""></p>
+<p>Let&rsquo;s now disconnect $R_L$ and find the open circuit voltage:
+<img src="/school/images/TEC1.png#center" alt=""></p>
+<p>$$
+V_{oc} = V_6 \quad | \quad \text{Since they are in parallel} \newline
+V_6 = V_{total} \cdot\ \frac{R_6}{(R_3 + R_6)} = 12 V \cdot\ \frac{6 \Omega}{3 \Omega + 6 \Omega} = 8 V \newline
+V_{TH} = V_{oc} = 8 V
+$$</p>
+<p>Notice how we didn&rsquo;t include the $R_7$, this is due to the fact that, no current is going through that resistor!</p>
+<p>Next step, let&rsquo;s find the $R_eq$ for this circuit. <strong>Don&rsquo;t forget to turn OFF all independent sources!</strong>:
+<img src="/school/images/TEC2.png#center" alt=""></p>
+<p>$$
+R_{eq} = R_{3 || 6} + R_7 = 2 \Omega + 7 \Omega = 9 \Omega \newline
+R_{TH} = R_{eq} = 9 \Omega
+$$</p>
+<p>Therefore, the final equivalent circuit is:
+<img src="/school/images/TECF.png#center" alt=""></p>
+<h3 id="norton-equivalent-circuits">Norton equivalent circuits</h3>
+<p>Norton equivalent is the same idea, but we replace the voltage source with a current source, and make the resistors parallel instead:
+<img src="/school/images/NEC.png" alt=""></p>
+<p>The method for finding a Norton equivalent circuit is:</p>
+<ol>
+<li>
+<p>Replace the load with a <strong>short circuit</strong>.</p>
+</li>
+<li>
+<p>Find the <strong>short circuit</strong> current, $I_{sc}$.</p>
+</li>
+<li>
+<p>Find the equivalent resistance, $R_{eq}$, of the network with all independent sources turned off.</p>
+</li>
+<li>
+<p>Then:</p>
+<ul>
+<li>$I_N = I_{sc}$</li>
+<li>$R_N = R_{eq}$</li>
+</ul>
+</li>
+</ol>
+<h3 id="source-transformation">Source transformation</h3>
+<p>Now comes the beauty with all of this, we can transform a Thévenin equivalent circuit to a Norton equivalent circuit!</p>
+<p>It&rsquo;s quite obvious because:
+$$
+R_{TH} = R_{N} = R_{eq} \newline
+$$</p>
+<p>But the beauty is:
+$$
+V_{TH} = I_{N} \cdot\ R_{eq}
+$$</p>
+<p>Using Ohm&rsquo;s law, we can easily just convert one type of circuit to the corresponding other type!</p>
+<p>We&rsquo;ll be using this tool a lot in future for analyzing circuits!</p>
+
+        </section>
+    </article>
+
+    <nav class="navigation"
+        style="display: flex; justify-content: space-between; align-items: center; margin-top: 20px;">
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+
+        
+        
+        <a class="previous" href="/school/eem076/eem076_2/" title="Previous: Electrical Circuits and Fields: Part 2 - Power &amp; Energy"
+            style="flex-grow: 1; text-align: left;">&larr; Previous</a>
+        
+        
+
+        <div style="flex-grow: 2; text-align: center;"></div>
+
+        
+        
+        <a class="next" href="/school/eem076/eem076_4/" title="Next: Electrical Circuits and Fields: Part 4 - Capacitance, inductance, timevarying currents and voltages"
+            style="flex-grow: 1; text-align: right;">Next &rarr;</a>
+        
+        
+    </nav>
+</main>
+<footer id="site-footer">
+    
+    <a href="https://github.com/rezaarezvan" title="">github</a>
+    
+    <a href="https://x.com/rzvan__/" title="">x</a>
+    <p class="footer_msg">memento mori</p></footer><script>
+    feather.replace()
+</script></div>
+</body>
+
+</html>

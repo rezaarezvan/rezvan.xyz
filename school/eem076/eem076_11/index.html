@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html><head lang="en">
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"><title>rezvan | Electrical Circuits and Fields: Part 11 - Calculation methods for AC-circuits</title><link rel="icon" type="image/png" href="https://rezvan.xyz/images/icon.png" /><meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description"
+        content="In this part we&rsquo;ll cover all calculation methods that we&rsquo;ll use for AC-circuits.
+Equivalent Impedance Given the circuit and that $\omega = 5 \dfrac{rad}{s}$ - find the equivalent output impedance:
+As we discussed in the last part, our resistor rules, for series and parallel apply for impedance as well.
+Let&rsquo;s first quickly convert the capacitor and inductor to Ohm.
+For our capacitor: $$ \begin{align*} Z_{C} &amp; = \dfrac{1}{j\omega C} \newline &amp; = -j \cdot\ \dfrac{1}{\omega C} \newline &amp; = -j \cdot\ \dfrac{1}{5 \cdot\ 500 \cdot\ 10^{-3}}\ [\Omega] \newline &amp; = -j 0." />
+    <meta property="og:image" content="https://raw.githubusercontent.com/rezaarezvan/rezvan.xyz/main/images/icon.png" />
+    <meta property="og:title" content="Electrical Circuits and Fields: Part 11 - Calculation methods for AC-circuits" />
+<meta property="og:description" content="In this part we&rsquo;ll cover all calculation methods that we&rsquo;ll use for AC-circuits.
+Equivalent Impedance Given the circuit and that $\omega = 5 \dfrac{rad}{s}$ - find the equivalent output impedance:
+As we discussed in the last part, our resistor rules, for series and parallel apply for impedance as well.
+Let&rsquo;s first quickly convert the capacitor and inductor to Ohm.
+For our capacitor: $$ \begin{align*} Z_{C} &amp; = \dfrac{1}{j\omega C} \newline &amp; = -j \cdot\ \dfrac{1}{\omega C} \newline &amp; = -j \cdot\ \dfrac{1}{5 \cdot\ 500 \cdot\ 10^{-3}}\ [\Omega] \newline &amp; = -j 0." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://rezvan.xyz/school/eem076/eem076_11/" /><meta property="article:section" content="school" />
+<meta property="article:published_time" content="2023-05-08T16:36:54+02:00" />
+<meta property="article:modified_time" content="2023-05-08T16:36:54+02:00" />
+
+<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Electrical Circuits and Fields: Part 11 - Calculation methods for AC-circuits"/>
+<meta name="twitter:description" content="In this part we&rsquo;ll cover all calculation methods that we&rsquo;ll use for AC-circuits.
+Equivalent Impedance Given the circuit and that $\omega = 5 \dfrac{rad}{s}$ - find the equivalent output impedance:
+As we discussed in the last part, our resistor rules, for series and parallel apply for impedance as well.
+Let&rsquo;s first quickly convert the capacitor and inductor to Ohm.
+For our capacitor: $$ \begin{align*} Z_{C} &amp; = \dfrac{1}{j\omega C} \newline &amp; = -j \cdot\ \dfrac{1}{\omega C} \newline &amp; = -j \cdot\ \dfrac{1}{5 \cdot\ 500 \cdot\ 10^{-3}}\ [\Omega] \newline &amp; = -j 0."/>
+<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@1,500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
+
+    
+    
+    <link rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/main.1c8bcd5d4ada46afe0c47c75ab955bba6342e70592bc9462fe26a21c59920c6b.css" />
+    <link id="lightSyntaxStyle" rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/light_syntax.65408cc3a5c02070b661c3e4e79306fc261cc63620f4adce9a30eafcba4ab79e.css" />
+    
+    <link id="darkModeStyle" rel="stylesheet" type="text/css" href="https://rezvan.xyz/css/dark.f21f1f72304fd4373b0a82b421dac836220c43b1e924ed3811cbe84f5c8a1b3f.css"  disabled />
+    <link id="darkSyntaxStyle" rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/dark_syntax.2b10cc1a2156b30874a063b7439a993bc3b43d476c5e1d8598d769c929c7b381.css" />
+    
+
+    
+    
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+        </script>
+
+    
+    <script type="text/x-mathjax-config">
+		MathJax.Hub.Config({
+			tex2jax: {
+				inlineMath: [['$','$'], ['\\(','\\)']],
+				displayMath: [['$$','$$'], ['\[','\]']],
+				processEscapes: true,
+				processEnvironments: true,
+				skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+				TeX: { equationNumbers: { autoNumber: "AMS" },
+						 extensions: ["AMSmath.js", "AMSsymbols.js"] }
+			}
+		});
+		</script>
+    
+
+    
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js"
+        onload="renderMathInElement(document.body);"></script>
+
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            renderMathInElement(document.body, {
+                delimiters: [
+                    {left: "$$", right: "$$", display: true},
+                    {left: "$", right: "$", display: false}
+                ]
+            });
+        });
+    </script>
+    
+
+    
+</head>
+<body>
+    <div class="content"><header>
+    <nav id="site-navbar">
+        
+        <a href="/">home</a>
+        
+        <a href="/about">about</a>
+        
+        <a href="/principles">principles</a>
+        
+        <a href="/contact">contact</a>
+        
+        <a href="/cv">cv</a>
+        
+        <a href="/school">school</a>
+        
+        | <span id="dark-mode-toggle" onclick="toggleTheme()"></span>
+        <script src="https://rezvan.xyz/js/themetoggle.js"></script>
+        
+    </nav>
+</header>
+
+<main>
+    <article>
+        <div class="title">
+            <h1>Electrical Circuits and Fields: Part 11 - Calculation methods for AC-circuits</h1>
+            <div class="meta">Posted on May 8, 2023</div>
+        </div>
+        
+        <section class="body">
+            <p>In this part we&rsquo;ll cover all calculation methods that we&rsquo;ll use for AC-circuits.</p>
+<h3 id="equivalent-impedance">Equivalent Impedance</h3>
+<p>Given the circuit and that $\omega = 5 \dfrac{rad}{s}$ - find the equivalent output impedance:</p>
+<p><img src="/school/images/EQI.png#center" alt=""></p>
+<p>As we discussed in the last part, our resistor rules, for series and parallel apply for impedance as well.</p>
+<p>Let&rsquo;s first quickly convert the capacitor and inductor to Ohm.</p>
+<p>For our capacitor:
+$$
+\begin{align*}
+Z_{C} &amp; = \dfrac{1}{j\omega C} \newline
+&amp; = -j \cdot\ \dfrac{1}{\omega C} \newline
+&amp; = -j \cdot\ \dfrac{1}{5 \cdot\ 500 \cdot\ 10^{-3}}\ [\Omega] \newline
+&amp; = -j 0.4\ \Omega
+\end{align*}
+$$</p>
+<p>Same procedure for our inductor:</p>
+<p>$$
+\begin{align*}
+Z_{L} &amp; = j\omega L \newline
+&amp; = j(5 \cdot\ 2)\ [\Omega] \newline
+&amp; = j10 \Omega
+\end{align*}
+$$</p>
+<p>Which means we have the following circuit now:</p>
+<p><img src="/school/images/EQII.png#center" alt=""></p>
+<p>Now, let&rsquo;s simplify our impedance!</p>
+<p>$$
+\begin{align*}
+Z_{eq\ 6\ ||\ -j0.4} &amp; = \dfrac{(6)(-j0.4)}{6 - j0.4} \newline
+&amp; = \dfrac{-j2.4}{6 - j0.4} \newline
+&amp; = \dfrac{(-j2.4)(6 + j0.4)}{(6 - j0.4)(6 + j0.4)} \newline
+&amp; = \dfrac{(-j2.4)(6 + j0.4)}{36.16} \newline
+&amp; = \dfrac{(-j14.4 + 0.96)}{36.16} \newline
+&amp; = \dfrac{(-j14.4 + 0.96)}{36.16 \angle 0^{\circ}} \newline
+&amp; = \dfrac{(14.43 \angle -86.18^{\circ})}{36.16 \angle 0^{\circ}} \newline
+&amp; = \dfrac{14.43}{36.16} \angle -86.18^{\circ} \newline
+&amp; = \dfrac{14.43}{36.16} \angle -86.18^{\circ} \newline
+&amp; = 0.399 \angle -86.18^{\circ} \newline
+&amp; = 0.026 -j0.39 \Omega
+\end{align*}
+$$</p>
+<p>$$
+\begin{align*}
+Z_{eq series} &amp; = -j + j10 + 0.026 - j0.39 \newline
+&amp; = 0.026 + j8.61 \Omega
+\end{align*}
+$$</p>
+<p>$$
+\begin{align*}
+Z_{eq\ 10 ||\ 0.026 + j8.61} &amp; = \dfrac{(10)(0.026 + j8.61)}{10 + 0.026 + j8.61} \newline
+&amp; = \dfrac{0.26 + j86.1}{10.026 + j8.61} \newline
+&amp; = \dfrac{86.1 \angle 89.82^{\circ}}{13.21 \angle 40.65^{\circ}} \newline
+&amp; = \dfrac{86.1}{13.21} \angle 89.82 - 40.65^{\circ} \newline
+&amp; = \boxed{6.51 \angle 49.17^{\circ}\ \Omega}
+\end{align*}
+$$</p>
+<h3 id="multiple-sources">Multiple sources</h3>
+<p>Given this circuit, and that $\omega = 2 \dfrac{rad}{s}$ $I_{c} = 2 \angle 28^{\circ}$ - find $\mathbf{I}_S$ and $I(t)$</p>
+<p><img src="/school/images/MSI.png#center" alt=""></p>
+<p>Here we can utilize Ohm&rsquo;s law:
+$$
+\begin{align*}
+V_{c} &amp; = I_{c} Z_{c} \newline
+&amp; = \dfrac{1}{j\omega C} I_{c} \newline
+&amp; = -j \dfrac{1}{\omega C} I_{c} \newline
+&amp; = -j \dfrac{1}{2} (2 \angle 28^{\circ}) \newline
+&amp; = (-j0.5)(2 \angle 28^{\circ}) \newline
+&amp; = (\dfrac{1}{2} \angle -90^{\circ})(2 \angle 28^{\circ}) \newline
+&amp; = \dfrac{1}{2} \cdot\ 2 -90 + 28^{\circ} \newline
+&amp; = 1 - 62^{\circ}
+\end{align*}
+$$</p>
+<p>We know that $V_{R_2} = V_{C}$ since they are in parallel!</p>
+<p>$$
+\begin{align*}
+I_{R_2} &amp; = \dfrac{V_{R_2}}{Z_{R_{2}}} \newline
+&amp; = \dfrac{V_{C}}{Z_{R_{2}}} \newline
+&amp; = \dfrac{V_{C}}{2} \newline
+&amp; = \dfrac{1}{2} \angle - 62^{\circ}
+\end{align*}
+$$</p>
+<p>Using Kirchhoff&rsquo;s current law we know that:
+$$
+\begin{align*}
+\mathbf{I_S} &amp; = I_{R_2} + I_{C} \newline
+&amp; = (\dfrac{1}{2} \angle - 62^{\circ}) + (2 \angle 28^{\circ}) \newline
+&amp; = (0.23 -j0.44) + (1.76 + j0.93) \newline
+&amp; = 1.99 + j0.49 \newline
+&amp; = \boxed{2.04 \angle 13.83^{\circ}}
+\end{align*}
+$$</p>
+<p>Which means that $I(t)$:
+$$
+\boxed{I(t) = 2.04 cos(2t + 13.83^{\circ}) A}
+$$</p>
+<h3 id="node-analysis">Node Analysis</h3>
+<p>Given this circuit, find $V_1$ and $V_2$:</p>
+<p><img src="/school/images/NAI.png#center" alt=""></p>
+<p>Let&rsquo;s perform our node analysis algorithm here:</p>
+<p>For $V_1$:
+$$
+\begin{align*}
+&amp; -1 \angle 0^{\circ} + \dfrac{V_1}{5} + \dfrac{V_1}{-j10} + \dfrac{V_1 - V_2}{-j5} + \dfrac{V_1 - V_2}{j10} = 0 \newline
+&amp; \dfrac{V_1}{5} + j\dfrac{V_1}{10} + j\dfrac{V_1 - V_2}{5} - j\dfrac{V_1 - V_2}{10} = 1 \newline
+&amp; 0.2V_1 + j0.1V_1 + j0.2(V_1 - V_2) - j0.1(V_1 - V_2) = 1 \newline
+&amp; 0.2V_1 + j0.1V_1 + j0.2V_1 - j0.2V_2 -j0.1V_1 + j0.1V_2 = 1 \newline
+&amp; 0.2V_1 + j0.2V_1 - j0.1V_2 = 1 \newline
+&amp; (0.2 + j0.2)V_1 - j0.1V_2 = 1 \newline
+&amp; (0.2 + j0.2)V_1 = 1 + j0.1V_2 \newline
+&amp; V_1 = \dfrac{1 + j0.1V_2}{0.2 + j0.2}
+\end{align*}
+$$</p>
+<p>For $V_2$:
+$$
+\begin{align*}
+&amp; \dfrac{V_2 - V_1}{-j5} + \dfrac{V_2 - V_1}{j10} + \dfrac{V_2}{j5} + \dfrac{V_2}{10} + 0.5 \angle 90^{\circ} = 0 \newline
+&amp; j\dfrac{V_2 - V_1}{5} - j\dfrac{V_2 - V_1}{10} - \dfrac{V_2}{5} + \dfrac{V_2}{10} - j0.5 = 0 \newline
+&amp; j0.2(V_2 - V_1) - j0.1(V_2 - V_1) - 0.2V_2 + 0.1V_2 - j0.5 = 0 \newline
+&amp; j0.2V_2 - j0.2V_1 - j0.1V_2 + j0.1V_1 - 0.2V_2 + 0.1V_2 - j0.5 = 0 \newline
+&amp; -0.1V_2 + j0.1V_2 - j0.1V_1 = j0.5 \newline
+&amp; (0.1 - j0.1)V_2 - j0.1V_1 = j0.5 \newline
+&amp; V_2 = \dfrac{j0.5 + j0.1V_1}{0.1 - j0.1}
+\end{align*}
+$$</p>
+<p>Now finding $V_1$ and $V_2$, by substituting in $V_1$ in this:</p>
+<p>$$
+\begin{align*}
+V_2 &amp; = \ldots = -2 + j4\ V \newline
+&amp; = \boxed{4.47 \angle 116.6^{\circ}\ V}
+\end{align*}
+$$</p>
+<p>Which means $V_2(t)$:
+$$
+\begin{align*}
+V_2(t) &amp; = \boxed{4.47 cos(\omega t + 116.6^{\circ})}
+\end{align*}
+$$</p>
+<p>For $V_1$:
+$$
+\begin{align*}
+V_1 &amp; = \ldots = 1 - j2\ V \newline
+&amp; = \boxed{2.24 \angle -63.4^{\circ}\ V}
+\end{align*}
+$$</p>
+<p>Which means $V_1(t)$:
+$$
+\begin{align*}
+V_1(t) &amp; = \boxed{2.24 cos(\omega t - 63.4^{\circ})}
+\end{align*}
+$$</p>
+<h3 id="mesh-analysis">Mesh analysis</h3>
+<p>Given this circuit, find $I_1(t)$ and $I_2(t)$:</p>
+<p><img src="/school/images/MAI.png#center" alt=""></p>
+<p>Let&rsquo;s first quickly convert our capacitor and inductor:</p>
+<p>Our inductor:</p>
+<p>$$
+\begin{align*}
+Z_{L} &amp; = j\omega L \newline
+&amp; = j(10^3 \cdot\ 4 \cdot\ 10^{-3}) [\Omega] \newline
+&amp; = j4\ \Omega
+\end{align*}
+$$</p>
+<p>Our capacitor:</p>
+<p>$$
+\begin{align*}
+Z_{L} &amp; = -j \dfrac{1}{\omega C} \newline
+&amp; = -j \dfrac{1}{10^3 \cdot\ 500 \cdot\ 10^{-6}}
+&amp; = -j2\ \Omega
+\end{align*}
+$$</p>
+<p>Which gives us:
+<img src="/school/images/MAII.png#center" alt=""></p>
+<p>For Mesh 1:
+$$
+\begin{align*}
+-10 \angle 0^{\circ} + 3I_1 + j4(I_1 - I_2) &amp; = 0 \newline
+(3 + j4)I_1 - j4I_2 &amp; = 10
+\end{align*}
+$$</p>
+<p>For Mesh 2:
+$$
+\begin{align*}
+j4(I_2 - I_1) - j2I_2 + 2I_1 &amp; = 0
+(2 - j4)I_1 + j2I_2 &amp; = 0
+\end{align*}
+$$</p>
+<p>Finding $I_1$ and $I_2$:</p>
+<p>$$
+\begin{align*}
+I_1 &amp; = \dfrac{14 + j8}{13}
+&amp; = \boxed{1.24 \angle 29.7^{\circ}\ A}
+\end{align*}
+$$</p>
+<p>$$
+\begin{align*}
+I_2 &amp; = \dfrac{20 + j30}{13}
+&amp; = \boxed{2.77 \angle 56.3^{\circ}\ A}
+\end{align*}
+$$</p>
+<p>Meaning that:
+$$
+\begin{align*}
+I_1(t) &amp; = 1.24 cos(10^3t + 29.7^{\circ})
+\end{align*}
+$$</p>
+<p>$$
+\begin{align*}
+I_2(t) &amp; = 2.77 cos(10^3t + 56.3^{\circ})
+\end{align*}
+$$</p>
+<h3 id="superposition">Superposition</h3>
+<p>Looking at this circuit again:</p>
+<p><img src="/school/images/NAI.png#center" alt=""></p>
+<p>One can see that we can solve this via the principle of superposition.</p>
+<p>We fist need to simplify our circuit impedance:
+$$
+\begin{align*}
+Z_{eq\ -j5\ ||\ j10} &amp; = \dfrac{(-j5)(j10)}{-j5 + j10} \newline
+&amp; = \dfrac{50}{j5} \newline
+&amp; = \dfrac{50 \angle 0^{\circ}}{j5} \newline
+&amp; = \dfrac{50 \angle 0^{\circ}}{5 \angle 90^{\circ}} \newline
+&amp; = \dfrac{50}{5} \angle -90^{\circ} \newline
+&amp; = -10 \angle -90^{\circ} \newline
+&amp; = -j10 \Omega \newline
+\end{align*}
+$$</p>
+<p>$$
+\begin{align*}
+Z_{eq\ 5\ ||\ -j10} &amp; = \dfrac{(5)(-j10)}{5 + j10} \newline
+&amp; = \dfrac{(5)(-j10)(5 - j10)}{(5 + j10)(5 - j10)} \newline
+&amp; = \dfrac{(-j50)(5 - j10)}{5^2 + 10^2}\newline
+&amp; = \dfrac{-j250 - 500}{125}\newline
+&amp; = 4 - j2\ \Omega
+\end{align*}
+$$</p>
+<p>$$
+\begin{align*}
+Z_{eq\ j5\ ||\ 10} &amp; = \ldots = 2 + j4\ \Omega
+\end{align*}
+$$</p>
+<p>Which means:</p>
+<p><img src="/school/images/SPI.png#center" alt=""></p>
+<p>When right source is off:
+$$
+\begin{align*}
+(4 - j2) || (-j10 + 2 + j4) \newline
+V_{1L} &amp; = 1 \angle 0^{\circ} \dfrac{(4 - j2)(-j10 + 2 + j4)}{(4 - j2) + (-j10 + 2 + j4)} \newline
+&amp; = \ldots \newline
+&amp; = 2 - j2\ V
+\end{align*}
+$$</p>
+<p>Left source turned off:
+$$
+\begin{align*}
+(4 - j2 - j10) || (2 + j4) \newline
+V_{1R} &amp; = (-0.5 \angle -90^{\circ}) (\dfrac{2 + j4}{4 - j2 - j10 + 2 + j4}) (4 - j2) \newline
+&amp; = \ldots \newline
+&amp; = -1\ V
+\end{align*}
+$$</p>
+<p>Which means:
+$$
+\begin{align*}
+V_1 &amp; = V_{1L} + V_{1R} \newline
+&amp; = 2 - j2 - 1
+&amp; = 1 - j2\ V
+\end{align*}
+$$</p>
+<p>Same procedure for $V_2$</p>
+<h3 id="thévenin-equivalent">Thévenin equivalent</h3>
+<p>Given this circuit, find the Thévenin equivalent circuit:</p>
+<p><img src="/school/images/TEI.png#center" alt=""></p>
+<p>Let&rsquo;s first disconnect the load:</p>
+<p><img src="/school/images/TEII.png#center" alt=""></p>
+<p>Which means $V_oc$:
+$$
+\begin{align*}
+V_{oc} &amp; = V_1 - V_2 \newline
+&amp; = (1 \angle 0^{\circ})(4 - j2) - (-0.5 \angle -90^{\circ})(2 - j4) \newline
+&amp; = 6 - j3
+\end{align*}
+$$</p>
+<p>For our equivalent impedance:</p>
+<p><img src="/school/images/TEIII.png#center" alt=""></p>
+<p>Which means:
+$$
+\begin{align*}
+Z_{th} &amp; = (4 - j2) + (2 + j4) \newline
+&amp; = 6 + j2\ \Omega
+\end{align*}
+$$</p>
+<h3 id="resonance">Resonance</h3>
+<p>A network is in resonance (or resonant) when the
+voltage and current at the network input
+terminals are in phase.</p>
+<p>A maximum-amplitude response is produced in
+the resonant condition</p>
+<p><img src="/school/images/RIS.png#center" alt=""></p>
+<p>From this we can see that:
+$$
+\begin{align*}
+Z_{s} &amp; = j2\pi f L + R - j \dfrac{1}{2\pi f C}
+\end{align*}
+$$</p>
+<p>At the <strong>resonant</strong> frequency:
+$$
+\begin{align*}
+j2\pi f_0 L = j \dfrac{1}{2\pi f_0 C} \newline
+f_0 = \dfrac{1}{2\pi \sqrt{LC}}
+\end{align*}
+$$</p>
+<p>We call the ratio of the reactance of the impedance to the resistance at the resonant frequency for <strong>quality factor</strong>:
+$$
+\begin{align*}
+Q_{s} = \dfrac{2\pi f_0 L}{R}
+&amp; = \dfrac{1}{2\pi f_0 CR}
+\end{align*}
+$$</p>
+<p>Which means:
+$$
+\begin{align*}
+Z_{s} = R\left[1 + jQ_s \left(\dfrac{f}{f_0} - \dfrac{f_0}{f}\right)\right]
+\end{align*}
+$$</p>
+<p>$$
+\begin{align*}
+I &amp; = \dfrac{V_s}{Z_s} \newline
+&amp; = \dfrac{V_s}{R\left[1 + jQ_s \left(\dfrac{f}{f_0} - \dfrac{f_0}{f}\right)\right]} \newline
+\end{align*}
+$$</p>
+<p>$$
+\begin{align*}
+RI = \dfrac{V_s}{\left[1 + jQ_s \left(\dfrac{f}{f_0} - \dfrac{f_0}{f}\right)\right]} \newline
+\end{align*}
+$$</p>
+<p>$$
+\begin{align*}
+\dfrac{V_R}{V_s} = \dfrac{1}{1 + jQs \left(\dfrac{f}{f_0} - \dfrac{f_0}{f}\right)} \newline
+\end{align*}
+$$</p>
+<p>$$
+\begin{align*}
+B &amp; = f_H - f_L \newline
+&amp; = \dfrac{f_0}{Q_s}
+\end{align*}
+$$</p>
+
+        </section>
+    </article>
+
+    <nav class="navigation"
+        style="display: flex; justify-content: space-between; align-items: center; margin-top: 20px;">
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+
+        
+        
+        <a class="previous" href="/school/eem076/eem076_10/" title="Previous: Electrical Circuits and Fields: Part 10 - Steady-state sinusoidal analysis"
+            style="flex-grow: 1; text-align: left;">&larr; Previous</a>
+        
+        
+
+        <div style="flex-grow: 2; text-align: center;"></div>
+
+        
+        
+        <a class="next" href="/school/eem076/eem076_12/" title="Next: Electrical Circuits and Fields: Part 12 - Power in AC Circuits"
+            style="flex-grow: 1; text-align: right;">Next &rarr;</a>
+        
+        
+    </nav>
+</main>
+<footer id="site-footer">
+    
+    <a href="https://github.com/rezaarezvan" title="">github</a>
+    
+    <a href="https://x.com/rzvan__/" title="">x</a>
+    <p class="footer_msg">memento mori</p></footer><script>
+    feather.replace()
+</script></div>
+</body>
+
+</html>

@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html><head lang="en">
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"><title>rezvan | Mathematical analysis in several variables: Part 10 - Double  integrals over general regions</title><link rel="icon" type="image/png" href="https://rezvan.xyz/images/icon.png" /><meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description"
+        content="Introduction In this part we&rsquo;ll cover how to compute the double integral over general regions.
+Double integrals over general regions Let $f(x, y)$ be defined on the domain, $D$, where $D$ is a bounded region. $D$ is a general region, meaning it can have any geometrical shape.
+However, if we reduce our problem into something we know, a rectangular region, we know how to compute the double integral.
+Therefore, let&rsquo;s enclose $D$, with a rectangle, let&rsquo;s call this rectangle for $R$." />
+    <meta property="og:image" content="https://raw.githubusercontent.com/rezaarezvan/rezvan.xyz/main/images/icon.png" />
+    <meta property="og:title" content="Mathematical analysis in several variables: Part 10 - Double  integrals over general regions" />
+<meta property="og:description" content="Introduction In this part we&rsquo;ll cover how to compute the double integral over general regions.
+Double integrals over general regions Let $f(x, y)$ be defined on the domain, $D$, where $D$ is a bounded region. $D$ is a general region, meaning it can have any geometrical shape.
+However, if we reduce our problem into something we know, a rectangular region, we know how to compute the double integral.
+Therefore, let&rsquo;s enclose $D$, with a rectangle, let&rsquo;s call this rectangle for $R$." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://rezvan.xyz/school/lma017/lma017_10/" /><meta property="article:section" content="school" />
+<meta property="article:published_time" content="2023-09-19T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-09-19T00:00:00+00:00" />
+
+<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Mathematical analysis in several variables: Part 10 - Double  integrals over general regions"/>
+<meta name="twitter:description" content="Introduction In this part we&rsquo;ll cover how to compute the double integral over general regions.
+Double integrals over general regions Let $f(x, y)$ be defined on the domain, $D$, where $D$ is a bounded region. $D$ is a general region, meaning it can have any geometrical shape.
+However, if we reduce our problem into something we know, a rectangular region, we know how to compute the double integral.
+Therefore, let&rsquo;s enclose $D$, with a rectangle, let&rsquo;s call this rectangle for $R$."/>
+<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@1,500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
+
+    
+    
+    <link rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/main.1c8bcd5d4ada46afe0c47c75ab955bba6342e70592bc9462fe26a21c59920c6b.css" />
+    <link id="lightSyntaxStyle" rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/light_syntax.65408cc3a5c02070b661c3e4e79306fc261cc63620f4adce9a30eafcba4ab79e.css" />
+    
+    <link id="darkModeStyle" rel="stylesheet" type="text/css" href="https://rezvan.xyz/css/dark.f21f1f72304fd4373b0a82b421dac836220c43b1e924ed3811cbe84f5c8a1b3f.css"  disabled />
+    <link id="darkSyntaxStyle" rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/dark_syntax.2b10cc1a2156b30874a063b7439a993bc3b43d476c5e1d8598d769c929c7b381.css" />
+    
+
+    
+    
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+        </script>
+
+    
+    <script type="text/x-mathjax-config">
+		MathJax.Hub.Config({
+			tex2jax: {
+				inlineMath: [['$','$'], ['\\(','\\)']],
+				displayMath: [['$$','$$'], ['\[','\]']],
+				processEscapes: true,
+				processEnvironments: true,
+				skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+				TeX: { equationNumbers: { autoNumber: "AMS" },
+						 extensions: ["AMSmath.js", "AMSsymbols.js"] }
+			}
+		});
+		</script>
+    
+
+    
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js"
+        onload="renderMathInElement(document.body);"></script>
+
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            renderMathInElement(document.body, {
+                delimiters: [
+                    {left: "$$", right: "$$", display: true},
+                    {left: "$", right: "$", display: false}
+                ]
+            });
+        });
+    </script>
+    
+
+    
+</head>
+<body>
+    <div class="content"><header>
+    <nav id="site-navbar">
+        
+        <a href="/">home</a>
+        
+        <a href="/about">about</a>
+        
+        <a href="/principles">principles</a>
+        
+        <a href="/contact">contact</a>
+        
+        <a href="/cv">cv</a>
+        
+        <a href="/school">school</a>
+        
+        | <span id="dark-mode-toggle" onclick="toggleTheme()"></span>
+        <script src="https://rezvan.xyz/js/themetoggle.js"></script>
+        
+    </nav>
+</header>
+
+<main>
+    <article>
+        <div class="title">
+            <h1>Mathematical analysis in several variables: Part 10 - Double  integrals over general regions</h1>
+            <div class="meta">Posted on Sep 19, 2023</div>
+        </div>
+        
+        <section class="body">
+            <h3 id="introduction">Introduction</h3>
+<p>In this part we&rsquo;ll cover how to compute the double integral over general regions.</p>
+<h3 id="double-integrals-over-general-regions">Double integrals over general regions</h3>
+<p>Let $f(x, y)$ be defined on the domain, $D$, where $D$ is a bounded region. $D$ is a general region, meaning it can have any geometrical shape.</p>
+<p>However, if we reduce our problem into something we know, a rectangular region, we know how to compute the double integral.</p>
+<p>Therefore, let&rsquo;s enclose $D$, with a rectangle, let&rsquo;s call this rectangle for $R$.</p>
+<p>We define a function, $\tilde{f}$, on $R$ as the following:
+$$
+\tilde{f}(x, y) =
+\begin{cases}
+f(x, y) &amp; (x, y) \in D \newline
+0 &amp; (x, y) \notin D
+\end{cases}
+$$</p>
+<h3 id="definition">Definition</h3>
+<p>The double integral of, $f$ over $D$ is:
+$$
+\iint_D f(x, y)\ dA = \iint_R \tilde{f}(x, y)\ dA
+$$</p>
+<h3 id="equivalent-definition">Equivalent definition</h3>
+<p>Recall our original definition of the double integral, we can also divide the domain, $D$, into smaller pieces.</p>
+<p>Therefore, the double integral of, $f$, over $D$ is also:
+$$
+\iint_{D} f(x, y)\ dA = \lim_{\substack{\Delta x \to 0 \newline \Delta y \to 0}} \sum_{j = 1}^{m} \sum_{i = 1}^{n} f(x_{i}^{*}, y_{j}^{*}) (\Delta A)_{ij}
+$$</p>
+<p>Since everything outside $D$, is 0, they contribute nothing to the overall volume. Therefore, the volume under $\tilde{f}$ is the same as the volume under $f$.</p>
+<h3 id="how-to-compute-general-double-integrals">How to compute general double integrals</h3>
+<p>To compute double integrals over a general region, we firstly need to introduce a new concept.</p>
+<h4 id="type-i-and-ii-regions">Type I and II regions</h4>
+<p>A domain, $D$, is of <strong>type I</strong>, if it lies between two graphs of two continuous functions of x.</p>
+<p>Meaning:
+$$
+D = \{(x, y) | a \leq x \leq b, g_1(x) \leq y \leq g_2(x)\}
+$$</p>
+<p>Let&rsquo;s see how we can compute this now. Let $D$ be of type I. Let&rsquo;s enclose this region within a rectangle as well:</p>
+<p>$$
+\iint f(x, y)\ dA = \iint_R \tilde{f}(x, y)\ dA = \int_a^b \int_c^d \tilde{f}(x, y)\ dy\ dx
+$$</p>
+<p>If we fix $x$, then $\tilde{f}$ becomes:
+$$
+\tilde{f}(x, y) =
+\begin{cases}
+0 &amp; c \leq y \leq g_1(x) \newline
+f(x, y) &amp; g_1(x) \leq y \leq g_2(x) \newline
+0 &amp; g_2(x) \leq y \leq d
+\end{cases}
+$$</p>
+<p>Which means:
+$$
+\boxed{\int_a^b \int_{g_1(x)}^{g_2(x)} f(x, y)\ dy\ dx}
+$$</p>
+<h4 id="type-i-definition">Type I definition</h4>
+<p>If $D$ is of type I, then:
+$$
+\iint_D f(x, y)\ dA = \int_a^b \int_{g_1(x)}^{g_2(x)} f(x, y)\ dy\ dx
+$$</p>
+<h3 id="type-ii">Type II</h3>
+<p>D is of <strong>type II</strong>, if it lies between two graphs of two continuous functions of y.</p>
+<p>$$
+D = \{(x, y) | h_1(y) \leq x \leq h_2(y), c \leq y \leq d\}
+$$</p>
+<p>We perform the same procedure as type I, instead of fixing $x$, we fix $y$.</p>
+<h4 id="type-ii-definition">Type II definition</h4>
+<p>If $D$ is of type II, then:
+$$
+\iint_D f(x, y)\ dA = \int_c^d \int_{h_1(y)}^{h_2(y)} f(x, y)\ dx\ dy
+$$</p>
+<p>Before we head into doing a few examples, it&rsquo;s a good practice always draw where our $D$ lies. So we easily get a geometrical sense of how it lies.</p>
+<h3 id="example">Example</h3>
+<p>Find $\iint_D y\ dA$, where $D$ is the region bounded by, $y = 2x^2, y = 1 + x^2$.</p>
+<p>So, our region is bounded by two parabolas, we have two functions of $x$, therefore, our region is of type I.</p>
+<p>Let&rsquo;s firstly find where these graphs intersect:
+$$
+2x^2 = 1 + x^2 \newline
+x^2 = 1 \newline
+x = \pm 1
+$$</p>
+<p>Graphing these we also see that, $y = 1 + x^2$ is the upper graph, and the lower is $y = 2x^2$.</p>
+<p>$$
+\int_{-1}^1 \int_{2x^2}^{1 + x^2} y\ dy\ dx
+$$</p>
+<p>$$
+\dfrac{1}{2} \int_{-1}^1 y^2 \bigg\rvert_{y = 2x^2}^{y = 1 + x^2}\ dx
+$$</p>
+<p>$$
+\dfrac{1}{2} \int_{-1}^1 (1 + x^2)^2 - (2x^2)^2\ dx
+$$</p>
+<p>$$
+\dfrac{1}{2} \int_{-1}^1 1 + 2x^2 + x^4 - 4x^4 \ dx
+$$</p>
+<p>$$
+\dfrac{1}{2} \int_{-1}^1 1 + 2x^2 - 3x^4\ dx
+$$</p>
+<p>$$
+\dfrac{1}{2} \left[x + \dfrac{2}{3} x^3 - \dfrac{3}{5} x^5 \bigg\rvert_{x = -1}^{x = 1} \right]
+$$</p>
+<p>$$
+\dfrac{1}{2} \left[\left(1 + \dfrac{2}{3} - \dfrac{3}{5}\right) - \left(-1 - \dfrac{2}{3} + \dfrac{3}{5}\right) \right]
+$$</p>
+<p>$$
+\dfrac{1}{2} \left[1 + \dfrac{2}{3} - \dfrac{3}{5} + 1 + \dfrac{2}{3} - \dfrac{3}{5} \right]
+$$</p>
+<p>$$
+\boxed{1 + \dfrac{2}{3} - \dfrac{3}{5}}
+$$</p>
+<h3 id="example-1">Example</h3>
+<p>Find $\iint_D xy\ dA$, where $D$ is the region bounded by, $y = x -1, y^2 = x+ 1$.</p>
+<p>Now, this region is technically both of type I and II. However, one of the choices will make our lives easier.</p>
+<p>Let&rsquo;s rewrite our bounds as, $x = y + 1, x = y^2 -1$.</p>
+<p>Let&rsquo;s find where these intersect:
+$$
+y + 1 = y^2 - 1 \newline
+y^2 -y -2 = 0 \newline
+y_1 = \ldots = -1 \newline
+y_2 = \ldots = 2 \newline
+$$</p>
+<p>Which means:
+$$
+\int_{-1}^{2} \int_{y^2 - 1}^{y + 1} xy\ dx\ dy
+$$</p>
+<p>$$
+\int_{-1}^{2} \dfrac{y}{2} \left[x^2\right] \bigg\rvert_{x = y^2 - 1}^{x = y + 1}\ dy
+$$</p>
+<p>$$
+\int_{-1}^{2} \dfrac{y}{2} \left[(y + 1)^2 - (y^2 - 1)^2\right]\ dy
+$$</p>
+<p>$$
+\int_{-1}^{2} \dfrac{y}{2} \left[y^2 + 2y + 1 - y^4 + 2y^2 - 1 \right]\ dy
+$$</p>
+<p>$$
+\int_{-1}^{2} \dfrac{y}{2} \left[3y^2 + 2y - y^4 \right]\ dy
+$$</p>
+<p>$$
+\int_{-1}^{2} \dfrac{3}{2} y^3 + y^2 - \dfrac{y^5}{2}\ dy
+$$</p>
+<p>$$
+\dfrac{3}{8} y^4 + \dfrac{y^3}{3} - \dfrac{y^6}{12} \bigg\rvert_{y = -1}^{y = 2} = \ldots = \boxed{\dfrac{27}{8}}
+$$</p>
+<h3 id="changing-order-of-integral">Changing order of integral</h3>
+<p>One might now think that we can change the order of integration, using Fubini&rsquo;s Theorem.</p>
+<p>That is <strong>not</strong> the case.</p>
+<p>Say we have:
+$$
+\int_{g_1(x)}^{g_2(x)} \int_a^b f(x, y)\ dx\ dy
+$$</p>
+<p>Computing this entire integral will not yield a singular number, it will yield a function of $x$ instead.</p>
+<p><em>However</em>, if $D$ is both type I and II, we can change order of integration, but we need to change our limits accordingly.</p>
+<h3 id="example-2">Example</h3>
+<p>Find $\iint_D sin(y^2)\ dA$, where $D$ is the region bounded by, $x = 0, y = 1, y = x$</p>
+<p>Graphing this we can see that this a region of both types.</p>
+<p>For, type I:
+$$
+\iint_D f(x, y)\ dA = \int_0^1 \int_x^y sin(y^2)\ dy\ dx
+$$</p>
+<p>Type II:
+$$
+\iint_D f(x, y)\ dA = \int_0^1 \int_0^y sin(y^2)\ dx\ dy
+$$</p>
+<p>In this case, one of these isn&rsquo;t even integrable in terms of elementary functions. So yeah&hellip;</p>
+<p>Solving the second integral:
+$$
+\int_0^1 \int_0^y sin(y^2)\ dx\ dy
+$$</p>
+<p>$$
+\int_0^1 x \cdot sin(y^2) \bigg\rvert_{x = 0}^{x = y}\ dy
+$$</p>
+<p>$$
+\int_0^1 y \cdot sin(y^2) \ dy
+$$</p>
+<p>Using normal u-sub, we obtain:</p>
+<p>$$
+-\dfrac{1}{2} cos(y^2) \bigg\rvert_{y = 0}^{y = 1}
+$$</p>
+<p>$$
+\left( -\dfrac{1}{2} cos(1)\right) - \left( -\dfrac{1}{2} cos(0)\right)
+$$</p>
+<p>$$
+-\dfrac{1}{2} cos(1) + \dfrac{1}{2}
+$$</p>
+<p>$$
+\boxed{\dfrac{1}{2} \left(-cos(1) + 1 \right)}
+$$</p>
+
+        </section>
+    </article>
+
+    <nav class="navigation"
+        style="display: flex; justify-content: space-between; align-items: center; margin-top: 20px;">
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+
+        
+        
+        <a class="previous" href="/school/lma017/lma017_9/" title="Previous: Mathematical analysis in several variables: Part 9 - Double and triple integrals"
+            style="flex-grow: 1; text-align: left;">&larr; Previous</a>
+        
+        
+
+        <div style="flex-grow: 2; text-align: center;"></div>
+
+        
+        
+        <a class="next" href="/school/lma017/lma017_11/" title="Next: Mathematical analysis in several variables: Part 11 - Computing volumes and Triple integrals over general regions"
+            style="flex-grow: 1; text-align: right;">Next &rarr;</a>
+        
+        
+    </nav>
+</main>
+<footer id="site-footer">
+    
+    <a href="https://github.com/rezaarezvan" title="">github</a>
+    
+    <a href="https://x.com/rzvan__/" title="">x</a>
+    <p class="footer_msg">memento mori</p></footer><script>
+    feather.replace()
+</script></div>
+</body>
+
+</html>

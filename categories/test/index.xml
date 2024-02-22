@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Test on rezvan</title>
+    <link>http://localhost:1313/categories/test/</link>
+    <description>Recent content in Test on rezvan</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 29 Aug 2023 10:53:01 +0200</lastBuildDate>
+    <atom:link href="http://localhost:1313/categories/test/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Mathematical analysis in several variables: Part 1 - Functions of several variables, level curves and limits.</title>
+      <link>http://localhost:1313/school/LMA017/LMA017/</link>
+      <pubDate>Tue, 29 Aug 2023 10:53:01 +0200</pubDate>
+      <guid>http://localhost:1313/school/LMA017/LMA017/</guid>
+      <description>lysis of one variable is very powerful, but most of the time, functions will have several variables.&#xA;This series will cover analysis in several variables.&#xA;Formal definition Let&amp;rsquo;s properly define what a function of several variables is&#xA;A function of two variables is a rule that associates to each pair, $(x, y)$ of real numbers, in a set, $D$, a unique number denoted as, $f(x, y)$.&#xA;$D$ is the so-called domain.</description>
+    </item>
+  </channel>
+</rss>

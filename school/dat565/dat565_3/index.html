@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html><head lang="en">
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"><title>rezvan | Introduction to data science and AI: Part 3 - Data munging</title><link rel="icon" type="image/png" href="https://rezvan.xyz/images/icon.png" /><meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description"
+        content="Introduction In this part we&rsquo;re going to discuss different data munging techniques.
+Data munging is the process of transforming &ldquo;raw&rdquo; data into a readable format.
+One of the most common processes is when we want to scrape data from a website.
+HTML The web is built on Hypertext Markup Language.
+HTML form a tree of nested elements, marked with tags.
+&lt;p class=&#34;foo&#34;&gt; bar &lt;/p&gt; This creates a paragraph element.
+&lt;img src=&#34;url&#34; alt=&#34;text&#34;&gt; This creates an image element." />
+    <meta property="og:image" content="https://raw.githubusercontent.com/rezaarezvan/rezvan.xyz/main/images/icon.png" />
+    <meta property="og:title" content="Introduction to data science and AI: Part 3 - Data munging" />
+<meta property="og:description" content="Introduction In this part we&rsquo;re going to discuss different data munging techniques.
+Data munging is the process of transforming &ldquo;raw&rdquo; data into a readable format.
+One of the most common processes is when we want to scrape data from a website.
+HTML The web is built on Hypertext Markup Language.
+HTML form a tree of nested elements, marked with tags.
+&lt;p class=&#34;foo&#34;&gt; bar &lt;/p&gt; This creates a paragraph element.
+&lt;img src=&#34;url&#34; alt=&#34;text&#34;&gt; This creates an image element." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://rezvan.xyz/school/dat565/dat565_3/" /><meta property="article:section" content="school" />
+<meta property="article:published_time" content="2024-01-23T00:00:00+00:00" />
+<meta property="article:modified_time" content="2024-01-23T00:00:00+00:00" />
+
+<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Introduction to data science and AI: Part 3 - Data munging"/>
+<meta name="twitter:description" content="Introduction In this part we&rsquo;re going to discuss different data munging techniques.
+Data munging is the process of transforming &ldquo;raw&rdquo; data into a readable format.
+One of the most common processes is when we want to scrape data from a website.
+HTML The web is built on Hypertext Markup Language.
+HTML form a tree of nested elements, marked with tags.
+&lt;p class=&#34;foo&#34;&gt; bar &lt;/p&gt; This creates a paragraph element.
+&lt;img src=&#34;url&#34; alt=&#34;text&#34;&gt; This creates an image element."/>
+<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@1,500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
+
+    
+    
+    <link rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/main.1c8bcd5d4ada46afe0c47c75ab955bba6342e70592bc9462fe26a21c59920c6b.css" />
+    <link id="lightSyntaxStyle" rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/light_syntax.65408cc3a5c02070b661c3e4e79306fc261cc63620f4adce9a30eafcba4ab79e.css" />
+    
+    <link id="darkModeStyle" rel="stylesheet" type="text/css" href="https://rezvan.xyz/css/dark.f21f1f72304fd4373b0a82b421dac836220c43b1e924ed3811cbe84f5c8a1b3f.css"  disabled />
+    <link id="darkSyntaxStyle" rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/dark_syntax.2b10cc1a2156b30874a063b7439a993bc3b43d476c5e1d8598d769c929c7b381.css" />
+    
+
+    
+    
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+        </script>
+
+    
+    <script type="text/x-mathjax-config">
+		MathJax.Hub.Config({
+			tex2jax: {
+				inlineMath: [['$','$'], ['\\(','\\)']],
+				displayMath: [['$$','$$'], ['\[','\]']],
+				processEscapes: true,
+				processEnvironments: true,
+				skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+				TeX: { equationNumbers: { autoNumber: "AMS" },
+						 extensions: ["AMSmath.js", "AMSsymbols.js"] }
+			}
+		});
+		</script>
+    
+
+    
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js"
+        onload="renderMathInElement(document.body);"></script>
+
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            renderMathInElement(document.body, {
+                delimiters: [
+                    {left: "$$", right: "$$", display: true},
+                    {left: "$", right: "$", display: false}
+                ]
+            });
+        });
+    </script>
+    
+
+    
+</head>
+<body>
+    <div class="content"><header>
+    <nav id="site-navbar">
+        
+        <a href="/">home</a>
+        
+        <a href="/about">about</a>
+        
+        <a href="/principles">principles</a>
+        
+        <a href="/contact">contact</a>
+        
+        <a href="/cv">cv</a>
+        
+        <a href="/school">school</a>
+        
+        | <span id="dark-mode-toggle" onclick="toggleTheme()"></span>
+        <script src="https://rezvan.xyz/js/themetoggle.js"></script>
+        
+    </nav>
+</header>
+
+<main>
+    <article>
+        <div class="title">
+            <h1>Introduction to data science and AI: Part 3 - Data munging</h1>
+            <div class="meta">Posted on Jan 23, 2024</div>
+        </div>
+        
+        <section class="body">
+            <h3 id="introduction">Introduction</h3>
+<p>In this part we&rsquo;re going to discuss different data munging techniques.</p>
+<p>Data munging is the process of transforming &ldquo;raw&rdquo; data into a readable format.</p>
+<p>One of the most common processes is when we want to scrape data from a website.</p>
+<h3 id="html">HTML</h3>
+<p>The web is built on <strong>H</strong>yper<strong>t</strong>ext <strong>M</strong>arkup <strong>L</strong>anguage.</p>
+<p>HTML form a <strong>tree</strong> of nested elements, marked with <strong>tags</strong>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">p</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;foo&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    bar
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+</span></span></code></pre></div><p>This creates a paragraph element.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">img</span> <span class="na">src</span><span class="o">=</span><span class="s">&#34;url&#34;</span> <span class="na">alt</span><span class="o">=</span><span class="s">&#34;text&#34;</span><span class="p">&gt;</span>
+</span></span></code></pre></div><p>This creates an image element.</p>
+<p>Elements can have <strong>attributes</strong> that affect their behavior or appearance.
+Above <code>class, src, alt</code> are all attributes. The <code>class</code> attribute is the most important one.</p>
+<p>This is what we can use to identify these classes for, e.g. in a CSS file. The <code>id</code> attribute can also be used to <em>uniquely</em> identify an element.</p>
+<p>In the paragraph element, we have some <em>content</em> in between the tags.
+This can be pure text as in the above case, but we can also have new tags in between, or nothing, as in the <code>img</code> tag.</p>
+<h3 id="web-scraping">Web scraping</h3>
+<p>Due to this convenient tree structure that HTML is built upon, information and content can easily be extracted from web pages.</p>
+<p>This is called <strong>web scraping</strong>. In the most simple cases this can easily be done with writing some manual code.
+In more modern and complex websites, where the HTML is automatically generated and has non-human structure, libraries can do the job for us.</p>
+<p>Golden rule of web scraping:</p>
+<blockquote>
+<p>If the user can read it, it can be scraped</p>
+</blockquote>
+<h4 id="beautifulsoup">BeautifulSoup</h4>
+<p>BeautifulSoup is Python library that parses HTML (and XML) documents, and creates an abstract tree from the elements.</p>
+<p>This enables us to easily navigate the tree, access some tag element along with all its siblings and children elements.</p>
+<h4 id="selenium">Selenium</h4>
+<p>However, in modern web pages are built on JavaScript and are most often rendered in the end user&rsquo;s web browser.</p>
+<p>The HTML for these websites aren&rsquo;t necessarily a complete description of the data, but the data is dynamically loaded.</p>
+<p><strong>Selenium</strong> is a browser automation framework that is often used for testing web pages.
+Happens that selenium is also very convenient for web scraping, since we can perform user actions.</p>
+<p>So we can click &ldquo;I accept cookies&rdquo;, &ldquo;load next page&rdquo; etc.</p>
+<h3 id="regular-expression">Regular expression</h3>
+<p>A <strong>regular expression</strong> or a <strong>regex</strong> is a sequence of characters that can match text.</p>
+<p>We use regular expressions for:</p>
+<ul>
+<li>Determine if a string <strong>matches</strong> a pattern completely</li>
+<li><strong>Find</strong> the first or all matches of a pattern</li>
+<li>Extract <strong>groups</strong> that have been matched within the pattern</li>
+<li><strong>Replace</strong> the matched text with some other text or a new pattern composed of matched groups.</li>
+</ul>
+<h4 id="matching-characters">Matching characters</h4>
+<p>When matching characters, most characters are matched regularly, but some characters have special meaning:</p>
+<ul>
+<li><code>.</code> matches <strong>any</strong> character.</li>
+<li><code>^</code> matches start of line.</li>
+<li><code>$</code> matches end of line.</li>
+<li><code>$[acf]$</code> matches any of the characters a, c, f.</li>
+<li><code>$[a-z]$</code> matches any lowercase characters.</li>
+<li><code>$[A-Z]$</code> matches any uppercase characters.</li>
+<li><code>$[0-9]$</code> matches any digits.</li>
+<li><code>\w</code> matches alphanumeric characters.</li>
+<li><code>\W</code> matches non-alphanumeric characters.</li>
+<li><code>\d</code> matches digits.</li>
+<li><code>\D</code> matches non-digits.</li>
+<li><code>\s</code> matches whitespace.</li>
+<li><code>\S</code> matches non-whitespace.</li>
+</ul>
+<p>Any special character that wants to be matched literally need to be escaped with a <code>\</code>. E.g. <code>\.</code> matches a period.</p>
+<h4 id="repetitions">Repetitions</h4>
+<p>By default, exactly one character is matched, but this behavior can be changed:</p>
+<ul>
+<li><code>*</code> matches 0 or more occurrences of the <em>preceding</em> character</li>
+<li><code>+</code> matches 1 or more</li>
+<li><code>?</code> matches 0 or 1</li>
+<li><code>{m, n}</code> matches at least <code>m</code> but no more than <code>n</code> occurrences of the preceding character.</li>
+</ul>
+<h4 id="groups">Groups</h4>
+<p>Regexes can include <strong>group</strong>, subregexes within parentheses.</p>
+<p>Groups can include alternatives, denoted with the pipe <code>|</code>. One of these alternatives are matched.</p>
+<p>If we&rsquo;re dealing with replacement, groups can be referenced with backreferences, e.g. <code>\1</code> refers to the first match grouped.</p>
+<h4 id="examples">Examples</h4>
+<p>Swedish social security numbers are in the format <code>yyyymmddxxxx</code></p>
+<p>We could match this simply with:</p>
+<pre tabindex="0"><code>[12]\d{3}[01]\d[0-3]\d{5}
+</code></pre><h3 id="regex-in-python">Regex in Python</h3>
+<p>The most important features of the Python regex module are:</p>
+<ul>
+<li><code>re.match(regex, string)</code> returns a <code>Match</code> object that evaluates to <code>True</code> if the beginning of the string matched the regex.</li>
+<li><code>re.fullmatch(regex, string)</code> returns a <code>Match</code> object that evaluates to <code>True</code> if the whole string matched to the regex.</li>
+<li><code>re.search(regex, string)</code> returns a <code>Match</code> object to the first match of the regex in the string.</li>
+<li><code>re.findall(regex, string)</code> returns all non-overlapping matches of pattern in string (left-to-right).</li>
+<li><code>re.sub(regex, replacement, string)</code> replaces all occurrences of regex with replacement, the replacement can contain backreferences to groups in the match.</li>
+</ul>
+
+        </section>
+    </article>
+
+    <nav class="navigation"
+        style="display: flex; justify-content: space-between; align-items: center; margin-top: 20px;">
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+
+        
+        
+        <a class="previous" href="/school/dat565/dat565_2/" title="Previous: Introduction to data science and AI: Part 2 - Python tools for data science"
+            style="flex-grow: 1; text-align: left;">&larr; Previous</a>
+        
+        
+
+        <div style="flex-grow: 2; text-align: center;"></div>
+
+        
+        
+        <a class="next" href="/school/dat565/dat565_4/" title="Next: Introduction to data science and AI: Part 4 - Data visualization"
+            style="flex-grow: 1; text-align: right;">Next &rarr;</a>
+        
+        
+    </nav>
+</main>
+<footer id="site-footer">
+    
+    <a href="https://github.com/rezaarezvan" title="">github</a>
+    
+    <a href="https://x.com/rzvan__/" title="">x</a>
+    <p class="footer_msg">memento mori</p></footer><script>
+    feather.replace()
+</script></div>
+</body>
+
+</html>

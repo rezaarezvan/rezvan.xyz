@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html><head lang="en">
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"><title>rezvan | Mathematical analysis in several variables: Part 18 - Green&#39;s Theorem</title><link rel="icon" type="image/png" href="https://rezvan.xyz/images/icon.png" /><meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description"
+        content="Introduction In this part we&rsquo;ll cover Green&rsquo;s Theorem, which will allow us to have a relationship between integrals and double integrals.
+Before starting, we will only work with simple curves. Which essentially just means that the curves have no self-injections (only exception is when it starts and ends at the same point).
+If $C$ is a simple and closed curve, e.g a circle. Then $C$ determines a inner region, $D$. In this case, we write $\partial D = C$." />
+    <meta property="og:image" content="https://raw.githubusercontent.com/rezaarezvan/rezvan.xyz/main/images/icon.png" />
+    <meta property="og:title" content="Mathematical analysis in several variables: Part 18 - Green&#39;s Theorem" />
+<meta property="og:description" content="Introduction In this part we&rsquo;ll cover Green&rsquo;s Theorem, which will allow us to have a relationship between integrals and double integrals.
+Before starting, we will only work with simple curves. Which essentially just means that the curves have no self-injections (only exception is when it starts and ends at the same point).
+If $C$ is a simple and closed curve, e.g a circle. Then $C$ determines a inner region, $D$. In this case, we write $\partial D = C$." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://rezvan.xyz/school/lma017/lma017_18/" /><meta property="article:section" content="school" />
+<meta property="article:published_time" content="2023-10-10T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-10-10T00:00:00+00:00" />
+
+<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Mathematical analysis in several variables: Part 18 - Green&#39;s Theorem"/>
+<meta name="twitter:description" content="Introduction In this part we&rsquo;ll cover Green&rsquo;s Theorem, which will allow us to have a relationship between integrals and double integrals.
+Before starting, we will only work with simple curves. Which essentially just means that the curves have no self-injections (only exception is when it starts and ends at the same point).
+If $C$ is a simple and closed curve, e.g a circle. Then $C$ determines a inner region, $D$. In this case, we write $\partial D = C$."/>
+<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@1,500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
+
+    
+    
+    <link rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/main.1c8bcd5d4ada46afe0c47c75ab955bba6342e70592bc9462fe26a21c59920c6b.css" />
+    <link id="lightSyntaxStyle" rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/light_syntax.65408cc3a5c02070b661c3e4e79306fc261cc63620f4adce9a30eafcba4ab79e.css" />
+    
+    <link id="darkModeStyle" rel="stylesheet" type="text/css" href="https://rezvan.xyz/css/dark.f21f1f72304fd4373b0a82b421dac836220c43b1e924ed3811cbe84f5c8a1b3f.css"  disabled />
+    <link id="darkSyntaxStyle" rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/dark_syntax.2b10cc1a2156b30874a063b7439a993bc3b43d476c5e1d8598d769c929c7b381.css" />
+    
+
+    
+    
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+        </script>
+
+    
+    <script type="text/x-mathjax-config">
+		MathJax.Hub.Config({
+			tex2jax: {
+				inlineMath: [['$','$'], ['\\(','\\)']],
+				displayMath: [['$$','$$'], ['\[','\]']],
+				processEscapes: true,
+				processEnvironments: true,
+				skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+				TeX: { equationNumbers: { autoNumber: "AMS" },
+						 extensions: ["AMSmath.js", "AMSsymbols.js"] }
+			}
+		});
+		</script>
+    
+
+    
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js"
+        onload="renderMathInElement(document.body);"></script>
+
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            renderMathInElement(document.body, {
+                delimiters: [
+                    {left: "$$", right: "$$", display: true},
+                    {left: "$", right: "$", display: false}
+                ]
+            });
+        });
+    </script>
+    
+
+    
+</head>
+<body>
+    <div class="content"><header>
+    <nav id="site-navbar">
+        
+        <a href="/">home</a>
+        
+        <a href="/about">about</a>
+        
+        <a href="/principles">principles</a>
+        
+        <a href="/contact">contact</a>
+        
+        <a href="/cv">cv</a>
+        
+        <a href="/school">school</a>
+        
+        | <span id="dark-mode-toggle" onclick="toggleTheme()"></span>
+        <script src="https://rezvan.xyz/js/themetoggle.js"></script>
+        
+    </nav>
+</header>
+
+<main>
+    <article>
+        <div class="title">
+            <h1>Mathematical analysis in several variables: Part 18 - Green&#39;s Theorem</h1>
+            <div class="meta">Posted on Oct 10, 2023</div>
+        </div>
+        
+        <section class="body">
+            <h3 id="introduction">Introduction</h3>
+<p>In this part we&rsquo;ll cover Green&rsquo;s Theorem, which will allow us to have a relationship between integrals and double integrals.</p>
+<p>Before starting, we will only work with <em>simple</em> curves. Which essentially just means that the curves have no self-injections (only exception is when it starts and ends at the same point).</p>
+<p>If $C$ is a simple and closed curve, e.g a circle. Then $C$ determines a inner region, $D$. In this case, we write $\partial D = C$. Meaning the border of $D$.</p>
+<p>NB: &ldquo;Positive&rdquo; orientation is counter-clockwise and &ldquo;Negative&rdquo; orientation is clockwise.</p>
+<h3 id="theorem">Theorem</h3>
+<p>Let $C$ be a simple, closed curve oriented positively. Let $D$ be the region it surrounds and let $P, Q: D \rarr \mathbb{R}$.</p>
+<p>$$
+\int_C P\ dx + Q\ dy = \iint_D \dfrac{\partial Q}{\partial x} - \dfrac{\partial P}{\partial y}\ dx\ dy
+$$</p>
+<p>Equivalently:
+$$
+\int_{\partial D} P\ dx + Q\ dy = \iint_D \dfrac{\partial Q}{\partial x} - \dfrac{\partial P}{\partial y}\ dx\ dy
+$$</p>
+<h3 id="example">Example</h3>
+<p>Evaluate $\int_C x^4\ dx + xy\ dy$ where C is the triangle going from $(0, 0)$ to $(1, 0)$ to $(0, 1)$ then back to $(0, 0)$.</p>
+<p>$$
+\int_C x^4\ dx + xy\ dy = \iint_D \dfrac{\partial Q}{\partial x} - \dfrac{\partial P}{\partial y}\ dx\ dy = \iint_D y - 0\ dx\ dy
+$$</p>
+<p>Which then just becomes:
+$$
+\int_0^1 \int_0^{1 - x} y\ dy\ dx
+$$</p>
+<p>$$
+\int_0^1 \dfrac{y^2}{2} \bigg\rvert_{y = 0}^{y = 1 - x}
+$$</p>
+<p>$$
+\int_0^1 \dfrac{(1 - x)^2}{2}\ dx
+$$</p>
+<p>$$
+\dfrac{1}{2} \int_0^1 (1 - x)^2\ dx
+$$</p>
+<p>$$
+\dfrac{1}{2} \int_0^1 1 - 2x + x^2\ dx
+$$</p>
+<p>$$
+\dfrac{1}{2} \left[x - x^2 + \dfrac{x^3}{3} \bigg\rvert_{x = 0}^{x = 1}\right]\ dx
+$$</p>
+<p>$$
+\boxed{\dfrac{1}{6}}
+$$</p>
+<h3 id="example-1">Example</h3>
+<p>Evaluate $\int_C (3y - e^{sin(x)})\ dx + (7x + \sqrt{y^4 + 1})\ dy$</p>
+<p>For, $C = \{(x, y) | x^2 + y^2 = 9\}$, with positive orientation.</p>
+<p>$$
+\int_C (3y - e^{sin(x)}\ dx + (7x + \sqrt{y^4 + 1})\ dy = \iint_D \dfrac{\partial Q}{\partial x} - \dfrac{\partial P}{\partial y}\ dx\ dy = \iint_D (7 - 3)\ dx\ dy
+$$</p>
+<p>$$
+\iint_D 4\ dx\ dy
+$$</p>
+<p>$$
+4 \iint_D 1\ dx\ dy
+$$</p>
+<p>We can either, do a change of variables to polar coordinates, or just use the definition that this is just the area of the circle.</p>
+<p>$$
+4 \cdot \pi 3^2 = 36\pi
+$$</p>
+<p>With polar coordinates:
+$$
+S = \{(r, \theta) | 0 \leq r \leq 3, 0 \leq \theta \leq 2\pi\}
+$$</p>
+<p>$$
+4 \int_0^{2\pi} \int_0^3 1 \cdot r\ dr\ d\theta
+$$</p>
+<p>$$
+4 \int_0^{2\pi} \dfrac{9}{2}\ d\theta
+$$</p>
+<p>$$
+4 \cdot 9 \pi = 36\pi
+$$</p>
+<h3 id="applications">Applications</h3>
+<p>As we just saw, this could maybe be useful to compute areas, using Green&rsquo;s Theorem &ldquo;backwards&rdquo;.</p>
+<p>$$
+\text{Area}(D) = \iint_D 1\ dA
+$$</p>
+<p>Which, by Green&rsquo;s Theorem, means that:
+$$
+P(x, y) = 0 \\
+Q(x, y) = x
+$$</p>
+<p>or</p>
+<p>$$
+P(x, y) = -y \\
+Q(x, y) = 0
+$$</p>
+<p>Yields this result.</p>
+<h3 id="example-2">Example</h3>
+<p>Find the area of the ellipse $\dfrac{x^2}{a^2} + \dfrac{y^2}{b^2} = 1$.</p>
+<p>$$
+\iint_D 1\ dA = \int_{\partial D} x\ dy
+$$</p>
+<p>We need to parameterize the border of this ellipse. The parameterization for a circle is:
+$$
+\vec{r}(t) = \langle cos(t), sin(t) \rangle \ | \ 0 \leq t \leq 2\pi
+$$</p>
+<p>For an ellipse, we could take a naive guess and guess that it is:
+$$
+\vec{r}(t) = \langle a cos(t), b sin(t) \rangle \ | \ 0 \leq t \leq 2\pi
+$$</p>
+<p>One can prove that this works, but it does :)</p>
+<p>So:
+$$
+\int_0^{2\pi} x\ dy = \int_0^{2\pi} a cos(t) \cdot b cos(t)\ dt = ab \int_0^{2\pi} cos^2(t)\ dt = \ldots = \boxed{ab\pi}
+$$</p>
+<h3 id="parametric-surfaces">Parametric surfaces</h3>
+<h3 id="definition">Definition</h3>
+<p>A <strong>parametric surface</strong> is a region, $S \subset \mathbb{R}^3$, which is the image of a function, $r: D \rarr \mathbb{R}^3$, defined on a region $D \subset \mathbb{R}^2$ of the plane.</p>
+<p>Which means we can parameterize:
+$$
+\vec{r}(u, v) = \langle x(u, v), y(u, v), z(u, v) \rangle
+$$</p>
+<h3 id="example-3">Example</h3>
+<p>$$
+\vec{r}(u, v) = \langle u cos(v), u sin(v), 1 \rangle \ | \ 0 \leq u \leq 1, 0 \leq v \leq 2\pi
+$$</p>
+<p>Plotting this parameterization:
+<img src="/school/images/unit_disc.png#center" alt=""></p>
+<h3 id="example-4">Example</h3>
+<p>Elliptic paraboloid is the surface with equation:
+$$
+z = x^2 + 2y^2
+$$</p>
+<p>The parameterization is therefore:
+$$
+\vec{r}(x, y) \langle x, y, x^2 + 2y^2 \rangle
+$$</p>
+<h3 id="example-5">Example</h3>
+<p>Find a parameterization of:
+$$
+x^2 + y^2 = 2 \\
+0 \leq z \leq 1
+$$</p>
+<p>$$
+\vec{r}{u, v} = \langle 2 cos(u), 2 sin(u), v \rangle \ | \ 0 \leq u \leq 2\pi, 0 \leq v \leq 1
+$$</p>
+<p>Plot:
+<img src="/school/images/cyl.png#center" alt=""></p>
+
+        </section>
+    </article>
+
+    <nav class="navigation"
+        style="display: flex; justify-content: space-between; align-items: center; margin-top: 20px;">
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+
+        
+        
+        <a class="previous" href="/school/lma017/lma017_17/" title="Previous: Mathematical analysis in several variables: Part 17 - The fundamental theorem of line integrals"
+            style="flex-grow: 1; text-align: left;">&larr; Previous</a>
+        
+        
+
+        <div style="flex-grow: 2; text-align: center;"></div>
+
+        
+        
+        <a class="next" href="/school/lma017/lma017_19/" title="Next: Mathematical analysis in several variables: Part 19 - Surface integrals"
+            style="flex-grow: 1; text-align: right;">Next &rarr;</a>
+        
+        
+    </nav>
+</main>
+<footer id="site-footer">
+    
+    <a href="https://github.com/rezaarezvan" title="">github</a>
+    
+    <a href="https://x.com/rzvan__/" title="">x</a>
+    <p class="footer_msg">memento mori</p></footer><script>
+    feather.replace()
+</script></div>
+</body>
+
+</html>

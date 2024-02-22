@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html><head lang="en">
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"><title>rezvan | Concurrent Programming: Part 6 &amp; 7 - Message-Passing Concurrency</title><link rel="icon" type="image/png" href="https://rezvan.xyz/images/icon.png" /><meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description"
+        content="So far we have looked at threads which share memory. The so-called shared memory model, but in this part we&rsquo;ll cover distributed memory model, specifically, message-passing concurrency.
+For this we&rsquo;ll cover and use the programming language, Erlang!
+So let&rsquo;s quickly have a crash course over Erlang!
+What is Erlang? Erlang is a functional programming language with message-passing features. The message-passing part is concurrent and implements the actor model, where Erlang processes are actors." />
+    <meta property="og:image" content="https://raw.githubusercontent.com/rezaarezvan/rezvan.xyz/main/images/icon.png" />
+    <meta property="og:title" content="Concurrent Programming: Part 6 &amp; 7 - Message-Passing Concurrency" />
+<meta property="og:description" content="So far we have looked at threads which share memory. The so-called shared memory model, but in this part we&rsquo;ll cover distributed memory model, specifically, message-passing concurrency.
+For this we&rsquo;ll cover and use the programming language, Erlang!
+So let&rsquo;s quickly have a crash course over Erlang!
+What is Erlang? Erlang is a functional programming language with message-passing features. The message-passing part is concurrent and implements the actor model, where Erlang processes are actors." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://rezvan.xyz/school/tda384/tda384_6/" /><meta property="article:section" content="school" />
+<meta property="article:published_time" content="2023-02-04T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-02-04T00:00:00+00:00" />
+
+<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Concurrent Programming: Part 6 &amp; 7 - Message-Passing Concurrency"/>
+<meta name="twitter:description" content="So far we have looked at threads which share memory. The so-called shared memory model, but in this part we&rsquo;ll cover distributed memory model, specifically, message-passing concurrency.
+For this we&rsquo;ll cover and use the programming language, Erlang!
+So let&rsquo;s quickly have a crash course over Erlang!
+What is Erlang? Erlang is a functional programming language with message-passing features. The message-passing part is concurrent and implements the actor model, where Erlang processes are actors."/>
+<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@1,500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
+
+    
+    
+    <link rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/main.1c8bcd5d4ada46afe0c47c75ab955bba6342e70592bc9462fe26a21c59920c6b.css" />
+    <link id="lightSyntaxStyle" rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/light_syntax.65408cc3a5c02070b661c3e4e79306fc261cc63620f4adce9a30eafcba4ab79e.css" />
+    
+    <link id="darkModeStyle" rel="stylesheet" type="text/css" href="https://rezvan.xyz/css/dark.f21f1f72304fd4373b0a82b421dac836220c43b1e924ed3811cbe84f5c8a1b3f.css"  disabled />
+    <link id="darkSyntaxStyle" rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/dark_syntax.2b10cc1a2156b30874a063b7439a993bc3b43d476c5e1d8598d769c929c7b381.css" />
+    
+
+    
+    
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+        </script>
+
+    
+    <script type="text/x-mathjax-config">
+		MathJax.Hub.Config({
+			tex2jax: {
+				inlineMath: [['$','$'], ['\\(','\\)']],
+				displayMath: [['$$','$$'], ['\[','\]']],
+				processEscapes: true,
+				processEnvironments: true,
+				skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+				TeX: { equationNumbers: { autoNumber: "AMS" },
+						 extensions: ["AMSmath.js", "AMSsymbols.js"] }
+			}
+		});
+		</script>
+    
+
+    
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js"
+        onload="renderMathInElement(document.body);"></script>
+
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            renderMathInElement(document.body, {
+                delimiters: [
+                    {left: "$$", right: "$$", display: true},
+                    {left: "$", right: "$", display: false}
+                ]
+            });
+        });
+    </script>
+    
+
+    
+</head>
+<body>
+    <div class="content"><header>
+    <nav id="site-navbar">
+        
+        <a href="/">home</a>
+        
+        <a href="/about">about</a>
+        
+        <a href="/principles">principles</a>
+        
+        <a href="/contact">contact</a>
+        
+        <a href="/cv">cv</a>
+        
+        <a href="/school">school</a>
+        
+        | <span id="dark-mode-toggle" onclick="toggleTheme()"></span>
+        <script src="https://rezvan.xyz/js/themetoggle.js"></script>
+        
+    </nav>
+</header>
+
+<main>
+    <article>
+        <div class="title">
+            <h1>Concurrent Programming: Part 6 &amp; 7 - Message-Passing Concurrency</h1>
+            <div class="meta">Posted on Feb 4, 2023</div>
+        </div>
+        
+        <section class="body">
+            <p>So far we have looked at threads which share memory.
+The so-called <strong>shared memory</strong> model, but in this part we&rsquo;ll cover <strong>distributed memory</strong> model,
+specifically, <em>message-passing</em> concurrency.</p>
+<p>For this we&rsquo;ll cover and use the programming language, Erlang!</p>
+<p>So let&rsquo;s quickly have a crash course over Erlang!</p>
+<h3 id="what-is-erlang">What is Erlang?</h3>
+<p>Erlang is a <em>functional</em> programming language with <em>message-passing</em> features.
+The message-passing part is concurrent and implements the <em>actor model</em>, where Erlang processes are actors.</p>
+<p>This post won&rsquo;t cover functional languages in general, so I hope you remember good &lsquo;ol Haskell.</p>
+<p>Let&rsquo;s look at a little code snippet from Erlang:</p>
+<pre tabindex="0"><code>-module(power).
+-export([power/2]).
+
+power(X, 0) -&gt; 1;
+power(X, N) -&gt; X * power(X, N - 1).
+</code></pre><p>Then if we enter the erl shell by <code>erl</code> and doing:</p>
+<pre tabindex="0"><code>c(power).
+
+power:power(2, 3).
+</code></pre><p>We see the output 8!</p>
+<h3 id="types-in-erlang">Types in Erlang</h3>
+<p>Erlang has 8 primitives types and 5 compound types:</p>
+<ul>
+<li>Primitives
+<ul>
+<li>Integers
+<ul>
+<li>Arbitrary sized integers with the usual operations</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>Atoms</li>
+</ul>
+<ul>
+<li>Floats
+<ul>
+<li>64-bit floating point numbers</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>References
+<ul>
+<li>Globally unique symbols</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>Binaries
+<ul>
+<li>Sequence of bytes</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>Pids
+<ul>
+<li>Process identifiers</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>Ports
+<ul>
+<li>Used for communication</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>Funs
+<ul>
+<li>Function closures</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>Compound types
+<ul>
+<li>Tuples
+<ul>
+<li>Fixed size containers</li>
+</ul>
+</li>
+<li>Lists
+<ul>
+<li>Dynamically sized containers</li>
+</ul>
+</li>
+<li>Maps
+<ul>
+<li>Key-value tables</li>
+</ul>
+</li>
+<li>Strings
+<ul>
+<li>Syntactic sugar for sequence of characters</li>
+</ul>
+</li>
+<li>Records
+<ul>
+<li>Syntactic sugar to access tuples elements by name</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>As you can see for example, there is no boolean type for <code>true</code> and <code>false</code>.
+Instead, the <em>atoms</em> <code>true</code> and <code>false</code> are used for this.</p>
+<p>One interesting design choice I have encountered in Erlang is the relational operators.</p>
+<p><code>==</code> is <em>numerical</em> equal, <code>/=</code> is <em>numerical not equal</em>. Compared to <code>=:=</code> and <code>=/=</code>
+which are the &ldquo;normal&rdquo; equal we associate with.</p>
+<h3 id="order-between-types">Order between types</h3>
+<p>In Erlang, types have a distinct order relation:</p>
+<pre tabindex="0"><code>number &lt; atom &lt; reference &lt; funs &lt; port &lt; pid &lt; tuple &lt; map &lt; list
+</code></pre><p>Which means that for example:
+<code>3 &lt; true</code> is true.</p>
+<h3 id="tuples">Tuples</h3>
+<p>Tuples are written like this in Erlang:</p>
+<pre tabindex="0"><code>{ }
+{10, 12, 98}
+{8.88, false, aToM}
+{10, {-1, true}}
+</code></pre><p>They are also 1-indexed.</p>
+<h3 id="lists">Lists</h3>
+<pre tabindex="0"><code>[ ]
+[10, 12, 98]
+[8.88, false, aToM]
+[10, [-1, true]]
+</code></pre><p>They have the following nice operators as well:</p>
+<pre tabindex="0"><code>% A copy of L with H added as head element
+[H | L]
+
+% Get head element
+hd(L)
+
+% Get tail element
+tl(L)
+
+% Concatenation and deletion
+L1 ++ L2
+L1 -- L2
+</code></pre><h3 id="records">Records</h3>
+<p>Records are ordered sequences with a fixed number of elements, where each element has an
+atom as name</p>
+<ul>
+<li>Records are just syntactic sugar for tuples where positions are named</li>
+</ul>
+<pre tabindex="0"><code>-record(person, { name=&#34;add name&#34;, age })
+</code></pre><h3 id="multiple-expressions">Multiple expressions</h3>
+<p>The <code>,</code> operator in Erlang makes it so we can combine expressions, for example:</p>
+<pre tabindex="0"><code>% Evalutes 3 &lt; 0 and returns 2
+3 &lt; 0, 2.
+
+% Evaluates 3 + true and fails (because of 3 + true)
+3 + true, 2.
+
+% Binds 10 to R, binds 3.14 to Pi, returns 62.8...
+R = 10, Pi = 3.14, 2*Pi*R.
+</code></pre><h3 id="modules">Modules</h3>
+<p>In our power example you may have noticed the <code>module</code> and <code>export</code> keywords.</p>
+<pre tabindex="0"><code>-module(foo).
+-export([bar/1, baz/0]).
+
+bar(X) -&gt; X.
+baz()  -&gt; 0.
+</code></pre><p>As you can the, <code>f/n</code>, declares the function name and number of parameters (or arity n, with patterns).</p>
+<h3 id="guards">Guards</h3>
+<p>This is something we should be familiar with from Haskell:</p>
+<pre tabindex="0"><code>can_drive(Name, Age) when Age &gt;= 18 -&gt; Name ++ &#34; can drive&#34;;
+can_drive(Name, _) -&gt; Name ++ &#34; cannot drive&#34;.
+</code></pre><p>Erlang is very similar to Haskell in its clauses, gaurds, pattern matchings.
+Since it&rsquo;s functional as well, we can pass around functions as values, but also remember higher-order functions etc etc.</p>
+<p>This is mostly so, I remember the Erlang syntax itself, and not a post on functional languages as I said :).</p>
+<h3 id="erlangs-principles">Erlang&rsquo;s principles</h3>
+<p>Erlang has some principles that it follows, let&rsquo;s take a look:</p>
+<ul>
+<li>Processes are strongly isolated.</li>
+<li>Process creation and destruction is a lightweight operation.</li>
+<li>Message passing is the only way for processes to interact with each other.</li>
+<li>Processes have unique names.</li>
+<li>If you know the name of a process, you can send it a message to it.</li>
+<li>Processes share no resources.</li>
+<li>Error handling is non-local.</li>
+<li>Processes do what they are supposed to do or fail.</li>
+</ul>
+<p>Let&rsquo;s quickly compare the different concurrent models:</p>
+<ul>
+<li>Shared memory
+<ul>
+<li>Synchronize by <em>writing to</em> and <em>reading from shared</em> memory.</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>Message passing
+<ul>
+<li>Synchronize by <em>exchanging messages</em></li>
+</ul>
+</li>
+</ul>
+<h3 id="the-actor-model">The actor model</h3>
+<p>Erlang&rsquo;s message-passing model is based on the <em>actor model</em>:</p>
+<ul>
+<li>Actors are just abstractions of processes</li>
+<li><strong>No</strong> shared state or resources between actors (processes)</li>
+<li>Actors (processes) <em>communicate</em> by <strong>exchanging messages</strong> - <em>asynchronous</em> messages passing at that.</li>
+</ul>
+<p>Let&rsquo;s clearly define the actors and messages:</p>
+<p>Each actor is identified by their <em>address</em>, we can think of this as their unique ID.</p>
+<p>An <strong>actor</strong> can:</p>
+<ul>
+<li><code>send</code> messages to other actors via their addresses/IDs.</li>
+<li><code>change</code> its <em>behavior</em>, what it computes/how it reacts to messages.</li>
+<li><code>create</code> new actors</li>
+</ul>
+<p>A message <em>includes</em>:</p>
+<ul>
+<li>A <em>recipient</em>, the identifier address/ID</li>
+<li><em>Content</em>, arbitrary information necessary for the actors</li>
+</ul>
+<h3 id="sending-and-receiving-messages">Sending and receiving messages</h3>
+<p>A process (actor) in Erlang is created by calling <code>spawn</code>,
+it is identified by its PID (Process identifier) and executes its behavioral function, <code>f</code>, (which is passed as a parameter into <code>spawn</code>).
+When the function terminates the process <code>ends</code>.</p>
+<p>Let&rsquo;s take a look at the <code>spawn</code> function:</p>
+<pre tabindex="0"><code>spawn(M, F, Args)
+</code></pre><p>When creating a process, the newly created process runs the function <code>F</code> in module <code>M</code> with arguments <code>Args</code>.</p>
+<p>Let&rsquo;s look at an example:</p>
+<pre tabindex="0"><code>-module(procs).
+
+print_sum(X,Y) -&gt;
+    io:format(&#34;~p~n&#34;, [X+Y]).
+
+compute_sum(X,Y) -&gt; X + Y.
+</code></pre><p>then in the shell we just do:</p>
+<pre tabindex="0"><code>spawn(procs, print_sum, [3, 4]).
+</code></pre><p>And we should see the result <code>7</code>.</p>
+<p>Messages are as simple, typically a message is the result of evaluting an expression:</p>
+<pre tabindex="0"><code>Pid ! Message
+</code></pre><p>This sends the evaluation, <code>T</code>, of <code>Message</code> to the process with PID, <code>Pid</code>, and returns <code>T</code> as a result.</p>
+<p>Note that the, <code>!</code>, or &ldquo;bang&rdquo; operator is <em>right-associative</em></p>
+<h3 id="mailboxes">Mailboxes</h3>
+<p>Every process has a mailbox, this is how it becomes asynchronous,
+a process never needs to wait to read a message, we only need to check our mailbox.</p>
+<p>To check a process with Pid, <code>Pid</code>, we can use:</p>
+<pre tabindex="0"><code>% How many elements are in the mailbox
+process_info(Pid, message_queue_len)
+
+% List of messages in the mailbox (oldest to newest)
+process_info(Pid, messages)
+
+% Empty the current process&#39;s mailbox
+flush()
+</code></pre><p>For example:</p>
+<pre tabindex="0"><code>% Send &#39;hello&#39; twice to self
+self() ! self() ! hello.
+
+% send &#39;world&#39; to self
+self() ! world.
+
+process_info(self(), message).
+
+&gt; {messages, [hello, hello, world]}
+</code></pre><p>To <em>receive</em> a message, we can use the <code>receive</code> expression:</p>
+<pre tabindex="0"><code>receive
+    P1 when C1 -&gt; E1;
+        .
+        .
+        .
+    PN when CN -&gt; EN
+end
+</code></pre><p>Evaluating the <code>recieve</code> expression, selects the <strong>oldest</strong> message in our mailbox, that matches the pattern.
+If we don&rsquo;t find any match we <em>block</em> until a suitable message arrives.</p>
+<p>For example, a simple echo function:</p>
+<pre tabindex="0"><code>echo() -&gt;
+    recieve Msg -&gt; io:format(&#34;Receive: ~p~n&#34;, [Msg]) end.
+    % To make this permanent we just do this:
+    echo().
+</code></pre><p>Note that Erlang&rsquo;s runtime only provides weak guarantees of message delivery <em>order</em>.
+So it&rsquo;s not guaranteed that the messages are received in the same order as sent.
+This is in the case when sending to multiple <em>different</em> processes, if we are only sending to a single process, the order will be the same.</p>
+<h3 id="stateful-processes">Stateful processes</h3>
+<p>Processes can only operate on the arguments of the function they run,
+thus we need to store the state information using arguments.</p>
+<p>These values gets updates by the recursive calls used to make a process permanently running.</p>
+<p>An example makes this clear, let&rsquo;s implement our beloved counter program:</p>
+<pre tabindex="0"><code>base_counter(N) -&gt;
+recieve {From, Command} -&gt; case Command of
+    increment -&gt; base_counter(N + 1);
+
+    count     -&gt; From ! {self(), N},
+                 base_counter(N);
+
+    % Unrecongnized command
+    U         -&gt; io:format(&#34;? ~p~n&#34;, [U])
+</code></pre><h3 id="clients-and-servers">Clients and servers</h3>
+<p>The client/server architecture is widely used, so let&rsquo;s go!</p>
+<ol>
+<li>
+<p>A <em>server</em> is available to <em>serve requests</em> from any <em>clients</em>.</p>
+</li>
+<li>
+<p>An arbitrary number of <em>clients</em> send <em>commands</em> to the server and <em>wait</em> for the server&rsquo;s response.</p>
+</li>
+</ol>
+<h3 id="servers">Servers</h3>
+<p>A server is a process that:</p>
+<ul>
+<li>Responds to a fixed number of <em>commands</em></li>
+<li>Runs indefinitely, serving an arbitrary number of <em>requests</em>, until it recieves a <strong>shutdown</strong> command.</li>
+<li>Can serve an arbitrary number of clients</li>
+</ul>
+<p>Each <em>command</em> is a message of the form:</p>
+<p><code>{Command, From, Ref, Arg1, ..., ArgN}</code></p>
+<ul>
+<li><code>Command</code> is the command&rsquo;s name.</li>
+<li><code>From</code> is the PID of the client.</li>
+<li><code>Ref</code> is a unique identifier of the request.</li>
+<li><code>Arg1, ..., ArgN</code> are arguments to the command.</li>
+</ul>
+<h3 id="math-server">Math server</h3>
+<p>Let&rsquo;s make a simple math server:</p>
+<pre tabindex="0"><code>% Interface for the server/commands
+
+start(): start a math server, and return the server&#39;s PID
+
+factorial(S, M): compute the factorial of M on server with PID, S
+
+status(S): return the number of requests server so far on the server with PID, S
+
+stop(S): shutdown server with PID, S
+</code></pre><p>The main/event loop would be:</p>
+<pre tabindex="0"><code>loop(N) -&gt;
+
+    receive% ‘factorial’ command:
+    {factorial, From, Ref, M} -&gt;
+        From ! {response, Ref, compute_factorial(M)},
+
+        % increment request number
+        loop(N+1);
+
+    % ‘status’ command:
+    {status, From, Ref} -&gt;
+        From ! {response, Ref, N},
+
+        % don’t increment request number
+        loop(N);
+
+    % ‘stop’ command:
+    {stop, _From, _Ref} -&gt; ok
+end.
+</code></pre><p>The starting and stopping:</p>
+<pre tabindex="0"><code>% start a server, return server’s pid
+start() -&gt;
+    spawn(fun () -&gt; loop(0) end).
+
+% shutdown ‘Server’
+stop(Server) -&gt;
+    % Ref is not needed
+    Server ! {stop, self(), 0},
+    ok.
+</code></pre><p>Factorial and status:</p>
+<pre tabindex="0"><code>% compute factorial(M) on ‘Server’:
+factorial(Server, M) -&gt;
+    % unique reference number
+    Ref = make_ref(),
+
+    % send request to server:
+    Server ! {factorial, self(), Ref, M},
+
+    % wait for response, and return it:
+    receive {response, Ref, Result} -&gt; Result end.
+
+% return number of requests served so far by ‘Server’:
+status(Server) -&gt;
+    % unique reference number
+    Ref = make_ref(),
+
+    % send request to server:
+    Server ! {status, self(), Ref},
+
+    % wait for response, and return it:
+    receive {response, Ref, Result} -&gt; Result end.
+</code></pre>
+        </section>
+    </article>
+
+    <nav class="navigation"
+        style="display: flex; justify-content: space-between; align-items: center; margin-top: 20px;">
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+
+        
+        
+        <a class="previous" href="/school/tda384/tda384_5/" title="Previous: Concurrent Programming: Part 5 - Monitors"
+            style="flex-grow: 1; text-align: left;">&larr; Previous</a>
+        
+        
+
+        <div style="flex-grow: 2; text-align: center;"></div>
+
+        
+        
+        <a class="next" href="/school/tda384/tda384_8/" title="Next: Concurrent Programming: Part 8 - Synchronization problems with message-passing"
+            style="flex-grow: 1; text-align: right;">Next &rarr;</a>
+        
+        
+    </nav>
+</main>
+<footer id="site-footer">
+    
+    <a href="https://github.com/rezaarezvan" title="">github</a>
+    
+    <a href="https://x.com/rzvan__/" title="">x</a>
+    <p class="footer_msg">memento mori</p></footer><script>
+    feather.replace()
+</script></div>
+</body>
+
+</html>

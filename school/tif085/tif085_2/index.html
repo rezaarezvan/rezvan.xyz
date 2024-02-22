@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html><head lang="en">
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"><title>rezvan | Thermodynamics: Lecture 2</title><link rel="icon" type="image/png" href="https://rezvan.xyz/images/icon.png" /><meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description"
+        content="Ideal gases An &lsquo;ideal&rsquo; gas is a gas that is not subject to interparticle interactions. Also commonly said to not being subject to &lsquo;react with other substances&rsquo;.
+In many applications of thermodynamics, ideal gases often come up, so it&rsquo;s natural to understand them within a thermodynamic perspective.
+Gases and Pressure Before we begin with the real thermodynamical part of gases we need a bit of background with gases. Boyle&rsquo;s law gives us a mathematical formula for our intuition of gases." />
+    <meta property="og:image" content="https://raw.githubusercontent.com/rezaarezvan/rezvan.xyz/main/images/icon.png" />
+    <meta property="og:title" content="Thermodynamics: Lecture 2" />
+<meta property="og:description" content="Ideal gases An &lsquo;ideal&rsquo; gas is a gas that is not subject to interparticle interactions. Also commonly said to not being subject to &lsquo;react with other substances&rsquo;.
+In many applications of thermodynamics, ideal gases often come up, so it&rsquo;s natural to understand them within a thermodynamic perspective.
+Gases and Pressure Before we begin with the real thermodynamical part of gases we need a bit of background with gases. Boyle&rsquo;s law gives us a mathematical formula for our intuition of gases." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://rezvan.xyz/school/tif085/tif085_2/" /><meta property="article:section" content="school" />
+<meta property="article:published_time" content="2022-11-26T00:04:21+01:00" />
+<meta property="article:modified_time" content="2022-11-26T00:04:21+01:00" />
+
+<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Thermodynamics: Lecture 2"/>
+<meta name="twitter:description" content="Ideal gases An &lsquo;ideal&rsquo; gas is a gas that is not subject to interparticle interactions. Also commonly said to not being subject to &lsquo;react with other substances&rsquo;.
+In many applications of thermodynamics, ideal gases often come up, so it&rsquo;s natural to understand them within a thermodynamic perspective.
+Gases and Pressure Before we begin with the real thermodynamical part of gases we need a bit of background with gases. Boyle&rsquo;s law gives us a mathematical formula for our intuition of gases."/>
+<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@1,500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
+
+    
+    
+    <link rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/main.1c8bcd5d4ada46afe0c47c75ab955bba6342e70592bc9462fe26a21c59920c6b.css" />
+    <link id="lightSyntaxStyle" rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/light_syntax.65408cc3a5c02070b661c3e4e79306fc261cc63620f4adce9a30eafcba4ab79e.css" />
+    
+    <link id="darkModeStyle" rel="stylesheet" type="text/css" href="https://rezvan.xyz/css/dark.f21f1f72304fd4373b0a82b421dac836220c43b1e924ed3811cbe84f5c8a1b3f.css"  disabled />
+    <link id="darkSyntaxStyle" rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/dark_syntax.2b10cc1a2156b30874a063b7439a993bc3b43d476c5e1d8598d769c929c7b381.css" />
+    
+
+    
+    
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+        </script>
+
+    
+    <script type="text/x-mathjax-config">
+		MathJax.Hub.Config({
+			tex2jax: {
+				inlineMath: [['$','$'], ['\\(','\\)']],
+				displayMath: [['$$','$$'], ['\[','\]']],
+				processEscapes: true,
+				processEnvironments: true,
+				skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+				TeX: { equationNumbers: { autoNumber: "AMS" },
+						 extensions: ["AMSmath.js", "AMSsymbols.js"] }
+			}
+		});
+		</script>
+    
+
+    
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js"
+        onload="renderMathInElement(document.body);"></script>
+
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            renderMathInElement(document.body, {
+                delimiters: [
+                    {left: "$$", right: "$$", display: true},
+                    {left: "$", right: "$", display: false}
+                ]
+            });
+        });
+    </script>
+    
+
+    
+</head>
+<body>
+    <div class="content"><header>
+    <nav id="site-navbar">
+        
+        <a href="/">home</a>
+        
+        <a href="/about">about</a>
+        
+        <a href="/principles">principles</a>
+        
+        <a href="/contact">contact</a>
+        
+        <a href="/cv">cv</a>
+        
+        <a href="/school">school</a>
+        
+        | <span id="dark-mode-toggle" onclick="toggleTheme()"></span>
+        <script src="https://rezvan.xyz/js/themetoggle.js"></script>
+        
+    </nav>
+</header>
+
+<main>
+    <article>
+        <div class="title">
+            <h1>Thermodynamics: Lecture 2</h1>
+            <div class="meta">Posted on Nov 26, 2022</div>
+        </div>
+        
+        <section class="body">
+            <h3 id="ideal-gases">Ideal gases</h3>
+<p>An &lsquo;ideal&rsquo; gas is a gas that is not subject to interparticle interactions. Also commonly said to not being subject to &lsquo;react with other substances&rsquo;.</p>
+<p>In many applications of thermodynamics, ideal gases often come up, so it&rsquo;s natural to understand them within a thermodynamic perspective.</p>
+<h3 id="gases-and-pressure">Gases and Pressure</h3>
+<p>Before we begin with the real thermodynamical part of gases we need a bit of background with gases.
+Boyle&rsquo;s law gives us a mathematical formula for our intuition of gases. Say we have setup a experiment where the mass of a gas and the temperature is constant.
+The only thing that could vary now is the pressure within in the gas, and its volume. How we define pressure is the key here - pressure is, in non-science terms,
+the force applied per area unit. Usually we write pressure as, $P$, with the formula:</p>
+<p>$$
+P = \frac{F}{A}
+$$</p>
+<p>So if we expand our container which the gas is held in, intuitively, the pressure should release/decrease.
+This is exactly what Boyle&rsquo;s law tells us.</p>
+<h4 id="boyles-law">Boyle&rsquo;s law</h4>
+<p>$$
+PV = Constant
+$$</p>
+<p>This means we can, for example, write:
+$$
+P_1 V_1 = P_2 V_2
+$$</p>
+<p>But in many cases we can&rsquo;t keep the amount of particles (mass) and temperature constant - so how do we describe it then?</p>
+<h3 id="ideal-gas-law">Ideal Gas Law</h3>
+<p>Suppose we have a cylinder with height $h$, and a surface area of $A$, containing some gas. Simplified, the gas will have a gravitational force
+$F_mg$, since the gas has a mass $M$.</p>
+<p>We can therefore describe the pressure as:
+$$
+M = (h * A) * \rho
+\newline
+F = Mg
+\newline
+P = \frac{F}{A} = \frac{h * A * \rho * g}{A} = h \rho g
+$$</p>
+<p>From observations and experiments, scientist have found that $PV = dT$ has linear relationship and found that:
+$$
+PV = nRT \text{, where:}
+\newline
+P - \text{ Pressure } [N/m^2, Pa]
+\newline
+V - \text{ Volume }   [m^3]
+\newline
+n - \text{ Amount of moles } [moles]
+\newline
+R - \text{ Gas constant, 8.3145 }  [J/mol * K]
+\newline
+T - \text{ Temperature } [K]
+$$</p>
+<p>Moles may something new that some haven&rsquo;t encountered. It&rsquo;s a way of describing how many particles there are in a given substance with some mass.
+The formula for moles is:
+$$
+n = \frac{N}{N_A} \text{, where:}
+\newline
+N - \text{ Amount of particles } [Count]
+\newline
+N_A - \text{Avogadro&rsquo;s constant, } 6.023 * 10^{23} \text{ } [1/mol]
+$$</p>
+<p>We can also define something called &lsquo;particle intensity&rsquo; which is just $\frac{N}{V}$, which can we useful sometimes.</p>
+<p>If we use this definition of moles, we can rewrite the Ideal gas law as:
+$$
+PV = \frac{N}{N_A}RT \rightarrow P = \frac{N}{V} \frac{R}{N_A} T
+$$</p>
+<p>This constant $\frac{R}{N_A}$ has a name, Boltzmann&rsquo;s constant, denoted by
+$$
+k_B = \frac{R}{N_A} = 1.38 * 10^{-23} \text{, therefore the equation becomes}
+\newline
+PV = N k_B T
+$$</p>
+<h3 id="kinetic-gas-theory">Kinetic Gas Theory</h3>
+<p>Our day to day definition of temperature is how &lsquo;hot&rsquo; or &lsquo;cold&rsquo; it is - but what is temperature <em>really</em> describing?
+One can think that temperature describes the <em>average kinetic energy in a object</em>.
+This of course varies with what substance we have and on many other factors - but in general we can say that gas <strong>particle</strong>, has an average kinetic energy of:
+$$
+E_{average} = \frac{\alpha}{2} k_B T \text{, where } \alpha \text{ is so called &lsquo;degrees of freedom&rsquo;}
+$$</p>
+<p>Therefore the <strong>total</strong> energy in a gas is:
+$$
+E_{total} = N E_{average} = N \frac{\alpha}{2} k_B T
+$$</p>
+<p>In our course and its applications, where we will only encounter monoatomic and diatomic gases - $\alpha = 3$ for monoatomic and $\alpha = 5$ diatomic.</p>
+<p>There&rsquo;s also a so called &lsquo;inner energy&rsquo; in the gas which we denote with $U$ - for a monoatomic gas, $U$ is generally:
+$$
+U = n \frac{3}{2}RT $$</p>
+<h3 id="conductivity-in-ideal-gases">Conductivity in Ideal Gases</h3>
+<p>Often when we encounter gases in a thermal system - we will encounter two different categories of them.
+One where we have constant volume, the gas can not expand more than its initial state.
+One where we have constant pressure, we may have a lid that can be expanded, therefore the volume will change.</p>
+<p>For these kinds of problems the usual $Q = cm\Delta T$ becomes tricky. But luckily, the formula for these are:
+$$
+Q = n C_v \Delta T
+\newline
+Q = n C_p \Delta T
+$$
+Where the subscript of the $C$ denotes which is constant and the other varying.</p>
+<p>With this we can also get formulas for $C_v$ and $C_p$ for ideal gases:
+$$
+C_v = \frac{\alpha}{2}R
+\newline
+C_p = C_v + R
+$$</p>
+<h3 id="work-by-gases">Work by Gases</h3>
+<p>Now that we&rsquo;ve encountered the different kind of categories of problems - we can understand which kind can perform work and which can not.
+If we have constant volume it means the gas cannot expand or &lsquo;push&rsquo; its surrounding. Therefore it cant do work!</p>
+<p>But in the case where we have constant pressure, but not volume, the gas can perform work.
+As we remember from mechanics - work is defined as:
+$$
+dW = \vec{F} dx
+$$</p>
+<p>Since we have another equation for the force, $F = PA$, we can write:
+$$
+dW = P(A dx) = P dV
+$$</p>
+<p>We usually write this as
+$$
+W = \int_i^f P dV
+$$</p>
+<p>Now the &lsquo;direction&rsquo; is really important here - and one may wonder what &lsquo;direction&rsquo; do we have when we&rsquo;re dealing with thermodynamics?
+Direction within thermodynamics means if the gas <strong>expands</strong> $(W &gt; 0)$ or if it compresses $(W &lt; 0)$.</p>
+<h3 id="phase-and-transition-variables">Phase and Transition variables</h3>
+<p>In a given system, we may have a heat flux, $Q$ - we have a &lsquo;inner energy&rsquo;, $U$, and the system may do work, $W$.
+Notice how I used <strong>may</strong> for $Q$ and $W$ - this is because they are so called &lsquo;phase variables&rsquo;, this because they are only present during a &lsquo;phase&rsquo; or &lsquo;process&rsquo;.</p>
+<p>While the system <strong>always</strong> has a inner energy, $U$.</p>
+<h3 id="thermodynamics">Thermodynamics</h3>
+<p>Now we have finally arrived at what this section of the course is all about - &lsquo;Thermodynamics&rsquo;. So how would one describe thermodynamics?
+Our lecturer described it as, &ldquo;A transaction system for energy&rdquo;. Which I find as a simple - yet good - explanation.
+It really is about how <strong>systems</strong> &lsquo;handle&rsquo; energy in and out of it.</p>
+<p>We&rsquo;ve already defined a lot of variables that are essential in thermodynamics:</p>
+<p>Q - heat exchange with the systems environment</p>
+<p>U - the systems inner energy</p>
+<p>W - Work which the <strong>gas</strong> performs - here we have to careful, sometimes work is defined by the work done by the outside <strong>on</strong> the system.</p>
+<h3 id="0th-law-of-thermodynamics">0th Law of Thermodynamics</h3>
+<p>It&rsquo;s quite a funny name since it&rsquo;s a physics law - and not a Computer Science one - that it&rsquo;s 0 indexed. But this law came <strong>after</strong> all the other laws, because people just assumed this was the case - but a proper formal law was needed.</p>
+<p>The 0th law of thermodynamics states that:</p>
+<p>&ldquo;Suppose we have 3 bodies, 1, 2, and, 3. In that order, if 1 and 2 are in thermal equilibrium - 2 and 3 are also in thermal equilibrium.
+Then 1 and 3 are also in thermal equilibrium&rdquo;.</p>
+<p>As stated - a quite &lsquo;obvious&rsquo; law that is not so powerful, but needed.</p>
+<h3 id="1th-law-of-thermodynamics">1th Law of Thermodynamics</h3>
+<p>Now this is a really powerful law - The 1th law of thermodynamics states that:
+$$
+Q = \Delta U + W
+$$</p>
+<p>If we &rsquo;talk&rsquo; through this forumla we understand that - the heat flux/heat exchange in a system, will be the difference in inner energy added with the work done by the gas in the system.</p>
+<h3 id="isoprocesses">Isoprocesses</h3>
+<p>As we already touched upon - thermodynamical gas problems often come in two categories. Here we will formally define them.
+The prefix &lsquo;iso&rsquo; means that something is unchanged, so therefore a <strong>isobar</strong> process means that the pressure is constant.
+In all of these different processes, the ideal gas law and the difference in inner energy will be the same for <strong>all</strong>.
+$$
+PV = nRT
+\newline
+\Delta U = n \frac{\alpha}{R} \Delta T
+$$</p>
+<h4 id="isobar-process">Isobar process</h4>
+<p>In a isobar process, the pressure will be held constant throughout the system. Which means:
+$$
+W_{if} = P(V_f - V_i)
+\newline
+Q = n C_p \Delta T
+\newline
+\Delta U = n C_v \Delta T
+$$</p>
+<h4 id="isochoric-process">Isochoric process</h4>
+<p>In a isochoric process, the volume will instead be held constant throughout the system. Which leads to:
+$$
+W_{if} = 0
+\newline
+Q = n C_v \Delta T
+\newline
+\Delta U = n C_v \Delta T
+$$</p>
+<h4 id="isothermal-process">Isothermal process</h4>
+<p>In a isothermal process, the temperature will instead be held constant throughout the system. Which means:
+$$
+W_{if} = \int P dV = nRT * ln(\frac{V_f}{V_i})
+\newline \Delta U = n C_v \Delta T = 0 \newline
+Q = +W
+$$</p>
+<h4 id="adiabatic-process">Adiabatic process</h4>
+<p>In a adiabatic process, the heat exchange is 0 - this is quite a special case, but this means:
+$$
+Q = 0
+\newline
+W = n C_v (T_i - T_f)
+\newline
+W = - n C_V \Delta T
+\newline
+\Delta U = n C_v \Delta T
+$$</p>
+<p>With this we can see that $\Delta U$ has to &lsquo;pay the price&rsquo; since $Q = 0$. This means the system takes its own inner energy to complete the transaction in energy.</p>
+<p>We also have one more formula in the adiabatic case:
+$$
+PV^\gamma = Constant
+$$</p>
+<p>With the ideal gas law we can find that:
+$$
+TV^{\gamma - 1} = Constant
+$$</p>
+<p>As well as:
+$$
+TP^{\frac{1 - \gamma}{\gamma}} = Constant
+$$</p>
+<h3 id="thermal-efficiency">Thermal Efficiency</h3>
+<p>Now that we have gone through almost all process that we&rsquo;re covering in this course - we will finally <strong>formally</strong> define thermal efficiency! As I promised in part 1!</p>
+<p>Thermal efficiency can be defined as:
+$$
+e = \frac{\sum W_g}{\sum Q_{pos}} = \frac{\sum Q_{total}}{\sum Q_{pos}}
+$$</p>
+<p>Thermal efficiency can also sometimes be denoted as $\eta$.</p>
+<h3 id="conclusion">Conclusion</h3>
+<p>This concludes this part - in the next part (coming next week, probably) we&rsquo;ll cover the 2nd law of thermodynamics, as well as summarize everything!</p>
+
+        </section>
+    </article>
+
+    <nav class="navigation"
+        style="display: flex; justify-content: space-between; align-items: center; margin-top: 20px;">
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+
+        
+        
+        <a class="previous" href="/school/tif085/tif085/" title="Previous: Thermodynamics: Lecture 1"
+            style="flex-grow: 1; text-align: left;">&larr; Previous</a>
+        
+        
+
+        <div style="flex-grow: 2; text-align: center;"></div>
+
+        
+        
+        <a class="next" href="/school/tif085/tif085_3/" title="Next: Thermodynamics: Lecture 3"
+            style="flex-grow: 1; text-align: right;">Next &rarr;</a>
+        
+        
+    </nav>
+</main>
+<footer id="site-footer">
+    
+    <a href="https://github.com/rezaarezvan" title="">github</a>
+    
+    <a href="https://x.com/rzvan__/" title="">x</a>
+    <p class="footer_msg">memento mori</p></footer><script>
+    feather.replace()
+</script></div>
+</body>
+
+</html>

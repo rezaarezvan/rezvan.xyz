@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html><head lang="en">
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"><title>rezvan | Mathematical analysis in several variables: Part 8 - Lagrange multipliers</title><link rel="icon" type="image/png" href="https://rezvan.xyz/images/icon.png" /><meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description"
+        content="Introduction In this part we&rsquo;ll cover the method of Lagrange multipliers. This is a strategy, for finding local minimum/maximums for a function with a constraint.
+Let&rsquo;s define it properly
+Definition Say we have a function, $f(x, y)$, which we want to find the min/max points. But this function is subject of some constraint of the form, $g(x, y) = k$.
+Recall our rectangular box problem from the last part: $$ V(x, y, z) = xyz \newline 2zx &#43; 2zy &#43; yx = 12 $$" />
+    <meta property="og:image" content="https://raw.githubusercontent.com/rezaarezvan/rezvan.xyz/main/images/icon.png" />
+    <meta property="og:title" content="Mathematical analysis in several variables: Part 8 - Lagrange multipliers" />
+<meta property="og:description" content="Introduction In this part we&rsquo;ll cover the method of Lagrange multipliers. This is a strategy, for finding local minimum/maximums for a function with a constraint.
+Let&rsquo;s define it properly
+Definition Say we have a function, $f(x, y)$, which we want to find the min/max points. But this function is subject of some constraint of the form, $g(x, y) = k$.
+Recall our rectangular box problem from the last part: $$ V(x, y, z) = xyz \newline 2zx &#43; 2zy &#43; yx = 12 $$" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://rezvan.xyz/school/lma017/lma017_8/" /><meta property="article:section" content="school" />
+<meta property="article:published_time" content="2023-09-13T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-09-13T00:00:00+00:00" />
+
+<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Mathematical analysis in several variables: Part 8 - Lagrange multipliers"/>
+<meta name="twitter:description" content="Introduction In this part we&rsquo;ll cover the method of Lagrange multipliers. This is a strategy, for finding local minimum/maximums for a function with a constraint.
+Let&rsquo;s define it properly
+Definition Say we have a function, $f(x, y)$, which we want to find the min/max points. But this function is subject of some constraint of the form, $g(x, y) = k$.
+Recall our rectangular box problem from the last part: $$ V(x, y, z) = xyz \newline 2zx &#43; 2zy &#43; yx = 12 $$"/>
+<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@1,500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
+
+    
+    
+    <link rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/main.1c8bcd5d4ada46afe0c47c75ab955bba6342e70592bc9462fe26a21c59920c6b.css" />
+    <link id="lightSyntaxStyle" rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/light_syntax.65408cc3a5c02070b661c3e4e79306fc261cc63620f4adce9a30eafcba4ab79e.css" />
+    
+    <link id="darkModeStyle" rel="stylesheet" type="text/css" href="https://rezvan.xyz/css/dark.f21f1f72304fd4373b0a82b421dac836220c43b1e924ed3811cbe84f5c8a1b3f.css"  disabled />
+    <link id="darkSyntaxStyle" rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/dark_syntax.2b10cc1a2156b30874a063b7439a993bc3b43d476c5e1d8598d769c929c7b381.css" />
+    
+
+    
+    
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+        </script>
+
+    
+    <script type="text/x-mathjax-config">
+		MathJax.Hub.Config({
+			tex2jax: {
+				inlineMath: [['$','$'], ['\\(','\\)']],
+				displayMath: [['$$','$$'], ['\[','\]']],
+				processEscapes: true,
+				processEnvironments: true,
+				skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+				TeX: { equationNumbers: { autoNumber: "AMS" },
+						 extensions: ["AMSmath.js", "AMSsymbols.js"] }
+			}
+		});
+		</script>
+    
+
+    
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js"
+        onload="renderMathInElement(document.body);"></script>
+
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            renderMathInElement(document.body, {
+                delimiters: [
+                    {left: "$$", right: "$$", display: true},
+                    {left: "$", right: "$", display: false}
+                ]
+            });
+        });
+    </script>
+    
+
+    
+</head>
+<body>
+    <div class="content"><header>
+    <nav id="site-navbar">
+        
+        <a href="/">home</a>
+        
+        <a href="/about">about</a>
+        
+        <a href="/principles">principles</a>
+        
+        <a href="/contact">contact</a>
+        
+        <a href="/cv">cv</a>
+        
+        <a href="/school">school</a>
+        
+        | <span id="dark-mode-toggle" onclick="toggleTheme()"></span>
+        <script src="https://rezvan.xyz/js/themetoggle.js"></script>
+        
+    </nav>
+</header>
+
+<main>
+    <article>
+        <div class="title">
+            <h1>Mathematical analysis in several variables: Part 8 - Lagrange multipliers</h1>
+            <div class="meta">Posted on Sep 13, 2023</div>
+        </div>
+        
+        <section class="body">
+            <h3 id="introduction">Introduction</h3>
+<p>In this part we&rsquo;ll cover the method of Lagrange multipliers. This is a strategy, for finding local minimum/maximums for a function with a constraint.</p>
+<p>Let&rsquo;s define it properly</p>
+<h3 id="definition">Definition</h3>
+<p>Say we have a function, $f(x, y)$, which we want to find the min/max points. But this function is subject of some constraint of the form, $g(x, y) = k$.</p>
+<p>Recall our rectangular box problem from the last part:
+$$
+V(x, y, z) = xyz \newline
+2zx + 2zy + yx = 12
+$$</p>
+<p>So if it&rsquo;s difficult to try to rewrite this using only two variables, we can instead use this method.</p>
+<p>Let&rsquo;s first get a geometrical sense.</p>
+<h3 id="geometrical-sense-of-lagrange-multipliers">Geometrical sense of Lagrange multipliers</h3>
+<p>If min/max of $f$, is subject to constraint, $g(x, y) = k$, which occurs at $(x_0, y_0)$, then the level curve containing $(x_0, y_0)$ must <em>touch</em> the constraint curve.</p>
+<p>If two curves are touching at $(x_0, y_0)$, in other words they have a common tangent line at $(x_0, y_0)$.</p>
+<p>Which is just equivalent of saying that they have a common perpendicular line at $(x_0, y_0)$, and what do we know which is orthogonal to the level curve?</p>
+<p>The gradient.</p>
+<p>Therefore, this means:
+$$
+\nabla f(x_0, y_0) || \nabla g(x_0, y_0)
+$$</p>
+<p>If two vectors are parallel, it&rsquo;s equivalent of saying:</p>
+<p>$$
+\boxed{\nabla f(x_0, y_0) || \lambda \nabla g(x_0, y_0)}
+$$</p>
+<p>All of this assuming that $\nabla g \neq 0$</p>
+<p>Let&rsquo;s properly define our method now.</p>
+<h3 id="lagrange-multiplier-method">Lagrange multiplier method</h3>
+<blockquote>
+<p>To find minimum/maximum values of function, $f$, subject to constraint, $g(x, y) = k$, assuming minimum/maximum points exists and $\nabla g \neq 0$</p>
+</blockquote>
+<ol>
+<li>
+<p>Find all numbers $x, y$ and $\lambda$, such that:
+$$
+\nabla f(x, y) = \lambda \nabla g(x, y) = k
+$$</p>
+</li>
+<li>
+<p>Compute values from step 1, choose the minimum/maximum value(s).</p>
+</li>
+</ol>
+<p>Let&rsquo;s do an example.</p>
+<h4 id="example">Example</h4>
+<p>Find the extreme values of, $f(x, y) = xy$ on the disc, $x^2 + y^2 \leq 1$.</p>
+<p>Step 1 - Find critical points (as usual):
+$$
+\nabla f = 0 \newline
+\langle y, x \rangle  = 0
+$$</p>
+<p>Which means:
+$$
+\begin{cases}
+y = 0 \newline
+x = 0
+\end{cases}
+$$</p>
+<p>So we have a critical point at $(0, 0)$. Let&rsquo;s compute the value:
+$$
+f(0, 0) = \boxed{0}
+$$</p>
+<p>Step 2 - Find absolute minimum/maximum values on boundary.</p>
+<p>Since we have a unit circle, with equation, $x^2 + y^2 = 1$, we can view this as a constraint.
+$$
+g(x, y) = k \newline
+x^2 + y^2 = 1
+$$</p>
+<p>Let&rsquo;s first see if all our assumptions hold, since this is a bounded closed set, by the extreme value theorem, absolute values must exists. So we know that they exists.</p>
+<p>Let&rsquo;s check that $\nabla g \neq 0$:
+$$
+\nabla g = \langle 2x, 2y \rangle
+$$</p>
+<p>Which is only $0$ at $(0, 0)$ which isn&rsquo;t on the boundary of the circle.</p>
+<p>So we can try our new method!</p>
+<p>$$
+\begin{cases}
+\langle y, x \rangle = \lambda \langle 2x, 2y \rangle \newline
+x^2 + y^2 = 1
+\end{cases}
+$$</p>
+<p>So we have a vector that must be equal to another vector, this means they share coordinates.</p>
+<p>Which means:
+$$
+\begin{cases}
+y = 2\lambda x \newline
+x = 2\lambda y \newline
+x^2 + y^2 = 1
+\end{cases}
+$$</p>
+<p>substitute and simplify:
+$$
+\begin{cases}
+x = 4\lambda^2 x \newline
+y = 2\lambda x \newline
+x^2 + y^2 = 1
+\end{cases}
+$$</p>
+<p>$$
+\begin{cases}
+x - 4\lambda^2 x = 0 \newline
+y = 2\lambda x \newline
+x^2 + y^2 = 1
+\end{cases}
+$$</p>
+<p>$$
+\begin{cases}
+x(1 - 4\lambda^2) = 0 \newline
+y = 2\lambda x \newline
+x^2 + y^2 = 1
+\end{cases}
+$$</p>
+<p>Case 1, $x = 0$, therefore, $y = 0$ as well, but our constraint is not fulfilled then.</p>
+<p>Case 2, $1 - 4\lambda^2 = 0$:
+$$
+\lambda = \pm \dfrac{1}{2}
+$$</p>
+<p>Case 2.1, $\lambda = \dfrac{1}{2}$
+$$
+\begin{cases}
+y = x
+x = y
+x^2 + y^2 = 1
+\end{cases}
+$$</p>
+<p>$$
+2x^2 = 1 \newline
+x = \pm \dfrac{1}{\sqrt{2}} \newline
+y = \pm \dfrac{1}{\sqrt{2}} \newline
+$$</p>
+<p>The constraint holds, so we have found another point, $\left( \dfrac{1}{\sqrt{2}}, \dfrac{1}{\sqrt{2}} \right)$ and $\left( - \dfrac{1}{\sqrt{2}}, - \dfrac{1}{\sqrt{2}} \right)$.</p>
+<p>Case 2.2, $\lambda = - \dfrac{1}{2}$
+$$
+\begin{cases}
+y = -x
+x = -y
+x^2 + y^2 = 1
+\end{cases}
+$$</p>
+<p>$$
+2x^2 = 1 \newline
+x = \pm \dfrac{1}{\sqrt{2}} \newline
+y = \pm \dfrac{1}{\sqrt{2}} \newline
+$$</p>
+<p>The constraint holds, $\left( \dfrac{1}{\sqrt{2}}, - \dfrac{1}{\sqrt{2}} \right)$ and $\left( - \dfrac{1}{\sqrt{2}}, \dfrac{1}{\sqrt{2}} \right)$.</p>
+<p>Now, we just compute the value of these points:
+$$
+f\left( \dfrac{1}{\sqrt{2}}, \dfrac{1}{\sqrt{2}} \right) = \dfrac{1}{2} \newline
+f\left( - \dfrac{1}{\sqrt{2}}, - \dfrac{1}{\sqrt{2}} \right) = \dfrac{1}{2} \newline
+f\left( \dfrac{1}{\sqrt{2}}, - \dfrac{1}{\sqrt{2}} \right) = - \dfrac{1}{2} \newline
+f\left( - \dfrac{1}{\sqrt{2}}, \dfrac{1}{\sqrt{2}} \right) = - \dfrac{1}{2}
+$$</p>
+<p>So, we have finally found our minimum and maximum values, $- \dfrac{1}{2}$ and $\dfrac{1}{2}$, respectively.</p>
+<h3 id="remark">Remark</h3>
+<p>A little remark, it is important that the constraint has to be of the form $g(x, y) = k$. For example, our rectangle problem from last time, we can not describe a rectangular box in that form.</p>
+<p>So no lagrange multiplier there. Let&rsquo;s look at more difficult example.</p>
+<h3 id="example-1">Example</h3>
+<p>Find the points on the sphere, $x^2 + y^2 + z^2 = 4$, that are closest and furthest from the point $(3, 1, -1)$.</p>
+<p>So we have to calculate the distance between these points, or in other words:
+$$
+d(x, y, z) = \sqrt{(x - 3)^2 + (y - 1)^2 + (z + 1)^2}
+$$</p>
+<p>But this function isn&rsquo;t really that pleasant, so instead, let&rsquo;s calculate the distance squared, or:
+$$
+d(x, y, z) = (x - 3)^2 + (y - 1)^2 + (z + 1)^2
+$$</p>
+<p>We can work with this function instead, so let&rsquo;s use our method. Let&rsquo;s first compute gradients:
+$$
+\nabla d = \langle 2(x - 3), 2(y - 1), 2(z + 1) \rangle
+$$</p>
+<p>$$
+\nabla g = \langle 2x, 2y, 2z \rangle
+$$</p>
+<p>So we have:
+$$
+\begin{cases}
+\langle 2(x - 3), 2(y - 1), 2(z + 1) \rangle = \lambda \langle 2x, 2y, 2z \rangle \newline
+x^2 + y^2 + z^2 = 4
+\end{cases}
+$$</p>
+<p>$$
+\begin{cases}
+2(x - 3) = 2\lambda x \newline
+2(y - 1) = 2\lambda y \newline
+2(z + 1) = 2\lambda z \newline
+x^2 + y^2 + z^2 = 4
+\end{cases}
+$$</p>
+<p>$$
+\begin{cases}
+x - 3 = \lambda x \newline
+y - 1 = \lambda y \newline
+z + 1 = \lambda z \newline
+x^2 + y^2 + z^2 = 4
+\end{cases}
+$$</p>
+<p>$$
+\begin{cases}
+x - \lambda x = 3 \newline
+y - \lambda y = 1 \newline
+z - \lambda z = -1 \newline
+x^2 + y^2 + z^2 = 4
+\end{cases}
+$$</p>
+<p>$$
+\begin{cases}
+x(1 - \lambda) = 3 \newline
+y(1 - \lambda) = 1 \newline
+z(1 - \lambda) = -1 \newline
+x^2 + y^2 + z^2 = 4
+\end{cases}
+$$</p>
+<p>$$
+\begin{cases}
+x = \dfrac{3}{1 - \lambda} \newline
+y = \dfrac{1}{1 - \lambda} \newline
+z = \dfrac{-1}{1 - \lambda} \newline
+x^2 + y^2 + z^2 = 4
+\end{cases}
+$$</p>
+<p>Let&rsquo;s substitute these into our constraint:
+$$
+\dfrac{9}{(1 - \lambda)^2} + \dfrac{1}{(1 - \lambda)^2} + \dfrac{1}{(1 - \lambda)^2} = 4
+$$</p>
+<p>$$
+\dfrac{11}{(1 - \lambda)^2} = 4
+$$</p>
+<p>$$
+(1 - \lambda)^2 = \dfrac{11}{4}
+$$</p>
+<p>$$
+1 - \lambda = \pm \dfrac{\sqrt{11}}{2}
+$$</p>
+<p>Compute vales of $x, y, z$, in case 1, $1 - \lambda = \dfrac{\sqrt{11}}{2}$:
+$$
+\begin{cases}
+x = \dfrac{6}{\sqrt{11}} \newline
+y = \dfrac{2}{\sqrt{11}} \newline
+z = -\dfrac{2}{\sqrt{11}} \newline
+\end{cases}
+$$</p>
+<p>Compute vales of $x, y, z$, in case 2, $1 - \lambda = -\dfrac{\sqrt{11}}{2}$:
+$$
+\begin{cases}
+x = -\dfrac{6}{\sqrt{11}} \newline
+y = -\dfrac{2}{\sqrt{11}} \newline
+z = \dfrac{2}{\sqrt{11}} \newline
+\end{cases}
+$$</p>
+<p>Now, we could plug these values into our $d$ function, however we can intuitively see which point is closest and furthest.</p>
+<p>Case 1 is the closest and case 2 is the furthest.</p>
+
+        </section>
+    </article>
+
+    <nav class="navigation"
+        style="display: flex; justify-content: space-between; align-items: center; margin-top: 20px;">
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+
+        
+        
+        <a class="previous" href="/school/lma017/lma017_7/" title="Previous: Mathematical analysis in several variables: Part 7 - Absolute max and min values"
+            style="flex-grow: 1; text-align: left;">&larr; Previous</a>
+        
+        
+
+        <div style="flex-grow: 2; text-align: center;"></div>
+
+        
+        
+        <a class="next" href="/school/lma017/lma017_9/" title="Next: Mathematical analysis in several variables: Part 9 - Double and triple integrals"
+            style="flex-grow: 1; text-align: right;">Next &rarr;</a>
+        
+        
+    </nav>
+</main>
+<footer id="site-footer">
+    
+    <a href="https://github.com/rezaarezvan" title="">github</a>
+    
+    <a href="https://x.com/rzvan__/" title="">x</a>
+    <p class="footer_msg">memento mori</p></footer><script>
+    feather.replace()
+</script></div>
+</body>
+
+</html>

@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html><head lang="en">
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"><title>rezvan | Electrical Circuits and Fields: Part 9 - Electromagnetic Waves</title><link rel="icon" type="image/png" href="https://rezvan.xyz/images/icon.png" /><meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description"
+        content="In this part we&rsquo;ll cover electromagnetic waves - we&rsquo;ll see why electrical and magnetic fields always appear together.
+Displacement current If we recall Faraday&rsquo;s law: $$ \oint \mathbf{\vec{E}} \cdot d\mathbf{\vec{s}} = -\dfrac{d \Phi_B}{dt} $$
+This says that a change in the magnetic field will produce an electrical field. But how about the converse?
+Does a change in an electrical field produce a magnetic field?
+If we consider this example with a capacitor being charged:" />
+    <meta property="og:image" content="https://raw.githubusercontent.com/rezaarezvan/rezvan.xyz/main/images/icon.png" />
+    <meta property="og:title" content="Electrical Circuits and Fields: Part 9 - Electromagnetic Waves" />
+<meta property="og:description" content="In this part we&rsquo;ll cover electromagnetic waves - we&rsquo;ll see why electrical and magnetic fields always appear together.
+Displacement current If we recall Faraday&rsquo;s law: $$ \oint \mathbf{\vec{E}} \cdot d\mathbf{\vec{s}} = -\dfrac{d \Phi_B}{dt} $$
+This says that a change in the magnetic field will produce an electrical field. But how about the converse?
+Does a change in an electrical field produce a magnetic field?
+If we consider this example with a capacitor being charged:" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://rezvan.xyz/school/eem076/eem076_9/" /><meta property="article:section" content="school" />
+<meta property="article:published_time" content="2023-04-25T19:40:29+02:00" />
+<meta property="article:modified_time" content="2023-04-25T19:40:29+02:00" />
+
+<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Electrical Circuits and Fields: Part 9 - Electromagnetic Waves"/>
+<meta name="twitter:description" content="In this part we&rsquo;ll cover electromagnetic waves - we&rsquo;ll see why electrical and magnetic fields always appear together.
+Displacement current If we recall Faraday&rsquo;s law: $$ \oint \mathbf{\vec{E}} \cdot d\mathbf{\vec{s}} = -\dfrac{d \Phi_B}{dt} $$
+This says that a change in the magnetic field will produce an electrical field. But how about the converse?
+Does a change in an electrical field produce a magnetic field?
+If we consider this example with a capacitor being charged:"/>
+<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@1,500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
+
+    
+    
+    <link rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/main.1c8bcd5d4ada46afe0c47c75ab955bba6342e70592bc9462fe26a21c59920c6b.css" />
+    <link id="lightSyntaxStyle" rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/light_syntax.65408cc3a5c02070b661c3e4e79306fc261cc63620f4adce9a30eafcba4ab79e.css" />
+    
+    <link id="darkModeStyle" rel="stylesheet" type="text/css" href="https://rezvan.xyz/css/dark.f21f1f72304fd4373b0a82b421dac836220c43b1e924ed3811cbe84f5c8a1b3f.css"  disabled />
+    <link id="darkSyntaxStyle" rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/dark_syntax.2b10cc1a2156b30874a063b7439a993bc3b43d476c5e1d8598d769c929c7b381.css" />
+    
+
+    
+    
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+        </script>
+
+    
+    <script type="text/x-mathjax-config">
+		MathJax.Hub.Config({
+			tex2jax: {
+				inlineMath: [['$','$'], ['\\(','\\)']],
+				displayMath: [['$$','$$'], ['\[','\]']],
+				processEscapes: true,
+				processEnvironments: true,
+				skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+				TeX: { equationNumbers: { autoNumber: "AMS" },
+						 extensions: ["AMSmath.js", "AMSsymbols.js"] }
+			}
+		});
+		</script>
+    
+
+    
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js"
+        onload="renderMathInElement(document.body);"></script>
+
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            renderMathInElement(document.body, {
+                delimiters: [
+                    {left: "$$", right: "$$", display: true},
+                    {left: "$", right: "$", display: false}
+                ]
+            });
+        });
+    </script>
+    
+
+    
+</head>
+<body>
+    <div class="content"><header>
+    <nav id="site-navbar">
+        
+        <a href="/">home</a>
+        
+        <a href="/about">about</a>
+        
+        <a href="/principles">principles</a>
+        
+        <a href="/contact">contact</a>
+        
+        <a href="/cv">cv</a>
+        
+        <a href="/school">school</a>
+        
+        | <span id="dark-mode-toggle" onclick="toggleTheme()"></span>
+        <script src="https://rezvan.xyz/js/themetoggle.js"></script>
+        
+    </nav>
+</header>
+
+<main>
+    <article>
+        <div class="title">
+            <h1>Electrical Circuits and Fields: Part 9 - Electromagnetic Waves</h1>
+            <div class="meta">Posted on Apr 25, 2023</div>
+        </div>
+        
+        <section class="body">
+            <p>In this part we&rsquo;ll cover electromagnetic waves - we&rsquo;ll see why electrical and magnetic fields always appear together.</p>
+<h3 id="displacement-current">Displacement current</h3>
+<p>If we recall Faraday&rsquo;s law:
+$$
+\oint \mathbf{\vec{E}} \cdot d\mathbf{\vec{s}} = -\dfrac{d \Phi_B}{dt}
+$$</p>
+<p>This says that a change in the magnetic field will produce an electrical field. But how about the converse?</p>
+<p>Does a change in an electrical field produce a magnetic field?</p>
+<p>If we consider this example with a capacitor being charged:</p>
+<p><img src="/school/images/CC.png#center" alt=""></p>
+<p>Using Ampere&rsquo;s law:
+$$
+\oint \mathbf{\vec{B}}  \cdot\ d\mathbf{\vec{s}} = \mu_0 I_{enc}
+$$</p>
+<p>If we look at $S_1$, we see that $I_{enc} = I$ - however, for $S_2$, $I_{enc} = 0$ - but the current does continue?</p>
+<p>So we will need to add an extra term to Ampere&rsquo;s law:
+$$
+\oint \mathbf{\vec{B}}  \cdot\ d\mathbf{\vec{s}} = \mu_0(I + I_d)
+$$</p>
+<p>Where the <strong>displacement</strong> current, $I_d$:
+$$
+I_d = \varepsilon_0 \dfrac{d \Phi_E}{dt}
+$$</p>
+<p>In practice, $I = I_d$, thus the choice of the Amperian loop is inconsequential!</p>
+<p><img src="/school/images/DC.png#center" alt=""></p>
+<h3 id="gausss-law">Gauss&rsquo;s Law</h3>
+<p>For electrostatics, Gauss&rsquo;s law said that:
+$$
+\Phi_E = \oiint \mathbf{\vec{E}} \cdot\ d\mathbf{\vec{A}} = \dfrac{q}{\mu_0}
+$$</p>
+<p>But in the case for magnetism - magnetic <em>monopoles</em> do not exist (meaning that $q = 0$). Therefore:
+$$
+\Phi_B = \oiint \mathbf{\vec{B}} \cdot\ d\mathbf{\vec{A}} = 0
+$$</p>
+<h3 id="maxwells-equations">Maxwell&rsquo;s Equations</h3>
+<p>With these new tools in mind - we have now learned the four Maxwell equations that form the basis of electromagnetism!</p>
+<p>Let&rsquo;s write them all down:</p>
+<p><strong>Gauss&rsquo;s Law for electrostatics</strong>:
+$$
+\Phi_E = \oiint \mathbf{\vec{E}} \cdot\ d\mathbf{\vec{A}} = \dfrac{q}{\mu_0}
+$$</p>
+<p><strong>Gauss&rsquo;s Law for magnetism</strong>:
+$$
+\Phi_B = \oiint \mathbf{\vec{B}} \cdot\ d\mathbf{\vec{A}} = 0
+$$</p>
+<p><strong>Faraday&rsquo;s Law</strong>:
+$$
+\varepsilon = \oint \mathbf{\vec{E}} \cdot d\mathbf{\vec{s}} = -\dfrac{d \Phi_B}{dt}
+$$</p>
+<p><strong>Ampere-Maxwell Law</strong>:
+$$
+\varepsilon = \oint \mathbf{\vec{B}} \cdot d\mathbf{\vec{s}} = \mu_0(I + I_d) = \mu_0\left(I + \varepsilon_0 \dfrac{d \Phi_E}{dt}\right)
+$$</p>
+<p>If the absence of sources is present (meaning that q = 0 and I = 0) - all of these become quite compact and tidy:</p>
+<p><strong>Gauss&rsquo;s Law for electrostatics</strong>:
+$$
+\Phi_E = \oiint \mathbf{\vec{E}} \cdot\ d\mathbf{\vec{A}} = 0
+$$</p>
+<p><strong>Gauss&rsquo;s Law for magnetism</strong>:
+$$
+\Phi_B = \oiint \mathbf{\vec{B}} \cdot\ d\mathbf{\vec{A}} = 0
+$$</p>
+<p><strong>Faraday&rsquo;s Law</strong>:
+$$
+\varepsilon = \oint \mathbf{\vec{E}} \cdot d\mathbf{\vec{s}} = -\dfrac{d \Phi_B}{dt}
+$$</p>
+<p><strong>Ampere-Maxwell Law</strong>:
+$$
+\varepsilon = \oint \mathbf{\vec{B}} \cdot d\mathbf{\vec{s}} = \mu_0(I + I_d) = \mu_0 \varepsilon_0 \dfrac{d \Phi_E}{dt}
+$$</p>
+<p>Now we can see, from Faraday&rsquo;s law and Ampere-Maxwell&rsquo;s Law that, if we have a change in one field - we&rsquo;ll see a change in the other!</p>
+<p>We&rsquo;ll see why this picture will make a lot of sense soon:
+<img src="/school/images/EM.png#center" alt=""></p>
+<h3 id="inductance">Inductance</h3>
+<p>We have seen some aspect of inductances already - the induced current.</p>
+<p>Imagine this scenario:
+<img src="/school/images/MI.png#center" alt=""></p>
+<p>We can see that our $\mathbf{\vec{B_1}}$ passes through the second coil, therefore a flux is generated, $\Phi_{21}$</p>
+<p>As we learned last time, varying $I_1$ will induce an emf!</p>
+<p>Which means:
+$$
+\varepsilon_{21} = -N_{2} \dfrac{d \Phi_{21}}{dt}
+$$</p>
+<p>If we want to write this in terms of $I_1$ we get:
+$$
+\varepsilon_{21} = M_{21} \dfrac{d I_1}{dt}
+$$</p>
+<p>Where $M_{21}$:
+$$
+M_{21} = \dfrac{N_2 \Phi_{21}}{I_1}
+$$</p>
+<p>But let&rsquo;s say that we vary $I_2$, this will also lead to an EMF, but in the first coil:
+$$
+\varepsilon_{12} = -N_{1} \dfrac{d \Phi_{12}}{dt} = M_{12} \dfrac{d I_2}{dt}
+$$</p>
+<p>Then, if we use the theorem of reciprocity - which states that:</p>
+<blockquote>
+<p>The current at one point in a circuit due to a voltage at a second point is the same as the current at the second point due to the same voltage at the first.</p>
+</blockquote>
+<p>Using this and combining Ampere&rsquo;s law and the Biot-Savart law - we get:
+$$
+M_{12} = M_{21} = M
+$$</p>
+<p>This means - sending varying current (AC) through coil 1 - will generate an AC current in coil 2 as well!</p>
+<p>We can also connect this to voltage, potential drop:
+$$
+\dfrac{V_2}{V_1} = \dfrac{N_2}{N_1}
+$$</p>
+<h3 id="self-inductance">Self-Inductance</h3>
+<p>Say we only have one coil</p>
+<p><img src="/school/images/SI.png#center" alt=""></p>
+<p>If we vary, $I$, an induced EMF will oppose the change in flux, according to Faraday&rsquo;s law.</p>
+<p>We denote this self-inducted EMF with, $\varepsilon_L$.</p>
+<p>We can write it as:
+$$
+\varepsilon_L = -N \dfrac{d \Phi_B}{dt}
+$$</p>
+<p>We can relate this self-inductance with self-inductance, $L$:
+$$
+\varepsilon_L = -L \dfrac{dI}{dt}
+$$</p>
+<p>We can also write:
+$$
+L = \dfrac{N \Phi_B}{I} = \dfrac{\mu_0 N^2 A}{l}
+$$</p>
+<p>Therefore, the inductance, is a measure of an inductor&rsquo;s resistance to change of the current!</p>
+<p>In even simpler terms - inductors oppose change in the current!</p>
+<p>So, since inductors oppose changes to the current - work must be done to establish a current in the inductor.
+Thus, energy must be stored in the magnetic field in an inductor! Similar to electrical fields in a capacitor.</p>
+<p>The power, or the rate at an external EMF, $\varepsilon_{ext}$, <em>works</em> to overcome the self-induced EMF, $\varepsilon_L$, to pass the current $I$:
+$$
+P_L = \dfrac{d W_{ext}}{dt} = I \varepsilon_{ext} = -I \varepsilon_L = IL \dfrac{dI}{dt}
+$$</p>
+<p>This assumes that only $\varepsilon_{ext}$ and the inductor is present.</p>
+<p>The total work done by an external source to increase the current from 0 to $I$ is:
+$$
+W_{ext} = \int dW_{ext} = \int_0^I IL\ dI = \boxed{\dfrac{1}{2}LI^2}
+$$</p>
+<h3 id="electromagnetic-waves">Electromagnetic waves</h3>
+<p>We&rsquo;ll now cover a very cool phenomena - we&rsquo;ll cover why electromagnetic waves travel at light speed!</p>
+<p>To prove this we&rsquo;ll need to rewrite our definition for $\mathbf{\vec{E}}$ and $\mathbf{\vec{B}}$:
+$$
+\mathbf{\vec{E}} = E_y(x, t)\mathbf{\vec{J}} = E\ cos(kx - \omega t)\mathbf{\vec{J}}
+$$</p>
+<p>$$
+\mathbf{\vec{B}} = B_z(x, t)\mathbf{\vec{K}} = B\ cos(kx - \omega t)\mathbf{\vec{K}}
+$$</p>
+<p>Using Faraday&rsquo;s law:
+$$
+\oint \mathbf{\vec{E}} \cdot\ d\mathbf{\vec{s}} = - \dfrac{d}{dt} \iint \mathbf{\vec{B}} \cdot\ d\mathbf{\vec{A}}
+$$</p>
+<p>If we take our ring integral inside a arbitrary rectangle - on the xy-plane:</p>
+<p><img src="/school/images/xy.png#center" alt=""></p>
+<p>$$
+E_y(x + \Delta x) - E_y(x) = - \dfrac{d}{dt} \iint \mathbf{\vec{B}} \cdot dxdy
+$$</p>
+<p>We get that:
+$$
+\dfrac{\partial E_y}{\partial x} = - \dfrac{\partial B_z}{\partial t}
+$$</p>
+<p>Let&rsquo;s calculate both:
+$$
+\dfrac{\partial E_y}{\partial x} = -kE\ sin(kx - \omega t)
+$$</p>
+<p>$$
+\dfrac{\partial B_z}{\partial t} = \omega B\ sin(kx - \omega t)
+$$</p>
+<p>Which, finally, means:
+$$
+\boxed{\dfrac{E}{B} = \dfrac{\omega}{k} = c}
+$$</p>
+<h3 id="emfs-in-circuits">EMFs in circuits</h3>
+<p>Now that we have learned this beauty of electromagnetic waves - let&rsquo;s tie it back to our electrical circuits.</p>
+<p>As we learned with electrical fields and capacitor:</p>
+<blockquote>
+<p>Electrical field opposes change in voltage
+$$
+C = \varepsilon_0 \dfrac{A}{d} \newline
+U = \dfrac{1}{2} C|V^2| \newline
+I(t) = C \dfrac{dV}{dt}
+$$</p>
+</blockquote>
+<p>We have now seen that, magnetic fields and inductors:</p>
+<blockquote>
+<p>Magnetic field opposes change in the current
+$$
+L = \mu_0 N^2 \dfrac{A}{l} \newline
+U = \dfrac{1}{2} LI^2 \newline
+V(t) = L \dfrac{dI}{dt}
+$$</p>
+</blockquote>
+<p>We can now use this knowledge to understand LC and RLC circuits - and see how and why the energy oscillates between the electrical and magnetic field!</p>
+
+        </section>
+    </article>
+
+    <nav class="navigation"
+        style="display: flex; justify-content: space-between; align-items: center; margin-top: 20px;">
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+
+        
+        
+        <a class="previous" href="/school/eem076/eem076_8/" title="Previous: Electrical Circuits and Fields: Part 8 - Magnetic fields"
+            style="flex-grow: 1; text-align: left;">&larr; Previous</a>
+        
+        
+
+        <div style="flex-grow: 2; text-align: center;"></div>
+
+        
+        
+        <a class="next" href="/school/eem076/eem076_10/" title="Next: Electrical Circuits and Fields: Part 10 - Steady-state sinusoidal analysis"
+            style="flex-grow: 1; text-align: right;">Next &rarr;</a>
+        
+        
+    </nav>
+</main>
+<footer id="site-footer">
+    
+    <a href="https://github.com/rezaarezvan" title="">github</a>
+    
+    <a href="https://x.com/rzvan__/" title="">x</a>
+    <p class="footer_msg">memento mori</p></footer><script>
+    feather.replace()
+</script></div>
+</body>
+
+</html>

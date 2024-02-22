@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Introduction to Data Science and AI on rezvan</title>
+    <link>http://localhost:1313/school/Introduction-to-data-science-and-AI/</link>
+    <description>Recent content in Introduction to Data Science and AI on rezvan</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 06 Feb 2024 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/school/Introduction-to-data-science-and-AI/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Introduction to data science and AI: Part 7 - Linear and logistic regression</title>
+      <link>http://localhost:1313/school/DAT565/DAT565_7/</link>
+      <pubDate>Tue, 06 Feb 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/school/DAT565/DAT565_7/</guid>
+      <description>Introduction In this part we&amp;rsquo;ll cover linear and logistic regression.&#xA;Core data science tasks Regression is one of the core data science tasks:&#xA;Regression Predicting a numerical quantity Classification Assigning a label from a discrete set of possibilities Clustering Grouping items by similarity We will cover clustering in a few parts.&#xA;Linear regression Regression line is useful for visualization and a method for forecasting numerical values. Residual error of a regression line is the difference between the predicted and actual values.</description>
+    </item>
+    <item>
+      <title>Introduction to data science and AI: Part 6 - Mathematical models</title>
+      <link>http://localhost:1313/school/DAT565/DAT565_6/</link>
+      <pubDate>Fri, 02 Feb 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/school/DAT565/DAT565_6/</guid>
+      <description>Introduction In this part we&amp;rsquo;ll cover some central mathematical models and their applications.&#xA;Mathematical models All models are wrong, but some models are useful - George Box&#xA;Before we start, let&amp;rsquo;s remember that a model is not perfect by any means, and it is just a tool for a subset of tasks.&#xA;Linear VS. Non-linear models Let&amp;rsquo;s define what a linear and non-linear model is.&#xA;In mathematics, a linear polynomial has the form $f(x) = ax + b$ for some constants $a, b$, so it corresponds to a line drawn on the Cartesian plane.</description>
+    </item>
+    <item>
+      <title>Introduction to data science and AI: Part 5 - Statistical analysis</title>
+      <link>http://localhost:1313/school/DAT565/DAT565_5/</link>
+      <pubDate>Sat, 27 Jan 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/school/DAT565/DAT565_5/</guid>
+      <description>Introduction In this part we&amp;rsquo;ll cover some very central and fundamental concepts and theorems from statistics that are used.&#xA;The statistic paradigm The bread and butter of statistics is inferring the properties of the population from a random sample.&#xA;Properties of the random sample are determined by the underlying properties of the population and probability. The random sample can be described in terms of descriptive statistics, such as summary statistics e.</description>
+    </item>
+    <item>
+      <title>Introduction to data science and AI: Part 4 - Data visualization</title>
+      <link>http://localhost:1313/school/DAT565/DAT565_4/</link>
+      <pubDate>Fri, 26 Jan 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/school/DAT565/DAT565_4/</guid>
+      <description>Introduction In this part we&amp;rsquo;ll discuss some principles when it comes to data visualization&#xA;Five-point summary The five-point summary is a very common and effective summary of data to get a quick overview and feeling for the data.&#xA;To understand what the five-point summary tells us, let&amp;rsquo;s first understand quantiles and quartiles.&#xA;A quantile is a cut-point of a distribution (or a dataset). Quantiles are usually obtained by sorting the data and selecting an appropriate value at an appropriate rank.</description>
+    </item>
+    <item>
+      <title>Introduction to data science and AI: Part 3 - Data munging</title>
+      <link>http://localhost:1313/school/DAT565/DAT565_3/</link>
+      <pubDate>Tue, 23 Jan 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/school/DAT565/DAT565_3/</guid>
+      <description>Introduction In this part we&amp;rsquo;re going to discuss different data munging techniques.&#xA;Data munging is the process of transforming &amp;ldquo;raw&amp;rdquo; data into a readable format.&#xA;One of the most common processes is when we want to scrape data from a website.&#xA;HTML The web is built on Hypertext Markup Language.&#xA;HTML form a tree of nested elements, marked with tags.&#xA;&amp;lt;p class=&amp;#34;foo&amp;#34;&amp;gt; bar &amp;lt;/p&amp;gt; This creates a paragraph element.&#xA;&amp;lt;img src=&amp;#34;url&amp;#34; alt=&amp;#34;text&amp;#34;&amp;gt; This creates an image element.</description>
+    </item>
+    <item>
+      <title>Introduction to data science and AI: Part 2 - Python tools for data science</title>
+      <link>http://localhost:1313/school/DAT565/DAT565_2/</link>
+      <pubDate>Fri, 19 Jan 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/school/DAT565/DAT565_2/</guid>
+      <description>Introduction In this part we&amp;rsquo;re going to explore some popular Python tools for data science.&#xA;NumPy Numerical Python, is the standard package for computation and array operations.&#xA;Low-level functions are written in C, therefore, very fast.&#xA;Basic operations in NumPy We usually import as:&#xA;import numpy as np NumPy arrays can be constructed with the following:&#xA;A = np.array([69, 420, 1337, 42]) A NumPy array is defined by:&#xA;The number of dimensions it has (ndim) The number of elements it has (size) Its shape (number of elements along an axis) Its dtype A = np.</description>
+    </item>
+    <item>
+      <title>Introduction to data science and AI: Part 1 - Introduction</title>
+      <link>http://localhost:1313/school/DAT565/DAT565/</link>
+      <pubDate>Tue, 16 Jan 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/school/DAT565/DAT565/</guid>
+      <description>Introduction In this series we&amp;rsquo;ll cover the very large and mystical field of data science and AI. We&amp;rsquo;re going to spend these first few parts to understand what data science is.&#xA;Data science What is data science? (Theoretical) Computer science is method-driven and often abstract. In data science, the question is often answered with insights derived from the data.&#xA;Data scientists aim for results that can describe the world, or a business sector, that needs it.</description>
+    </item>
+  </channel>
+</rss>

@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html><head lang="en">
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"><title>rezvan | Mathematical analysis in several variables: Part 4 - Chain rule &amp; implicit differentiation</title><link rel="icon" type="image/png" href="https://rezvan.xyz/images/icon.png" /><meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description"
+        content="Introduction In this part we&rsquo;ll define the chain rule for functions with several variables. We will also cover something called implicit differentiation.
+Chain rule Let&rsquo;s recall the chain rule for functions with one variable. $$ f(x) = h(g(x)) \newline f&rsquo;(x) = h&rsquo;(g(x)) \cdot g&rsquo;(x) $$
+Alternative notation: $$ y = f(x) \newline x = g(t) $$
+$$ \dfrac{dy}{dt} = \dfrac{dy}{dx} \cdot \dfrac{dx}{dt} $$
+For functions with two variables. $$ z = f(x, y),\ x = g(t),\ y = h(t) $$" />
+    <meta property="og:image" content="https://raw.githubusercontent.com/rezaarezvan/rezvan.xyz/main/images/icon.png" />
+    <meta property="og:title" content="Mathematical analysis in several variables: Part 4 - Chain rule &amp; implicit differentiation" />
+<meta property="og:description" content="Introduction In this part we&rsquo;ll define the chain rule for functions with several variables. We will also cover something called implicit differentiation.
+Chain rule Let&rsquo;s recall the chain rule for functions with one variable. $$ f(x) = h(g(x)) \newline f&rsquo;(x) = h&rsquo;(g(x)) \cdot g&rsquo;(x) $$
+Alternative notation: $$ y = f(x) \newline x = g(t) $$
+$$ \dfrac{dy}{dt} = \dfrac{dy}{dx} \cdot \dfrac{dx}{dt} $$
+For functions with two variables. $$ z = f(x, y),\ x = g(t),\ y = h(t) $$" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://rezvan.xyz/school/lma017/lma017_4/" /><meta property="article:section" content="school" />
+<meta property="article:published_time" content="2023-09-05T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-09-05T00:00:00+00:00" />
+
+<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Mathematical analysis in several variables: Part 4 - Chain rule &amp; implicit differentiation"/>
+<meta name="twitter:description" content="Introduction In this part we&rsquo;ll define the chain rule for functions with several variables. We will also cover something called implicit differentiation.
+Chain rule Let&rsquo;s recall the chain rule for functions with one variable. $$ f(x) = h(g(x)) \newline f&rsquo;(x) = h&rsquo;(g(x)) \cdot g&rsquo;(x) $$
+Alternative notation: $$ y = f(x) \newline x = g(t) $$
+$$ \dfrac{dy}{dt} = \dfrac{dy}{dx} \cdot \dfrac{dx}{dt} $$
+For functions with two variables. $$ z = f(x, y),\ x = g(t),\ y = h(t) $$"/>
+<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@1,500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
+
+    
+    
+    <link rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/main.1c8bcd5d4ada46afe0c47c75ab955bba6342e70592bc9462fe26a21c59920c6b.css" />
+    <link id="lightSyntaxStyle" rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/light_syntax.65408cc3a5c02070b661c3e4e79306fc261cc63620f4adce9a30eafcba4ab79e.css" />
+    
+    <link id="darkModeStyle" rel="stylesheet" type="text/css" href="https://rezvan.xyz/css/dark.f21f1f72304fd4373b0a82b421dac836220c43b1e924ed3811cbe84f5c8a1b3f.css"  disabled />
+    <link id="darkSyntaxStyle" rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/dark_syntax.2b10cc1a2156b30874a063b7439a993bc3b43d476c5e1d8598d769c929c7b381.css" />
+    
+
+    
+    
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+        </script>
+
+    
+    <script type="text/x-mathjax-config">
+		MathJax.Hub.Config({
+			tex2jax: {
+				inlineMath: [['$','$'], ['\\(','\\)']],
+				displayMath: [['$$','$$'], ['\[','\]']],
+				processEscapes: true,
+				processEnvironments: true,
+				skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+				TeX: { equationNumbers: { autoNumber: "AMS" },
+						 extensions: ["AMSmath.js", "AMSsymbols.js"] }
+			}
+		});
+		</script>
+    
+
+    
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js"
+        onload="renderMathInElement(document.body);"></script>
+
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            renderMathInElement(document.body, {
+                delimiters: [
+                    {left: "$$", right: "$$", display: true},
+                    {left: "$", right: "$", display: false}
+                ]
+            });
+        });
+    </script>
+    
+
+    
+</head>
+<body>
+    <div class="content"><header>
+    <nav id="site-navbar">
+        
+        <a href="/">home</a>
+        
+        <a href="/about">about</a>
+        
+        <a href="/principles">principles</a>
+        
+        <a href="/contact">contact</a>
+        
+        <a href="/cv">cv</a>
+        
+        <a href="/school">school</a>
+        
+        | <span id="dark-mode-toggle" onclick="toggleTheme()"></span>
+        <script src="https://rezvan.xyz/js/themetoggle.js"></script>
+        
+    </nav>
+</header>
+
+<main>
+    <article>
+        <div class="title">
+            <h1>Mathematical analysis in several variables: Part 4 - Chain rule &amp; implicit differentiation</h1>
+            <div class="meta">Posted on Sep 5, 2023</div>
+        </div>
+        
+        <section class="body">
+            <h3 id="introduction">Introduction</h3>
+<p>In this part we&rsquo;ll define the chain rule for functions with several variables. We will also cover something called implicit differentiation.</p>
+<h3 id="chain-rule">Chain rule</h3>
+<p>Let&rsquo;s recall the chain rule for functions with one variable.
+$$
+f(x) = h(g(x)) \newline
+f&rsquo;(x) = h&rsquo;(g(x)) \cdot g&rsquo;(x)
+$$</p>
+<p>Alternative notation:
+$$
+y = f(x) \newline
+x = g(t)
+$$</p>
+<p>$$
+\dfrac{dy}{dt} = \dfrac{dy}{dx} \cdot \dfrac{dx}{dt}
+$$</p>
+<p>For functions with two variables.
+$$
+z = f(x, y),\ x = g(t),\ y = h(t)
+$$</p>
+<p>$$
+\dfrac{dz}{dt} = ?
+$$</p>
+<p>Let&rsquo;s first assume $f, g \text{ and } h$ are all differentiable. Using the definition:
+$$
+\dfrac{dz}{dt} = \lim_{\Delta t \to 0} \dfrac{\Delta z}{\Delta t}
+$$</p>
+<p>As we defined last time, $\Delta t$ is the <em>increment</em> in t. Increment in $\Delta t$ produces increment in:
+$$
+\Delta x = g(t + \Delta t) - g(t)
+\Delta y = h(t + \Delta t) - h(t)
+$$</p>
+<p>Since, $f$, is differentiable, this must mean:
+$$
+\Delta z = \dfrac{\partial z}{\partial x} \Delta x + \dfrac{\partial z}{\partial y} \Delta y + \varepsilon_1 \Delta x + \varepsilon_2 \Delta y
+$$</p>
+<p>Where $\varepsilon_1$, $\varepsilon_2 \to 0$ as $(\Delta x, \Delta y) \to (0, 0)$.</p>
+<p>As we defined earlier:
+$$
+\dfrac{dz}{dt} = \lim_{\Delta t \to 0} \dfrac{\Delta z}{\Delta t}
+$$</p>
+<p>We then get:
+$$
+\dfrac{\Delta z}{\Delta t} = \dfrac{\partial z}{\partial x} \dfrac{\Delta x}{\Delta t} + \dfrac{\partial z}{\partial y} \dfrac{\Delta y}{\Delta t} + \varepsilon_1 \dfrac{\Delta x}{\Delta t} + \varepsilon_2 \dfrac{\Delta y}{\Delta t}
+$$</p>
+<p>$$
+\lim_{\Delta t \to 0} \dfrac{\Delta z}{\Delta t} = \dfrac{\partial z}{\partial x} \dfrac{dx}{dt} + \dfrac{\partial z}{\partial y} \dfrac{dy}{dt} + \varepsilon_1 \dfrac{dx}{dt} + \varepsilon_2 \dfrac{dy}{dt}
+$$</p>
+<p>If $\Delta t \to 0$, then:
+$$
+\lim_{\Delta t \to 0} \Delta x = \lim_{\Delta t \to 0} g(t + \Delta t) - g(t) \newline
+\lim_{\Delta t \to 0} \Delta x = \lim_{\Delta t \to 0} g(t) - g(t) \newline
+\lim_{\Delta t \to 0} \Delta x = 0
+$$</p>
+<p>$$
+\lim_{\Delta t \to 0} \Delta y = \lim_{\Delta t \to 0} h(t + \Delta t) - g(t) \newline
+\lim_{\Delta t \to 0} \Delta y = \lim_{\Delta t \to 0} h(t) - g(t) \newline
+\lim_{\Delta t \to 0} \Delta y = 0
+$$</p>
+<p>So, $(\Delta x, \Delta y) \to (0, 0)$, which finally leads us to:</p>
+<p>$$
+\boxed{\dfrac{dz}{dt} = \dfrac{\partial z}{\partial x} \dfrac{dx}{dt} + \dfrac{\partial z}{\partial y} \dfrac{dy}{dt}}
+$$</p>
+<p>Let&rsquo;s write and define properly now.</p>
+<h4 id="definition">Definition</h4>
+<p>Suppose $z = f(x, y)$ is differentiable function of $x, y$. Where $x = g(t)$ and $y = h(t)$. Which both are differentiable functions of $t$. Then:
+$$
+\boxed{\dfrac{dz}{dt} = \dfrac{\partial z}{\partial x} \dfrac{dx}{dt} + \dfrac{\partial z}{\partial y} \dfrac{dy}{dt}}
+$$</p>
+<h4 id="example">Example</h4>
+<p>Find $\dfrac{dz}{dt}$ at $t = 0$.</p>
+<p>For:</p>
+<p>$$
+z = x^2y + 3xy^4 \newline
+x = sin(2t) \newline
+y = cos(t)
+$$</p>
+<p>$$
+\dfrac{dz}{dt} = \dfrac{\partial z}{\partial x} \dfrac{dx}{dt} + \dfrac{\partial z}{\partial y} \dfrac{dy}{dt}
+$$</p>
+<p>$$
+\dfrac{dz}{dt} = (2yx + 3y^4) \cdot (2cos(2t)) + (x^2 + 12xy^3) \cdot (-sin(t))
+$$</p>
+<p>Since we need to evaluate at $t = 0$, we evaluate what $x$ and $y$ are at this point.</p>
+<p>$$
+x = sin(2 \cdot 0) = 0 \newline
+y = cos(0) = 1
+$$</p>
+<p>Now we substitute these values.
+$$
+\dfrac{dz}{dt} = (2 \cdot 1 \cdot 0 + 3 \cdot 1^4) \cdot (2cos(2 \cdot 0)) + (0^2 + 12 \cdot 0 \cdot 1^3) \cdot (-sin(0))
+$$</p>
+<p>$$
+\dfrac{dz}{dt} \bigg\rvert_{t = 0} = \ldots = \boxed{6}
+$$</p>
+<h3 id="chain-rule-for-functions-with-two-variables">Chain Rule for functions with two variables</h3>
+<p>We&rsquo;ve defined the chain rule only if our functions depend on two variables when they depend on a single variable. But often this is not the case.</p>
+<p>$z = f(x, y),\ x = g(t, s),\ y = h(t, s)$.</p>
+<p>How do we find $\dfrac{\partial z}{\partial t} = ?$ $\dfrac{\partial z}{\partial s} = ?$</p>
+<p>Let&rsquo;s think about this, when we say we want to find $\dfrac{\partial z}{\partial t}$ this means $s$ is a constant, we can now view the functions as a function of one variable!</p>
+<p>This means:
+$$
+\dfrac{dz}{dt} = \dfrac{\partial z}{\partial x} \dfrac{dx}{dt} + \dfrac{\partial z}{\partial y} \dfrac{dy}{dt}
+$$</p>
+<p>$$
+\dfrac{dz}{ds} = \dfrac{\partial z}{\partial x} \dfrac{dx}{ds} + \dfrac{\partial z}{\partial y} \dfrac{dy}{ds}
+$$</p>
+<p>We now can generalize the chain rule.</p>
+<h3 id="general-chain-rule">General chain rule</h3>
+<p>Let $z$ be a differentiable function of $n$ variables, $x_1, \ldots, x_n$, where each $x_i$ is differentiable function of $m$ variables, $t_1, \ldots, t_m$.</p>
+<p>Then:
+$$
+\dfrac{\partial z}{\partial t_i} = \dfrac{\partial z}{\partial x_1} \dfrac{\partial x_1}{\partial t_i} + \dfrac{\partial z}{\partial x_2} \dfrac{\partial x_2}{\partial t_i} + \ldots + \dfrac{\partial z}{\partial x_n} \dfrac{\partial x_n}{\partial t_i}
+$$</p>
+<h4 id="example-1">Example</h4>
+<p>Let</p>
+<p>$$
+u = x^4y + y^2 z^3 \newline
+x = rs \cdot e^t \newline
+y = rs^2 \cdot e^{-t} \newline
+z = r^2s \cdot sin(t)
+$$</p>
+<p>Find the value of $\dfrac{\partial u}{\partial s}$ when $r = 1, s = 1, t = 0$.</p>
+<p>$$
+\dfrac{\partial u}{\partial s} \bigg\rvert_{r = 1, s = 1, t = 0} = \dfrac{\partial u}{\partial x} \dfrac{\partial x}{\partial s} + \dfrac{\partial u}{\partial y} \dfrac{\partial y}{\partial s} +  \dfrac{\partial u}{\partial z} \dfrac{\partial z}{\partial s}
+$$</p>
+<p>$$
+\dfrac{\partial u}{\partial s} \bigg\rvert_{r = 1, s = 1, t = 0} = \ldots = (4yx^3) \cdot (re^t) + (x^4 + 2z^3y) \cdot (2rse^{-t}) + (3y^2z^2) \cdot (r^2 sin(t))
+$$</p>
+<p>Evaluate $x, y, z$ at $r = 1, s = 1, t = 0$:
+$$
+x = 1 \cdot 1 \cdot e^0 = 1 \newline
+y = 1 \cdot 1 \cdot e^{-0} = 1 \newline
+z = 1 \cdot 1 \cdot sin(0) = 0 \newline
+$$</p>
+<p>Substitute all variables:
+$$
+\dfrac{\partial u}{\partial s} \bigg\rvert_{r = 1, s = 1, t = 0} = \ldots = \boxed{}
+$$</p>
+<h3 id="implicit-differentiation">Implicit differentiation</h3>
+<p>Sometimes the function is not given explicitly, rather implicitly. For example:</p>
+<p>Let y(x) be a function that satisfies:
+$$
+x^3 + 3xy - y^5 + 1 = 0
+$$</p>
+<p>How can we find $\dfrac{dy}{dx}$?</p>
+<p>The first logical answer would be to explicitly find $y(x)$, but that can be really tedious. We can instead view this equation as a function of two variables.</p>
+<p>Let&rsquo;s introduce a new function, $F(x, y)$. This means:
+$$
+F(x, y) = x^3 + 3xy - y^5 + 1 = 0
+$$</p>
+<p>We want to find a $y(x)$ such that this equation is satisfied. Since $y(x)$ depends on $x$, and $x$ in itself depends on $x$. We can apply the chain rule!
+$$
+\dfrac{dF(x, y)}{dx} = \dfrac{\partial F}{\partial x} \dfrac{dx}{dx} + \dfrac{\partial F}{\partial y} \dfrac{dy}{dx}
+$$</p>
+<p>We want to find $y(x)$ such that:
+$$
+\dfrac{\partial F}{\partial x} \dfrac{dx}{dx} + \dfrac{\partial F}{\partial y} \dfrac{dy}{dx} = 0
+$$</p>
+<p>Which means:
+$$
+\dfrac{dy}{dx} = - \dfrac{\dfrac{\partial F}{\partial x}}{\dfrac{\partial F}{\partial y}} = \boxed{-\dfrac{F_x}{F_y}}
+$$</p>
+<p>Here we need to assume $F_y$ isn&rsquo;t zero. But this means in our case that:
+$$
+\dfrac{dy}{dx} = - \dfrac{3x^2 + 3y}{3x - 5y^4}
+$$</p>
+<h4 id="definition-1">Definition</h4>
+<p>Suppose a function $y = y(x)$ is given implicitly by equation of the form $F(x, y) = 0$ where $F$ is a differentiable function of two variables and $F_y \neq 0$. Then:
+$$
+\boxed{\dfrac{dy}{dx} = -\dfrac{F_x}{F_y}}
+$$</p>
+<h4 id="example-2">Example</h4>
+<p>Let $y(x)$ be given implicitly by equation:
+$$
+x^3 + 3xy - y^5 + 1 = 0
+$$</p>
+<p>Evaluate $\dfrac{dy}{dx}$ at $x = 0$.</p>
+<p>$$
+\dfrac{dy}{dx} \bigg\rvert_{x = 0} = -\dfrac{F_x}{F_y} = - \dfrac{3x^2 + 3y}{3x - 5y^4}
+$$</p>
+<p>Evaluate $y$ at $x = 0$:
+$$
+x^3 + 3xy - y^5 + 1 = 0 \newline
+0^3 + 3 \cdot 0 \cdot y - y^5 + 1 = 0 \newline
+y = 1
+$$</p>
+<p>Which means:
+$$
+\dfrac{dy}{dx} \bigg\rvert_{x = 0} = \ldots = \boxed{\dfrac{3}{5}}
+$$</p>
+<h3 id="implicit-differentiation-of-several-variables">Implicit differentiation of several variables</h3>
+<p>The proof for this is exactly the same so&hellip;
+Let $z(x, y)$ be given implicitly, by equation of form $F(x, y, z) = 0$ where $F$ is differentiable and $F_z \neq 0$, then:
+$$
+\dfrac{\partial z}{\partial x} = -\dfrac{F_x}{F_z} \newline
+\dfrac{\partial z}{\partial y} = -\dfrac{F_y}{F_z} \newline
+$$</p>
+<h4 id="example-3">Example</h4>
+<p>Find $\dfrac{\partial z}{\partial y}$, given $x^3 + y^3 + z^3 + 6xyz - 1 = 0$
+$$
+\dfrac{\partial z}{\partial y} = -\dfrac{F_y}{F_z} = - \dfrac{3y^2 + 6xz}{3z^2 + 6xy} = - \dfrac{y^2 + 2xz}{z^2 + 2xy}
+$$</p>
+
+        </section>
+    </article>
+
+    <nav class="navigation"
+        style="display: flex; justify-content: space-between; align-items: center; margin-top: 20px;">
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+
+        
+        
+        <a class="previous" href="/school/lma017/lma017_3/" title="Previous: Mathematical analysis in several variables: Part 3 - Higher partial derivatives &amp; differentiability"
+            style="flex-grow: 1; text-align: left;">&larr; Previous</a>
+        
+        
+
+        <div style="flex-grow: 2; text-align: center;"></div>
+
+        
+        
+        <a class="next" href="/school/lma017/lma017_5/" title="Next: Mathematical analysis in several variables: Part 5 - Directional derivatives and the gradient vector"
+            style="flex-grow: 1; text-align: right;">Next &rarr;</a>
+        
+        
+    </nav>
+</main>
+<footer id="site-footer">
+    
+    <a href="https://github.com/rezaarezvan" title="">github</a>
+    
+    <a href="https://x.com/rzvan__/" title="">x</a>
+    <p class="footer_msg">memento mori</p></footer><script>
+    feather.replace()
+</script></div>
+</body>
+
+</html>

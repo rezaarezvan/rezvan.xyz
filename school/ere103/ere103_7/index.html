@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html><head lang="en">
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"><title>rezvan | Control theory: Part 7 - Bode plot</title><link rel="icon" type="image/png" href="https://rezvan.xyz/images/icon.png" /><meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description"
+        content="Introduction In this part we&rsquo;ll begin with the part about frequency analysis.
+Test functions Often when we want to test our system to determine the overall stability, time it takes and the response we get.
+We often test with our unit step function: $$ \sigma(t) = \begin{cases} 1 &amp; t \leq 0 \\ 0 &amp; t &lt; 0 \end{cases} $$
+We call a system response to the unit step function for unit step response." />
+    <meta property="og:image" content="https://raw.githubusercontent.com/rezaarezvan/rezvan.xyz/main/images/icon.png" />
+    <meta property="og:title" content="Control theory: Part 7 - Bode plot" />
+<meta property="og:description" content="Introduction In this part we&rsquo;ll begin with the part about frequency analysis.
+Test functions Often when we want to test our system to determine the overall stability, time it takes and the response we get.
+We often test with our unit step function: $$ \sigma(t) = \begin{cases} 1 &amp; t \leq 0 \\ 0 &amp; t &lt; 0 \end{cases} $$
+We call a system response to the unit step function for unit step response." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://rezvan.xyz/school/ere103/ere103_7/" /><meta property="article:section" content="school" />
+<meta property="article:published_time" content="2023-11-13T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-11-13T00:00:00+00:00" />
+
+<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Control theory: Part 7 - Bode plot"/>
+<meta name="twitter:description" content="Introduction In this part we&rsquo;ll begin with the part about frequency analysis.
+Test functions Often when we want to test our system to determine the overall stability, time it takes and the response we get.
+We often test with our unit step function: $$ \sigma(t) = \begin{cases} 1 &amp; t \leq 0 \\ 0 &amp; t &lt; 0 \end{cases} $$
+We call a system response to the unit step function for unit step response."/>
+<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@1,500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
+
+    
+    
+    <link rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/main.1c8bcd5d4ada46afe0c47c75ab955bba6342e70592bc9462fe26a21c59920c6b.css" />
+    <link id="lightSyntaxStyle" rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/light_syntax.65408cc3a5c02070b661c3e4e79306fc261cc63620f4adce9a30eafcba4ab79e.css" />
+    
+    <link id="darkModeStyle" rel="stylesheet" type="text/css" href="https://rezvan.xyz/css/dark.f21f1f72304fd4373b0a82b421dac836220c43b1e924ed3811cbe84f5c8a1b3f.css"  disabled />
+    <link id="darkSyntaxStyle" rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/dark_syntax.2b10cc1a2156b30874a063b7439a993bc3b43d476c5e1d8598d769c929c7b381.css" />
+    
+
+    
+    
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+        </script>
+
+    
+    <script type="text/x-mathjax-config">
+		MathJax.Hub.Config({
+			tex2jax: {
+				inlineMath: [['$','$'], ['\\(','\\)']],
+				displayMath: [['$$','$$'], ['\[','\]']],
+				processEscapes: true,
+				processEnvironments: true,
+				skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+				TeX: { equationNumbers: { autoNumber: "AMS" },
+						 extensions: ["AMSmath.js", "AMSsymbols.js"] }
+			}
+		});
+		</script>
+    
+
+    
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js"
+        onload="renderMathInElement(document.body);"></script>
+
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            renderMathInElement(document.body, {
+                delimiters: [
+                    {left: "$$", right: "$$", display: true},
+                    {left: "$", right: "$", display: false}
+                ]
+            });
+        });
+    </script>
+    
+
+    
+</head>
+<body>
+    <div class="content"><header>
+    <nav id="site-navbar">
+        
+        <a href="/">home</a>
+        
+        <a href="/about">about</a>
+        
+        <a href="/principles">principles</a>
+        
+        <a href="/contact">contact</a>
+        
+        <a href="/cv">cv</a>
+        
+        <a href="/school">school</a>
+        
+        | <span id="dark-mode-toggle" onclick="toggleTheme()"></span>
+        <script src="https://rezvan.xyz/js/themetoggle.js"></script>
+        
+    </nav>
+</header>
+
+<main>
+    <article>
+        <div class="title">
+            <h1>Control theory: Part 7 - Bode plot</h1>
+            <div class="meta">Posted on Nov 13, 2023</div>
+        </div>
+        
+        <section class="body">
+            <h3 id="introduction">Introduction</h3>
+<p>In this part we&rsquo;ll begin with the part about frequency analysis.</p>
+<h3 id="test-functions">Test functions</h3>
+<p>Often when we want to test our system to determine the overall stability, time it takes and the response we get.</p>
+<p>We often test with our unit step function:
+$$
+\sigma(t) =
+\begin{cases}
+1 &amp; t \leq 0 \\
+0 &amp; t &lt; 0
+\end{cases}
+$$</p>
+<p>We call a system response to the unit step function for <em>unit step response</em>.</p>
+<p>Given a system of form:
+$$
+G(s) = \dfrac{K}{1 + Ts}
+$$</p>
+<p>We get a unit step response of $y(t) = K(1 - e^{-\dfrac{t}{\tau}})$.</p>
+<p>We also have our beloved impulse function, $\delta(t)$.</p>
+<p>$$
+\delta(t) = \lim_{\epsilon \to 0}
+\begin{cases}
+\dfrac{1}{\epsilon} &amp; 0 \leq t \leq \epsilon \\
+0 &amp; t &gt; \epsilon, t &lt; 0
+\end{cases}
+$$</p>
+<p>We also have the properties:
+$$
+\int_{-\infty}^{\infty} \delta(t)\ dt = 1
+$$</p>
+<p>$$
+\int_{-\infty}^{\infty} \delta(t - T) f(t)\ dt = f(T)
+$$</p>
+<p>$$
+\mathcal{L}\{\delta(t)\} = \int_0^{\infty} \delta(t) e^{-st} \ dt = e^{0t} = 1
+$$</p>
+<h3 id="delay-rate">Delay rate</h3>
+<p>We can &ldquo;delay&rdquo; a function using a unit step with a delay:
+$$
+\mathcal{L}\{y(t -T)\sigma(t - T)\} = e^{-Ts} \cdot \mathcal{L}\{y(t)\} = e^{-Ts}\ Y(s)
+$$</p>
+<h3 id="stable-systems">Stable systems</h3>
+<p>A system is stable if:
+$$
+\lim_{t \to \infty} \{\text{Impulse response}\} = 0
+$$</p>
+<h3 id="ramp-function">Ramp function</h3>
+<p>Another function that we&rsquo;ll perform a lot of tests with is the ramp function. Which we define as:
+$$
+t\ \sigma(t)
+$$</p>
+<p>The Laplace transform of this is (using partial integration):
+$$
+\mathcal{L} \{t\ \sigma(t) \} = \dfrac{1}{s^2}
+$$</p>
+<h4 id="example">Example</h4>
+<p>Determine the long term error, when the insignal is a ramp function, $t\ \sigma(t)$.</p>
+<p>Given that:
+$$
+F(s) = \dfrac{s + 2}{s}
+$$</p>
+<p>$$
+G(s) = \dfrac{1}{s + 1}
+$$</p>
+<p>We know that:
+$$
+E(s) = R(s) - Y(s)
+$$</p>
+<p>$$
+Y(s) = \dfrac{L(s)}{1 + L(s)} \cdot R(s)
+$$</p>
+<p>$$
+L(s) = F(s)G(s) = \dfrac{s + 2}{s(s + 1)}
+$$</p>
+<p>So:
+$$
+\begin{align*}
+E(s) &amp; = R(s) - \dfrac{L(s)}{1 + L(s)} \cdot R(s) \\
+&amp; = R(s) \left(1 - \dfrac{L(s)}{1 + L(s)} \right) \\
+&amp; = R(s) \left(\dfrac{1}{1 + L(s)} \right) \\
+&amp; = \dfrac{1}{s^2} \left(\frac{1}{1 + \frac{s + 2}{s(s + 1)}} \right) \\
+&amp; = \dfrac{1}{s^2} \left(\frac{s(s + 1)}{s(s + 1) + s + 2} \right) \\
+&amp; = \dfrac{1}{s^2} \left(\frac{s(s + 1)}{s^2 + 2s + 2} \right) \\
+&amp; = \frac{(s + 1)}{s(s^2 + 2s + 2)} \\
+\end{align*}
+$$</p>
+<p>Using the final value theorem:
+$$
+\lim_{t \to \infty} e(t) = \lim_{s \to 0} s \cdot E(s) \\
+e(\infty) = \lim_{s \to 0} s \cdot \frac{(s + 1)}{s(s^2 + 2s + 2)} \\
+e(\infty) = \lim_{s \to 0} \frac{(s + 1)}{(s^2 + 2s + 2)} \\
+e(\infty) = \boxed{\dfrac{1}{2}}
+$$</p>
+<h3 id="frequency-analysis">Frequency analysis</h3>
+<p>The frequency function, $G(j\omega)$ for a system is given by:
+$$
+G(j\omega) = G(s) \biggr\rvert_{s = j \omega}
+$$</p>
+<p>The polar form of this function will be written as:
+$$
+G(j\omega) = |G(j\omega)| \cdot e^{arg(G(j\omega))}
+$$</p>
+<h3 id="example-1">Example</h3>
+<p>Let $u(t) = A sin(\omega t + \phi)$ with the system, $G(s)$ what will our $y(t)$ be?</p>
+<p>$$
+y(t) = |G(j\omega)| \cdot A sin(\omega t + \phi + arg(G(j\omega)) (+ e^{-\lambda t})
+$$</p>
+<p>That last part is called the transient part and should in reality just be zero.</p>
+<h3 id="bode-plot">Bode plot</h3>
+<p>Bode plots are plots that show the system magnitude and phase shift in a system.</p>
+<p>Usually the magnitude can/will be in decibels.</p>
+<h4 id="example-2">Example</h4>
+<p><img src="/school/images/bode.png#center" alt=""></p>
+<p>Where the $y$-axis is either the phase ($arg(G(j\omega))$) or the magnitude ($|G(j \omega)|$).</p>
+<p>Remember that decibels are just:
+$$
+dB = 20 log(|G(j\omega)|)
+$$</p>
+<h3 id="example-3">Example</h3>
+<p>Given:
+$$
+G(s) = \dfrac{1}{s(s + 2)}
+$$</p>
+<p>This means that:
+$$
+G(j\omega) = \dfrac{1}{j\omega(j\omega + 2)}
+$$</p>
+<p>The magnitude is:
+$$
+|G(j\omega)| = \dfrac{1}{\omega \sqrt{\omega^2 + 2^2}} = \dfrac{1}{\omega \sqrt{4 + \omega^2}}
+$$</p>
+<p>The phase is:
+$$
+\begin{align*}
+arg(G(j\omega)) &amp; = arg\left( \dfrac{1}{j\omega(j\omega + 2)} \right) \\
+&amp; = \dfrac{arg(1)}{arg(j\omega(j\omega + 2))} \\
+&amp; = arg(1) - arg(j\omega(j\omega + 2)) \\
+&amp; = arg(1) - (arg(j\omega) + arg(j\omega + 2)) \\
+&amp; = 0^\circ - \left(90^\circ + \arctan{\left(\dfrac{\omega}{2}\right)}\right) \\
+&amp; = -90^\circ - \arctan{\left(\dfrac{\omega}{2}\right)}
+\end{align*}
+$$</p>
+<p>If we now plot these:
+<img src="/school/images/bode2.png#center" alt=""></p>
+<h3 id="type-of-factors">Type of factors</h3>
+<p>In our systems we&rsquo;ll deal/want these type of factors:
+$$
+s, 1 + \dfrac{s}{\omega_1}, e^{-Ts}, s^2 + 2 \zeta \omega_n s + \omega_n^2
+$$</p>
+<p>Also, good to remember, if $\zeta &gt; 1$, then we can split up this second-order term into first-order term(s).</p>
+<p>Let&rsquo;s do the bode plot for each term.</p>
+<p>$$
+G(s) = s
+$$</p>
+<p>$$
+G(j\omega) = j\omega
+$$</p>
+<p>$$
+|G(j\omega)| = \omega
+$$</p>
+<p>$$
+arg(G(j\omega)) = 90^\circ
+$$</p>
+<p>Plotting this:
+<img src="/school/images/bode3.png#center" alt=""></p>
+<p>Simple!</p>
+<p>Now, for $\dfrac{1}{s}$
+$$
+G(s) = \dfrac{1}{s}
+$$</p>
+<p>$$
+G(j\omega) = \dfrac{1}{j\omega}
+$$</p>
+<p>$$
+|G(j\omega)| = \dfrac{1}{\omega}
+$$</p>
+<p>$$
+arg(G(j\omega)) = -90^\circ
+$$</p>
+<p>Plotting this:
+<img src="/school/images/bode4.png#center" alt=""></p>
+<p>Now for $1 + \dfrac{s}{\omega_1}$
+$$
+G(s) = 1 + \dfrac{s}{\omega_1}
+$$</p>
+<p>$$
+G(j\omega) = 1 + \dfrac{j\omega}{\omega_1}
+$$</p>
+<p>For this we&rsquo;ll need to understand some cases.</p>
+<p>Case $\omega \ll \omega_1$:
+$$
+G(j\omega) \approx 1
+$$</p>
+<p>$$
+|G(j\omega)| = 1
+$$</p>
+<p>$$
+arg(G(j\omega)) = 0^\circ
+$$</p>
+<p>Case $\omega = \omega_1$:
+$$
+G(j\omega) =  1 + j
+$$</p>
+<p>$$
+|G(j\omega)| = \sqrt{1^2 + 1^2} = \sqrt{2}
+$$</p>
+<p>$$
+arg(G(j\omega)) = 45^\circ
+$$</p>
+<p>Case $\omega \gg \omega_1$:
+$$
+G(j\omega) \approx j \dfrac{\omega}{\omega_1}
+$$</p>
+<p>$$
+|G(j\omega)| = \dfrac{\omega}{\omega_1}
+$$</p>
+<p>$$
+arg(G(j\omega)) = 90^\circ
+$$</p>
+<p>Plotting for $\omega_1 = 2$:
+<img src="/school/images/bode5.png#center" alt=""></p>
+<p>This is what we&rsquo;ll call for low and high frequency asymptotes.</p>
+<p>Last factor before an example
+$$
+G(s) = \dfrac{1}{1 + \dfrac{s}{\omega_1}}
+$$</p>
+<p>$$
+G(j\omega) = \dfrac{1}{1 + \dfrac{j\omega}{\omega_1}}
+$$</p>
+<p>Case $\omega \ll \omega_1$:
+$$
+G(j\omega) \approx 1
+$$</p>
+<p>$$
+|G(j\omega)| = 1
+$$</p>
+<p>$$
+arg(G(j\omega)) = 0^\circ
+$$</p>
+<p>Case $\omega = \omega_1$:
+$$
+G(j\omega) =  \dfrac{1}{1 + j}
+$$</p>
+<p>$$
+|G(j\omega)| = \dfrac{1}{\sqrt{1^2 + 1^2}} = \dfrac{1}{\sqrt{2}}
+$$</p>
+<p>$$
+arg(G(j\omega)) = -45^\circ
+$$</p>
+<p>Case $\omega \gg \omega_1$:
+$$
+G(j\omega) \approx \dfrac{1}{j \dfrac{\omega}{\omega_1}}
+$$</p>
+<p>$$
+|G(j\omega)| = \dfrac{1}{\dfrac{\omega}{\omega_1}} = \dfrac{\omega_1}{\omega}
+$$</p>
+<p>$$
+arg(G(j\omega)) = -90^\circ
+$$</p>
+<p><img src="/school/images/bode6.png#center" alt=""></p>
+<h3 id="standard-form">Standard form</h3>
+<p>We&rsquo;ll usually want to rewrite our transfer functions into these standard factor forms.</p>
+<p>Let&rsquo;s take an example to see why</p>
+<h4 id="example-4">Example</h4>
+<p>$$
+\begin{align*}
+G(s) &amp; = \dfrac{3(1 + s)e^{-0.5s}}{s(s + 2)(s + 3)} \\
+&amp; = \dfrac{3(1 + s)e^{-0.5s}}{2s(1 + \frac{s}{2})(s + 3)} \\
+&amp; = \dfrac{3(1 + s)e^{-0.5s}}{6s(1 + \frac{s}{2})(1 + \frac{s}{3})} \\
+&amp; = \boxed{\dfrac{0.5(1 + s)e^{-0.5s}}{s(1 + \frac{s}{2})(1 + \frac{s}{3})}}
+\end{align*}
+$$</p>
+<p>This is now in standard form.
+$$
+G(j\omega) = \boxed{\dfrac{0.5(1 + j\omega)e^{-0.5j\omega}}{j\omega(1 + \frac{j\omega}{2})(1 + \frac{j\omega}{3})}}
+$$</p>
+
+        </section>
+    </article>
+
+    <nav class="navigation"
+        style="display: flex; justify-content: space-between; align-items: center; margin-top: 20px;">
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+
+        
+        
+        <a class="previous" href="/school/ere103/ere103_6/" title="Previous: Control theory: Part 6 - Space-state representation to transfer function"
+            style="flex-grow: 1; text-align: left;">&larr; Previous</a>
+        
+        
+
+        <div style="flex-grow: 2; text-align: center;"></div>
+
+        
+        
+        <a class="next" href="/school/ere103/ere103_8/" title="Next: Control theory: Part 8 - Stability"
+            style="flex-grow: 1; text-align: right;">Next &rarr;</a>
+        
+        
+    </nav>
+</main>
+<footer id="site-footer">
+    
+    <a href="https://github.com/rezaarezvan" title="">github</a>
+    
+    <a href="https://x.com/rzvan__/" title="">x</a>
+    <p class="footer_msg">memento mori</p></footer><script>
+    feather.replace()
+</script></div>
+</body>
+
+</html>

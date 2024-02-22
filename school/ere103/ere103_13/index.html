@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html><head lang="en">
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"><title>rezvan | Control theory: Part 13 - Discretization</title><link rel="icon" type="image/png" href="https://rezvan.xyz/images/icon.png" /><meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description"
+        content="Introduction In this part we&rsquo;ll see how all of this theory will actually be represented when we need to use a computer for calculations.
+Implementation When we want to implement discrete controllers and systems we need to sample.
+Sampling is when we sample points from our signal with a certain time period.
+We call our sampling period for: $$ h = \dfrac{1}{f_s} $$
+Where $f_s$ is the so-called sampling frequency." />
+    <meta property="og:image" content="https://raw.githubusercontent.com/rezaarezvan/rezvan.xyz/main/images/icon.png" />
+    <meta property="og:title" content="Control theory: Part 13 - Discretization" />
+<meta property="og:description" content="Introduction In this part we&rsquo;ll see how all of this theory will actually be represented when we need to use a computer for calculations.
+Implementation When we want to implement discrete controllers and systems we need to sample.
+Sampling is when we sample points from our signal with a certain time period.
+We call our sampling period for: $$ h = \dfrac{1}{f_s} $$
+Where $f_s$ is the so-called sampling frequency." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://rezvan.xyz/school/ere103/ere103_13/" /><meta property="article:section" content="school" />
+<meta property="article:published_time" content="2023-12-06T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-12-06T00:00:00+00:00" />
+
+<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Control theory: Part 13 - Discretization"/>
+<meta name="twitter:description" content="Introduction In this part we&rsquo;ll see how all of this theory will actually be represented when we need to use a computer for calculations.
+Implementation When we want to implement discrete controllers and systems we need to sample.
+Sampling is when we sample points from our signal with a certain time period.
+We call our sampling period for: $$ h = \dfrac{1}{f_s} $$
+Where $f_s$ is the so-called sampling frequency."/>
+<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@1,500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
+
+    
+    
+    <link rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/main.1c8bcd5d4ada46afe0c47c75ab955bba6342e70592bc9462fe26a21c59920c6b.css" />
+    <link id="lightSyntaxStyle" rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/light_syntax.65408cc3a5c02070b661c3e4e79306fc261cc63620f4adce9a30eafcba4ab79e.css" />
+    
+    <link id="darkModeStyle" rel="stylesheet" type="text/css" href="https://rezvan.xyz/css/dark.f21f1f72304fd4373b0a82b421dac836220c43b1e924ed3811cbe84f5c8a1b3f.css"  disabled />
+    <link id="darkSyntaxStyle" rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/dark_syntax.2b10cc1a2156b30874a063b7439a993bc3b43d476c5e1d8598d769c929c7b381.css" />
+    
+
+    
+    
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+        </script>
+
+    
+    <script type="text/x-mathjax-config">
+		MathJax.Hub.Config({
+			tex2jax: {
+				inlineMath: [['$','$'], ['\\(','\\)']],
+				displayMath: [['$$','$$'], ['\[','\]']],
+				processEscapes: true,
+				processEnvironments: true,
+				skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+				TeX: { equationNumbers: { autoNumber: "AMS" },
+						 extensions: ["AMSmath.js", "AMSsymbols.js"] }
+			}
+		});
+		</script>
+    
+
+    
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js"
+        onload="renderMathInElement(document.body);"></script>
+
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            renderMathInElement(document.body, {
+                delimiters: [
+                    {left: "$$", right: "$$", display: true},
+                    {left: "$", right: "$", display: false}
+                ]
+            });
+        });
+    </script>
+    
+
+    
+</head>
+<body>
+    <div class="content"><header>
+    <nav id="site-navbar">
+        
+        <a href="/">home</a>
+        
+        <a href="/about">about</a>
+        
+        <a href="/principles">principles</a>
+        
+        <a href="/contact">contact</a>
+        
+        <a href="/cv">cv</a>
+        
+        <a href="/school">school</a>
+        
+        | <span id="dark-mode-toggle" onclick="toggleTheme()"></span>
+        <script src="https://rezvan.xyz/js/themetoggle.js"></script>
+        
+    </nav>
+</header>
+
+<main>
+    <article>
+        <div class="title">
+            <h1>Control theory: Part 13 - Discretization</h1>
+            <div class="meta">Posted on Dec 6, 2023</div>
+        </div>
+        
+        <section class="body">
+            <h3 id="introduction">Introduction</h3>
+<p>In this part we&rsquo;ll see how all of this theory will actually be represented when we need to use a computer for calculations.</p>
+<h3 id="implementation">Implementation</h3>
+<p>When we want to implement discrete controllers and systems we need to sample.</p>
+<p>Sampling is when we <em>sample</em> points from our signal with a certain time period.</p>
+<p>We call our sampling period for:
+$$
+h = \dfrac{1}{f_s}
+$$</p>
+<p>Where $f_s$ is the so-called sampling frequency.</p>
+<p>To represent a system in a computer we need to sample our signals.</p>
+<p>So $e(t)$ becomes $e(kh)$ and $y(t)$ becomes $y(kh)$</p>
+<p>We will usually encounter differential equations.</p>
+<p>These equations that describe $G(s)$ can be approximated as:
+$$
+\dot{y}(t) \approx = \dfrac{y(t + h) - y(t)}{h}
+$$</p>
+<p>$$
+\ddot{y}(t) = \dot{(\dot{y})} = \dfrac{\dot{y}(t +h) - \dot{y}(t)}{h} = \dfrac{\dfrac{y(t + 2h) - y(t + h)}{h} - \dfrac{y(t + h) - y(t)}{h}}{h} = \dfrac{y(t + 2h) - 2y(t + h) - y(t)}{h^2}
+$$</p>
+<h4 id="example">Example</h4>
+<p>$$
+\dot{y}(t) + ay(t) = a \cdot u(t) \ | \ t=kh,\ k = 0, 1, \ldots
+$$</p>
+<p>$$
+\dfrac{y(kh + h) - y(kh)}{h} + ay(kh) = a \cdot u(kh)
+$$</p>
+<p>$$
+y(kh + h) = (1 - ah)y(kh) + a \cdot u(kh)
+$$</p>
+<h3 id="z-transform">Z-transform</h3>
+<p>We won&rsquo;t that much in depth about it:
+$$
+Y(z) = \mathcal{Z}\{y(kh)\} = \sum_{k = 0}^{\infty} y(kh) \cdot z^{-k}
+$$</p>
+<h4 id="example-1">Example</h4>
+<p>$$
+y(kh) = e^{-akh}
+$$</p>
+<p>$$
+\begin{align*}
+Y(z) &amp; = \sum_{k = 0}^{\infty} e^{-akh} \cdot z^{-k} \\
+&amp; = \sum_{k = 0}^{\infty} (e^{-ak} \cdot z^{-1})^k \\
+&amp; = \dfrac{1}{1 - e^{-ah} \cdot z^{-1}} \\
+&amp; = \boxed{\dfrac{z}{z - e^{-ah}}}
+\end{align*}
+$$</p>
+<h3 id="delay-theorem">Delay Theorem</h3>
+<p>$$
+\mathcal{Z}\{y(kh - lh)\} = z^{-l} \cdot Y(z)
+$$</p>
+<h3 id="controller-design-based-on-analog-gs-and-fs">Controller design based on analog $G(s)$ and $F(s)$</h3>
+<p>The discretization of $L_d(z) = F_d(z) G_d(z)$</p>
+<p>Sensitivity function, $S_d(z) = \dfrac{1}{1 + L_d(z)}$
+Inverse sensitivity function, $S_d(z) = \dfrac{L_d(z)}{1 + L_d(z)}$</p>
+
+        </section>
+    </article>
+
+    <nav class="navigation"
+        style="display: flex; justify-content: space-between; align-items: center; margin-top: 20px;">
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+
+        
+        
+        <a class="previous" href="/school/ere103/ere103_12/" title="Previous: Control theory: Part 12 - State feedback"
+            style="flex-grow: 1; text-align: left;">&larr; Previous</a>
+        
+        
+
+        <div style="flex-grow: 2; text-align: center;"></div>
+
+        
+        
+        <a class="next" href="/school/ere103/ere103_14/" title="Next: Control theory: Part 14 - Filters"
+            style="flex-grow: 1; text-align: right;">Next &rarr;</a>
+        
+        
+    </nav>
+</main>
+<footer id="site-footer">
+    
+    <a href="https://github.com/rezaarezvan" title="">github</a>
+    
+    <a href="https://x.com/rzvan__/" title="">x</a>
+    <p class="footer_msg">memento mori</p></footer><script>
+    feather.replace()
+</script></div>
+</body>
+
+</html>
