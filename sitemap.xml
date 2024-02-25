@@ -182,12 +182,6 @@
     <loc>https://rezvan.xyz/school/lma017/lma017/</loc>
     <lastmod>2023-08-29T10:53:01+02:00</lastmod>
   </url><url>
-    <loc>https://rezvan.xyz/tags/</loc>
-    <lastmod>2023-08-29T10:53:01+02:00</lastmod>
-  </url><url>
-    <loc>https://rezvan.xyz/tags/test/</loc>
-    <lastmod>2023-08-29T10:53:01+02:00</lastmod>
-  </url><url>
     <loc>https://rezvan.xyz/cv/</loc>
     <lastmod>2023-08-24T00:00:00+00:00</lastmod>
   </url><url>
@@ -423,7 +417,5 @@
     <loc>https://rezvan.xyz/school/tda384/</loc>
   </url><url>
     <loc>https://rezvan.xyz/school/tif085/</loc>
-  </url><url>
-    <loc>https://rezvan.xyz/categories/</loc>
   </url>
 </urlset>
