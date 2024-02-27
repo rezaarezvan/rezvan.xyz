@@ -6,8 +6,15 @@
     <description>Recent content in Introduction to Data Science and Ai on rezvan</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 06 Feb 2024 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 13 Feb 2024 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://rezvan.xyz/school/introduction-to-data-science-and-ai/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Introduction to data science and AI: Part 8 - Distance and network methods</title>
+      <link>https://rezvan.xyz/school/dat565/dat565_8/</link>
+      <pubDate>Tue, 13 Feb 2024 00:00:00 +0000</pubDate>
+      <guid>https://rezvan.xyz/school/dat565/dat565_8/</guid>
+      <description>Introduction In data science, classification stands out as a fundamental technique. It involves the art of categorizing data into distinct classes based on various features and attributes.&#xA;Different type of classifiers Within the arsenal of classification algorithms, we encounter a diverse array of tools. From the simplicity of Logistic Regression to the complexity of Support Vector Machines, each classifier brings its unique strengths to the table.&#xA;Measuring Distances The most common metric for distance is euclidean distance: $$ d(p, q) = \sqrt{\sum_{i=1}^{n} |q_i - p_i|^2} $$</description>
+    </item>
     <item>
       <title>Introduction to data science and AI: Part 7 - Linear and logistic regression</title>
       <link>https://rezvan.xyz/school/dat565/dat565_7/</link>
