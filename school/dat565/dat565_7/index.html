@@ -190,8 +190,21 @@ Minimize the sum of the absolute values of the coefficients, which is just as ha
 J(w, t) = \frac{1}{2n} \sum_{i = 1}^n (y_i - f(x_i))^2 \text{ subject to } \sum_{j = 1}^m |w_j| \leq t
 $$</p>
 <h3 id="logistic-regression">Logistic regression</h3>
-<p>Logistic regression is the process of modeling the probability of a discrete outcome given an input variable.</p>
-<h3 id="todo">TODO</h3>
+<p>Logistic regression is a powerful tool for modeling the probability of a binary outcome.
+It is particularly useful when the dependent variable is categorical and the relationship between the independent variables and the probability of the outcome needs to be understood.</p>
+<h3 id="logistic-function">Logistic Function</h3>
+<p>The logistic function, also known as the sigmoid function, is used in logistic regression to map input values to a probability between 0 and 1.
+The formula for the logistic function is:
+$$
+\sigma = \frac{1}{1 + e^{-x}}
+$$</p>
+<h3 id="maximum-likelihood-estimation">Maximum Likelihood Estimation</h3>
+<p>In logistic regression, the model parameters are estimated using maximum likelihood estimation.
+The goal is to find the parameter values that maximize the likelihood of observing the data given the model.
+This involves optimizing the log-likelihood function, which quantifies how well the model fits the data.</p>
+<h3 id="model-evaluation">Model Evaluation</h3>
+<p>Once the logistic regression model is trained, it is essential to evaluate its performance.
+Common metrics for evaluating classification models include accuracy, precision, recall, F1 score, and the receiver operating characteristic (ROC) curve.</p>
 
         </section>
     </article>
