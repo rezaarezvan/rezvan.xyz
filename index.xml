@@ -6,8 +6,15 @@
     <description>Recent content on rezvan</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 13 Feb 2024 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 20 Feb 2024 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://rezvan.xyz/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Introduction to data science and AI: Part 9 - Machine Learning and neural networks</title>
+      <link>https://rezvan.xyz/school/dat565/dat565_9/</link>
+      <pubDate>Tue, 20 Feb 2024 00:00:00 +0000</pubDate>
+      <guid>https://rezvan.xyz/school/dat565/dat565_9/</guid>
+      <description>Introduction In this part, we will discuss machine learning and neural networks. We will start with a brief introduction to machine learning.&#xA;Learning types There are three types of learning:&#xA;Supervised learning Unsupervised learning Semi-supervised learning Self-supervised learning Supervised learning In supervised learning, we have for each input $x$ a label $y$, that we want to predict. Models are trained to minimize the difference between their prediction and the labels.</description>
+    </item>
     <item>
       <title>Introduction to data science and AI: Part 8 - Distance and network methods</title>
       <link>https://rezvan.xyz/school/dat565/dat565_8/</link>
