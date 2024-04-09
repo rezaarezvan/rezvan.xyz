@@ -15,6 +15,7 @@ When performing addition Overflow if: Adding a positive and negative operand - n
 <meta property="og:url" content="https://rezvan.xyz/school/eda333/eda333_7/" /><meta property="article:section" content="school" />
 <meta property="article:published_time" content="2023-04-25T15:18:21+02:00" />
 <meta property="article:modified_time" content="2023-04-25T15:18:21+02:00" />
+
 <meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Computer System Engineering: Part 7 - Floating-point arithmetic"/>
 <meta name="twitter:description" content="In this part we&rsquo;ll cover some basics for floating-point arithmetic.
 Integer addition Just some basics:
@@ -148,7 +149,7 @@ mflo rd
 # Least significant 32-bits of product -&gt; rd
 mul rd, rs, rt
 </code></pre><h3 id="division">Division</h3>
-<p>We will not cover division as well - but there are methods, the &ldquo;usual&rdquo; way we are thought - but also restoring division - which we cover <a href="https://www.rezvan.xyz/school/Digital_design_5/">here</a>.</p>
+<p>We will not cover division as well - but there are methods, the &ldquo;usual&rdquo; way we are thought - but also restoring division - which we cover <a href="https://rezvan.xyz/school/eda322/eda322_5/">here</a>.</p>
 <p>Now, <code>$HI</code> and <code>$LO</code>, also store the result after division.</p>
 <p><code>$HI</code>: 32-bit remainder
 <code>$LO</code>: 32-bit quotient</p>
@@ -172,7 +173,7 @@ The exponent is 8 and 11-bits respectively.</p>
 <h3 id="floating-point-in-mips">Floating-point in MIPS</h3>
 <p>Floating-point operations are handled by the Co-processor 1.</p>
 <p>We also have separate floating-point registers, all of which are of 32-bit size.
-For double precision, we use them pairwise - meaning <code>$f0/$f1</code> will be one 64-bit floating-point number.</p>
+For double precision, we use them pairwise - meaning <code>\$f0/$f1</code> will be one 64-bit floating-point number.</p>
 <p>For floating-point load and store we use:</p>
 <pre tabindex="0"><code># Eqv to l.s, l.d, s.s, s.d
 lwc1, ldc1, swc1, sdc1
