@@ -7,27 +7,32 @@
 Different type of classifiers Within the arsenal of classification algorithms, we encounter a diverse array of tools. From the simplicity of Logistic Regression to the complexity of Support Vector Machines, each classifier brings its unique strengths to the table.
 Measuring Distances The most common metric for distance is euclidean distance: $$ d(p, q) = \sqrt{\sum_{i=1}^{n} |q_i - p_i|^2} $$" />
     <meta property="og:image" content="https://raw.githubusercontent.com/rezaarezvan/rezvan.xyz/main/images/icon.png" />
-    <meta property="og:title" content="Introduction to data science and AI: Part 8 - Distance and network methods" />
-<meta property="og:description" content="Introduction In data science, classification stands out as a fundamental technique. It involves the art of categorizing data into distinct classes based on various features and attributes.
+    <meta property="og:url" content="https://rezvan.xyz/school/dat565/dat565_8/">
+  <meta property="og:site_name" content="rezvan">
+  <meta property="og:title" content="Introduction to data science and AI: Part 8 - Distance and network methods">
+  <meta property="og:description" content="Introduction In data science, classification stands out as a fundamental technique. It involves the art of categorizing data into distinct classes based on various features and attributes.
 Different type of classifiers Within the arsenal of classification algorithms, we encounter a diverse array of tools. From the simplicity of Logistic Regression to the complexity of Support Vector Machines, each classifier brings its unique strengths to the table.
-Measuring Distances The most common metric for distance is euclidean distance: $$ d(p, q) = \sqrt{\sum_{i=1}^{n} |q_i - p_i|^2} $$" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://rezvan.xyz/school/dat565/dat565_8/" /><meta property="article:section" content="school" />
-<meta property="article:published_time" content="2024-02-13T00:00:00+00:00" />
-<meta property="article:modified_time" content="2024-02-13T00:00:00+00:00" />
-<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Introduction to data science and AI: Part 8 - Distance and network methods"/>
-<meta name="twitter:description" content="Introduction In data science, classification stands out as a fundamental technique. It involves the art of categorizing data into distinct classes based on various features and attributes.
+Measuring Distances The most common metric for distance is euclidean distance: $$ d(p, q) = \sqrt{\sum_{i=1}^{n} |q_i - p_i|^2} $$">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="school">
+    <meta property="article:published_time" content="2024-02-13T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-02-27T20:09:18+01:00">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Introduction to data science and AI: Part 8 - Distance and network methods">
+  <meta name="twitter:description" content="Introduction In data science, classification stands out as a fundamental technique. It involves the art of categorizing data into distinct classes based on various features and attributes.
 Different type of classifiers Within the arsenal of classification algorithms, we encounter a diverse array of tools. From the simplicity of Logistic Regression to the complexity of Support Vector Machines, each classifier brings its unique strengths to the table.
-Measuring Distances The most common metric for distance is euclidean distance: $$ d(p, q) = \sqrt{\sum_{i=1}^{n} |q_i - p_i|^2} $$"/>
+Measuring Distances The most common metric for distance is euclidean distance: $$ d(p, q) = \sqrt{\sum_{i=1}^{n} |q_i - p_i|^2} $$">
 <script src="https://rezvan.xyz/js/feather.min.js"></script>
     
 
     
     
-    <link rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/main.e78c3f2ddb05c4f5f0aa7553861677149e3602644857702209900dcba4ebbdf7.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/main.6ad9c068c7f2d7d0babefb693af3dd601fb7b232014794a999404fb8994937e1.css" />
     <link id="lightSyntaxStyle" rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/light_syntax.65408cc3a5c02070b661c3e4e79306fc261cc63620f4adce9a30eafcba4ab79e.css" />
     
-    <link id="darkModeStyle" rel="stylesheet" type="text/css" href="https://rezvan.xyz/css/dark.e29e262999fbfa441b826411da5f98fbc72906f0e9541b0c23a9544e99356b4a.css"  disabled />
+    <link id="darkModeStyle" rel="stylesheet" type="text/css" href="https://rezvan.xyz/css/dark.13c6bfb747b76fdd2dc198b1172afdd77e7ce604de43f343ce643378bafc58af.css"  disabled />
     <link id="darkSyntaxStyle" rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/dark_syntax.2b10cc1a2156b30874a063b7439a993bc3b43d476c5e1d8598d769c929c7b381.css" />
     
 
@@ -76,21 +81,23 @@ Measuring Distances The most common metric for distance is euclidean distance: $
 <body>
     <div class="content"><header>
     <nav id="site-navbar">
-        
-        <a href="/">home</a>
-        
-        <a href="/about">about</a>
-        
-        <a href="/principles">principles</a>
-        
-        <a href="/contact">contact</a>
-        
-        <a href="/cv">cv</a>
-        
-        <a href="/school">school</a>
-        
-        | <span id="dark-mode-toggle" onclick="toggleTheme()"></span>
-        <script src="https://rezvan.xyz/js/themetoggle.js"></script>
+        <div class="menu-items">
+            
+            <a href="/">home</a>
+            
+            <a href="/principles">principles</a>
+            
+            <a href="/cv">cv</a>
+            
+            <a href="/posts">posts</a>
+            
+            <a href="/school">school</a>
+            
+        </div>
+        <div class="theme-toggle">
+            <span id="dark-mode-toggle" onclick="toggleTheme()"><i data-feather="moon"></i></span>
+            <script src="https://rezvan.xyz/js/themetoggle.js"></script>
+        </div>
         
     </nav>
 </header>
@@ -99,7 +106,12 @@ Measuring Distances The most common metric for distance is euclidean distance: $
     <article>
         <div class="title">
             <h1>Introduction to data science and AI: Part 8 - Distance and network methods</h1>
-            <div class="meta">Posted on Feb 13, 2024</div>
+            <div class="meta">Posted on Feb 13, 2024
+            </div>
+            <div class="meta">
+                (Last updated: Feb 27, 2024)
+            </div>
+
         </div>
         
         <section class="body">
@@ -186,8 +198,7 @@ $$</p>
         </section>
     </article>
 
-    <nav class="navigation"
-        style="display: flex; justify-content: space-between; align-items: center; margin-top: 20px;">
+    <nav class="navigation">
         
         
         
@@ -216,25 +227,33 @@ $$</p>
 
         
         
-        <a class="previous" href="/school/dat565/dat565_7/" title="Previous: Introduction to data science and AI: Part 7 - Linear and logistic regression"
-            style="flex-grow: 0; text-align: left;">&larr; Previous</a>
-        
-        
 
-        
-        
-        <a class="next" href="/school/dat565/dat565_9/" title="Next: Introduction to data science and AI: Part 9 - Machine Learning and neural networks"
-            style="flex-grow: 0; text-align: right;">Next &rarr;</a>
-        
-        
+        <div class="nav-item previous">
+            
+            
+            <a href="/school/dat565/dat565_7/" title="Previous: Introduction to data science and AI: Part 7 - Linear and logistic regression">&larr; Previous</a>
+            
+            
+        </div>
+
+        <div class="nav-item next">
+            
+            
+            <a href="/school/dat565/dat565_9/" title="Next: Introduction to data science and AI: Part 9 - Machine Learning and neural networks">Next &rarr;</a>
+            
+            
+        </div>
     </nav>
 </main>
 <footer id="site-footer">
-    
-    <a href="https://github.com/rezaarezvan" title="">github</a>
-    
-    <a href="https://x.com/rzvan__/" title="">x</a>
-    <p class="footer_msg">memento mori</p></footer></div>
+    <div class="social-links">
+        
+        <a href="https://github.com/rezaarezvan" title="">github</a>
+        
+        <a href="https://x.com/rzvan__/" title="">x</a>
+        
+    </div><p class="footer-msg">memento mori</p>
+</footer></div>
 </body>
 
 </html>

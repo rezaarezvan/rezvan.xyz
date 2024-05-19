@@ -10,33 +10,38 @@ Let $C = D$ be parameterized as $\vec{r}(t)$, for $a \leq t \leq b$.
 $$ \boxed{\int_C \nabla f \cdot dr = f(\vec{r}(b)) - f(\vec{r}(a))} $$
 Notice how this doesn&rsquo;t depend on the actual curve, but only of the start and endpoint." />
     <meta property="og:image" content="https://raw.githubusercontent.com/rezaarezvan/rezvan.xyz/main/images/icon.png" />
-    <meta property="og:title" content="Mathematical analysis in several variables: Part 17 - The fundamental theorem of line integrals" />
-<meta property="og:description" content="Introduction In this part we&rsquo;ll cover the fundamental theorem of line integrals.
+    <meta property="og:url" content="https://rezvan.xyz/school/lma017/lma017_17/">
+  <meta property="og:site_name" content="rezvan">
+  <meta property="og:title" content="Mathematical analysis in several variables: Part 17 - The fundamental theorem of line integrals">
+  <meta property="og:description" content="Introduction In this part we’ll cover the fundamental theorem of line integrals.
 Definition Recall the fundamental theorem of calculus: $$ \int_a^b f^\prime(x)\ dx = f(b) - f(a) $$
 For line integrals: Let $f: D \subset \mathbb{R}^2 \rarr \mathbb{R}$
 Let $C = D$ be parameterized as $\vec{r}(t)$, for $a \leq t \leq b$.
 $$ \boxed{\int_C \nabla f \cdot dr = f(\vec{r}(b)) - f(\vec{r}(a))} $$
-Notice how this doesn&rsquo;t depend on the actual curve, but only of the start and endpoint." />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://rezvan.xyz/school/lma017/lma017_17/" /><meta property="article:section" content="school" />
-<meta property="article:published_time" content="2023-10-04T00:00:00+00:00" />
-<meta property="article:modified_time" content="2023-10-04T00:00:00+00:00" />
-<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Mathematical analysis in several variables: Part 17 - The fundamental theorem of line integrals"/>
-<meta name="twitter:description" content="Introduction In this part we&rsquo;ll cover the fundamental theorem of line integrals.
+Notice how this doesn’t depend on the actual curve, but only of the start and endpoint.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="school">
+    <meta property="article:published_time" content="2023-10-04T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-02-21T20:24:30+01:00">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Mathematical analysis in several variables: Part 17 - The fundamental theorem of line integrals">
+  <meta name="twitter:description" content="Introduction In this part we’ll cover the fundamental theorem of line integrals.
 Definition Recall the fundamental theorem of calculus: $$ \int_a^b f^\prime(x)\ dx = f(b) - f(a) $$
 For line integrals: Let $f: D \subset \mathbb{R}^2 \rarr \mathbb{R}$
 Let $C = D$ be parameterized as $\vec{r}(t)$, for $a \leq t \leq b$.
 $$ \boxed{\int_C \nabla f \cdot dr = f(\vec{r}(b)) - f(\vec{r}(a))} $$
-Notice how this doesn&rsquo;t depend on the actual curve, but only of the start and endpoint."/>
+Notice how this doesn’t depend on the actual curve, but only of the start and endpoint.">
 <script src="https://rezvan.xyz/js/feather.min.js"></script>
     
 
     
     
-    <link rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/main.e78c3f2ddb05c4f5f0aa7553861677149e3602644857702209900dcba4ebbdf7.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/main.6ad9c068c7f2d7d0babefb693af3dd601fb7b232014794a999404fb8994937e1.css" />
     <link id="lightSyntaxStyle" rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/light_syntax.65408cc3a5c02070b661c3e4e79306fc261cc63620f4adce9a30eafcba4ab79e.css" />
     
-    <link id="darkModeStyle" rel="stylesheet" type="text/css" href="https://rezvan.xyz/css/dark.e29e262999fbfa441b826411da5f98fbc72906f0e9541b0c23a9544e99356b4a.css"  disabled />
+    <link id="darkModeStyle" rel="stylesheet" type="text/css" href="https://rezvan.xyz/css/dark.13c6bfb747b76fdd2dc198b1172afdd77e7ce604de43f343ce643378bafc58af.css"  disabled />
     <link id="darkSyntaxStyle" rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/dark_syntax.2b10cc1a2156b30874a063b7439a993bc3b43d476c5e1d8598d769c929c7b381.css" />
     
 
@@ -85,21 +90,23 @@ Notice how this doesn&rsquo;t depend on the actual curve, but only of the start 
 <body>
     <div class="content"><header>
     <nav id="site-navbar">
-        
-        <a href="/">home</a>
-        
-        <a href="/about">about</a>
-        
-        <a href="/principles">principles</a>
-        
-        <a href="/contact">contact</a>
-        
-        <a href="/cv">cv</a>
-        
-        <a href="/school">school</a>
-        
-        | <span id="dark-mode-toggle" onclick="toggleTheme()"></span>
-        <script src="https://rezvan.xyz/js/themetoggle.js"></script>
+        <div class="menu-items">
+            
+            <a href="/">home</a>
+            
+            <a href="/principles">principles</a>
+            
+            <a href="/cv">cv</a>
+            
+            <a href="/posts">posts</a>
+            
+            <a href="/school">school</a>
+            
+        </div>
+        <div class="theme-toggle">
+            <span id="dark-mode-toggle" onclick="toggleTheme()"><i data-feather="moon"></i></span>
+            <script src="https://rezvan.xyz/js/themetoggle.js"></script>
+        </div>
         
     </nav>
 </header>
@@ -108,7 +115,12 @@ Notice how this doesn&rsquo;t depend on the actual curve, but only of the start 
     <article>
         <div class="title">
             <h1>Mathematical analysis in several variables: Part 17 - The fundamental theorem of line integrals</h1>
-            <div class="meta">Posted on Oct 4, 2023</div>
+            <div class="meta">Posted on Oct 4, 2023
+            </div>
+            <div class="meta">
+                (Last updated: Feb 21, 2024)
+            </div>
+
         </div>
         
         <section class="body">
@@ -295,8 +307,7 @@ $$</p>
         </section>
     </article>
 
-    <nav class="navigation"
-        style="display: flex; justify-content: space-between; align-items: center; margin-top: 20px;">
+    <nav class="navigation">
         
         
         
@@ -349,25 +360,33 @@ $$</p>
 
         
         
-        <a class="previous" href="/school/lma017/lma017_16/" title="Previous: Mathematical analysis in several variables: Part 16 - Vector fields"
-            style="flex-grow: 0; text-align: left;">&larr; Previous</a>
-        
-        
 
-        
-        
-        <a class="next" href="/school/lma017/lma017_18/" title="Next: Mathematical analysis in several variables: Part 18 - Green&#39;s Theorem"
-            style="flex-grow: 0; text-align: right;">Next &rarr;</a>
-        
-        
+        <div class="nav-item previous">
+            
+            
+            <a href="/school/lma017/lma017_16/" title="Previous: Mathematical analysis in several variables: Part 16 - Vector fields">&larr; Previous</a>
+            
+            
+        </div>
+
+        <div class="nav-item next">
+            
+            
+            <a href="/school/lma017/lma017_18/" title="Next: Mathematical analysis in several variables: Part 18 - Green&#39;s Theorem">Next &rarr;</a>
+            
+            
+        </div>
     </nav>
 </main>
 <footer id="site-footer">
-    
-    <a href="https://github.com/rezaarezvan" title="">github</a>
-    
-    <a href="https://x.com/rzvan__/" title="">x</a>
-    <p class="footer_msg">memento mori</p></footer></div>
+    <div class="social-links">
+        
+        <a href="https://github.com/rezaarezvan" title="">github</a>
+        
+        <a href="https://x.com/rzvan__/" title="">x</a>
+        
+    </div><p class="footer-msg">memento mori</p>
+</footer></div>
 </body>
 
 </html>

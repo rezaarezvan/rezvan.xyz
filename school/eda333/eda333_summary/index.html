@@ -15,8 +15,10 @@ $t0-7 - Temporary registers
 $s0-7 - Content registers, save for later use
 $sp - Stack pointer" />
     <meta property="og:image" content="https://raw.githubusercontent.com/rezaarezvan/rezvan.xyz/main/images/icon.png" />
-    <meta property="og:title" content="Computer System Engineering: Summary" />
-<meta property="og:description" content="Performance and MIPS CPU Time for a program: $$ \text{CPU Time} = \frac{\text{Instructions}}{\text{Program}} \cdot\ \frac{\text{Clock cycles}}{\text{Instruction}} \cdot\ \frac{\text{Seconds}}{\text{Clock cycle}} $$
+    <meta property="og:url" content="https://rezvan.xyz/school/eda333/eda333_summary/">
+  <meta property="og:site_name" content="rezvan">
+  <meta property="og:title" content="Computer System Engineering: Summary">
+  <meta property="og:description" content="Performance and MIPS CPU Time for a program: $$ \text{CPU Time} = \frac{\text{Instructions}}{\text{Program}} \cdot\ \frac{\text{Clock cycles}}{\text{Instruction}} \cdot\ \frac{\text{Seconds}}{\text{Clock cycle}} $$
 $$ \text{CPU Time} = IC \cdot\ CPI \cdot\ T_c $$
 Geometric mean: $$ \sqrt[n]{\prod_{i = 1}^{n} \text{Execution time ratio}_i} $$
 MIPS Cheat Sheet:
@@ -26,13 +28,16 @@ $v0-1 - Result registers
 $a0-3 - Argument registers
 $t0-7 - Temporary registers
 $s0-7 - Content registers, save for later use
-$sp - Stack pointer" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://rezvan.xyz/school/eda333/eda333_summary/" /><meta property="article:section" content="school" />
-<meta property="article:published_time" content="2023-05-25T11:22:18+02:00" />
-<meta property="article:modified_time" content="2023-05-25T11:22:18+02:00" />
-<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Computer System Engineering: Summary"/>
-<meta name="twitter:description" content="Performance and MIPS CPU Time for a program: $$ \text{CPU Time} = \frac{\text{Instructions}}{\text{Program}} \cdot\ \frac{\text{Clock cycles}}{\text{Instruction}} \cdot\ \frac{\text{Seconds}}{\text{Clock cycle}} $$
+$sp - Stack pointer">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="school">
+    <meta property="article:published_time" content="2023-05-25T11:22:18+02:00">
+    <meta property="article:modified_time" content="2024-02-21T20:24:30+01:00">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Computer System Engineering: Summary">
+  <meta name="twitter:description" content="Performance and MIPS CPU Time for a program: $$ \text{CPU Time} = \frac{\text{Instructions}}{\text{Program}} \cdot\ \frac{\text{Clock cycles}}{\text{Instruction}} \cdot\ \frac{\text{Seconds}}{\text{Clock cycle}} $$
 $$ \text{CPU Time} = IC \cdot\ CPI \cdot\ T_c $$
 Geometric mean: $$ \sqrt[n]{\prod_{i = 1}^{n} \text{Execution time ratio}_i} $$
 MIPS Cheat Sheet:
@@ -42,16 +47,16 @@ $v0-1 - Result registers
 $a0-3 - Argument registers
 $t0-7 - Temporary registers
 $s0-7 - Content registers, save for later use
-$sp - Stack pointer"/>
+$sp - Stack pointer">
 <script src="https://rezvan.xyz/js/feather.min.js"></script>
     
 
     
     
-    <link rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/main.e78c3f2ddb05c4f5f0aa7553861677149e3602644857702209900dcba4ebbdf7.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/main.6ad9c068c7f2d7d0babefb693af3dd601fb7b232014794a999404fb8994937e1.css" />
     <link id="lightSyntaxStyle" rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/light_syntax.65408cc3a5c02070b661c3e4e79306fc261cc63620f4adce9a30eafcba4ab79e.css" />
     
-    <link id="darkModeStyle" rel="stylesheet" type="text/css" href="https://rezvan.xyz/css/dark.e29e262999fbfa441b826411da5f98fbc72906f0e9541b0c23a9544e99356b4a.css"  disabled />
+    <link id="darkModeStyle" rel="stylesheet" type="text/css" href="https://rezvan.xyz/css/dark.13c6bfb747b76fdd2dc198b1172afdd77e7ce604de43f343ce643378bafc58af.css"  disabled />
     <link id="darkSyntaxStyle" rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/dark_syntax.2b10cc1a2156b30874a063b7439a993bc3b43d476c5e1d8598d769c929c7b381.css" />
     
 
@@ -100,21 +105,23 @@ $sp - Stack pointer"/>
 <body>
     <div class="content"><header>
     <nav id="site-navbar">
-        
-        <a href="/">home</a>
-        
-        <a href="/about">about</a>
-        
-        <a href="/principles">principles</a>
-        
-        <a href="/contact">contact</a>
-        
-        <a href="/cv">cv</a>
-        
-        <a href="/school">school</a>
-        
-        | <span id="dark-mode-toggle" onclick="toggleTheme()"></span>
-        <script src="https://rezvan.xyz/js/themetoggle.js"></script>
+        <div class="menu-items">
+            
+            <a href="/">home</a>
+            
+            <a href="/principles">principles</a>
+            
+            <a href="/cv">cv</a>
+            
+            <a href="/posts">posts</a>
+            
+            <a href="/school">school</a>
+            
+        </div>
+        <div class="theme-toggle">
+            <span id="dark-mode-toggle" onclick="toggleTheme()"><i data-feather="moon"></i></span>
+            <script src="https://rezvan.xyz/js/themetoggle.js"></script>
+        </div>
         
     </nav>
 </header>
@@ -123,7 +130,12 @@ $sp - Stack pointer"/>
     <article>
         <div class="title">
             <h1>Computer System Engineering: Summary</h1>
-            <div class="meta">Posted on May 25, 2023</div>
+            <div class="meta">Posted on May 25, 2023
+            </div>
+            <div class="meta">
+                (Last updated: Feb 21, 2024)
+            </div>
+
         </div>
         
         <section class="body">
@@ -295,8 +307,7 @@ Number of virtual pages = (Number of processes $\times$ Size of each virtual add
         </section>
     </article>
 
-    <nav class="navigation"
-        style="display: flex; justify-content: space-between; align-items: center; margin-top: 20px;">
+    <nav class="navigation">
         
         
         
@@ -325,20 +336,29 @@ Number of virtual pages = (Number of processes $\times$ Size of each virtual add
 
         
         
-        <a class="previous" href="/school/eda333/eda333_8/" title="Previous: Computer System Engineering: Part 8 - Parallel Processors"
-            style="flex-grow: 0; text-align: left;">&larr; Previous</a>
-        
-        
 
-        
+        <div class="nav-item previous">
+            
+            
+            <a href="/school/eda333/eda333_8/" title="Previous: Computer System Engineering: Part 8 - Parallel Processors">&larr; Previous</a>
+            
+            
+        </div>
+
+        <div class="nav-item next">
+            
+        </div>
     </nav>
 </main>
 <footer id="site-footer">
-    
-    <a href="https://github.com/rezaarezvan" title="">github</a>
-    
-    <a href="https://x.com/rzvan__/" title="">x</a>
-    <p class="footer_msg">memento mori</p></footer></div>
+    <div class="social-links">
+        
+        <a href="https://github.com/rezaarezvan" title="">github</a>
+        
+        <a href="https://x.com/rzvan__/" title="">x</a>
+        
+    </div><p class="footer-msg">memento mori</p>
+</footer></div>
 </body>
 
 </html>

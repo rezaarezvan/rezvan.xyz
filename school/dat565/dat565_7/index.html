@@ -8,29 +8,34 @@ Core data science tasks Regression is one of the core data science tasks:
 Regression Predicting a numerical quantity Classification Assigning a label from a discrete set of possibilities Clustering Grouping items by similarity We will cover clustering in a few parts.
 Linear regression Regression line is useful for visualization and a method for forecasting numerical values. Residual error of a regression line is the difference between the predicted and actual values." />
     <meta property="og:image" content="https://raw.githubusercontent.com/rezaarezvan/rezvan.xyz/main/images/icon.png" />
-    <meta property="og:title" content="Introduction to data science and AI: Part 7 - Linear and logistic regression" />
-<meta property="og:description" content="Introduction In this part we&rsquo;ll cover linear and logistic regression.
+    <meta property="og:url" content="https://rezvan.xyz/school/dat565/dat565_7/">
+  <meta property="og:site_name" content="rezvan">
+  <meta property="og:title" content="Introduction to data science and AI: Part 7 - Linear and logistic regression">
+  <meta property="og:description" content="Introduction In this part we’ll cover linear and logistic regression.
 Core data science tasks Regression is one of the core data science tasks:
 Regression Predicting a numerical quantity Classification Assigning a label from a discrete set of possibilities Clustering Grouping items by similarity We will cover clustering in a few parts.
-Linear regression Regression line is useful for visualization and a method for forecasting numerical values. Residual error of a regression line is the difference between the predicted and actual values." />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://rezvan.xyz/school/dat565/dat565_7/" /><meta property="article:section" content="school" />
-<meta property="article:published_time" content="2024-02-06T00:00:00+00:00" />
-<meta property="article:modified_time" content="2024-02-06T00:00:00+00:00" />
-<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Introduction to data science and AI: Part 7 - Linear and logistic regression"/>
-<meta name="twitter:description" content="Introduction In this part we&rsquo;ll cover linear and logistic regression.
+Linear regression Regression line is useful for visualization and a method for forecasting numerical values. Residual error of a regression line is the difference between the predicted and actual values.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="school">
+    <meta property="article:published_time" content="2024-02-06T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-02-27T19:32:47+01:00">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Introduction to data science and AI: Part 7 - Linear and logistic regression">
+  <meta name="twitter:description" content="Introduction In this part we’ll cover linear and logistic regression.
 Core data science tasks Regression is one of the core data science tasks:
 Regression Predicting a numerical quantity Classification Assigning a label from a discrete set of possibilities Clustering Grouping items by similarity We will cover clustering in a few parts.
-Linear regression Regression line is useful for visualization and a method for forecasting numerical values. Residual error of a regression line is the difference between the predicted and actual values."/>
+Linear regression Regression line is useful for visualization and a method for forecasting numerical values. Residual error of a regression line is the difference between the predicted and actual values.">
 <script src="https://rezvan.xyz/js/feather.min.js"></script>
     
 
     
     
-    <link rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/main.e78c3f2ddb05c4f5f0aa7553861677149e3602644857702209900dcba4ebbdf7.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/main.6ad9c068c7f2d7d0babefb693af3dd601fb7b232014794a999404fb8994937e1.css" />
     <link id="lightSyntaxStyle" rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/light_syntax.65408cc3a5c02070b661c3e4e79306fc261cc63620f4adce9a30eafcba4ab79e.css" />
     
-    <link id="darkModeStyle" rel="stylesheet" type="text/css" href="https://rezvan.xyz/css/dark.e29e262999fbfa441b826411da5f98fbc72906f0e9541b0c23a9544e99356b4a.css"  disabled />
+    <link id="darkModeStyle" rel="stylesheet" type="text/css" href="https://rezvan.xyz/css/dark.13c6bfb747b76fdd2dc198b1172afdd77e7ce604de43f343ce643378bafc58af.css"  disabled />
     <link id="darkSyntaxStyle" rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/dark_syntax.2b10cc1a2156b30874a063b7439a993bc3b43d476c5e1d8598d769c929c7b381.css" />
     
 
@@ -79,21 +84,23 @@ Linear regression Regression line is useful for visualization and a method for f
 <body>
     <div class="content"><header>
     <nav id="site-navbar">
-        
-        <a href="/">home</a>
-        
-        <a href="/about">about</a>
-        
-        <a href="/principles">principles</a>
-        
-        <a href="/contact">contact</a>
-        
-        <a href="/cv">cv</a>
-        
-        <a href="/school">school</a>
-        
-        | <span id="dark-mode-toggle" onclick="toggleTheme()"></span>
-        <script src="https://rezvan.xyz/js/themetoggle.js"></script>
+        <div class="menu-items">
+            
+            <a href="/">home</a>
+            
+            <a href="/principles">principles</a>
+            
+            <a href="/cv">cv</a>
+            
+            <a href="/posts">posts</a>
+            
+            <a href="/school">school</a>
+            
+        </div>
+        <div class="theme-toggle">
+            <span id="dark-mode-toggle" onclick="toggleTheme()"><i data-feather="moon"></i></span>
+            <script src="https://rezvan.xyz/js/themetoggle.js"></script>
+        </div>
         
     </nav>
 </header>
@@ -102,7 +109,12 @@ Linear regression Regression line is useful for visualization and a method for f
     <article>
         <div class="title">
             <h1>Introduction to data science and AI: Part 7 - Linear and logistic regression</h1>
-            <div class="meta">Posted on Feb 6, 2024</div>
+            <div class="meta">Posted on Feb 6, 2024
+            </div>
+            <div class="meta">
+                (Last updated: Feb 27, 2024)
+            </div>
+
         </div>
         
         <section class="body">
@@ -208,8 +220,7 @@ Common metrics for evaluating classification models include accuracy, precision,
         </section>
     </article>
 
-    <nav class="navigation"
-        style="display: flex; justify-content: space-between; align-items: center; margin-top: 20px;">
+    <nav class="navigation">
         
         
         
@@ -238,25 +249,33 @@ Common metrics for evaluating classification models include accuracy, precision,
 
         
         
-        <a class="previous" href="/school/dat565/dat565_6/" title="Previous: Introduction to data science and AI: Part 6 - Mathematical models"
-            style="flex-grow: 0; text-align: left;">&larr; Previous</a>
-        
-        
 
-        
-        
-        <a class="next" href="/school/dat565/dat565_8/" title="Next: Introduction to data science and AI: Part 8 - Distance and network methods"
-            style="flex-grow: 0; text-align: right;">Next &rarr;</a>
-        
-        
+        <div class="nav-item previous">
+            
+            
+            <a href="/school/dat565/dat565_6/" title="Previous: Introduction to data science and AI: Part 6 - Mathematical models">&larr; Previous</a>
+            
+            
+        </div>
+
+        <div class="nav-item next">
+            
+            
+            <a href="/school/dat565/dat565_8/" title="Next: Introduction to data science and AI: Part 8 - Distance and network methods">Next &rarr;</a>
+            
+            
+        </div>
     </nav>
 </main>
 <footer id="site-footer">
-    
-    <a href="https://github.com/rezaarezvan" title="">github</a>
-    
-    <a href="https://x.com/rzvan__/" title="">x</a>
-    <p class="footer_msg">memento mori</p></footer></div>
+    <div class="social-links">
+        
+        <a href="https://github.com/rezaarezvan" title="">github</a>
+        
+        <a href="https://x.com/rzvan__/" title="">x</a>
+        
+    </div><p class="footer-msg">memento mori</p>
+</footer></div>
 </body>
 
 </html>

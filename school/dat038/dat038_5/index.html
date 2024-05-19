@@ -6,25 +6,30 @@
         content="Hash Tables Hash tables are one of the most famous (and widely used) data structures. But why are they so popular and powerful? Before we can answer that question we need to look back at sets and maps.
 Sets and Maps in Context Just to refresh our memory - a set is a collection of items, where duplicates aren&rsquo;t allowed. Maps are sets of keys, each having an associate value - or you can formulate it as - a set of key-value pairs." />
     <meta property="og:image" content="https://raw.githubusercontent.com/rezaarezvan/rezvan.xyz/main/images/icon.png" />
-    <meta property="og:title" content="DSA: Part 5 - Hash Tables" />
-<meta property="og:description" content="Hash Tables Hash tables are one of the most famous (and widely used) data structures. But why are they so popular and powerful? Before we can answer that question we need to look back at sets and maps.
-Sets and Maps in Context Just to refresh our memory - a set is a collection of items, where duplicates aren&rsquo;t allowed. Maps are sets of keys, each having an associate value - or you can formulate it as - a set of key-value pairs." />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://rezvan.xyz/school/dat038/dat038_5/" /><meta property="article:section" content="school" />
-<meta property="article:published_time" content="2022-11-29T18:50:23+01:00" />
-<meta property="article:modified_time" content="2022-11-29T18:50:23+01:00" />
-<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="DSA: Part 5 - Hash Tables"/>
-<meta name="twitter:description" content="Hash Tables Hash tables are one of the most famous (and widely used) data structures. But why are they so popular and powerful? Before we can answer that question we need to look back at sets and maps.
-Sets and Maps in Context Just to refresh our memory - a set is a collection of items, where duplicates aren&rsquo;t allowed. Maps are sets of keys, each having an associate value - or you can formulate it as - a set of key-value pairs."/>
+    <meta property="og:url" content="https://rezvan.xyz/school/dat038/dat038_5/">
+  <meta property="og:site_name" content="rezvan">
+  <meta property="og:title" content="DSA: Part 5 - Hash Tables">
+  <meta property="og:description" content="Hash Tables Hash tables are one of the most famous (and widely used) data structures. But why are they so popular and powerful? Before we can answer that question we need to look back at sets and maps.
+Sets and Maps in Context Just to refresh our memory - a set is a collection of items, where duplicates aren’t allowed. Maps are sets of keys, each having an associate value - or you can formulate it as - a set of key-value pairs.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="school">
+    <meta property="article:published_time" content="2022-11-29T18:50:23+01:00">
+    <meta property="article:modified_time" content="2024-02-21T20:24:30+01:00">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="DSA: Part 5 - Hash Tables">
+  <meta name="twitter:description" content="Hash Tables Hash tables are one of the most famous (and widely used) data structures. But why are they so popular and powerful? Before we can answer that question we need to look back at sets and maps.
+Sets and Maps in Context Just to refresh our memory - a set is a collection of items, where duplicates aren’t allowed. Maps are sets of keys, each having an associate value - or you can formulate it as - a set of key-value pairs.">
 <script src="https://rezvan.xyz/js/feather.min.js"></script>
     
 
     
     
-    <link rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/main.e78c3f2ddb05c4f5f0aa7553861677149e3602644857702209900dcba4ebbdf7.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/main.6ad9c068c7f2d7d0babefb693af3dd601fb7b232014794a999404fb8994937e1.css" />
     <link id="lightSyntaxStyle" rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/light_syntax.65408cc3a5c02070b661c3e4e79306fc261cc63620f4adce9a30eafcba4ab79e.css" />
     
-    <link id="darkModeStyle" rel="stylesheet" type="text/css" href="https://rezvan.xyz/css/dark.e29e262999fbfa441b826411da5f98fbc72906f0e9541b0c23a9544e99356b4a.css"  disabled />
+    <link id="darkModeStyle" rel="stylesheet" type="text/css" href="https://rezvan.xyz/css/dark.13c6bfb747b76fdd2dc198b1172afdd77e7ce604de43f343ce643378bafc58af.css"  disabled />
     <link id="darkSyntaxStyle" rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/dark_syntax.2b10cc1a2156b30874a063b7439a993bc3b43d476c5e1d8598d769c929c7b381.css" />
     
 
@@ -73,21 +78,23 @@ Sets and Maps in Context Just to refresh our memory - a set is a collection of i
 <body>
     <div class="content"><header>
     <nav id="site-navbar">
-        
-        <a href="/">home</a>
-        
-        <a href="/about">about</a>
-        
-        <a href="/principles">principles</a>
-        
-        <a href="/contact">contact</a>
-        
-        <a href="/cv">cv</a>
-        
-        <a href="/school">school</a>
-        
-        | <span id="dark-mode-toggle" onclick="toggleTheme()"></span>
-        <script src="https://rezvan.xyz/js/themetoggle.js"></script>
+        <div class="menu-items">
+            
+            <a href="/">home</a>
+            
+            <a href="/principles">principles</a>
+            
+            <a href="/cv">cv</a>
+            
+            <a href="/posts">posts</a>
+            
+            <a href="/school">school</a>
+            
+        </div>
+        <div class="theme-toggle">
+            <span id="dark-mode-toggle" onclick="toggleTheme()"><i data-feather="moon"></i></span>
+            <script src="https://rezvan.xyz/js/themetoggle.js"></script>
+        </div>
         
     </nav>
 </header>
@@ -96,7 +103,12 @@ Sets and Maps in Context Just to refresh our memory - a set is a collection of i
     <article>
         <div class="title">
             <h1>DSA: Part 5 - Hash Tables</h1>
-            <div class="meta">Posted on Nov 29, 2022</div>
+            <div class="meta">Posted on Nov 29, 2022
+            </div>
+            <div class="meta">
+                (Last updated: Feb 21, 2024)
+            </div>
+
         </div>
         
         <section class="body">
@@ -488,8 +500,7 @@ If this number exceeds some threshold we resize.</p>
         </section>
     </article>
 
-    <nav class="navigation"
-        style="display: flex; justify-content: space-between; align-items: center; margin-top: 20px;">
+    <nav class="navigation">
         
         
         
@@ -520,25 +531,33 @@ If this number exceeds some threshold we resize.</p>
 
         
         
-        <a class="previous" href="/school/dat038/dat038_4/" title="Previous: DSA: Part 4 - Abstract Data Types"
-            style="flex-grow: 0; text-align: left;">&larr; Previous</a>
-        
-        
 
-        
-        
-        <a class="next" href="/school/dat038/dat038_6/" title="Next: DSA: Part 6 - Trees"
-            style="flex-grow: 0; text-align: right;">Next &rarr;</a>
-        
-        
+        <div class="nav-item previous">
+            
+            
+            <a href="/school/dat038/dat038_4/" title="Previous: DSA: Part 4 - Abstract Data Types">&larr; Previous</a>
+            
+            
+        </div>
+
+        <div class="nav-item next">
+            
+            
+            <a href="/school/dat038/dat038_6/" title="Next: DSA: Part 6 - Trees">Next &rarr;</a>
+            
+            
+        </div>
     </nav>
 </main>
 <footer id="site-footer">
-    
-    <a href="https://github.com/rezaarezvan" title="">github</a>
-    
-    <a href="https://x.com/rzvan__/" title="">x</a>
-    <p class="footer_msg">memento mori</p></footer></div>
+    <div class="social-links">
+        
+        <a href="https://github.com/rezaarezvan" title="">github</a>
+        
+        <a href="https://x.com/rzvan__/" title="">x</a>
+        
+    </div><p class="footer-msg">memento mori</p>
+</footer></div>
 </body>
 
 </html>

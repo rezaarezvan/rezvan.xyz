@@ -4,9 +4,9 @@
     <title>Concurrent Programming on rezvan</title>
     <link>https://rezvan.xyz/school/concurrent-programming/</link>
     <description>Recent content in Concurrent Programming on rezvan</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 19 Feb 2023 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 21 Feb 2024 20:24:30 +0100</lastBuildDate>
     <atom:link href="https://rezvan.xyz/school/concurrent-programming/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Concurrent Programming: Part 10 - Parallel linked lists</title>

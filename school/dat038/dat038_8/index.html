@@ -8,29 +8,34 @@ Introduction of Graphs A graph is a set of vertices connected pairwise by edges.
 A node can have a so-called degree describing how many in/outgoing edges it has. In the directed case we split this variable to &lsquo;out degree&rsquo; and &lsquo;in degree&rsquo;.
 Another basic term that we&rsquo;ll encounter is a cycle." />
     <meta property="og:image" content="https://raw.githubusercontent.com/rezaarezvan/rezvan.xyz/main/images/icon.png" />
-    <meta property="og:title" content="DSA: Part 8 - Graphs" />
-<meta property="og:description" content="In this part we&rsquo;ll so-called graphs and their applications.
+    <meta property="og:url" content="https://rezvan.xyz/school/dat038/dat038_8/">
+  <meta property="og:site_name" content="rezvan">
+  <meta property="og:title" content="DSA: Part 8 - Graphs">
+  <meta property="og:description" content="In this part we’ll so-called graphs and their applications.
 Introduction of Graphs A graph is a set of vertices connected pairwise by edges. So a very natural thing is that these edged can be either undirected or directed!
-A node can have a so-called degree describing how many in/outgoing edges it has. In the directed case we split this variable to &lsquo;out degree&rsquo; and &lsquo;in degree&rsquo;.
-Another basic term that we&rsquo;ll encounter is a cycle." />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://rezvan.xyz/school/dat038/dat038_8/" /><meta property="article:section" content="school" />
-<meta property="article:published_time" content="2022-12-06T13:08:43+01:00" />
-<meta property="article:modified_time" content="2022-12-06T13:08:43+01:00" />
-<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="DSA: Part 8 - Graphs"/>
-<meta name="twitter:description" content="In this part we&rsquo;ll so-called graphs and their applications.
+A node can have a so-called degree describing how many in/outgoing edges it has. In the directed case we split this variable to ‘out degree’ and ‘in degree’.
+Another basic term that we’ll encounter is a cycle.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="school">
+    <meta property="article:published_time" content="2022-12-06T13:08:43+01:00">
+    <meta property="article:modified_time" content="2024-02-21T20:24:30+01:00">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="DSA: Part 8 - Graphs">
+  <meta name="twitter:description" content="In this part we’ll so-called graphs and their applications.
 Introduction of Graphs A graph is a set of vertices connected pairwise by edges. So a very natural thing is that these edged can be either undirected or directed!
-A node can have a so-called degree describing how many in/outgoing edges it has. In the directed case we split this variable to &lsquo;out degree&rsquo; and &lsquo;in degree&rsquo;.
-Another basic term that we&rsquo;ll encounter is a cycle."/>
+A node can have a so-called degree describing how many in/outgoing edges it has. In the directed case we split this variable to ‘out degree’ and ‘in degree’.
+Another basic term that we’ll encounter is a cycle.">
 <script src="https://rezvan.xyz/js/feather.min.js"></script>
     
 
     
     
-    <link rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/main.e78c3f2ddb05c4f5f0aa7553861677149e3602644857702209900dcba4ebbdf7.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/main.6ad9c068c7f2d7d0babefb693af3dd601fb7b232014794a999404fb8994937e1.css" />
     <link id="lightSyntaxStyle" rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/light_syntax.65408cc3a5c02070b661c3e4e79306fc261cc63620f4adce9a30eafcba4ab79e.css" />
     
-    <link id="darkModeStyle" rel="stylesheet" type="text/css" href="https://rezvan.xyz/css/dark.e29e262999fbfa441b826411da5f98fbc72906f0e9541b0c23a9544e99356b4a.css"  disabled />
+    <link id="darkModeStyle" rel="stylesheet" type="text/css" href="https://rezvan.xyz/css/dark.13c6bfb747b76fdd2dc198b1172afdd77e7ce604de43f343ce643378bafc58af.css"  disabled />
     <link id="darkSyntaxStyle" rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/dark_syntax.2b10cc1a2156b30874a063b7439a993bc3b43d476c5e1d8598d769c929c7b381.css" />
     
 
@@ -79,21 +84,23 @@ Another basic term that we&rsquo;ll encounter is a cycle."/>
 <body>
     <div class="content"><header>
     <nav id="site-navbar">
-        
-        <a href="/">home</a>
-        
-        <a href="/about">about</a>
-        
-        <a href="/principles">principles</a>
-        
-        <a href="/contact">contact</a>
-        
-        <a href="/cv">cv</a>
-        
-        <a href="/school">school</a>
-        
-        | <span id="dark-mode-toggle" onclick="toggleTheme()"></span>
-        <script src="https://rezvan.xyz/js/themetoggle.js"></script>
+        <div class="menu-items">
+            
+            <a href="/">home</a>
+            
+            <a href="/principles">principles</a>
+            
+            <a href="/cv">cv</a>
+            
+            <a href="/posts">posts</a>
+            
+            <a href="/school">school</a>
+            
+        </div>
+        <div class="theme-toggle">
+            <span id="dark-mode-toggle" onclick="toggleTheme()"><i data-feather="moon"></i></span>
+            <script src="https://rezvan.xyz/js/themetoggle.js"></script>
+        </div>
         
     </nav>
 </header>
@@ -102,7 +109,12 @@ Another basic term that we&rsquo;ll encounter is a cycle."/>
     <article>
         <div class="title">
             <h1>DSA: Part 8 - Graphs</h1>
-            <div class="meta">Posted on Dec 6, 2022</div>
+            <div class="meta">Posted on Dec 6, 2022
+            </div>
+            <div class="meta">
+                (Last updated: Feb 21, 2024)
+            </div>
+
         </div>
         
         <section class="body">
@@ -312,8 +324,7 @@ we change where the enqueue/push goes.</p>
         </section>
     </article>
 
-    <nav class="navigation"
-        style="display: flex; justify-content: space-between; align-items: center; margin-top: 20px;">
+    <nav class="navigation">
         
         
         
@@ -344,25 +355,33 @@ we change where the enqueue/push goes.</p>
 
         
         
-        <a class="previous" href="/school/dat038/dat038_7/" title="Previous: DSA: Part 7 - Binary Heaps"
-            style="flex-grow: 0; text-align: left;">&larr; Previous</a>
-        
-        
 
-        
-        
-        <a class="next" href="/school/dat038/dat038_9/" title="Next: DSA: Part 9 - Shortest Path Algortihms &amp; Spanning Trees"
-            style="flex-grow: 0; text-align: right;">Next &rarr;</a>
-        
-        
+        <div class="nav-item previous">
+            
+            
+            <a href="/school/dat038/dat038_7/" title="Previous: DSA: Part 7 - Binary Heaps">&larr; Previous</a>
+            
+            
+        </div>
+
+        <div class="nav-item next">
+            
+            
+            <a href="/school/dat038/dat038_9/" title="Next: DSA: Part 9 - Shortest Path Algortihms &amp; Spanning Trees">Next &rarr;</a>
+            
+            
+        </div>
     </nav>
 </main>
 <footer id="site-footer">
-    
-    <a href="https://github.com/rezaarezvan" title="">github</a>
-    
-    <a href="https://x.com/rzvan__/" title="">x</a>
-    <p class="footer_msg">memento mori</p></footer></div>
+    <div class="social-links">
+        
+        <a href="https://github.com/rezaarezvan" title="">github</a>
+        
+        <a href="https://x.com/rzvan__/" title="">x</a>
+        
+    </div><p class="footer-msg">memento mori</p>
+</footer></div>
 </body>
 
 </html>

@@ -8,29 +8,34 @@ Order of growth of Functions Let&rsquo;s find out the complexity ($\mathcal{O}$)
 Since we seek the growth rate - we can use our rules about complexity. We can remove all constants: $$ T(n) = (n^2 &#43; n)(log_{10}(n)) $$
 The next rule we can apply is, &ldquo;the most dominating factor &lsquo;wins&rsquo;&rdquo; as I like to call it." />
     <meta property="og:image" content="https://raw.githubusercontent.com/rezaarezvan/rezvan.xyz/main/images/icon.png" />
-    <meta property="og:title" content="DSA: Part 10 - Complexity (2)" />
-<meta property="og:description" content="We have actually covered everything in this course - in this part we&rsquo;ll do some exercises!
-Order of growth of Functions Let&rsquo;s find out the complexity ($\mathcal{O}$) of: $$ T(n) = 5(3n^2 &#43; 2n &#43; 6)(4\ log_{10}(n) &#43; 1) $$
+    <meta property="og:url" content="https://rezvan.xyz/school/dat038/dat038_10/">
+  <meta property="og:site_name" content="rezvan">
+  <meta property="og:title" content="DSA: Part 10 - Complexity (2)">
+  <meta property="og:description" content="We have actually covered everything in this course - in this part we’ll do some exercises!
+Order of growth of Functions Let’s find out the complexity ($\mathcal{O}$) of: $$ T(n) = 5(3n^2 &#43; 2n &#43; 6)(4\ log_{10}(n) &#43; 1) $$
 Since we seek the growth rate - we can use our rules about complexity. We can remove all constants: $$ T(n) = (n^2 &#43; n)(log_{10}(n)) $$
-The next rule we can apply is, &ldquo;the most dominating factor &lsquo;wins&rsquo;&rdquo; as I like to call it." />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://rezvan.xyz/school/dat038/dat038_10/" /><meta property="article:section" content="school" />
-<meta property="article:published_time" content="2022-12-09T18:49:03+01:00" />
-<meta property="article:modified_time" content="2022-12-09T18:49:03+01:00" />
-<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="DSA: Part 10 - Complexity (2)"/>
-<meta name="twitter:description" content="We have actually covered everything in this course - in this part we&rsquo;ll do some exercises!
-Order of growth of Functions Let&rsquo;s find out the complexity ($\mathcal{O}$) of: $$ T(n) = 5(3n^2 &#43; 2n &#43; 6)(4\ log_{10}(n) &#43; 1) $$
+The next rule we can apply is, “the most dominating factor ‘wins’” as I like to call it.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="school">
+    <meta property="article:published_time" content="2022-12-09T18:49:03+01:00">
+    <meta property="article:modified_time" content="2024-02-21T20:24:30+01:00">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="DSA: Part 10 - Complexity (2)">
+  <meta name="twitter:description" content="We have actually covered everything in this course - in this part we’ll do some exercises!
+Order of growth of Functions Let’s find out the complexity ($\mathcal{O}$) of: $$ T(n) = 5(3n^2 &#43; 2n &#43; 6)(4\ log_{10}(n) &#43; 1) $$
 Since we seek the growth rate - we can use our rules about complexity. We can remove all constants: $$ T(n) = (n^2 &#43; n)(log_{10}(n)) $$
-The next rule we can apply is, &ldquo;the most dominating factor &lsquo;wins&rsquo;&rdquo; as I like to call it."/>
+The next rule we can apply is, “the most dominating factor ‘wins’” as I like to call it.">
 <script src="https://rezvan.xyz/js/feather.min.js"></script>
     
 
     
     
-    <link rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/main.e78c3f2ddb05c4f5f0aa7553861677149e3602644857702209900dcba4ebbdf7.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/main.6ad9c068c7f2d7d0babefb693af3dd601fb7b232014794a999404fb8994937e1.css" />
     <link id="lightSyntaxStyle" rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/light_syntax.65408cc3a5c02070b661c3e4e79306fc261cc63620f4adce9a30eafcba4ab79e.css" />
     
-    <link id="darkModeStyle" rel="stylesheet" type="text/css" href="https://rezvan.xyz/css/dark.e29e262999fbfa441b826411da5f98fbc72906f0e9541b0c23a9544e99356b4a.css"  disabled />
+    <link id="darkModeStyle" rel="stylesheet" type="text/css" href="https://rezvan.xyz/css/dark.13c6bfb747b76fdd2dc198b1172afdd77e7ce604de43f343ce643378bafc58af.css"  disabled />
     <link id="darkSyntaxStyle" rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/dark_syntax.2b10cc1a2156b30874a063b7439a993bc3b43d476c5e1d8598d769c929c7b381.css" />
     
 
@@ -79,21 +84,23 @@ The next rule we can apply is, &ldquo;the most dominating factor &lsquo;wins&rsq
 <body>
     <div class="content"><header>
     <nav id="site-navbar">
-        
-        <a href="/">home</a>
-        
-        <a href="/about">about</a>
-        
-        <a href="/principles">principles</a>
-        
-        <a href="/contact">contact</a>
-        
-        <a href="/cv">cv</a>
-        
-        <a href="/school">school</a>
-        
-        | <span id="dark-mode-toggle" onclick="toggleTheme()"></span>
-        <script src="https://rezvan.xyz/js/themetoggle.js"></script>
+        <div class="menu-items">
+            
+            <a href="/">home</a>
+            
+            <a href="/principles">principles</a>
+            
+            <a href="/cv">cv</a>
+            
+            <a href="/posts">posts</a>
+            
+            <a href="/school">school</a>
+            
+        </div>
+        <div class="theme-toggle">
+            <span id="dark-mode-toggle" onclick="toggleTheme()"><i data-feather="moon"></i></span>
+            <script src="https://rezvan.xyz/js/themetoggle.js"></script>
+        </div>
         
     </nav>
 </header>
@@ -102,7 +109,12 @@ The next rule we can apply is, &ldquo;the most dominating factor &lsquo;wins&rsq
     <article>
         <div class="title">
             <h1>DSA: Part 10 - Complexity (2)</h1>
-            <div class="meta">Posted on Dec 9, 2022</div>
+            <div class="meta">Posted on Dec 9, 2022
+            </div>
+            <div class="meta">
+                (Last updated: Feb 21, 2024)
+            </div>
+
         </div>
         
         <section class="body">
@@ -430,8 +442,7 @@ Since this is a BST, the <code>contains()</code> will have a complexity of $\mat
         </section>
     </article>
 
-    <nav class="navigation"
-        style="display: flex; justify-content: space-between; align-items: center; margin-top: 20px;">
+    <nav class="navigation">
         
         
         
@@ -462,20 +473,29 @@ Since this is a BST, the <code>contains()</code> will have a complexity of $\mat
 
         
         
-        <a class="previous" href="/school/dat038/dat038_9/" title="Previous: DSA: Part 9 - Shortest Path Algortihms &amp; Spanning Trees"
-            style="flex-grow: 0; text-align: left;">&larr; Previous</a>
-        
-        
 
-        
+        <div class="nav-item previous">
+            
+            
+            <a href="/school/dat038/dat038_9/" title="Previous: DSA: Part 9 - Shortest Path Algortihms &amp; Spanning Trees">&larr; Previous</a>
+            
+            
+        </div>
+
+        <div class="nav-item next">
+            
+        </div>
     </nav>
 </main>
 <footer id="site-footer">
-    
-    <a href="https://github.com/rezaarezvan" title="">github</a>
-    
-    <a href="https://x.com/rzvan__/" title="">x</a>
-    <p class="footer_msg">memento mori</p></footer></div>
+    <div class="social-links">
+        
+        <a href="https://github.com/rezaarezvan" title="">github</a>
+        
+        <a href="https://x.com/rzvan__/" title="">x</a>
+        
+    </div><p class="footer-msg">memento mori</p>
+</footer></div>
 </body>
 
 </html>
