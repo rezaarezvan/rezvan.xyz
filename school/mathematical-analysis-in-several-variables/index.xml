@@ -9,147 +9,147 @@
     <lastBuildDate>Sun, 25 Feb 2024 11:15:15 +0100</lastBuildDate>
     <atom:link href="https://rezvan.xyz/school/mathematical-analysis-in-several-variables/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Mathematical analysis in several variables: Summary</title>
+      <title>Part 21 - Summary</title>
       <link>https://rezvan.xyz/school/lma017/lma017_summary/</link>
       <pubDate>Thu, 19 Oct 2023 00:00:00 +0000</pubDate>
       <guid>https://rezvan.xyz/school/lma017/lma017_summary/</guid>
       <description>Limits Let&amp;rsquo;s compare limits in one variable to several. $$ \lim_{x \to a} f(x) = L $$&#xA;$$ \lim_{(x, y) \to (a, b)} f(x) = L $$&#xA;They work quite similiar, let&amp;rsquo;s see the limit laws:&#xA;$$ \lim_{(x, y) \to (a, b)} f(x, y) \pm h(x, y) = L + M $$&#xA;$$ \lim_{(x, y) \to (a, b)} f(x, y) \cdot h(x, y) = L \cdot M $$&#xA;$$ \lim_{(x, y) \to (a, b)} \dfrac{f(x, y)}{h(x, y} = \dfrac{L}{M} , M \neq 0 $$</description>
     </item>
     <item>
-      <title>Mathematical analysis in several variables: Part 20 - Divergence Theorem and Stokes Theorem</title>
+      <title>Part 20 - Divergence and Stokes&#39; Theorem</title>
       <link>https://rezvan.xyz/school/lma017/lma017_20/</link>
       <pubDate>Wed, 18 Oct 2023 00:00:00 +0000</pubDate>
       <guid>https://rezvan.xyz/school/lma017/lma017_20/</guid>
       <description>Introduction In this part we&amp;rsquo;ll cover surface integrals over vector fields as well as two very important theorems.&#xA;Surface integrals over vector fields Let $S$ be a parametric surface, parameterized by, $\vec{r}: D \rarr \mathbb{R}^2$ and $F: \mathbb{R}^3 \rarr \mathbb{R}^3$, be a vector field. Then: $$ \iint_S \vec{F} \cdot dS = \iint_D \vec{F}(\vec{r}(u, v)) \cdot \vec{r_u} \times \vec{r_v}\ du\ dv $$&#xA;We call this the flux of $\vec{F}$ through $S$.</description>
     </item>
     <item>
-      <title>Mathematical analysis in several variables: Part 19 - Surface integrals</title>
+      <title>Part 19 - Surface integrals</title>
       <link>https://rezvan.xyz/school/lma017/lma017_19/</link>
       <pubDate>Wed, 11 Oct 2023 00:00:00 +0000</pubDate>
       <guid>https://rezvan.xyz/school/lma017/lma017_19/</guid>
       <description>Introduction In this part we&amp;rsquo;ll cover surface integrals.&#xA;Let&amp;rsquo;s first start with tanget planes to surfaces.&#xA;Tangent planes to surfaces. Suppose $S$ is a parametric surface with parameterization $r: D \subset \mathbb{R}^2 \rarr \mathbb{R}^3$.&#xA;$$ \vec{r}(u, v) = x(u, v) \vec{i} + y(u, v) \vec{j} + z(u, v) \vec{k} $$&#xA;We define $\vec{r_u}(u, v)$ as: $$ \vec{r_u} = x_u(u, v) \vec{i} + y_u(u, v) \vec{j} + z_u(u, v) \vec{k} $$</description>
     </item>
     <item>
-      <title>Mathematical analysis in several variables: Part 18 - Green&#39;s Theorem</title>
+      <title>Part 18 - Green&#39;s Theorem</title>
       <link>https://rezvan.xyz/school/lma017/lma017_18/</link>
       <pubDate>Tue, 10 Oct 2023 00:00:00 +0000</pubDate>
       <guid>https://rezvan.xyz/school/lma017/lma017_18/</guid>
       <description>Introduction In this part we&amp;rsquo;ll cover Green&amp;rsquo;s Theorem, which will allow us to have a relationship between integrals and double integrals.&#xA;Before starting, we will only work with simple curves. Which essentially just means that the curves have no self-injections (only exception is when it starts and ends at the same point).&#xA;If $C$ is a simple and closed curve, e.g a circle. Then $C$ determines a inner region, $D$. In this case, we write $\partial D = C$.</description>
     </item>
     <item>
-      <title>Mathematical analysis in several variables: Part 17 - The fundamental theorem of line integrals</title>
+      <title>Part 17 - Gradient theorem</title>
       <link>https://rezvan.xyz/school/lma017/lma017_17/</link>
       <pubDate>Wed, 04 Oct 2023 00:00:00 +0000</pubDate>
       <guid>https://rezvan.xyz/school/lma017/lma017_17/</guid>
-      <description>Introduction In this part we&amp;rsquo;ll cover the fundamental theorem of line integrals.&#xA;Definition Recall the fundamental theorem of calculus: $$ \int_a^b f^\prime(x)\ dx = f(b) - f(a) $$&#xA;For line integrals: Let $f: D \subset \mathbb{R}^2 \rarr \mathbb{R}$&#xA;Let $C = D$ be parameterized as $\vec{r}(t)$, for $a \leq t \leq b$.&#xA;$$ \boxed{\int_C \nabla f \cdot dr = f(\vec{r}(b)) - f(\vec{r}(a))} $$&#xA;Notice how this doesn&amp;rsquo;t depend on the actual curve, but only of the start and endpoint.</description>
+      <description>Introduction In this part we&amp;rsquo;ll cover the fundamental theorem of line integrals (also called Gradient theorem).&#xA;Definition Recall the fundamental theorem of calculus: $$ \int_a^b f^\prime(x)\ dx = f(b) - f(a) $$&#xA;For line integrals: Let $f: D \subset \mathbb{R}^2 \rarr \mathbb{R}$&#xA;Let $C = D$ be parameterized as $\vec{r}(t)$, for $a \leq t \leq b$.&#xA;$$ \boxed{\int_C \nabla f \cdot dr = f(\vec{r}(b)) - f(\vec{r}(a))} $$&#xA;Notice how this doesn&amp;rsquo;t depend on the actual curve, but only of the start and endpoint.</description>
     </item>
     <item>
-      <title>Mathematical analysis in several variables: Part 16 - Vector fields</title>
+      <title>Part 16 - Vector fields</title>
       <link>https://rezvan.xyz/school/lma017/lma017_16/</link>
       <pubDate>Tue, 03 Oct 2023 00:00:00 +0000</pubDate>
       <guid>https://rezvan.xyz/school/lma017/lma017_16/</guid>
       <description>Introduction In this part we&amp;rsquo;ll cover so-called vector fields.&#xA;Definition A vector field is a function, $F$: $$ F: D \subset \mathbb{R}^2 \rarr \mathbb{R}^2 \ | \ \text{2D} \\ F: D \subset \mathbb{R}^3 \rarr \mathbb{R}^3 \ | \ \text{3D} $$&#xA;Example Consider $F(x, y) = (-y, x)$ (which is the same as $-y \vec{i} + x\vec{j}$).&#xA;The graph for this looks like: Gradient field By this definiton, we can say that.</description>
     </item>
     <item>
-      <title>Mathematical analysis in several variables: Part 15 - Line integrals</title>
+      <title>Part 15 - Line integrals</title>
       <link>https://rezvan.xyz/school/lma017/lma017_15/</link>
       <pubDate>Sun, 01 Oct 2023 00:00:00 +0000</pubDate>
       <guid>https://rezvan.xyz/school/lma017/lma017_15/</guid>
       <description>Introduction In this part we&amp;rsquo;ll cover a new concept with integrals, the so-called line integral.&#xA;Definition A curve, $C$, parameterized as $\vec{r}(t) = \langle x(t), y(t) \rangle$, for an interval $t \in [a, b]$ and a continuous function, $f: C \rarr \mathbb{R}$.&#xA;Assuming $x(t)$ and $y(t)$ are differentiable.&#xA;$$ \int_C f(x, y) ds = \int_a^b f(x(t), y(t)) \sqrt{x^\prime(t)^2 + y^\prime(t)^2}\ dt $$&#xA;Geometrical sense Just as an integral over an interval $[a, b]$ describes the area under a curve on that interval.</description>
     </item>
     <item>
-      <title>Mathematical analysis in several variables: Part 14 - Curves</title>
+      <title>Part 14 - Curves</title>
       <link>https://rezvan.xyz/school/lma017/lma017_14/</link>
       <pubDate>Wed, 27 Sep 2023 00:00:00 +0000</pubDate>
       <guid>https://rezvan.xyz/school/lma017/lma017_14/</guid>
       <description>Introduction In this part we&amp;rsquo;ll cover curves and how we can parameterize curve.&#xA;Definition Let, $f(t)$, $g(t)$ and $h(t)$ be continuous functions on some interval, $I$. The connection of points $(x, y, z)$, where $x = f(t)$, $y = g(t)$ and $z = h(t)$, is a curve.&#xA;Equivalently, we can say that: $$ \vec{r}(t) = \langle f(t), g(t), h(t) \rangle $$&#xA;We call this the parameterization of the curve. Where $t$ is the parameter.</description>
     </item>
     <item>
-      <title>Mathematical analysis in several variables: Part 13 - The jacobian matrix, cylindrical coordinates and spherical coordinates</title>
+      <title>Part 13 - The Jacobian</title>
       <link>https://rezvan.xyz/school/lma017/lma017_13/</link>
       <pubDate>Tue, 26 Sep 2023 00:00:00 +0000</pubDate>
       <guid>https://rezvan.xyz/school/lma017/lma017_13/</guid>
       <description>Introduction In this part we&amp;rsquo;ll cover how we change our variables into others, in the most general case.&#xA;General case of variable change $$ \iint_D f(x, y)\ dA $$&#xA;We want to rewrite this in terms of $u$ and $v$. Let&amp;rsquo;s say that: $$ x = g(u, v) \newline y = h(u, v) $$&#xA;We can say that we have a transformation, $T$, from the $uv$-plane to the $xy$-plane, given by our functions $g$ and $h$.</description>
     </item>
     <item>
-      <title>Mathematical analysis in several variables: Part 12 - Change of variables &amp; Polar coordinates</title>
+      <title>Part 12 - Change of variables</title>
       <link>https://rezvan.xyz/school/lma017/lma017_12/</link>
       <pubDate>Fri, 22 Sep 2023 00:00:00 +0000</pubDate>
       <guid>https://rezvan.xyz/school/lma017/lma017_12/</guid>
       <description>Introduction In this part we&amp;rsquo;ll cover how to perform change of variables for double and triple integrals, as well as the idea and power with polar coordinates.&#xA;Change of variable For functions of one variable:&#xA;$$ \int_a^b f(g(x))g&amp;rsquo;(x)\ dx $$&#xA;Let $u = g(x)$ and therefore $du = g&amp;rsquo;(x)\ dx$.&#xA;Then: $$ \int_{g(a)}^{g(b)} f(u)\ du $$&#xA;But in two variables, this is a bit tricker, we&amp;rsquo;ll have to use polar coordinates.</description>
     </item>
     <item>
-      <title>Mathematical analysis in several variables: Part 11 - Computing volumes and Triple integrals over general regions</title>
+      <title>Part 11 - General regions (2)</title>
       <link>https://rezvan.xyz/school/lma017/lma017_11/</link>
       <pubDate>Wed, 20 Sep 2023 00:00:00 +0000</pubDate>
       <guid>https://rezvan.xyz/school/lma017/lma017_11/</guid>
       <description>Introduction In this part we&amp;rsquo;ll cover how to compute volumes using double integrals, as well as defining the triple integral over general regions.&#xA;Properties of double integral $\iint_D (f(x, y) + g(x, y))\ dA = \iint_D f(x, y)\ dA + \iint_D g(x, y)\ dA$ Quick proof: $$ \iint_D (f(x, y) + g(x, y))\ dA = \lim_{\substack{\Delta x \to 0 \newline \Delta y \to 0}} \sum_{j = 1}^{m} \sum_{i = 1}^{n} (f(x_{i}^{*}, y_{j}^{*}) + g(x_{i}^{*}, y_{j}^{*})) (\Delta A)_{ij} $$</description>
     </item>
     <item>
-      <title>Mathematical analysis in several variables: Part 10 - Double  integrals over general regions</title>
+      <title>Part 10 - General regions (1)</title>
       <link>https://rezvan.xyz/school/lma017/lma017_10/</link>
       <pubDate>Tue, 19 Sep 2023 00:00:00 +0000</pubDate>
       <guid>https://rezvan.xyz/school/lma017/lma017_10/</guid>
       <description>Introduction In this part we&amp;rsquo;ll cover how to compute the double integral over general regions.&#xA;Double integrals over general regions Let $f(x, y)$ be defined on the domain, $D$, where $D$ is a bounded region. $D$ is a general region, meaning it can have any geometrical shape.&#xA;However, if we reduce our problem into something we know, a rectangular region, we know how to compute the double integral.&#xA;Therefore, let&amp;rsquo;s enclose $D$, with a rectangle, let&amp;rsquo;s call this rectangle for $R$.</description>
     </item>
     <item>
-      <title>Mathematical analysis in several variables: Part 9 - Double and triple integrals</title>
+      <title>Part 9 - Double and triple integrals</title>
       <link>https://rezvan.xyz/school/lma017/lma017_9/</link>
       <pubDate>Fri, 15 Sep 2023 00:00:00 +0000</pubDate>
       <guid>https://rezvan.xyz/school/lma017/lma017_9/</guid>
       <description>Introduction In this part we&amp;rsquo;ll cover how we integrate functions of several variables, specifically, over a rectangular domain. We&amp;rsquo;ll later cover general domains.&#xA;For now, let&amp;rsquo;s stick to rectangles and rectangular boxes.&#xA;Let&amp;rsquo;s define our approach.&#xA;Double integrals Say we have a function, $f(x, y)$ with rectangular domain, $R = [a, b] \cdot [c, d]$.&#xA;In mathematical terms: $\{(x, y) | a \leq x \leq b, c \leq y \leq y \}$.</description>
     </item>
     <item>
-      <title>Mathematical analysis in several variables: Part 8 - Lagrange multipliers</title>
+      <title>Part 8 - Lagrange multipliers</title>
       <link>https://rezvan.xyz/school/lma017/lma017_8/</link>
       <pubDate>Wed, 13 Sep 2023 00:00:00 +0000</pubDate>
       <guid>https://rezvan.xyz/school/lma017/lma017_8/</guid>
       <description>Introduction In this part we&amp;rsquo;ll cover the method of Lagrange multipliers. This is a strategy, for finding local minimum/maximums for a function with a constraint.&#xA;Let&amp;rsquo;s define it properly&#xA;Definition Say we have a function, $f(x, y)$, which we want to find the min/max points. But this function is subject of some constraint of the form, $g(x, y) = k$.&#xA;Recall our rectangular box problem from the last part: $$ V(x, y, z) = xyz \newline 2zx + 2zy + yx = 12 $$</description>
     </item>
     <item>
-      <title>Mathematical analysis in several variables: Part 7 - Absolute max and min values</title>
+      <title>Part 7 - Absolute max and min values</title>
       <link>https://rezvan.xyz/school/lma017/lma017_7/</link>
       <pubDate>Tue, 12 Sep 2023 00:00:00 +0000</pubDate>
       <guid>https://rezvan.xyz/school/lma017/lma017_7/</guid>
       <description>Introduction In this part we&amp;rsquo;ll cover how we find absolute maximum and minimum values for a function.&#xA;Absolute minimum/maximum values Let&amp;rsquo;s start with an example to understand why it&amp;rsquo;s important to find these values:&#xA;A rectangular box is to be made from $12m^2$ of cardboard. Find the maximum volume of such a box.&#xA;We can describe the volume of the rectangular box as $V = xyz$.&#xA;We also assume we don&amp;rsquo;t have a top side, therefore the total surface area will be: $$ 2zx + 2zy + yx = 12 $$</description>
     </item>
     <item>
-      <title>Mathematical analysis in several variables: Part 6 - Maximum and minimum values &amp; 2nd derivative test</title>
+      <title>Part 6 - Maximum and minimum values</title>
       <link>https://rezvan.xyz/school/lma017/lma017_6/</link>
       <pubDate>Fri, 08 Sep 2023 00:00:00 +0000</pubDate>
       <guid>https://rezvan.xyz/school/lma017/lma017_6/</guid>
       <description>Introduction In this part we&amp;rsquo;ll cover how we find maximum and minimum values for a function, we&amp;rsquo;ll also see how this is related to the 2nd derivative.&#xA;Maximum and minimum values Let&amp;rsquo;s first recall how we define maximum and minimum values for functions of one variable.&#xA;Definition For maximum:&#xA;A function of one variable has local maximum at $a$, if $f(a) \geq f(x)$ when $x$ is near $a$.&#xA;For minimum: A function of one variable has local minimum at $a$, if $f(a) \leq f(x)$ when $x$ is near $a$.</description>
     </item>
     <item>
-      <title>Mathematical analysis in several variables: Part 5 - Directional derivatives and the gradient vector</title>
+      <title>Part 5 - Directional derivatives</title>
       <link>https://rezvan.xyz/school/lma017/lma017_5/</link>
       <pubDate>Wed, 06 Sep 2023 00:00:00 +0000</pubDate>
       <guid>https://rezvan.xyz/school/lma017/lma017_5/</guid>
       <description>Introduction In this part we&amp;rsquo;ll cover directional derivatives and the gradient vector.&#xA;Directional derivatives To understand this part, we&amp;rsquo;ll first need to recall vectors from linear algebra. Warning: In this series we&amp;rsquo;ll use notation that is not that common.&#xA;Vectors We all know that vectors have a direction and a magnitude (or length), from physics and linear algebra. Let&amp;rsquo;s just quickly define these: $$ \vec{a} = \langle a, b \rangle $$</description>
     </item>
     <item>
-      <title>Mathematical analysis in several variables: Part 4 - Chain rule &amp; implicit differentiation</title>
+      <title>Part 4 - Chain rule</title>
       <link>https://rezvan.xyz/school/lma017/lma017_4/</link>
       <pubDate>Tue, 05 Sep 2023 00:00:00 +0000</pubDate>
       <guid>https://rezvan.xyz/school/lma017/lma017_4/</guid>
       <description>Introduction In this part we&amp;rsquo;ll define the chain rule for functions with several variables. We will also cover something called implicit differentiation.&#xA;Chain rule Let&amp;rsquo;s recall the chain rule for functions with one variable. $$ f(x) = h(g(x)) \newline f&amp;rsquo;(x) = h&amp;rsquo;(g(x)) \cdot g&amp;rsquo;(x) $$&#xA;Alternative notation: $$ y = f(x) \newline x = g(t) $$&#xA;$$ \dfrac{dy}{dt} = \dfrac{dy}{dx} \cdot \dfrac{dx}{dt} $$&#xA;For functions with two variables. $$ z = f(x, y),\ x = g(t),\ y = h(t) $$</description>
     </item>
     <item>
-      <title>Mathematical analysis in several variables: Part 3 - Higher partial derivatives &amp; differentiability</title>
+      <title>Part 3 - Higher partial derivatives</title>
       <link>https://rezvan.xyz/school/lma017/lma017_3/</link>
       <pubDate>Fri, 01 Sep 2023 10:53:01 +0200</pubDate>
       <guid>https://rezvan.xyz/school/lma017/lma017_3/</guid>
       <description>Introduction In this part we&amp;rsquo;ll define higher partial derivatives and how we define if a function with several variables is differentiable.&#xA;Higher partial derivatives In the last part we defined what partial derivatives were: $$ f_x = \lim{h \to 0} \dfrac{f(x + h, y) - f(x, y)}{h} $$&#xA;We can now derive this function again: $$ f_{xx} = \lim{h \to 0} \dfrac{f_x(x + h, y) - f_x(x, y)}{h} $$&#xA;$$ f_{xy} = \lim{h \to 0} \dfrac{f_x(x, y + h) - f_x(x, y)}{h} $$</description>
     </item>
     <item>
-      <title>Mathematical analysis in several variables: Part 2 - Continuity &amp; partial derivatives.</title>
+      <title>Part 2 - Continuity &amp; partial derivatives.</title>
       <link>https://rezvan.xyz/school/lma017/lma017_2/</link>
       <pubDate>Wed, 30 Aug 2023 10:53:01 +0200</pubDate>
       <guid>https://rezvan.xyz/school/lma017/lma017_2/</guid>
       <description>Introduction In this part we&amp;rsquo;ll define continuity when dealing with functions with several variables. We&amp;rsquo;ll also start looking at derivatives of functions of several variables.&#xA;Continuity Let&amp;rsquo;s recall what continuity of a function with one variable is defined:&#xA;A function of one variable is continuous at a point, $a \in D$ if:&#xA;$$ \lim_{x \to a} f(x) = f(a) $$&#xA;In functions with several variables, it&amp;rsquo;s the same: $$ \lim_{(x, y) \to (a, b)} f(x, y) = f(a, b) $$</description>
     </item>
     <item>
-      <title>Mathematical analysis in several variables: Part 1 - Functions of several variables, level curves and limits.</title>
+      <title>Part 1 - Functions of several variables</title>
       <link>https://rezvan.xyz/school/lma017/lma017/</link>
       <pubDate>Tue, 29 Aug 2023 10:53:01 +0200</pubDate>
       <guid>https://rezvan.xyz/school/lma017/lma017/</guid>

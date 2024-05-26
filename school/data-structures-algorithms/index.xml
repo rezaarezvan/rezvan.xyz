@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Data Structures Algorithms on rezvan</title>
+    <link>https://rezvan.xyz/school/data-structures-algorithms/</link>
+    <description>Recent content in Data Structures Algorithms on rezvan</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 21 Feb 2024 20:24:30 +0100</lastBuildDate>
+    <atom:link href="https://rezvan.xyz/school/data-structures-algorithms/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Part 10 - Complexity (2)</title>
+      <link>https://rezvan.xyz/school/dat038/dat038_10/</link>
+      <pubDate>Fri, 09 Dec 2022 18:49:03 +0100</pubDate>
+      <guid>https://rezvan.xyz/school/dat038/dat038_10/</guid>
+      <description>We have actually covered everything in this course - in this part we&amp;rsquo;ll do some exercises!&#xA;Order of growth of Functions Let&amp;rsquo;s find out the complexity ($\mathcal{O}$) of: $$ T(n) = 5(3n^2 + 2n + 6)(4\ log_{10}(n) + 1) $$&#xA;Since we seek the growth rate - we can use our rules about complexity. We can remove all constants: $$ T(n) = (n^2 + n)(log_{10}(n)) $$&#xA;The next rule we can apply is, &amp;ldquo;the most dominating factor &amp;lsquo;wins&amp;rsquo;&amp;rdquo; as I like to call it.</description>
+    </item>
+    <item>
+      <title>Part 9 - Shortest Path &amp; Spanning Trees</title>
+      <link>https://rezvan.xyz/school/dat038/dat038_9/</link>
+      <pubDate>Wed, 07 Dec 2022 18:34:09 +0100</pubDate>
+      <guid>https://rezvan.xyz/school/dat038/dat038_9/</guid>
+      <description>In this part we&amp;rsquo;ll cover spanning trees along with how we can use these to solve pathfinding problems!&#xA;Weighted Graphs As we have seen in the last part - graphs can we directed or undirected, the same thing goes for the weights on the edge. These represent some kind of &amp;lsquo;cost&amp;rsquo;, usually these are positive float numbers, but they could be anything - although many algorithms only work for positive weights.</description>
+    </item>
+    <item>
+      <title>Part 8 - Graphs</title>
+      <link>https://rezvan.xyz/school/dat038/dat038_8/</link>
+      <pubDate>Tue, 06 Dec 2022 13:08:43 +0100</pubDate>
+      <guid>https://rezvan.xyz/school/dat038/dat038_8/</guid>
+      <description>In this part we&amp;rsquo;ll so-called graphs and their applications.&#xA;Introduction of Graphs A graph is a set of vertices connected pairwise by edges. So a very natural thing is that these edged can be either undirected or directed!&#xA;A node can have a so-called degree describing how many in/outgoing edges it has. In the directed case we split this variable to &amp;lsquo;out degree&amp;rsquo; and &amp;lsquo;in degree&amp;rsquo;.&#xA;Another basic term that we&amp;rsquo;ll encounter is a cycle.</description>
+    </item>
+    <item>
+      <title>Part 7 - Binary Heaps</title>
+      <link>https://rezvan.xyz/school/dat038/dat038_7/</link>
+      <pubDate>Sun, 04 Dec 2022 18:18:49 +0100</pubDate>
+      <guid>https://rezvan.xyz/school/dat038/dat038_7/</guid>
+      <description>In this part we&amp;rsquo;ll cover priority queues, binary heaps, and lastly heaps as arrays. So let&amp;rsquo;s begin with priority queues!&#xA;Priority Queues A priority queues is a collection of items which we can:&#xA;Add an item to the queue Find the smallest item in the queue Remove the smallest item in the queue In this we&amp;rsquo;ll handle a priority queue as a min-priority queue, but there&amp;rsquo;s also a max-priority queue which gets/removes the maximum item in the queue as well.</description>
+    </item>
+    <item>
+      <title>Part 6 - Trees</title>
+      <link>https://rezvan.xyz/school/dat038/dat038_6/</link>
+      <pubDate>Wed, 30 Nov 2022 18:08:48 +0100</pubDate>
+      <guid>https://rezvan.xyz/school/dat038/dat038_6/</guid>
+      <description>In this part we&amp;rsquo;ll cover so called &amp;rsquo;trees&amp;rsquo; in computer science.&#xA;Trees The formal definition of a &amp;rsquo;tree&amp;rsquo; is: &amp;ldquo;A hierarchical data structure built up from nodes&amp;rdquo;.&#xA;So unlike a real tree which has its root at the bottom - the computer scientist flipped it - the root node is at the top of the tree.&#xA;In any tree there&amp;rsquo;s always one root node. Each node can have so-called child nodes, and these children can have their own child nodes and so on.</description>
+    </item>
+    <item>
+      <title>Part 5 - Hash Tables</title>
+      <link>https://rezvan.xyz/school/dat038/dat038_5/</link>
+      <pubDate>Tue, 29 Nov 2022 18:50:23 +0100</pubDate>
+      <guid>https://rezvan.xyz/school/dat038/dat038_5/</guid>
+      <description>Hash Tables Hash tables are one of the most famous (and widely used) data structures. But why are they so popular and powerful? Before we can answer that question we need to look back at sets and maps.&#xA;Sets and Maps in Context Just to refresh our memory - a set is a collection of items, where duplicates aren&amp;rsquo;t allowed. Maps are sets of keys, each having an associate value - or you can formulate it as - a set of key-value pairs.</description>
+    </item>
+    <item>
+      <title>Part 3 - Dynamic Arrays</title>
+      <link>https://rezvan.xyz/school/dat038/dat038_3/</link>
+      <pubDate>Sun, 27 Nov 2022 17:26:09 +0100</pubDate>
+      <guid>https://rezvan.xyz/school/dat038/dat038_3/</guid>
+      <description>Dynamic arrays Finally we have arrived at the DS of DSA. In (almost) all programming languages the most common built in data structure are arrays. We have seen them, worked with them - nothing new. We&amp;rsquo;ve probably even worked with dynamic arrays, they are an essential data structure - sometimes we don&amp;rsquo;t know how much data we&amp;rsquo;ll need.&#xA;But how are dynamic arrays actually implemented into a language? The ideas are actually quite simple - we use a fixed length array and make a larger, fixed length array again, when we have run out of space.</description>
+    </item>
+    <item>
+      <title>Part 2 - Complexity (1)</title>
+      <link>https://rezvan.xyz/school/dat038/dat038_2/</link>
+      <pubDate>Fri, 25 Nov 2022 17:20:46 +0100</pubDate>
+      <guid>https://rezvan.xyz/school/dat038/dat038_2/</guid>
+      <description>Introduction What do we mean by an &amp;lsquo;Algorithmic complexity&amp;rsquo;, a good (but not fully formal) definition would be - &amp;ldquo;How much resources does the algorithm use in relation to quantitative properties of its input&amp;rdquo;&#xA;And just to be clear, the definition of an algorithm: any well-defined procedure to solve a given problem.&#xA;So what kind of resources could we quantify from an input? Of course the runtime of an algorithm is important.</description>
+    </item>
+    <item>
+      <title>Part 1 - Sorting</title>
+      <link>https://rezvan.xyz/school/dat038/dat038/</link>
+      <pubDate>Thu, 24 Nov 2022 19:57:27 +0100</pubDate>
+      <guid>https://rezvan.xyz/school/dat038/dat038/</guid>
+      <description>My other course for this study period is a course in Data Structures &amp;amp; Algorithms.&#xA;Sorting &amp;amp; Searching We began this course with sorting and why it&amp;rsquo;s an important topic for a computer scientist. Sorting data comes up in all fields of computer science, everything from low-level, simple, array sorting - to sort millions of data gathered by an AI.&#xA;With this we began with simple sorting and searching algorithms. Firstly we began with binary search.</description>
+    </item>
+  </channel>
+</rss>

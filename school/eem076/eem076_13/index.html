@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html><head>
     <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"><title>rezvan | Electrical Circuits and Fields: Part 13 - Circuit Response, Passive Filters, and Amplifiers</title><link rel="icon" type="image/png" href="https://rezvan.xyz/images/icon.png" /><meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"><title>rezvan | Part 13 - Op-Amps and Filters</title><link rel="icon" type="image/png" href="https://rezvan.xyz/images/icon.png" /><meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description"
         content="In this part we&rsquo;ll cover circuit response, filter and amplifiers.
 Transfer Function Recall from the last part that, the transfer function is defined as: $$ H(f) = \dfrac{V_{out}}{V_{in}} $$
@@ -10,22 +10,20 @@ Which means that $H(f)$: $$ \begin{align*} H(f) &amp; = \dfrac{V_{out}}{V_{in}} 
     <meta property="og:image" content="https://raw.githubusercontent.com/rezaarezvan/rezvan.xyz/main/images/icon.png" />
     <meta property="og:url" content="https://rezvan.xyz/school/eem076/eem076_13/">
   <meta property="og:site_name" content="rezvan">
-  <meta property="og:title" content="Electrical Circuits and Fields: Part 13 - Circuit Response, Passive Filters, and Amplifiers">
+  <meta property="og:title" content="Part 13 - Op-Amps and Filters">
   <meta property="og:description" content="In this part we’ll cover circuit response, filter and amplifiers.
 Transfer Function Recall from the last part that, the transfer function is defined as: $$ H(f) = \dfrac{V_{out}}{V_{in}} $$
 Let’s find the transfer function of this circuit: Let’s find $V_{out}$ $$ \begin{align*} V_{out} &amp; = I \cdot\ Z_C \newline &amp; = \left(\dfrac{V_{in}}{Z_R &#43; Z_C}\right) Z_C \newline &amp; = \left(\dfrac{V_{in}}{R &#43; \dfrac{1}{j2\pi fC}}\right) \left(\dfrac{1}{j2\pi fC}\right) \end{align*} $$
 Which means that $H(f)$: $$ \begin{align*} H(f) &amp; = \dfrac{V_{out}}{V_{in}} &amp; = \dfrac{\left(\dfrac{V_{in}}{R &#43; \dfrac{1}{j2\pi fC}}\right) \left(\dfrac{1}{j2\pi fC}\right)}{V_{in}} \newline &amp; = \cdots &amp; = \dfrac{1}{1 &#43; j2\pi fRC} \end{align*} $$">
-  <meta property="og:locale" content="en_us">
+  <meta property="og:locale" content="en-us">
   <meta property="og:type" content="article">
     <meta property="article:section" content="school">
     <meta property="article:published_time" content="2023-05-19T11:34:16+02:00">
     <meta property="article:modified_time" content="2024-02-21T20:24:30+01:00">
-
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Electrical Circuits and Fields: Part 13 - Circuit Response, Passive Filters, and Amplifiers">
-  <meta name="twitter:description" content="In this part we’ll cover circuit response, filter and amplifiers.
+<meta name="twitter:card" content="summary"><meta name="twitter:title" content="Part 13 - Op-Amps and Filters">
+<meta name="twitter:description" content="In this part we&rsquo;ll cover circuit response, filter and amplifiers.
 Transfer Function Recall from the last part that, the transfer function is defined as: $$ H(f) = \dfrac{V_{out}}{V_{in}} $$
-Let’s find the transfer function of this circuit: Let’s find $V_{out}$ $$ \begin{align*} V_{out} &amp; = I \cdot\ Z_C \newline &amp; = \left(\dfrac{V_{in}}{Z_R &#43; Z_C}\right) Z_C \newline &amp; = \left(\dfrac{V_{in}}{R &#43; \dfrac{1}{j2\pi fC}}\right) \left(\dfrac{1}{j2\pi fC}\right) \end{align*} $$
+Let&rsquo;s find the transfer function of this circuit: Let&rsquo;s find $V_{out}$ $$ \begin{align*} V_{out} &amp; = I \cdot\ Z_C \newline &amp; = \left(\dfrac{V_{in}}{Z_R &#43; Z_C}\right) Z_C \newline &amp; = \left(\dfrac{V_{in}}{R &#43; \dfrac{1}{j2\pi fC}}\right) \left(\dfrac{1}{j2\pi fC}\right) \end{align*} $$
 Which means that $H(f)$: $$ \begin{align*} H(f) &amp; = \dfrac{V_{out}}{V_{in}} &amp; = \dfrac{\left(\dfrac{V_{in}}{R &#43; \dfrac{1}{j2\pi fC}}\right) \left(\dfrac{1}{j2\pi fC}\right)}{V_{in}} \newline &amp; = \cdots &amp; = \dfrac{1}{1 &#43; j2\pi fRC} \end{align*} $$">
 <script src="https://rezvan.xyz/js/feather.min.js"></script>
     
@@ -108,7 +106,7 @@ Which means that $H(f)$: $$ \begin{align*} H(f) &amp; = \dfrac{V_{out}}{V_{in}} 
 <main>
     <article>
         <div class="title">
-            <h1>Electrical Circuits and Fields: Part 13 - Circuit Response, Passive Filters, and Amplifiers</h1>
+            <h1>Part 13 - Op-Amps and Filters</h1>
             <div class="meta">Posted on May 19, 2023
             </div>
             <div class="meta">
@@ -276,7 +274,7 @@ $$</p>
         <div class="nav-item previous">
             
             
-            <a href="/school/eem076/eem076_12/" title="Previous: Electrical Circuits and Fields: Part 12 - Power in AC Circuits">&larr; Previous</a>
+            <a href="/school/eem076/eem076_12/" title="Previous: Part 12 - Power in AC Circuits">&larr; Previous</a>
             
             
         </div>
@@ -284,7 +282,7 @@ $$</p>
         <div class="nav-item next">
             
             
-            <a href="/school/eem076/eem076_summary/" title="Next: Electrical Circuits and Fields: Summary">Next &rarr;</a>
+            <a href="/school/eem076/eem076_summary/" title="Next: Part 14 - Summary">Next &rarr;</a>
             
             
         </div>

@@ -8,9 +8,6 @@
     <loc>https://rezvan.xyz/school/dat565/dat565_9/</loc>
     <lastmod>2024-02-28T20:46:10+01:00</lastmod>
   </url><url>
-    <loc>https://rezvan.xyz/</loc>
-    <lastmod>2024-04-09T11:28:01+02:00</lastmod>
-  </url><url>
     <loc>https://rezvan.xyz/school/</loc>
     <lastmod>2024-04-09T11:28:01+02:00</lastmod>
   </url><url>
@@ -98,10 +95,10 @@
     <loc>https://rezvan.xyz/school/lma017/lma017_20/</loc>
     <lastmod>2024-02-21T20:24:30+01:00</lastmod>
   </url><url>
-    <loc>https://rezvan.xyz/school/transforms-signals-and-systems/</loc>
+    <loc>https://rezvan.xyz/school/ssy081/ssy081_summary/</loc>
     <lastmod>2024-02-21T20:24:30+01:00</lastmod>
   </url><url>
-    <loc>https://rezvan.xyz/school/ssy081/ssy081_summary/</loc>
+    <loc>https://rezvan.xyz/school/transforms-signals-and-systems/</loc>
     <lastmod>2024-02-21T20:24:30+01:00</lastmod>
   </url><url>
     <loc>https://rezvan.xyz/school/lma017/lma017_19/</loc>
@@ -146,10 +143,10 @@
     <loc>https://rezvan.xyz/school/lma017/lma017_10/</loc>
     <lastmod>2024-02-21T20:24:30+01:00</lastmod>
   </url><url>
-    <loc>https://rezvan.xyz/school/lma017/lma017_9/</loc>
+    <loc>https://rezvan.xyz/school/ssy081/ssy081_5/</loc>
     <lastmod>2024-02-21T20:24:30+01:00</lastmod>
   </url><url>
-    <loc>https://rezvan.xyz/school/ssy081/ssy081_5/</loc>
+    <loc>https://rezvan.xyz/school/lma017/lma017_9/</loc>
     <lastmod>2024-02-21T20:24:30+01:00</lastmod>
   </url><url>
     <loc>https://rezvan.xyz/school/ssy081/ssy081_4/</loc>
@@ -338,7 +335,7 @@
     <loc>https://rezvan.xyz/posts/programming_principles/</loc>
     <lastmod>2024-01-26T09:55:10+01:00</lastmod>
   </url><url>
-    <loc>https://rezvan.xyz/school/data-structures--algorithms/</loc>
+    <loc>https://rezvan.xyz/school/data-structures-algorithms/</loc>
     <lastmod>2024-02-21T20:24:30+01:00</lastmod>
   </url><url>
     <loc>https://rezvan.xyz/school/dat038/dat038_10/</loc>
@@ -347,10 +344,10 @@
     <loc>https://rezvan.xyz/school/dat038/dat038_9/</loc>
     <lastmod>2024-02-21T20:24:30+01:00</lastmod>
   </url><url>
-    <loc>https://rezvan.xyz/school/waves/</loc>
+    <loc>https://rezvan.xyz/school/tif085/tif085_5/</loc>
     <lastmod>2024-02-21T20:24:30+01:00</lastmod>
   </url><url>
-    <loc>https://rezvan.xyz/school/tif085/tif085_5/</loc>
+    <loc>https://rezvan.xyz/school/waves/</loc>
     <lastmod>2024-02-21T20:24:30+01:00</lastmod>
   </url><url>
     <loc>https://rezvan.xyz/school/dat038/dat038_8/</loc>
@@ -368,13 +365,16 @@
     <loc>https://rezvan.xyz/school/dat038/dat038_5/</loc>
     <lastmod>2024-02-21T20:24:30+01:00</lastmod>
   </url><url>
+    <loc>https://rezvan.xyz/school/data-structures--algorithms/</loc>
+    <lastmod>2024-02-21T20:24:30+01:00</lastmod>
+  </url><url>
     <loc>https://rezvan.xyz/school/dat038/dat038_4/</loc>
     <lastmod>2024-02-21T20:24:30+01:00</lastmod>
   </url><url>
-    <loc>https://rezvan.xyz/school/thermodynamics/</loc>
+    <loc>https://rezvan.xyz/school/tif085/tif085_3/</loc>
     <lastmod>2024-02-21T20:24:30+01:00</lastmod>
   </url><url>
-    <loc>https://rezvan.xyz/school/tif085/tif085_3/</loc>
+    <loc>https://rezvan.xyz/school/thermodynamics/</loc>
     <lastmod>2024-02-21T20:24:30+01:00</lastmod>
   </url><url>
     <loc>https://rezvan.xyz/school/dat038/dat038_3/</loc>
@@ -433,5 +433,8 @@
   </url><url>
     <loc>https://rezvan.xyz/school/tif085/</loc>
     <lastmod>2024-02-21T20:24:30+01:00</lastmod>
+  </url><url>
+    <loc>https://rezvan.xyz/</loc>
+    <lastmod>2024-05-19T12:02:00+02:00</lastmod>
   </url>
 </urlset>

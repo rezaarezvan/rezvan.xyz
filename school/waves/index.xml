@@ -9,14 +9,14 @@
     <lastBuildDate>Wed, 21 Feb 2024 20:24:30 +0100</lastBuildDate>
     <atom:link href="https://rezvan.xyz/school/waves/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Waves: Part 2 - Light waves</title>
+      <title>Part 2 - Light waves</title>
       <link>https://rezvan.xyz/school/tif085/tif085_5/</link>
       <pubDate>Wed, 07 Dec 2022 17:55:57 +0100</pubDate>
       <guid>https://rezvan.xyz/school/tif085/tif085_5/</guid>
       <description>In this part we&amp;rsquo;ll cover light waves and it&amp;rsquo;s properties.&#xA;Light is actually electromagnetic radiation. The visible light we can see is usually between 380 - 740 nm&#xA;General Conventions As we remember from mechanical waves $v = \lambda f$, this also applies for light waves, but our $v$ is instead $c$. $$ c = \lambda f = 3 \cdot 10^8 m/s $$&#xA;If we look at light like usual mechanical waves, it quickly becomes very cluttered in our sketch.</description>
     </item>
     <item>
-      <title>Waves: Part 1 - Mechanical Waves</title>
+      <title>Part 1 - Mechanical Waves</title>
       <link>https://rezvan.xyz/school/tif085/tif085_4/</link>
       <pubDate>Sun, 04 Dec 2022 17:23:27 +0100</pubDate>
       <guid>https://rezvan.xyz/school/tif085/tif085_4/</guid>
