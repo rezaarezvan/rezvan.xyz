@@ -6,8 +6,15 @@
     <description>Recent content in Posts on rezvan</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 08 Feb 2024 20:25:05 +0100</lastBuildDate>
+    <lastBuildDate>Tue, 18 Jun 2024 21:03:25 +0200</lastBuildDate>
     <atom:link href="https://rezvan.xyz/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>My BSc Thesis, ClaudesLens</title>
+      <link>https://rezvan.xyz/posts/claudeslens/</link>
+      <pubDate>Tue, 18 Jun 2024 21:03:25 +0200</pubDate>
+      <guid>https://rezvan.xyz/posts/claudeslens/</guid>
+      <description>Introduction I have finally finished undergrad and would like to make a blog post about what I have been working on these past ~6 months. The tile of our thesis is:&#xA;ClaudesLens: Uncertainty Quantification in Computer Vision Models&#xA;However, before I dive into the project and what we actually did, let me tell you what we wanted to do.&#xA;BayesLens Originally, we wanted to create &amp;ldquo;Uncertainty-Aware Attention Mechanisms&amp;rdquo;. What we specifically had in mind was to create a transformer model that used Bayesian Neural Networks (BNNs), and even more ambitiously, apply this to self-driving cars.</description>
+    </item>
     <item>
       <title>Programming Principles</title>
       <link>https://rezvan.xyz/posts/programming_principles/</link>

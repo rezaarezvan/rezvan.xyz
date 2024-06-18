@@ -2,6 +2,12 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://rezvan.xyz/posts/claudeslens/</loc>
+    <lastmod>2024-06-18T21:03:25+02:00</lastmod>
+  </url><url>
+    <loc>https://rezvan.xyz/posts/</loc>
+    <lastmod>2024-06-18T21:03:25+02:00</lastmod>
+  </url><url>
     <loc>https://rezvan.xyz/school/introduction-to-data-science-and-ai/</loc>
     <lastmod>2024-05-26T11:09:10+02:00</lastmod>
   </url><url>
@@ -328,9 +334,6 @@
   </url><url>
     <loc>https://rezvan.xyz/school/eda322/eda322/</loc>
     <lastmod>2024-05-26T11:09:10+02:00</lastmod>
-  </url><url>
-    <loc>https://rezvan.xyz/posts/</loc>
-    <lastmod>2024-02-08T20:25:05+01:00</lastmod>
   </url><url>
     <loc>https://rezvan.xyz/posts/programming_principles/</loc>
     <lastmod>2024-01-26T09:55:10+01:00</lastmod>

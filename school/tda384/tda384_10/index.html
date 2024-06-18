@@ -27,14 +27,16 @@ Not enough locking: race conditions.
 Too much locking: not enough parallelism.
 Risk of deadlock and starvation.
 Lock-based implementations do not compose (easily).">
-  <meta property="og:locale" content="en-us">
+  <meta property="og:locale" content="en_us">
   <meta property="og:type" content="article">
     <meta property="article:section" content="school">
     <meta property="article:published_time" content="2023-02-19T00:00:00+00:00">
     <meta property="article:modified_time" content="2024-05-26T11:09:10+02:00">
-<meta name="twitter:card" content="summary"><meta name="twitter:title" content="Part 10 - Parallel linked lists">
-<meta name="twitter:description" content="In this part we&rsquo;ll cover the synchronization challenges that arise when designing (correct) and efficient parallelizations.
-But let&rsquo;s first see the burdens with locks
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Part 10 - Parallel linked lists">
+  <meta name="twitter:description" content="In this part we’ll cover the synchronization challenges that arise when designing (correct) and efficient parallelizations.
+But let’s first see the burdens with locks
 The trouble with locks Standard techniques for concurrent programming are ultimately based on locks.
 Programming with locks has several drawbacks:
 Performance overhead.

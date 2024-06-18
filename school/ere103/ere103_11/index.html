@@ -15,15 +15,17 @@ $$ \begin{align*} F_{PD}(s) &amp; = K_p(1 &#43; \dfrac{T_d s}{1 &#43; T_f s}) \\
 In the $s$-domain, the PD controller is: $$ F_{PD}(s) = \dfrac{U(s)}{E(s)} = K_p(1 &#43; T_d s) $$
 PD-controller are often paired with low-pass filters (LP), so that $\dot{e}(t)$ doesn’t become to large.
 $$ \begin{align*} F_{PD}(s) &amp; = K_p(1 &#43; \dfrac{T_d s}{1 &#43; T_f s}) \\ &amp; = K_p(\dfrac{1 &#43; (T_d &#43; T_f) s}{1 &#43; T_f s}) \\ &amp; = K_p(\dfrac{1 &#43; \tau_d s}{1 &#43; \frac{\tau_d}{b} s}) \ | \ \tau_d = T_d &#43; T_f, b = \frac{T_d &#43; T_f}{T_f} \end{align*} $$">
-  <meta property="og:locale" content="en-us">
+  <meta property="og:locale" content="en_us">
   <meta property="og:type" content="article">
     <meta property="article:section" content="school">
     <meta property="article:published_time" content="2023-11-28T00:00:00+00:00">
     <meta property="article:modified_time" content="2024-05-26T11:09:10+02:00">
-<meta name="twitter:card" content="summary"><meta name="twitter:title" content="Part 11 - Design of controllers (2)">
-<meta name="twitter:description" content="PD-controller Given that $u(t) = K_p(e(t) &#43; T_d \dot{e}(t))$
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Part 11 - Design of controllers (2)">
+  <meta name="twitter:description" content="PD-controller Given that $u(t) = K_p(e(t) &#43; T_d \dot{e}(t))$
 In the $s$-domain, the PD controller is: $$ F_{PD}(s) = \dfrac{U(s)}{E(s)} = K_p(1 &#43; T_d s) $$
-PD-controller are often paired with low-pass filters (LP), so that $\dot{e}(t)$ doesn&rsquo;t become to large.
+PD-controller are often paired with low-pass filters (LP), so that $\dot{e}(t)$ doesn’t become to large.
 $$ \begin{align*} F_{PD}(s) &amp; = K_p(1 &#43; \dfrac{T_d s}{1 &#43; T_f s}) \\ &amp; = K_p(\dfrac{1 &#43; (T_d &#43; T_f) s}{1 &#43; T_f s}) \\ &amp; = K_p(\dfrac{1 &#43; \tau_d s}{1 &#43; \frac{\tau_d}{b} s}) \ | \ \tau_d = T_d &#43; T_f, b = \frac{T_d &#43; T_f}{T_f} \end{align*} $$">
 <script src="https://rezvan.xyz/js/feather.min.js"></script>
     
