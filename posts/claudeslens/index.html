@@ -19,7 +19,7 @@ BayesLens Originally, we wanted to create “Uncertainty-Aware Attention Mechani
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
     <meta property="article:published_time" content="2024-06-18T21:03:25+02:00">
-    <meta property="article:modified_time" content="2024-06-18T21:03:25+02:00">
+    <meta property="article:modified_time" content="2024-06-18T23:28:42+02:00">
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="My BSc Thesis, ClaudesLens">
@@ -148,7 +148,26 @@ $$</p>
 <p>The activation function, denoted as $f$, calculates the neuron’s output $y = f(z)$ based on the weighted summation.
 Activation functions introduce non-linearity, enabling neural networks to approximate complex, non-linear functions.</p>
 <h3 id="the-network">The Network</h3>
-<!-- raw HTML omitted -->
+<p>Lets build upon what we now have learned and see how we can extend this.</p>
+<p>We can represent the inputs of a neuron as a vector,
+$$
+\mathbf{x} = \left[x_1, x_2, \ldots, x_n\right],
+$$</p>
+<p>where each element corresponds to an input to the neuron.</p>
+<p>Similarly, we can represent the associated weights as a vector,
+$$
+\mathbf{w} = \left[w_1, w_2, \ldots, w_n\right],
+$$</p>
+<p>with this the summation can be simplified to a dot product,
+$$
+z = \mathbf{w} \cdot \mathbf{x} + b.
+$$</p>
+<p>But only using one neuron will only get us so far, if we instead have multiple neurons and try to mimic the structure of the brain, we can get something more powerful.</p>
+<p>A <em>layer</em> is a collection of neurons, stacked on top of each other.
+Very often when we are referring to a layer, are we referring to a <em>fully connected layer</em>, where each neuron in the layer is connected to all the neurons in the previous layer.</p>
+<p>In the case of a network, we can now talk about the input layer and the output layer.</p>
+<p>&lt;TODO, need to think deeply about how to explain this properly, let&rsquo;s continue tomorrow:]&gt;</p>
+<p><img src="/posts/images/nn.png" alt="nn"></p>
 
         </section>
     </article>
