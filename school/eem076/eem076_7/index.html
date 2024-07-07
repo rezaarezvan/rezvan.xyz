@@ -1,52 +1,14 @@
-<!DOCTYPE html>
-<html><head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"><title>rezvan | Part 7 - Electrical &amp; Magnetic fields</title><link rel="icon" type="image/png" href="https://rezvan.xyz/images/icon.png" /><meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description"
-        content="In this part we&rsquo;ll finally cover magnetic fields and some very important laws for these. We&rsquo;ll see how electrical and magnetic fields interact with each other as well.
+<!doctype html><html><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge"><title>rezvan | Part 7 - Electrical & Magnetic fields</title><link rel=icon type=image/png href=https://rezvan.xyz/images/icon.png><meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=description content="In this part we&rsquo;ll finally cover magnetic fields and some very important laws for these. We&rsquo;ll see how electrical and magnetic fields interact with each other as well.
 Materials in electrical fields We have lightly touched on this before but - different type of materials will behave differently in electrical fields.
 We can roughly say we have three categories of types - conductors, semiconductors and insulators.
-A conductor is, as the name suggest, where the electrons are weakly bound to the atoms." />
-    <meta property="og:image" content="https://raw.githubusercontent.com/rezaarezvan/rezvan.xyz/main/images/icon.png" />
-    <meta property="og:url" content="https://rezvan.xyz/school/eem076/eem076_7/">
-  <meta property="og:site_name" content="rezvan">
-  <meta property="og:title" content="Part 7 - Electrical &amp; Magnetic fields">
-  <meta property="og:description" content="In this part we’ll finally cover magnetic fields and some very important laws for these. We’ll see how electrical and magnetic fields interact with each other as well.
+A conductor is, as the name suggest, where the electrons are weakly bound to the atoms."><meta property="og:image" content="https://raw.githubusercontent.com/rezaarezvan/rezvan.xyz/main/images/icon.png"><meta property="og:url" content="https://rezvan.xyz/school/eem076/eem076_7/"><meta property="og:site_name" content="rezvan"><meta property="og:title" content="Part 7 - Electrical & Magnetic fields"><meta property="og:description" content="In this part we’ll finally cover magnetic fields and some very important laws for these. We’ll see how electrical and magnetic fields interact with each other as well.
 Materials in electrical fields We have lightly touched on this before but - different type of materials will behave differently in electrical fields.
 We can roughly say we have three categories of types - conductors, semiconductors and insulators.
-A conductor is, as the name suggest, where the electrons are weakly bound to the atoms.">
-  <meta property="og:locale" content="en_us">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="school">
-    <meta property="article:published_time" content="2023-04-18T16:54:06+02:00">
-    <meta property="article:modified_time" content="2024-05-26T11:09:10+02:00">
-
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Part 7 - Electrical &amp; Magnetic fields">
-  <meta name="twitter:description" content="In this part we’ll finally cover magnetic fields and some very important laws for these. We’ll see how electrical and magnetic fields interact with each other as well.
+A conductor is, as the name suggest, where the electrons are weakly bound to the atoms."><meta property="og:locale" content="en_us"><meta property="og:type" content="article"><meta property="article:section" content="school"><meta property="article:published_time" content="2023-04-18T16:54:06+02:00"><meta property="article:modified_time" content="2024-05-26T11:09:10+02:00"><meta name=twitter:card content="summary"><meta name=twitter:title content="Part 7 - Electrical & Magnetic fields"><meta name=twitter:description content="In this part we’ll finally cover magnetic fields and some very important laws for these. We’ll see how electrical and magnetic fields interact with each other as well.
 Materials in electrical fields We have lightly touched on this before but - different type of materials will behave differently in electrical fields.
 We can roughly say we have three categories of types - conductors, semiconductors and insulators.
-A conductor is, as the name suggest, where the electrons are weakly bound to the atoms.">
-<script src="https://rezvan.xyz/js/feather.min.js"></script>
-    
-
-    
-    
-    <link rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/main.73f3431f38ac72fc2890b3747cc9c6d55d5756f3ba40e590c77627ae6c16e46b.css" />
-    <link id="lightSyntaxStyle" rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/light_syntax.65408cc3a5c02070b661c3e4e79306fc261cc63620f4adce9a30eafcba4ab79e.css" />
-    
-    <link id="darkModeStyle" rel="stylesheet" type="text/css" href="https://rezvan.xyz/css/dark.13c6bfb747b76fdd2dc198b1172afdd77e7ce604de43f343ce643378bafc58af.css"  disabled />
-    <link id="darkSyntaxStyle" rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/dark_syntax.2b10cc1a2156b30874a063b7439a993bc3b43d476c5e1d8598d769c929c7b381.css" />
-    
-
-    
-    
-    <script type="text/javascript"
-        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-        </script>
-
-    
-    <script type="text/x-mathjax-config">
+A conductor is, as the name suggest, where the electrons are weakly bound to the atoms."><link rel=stylesheet href=https://rezvan.xyz/css/combined.min.51ec65976b416262d827f98c76ca037bf7aeea27590e3c120eac32afbfbc40ee.css integrity="sha256-Uexll2tBYmLYJ/mMdsoDe/eu6idZDjwSDqwyr7+8QO4="><link id=lightSyntaxStyle rel=stylesheet href=https://rezvan.xyz/css/light_syntax.min.d9e0828a4ff7f2d7317942062fc751fa487b2ac2c47b934ad082abd7d3ca6690.css integrity="sha256-2eCCik/38tcxeUIGL8dR+kh7KsLEe5NK0IKr19PKZpA="><link id=darkModeStyle rel=stylesheet href=https://rezvan.xyz/css/dark.min.49ad20f2859f81550f852c48875ca9e72e4267459ed6fe82fc9b4f3cf7fdc4e8.css integrity="sha256-Sa0g8oWfgVUPhSxIh1yp5y5CZ0We1v6C/JtPPPf9xOg=" disabled><link id=darkSyntaxStyle rel=stylesheet href=https://rezvan.xyz/css/dark_syntax.min.1a878f3d8fb43359bd3b44bc70c4074f682f11066c6537bf6248b696cbe56586.css integrity="sha256-GoePPY+0M1m9O0S8cMQHT2gvEQZsZTe/Yki2lsvlZYY=" disabled><script type=text/javascript src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type=text/x-mathjax-config>
 		MathJax.Hub.Config({
 			tex2jax: {
 				inlineMath: [['$','$'], ['\\(','\\)']],
@@ -58,260 +20,71 @@ A conductor is, as the name suggest, where the electrons are weakly bound to the
 						 extensions: ["AMSmath.js", "AMSsymbols.js"] }
 			}
 		});
-		</script>
-    
-
-    
-    
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css">
-    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js"
-        onload="renderMathInElement(document.body);"></script>
-
-    
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            renderMathInElement(document.body, {
-                delimiters: [
-                    {left: "$$", right: "$$", display: true},
-                    {left: "$", right: "$", display: false}
-                ]
-            });
-        });
-    </script>
-    
-</head>
-<body>
-    <div class="content"><header>
-    <nav id="site-navbar">
-        <div class="menu-items">
-            
-            <a href="/">home</a>
-            
-            <a href="/principles">principles</a>
-            
-            <a href="/cv">cv</a>
-            
-            <a href="/posts">posts</a>
-            
-            <a href="/school">school</a>
-            
-        </div>
-        <div class="theme-toggle">
-            <span id="dark-mode-toggle" onclick="toggleTheme()"><i data-feather="moon"></i></span>
-            <script src="https://rezvan.xyz/js/themetoggle.js"></script>
-        </div>
-        
-    </nav>
-</header>
-
-<main>
-    <article>
-        <div class="title">
-            <h1>Part 7 - Electrical &amp; Magnetic fields</h1>
-            <div class="meta">Posted on Apr 18, 2023
-            </div>
-            <div class="meta">
-                (Last updated: May 26, 2024)
-            </div>
-
-        </div>
-        
-        <section class="body">
-            <p>In this part we&rsquo;ll finally cover magnetic fields and some very important laws for these.
-We&rsquo;ll see how electrical and magnetic fields interact with each other as well.</p>
-<h3 id="materials-in-electrical-fields">Materials in electrical fields</h3>
-<p>We have lightly touched on this before but - different type of materials will behave differently in electrical fields.</p>
-<p>We can roughly say we have three categories of types - conductors, semiconductors and insulators.</p>
-<p>A conductor is, as the name suggest, where the electrons are weakly bound to the atoms.
-An insulator is the opposite, the electrons are strongly bound to the atoms.</p>
-<p>The interesting area of semiconductors is where the electrons bonds are temperature dependent!</p>
-<h3 id="conductors-in-electrical-fields">Conductors in electrical fields</h3>
-<p>Say if we have an iron sphere, the electrical field <strong>inside</strong> the sphere will be exactly <strong>0</strong>.
-Why is that? Since the electrons are free to move, they will arrange in a way that maximizes the distance between each one.</p>
-<p>This means all the charge will be at the surface of the sphere, therefore the electrical field inside the sphere is 0.</p>
-<p>However, if we put this iron sphere inside an external electrical field, we will create a dipole field!</p>
-<p>But just as we discussed, the electrical field <strong>inside</strong> will still be <strong>0</strong>!</p>
-<p>We say that:</p>
-<blockquote>
-<p>Any <em>net</em> charge must reside on the surface</p>
-</blockquote>
-<p><img src="/school/images/CEE.png#center" alt=""></p>
-<h3 id="insulators-in-electrical-fields">Insulators in electrical fields</h3>
-<p>One important thing about insulators is that - there are two different types - Polar dielectric and Nonpolar dielectric materials.</p>
-<p>Polar dielectric materials will <em>align</em> the dipole moment, while nonpolar dielectric materials will gain an <em>induced dipole moment</em>.</p>
-<p><img src="/school/images/IEE.png#center" alt=""></p>
-<h3 id="dielectric-constant">Dielectric constant</h3>
-<p>Since our molecules now align with the electrical field, this will result in an electrical field in the <strong>opposite</strong> direction!</p>
-<p>Since, generally, capacitors don&rsquo;t have vacuum between the plates.</p>
-<p><img src="/school/images/IEEO.png#center" alt=""></p>
-<p>We can write the total net electrical field as:
+		</script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css><script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js onload=renderMathInElement(document.body)></script><script>document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]})})</script></head><body><div class=content><header><nav id=site-navbar><div class=navbar-content><a href=https://rezvan.xyz/ class=logo>rezvan.xyz</a><div class=navbar-links><a href=/principles class=nav-link><span class=bracket>[</span>principles<span class=bracket>]</span></a>
+<a href=/cv class=nav-link><span class=bracket>[</span>cv<span class=bracket>]</span></a>
+<a href=/posts class=nav-link><span class=bracket>[</span>posts<span class=bracket>]</span></a>
+<a href=/school class=nav-link><span class=bracket>[</span>school<span class=bracket>]</span></a></div><div class=theme-toggle><span id=dark-mode-toggle onclick=toggleTheme() aria-label="Toggle theme">○
+</span><script src=https://rezvan.xyz/js/themetoggle.js></script></div></div></nav></header><main><article><div class=title><h1>Part 7 - Electrical & Magnetic fields</h1><div class=meta>Posted on Apr 18, 2023</div><div class=meta>(Last updated: May 26, 2024)</div></div><section class=body><p>In this part we&rsquo;ll finally cover magnetic fields and some very important laws for these.
+We&rsquo;ll see how electrical and magnetic fields interact with each other as well.</p><h3 id=materials-in-electrical-fields>Materials in electrical fields</h3><p>We have lightly touched on this before but - different type of materials will behave differently in electrical fields.</p><p>We can roughly say we have three categories of types - conductors, semiconductors and insulators.</p><p>A conductor is, as the name suggest, where the electrons are weakly bound to the atoms.
+An insulator is the opposite, the electrons are strongly bound to the atoms.</p><p>The interesting area of semiconductors is where the electrons bonds are temperature dependent!</p><h3 id=conductors-in-electrical-fields>Conductors in electrical fields</h3><p>Say if we have an iron sphere, the electrical field <strong>inside</strong> the sphere will be exactly <strong>0</strong>.
+Why is that? Since the electrons are free to move, they will arrange in a way that maximizes the distance between each one.</p><p>This means all the charge will be at the surface of the sphere, therefore the electrical field inside the sphere is 0.</p><p>However, if we put this iron sphere inside an external electrical field, we will create a dipole field!</p><p>But just as we discussed, the electrical field <strong>inside</strong> will still be <strong>0</strong>!</p><p>We say that:</p><blockquote><p>Any <em>net</em> charge must reside on the surface</p></blockquote><p><img src=/school/images/CEE.png#center alt></p><h3 id=insulators-in-electrical-fields>Insulators in electrical fields</h3><p>One important thing about insulators is that - there are two different types - Polar dielectric and Nonpolar dielectric materials.</p><p>Polar dielectric materials will <em>align</em> the dipole moment, while nonpolar dielectric materials will gain an <em>induced dipole moment</em>.</p><p><img src=/school/images/IEE.png#center alt></p><h3 id=dielectric-constant>Dielectric constant</h3><p>Since our molecules now align with the electrical field, this will result in an electrical field in the <strong>opposite</strong> direction!</p><p>Since, generally, capacitors don&rsquo;t have vacuum between the plates.</p><p><img src=/school/images/IEEO.png#center alt></p><p>We can write the total net electrical field as:
 $$
 \mathbf{\vec{E}} = \mathbf{\vec{E}_0} + \mathbf{\vec{E}_p}
-$$</p>
-<p>Note that this is vector addition - with direction of course!</p>
-<p>The point here was, how does this affect the capacitance? Recall that:
+$$</p><p>Note that this is vector addition - with direction of course!</p><p>The point here was, how does this affect the capacitance? Recall that:
 $$
 \Delta V = - \int_+^- \mathbf{\vec{E}} \cdot\ d\mathbf{\vec{r}} = -Ed
-$$</p>
-<p>$$
+$$</p><p>$$
 C = \dfrac{q}{|\Delta V|} = \dfrac{q}{|Ed|}
-$$</p>
-<p>This means that:
+$$</p><p>This means that:
 $$
 C \propto \dfrac{1}{|E|}
-$$</p>
-<p>This means we can essentially control our capacitance or electrical field!</p>
-<p>The capacitance increases as the electrical field is reduced!</p>
-<p>We model this increase with a constant, the dielectric constant!
+$$</p><p>This means we can essentially control our capacitance or electrical field!</p><p>The capacitance increases as the electrical field is reduced!</p><p>We model this increase with a constant, the dielectric constant!
 $$
 C = k_e C_0
-$$</p>
-<h3 id="conductivity--resistivity">Conductivity &amp; Resistivity</h3>
-<p>One very important detail we have yet to covered in electrical circuits are - what causes the current to move?</p>
-<p>Imagine if we put a conductor inside an external electrical field - the charge will move due to the electrical field and creates a current.</p>
-<p>With an active current, the conductor is no longer an equipotential surface.</p>
-<p>We can write the total current as:
+$$</p><h3 id=conductivity--resistivity>Conductivity & Resistivity</h3><p>One very important detail we have yet to covered in electrical circuits are - what causes the current to move?</p><p>Imagine if we put a conductor inside an external electrical field - the charge will move due to the electrical field and creates a current.</p><p>With an active current, the conductor is no longer an equipotential surface.</p><p>We can write the total current as:
 $$
 I = \iint \mathbf{\vec{J}} \cdot\ d\mathbf{\vec{A}}
-$$</p>
-<p>Where $\mathbf{\vec{J}}$ is the <strong>current density</strong></p>
-<p>Let&rsquo;s also discuss this, electron movement is not linear, but on <em>average</em>, it is moving in a set direction.</p>
-<p>This means that the rate of electron movement depends on the <em>conductivity</em>, $\sigma$, of the material:
+$$</p><p>Where $\mathbf{\vec{J}}$ is the <strong>current density</strong></p><p>Let&rsquo;s also discuss this, electron movement is not linear, but on <em>average</em>, it is moving in a set direction.</p><p>This means that the rate of electron movement depends on the <em>conductivity</em>, $\sigma$, of the material:
 $$
 \mathbf{\vec{J}} = \sigma \mathbf{\vec{E}}
-$$</p>
-<p>If we assume $\mathbf{\vec{E}}$ is <strong>uniform</strong> meaning the electrical field lines are evenly spaced apart.</p>
-<p>We have:
+$$</p><p>If we assume $\mathbf{\vec{E}}$ is <strong>uniform</strong> meaning the electrical field lines are evenly spaced apart.</p><p>We have:
 $$
 \begin{align*}
-J &amp; = \sigma E = \sigma \dfrac{\Delta V}{l} \newline
-&amp; = \dfrac{I}{A}
+J & = \sigma E = \sigma \dfrac{\Delta V}{l} \newline
+& = \dfrac{I}{A}
 \end{align*}
-$$</p>
-<p>This means:
+$$</p><p>This means:
 $$
 \begin{align*}
-\Delta V &amp; = \dfrac{l}{\sigma}\ J \newline
-&amp; = \dfrac{l}{\sigma A}\ I \newline
-&amp; = RI
+\Delta V & = \dfrac{l}{\sigma}\ J \newline
+& = \dfrac{l}{\sigma A}\ I \newline
+& = RI
 \end{align*}
-$$</p>
-<p>Where $R$:
+$$</p><p>Where $R$:
 $$
 R = \dfrac{\Delta V}{I} = \dfrac{l}{\sigma A}
-$$</p>
-<p>Therefore, resistivity is the inverse of conductivity:
+$$</p><p>Therefore, resistivity is the inverse of conductivity:
 $$
 \rho = \dfrac{1}{\sigma}
-$$</p>
-<h3 id="magnetic-fields">Magnetic fields</h3>
-<p>Now, finally, magnetic fields.</p>
-<p>They behave similarly to electrical fields! However, magnetic fields <strong>always</strong> exist as dipoles!</p>
-<p>Magnetic fields arise <em>due to the motion of charge</em></p>
-<p>So how do we define the magnetic field, $\mathbf{\vec{B}}$</p>
-<p>We can&rsquo;t use electrical field equations to define magnetic fields, due to the absence of magnetic monopoles.</p>
-<p>So let&rsquo;s instead consider a particle of charge, $q$, moving at velocity, $\mathbf{\vec{v}}$.</p>
-<p>$$
+$$</p><h3 id=magnetic-fields>Magnetic fields</h3><p>Now, finally, magnetic fields.</p><p>They behave similarly to electrical fields! However, magnetic fields <strong>always</strong> exist as dipoles!</p><p>Magnetic fields arise <em>due to the motion of charge</em></p><p>So how do we define the magnetic field, $\mathbf{\vec{B}}$</p><p>We can&rsquo;t use electrical field equations to define magnetic fields, due to the absence of magnetic monopoles.</p><p>So let&rsquo;s instead consider a particle of charge, $q$, moving at velocity, $\mathbf{\vec{v}}$.</p><p>$$
 \mathbf{\vec{F}_B} = q\mathbf{\vec{v}} \times \mathbf{\vec{B}} = |q|vB\ sin(\theta)
-$$</p>
-<p>The unit for magnetic field strength is Tesla:
+$$</p><p>The unit for magnetic field strength is Tesla:
 $$
 1\ T = \left[1 \dfrac{N}{A \cdot\ m}\right]
-$$</p>
-<h3 id="biot-savarts-law">Biot-Savarts law</h3>
-<p>Given current through a wire, the magnetic field <em>from a single point on the wire is</em>:
+$$</p><h3 id=biot-savarts-law>Biot-Savarts law</h3><p>Given current through a wire, the magnetic field <em>from a single point on the wire is</em>:
 $$
 d\mathbf{\vec{B}} = \dfrac{\mu_0}{4\pi} \dfrac{I\ d\mathbf{\vec{s}} \times \mathbf{\vec{r}}}{r^2}
-$$</p>
-<p>Where, $\mu_0$ is the <em>permeability of free space</em>:
+$$</p><p>Where, $\mu_0$ is the <em>permeability of free space</em>:
 $$
 \mu_0 = 4\pi \cdot\ 10^{-7}\ \left[\dfrac{Tm}{A}\right]
-$$</p>
-<p>We can also calculate the total magnetic field at a point, $P$, is the sum across all points along the current source:
+$$</p><p>We can also calculate the total magnetic field at a point, $P$, is the sum across all points along the current source:
 $$
 \mathbf{\vec{B}} = \int d\mathbf{\vec{B}} = \dfrac{\mu_0 I}{4\pi} \int \dfrac{d\mathbf{\vec{s}} \times \mathbf{\vec{r}}}{r^2}
-$$</p>
-<h3 id="amperes-law">Ampere&rsquo;s law</h3>
-<p>If we want to calculate the magnetic field strength along a circular path:</p>
-<p>$$
+$$</p><h3 id=amperes-law>Ampere&rsquo;s law</h3><p>If we want to calculate the magnetic field strength along a circular path:</p><p>$$
 \oint \mathbf{\vec{B}} \cdot\ d\mathbf{\vec{s}} = B \oint ds = \dfrac{\mu_0 I}{2\pi r}(2\pi r) = \mu_0 I
-$$</p>
-<p>Therefore, the total field strength, around any closed <em>Amperian</em> loop is proportional to $I_{enc}$, the current encircled by the loop:
+$$</p><p>Therefore, the total field strength, around any closed <em>Amperian</em> loop is proportional to $I_{enc}$, the current encircled by the loop:
 $$
 \oint \mathbf{\vec{B}} \cdot\ d\mathbf{\vec{s}} = \mu_0 I_{enc}
-$$</p>
-<p>Note that this equation requires symmetry (in this case infinite symmetry!).</p>
-
-        </section>
-    </article>
-
-    <nav class="navigation">
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-
-        
-        
-
-        <div class="nav-item previous">
-            
-            
-            <a href="/school/eem076/eem076_6/" title="Previous: Part 6 - Work, Voltage and Capacitance">&larr; Previous</a>
-            
-            
-        </div>
-
-        <div class="nav-item next">
-            
-            
-            <a href="/school/eem076/eem076_8/" title="Next: Part 8 - Magnetic fields">Next &rarr;</a>
-            
-            
-        </div>
-    </nav>
-</main>
-<footer id="site-footer">
-    <div class="social-links">
-        
-        <a href="https://github.com/rezaarezvan" title="">github</a>
-        
-        <a href="https://x.com/rzvan__/" title="">x</a>
-        
-    </div><p class="footer-msg">memento mori</p>
-</footer></div>
-</body>
-
-</html>
+$$</p><p>Note that this equation requires symmetry (in this case infinite symmetry!).</p></section></article><nav class=navigation><div class="nav-item previous"><a href=/school/eem076/eem076_6/ title="Previous: Part 6 - Work, Voltage and Capacitance">&larr; Previous</a></div><div class="nav-item next"><a href=/school/eem076/eem076_8/ title="Next: Part 8 - Magnetic fields">Next &rarr;</a></div></nav></main><footer id=site-footer><div class=social-links><a href=https://github.com/rezaarezvan title class=social-link><span class=bracket>[</span>github<span class=bracket>]</span></a>
+<a href=https://x.com/rzvan__/ title class=social-link><span class=bracket>[</span>x<span class=bracket>]</span></a></div><div class=footer-marquee><div class=footer-marquee__content><span class=footer-marquee__item>memento mori • amor fati • sic parvis magna • per aspera ad astra</span>
+<span class=footer-marquee__item>memento mori • amor fati • sic parvis magna • per aspera ad astra</span></div></div></footer></div></body></html>

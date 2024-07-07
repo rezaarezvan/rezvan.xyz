@@ -1,55 +1,17 @@
-<!DOCTYPE html>
-<html><head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"><title>rezvan | Part 6 - Work, Voltage and Capacitance</title><link rel="icon" type="image/png" href="https://rezvan.xyz/images/icon.png" /><meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description"
-        content="In this part we&rsquo;ll work in electrical fields, the connection between electrical fields and voltages as well as how we can use electrical fields with capacitors.
+<!doctype html><html><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge"><title>rezvan | Part 6 - Work, Voltage and Capacitance</title><link rel=icon type=image/png href=https://rezvan.xyz/images/icon.png><meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=description content="In this part we&rsquo;ll work in electrical fields, the connection between electrical fields and voltages as well as how we can use electrical fields with capacitors.
 Work We&rsquo;ve briefly went over work before in this series - but let&rsquo;s consider the work required to move charges apart from eachother.
 For example: $$ W = F \cdot\ d\mathbf{\vec{r}} \newline $$
 $$ \mathbf{\vec{F_{12}}} = k_{e}\ \dfrac{q_1 q_2}{r^2} \mathbf{\vec{r_{12}}} $$
-$$ \begin{align*} W &amp; = \int_{R}^{\infty} \mathbf{\vec{F}} \cdot\ d\mathbf{\vec{r}} \newline &amp; = -k_e q_1 q_2 \int_{R}^{\infty} \dfrac{d\mathbf{\vec{r}}}{r^2} \newline &amp; = k_e q_1 q_2 \cdot\ \dfrac{-1}{r} \Big|_R^{\infty} \newline &amp; = \boxed{\dfrac{k_e q_1 q_2}{R}} \end{align*} $$" />
-    <meta property="og:image" content="https://raw.githubusercontent.com/rezaarezvan/rezvan.xyz/main/images/icon.png" />
-    <meta property="og:url" content="https://rezvan.xyz/school/eem076/eem076_6/">
-  <meta property="og:site_name" content="rezvan">
-  <meta property="og:title" content="Part 6 - Work, Voltage and Capacitance">
-  <meta property="og:description" content="In this part we’ll work in electrical fields, the connection between electrical fields and voltages as well as how we can use electrical fields with capacitors.
+$$ \begin{align*} W & = \int_{R}^{\infty} \mathbf{\vec{F}} \cdot\ d\mathbf{\vec{r}} \newline & = -k_e q_1 q_2 \int_{R}^{\infty} \dfrac{d\mathbf{\vec{r}}}{r^2} \newline & = k_e q_1 q_2 \cdot\ \dfrac{-1}{r} \Big|_R^{\infty} \newline & = \boxed{\dfrac{k_e q_1 q_2}{R}} \end{align*} $$"><meta property="og:image" content="https://raw.githubusercontent.com/rezaarezvan/rezvan.xyz/main/images/icon.png"><meta property="og:url" content="https://rezvan.xyz/school/eem076/eem076_6/"><meta property="og:site_name" content="rezvan"><meta property="og:title" content="Part 6 - Work, Voltage and Capacitance"><meta property="og:description" content="In this part we’ll work in electrical fields, the connection between electrical fields and voltages as well as how we can use electrical fields with capacitors.
 Work We’ve briefly went over work before in this series - but let’s consider the work required to move charges apart from eachother.
 For example: $$ W = F \cdot\ d\mathbf{\vec{r}} \newline $$
 $$ \mathbf{\vec{F_{12}}} = k_{e}\ \dfrac{q_1 q_2}{r^2} \mathbf{\vec{r_{12}}} $$
-$$ \begin{align*} W &amp; = \int_{R}^{\infty} \mathbf{\vec{F}} \cdot\ d\mathbf{\vec{r}} \newline &amp; = -k_e q_1 q_2 \int_{R}^{\infty} \dfrac{d\mathbf{\vec{r}}}{r^2} \newline &amp; = k_e q_1 q_2 \cdot\ \dfrac{-1}{r} \Big|_R^{\infty} \newline &amp; = \boxed{\dfrac{k_e q_1 q_2}{R}} \end{align*} $$">
-  <meta property="og:locale" content="en_us">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="school">
-    <meta property="article:published_time" content="2023-04-18T12:05:29+02:00">
-    <meta property="article:modified_time" content="2024-05-26T11:09:10+02:00">
-
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Part 6 - Work, Voltage and Capacitance">
-  <meta name="twitter:description" content="In this part we’ll work in electrical fields, the connection between electrical fields and voltages as well as how we can use electrical fields with capacitors.
+$$ \begin{align*} W & = \int_{R}^{\infty} \mathbf{\vec{F}} \cdot\ d\mathbf{\vec{r}} \newline & = -k_e q_1 q_2 \int_{R}^{\infty} \dfrac{d\mathbf{\vec{r}}}{r^2} \newline & = k_e q_1 q_2 \cdot\ \dfrac{-1}{r} \Big|_R^{\infty} \newline & = \boxed{\dfrac{k_e q_1 q_2}{R}} \end{align*} $$"><meta property="og:locale" content="en_us"><meta property="og:type" content="article"><meta property="article:section" content="school"><meta property="article:published_time" content="2023-04-18T12:05:29+02:00"><meta property="article:modified_time" content="2024-05-26T11:09:10+02:00"><meta name=twitter:card content="summary"><meta name=twitter:title content="Part 6 - Work, Voltage and Capacitance"><meta name=twitter:description content="In this part we’ll work in electrical fields, the connection between electrical fields and voltages as well as how we can use electrical fields with capacitors.
 Work We’ve briefly went over work before in this series - but let’s consider the work required to move charges apart from eachother.
 For example: $$ W = F \cdot\ d\mathbf{\vec{r}} \newline $$
 $$ \mathbf{\vec{F_{12}}} = k_{e}\ \dfrac{q_1 q_2}{r^2} \mathbf{\vec{r_{12}}} $$
-$$ \begin{align*} W &amp; = \int_{R}^{\infty} \mathbf{\vec{F}} \cdot\ d\mathbf{\vec{r}} \newline &amp; = -k_e q_1 q_2 \int_{R}^{\infty} \dfrac{d\mathbf{\vec{r}}}{r^2} \newline &amp; = k_e q_1 q_2 \cdot\ \dfrac{-1}{r} \Big|_R^{\infty} \newline &amp; = \boxed{\dfrac{k_e q_1 q_2}{R}} \end{align*} $$">
-<script src="https://rezvan.xyz/js/feather.min.js"></script>
-    
-
-    
-    
-    <link rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/main.73f3431f38ac72fc2890b3747cc9c6d55d5756f3ba40e590c77627ae6c16e46b.css" />
-    <link id="lightSyntaxStyle" rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/light_syntax.65408cc3a5c02070b661c3e4e79306fc261cc63620f4adce9a30eafcba4ab79e.css" />
-    
-    <link id="darkModeStyle" rel="stylesheet" type="text/css" href="https://rezvan.xyz/css/dark.13c6bfb747b76fdd2dc198b1172afdd77e7ce604de43f343ce643378bafc58af.css"  disabled />
-    <link id="darkSyntaxStyle" rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/dark_syntax.2b10cc1a2156b30874a063b7439a993bc3b43d476c5e1d8598d769c929c7b381.css" />
-    
-
-    
-    
-    <script type="text/javascript"
-        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-        </script>
-
-    
-    <script type="text/x-mathjax-config">
+$$ \begin{align*} W & = \int_{R}^{\infty} \mathbf{\vec{F}} \cdot\ d\mathbf{\vec{r}} \newline & = -k_e q_1 q_2 \int_{R}^{\infty} \dfrac{d\mathbf{\vec{r}}}{r^2} \newline & = k_e q_1 q_2 \cdot\ \dfrac{-1}{r} \Big|_R^{\infty} \newline & = \boxed{\dfrac{k_e q_1 q_2}{R}} \end{align*} $$"><link rel=stylesheet href=https://rezvan.xyz/css/combined.min.51ec65976b416262d827f98c76ca037bf7aeea27590e3c120eac32afbfbc40ee.css integrity="sha256-Uexll2tBYmLYJ/mMdsoDe/eu6idZDjwSDqwyr7+8QO4="><link id=lightSyntaxStyle rel=stylesheet href=https://rezvan.xyz/css/light_syntax.min.d9e0828a4ff7f2d7317942062fc751fa487b2ac2c47b934ad082abd7d3ca6690.css integrity="sha256-2eCCik/38tcxeUIGL8dR+kh7KsLEe5NK0IKr19PKZpA="><link id=darkModeStyle rel=stylesheet href=https://rezvan.xyz/css/dark.min.49ad20f2859f81550f852c48875ca9e72e4267459ed6fe82fc9b4f3cf7fdc4e8.css integrity="sha256-Sa0g8oWfgVUPhSxIh1yp5y5CZ0We1v6C/JtPPPf9xOg=" disabled><link id=darkSyntaxStyle rel=stylesheet href=https://rezvan.xyz/css/dark_syntax.min.1a878f3d8fb43359bd3b44bc70c4074f682f11066c6537bf6248b696cbe56586.css integrity="sha256-GoePPY+0M1m9O0S8cMQHT2gvEQZsZTe/Yki2lsvlZYY=" disabled><script type=text/javascript src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type=text/x-mathjax-config>
 		MathJax.Hub.Config({
 			tex2jax: {
 				inlineMath: [['$','$'], ['\\(','\\)']],
@@ -61,298 +23,119 @@ $$ \begin{align*} W &amp; = \int_{R}^{\infty} \mathbf{\vec{F}} \cdot\ d\mathbf{\
 						 extensions: ["AMSmath.js", "AMSsymbols.js"] }
 			}
 		});
-		</script>
-    
-
-    
-    
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css">
-    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js"
-        onload="renderMathInElement(document.body);"></script>
-
-    
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            renderMathInElement(document.body, {
-                delimiters: [
-                    {left: "$$", right: "$$", display: true},
-                    {left: "$", right: "$", display: false}
-                ]
-            });
-        });
-    </script>
-    
-</head>
-<body>
-    <div class="content"><header>
-    <nav id="site-navbar">
-        <div class="menu-items">
-            
-            <a href="/">home</a>
-            
-            <a href="/principles">principles</a>
-            
-            <a href="/cv">cv</a>
-            
-            <a href="/posts">posts</a>
-            
-            <a href="/school">school</a>
-            
-        </div>
-        <div class="theme-toggle">
-            <span id="dark-mode-toggle" onclick="toggleTheme()"><i data-feather="moon"></i></span>
-            <script src="https://rezvan.xyz/js/themetoggle.js"></script>
-        </div>
-        
-    </nav>
-</header>
-
-<main>
-    <article>
-        <div class="title">
-            <h1>Part 6 - Work, Voltage and Capacitance</h1>
-            <div class="meta">Posted on Apr 18, 2023
-            </div>
-            <div class="meta">
-                (Last updated: May 26, 2024)
-            </div>
-
-        </div>
-        
-        <section class="body">
-            <p>In this part we&rsquo;ll work in electrical fields, the connection between electrical fields and voltages as well as how we can use electrical fields with capacitors.</p>
-<h3 id="work">Work</h3>
-<p>We&rsquo;ve briefly went over work before in this series - but let&rsquo;s consider the work required to <em>move</em> charges apart from eachother.</p>
-<p>For example:
-<img src="/school/images/W.png#center" alt="">
+		</script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css><script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js onload=renderMathInElement(document.body)></script><script>document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]})})</script></head><body><div class=content><header><nav id=site-navbar><div class=navbar-content><a href=https://rezvan.xyz/ class=logo>rezvan.xyz</a><div class=navbar-links><a href=/principles class=nav-link><span class=bracket>[</span>principles<span class=bracket>]</span></a>
+<a href=/cv class=nav-link><span class=bracket>[</span>cv<span class=bracket>]</span></a>
+<a href=/posts class=nav-link><span class=bracket>[</span>posts<span class=bracket>]</span></a>
+<a href=/school class=nav-link><span class=bracket>[</span>school<span class=bracket>]</span></a></div><div class=theme-toggle><span id=dark-mode-toggle onclick=toggleTheme() aria-label="Toggle theme">○
+</span><script src=https://rezvan.xyz/js/themetoggle.js></script></div></div></nav></header><main><article><div class=title><h1>Part 6 - Work, Voltage and Capacitance</h1><div class=meta>Posted on Apr 18, 2023</div><div class=meta>(Last updated: May 26, 2024)</div></div><section class=body><p>In this part we&rsquo;ll work in electrical fields, the connection between electrical fields and voltages as well as how we can use electrical fields with capacitors.</p><h3 id=work>Work</h3><p>We&rsquo;ve briefly went over work before in this series - but let&rsquo;s consider the work required to <em>move</em> charges apart from eachother.</p><p>For example:
+<img src=/school/images/W.png#center alt>
 $$
 W = F \cdot\ d\mathbf{\vec{r}} \newline
-$$</p>
-<p>$$
+$$</p><p>$$
 \mathbf{\vec{F_{12}}} = k_{e}\ \dfrac{q_1 q_2}{r^2} \mathbf{\vec{r_{12}}}
-$$</p>
-<p>$$
+$$</p><p>$$
 \begin{align*}
-W &amp; = \int_{R}^{\infty} \mathbf{\vec{F}} \cdot\ d\mathbf{\vec{r}} \newline
-&amp; = -k_e q_1 q_2 \int_{R}^{\infty} \dfrac{d\mathbf{\vec{r}}}{r^2} \newline
-&amp; = k_e q_1 q_2 \cdot\ \dfrac{-1}{r} \Big|_R^{\infty} \newline
-&amp; = \boxed{\dfrac{k_e q_1 q_2}{R}}
+W & = \int_{R}^{\infty} \mathbf{\vec{F}} \cdot\ d\mathbf{\vec{r}} \newline
+& = -k_e q_1 q_2 \int_{R}^{\infty} \dfrac{d\mathbf{\vec{r}}}{r^2} \newline
+& = k_e q_1 q_2 \cdot\ \dfrac{-1}{r} \Big|_R^{\infty} \newline
+& = \boxed{\dfrac{k_e q_1 q_2}{R}}
 \end{align*}
-$$</p>
-<h3 id="work-in-an-electrical-field">Work in an electrical field</h3>
-<p>Now, if we consider a charge moving inside an electrical field:</p>
-<p><img src="/school/images/WE.png#center" alt="">
+$$</p><h3 id=work-in-an-electrical-field>Work in an electrical field</h3><p>Now, if we consider a charge moving inside an electrical field:</p><p><img src=/school/images/WE.png#center alt>
 Let&rsquo;s calculate the work to move from A to B.
 $$
 W = \mathbf{\vec{F}} \cdot\ d\mathbf{\vec{r}}
-$$</p>
-<p>$$
+$$</p><p>$$
 \mathbf{\vec{F}_E} = q \mathbf{\vec{E}}
-$$</p>
-<p>$$
+$$</p><p>$$
 \begin{align*}
-W &amp; = - \int_A^B \mathbf{\vec{F}} \cdot\ d\mathbf{\vec{r}} \newline
-&amp; = - \int_A^B q\mathbf{\vec{E}} \cdot\ d\mathbf{\vec{r}} \newline
-&amp; = -qE_0 \int_A^B d\mathbf{\vec{r}} \newline
-&amp; = -qE_0d
+W & = - \int_A^B \mathbf{\vec{F}} \cdot\ d\mathbf{\vec{r}} \newline
+& = - \int_A^B q\mathbf{\vec{E}} \cdot\ d\mathbf{\vec{r}} \newline
+& = -qE_0 \int_A^B d\mathbf{\vec{r}} \newline
+& = -qE_0d
 \end{align*}
-$$</p>
-<p>Note, in the case when we move perpendicular to the field, the work is <strong>0</strong>.</p>
-<p>Another way we can write work is:
+$$</p><p>Note, in the case when we move perpendicular to the field, the work is <strong>0</strong>.</p><p>Another way we can write work is:
 $$
 \begin{align*}
-W &amp; = \Delta U \newline
-&amp; = - \int_A^B \mathbf{\vec{F}} \cdot\ d\mathbf{\vec{r}}
+W & = \Delta U \newline
+& = - \int_A^B \mathbf{\vec{F}} \cdot\ d\mathbf{\vec{r}}
 \end{align*}
-$$</p>
-<p>This means that the potential is proportional to the charge:
+$$</p><p>This means that the potential is proportional to the charge:
 $$
 \mathbf{\vec{F}_E} = q\mathbf{\vec{E}}
-$$</p>
-<p>If we normalize the work with the charge we&rsquo;ll see a very interesting result:
+$$</p><p>If we normalize the work with the charge we&rsquo;ll see a very interesting result:
 $$
 \begin{align*}
-\dfrac{W}{q} &amp; = - \int_A^B \mathbf{\vec{E}} \cdot\ d\mathbf{\vec{r}}
+\dfrac{W}{q} & = - \int_A^B \mathbf{\vec{E}} \cdot\ d\mathbf{\vec{r}}
 \end{align*}
-$$</p>
-<p>If we just interpret this integral, we move a charged particle a distance.</p>
-<p>Let&rsquo;s go back to our definition of voltage from the first part - this is precisely the difference in voltage!
+$$</p><p>If we just interpret this integral, we move a charged particle a distance.</p><p>Let&rsquo;s go back to our definition of voltage from the first part - this is precisely the difference in voltage!
 $$
 [\Delta V] = \dfrac{Joules}{Coulumb}
-$$</p>
-<p>Just as <strong>Kirchoff&rsquo;s voltage law</strong> tells us that, within a closed loop, the sum of the voltages are 0.</p>
-<p>This means that the work done within a closed path:
+$$</p><p>Just as <strong>Kirchoff&rsquo;s voltage law</strong> tells us that, within a closed loop, the sum of the voltages are 0.</p><p>This means that the work done within a closed path:
 $$
 W = - \oint \mathbf{\vec{F}} \cdot\ d\mathbf{\vec{r}} = 0
-$$</p>
-<p>With all these new formulas, here is a little cheat sheet so that we remember:
-<img src="/school/images/CS.png#center" alt=""></p>
-<h3 id="electrical-fields">Electrical fields</h3>
-<p>If we work backwards from a known voltage - we can find the electrical field!
+$$</p><p>With all these new formulas, here is a little cheat sheet so that we remember:
+<img src=/school/images/CS.png#center alt></p><h3 id=electrical-fields>Electrical fields</h3><p>If we work backwards from a known voltage - we can find the electrical field!
 $$
 \Delta V = - \int_A^B \mathbf{\vec{E}} \cdot\ d\mathbf{\vec{r}}
-$$</p>
-<p>$$
+$$</p><p>$$
 dV = -\mathbf{\vec{E}} \cdot d\mathbf{\vec{r}}
-$$</p>
-<p>$$
+$$</p><p>$$
 \mathbf{\vec{E}} = - \dfrac{dV}{d\mathbf{\vec{r}}}
-$$</p>
-<p>We can define this as the gradient of the voltage:
+$$</p><p>We can define this as the gradient of the voltage:
 $$
 \mathbf{\vec{E}} = - \nabla V
-$$</p>
-<h3 id="equipotential-curves">Equipotential curves</h3>
-<p>As we just discovered - the electrical field is equal to the gradient of the voltage.
+$$</p><h3 id=equipotential-curves>Equipotential curves</h3><p>As we just discovered - the electrical field is equal to the gradient of the voltage.
 Equipotential curves are way of visualizing the electric potential in a region of space.
-They are just like geographical maps!</p>
-<p><img src="/school/images/EC.png#center" alt=""></p>
-<p>Now the interesting part is that these curves are always perpendicular to the electrical field lines!</p>
-<h3 id="capacitance">Capacitance</h3>
-<p>Capacitance is the ability for an electrical potential to <em>hold a charge</em></p>
-<p>We define capacitance as:
+They are just like geographical maps!</p><p><img src=/school/images/EC.png#center alt></p><p>Now the interesting part is that these curves are always perpendicular to the electrical field lines!</p><h3 id=capacitance>Capacitance</h3><p>Capacitance is the ability for an electrical potential to <em>hold a charge</em></p><p>We define capacitance as:
 $$
 C = \dfrac{q}{|\Delta V|}
-$$</p>
-<h4 id="capacitors">Capacitors</h4>
-<p>Capacitors are two isolated plates with <strong>equal</strong> and <strong>opposite</strong> charges: $\pm q$</p>
-<p>When they are charged, they create a voltage diffrence between the plates, naturally.</p>
-<p>How can we calculate this voltage?</p>
-<p>Assume we have a surface area of $A$, a <em>surface charge density</em> of $\sigma$.</p>
-<p>We can define charge as:
+$$</p><h4 id=capacitors>Capacitors</h4><p>Capacitors are two isolated plates with <strong>equal</strong> and <strong>opposite</strong> charges: $\pm q$</p><p>When they are charged, they create a voltage diffrence between the plates, naturally.</p><p>How can we calculate this voltage?</p><p>Assume we have a surface area of $A$, a <em>surface charge density</em> of $\sigma$.</p><p>We can define charge as:
 $$
 q = \sigma A
-$$</p>
-<p>Let&rsquo;s recall our Gaussian pillbox:
+$$</p><p>Let&rsquo;s recall our Gaussian pillbox:
 $$
 \begin{align*}
-\Phi &amp; = \oiint \mathbf{\vec{E}} \cdot\ d\mathbf{\vec{A}} \newline
-&amp; = \dfrac{q_{enc}}{\varepsilon_0}
+\Phi & = \oiint \mathbf{\vec{E}} \cdot\ d\mathbf{\vec{A}} \newline
+& = \dfrac{q_{enc}}{\varepsilon_0}
 \end{align*}
-$$</p>
-<p>For a given area, say, $A_1$, we can write:
+$$</p><p>For a given area, say, $A_1$, we can write:
 $$
 \begin{align*}
-EA_1 &amp; = \dfrac{q}{\varepsilon_0} \newline
-&amp; = \dfrac{\sigma A_1}{\varepsilon_0}
+EA_1 & = \dfrac{q}{\varepsilon_0} \newline
+& = \dfrac{\sigma A_1}{\varepsilon_0}
 \end{align*}
-$$</p>
-<p>Which means:
+$$</p><p>Which means:
 $$
 \begin{align*}
-E &amp; = \dfrac{\sigma}{\varepsilon_0} \newline
-&amp; = \boxed{\dfrac{q}{\varepsilon_0 A}}
+E & = \dfrac{\sigma}{\varepsilon_0} \newline
+& = \boxed{\dfrac{q}{\varepsilon_0 A}}
 \end{align*}
-$$</p>
-<p>Let&rsquo;s apply this on capacitors:
+$$</p><p>Let&rsquo;s apply this on capacitors:
 $$
 \Delta V = - \int_+^- \mathbf{\vec{E}} \cdot\ d\mathbf{\vec{r}} = -Ed
-$$</p>
-<p>$$
+$$</p><p>$$
 Ed = \dfrac{q}{\varepsilon_0 A} d
-$$</p>
-<p>$$
+$$</p><p>$$
 \begin{align*}
-C &amp; = \dfrac{q}{|\Delta V|} \newline
-&amp; = \dfrac{q}{\dfrac{q}{\varepsilon_0 A} d} \newline
-&amp; = \boxed{\varepsilon_0 \dfrac{A}{d}}
+C & = \dfrac{q}{|\Delta V|} \newline
+& = \dfrac{q}{\dfrac{q}{\varepsilon_0 A} d} \newline
+& = \boxed{\varepsilon_0 \dfrac{A}{d}}
 \end{align*}
-$$</p>
-<p>This means, the capacitance is <strong>solely</strong> dependent of the geometry of the capacitor!</p>
-<h3 id="energy-stored-in-capacitors">Energy stored in capacitors</h3>
-<p>Recall from earlier that we deduced that:
+$$</p><p>This means, the capacitance is <strong>solely</strong> dependent of the geometry of the capacitor!</p><h3 id=energy-stored-in-capacitors>Energy stored in capacitors</h3><p>Recall from earlier that we deduced that:
 $$
 \dfrac{W}{q} = - \int_A^B \mathbf{\vec{E}} \cdot\ d\mathbf{\vec{s}} = \Delta V
-$$</p>
-<p>This means:
+$$</p><p>This means:
 $$
 dW = dq \Delta V = dq \dfrac{q}{C}
-$$</p>
-<p>$$
+$$</p><p>$$
 W = \int dW = \dfrac{1}{C} \int_0^Q q\ dq = \boxed{\dfrac{1}{C}\ \dfrac{Q^2}{2}}
-$$</p>
-<p>How is the (potential) energy stored?</p>
-<p>$$
+$$</p><p>How is the (potential) energy stored?</p><p>$$
 U = \dfrac{1}{C}\ \dfrac{Q^2}{2} = \dfrac{1}{2} Q |\Delta V| = \dfrac{1}{2} C |\Delta V|^2 \newline
-$$</p>
-<p>$$
+$$</p><p>$$
 \dfrac{1}{2} C |\Delta V|^2 = \dfrac{1}{2}\ \dfrac{\varepsilon_0 A}{d} (Ed)^2 = \dfrac{1}{2} \varepsilon_0 E^2 Ad = u\ \times volume
-$$</p>
-<p>Where, $u$, is called the electrical field density:
+$$</p><p>Where, $u$, is called the electrical field density:
 $$
 u = \dfrac{\varepsilon_0 E^2}{2}
-$$</p>
-
-        </section>
-    </article>
-
-    <nav class="navigation">
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-
-        
-        
-
-        <div class="nav-item previous">
-            
-            
-            <a href="/school/eem076/eem076_5/" title="Previous: Part 5 - Electrical fields">&larr; Previous</a>
-            
-            
-        </div>
-
-        <div class="nav-item next">
-            
-            
-            <a href="/school/eem076/eem076_7/" title="Next: Part 7 - Electrical &amp; Magnetic fields">Next &rarr;</a>
-            
-            
-        </div>
-    </nav>
-</main>
-<footer id="site-footer">
-    <div class="social-links">
-        
-        <a href="https://github.com/rezaarezvan" title="">github</a>
-        
-        <a href="https://x.com/rzvan__/" title="">x</a>
-        
-    </div><p class="footer-msg">memento mori</p>
-</footer></div>
-</body>
-
-</html>
+$$</p></section></article><nav class=navigation><div class="nav-item previous"><a href=/school/eem076/eem076_5/ title="Previous: Part 5 - Electrical fields">&larr; Previous</a></div><div class="nav-item next"><a href=/school/eem076/eem076_7/ title="Next: Part 7 - Electrical & Magnetic fields">Next &rarr;</a></div></nav></main><footer id=site-footer><div class=social-links><a href=https://github.com/rezaarezvan title class=social-link><span class=bracket>[</span>github<span class=bracket>]</span></a>
+<a href=https://x.com/rzvan__/ title class=social-link><span class=bracket>[</span>x<span class=bracket>]</span></a></div><div class=footer-marquee><div class=footer-marquee__content><span class=footer-marquee__item>memento mori • amor fati • sic parvis magna • per aspera ad astra</span>
+<span class=footer-marquee__item>memento mori • amor fati • sic parvis magna • per aspera ad astra</span></div></div></footer></div></body></html>

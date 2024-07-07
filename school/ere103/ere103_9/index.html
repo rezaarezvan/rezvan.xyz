@@ -1,52 +1,14 @@
-<!DOCTYPE html>
-<html><head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"><title>rezvan | Part 9 - General controller structure</title><link rel="icon" type="image/png" href="https://rezvan.xyz/images/icon.png" /><meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description"
-        content="Introduction In this part we&rsquo;ll see how we define a general feedback loop.
+<!doctype html><html><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge"><title>rezvan | Part 9 - General controller structure</title><link rel=icon type=image/png href=https://rezvan.xyz/images/icon.png><meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=description content="Introduction In this part we&rsquo;ll see how we define a general feedback loop.
 General controller structure Assume the general structure for a feedback loop.
 However, we now have some noise that is added (in theory the sign can be whatever) to our out signal. Additionally, the noise, $V(s)$ will go through a process, $G_v(s)$.
-Along with this noise we have some noise in the feedback loop as well, so-called measurement error." />
-    <meta property="og:image" content="https://raw.githubusercontent.com/rezaarezvan/rezvan.xyz/main/images/icon.png" />
-    <meta property="og:url" content="https://rezvan.xyz/school/ere103/ere103_9/">
-  <meta property="og:site_name" content="rezvan">
-  <meta property="og:title" content="Part 9 - General controller structure">
-  <meta property="og:description" content="Introduction In this part we’ll see how we define a general feedback loop.
+Along with this noise we have some noise in the feedback loop as well, so-called measurement error."><meta property="og:image" content="https://raw.githubusercontent.com/rezaarezvan/rezvan.xyz/main/images/icon.png"><meta property="og:url" content="https://rezvan.xyz/school/ere103/ere103_9/"><meta property="og:site_name" content="rezvan"><meta property="og:title" content="Part 9 - General controller structure"><meta property="og:description" content="Introduction In this part we’ll see how we define a general feedback loop.
 General controller structure Assume the general structure for a feedback loop.
 However, we now have some noise that is added (in theory the sign can be whatever) to our out signal. Additionally, the noise, $V(s)$ will go through a process, $G_v(s)$.
-Along with this noise we have some noise in the feedback loop as well, so-called measurement error.">
-  <meta property="og:locale" content="en_us">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="school">
-    <meta property="article:published_time" content="2023-11-23T00:00:00+00:00">
-    <meta property="article:modified_time" content="2024-05-26T11:09:10+02:00">
-
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Part 9 - General controller structure">
-  <meta name="twitter:description" content="Introduction In this part we’ll see how we define a general feedback loop.
+Along with this noise we have some noise in the feedback loop as well, so-called measurement error."><meta property="og:locale" content="en_us"><meta property="og:type" content="article"><meta property="article:section" content="school"><meta property="article:published_time" content="2023-11-23T00:00:00+00:00"><meta property="article:modified_time" content="2024-05-26T11:09:10+02:00"><meta name=twitter:card content="summary"><meta name=twitter:title content="Part 9 - General controller structure"><meta name=twitter:description content="Introduction In this part we’ll see how we define a general feedback loop.
 General controller structure Assume the general structure for a feedback loop.
 However, we now have some noise that is added (in theory the sign can be whatever) to our out signal. Additionally, the noise, $V(s)$ will go through a process, $G_v(s)$.
-Along with this noise we have some noise in the feedback loop as well, so-called measurement error.">
-<script src="https://rezvan.xyz/js/feather.min.js"></script>
-    
-
-    
-    
-    <link rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/main.73f3431f38ac72fc2890b3747cc9c6d55d5756f3ba40e590c77627ae6c16e46b.css" />
-    <link id="lightSyntaxStyle" rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/light_syntax.65408cc3a5c02070b661c3e4e79306fc261cc63620f4adce9a30eafcba4ab79e.css" />
-    
-    <link id="darkModeStyle" rel="stylesheet" type="text/css" href="https://rezvan.xyz/css/dark.13c6bfb747b76fdd2dc198b1172afdd77e7ce604de43f343ce643378bafc58af.css"  disabled />
-    <link id="darkSyntaxStyle" rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/dark_syntax.2b10cc1a2156b30874a063b7439a993bc3b43d476c5e1d8598d769c929c7b381.css" />
-    
-
-    
-    
-    <script type="text/javascript"
-        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-        </script>
-
-    
-    <script type="text/x-mathjax-config">
+Along with this noise we have some noise in the feedback loop as well, so-called measurement error."><link rel=stylesheet href=https://rezvan.xyz/css/combined.min.51ec65976b416262d827f98c76ca037bf7aeea27590e3c120eac32afbfbc40ee.css integrity="sha256-Uexll2tBYmLYJ/mMdsoDe/eu6idZDjwSDqwyr7+8QO4="><link id=lightSyntaxStyle rel=stylesheet href=https://rezvan.xyz/css/light_syntax.min.d9e0828a4ff7f2d7317942062fc751fa487b2ac2c47b934ad082abd7d3ca6690.css integrity="sha256-2eCCik/38tcxeUIGL8dR+kh7KsLEe5NK0IKr19PKZpA="><link id=darkModeStyle rel=stylesheet href=https://rezvan.xyz/css/dark.min.49ad20f2859f81550f852c48875ca9e72e4267459ed6fe82fc9b4f3cf7fdc4e8.css integrity="sha256-Sa0g8oWfgVUPhSxIh1yp5y5CZ0We1v6C/JtPPPf9xOg=" disabled><link id=darkSyntaxStyle rel=stylesheet href=https://rezvan.xyz/css/dark_syntax.min.1a878f3d8fb43359bd3b44bc70c4074f682f11066c6537bf6248b696cbe56586.css integrity="sha256-GoePPY+0M1m9O0S8cMQHT2gvEQZsZTe/Yki2lsvlZYY=" disabled><script type=text/javascript src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type=text/x-mathjax-config>
 		MathJax.Hub.Config({
 			tex2jax: {
 				inlineMath: [['$','$'], ['\\(','\\)']],
@@ -58,223 +20,63 @@ Along with this noise we have some noise in the feedback loop as well, so-called
 						 extensions: ["AMSmath.js", "AMSsymbols.js"] }
 			}
 		});
-		</script>
-    
-
-    
-    
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css">
-    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js"
-        onload="renderMathInElement(document.body);"></script>
-
-    
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            renderMathInElement(document.body, {
-                delimiters: [
-                    {left: "$$", right: "$$", display: true},
-                    {left: "$", right: "$", display: false}
-                ]
-            });
-        });
-    </script>
-    
-</head>
-<body>
-    <div class="content"><header>
-    <nav id="site-navbar">
-        <div class="menu-items">
-            
-            <a href="/">home</a>
-            
-            <a href="/principles">principles</a>
-            
-            <a href="/cv">cv</a>
-            
-            <a href="/posts">posts</a>
-            
-            <a href="/school">school</a>
-            
-        </div>
-        <div class="theme-toggle">
-            <span id="dark-mode-toggle" onclick="toggleTheme()"><i data-feather="moon"></i></span>
-            <script src="https://rezvan.xyz/js/themetoggle.js"></script>
-        </div>
-        
-    </nav>
-</header>
-
-<main>
-    <article>
-        <div class="title">
-            <h1>Part 9 - General controller structure</h1>
-            <div class="meta">Posted on Nov 23, 2023
-            </div>
-            <div class="meta">
-                (Last updated: May 26, 2024)
-            </div>
-
-        </div>
-        
-        <section class="body">
-            <h3 id="introduction">Introduction</h3>
-<p>In this part we&rsquo;ll see how we define a general feedback loop.</p>
-<h3 id="general-controller-structure">General controller structure</h3>
-<p>Assume the general structure for a feedback loop.</p>
-<p>However, we now have some noise that is added (in theory the sign can be whatever) to our out signal. Additionally, the noise, $V(s)$ will go through a process, $G_v(s)$.</p>
-<p>Along with this noise we have some noise in the feedback loop as well, so-called measurement error. We&rsquo;ll call the new feedback signal for $Y_m = Y(s) - W(s)$, where $W(s)$ is the extra noise.</p>
-<p>Mathematically we will describe this as:
+		</script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css><script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js onload=renderMathInElement(document.body)></script><script>document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]})})</script></head><body><div class=content><header><nav id=site-navbar><div class=navbar-content><a href=https://rezvan.xyz/ class=logo>rezvan.xyz</a><div class=navbar-links><a href=/principles class=nav-link><span class=bracket>[</span>principles<span class=bracket>]</span></a>
+<a href=/cv class=nav-link><span class=bracket>[</span>cv<span class=bracket>]</span></a>
+<a href=/posts class=nav-link><span class=bracket>[</span>posts<span class=bracket>]</span></a>
+<a href=/school class=nav-link><span class=bracket>[</span>school<span class=bracket>]</span></a></div><div class=theme-toggle><span id=dark-mode-toggle onclick=toggleTheme() aria-label="Toggle theme">○
+</span><script src=https://rezvan.xyz/js/themetoggle.js></script></div></div></nav></header><main><article><div class=title><h1>Part 9 - General controller structure</h1><div class=meta>Posted on Nov 23, 2023</div><div class=meta>(Last updated: May 26, 2024)</div></div><section class=body><h3 id=introduction>Introduction</h3><p>In this part we&rsquo;ll see how we define a general feedback loop.</p><h3 id=general-controller-structure>General controller structure</h3><p>Assume the general structure for a feedback loop.</p><p>However, we now have some noise that is added (in theory the sign can be whatever) to our out signal. Additionally, the noise, $V(s)$ will go through a process, $G_v(s)$.</p><p>Along with this noise we have some noise in the feedback loop as well, so-called measurement error. We&rsquo;ll call the new feedback signal for $Y_m = Y(s) - W(s)$, where $W(s)$ is the extra noise.</p><p>Mathematically we will describe this as:
 $$
 \begin{align*}
-E(s) &amp; = R(s) - Y_m(s) \\
-&amp; = R(s) - (Y(s) - W(s))  \\
-&amp; = R(s) - Y(s) + W(s)
+E(s) & = R(s) - Y_m(s) \\
+& = R(s) - (Y(s) - W(s)) \\
+& = R(s) - Y(s) + W(s)
 \end{align*}
-$$</p>
-<p>$$
+$$</p><p>$$
 Y(s) = G_v(s)V(s) + F(s)G(s) [R(s) - Y(s) + W(s)] \\
 Y(s) = G_v(s)V(s) + F(s)G(s)R(s) - F(s)G(s)Y(s) + F(s)G(s)W(s) \\
 Y(s) + F(s)G(s)Y(s) = G_v(s)V(s) + F(s)G(s)R(s) + F(s)G(s)W(s) \\
 Y(s)(1 + F(s)G(s)) = G_v(s)V(s) + F(s)G(s)R(s) + F(s)G(s)W(s) \\
 Y(s)(1 + L(s)) = G_v(s)V(s) + L(s)R(s) + L(s)W(s) \\
 Y(s) = \dfrac{1}{1 + L(s)} G_v(s)V(s) + \dfrac{L(s)}{1 + L(s)} R(s) + \dfrac{L(s)}{1 + L(s)} W(s) \\
-$$</p>
-<p>Let&rsquo;s denote $\dfrac{1}{1 + L(s)}$ as $S(s)$, weird notation, but let&rsquo;s go with it.
-Let&rsquo;s denote $\dfrac{L(s)}{1 + L(s)}$ as $T(s)$.</p>
-<p>We call $S(s)$ for the sensitivity function. $T(s)$ is called for the complementary sensitivity function.</p>
-<p>Meaning that:
+$$</p><p>Let&rsquo;s denote $\dfrac{1}{1 + L(s)}$ as $S(s)$, weird notation, but let&rsquo;s go with it.
+Let&rsquo;s denote $\dfrac{L(s)}{1 + L(s)}$ as $T(s)$.</p><p>We call $S(s)$ for the sensitivity function. $T(s)$ is called for the complementary sensitivity function.</p><p>Meaning that:
 $$
 S(s) + T(s) = 1 \ | \ \text{Not hard to see}
-$$</p>
-<p>We also have a name for $\dfrac{G_v(s)}{1 + L(s)} = G_v(s) S(s)$, noise-sensitivity function.</p>
-<p>What is the error in $E(s)$?</p>
-<p>The impact from $R(s)$ of the overall error is found by setting $V(s) = 0, W(s) = 0$</p>
-<p>If we wanted to know the impact from $V(s)$ we set the others to 0.</p>
-<p>$$
+$$</p><p>We also have a name for $\dfrac{G_v(s)}{1 + L(s)} = G_v(s) S(s)$, noise-sensitivity function.</p><p>What is the error in $E(s)$?</p><p>The impact from $R(s)$ of the overall error is found by setting $V(s) = 0, W(s) = 0$</p><p>If we wanted to know the impact from $V(s)$ we set the others to 0.</p><p>$$
 \begin{align*}
-E(s) &amp; = R(s) - Y(s) \\
-&amp; = R(s) - T(s)R(s)
-&amp; = R(s)(1 - T(s))
-&amp; = R(s)S(s)
+E(s) & = R(s) - Y(s) \\
+& = R(s) - T(s)R(s)
+& = R(s)(1 - T(s))
+& = R(s)S(s)
 \end{align*}
-$$</p>
-<p>If we want $y(t)$ to follow $r(t)$, $S(s)$ needs to be small, which is equivalent to saying $T(s)$ should be &ldquo;large&rdquo;.</p>
-<p>Let&rsquo;s do an actual example now.</p>
-<h3 id="example">Example</h3>
-<p>We have a car system, where $y(t)$ is velocity of the car. $F_d(t)$ is a traction force. $u(t)$ is throttle.</p>
-<p>In the $s$-domain we have:
+$$</p><p>If we want $y(t)$ to follow $r(t)$, $S(s)$ needs to be small, which is equivalent to saying $T(s)$ should be &ldquo;large&rdquo;.</p><p>Let&rsquo;s do an actual example now.</p><h3 id=example>Example</h3><p>We have a car system, where $y(t)$ is velocity of the car. $F_d(t)$ is a traction force. $u(t)$ is throttle.</p><p>In the $s$-domain we have:
 $$
 Y(s) = \dfrac{5}{1 + 5s} F_d(s)
-$$</p>
-<p>$$
+$$</p><p>$$
 F_d(s) = \dfrac{0.1}{1 + s}U(s)
-$$</p>
-<p>$$
+$$</p><p>$$
 U(s) = \dfrac{(1 + s)F_d(s)}{0.1}
-$$</p>
-<p>The car has a cruise control - this is a feedback loop with a PI-controller.
+$$</p><p>The car has a cruise control - this is a feedback loop with a PI-controller.
 $$
 F(s) = K_p \cdot \dfrac{1 + T_i s}{T_i s}
-$$</p>
-<p>We know that the transfer function from throttle $\rarr$ velocity is:
+$$</p><p>We know that the transfer function from throttle $\rarr$ velocity is:
 $$
 G(s) = \dfrac{Y(s)}{U(s)} = \dfrac{\dfrac{5}{1 + 5s} F_d(s)}{\dfrac{(1 + s)F_d(s)}{0.1}} = \dfrac{0.5}{(1 + 5s)(1 + s)}
-$$</p>
-<p>The loop transfer function is therefore:
+$$</p><p>The loop transfer function is therefore:
 $$
 L(s) = F(s)G(s) = K_p \cdot \dfrac{1 + T_i s}{T_i s} \cdot \dfrac{0.5}{(1 + 5s)(1 + s)}
-$$</p>
-<p>If we choose a time constant, such as $T_i = 5$, we get:
+$$</p><p>If we choose a time constant, such as $T_i = 5$, we get:
 $$
 L(s) = F(s)G(s) = \dfrac{0.1K_p}{s(1 + s)}
-$$</p>
-<p>Let&rsquo;s study $S(s)$ and $T(s)$ now.</p>
-<p>$$
+$$</p><p>Let&rsquo;s study $S(s)$ and $T(s)$ now.</p><p>$$
 S(s) = \dfrac{1}{1 + L(s)} = \dfrac{1}{1 + \dfrac{0.1K_p}{s(1 + s)}} = \dfrac{s(1 + s)}{s(1 + s) + 0.1K_p} = \dfrac{s^2 + s}{s^2 + s + 0.1K_p}
-$$</p>
-<p>$$
+$$</p><p>$$
 T(s) = \dfrac{L(s)}{1 + L(s)} = \dfrac{\dfrac{0.1K_p}{s(1 + s)}}{1 + \dfrac{0.1K_p}{s(1 + s)}} = \dfrac{0.1K_p}{s(1 + s) + 0.1K_p} = \dfrac{0.1K_p}{s^2 + s + 0.1K_p}
-$$</p>
-<p>We can view this as a second-order system.
+$$</p><p>We can view this as a second-order system.
 $$
 \omega_n = \sqrt{0.1K_p}
-$$</p>
-<p>$$
+$$</p><p>$$
 \zeta = \dfrac{1}{2 \omega_n} = \dfrac{1}{2 \sqrt{0.1K_p}}
-$$</p>
-
-        </section>
-    </article>
-
-    <nav class="navigation">
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-
-        
-        
-
-        <div class="nav-item previous">
-            
-            
-            <a href="/school/ere103/ere103_8/" title="Previous: Part 8 - Stability">&larr; Previous</a>
-            
-            
-        </div>
-
-        <div class="nav-item next">
-            
-            
-            <a href="/school/ere103/ere103_10/" title="Next: Part 10 - Design of controllers">Next &rarr;</a>
-            
-            
-        </div>
-    </nav>
-</main>
-<footer id="site-footer">
-    <div class="social-links">
-        
-        <a href="https://github.com/rezaarezvan" title="">github</a>
-        
-        <a href="https://x.com/rzvan__/" title="">x</a>
-        
-    </div><p class="footer-msg">memento mori</p>
-</footer></div>
-</body>
-
-</html>
+$$</p></section></article><nav class=navigation><div class="nav-item previous"><a href=/school/ere103/ere103_8/ title="Previous: Part 8 - Stability">&larr; Previous</a></div><div class="nav-item next"><a href=/school/ere103/ere103_10/ title="Next: Part 10 - Design of controllers">Next &rarr;</a></div></nav></main><footer id=site-footer><div class=social-links><a href=https://github.com/rezaarezvan title class=social-link><span class=bracket>[</span>github<span class=bracket>]</span></a>
+<a href=https://x.com/rzvan__/ title class=social-link><span class=bracket>[</span>x<span class=bracket>]</span></a></div><div class=footer-marquee><div class=footer-marquee__content><span class=footer-marquee__item>memento mori • amor fati • sic parvis magna • per aspera ad astra</span>
+<span class=footer-marquee__item>memento mori • amor fati • sic parvis magna • per aspera ad astra</span></div></div></footer></div></body></html>

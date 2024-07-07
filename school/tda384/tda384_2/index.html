@@ -1,52 +1,14 @@
-<!DOCTYPE html>
-<html><head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"><title>rezvan | Part 2 - Races, Locks, and Semaphores</title><link rel="icon" type="image/png" href="https://rezvan.xyz/images/icon.png" /><meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description"
-        content="In the last part we covered the basics and some principles for concurrent programs. In this part we&rsquo;ll cover how we define concurrent problems, the outcome we want and some solutions.
+<!doctype html><html><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge"><title>rezvan | Part 2 - Races, Locks, and Semaphores</title><link rel=icon type=image/png href=https://rezvan.xyz/images/icon.png><meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=description content="In the last part we covered the basics and some principles for concurrent programs. In this part we&rsquo;ll cover how we define concurrent problems, the outcome we want and some solutions.
 Races As we saw in the last part - a different trace leads to a different outcome - this means that concurrent programs are non-deterministic.
 Why concurrent programs are non-deterministic is due to the scheduler&rsquo;s decisions.
-When we have a problem with different possible outcomes, we need to label what is a faulty run and a successful run." />
-    <meta property="og:image" content="https://raw.githubusercontent.com/rezaarezvan/rezvan.xyz/main/images/icon.png" />
-    <meta property="og:url" content="https://rezvan.xyz/school/tda384/tda384_2/">
-  <meta property="og:site_name" content="rezvan">
-  <meta property="og:title" content="Part 2 - Races, Locks, and Semaphores">
-  <meta property="og:description" content="In the last part we covered the basics and some principles for concurrent programs. In this part we’ll cover how we define concurrent problems, the outcome we want and some solutions.
+When we have a problem with different possible outcomes, we need to label what is a faulty run and a successful run."><meta property="og:image" content="https://raw.githubusercontent.com/rezaarezvan/rezvan.xyz/main/images/icon.png"><meta property="og:url" content="https://rezvan.xyz/school/tda384/tda384_2/"><meta property="og:site_name" content="rezvan"><meta property="og:title" content="Part 2 - Races, Locks, and Semaphores"><meta property="og:description" content="In the last part we covered the basics and some principles for concurrent programs. In this part we’ll cover how we define concurrent problems, the outcome we want and some solutions.
 Races As we saw in the last part - a different trace leads to a different outcome - this means that concurrent programs are non-deterministic.
 Why concurrent programs are non-deterministic is due to the scheduler’s decisions.
-When we have a problem with different possible outcomes, we need to label what is a faulty run and a successful run.">
-  <meta property="og:locale" content="en_us">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="school">
-    <meta property="article:published_time" content="2023-01-19T00:00:00+00:00">
-    <meta property="article:modified_time" content="2024-05-26T11:09:10+02:00">
-
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Part 2 - Races, Locks, and Semaphores">
-  <meta name="twitter:description" content="In the last part we covered the basics and some principles for concurrent programs. In this part we’ll cover how we define concurrent problems, the outcome we want and some solutions.
+When we have a problem with different possible outcomes, we need to label what is a faulty run and a successful run."><meta property="og:locale" content="en_us"><meta property="og:type" content="article"><meta property="article:section" content="school"><meta property="article:published_time" content="2023-01-19T00:00:00+00:00"><meta property="article:modified_time" content="2024-05-26T11:09:10+02:00"><meta name=twitter:card content="summary"><meta name=twitter:title content="Part 2 - Races, Locks, and Semaphores"><meta name=twitter:description content="In the last part we covered the basics and some principles for concurrent programs. In this part we’ll cover how we define concurrent problems, the outcome we want and some solutions.
 Races As we saw in the last part - a different trace leads to a different outcome - this means that concurrent programs are non-deterministic.
 Why concurrent programs are non-deterministic is due to the scheduler’s decisions.
-When we have a problem with different possible outcomes, we need to label what is a faulty run and a successful run.">
-<script src="https://rezvan.xyz/js/feather.min.js"></script>
-    
-
-    
-    
-    <link rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/main.73f3431f38ac72fc2890b3747cc9c6d55d5756f3ba40e590c77627ae6c16e46b.css" />
-    <link id="lightSyntaxStyle" rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/light_syntax.65408cc3a5c02070b661c3e4e79306fc261cc63620f4adce9a30eafcba4ab79e.css" />
-    
-    <link id="darkModeStyle" rel="stylesheet" type="text/css" href="https://rezvan.xyz/css/dark.13c6bfb747b76fdd2dc198b1172afdd77e7ce604de43f343ce643378bafc58af.css"  disabled />
-    <link id="darkSyntaxStyle" rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/dark_syntax.2b10cc1a2156b30874a063b7439a993bc3b43d476c5e1d8598d769c929c7b381.css" />
-    
-
-    
-    
-    <script type="text/javascript"
-        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-        </script>
-
-    
-    <script type="text/x-mathjax-config">
+When we have a problem with different possible outcomes, we need to label what is a faulty run and a successful run."><link rel=stylesheet href=https://rezvan.xyz/css/combined.min.51ec65976b416262d827f98c76ca037bf7aeea27590e3c120eac32afbfbc40ee.css integrity="sha256-Uexll2tBYmLYJ/mMdsoDe/eu6idZDjwSDqwyr7+8QO4="><link id=lightSyntaxStyle rel=stylesheet href=https://rezvan.xyz/css/light_syntax.min.d9e0828a4ff7f2d7317942062fc751fa487b2ac2c47b934ad082abd7d3ca6690.css integrity="sha256-2eCCik/38tcxeUIGL8dR+kh7KsLEe5NK0IKr19PKZpA="><link id=darkModeStyle rel=stylesheet href=https://rezvan.xyz/css/dark.min.49ad20f2859f81550f852c48875ca9e72e4267459ed6fe82fc9b4f3cf7fdc4e8.css integrity="sha256-Sa0g8oWfgVUPhSxIh1yp5y5CZ0We1v6C/JtPPPf9xOg=" disabled><link id=darkSyntaxStyle rel=stylesheet href=https://rezvan.xyz/css/dark_syntax.min.1a878f3d8fb43359bd3b44bc70c4074f682f11066c6537bf6248b696cbe56586.css integrity="sha256-GoePPY+0M1m9O0S8cMQHT2gvEQZsZTe/Yki2lsvlZYY=" disabled><script type=text/javascript src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type=text/x-mathjax-config>
 		MathJax.Hub.Config({
 			tex2jax: {
 				inlineMath: [['$','$'], ['\\(','\\)']],
@@ -58,99 +20,21 @@ When we have a problem with different possible outcomes, we need to label what i
 						 extensions: ["AMSmath.js", "AMSsymbols.js"] }
 			}
 		});
-		</script>
-    
-
-    
-    
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css">
-    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js"
-        onload="renderMathInElement(document.body);"></script>
-
-    
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            renderMathInElement(document.body, {
-                delimiters: [
-                    {left: "$$", right: "$$", display: true},
-                    {left: "$", right: "$", display: false}
-                ]
-            });
-        });
-    </script>
-    
-</head>
-<body>
-    <div class="content"><header>
-    <nav id="site-navbar">
-        <div class="menu-items">
-            
-            <a href="/">home</a>
-            
-            <a href="/principles">principles</a>
-            
-            <a href="/cv">cv</a>
-            
-            <a href="/posts">posts</a>
-            
-            <a href="/school">school</a>
-            
-        </div>
-        <div class="theme-toggle">
-            <span id="dark-mode-toggle" onclick="toggleTheme()"><i data-feather="moon"></i></span>
-            <script src="https://rezvan.xyz/js/themetoggle.js"></script>
-        </div>
-        
-    </nav>
-</header>
-
-<main>
-    <article>
-        <div class="title">
-            <h1>Part 2 - Races, Locks, and Semaphores</h1>
-            <div class="meta">Posted on Jan 19, 2023
-            </div>
-            <div class="meta">
-                (Last updated: May 26, 2024)
-            </div>
-
-        </div>
-        
-        <section class="body">
-            <p>In the last part we covered the basics and some principles for concurrent programs.
-In this part we&rsquo;ll cover how we define concurrent problems, the outcome we want and some solutions.</p>
-<h3 id="races">Races</h3>
-<p>As we saw in the last part - a different trace leads to a different outcome -
-this means that concurrent programs are <em>non-deterministic</em>.</p>
-<p>Why concurrent programs are non-deterministic is due to the scheduler&rsquo;s decisions.</p>
-<p>When we have a problem with different possible outcomes, we need to label what is a faulty run and a successful run.</p>
-<p>A <strong>race condition</strong> is a situation where the correctness of a concurrent program depends on the specific execution.
-If we try to define this a bit easier, since concurrent programs can are non-deterministic, this means we have to &ldquo;race&rdquo; the program.</p>
-<p>There are different types of race-conditions. A data race is one example.</p>
-<p>A data race is a when two (or more) threads access a shared memory location and where at least one access is a <em>write</em>.
-The threads use no synchronization mechanism to protect said data.</p>
-<p>A simple example is the counter program, in the case where the program spat out 1, instead of 2, it was due to this data race.</p>
-<p>One thing to note is that: Not every race-condition is a data race and not every data is a race-condition either.</p>
-<p>The first one is quite intuitive, the race isn&rsquo;t always about data, it can be an access call to files/network.
+		</script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css><script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js onload=renderMathInElement(document.body)></script><script>document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]})})</script></head><body><div class=content><header><nav id=site-navbar><div class=navbar-content><a href=https://rezvan.xyz/ class=logo>rezvan.xyz</a><div class=navbar-links><a href=/principles class=nav-link><span class=bracket>[</span>principles<span class=bracket>]</span></a>
+<a href=/cv class=nav-link><span class=bracket>[</span>cv<span class=bracket>]</span></a>
+<a href=/posts class=nav-link><span class=bracket>[</span>posts<span class=bracket>]</span></a>
+<a href=/school class=nav-link><span class=bracket>[</span>school<span class=bracket>]</span></a></div><div class=theme-toggle><span id=dark-mode-toggle onclick=toggleTheme() aria-label="Toggle theme">○
+</span><script src=https://rezvan.xyz/js/themetoggle.js></script></div></div></nav></header><main><article><div class=title><h1>Part 2 - Races, Locks, and Semaphores</h1><div class=meta>Posted on Jan 19, 2023</div><div class=meta>(Last updated: May 26, 2024)</div></div><section class=body><p>In the last part we covered the basics and some principles for concurrent programs.
+In this part we&rsquo;ll cover how we define concurrent problems, the outcome we want and some solutions.</p><h3 id=races>Races</h3><p>As we saw in the last part - a different trace leads to a different outcome -
+this means that concurrent programs are <em>non-deterministic</em>.</p><p>Why concurrent programs are non-deterministic is due to the scheduler&rsquo;s decisions.</p><p>When we have a problem with different possible outcomes, we need to label what is a faulty run and a successful run.</p><p>A <strong>race condition</strong> is a situation where the correctness of a concurrent program depends on the specific execution.
+If we try to define this a bit easier, since concurrent programs can are non-deterministic, this means we have to &ldquo;race&rdquo; the program.</p><p>There are different types of race-conditions. A data race is one example.</p><p>A data race is a when two (or more) threads access a shared memory location and where at least one access is a <em>write</em>.
+The threads use no synchronization mechanism to protect said data.</p><p>A simple example is the counter program, in the case where the program spat out 1, instead of 2, it was due to this data race.</p><p>One thing to note is that: Not every race-condition is a data race and not every data is a race-condition either.</p><p>The first one is quite intuitive, the race isn&rsquo;t always about data, it can be an access call to files/network.
 The latter is not clear from the start, but there is a simple explanation.
-A data race might not <em>always</em> affect the result, therefore it might not be a race condition.</p>
-<h3 id="synchronization-problems">Synchronization problems</h3>
-<p>Now that we&rsquo;ve seen how we can outline the problem, lets where the problem stems from and how we can identify where in code.</p>
-<p>We call the part of a program where threads access the shared resource a <strong>critical section</strong>.
+A data race might not <em>always</em> affect the result, therefore it might not be a race condition.</p><h3 id=synchronization-problems>Synchronization problems</h3><p>Now that we&rsquo;ve seen how we can outline the problem, lets where the problem stems from and how we can identify where in code.</p><p>We call the part of a program where threads access the shared resource a <strong>critical section</strong>.
 It&rsquo;s quite obvious that no more than 1 thread should be in this critical section at a time.
-We call this property the <strong>mutual exclusion property</strong>. Therefore, we can call this concurrent program problem for <strong>mutual exclusion problem</strong>.</p>
-<p>Let&rsquo;s define some more technical terms to this mutual exclusion property as well. A <strong>deadlock</strong> is when the program/group of threads can&rsquo;t proceed further.
+We call this property the <strong>mutual exclusion property</strong>. Therefore, we can call this concurrent program problem for <strong>mutual exclusion problem</strong>.</p><p>Let&rsquo;s define some more technical terms to this mutual exclusion property as well. A <strong>deadlock</strong> is when the program/group of threads can&rsquo;t proceed further.
 For example, if we have 10 threads, <code>t1, t2, t3, ... , t10</code>. If <code>t10</code> has to wait for <code>t9</code> and <code>t9</code> for <code>t8</code> and so on. If <code>t1</code>happens to be stuck, we achieve a so-called deadlock.
-A good example is the <a href="https://en.wikipedia.org/wiki/Dining_philosophers_problem">dining philosophers problem</a>. Many times deadlocks are created from &lsquo;circular dependency&rsquo; problems.</p>
-<p><strong>Starvation</strong> is when we have threads trying to enter the critical section, but never succeeds. So we have threads that are &ldquo;starved&rdquo; from entering the critical section.</p>
-<p>A <strong>good solution</strong> to the mutual exclusion property solves all these invariants. Note, freedom from starvation implies freedom from deadlock as well!</p>
-<p>To solve starvation, we need to become <em>fair</em>, <strong>fairness</strong> is a situation where all threads that request to enter the critical section <em>eventually</em> gets it.</p>
-<p>Alright, now we have clearly defined the outline of the problem, the problem and each &lsquo;sub-problem&rsquo;. Let&rsquo;s look at how we can achieve a good solution.</p>
-<h3 id="locks">Locks</h3>
-<p>Locks are one of (if not the simplest) synchronization mechanism that can ensure a good solution to the mutual exclusion property.</p>
-<p>A lock (interface) can be described as:</p>
-<pre tabindex="0"><code>interface Lock {
+A good example is the <a href=https://en.wikipedia.org/wiki/Dining_philosophers_problem>dining philosophers problem</a>. Many times deadlocks are created from &lsquo;circular dependency&rsquo; problems.</p><p><strong>Starvation</strong> is when we have threads trying to enter the critical section, but never succeeds. So we have threads that are &ldquo;starved&rdquo; from entering the critical section.</p><p>A <strong>good solution</strong> to the mutual exclusion property solves all these invariants. Note, freedom from starvation implies freedom from deadlock as well!</p><p>To solve starvation, we need to become <em>fair</em>, <strong>fairness</strong> is a situation where all threads that request to enter the critical section <em>eventually</em> gets it.</p><p>Alright, now we have clearly defined the outline of the problem, the problem and each &lsquo;sub-problem&rsquo;. Let&rsquo;s look at how we can achieve a good solution.</p><h3 id=locks>Locks</h3><p>Locks are one of (if not the simplest) synchronization mechanism that can ensure a good solution to the mutual exclusion property.</p><p>A lock (interface) can be described as:</p><pre tabindex=0><code>interface Lock {
 
     // Acquire lock
     void lock();
@@ -158,18 +42,13 @@ A good example is the <a href="https://en.wikipedia.org/wiki/Dining_philosophers
     // Release lock
     void unlock();
 }
-</code></pre><p>It&rsquo;s a quite simple to see how we can use this:</p>
-<pre tabindex="0"><code>int cnt;
+</code></pre><p>It&rsquo;s a quite simple to see how we can use this:</p><pre tabindex=0><code>int cnt;
 
 lock.lock();
     cnt = counter;
     counter = cnt + 1;
 lock.unlock()
-</code></pre><p>This <strong>ensures</strong> exactly one lock gets the lock and, after it&rsquo;s finished, another lock will acquire it and so on. In this simple program, it will become sequential even, but that&rsquo;s besides the point.</p>
-<p>The idea of locks still ensures a solution for the mutual exclusion problem.</p>
-<h3 id="semaphores">Semaphores</h3>
-<p>Semaphores are a further generalization of locks. Instead of the only possible states being <code>locked</code> and <code>unlocked</code> (one can see this as 0 and 1). We have a counting mechanism:</p>
-<pre tabindex="0"><code>interface Semaphore {
+</code></pre><p>This <strong>ensures</strong> exactly one lock gets the lock and, after it&rsquo;s finished, another lock will acquire it and so on. In this simple program, it will become sequential even, but that&rsquo;s besides the point.</p><p>The idea of locks still ensures a solution for the mutual exclusion problem.</p><h3 id=semaphores>Semaphores</h3><p>Semaphores are a further generalization of locks. Instead of the only possible states being <code>locked</code> and <code>unlocked</code> (one can see this as 0 and 1). We have a counting mechanism:</p><pre tabindex=0><code>interface Semaphore {
 
     // current value of counter
     int count();
@@ -182,34 +61,20 @@ lock.unlock()
 }
 </code></pre><p>When we initialize a semaphore, it is set to a non-negative value, <code>C</code>, which is the capacity.
 When we call <code>sem.up()</code>, we increment <code>C</code>by one.
-A call to <code>sem.down()</code>, first <strong>wait</strong> until <code>C</code> is positive, and then <em>uninterruptedly</em> decrements the value of <code>C</code> by one.</p>
-<p>Let&rsquo;s look at the counter program with semaphores now:</p>
-<pre tabindex="0"><code>int cnt;
+A call to <code>sem.down()</code>, first <strong>wait</strong> until <code>C</code> is positive, and then <em>uninterruptedly</em> decrements the value of <code>C</code> by one.</p><p>Let&rsquo;s look at the counter program with semaphores now:</p><pre tabindex=0><code>int cnt;
 
 sem.down();
     cnt = counter;
     counter = cnt + 1;
 sem.up();
-</code></pre><p>As we can see, it&rsquo;s really similar. But how do we &lsquo;wait until <code>C</code>is positive&rsquo;?</p>
-<p>We need to understand something called <em>invariant</em> first.</p>
-<p>An <em>invariant</em> is a <em>property</em> that always holds between method calls. The invariant should hold initially, at the beginning of a method call, and at the end of it.</p>
-<p>A good example is, a bank account should never become negative, when you create an account it should hold true. Also when you make an transaction.</p>
-<p>A semaphore, with capacity <code>C</code> satifies the invariant:</p>
-<pre tabindex="0"><code>invariant{
+</code></pre><p>As we can see, it&rsquo;s really similar. But how do we &lsquo;wait until <code>C</code>is positive&rsquo;?</p><p>We need to understand something called <em>invariant</em> first.</p><p>An <em>invariant</em> is a <em>property</em> that always holds between method calls. The invariant should hold initially, at the beginning of a method call, and at the end of it.</p><p>A good example is, a bank account should never become negative, when you create an account it should hold true. Also when you make an transaction.</p><p>A semaphore, with capacity <code>C</code> satifies the invariant:</p><pre tabindex=0><code>invariant{
     count() &gt;= 0;
     count() == C + # of calls to up - # of calls to down;
 }
-</code></pre><p>This makes sense, we shouldn&rsquo;t ever go past 0, and the number of calls to the up and down methods, should correspond to the current count number.</p>
-<p>A special semaphore case is when we have capacity 1, (0 and 1), this is called a <strong>binary</strong> semaphore and are essentially the same as locks.</p>
-<p>The only difference is that, in a lock, the thread with the lock is the <strong>only one</strong> that can release the lock as well.
-But in a binary semaphore, a thread may decrement the semaphore down to 0 from 1, but another thread can, legally, increment the semaphore back up to 1 again.</p>
-<p>This is called <em>transferring of permissions</em>, binary semaphores thus supports this.</p>
-<h3 id="barriers">Barriers</h3>
-<p>The last thing we&rsquo;ll cover in this part is a so-called <em>barrier</em>.
-A <em>barrier</em> is a form of synchronization where there is a entry-point (barrier) in a program&rsquo;s execution that all threads in a <em>group</em> have to reach <strong>before any of them</strong> is allowed to continue.</p>
-<p>A simple and good example, let&rsquo;s say we use a kind of array as our synchronization mechanism:
-In thread <code>t0</code>&rsquo;s <code>run()</code>:</p>
-<pre tabindex="0"><code>// code before barrier
+</code></pre><p>This makes sense, we shouldn&rsquo;t ever go past 0, and the number of calls to the up and down methods, should correspond to the current count number.</p><p>A special semaphore case is when we have capacity 1, (0 and 1), this is called a <strong>binary</strong> semaphore and are essentially the same as locks.</p><p>The only difference is that, in a lock, the thread with the lock is the <strong>only one</strong> that can release the lock as well.
+But in a binary semaphore, a thread may decrement the semaphore down to 0 from 1, but another thread can, legally, increment the semaphore back up to 1 again.</p><p>This is called <em>transferring of permissions</em>, binary semaphores thus supports this.</p><h3 id=barriers>Barriers</h3><p>The last thing we&rsquo;ll cover in this part is a so-called <em>barrier</em>.
+A <em>barrier</em> is a form of synchronization where there is a entry-point (barrier) in a program&rsquo;s execution that all threads in a <em>group</em> have to reach <strong>before any of them</strong> is allowed to continue.</p><p>A simple and good example, let&rsquo;s say we use a kind of array as our synchronization mechanism:
+In thread <code>t0</code>&rsquo;s <code>run()</code>:</p><pre tabindex=0><code>// code before barrier
 
 // t0 done
 done[t0].up();
@@ -218,8 +83,7 @@ done[t0].up();
 done[t1].down();
 
 // code after barrier
-</code></pre><p>And for thread <code>t1</code>&rsquo;s <code>run()</code>:</p>
-<pre tabindex="0"><code>// code before barrier
+</code></pre><p>And for thread <code>t1</code>&rsquo;s <code>run()</code>:</p><pre tabindex=0><code>// code before barrier
 
 // t1 done
 done[t1].up();
@@ -228,69 +92,6 @@ done[t1].up();
 done[t0].down();
 
 // code after barrier
-</code></pre><p>We can see that this ensures they wait for each other at this point at the program.</p>
-<h3 id="summary">Summary</h3>
-<p>This concludes this part - races, locks and semaphores are an important part in solving concurrent problems that can occur.</p>
-
-        </section>
-    </article>
-
-    <nav class="navigation">
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-
-        
-        
-
-        <div class="nav-item previous">
-            
-            
-            <a href="/school/tda384/tda384/" title="Previous: Part 1 - Introduction">&larr; Previous</a>
-            
-            
-        </div>
-
-        <div class="nav-item next">
-            
-            
-            <a href="/school/tda384/tda384_3/" title="Next: Part 3 - Models of concurrency">Next &rarr;</a>
-            
-            
-        </div>
-    </nav>
-</main>
-<footer id="site-footer">
-    <div class="social-links">
-        
-        <a href="https://github.com/rezaarezvan" title="">github</a>
-        
-        <a href="https://x.com/rzvan__/" title="">x</a>
-        
-    </div><p class="footer-msg">memento mori</p>
-</footer></div>
-</body>
-
-</html>
+</code></pre><p>We can see that this ensures they wait for each other at this point at the program.</p><h3 id=summary>Summary</h3><p>This concludes this part - races, locks and semaphores are an important part in solving concurrent problems that can occur.</p></section></article><nav class=navigation><div class="nav-item previous"><a href=/school/tda384/tda384/ title="Previous: Part 1 - Introduction">&larr; Previous</a></div><div class="nav-item next"><a href=/school/tda384/tda384_3/ title="Next: Part 3 - Models of concurrency">Next &rarr;</a></div></nav></main><footer id=site-footer><div class=social-links><a href=https://github.com/rezaarezvan title class=social-link><span class=bracket>[</span>github<span class=bracket>]</span></a>
+<a href=https://x.com/rzvan__/ title class=social-link><span class=bracket>[</span>x<span class=bracket>]</span></a></div><div class=footer-marquee><div class=footer-marquee__content><span class=footer-marquee__item>memento mori • amor fati • sic parvis magna • per aspera ad astra</span>
+<span class=footer-marquee__item>memento mori • amor fati • sic parvis magna • per aspera ad astra</span></div></div></footer></div></body></html>

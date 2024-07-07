@@ -1,49 +1,11 @@
-<!DOCTYPE html>
-<html><head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"><title>rezvan | Part 12 - Power in AC Circuits</title><link rel="icon" type="image/png" href="https://rezvan.xyz/images/icon.png" /><meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description"
-        content="In this part we&rsquo;ll define Power for AC circuits, we&rsquo;ve had all the tools now for a while, but just never applied them.
+<!doctype html><html><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge"><title>rezvan | Part 12 - Power in AC Circuits</title><link rel=icon type=image/png href=https://rezvan.xyz/images/icon.png><meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=description content="In this part we&rsquo;ll define Power for AC circuits, we&rsquo;ve had all the tools now for a while, but just never applied them.
 Power in AC circuits and be divided into three categories:
-Resistive load $(\theta = 0)$. Inductive load $(Z = \omega L \angle 90^{\circ})$. Capacitive load* $(Z = \dfrac{1}{\omega C} \angle -90^{\circ})$. Resistive Load When we have a resistive load, meaning no phase shift. Then our Voltage and Current are: $$ V(t) = V_m cos(\omega t) \newline I(t) = I_m cos(\omega t) $$" />
-    <meta property="og:image" content="https://raw.githubusercontent.com/rezaarezvan/rezvan.xyz/main/images/icon.png" />
-    <meta property="og:url" content="https://rezvan.xyz/school/eem076/eem076_12/">
-  <meta property="og:site_name" content="rezvan">
-  <meta property="og:title" content="Part 12 - Power in AC Circuits">
-  <meta property="og:description" content="In this part we’ll define Power for AC circuits, we’ve had all the tools now for a while, but just never applied them.
+Resistive load $(\theta = 0)$. Inductive load $(Z = \omega L \angle 90^{\circ})$. Capacitive load* $(Z = \dfrac{1}{\omega C} \angle -90^{\circ})$. Resistive Load When we have a resistive load, meaning no phase shift. Then our Voltage and Current are: $$ V(t) = V_m cos(\omega t) \newline I(t) = I_m cos(\omega t) $$"><meta property="og:image" content="https://raw.githubusercontent.com/rezaarezvan/rezvan.xyz/main/images/icon.png"><meta property="og:url" content="https://rezvan.xyz/school/eem076/eem076_12/"><meta property="og:site_name" content="rezvan"><meta property="og:title" content="Part 12 - Power in AC Circuits"><meta property="og:description" content="In this part we’ll define Power for AC circuits, we’ve had all the tools now for a while, but just never applied them.
 Power in AC circuits and be divided into three categories:
-Resistive load $(\theta = 0)$. Inductive load $(Z = \omega L \angle 90^{\circ})$. Capacitive load* $(Z = \dfrac{1}{\omega C} \angle -90^{\circ})$. Resistive Load When we have a resistive load, meaning no phase shift. Then our Voltage and Current are: $$ V(t) = V_m cos(\omega t) \newline I(t) = I_m cos(\omega t) $$">
-  <meta property="og:locale" content="en_us">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="school">
-    <meta property="article:published_time" content="2023-05-12T10:06:12+02:00">
-    <meta property="article:modified_time" content="2024-05-26T11:09:10+02:00">
-
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Part 12 - Power in AC Circuits">
-  <meta name="twitter:description" content="In this part we’ll define Power for AC circuits, we’ve had all the tools now for a while, but just never applied them.
+Resistive load $(\theta = 0)$. Inductive load $(Z = \omega L \angle 90^{\circ})$. Capacitive load* $(Z = \dfrac{1}{\omega C} \angle -90^{\circ})$. Resistive Load When we have a resistive load, meaning no phase shift. Then our Voltage and Current are: $$ V(t) = V_m cos(\omega t) \newline I(t) = I_m cos(\omega t) $$"><meta property="og:locale" content="en_us"><meta property="og:type" content="article"><meta property="article:section" content="school"><meta property="article:published_time" content="2023-05-12T10:06:12+02:00"><meta property="article:modified_time" content="2024-05-26T11:09:10+02:00"><meta name=twitter:card content="summary"><meta name=twitter:title content="Part 12 - Power in AC Circuits"><meta name=twitter:description content="In this part we’ll define Power for AC circuits, we’ve had all the tools now for a while, but just never applied them.
 Power in AC circuits and be divided into three categories:
-Resistive load $(\theta = 0)$. Inductive load $(Z = \omega L \angle 90^{\circ})$. Capacitive load* $(Z = \dfrac{1}{\omega C} \angle -90^{\circ})$. Resistive Load When we have a resistive load, meaning no phase shift. Then our Voltage and Current are: $$ V(t) = V_m cos(\omega t) \newline I(t) = I_m cos(\omega t) $$">
-<script src="https://rezvan.xyz/js/feather.min.js"></script>
-    
-
-    
-    
-    <link rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/main.73f3431f38ac72fc2890b3747cc9c6d55d5756f3ba40e590c77627ae6c16e46b.css" />
-    <link id="lightSyntaxStyle" rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/light_syntax.65408cc3a5c02070b661c3e4e79306fc261cc63620f4adce9a30eafcba4ab79e.css" />
-    
-    <link id="darkModeStyle" rel="stylesheet" type="text/css" href="https://rezvan.xyz/css/dark.13c6bfb747b76fdd2dc198b1172afdd77e7ce604de43f343ce643378bafc58af.css"  disabled />
-    <link id="darkSyntaxStyle" rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/dark_syntax.2b10cc1a2156b30874a063b7439a993bc3b43d476c5e1d8598d769c929c7b381.css" />
-    
-
-    
-    
-    <script type="text/javascript"
-        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-        </script>
-
-    
-    <script type="text/x-mathjax-config">
+Resistive load $(\theta = 0)$. Inductive load $(Z = \omega L \angle 90^{\circ})$. Capacitive load* $(Z = \dfrac{1}{\omega C} \angle -90^{\circ})$. Resistive Load When we have a resistive load, meaning no phase shift. Then our Voltage and Current are: $$ V(t) = V_m cos(\omega t) \newline I(t) = I_m cos(\omega t) $$"><link rel=stylesheet href=https://rezvan.xyz/css/combined.min.51ec65976b416262d827f98c76ca037bf7aeea27590e3c120eac32afbfbc40ee.css integrity="sha256-Uexll2tBYmLYJ/mMdsoDe/eu6idZDjwSDqwyr7+8QO4="><link id=lightSyntaxStyle rel=stylesheet href=https://rezvan.xyz/css/light_syntax.min.d9e0828a4ff7f2d7317942062fc751fa487b2ac2c47b934ad082abd7d3ca6690.css integrity="sha256-2eCCik/38tcxeUIGL8dR+kh7KsLEe5NK0IKr19PKZpA="><link id=darkModeStyle rel=stylesheet href=https://rezvan.xyz/css/dark.min.49ad20f2859f81550f852c48875ca9e72e4267459ed6fe82fc9b4f3cf7fdc4e8.css integrity="sha256-Sa0g8oWfgVUPhSxIh1yp5y5CZ0We1v6C/JtPPPf9xOg=" disabled><link id=darkSyntaxStyle rel=stylesheet href=https://rezvan.xyz/css/dark_syntax.min.1a878f3d8fb43359bd3b44bc70c4074f682f11066c6537bf6248b696cbe56586.css integrity="sha256-GoePPY+0M1m9O0S8cMQHT2gvEQZsZTe/Yki2lsvlZYY=" disabled><script type=text/javascript src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type=text/x-mathjax-config>
 		MathJax.Hub.Config({
 			tex2jax: {
 				inlineMath: [['$','$'], ['\\(','\\)']],
@@ -55,324 +17,114 @@ Resistive load $(\theta = 0)$. Inductive load $(Z = \omega L \angle 90^{\circ})$
 						 extensions: ["AMSmath.js", "AMSsymbols.js"] }
 			}
 		});
-		</script>
-    
-
-    
-    
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css">
-    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js"
-        onload="renderMathInElement(document.body);"></script>
-
-    
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            renderMathInElement(document.body, {
-                delimiters: [
-                    {left: "$$", right: "$$", display: true},
-                    {left: "$", right: "$", display: false}
-                ]
-            });
-        });
-    </script>
-    
-</head>
-<body>
-    <div class="content"><header>
-    <nav id="site-navbar">
-        <div class="menu-items">
-            
-            <a href="/">home</a>
-            
-            <a href="/principles">principles</a>
-            
-            <a href="/cv">cv</a>
-            
-            <a href="/posts">posts</a>
-            
-            <a href="/school">school</a>
-            
-        </div>
-        <div class="theme-toggle">
-            <span id="dark-mode-toggle" onclick="toggleTheme()"><i data-feather="moon"></i></span>
-            <script src="https://rezvan.xyz/js/themetoggle.js"></script>
-        </div>
-        
-    </nav>
-</header>
-
-<main>
-    <article>
-        <div class="title">
-            <h1>Part 12 - Power in AC Circuits</h1>
-            <div class="meta">Posted on May 12, 2023
-            </div>
-            <div class="meta">
-                (Last updated: May 26, 2024)
-            </div>
-
-        </div>
-        
-        <section class="body">
-            <p>In this part we&rsquo;ll define Power for AC circuits, we&rsquo;ve had all the tools now for a while, but just never applied them.</p>
-<p>Power in AC circuits and be divided into three categories:</p>
-<ul>
-<li><strong>Resistive load</strong> $(\theta = 0)$.</li>
-<li><strong>Inductive load</strong> $(Z = \omega L \angle 90^{\circ})$.</li>
-<li><strong>Capacitive load</strong>* $(Z = \dfrac{1}{\omega C} \angle -90^{\circ})$.</li>
-</ul>
-<h3 id="resistive-load">Resistive Load</h3>
-<p>When we have a resistive load, meaning no phase shift. Then our Voltage and Current are:
+		</script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css><script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js onload=renderMathInElement(document.body)></script><script>document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]})})</script></head><body><div class=content><header><nav id=site-navbar><div class=navbar-content><a href=https://rezvan.xyz/ class=logo>rezvan.xyz</a><div class=navbar-links><a href=/principles class=nav-link><span class=bracket>[</span>principles<span class=bracket>]</span></a>
+<a href=/cv class=nav-link><span class=bracket>[</span>cv<span class=bracket>]</span></a>
+<a href=/posts class=nav-link><span class=bracket>[</span>posts<span class=bracket>]</span></a>
+<a href=/school class=nav-link><span class=bracket>[</span>school<span class=bracket>]</span></a></div><div class=theme-toggle><span id=dark-mode-toggle onclick=toggleTheme() aria-label="Toggle theme">○
+</span><script src=https://rezvan.xyz/js/themetoggle.js></script></div></div></nav></header><main><article><div class=title><h1>Part 12 - Power in AC Circuits</h1><div class=meta>Posted on May 12, 2023</div><div class=meta>(Last updated: May 26, 2024)</div></div><section class=body><p>In this part we&rsquo;ll define Power for AC circuits, we&rsquo;ve had all the tools now for a while, but just never applied them.</p><p>Power in AC circuits and be divided into three categories:</p><ul><li><strong>Resistive load</strong> $(\theta = 0)$.</li><li><strong>Inductive load</strong> $(Z = \omega L \angle 90^{\circ})$.</li><li><strong>Capacitive load</strong>* $(Z = \dfrac{1}{\omega C} \angle -90^{\circ})$.</li></ul><h3 id=resistive-load>Resistive Load</h3><p>When we have a resistive load, meaning no phase shift. Then our Voltage and Current are:
 $$
 V(t) = V_m cos(\omega t) \newline
 I(t) = I_m cos(\omega t)
-$$</p>
-<p>Which, naturally means our power is:
+$$</p><p>Which, naturally means our power is:
 $$
 P(t) = V_m I_m cos^2(\omega t)
-$$</p>
-<p>This is the so-called, <strong>instantaneous power</strong>.</p>
-<p>Our <em>average power</em> is:
+$$</p><p>This is the so-called, <strong>instantaneous power</strong>.</p><p>Our <em>average power</em> is:
 $$
 P_{avg} = \dfrac{V_m I_m}{2}
-$$</p>
-<p>Recall that the Root-mean-square is:
+$$</p><p>Recall that the Root-mean-square is:
 $$
 V_{rms} = \dfrac{V_m}{\sqrt{2}}
-$$</p>
-<p>$$
+$$</p><p>$$
 I_{rms} = \dfrac{I_m}{\sqrt{2}}
-$$</p>
-<p>This also means:
+$$</p><p>This also means:
 $$
 P_{avg} = V_{rms} I_{rms}
-$$</p>
-<h3 id="inductive-load">Inductive Load</h3>
-<p>In an inductive load, the voltage leads the current by $90^\circ$.
+$$</p><h3 id=inductive-load>Inductive Load</h3><p>In an inductive load, the voltage leads the current by $90^\circ$.
 $$
 V(t) = V_m cos(\omega t) \newline
 I(t) = I_m cos(\omega t - 90^\circ)
-$$</p>
-<p>Or, we can write $I(t)$ as:
+$$</p><p>Or, we can write $I(t)$ as:
 $$
 I(t) = I_m sin(\omega t)
-$$</p>
-<p>Which means, our instantaneous power is:
+$$</p><p>Which means, our instantaneous power is:
 $$
 P(t) = V_m I_m cos(\omega t) sin(\omega t)
-$$</p>
-<p>Using one of the trigonometry identities:
+$$</p><p>Using one of the trigonometry identities:
 $$
 P(t) = \dfrac{V_m I_m}{2} sin(2\omega t)
-$$</p>
-<p>Our average power then? Well, the period of our power, $P$, is <em>half</em> the period of $V$ or $I$.</p>
-<p>This means that when either $V(t)$, or $I(t)$ are equal to 0, so is $P$.</p>
-<p>Therefore, the average power will also be zero!
+$$</p><p>Our average power then? Well, the period of our power, $P$, is <em>half</em> the period of $V$ or $I$.</p><p>This means that when either $V(t)$, or $I(t)$ are equal to 0, so is $P$.</p><p>Therefore, the average power will also be zero!
 $$
 P_{avg} = 0
-$$</p>
-<h3 id="capacitive-load">Capacitive Load</h3>
-<p>In a capacitive load, the current now leads by $90^\circ$.
+$$</p><h3 id=capacitive-load>Capacitive Load</h3><p>In a capacitive load, the current now leads by $90^\circ$.
 $$
 V(t) = V_m cos(\omega t) \newline
 I(t) = I_m cos(\omega t + 90^\circ)
-$$</p>
-<p>We can again rewrite $I(t)$ as:
+$$</p><p>We can again rewrite $I(t)$ as:
 $$
 I(t) = I_m -sin(\omega t)
-$$</p>
-<p>Which means our instantaneous power is:
+$$</p><p>Which means our instantaneous power is:
 $$
 P(t) = -V_m I_m cos(\omega t) sin(\omega t)
-$$</p>
-<p>Or using the same trigonometry identity:
+$$</p><p>Or using the same trigonometry identity:
 $$
 P(t) = -\dfrac{V_m I_m}{2} sin(2\omega t)
-$$</p>
-<p>Since we&rsquo;ve only flipped our signed, the average power behaves the same
+$$</p><p>Since we&rsquo;ve only flipped our signed, the average power behaves the same
 $$
 P_{avg} = 0
-$$</p>
-<h3 id="average-power-example">Average Power Example</h3>
-<p>Let&rsquo;s try to understand the average power with an example:</p>
-<p>If we have:
+$$</p><h3 id=average-power-example>Average Power Example</h3><p>Let&rsquo;s try to understand the average power with an example:</p><p>If we have:
 $$
 Z_{L} = 8 - j11 \newline
 I = 5 \angle 20^\circ
-$$</p>
-<p>What&rsquo;s average power in $Z_{L}$?</p>
-<p>We know that the reactive part is going to be zero:
+$$</p><p>What&rsquo;s average power in $Z_{L}$?</p><p>We know that the reactive part is going to be zero:
 $$
 P_{avg:\ Z_{reactive}} = 0
-$$</p>
-<p>The resistive part:
+$$</p><p>The resistive part:
 $$
 P_{avg:\ Z_{resistive}} = \dfrac{V_m I_m}{2}
-$$</p>
-<p>Which we can rewrite with Ohm&rsquo;s law:
+$$</p><p>Which we can rewrite with Ohm&rsquo;s law:
 $$
 P_{avg:\ Z_{resistive}} = \dfrac{I_m^2 R}{2}
-$$</p>
-<p>$$
+$$</p><p>$$
 P_{avg:\ Z_{resistive}} = \dfrac{(5^2) \cdot\ 8}{2} = \boxed{100 W}
-$$</p>
-<h3 id="power-in-ac-circuits---general">Power in AC circuits - general</h3>
-<p>Let&rsquo;s now write this as general we can:
+$$</p><h3 id=power-in-ac-circuits---general>Power in AC circuits - general</h3><p>Let&rsquo;s now write this as general we can:
 $$
 V(t) = V_m cos(\omega t + \theta_V) \newline
 I(t) = I_m cos(\omega t + \phi_I)
-$$</p>
-<p>Which means our instantaneous power:
+$$</p><p>Which means our instantaneous power:
 $$
 P(t) = V_m I_m cos(\omega t + \theta_V) cos(\omega t + \phi_I)
-$$</p>
-<p>We can rewrite this as:
+$$</p><p>We can rewrite this as:
 $$
 P(t) = \dfrac{1}{2} V_m I_m cos(\theta_V - \phi_I) + \dfrac{1}{2} V_m I_m cos(2 \omega t + \theta_V + \phi_I)
-$$</p>
-<p>As we can see, this has one constant part and one periodic part.</p>
-<p>This means our average power is:
+$$</p><p>As we can see, this has one constant part and one periodic part.</p><p>This means our average power is:
 $$
 P_{avg} = \dfrac{V_m I_m}{2} cos(\theta_V - \phi_I)
-$$</p>
-<p>Or using RMS:
+$$</p><p>Or using RMS:
 $$
 P_{avg} = V_{rms} I_{rms} cos(\theta_V - \phi_I)
-$$</p>
-<h3 id="different-types-of-power-in-ac">Different types of power in AC</h3>
-<p>Since we always deal with a complex part and a real part in AC, we can also define different types of power:</p>
-<ul>
-<li>Real Power: $P = V_{rms} I_{rms}\ cos(\theta_V - \phi_I)\ [W]$
-<ul>
-<li>Unit is in Watts, if this is purely resistive, meaning no phase shift, $P = V_{rms} I_{rms}$.</li>
-</ul>
-</li>
-<li>Reactive Power: $Q = V_{rms} I_{rms} sin(\theta_V - \phi_I) [VAR]$
-<ul>
-<li>Unit is in <strong>Volts Amperes Reactive</strong>, if purely resistive, $Q = 0$.</li>
-</ul>
-</li>
-<li>Complex Power: $S = P + jQ$ or in polar form, $S = V_{rms} I_{rms} \angle \theta_V - \phi_I [VA]$
-<ul>
-<li>Unit is in Volt Ampere.</li>
-</ul>
-</li>
-<li>Apparent Power: $|S| = V_{rms} I_{rms} [VA]$.
-<ul>
-<li>Unit is in Volt Ampere.</li>
-</ul>
-</li>
-</ul>
-<p>This also means that:
+$$</p><h3 id=different-types-of-power-in-ac>Different types of power in AC</h3><p>Since we always deal with a complex part and a real part in AC, we can also define different types of power:</p><ul><li>Real Power: $P = V_{rms} I_{rms}\ cos(\theta_V - \phi_I)\ [W]$<ul><li>Unit is in Watts, if this is purely resistive, meaning no phase shift, $P = V_{rms} I_{rms}$.</li></ul></li><li>Reactive Power: $Q = V_{rms} I_{rms} sin(\theta_V - \phi_I) [VAR]$<ul><li>Unit is in <strong>Volts Amperes Reactive</strong>, if purely resistive, $Q = 0$.</li></ul></li><li>Complex Power: $S = P + jQ$ or in polar form, $S = V_{rms} I_{rms} \angle \theta_V - \phi_I [VA]$<ul><li>Unit is in Volt Ampere.</li></ul></li><li>Apparent Power: $|S| = V_{rms} I_{rms} [VA]$.<ul><li>Unit is in Volt Ampere.</li></ul></li></ul><p>This also means that:
 $$
 P^2 + Q^2 = (V_{rms} I_{rms})^2
-$$</p>
-<h3 id="power-factor">Power Factor</h3>
-<p>The last thing we&rsquo;ll talk about is the so-called power factor.</p>
-<p>We define the power factor as:
+$$</p><h3 id=power-factor>Power Factor</h3><p>The last thing we&rsquo;ll talk about is the so-called power factor.</p><p>We define the power factor as:
 $$
 PF = cos(\theta_V - \phi_I) \leq 1
-$$</p>
-<p>We call the angle, for the power angle:
+$$</p><p>We call the angle, for the power angle:
 $$
 \text{Power Angle} = \theta_V - \phi_I
-$$</p>
-<p>Which means we can define the power factor as:
+$$</p><p>Which means we can define the power factor as:
 $$
 PF = \dfrac{P}{|S|}
-$$</p>
-<p><img src="/school/images/PF.png#center" alt=""></p>
-<p>The power factor and the power angle say a lot about the type of circuit we have.</p>
-<p>An inductive load will always have a positive power angle, on the other hand, a capacitive load will have a negative power angle!</p>
-<h3 id="power-relationships">Power Relationships</h3>
-<p>Now, with all these tools, let&rsquo;s write down some relationships. There&rsquo;s a lot.</p>
-<p>$$
+$$</p><p><img src=/school/images/PF.png#center alt></p><p>The power factor and the power angle say a lot about the type of circuit we have.</p><p>An inductive load will always have a positive power angle, on the other hand, a capacitive load will have a negative power angle!</p><h3 id=power-relationships>Power Relationships</h3><p>Now, with all these tools, let&rsquo;s write down some relationships. There&rsquo;s a lot.</p><p>$$
 P = V_{rms} I_{rms} = I_{rms}^2 R = \dfrac{V_{rms}^2}{R}
-$$</p>
-<p>Note, here $X$ is equal to the <strong>reactance</strong>
+$$</p><p>Note, here $X$ is equal to the <strong>reactance</strong>
 $$
 Q = I_{rms}^2 X = \dfrac{V_{rms}^2}{X}
-$$</p>
-<p>$$
+$$</p><p>$$
 S = P + j Q
-$$</p>
-<p>$$
+$$</p><p>$$
 S = V_{rms} I_{rms} \angle \theta_V - \phi_I
-$$</p>
-<p>$$
+$$</p><p>$$
 S = \dfrac{V_m I_m}{2} \angle \theta_V - \phi_I
-$$</p>
-
-        </section>
-    </article>
-
-    <nav class="navigation">
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-
-        
-        
-
-        <div class="nav-item previous">
-            
-            
-            <a href="/school/eem076/eem076_11/" title="Previous: Part 11 - Calculation methods for AC-circuits">&larr; Previous</a>
-            
-            
-        </div>
-
-        <div class="nav-item next">
-            
-            
-            <a href="/school/eem076/eem076_13/" title="Next: Part 13 - Op-Amps and Filters">Next &rarr;</a>
-            
-            
-        </div>
-    </nav>
-</main>
-<footer id="site-footer">
-    <div class="social-links">
-        
-        <a href="https://github.com/rezaarezvan" title="">github</a>
-        
-        <a href="https://x.com/rzvan__/" title="">x</a>
-        
-    </div><p class="footer-msg">memento mori</p>
-</footer></div>
-</body>
-
-</html>
+$$</p></section></article><nav class=navigation><div class="nav-item previous"><a href=/school/eem076/eem076_11/ title="Previous: Part 11 - Calculation methods for AC-circuits">&larr; Previous</a></div><div class="nav-item next"><a href=/school/eem076/eem076_13/ title="Next: Part 13 - Op-Amps and Filters">Next &rarr;</a></div></nav></main><footer id=site-footer><div class=social-links><a href=https://github.com/rezaarezvan title class=social-link><span class=bracket>[</span>github<span class=bracket>]</span></a>
+<a href=https://x.com/rzvan__/ title class=social-link><span class=bracket>[</span>x<span class=bracket>]</span></a></div><div class=footer-marquee><div class=footer-marquee__content><span class=footer-marquee__item>memento mori • amor fati • sic parvis magna • per aspera ad astra</span>
+<span class=footer-marquee__item>memento mori • amor fati • sic parvis magna • per aspera ad astra</span></div></div></footer></div></body></html>

@@ -1,46 +1,8 @@
-<!DOCTYPE html>
-<html><head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"><title>rezvan | Part 9 - Shortest Path &amp; Spanning Trees</title><link rel="icon" type="image/png" href="https://rezvan.xyz/images/icon.png" /><meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description"
-        content="In this part we&rsquo;ll cover spanning trees along with how we can use these to solve pathfinding problems!
-Weighted Graphs As we have seen in the last part - graphs can we directed or undirected, the same thing goes for the weights on the edge. These represent some kind of &lsquo;cost&rsquo;, usually these are positive float numbers, but they could be anything - although many algorithms only work for positive weights." />
-    <meta property="og:image" content="https://raw.githubusercontent.com/rezaarezvan/rezvan.xyz/main/images/icon.png" />
-    <meta property="og:url" content="https://rezvan.xyz/school/dat038/dat038_9/">
-  <meta property="og:site_name" content="rezvan">
-  <meta property="og:title" content="Part 9 - Shortest Path &amp; Spanning Trees">
-  <meta property="og:description" content="In this part we’ll cover spanning trees along with how we can use these to solve pathfinding problems!
-Weighted Graphs As we have seen in the last part - graphs can we directed or undirected, the same thing goes for the weights on the edge. These represent some kind of ‘cost’, usually these are positive float numbers, but they could be anything - although many algorithms only work for positive weights.">
-  <meta property="og:locale" content="en_us">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="school">
-    <meta property="article:published_time" content="2022-12-07T18:34:09+01:00">
-    <meta property="article:modified_time" content="2024-05-26T11:09:10+02:00">
-
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Part 9 - Shortest Path &amp; Spanning Trees">
-  <meta name="twitter:description" content="In this part we’ll cover spanning trees along with how we can use these to solve pathfinding problems!
-Weighted Graphs As we have seen in the last part - graphs can we directed or undirected, the same thing goes for the weights on the edge. These represent some kind of ‘cost’, usually these are positive float numbers, but they could be anything - although many algorithms only work for positive weights.">
-<script src="https://rezvan.xyz/js/feather.min.js"></script>
-    
-
-    
-    
-    <link rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/main.73f3431f38ac72fc2890b3747cc9c6d55d5756f3ba40e590c77627ae6c16e46b.css" />
-    <link id="lightSyntaxStyle" rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/light_syntax.65408cc3a5c02070b661c3e4e79306fc261cc63620f4adce9a30eafcba4ab79e.css" />
-    
-    <link id="darkModeStyle" rel="stylesheet" type="text/css" href="https://rezvan.xyz/css/dark.13c6bfb747b76fdd2dc198b1172afdd77e7ce604de43f343ce643378bafc58af.css"  disabled />
-    <link id="darkSyntaxStyle" rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/dark_syntax.2b10cc1a2156b30874a063b7439a993bc3b43d476c5e1d8598d769c929c7b381.css" />
-    
-
-    
-    
-    <script type="text/javascript"
-        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-        </script>
-
-    
-    <script type="text/x-mathjax-config">
+<!doctype html><html><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge"><title>rezvan | Part 9 - Shortest Path & Spanning Trees</title><link rel=icon type=image/png href=https://rezvan.xyz/images/icon.png><meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=description content="In this part we&rsquo;ll cover spanning trees along with how we can use these to solve pathfinding problems!
+Weighted Graphs As we have seen in the last part - graphs can we directed or undirected, the same thing goes for the weights on the edge. These represent some kind of &lsquo;cost&rsquo;, usually these are positive float numbers, but they could be anything - although many algorithms only work for positive weights."><meta property="og:image" content="https://raw.githubusercontent.com/rezaarezvan/rezvan.xyz/main/images/icon.png"><meta property="og:url" content="https://rezvan.xyz/school/dat038/dat038_9/"><meta property="og:site_name" content="rezvan"><meta property="og:title" content="Part 9 - Shortest Path & Spanning Trees"><meta property="og:description" content="In this part we’ll cover spanning trees along with how we can use these to solve pathfinding problems!
+Weighted Graphs As we have seen in the last part - graphs can we directed or undirected, the same thing goes for the weights on the edge. These represent some kind of ‘cost’, usually these are positive float numbers, but they could be anything - although many algorithms only work for positive weights."><meta property="og:locale" content="en_us"><meta property="og:type" content="article"><meta property="article:section" content="school"><meta property="article:published_time" content="2022-12-07T18:34:09+01:00"><meta property="article:modified_time" content="2024-05-26T11:09:10+02:00"><meta name=twitter:card content="summary"><meta name=twitter:title content="Part 9 - Shortest Path & Spanning Trees"><meta name=twitter:description content="In this part we’ll cover spanning trees along with how we can use these to solve pathfinding problems!
+Weighted Graphs As we have seen in the last part - graphs can we directed or undirected, the same thing goes for the weights on the edge. These represent some kind of ‘cost’, usually these are positive float numbers, but they could be anything - although many algorithms only work for positive weights."><link rel=stylesheet href=https://rezvan.xyz/css/combined.min.51ec65976b416262d827f98c76ca037bf7aeea27590e3c120eac32afbfbc40ee.css integrity="sha256-Uexll2tBYmLYJ/mMdsoDe/eu6idZDjwSDqwyr7+8QO4="><link id=lightSyntaxStyle rel=stylesheet href=https://rezvan.xyz/css/light_syntax.min.d9e0828a4ff7f2d7317942062fc751fa487b2ac2c47b934ad082abd7d3ca6690.css integrity="sha256-2eCCik/38tcxeUIGL8dR+kh7KsLEe5NK0IKr19PKZpA="><link id=darkModeStyle rel=stylesheet href=https://rezvan.xyz/css/dark.min.49ad20f2859f81550f852c48875ca9e72e4267459ed6fe82fc9b4f3cf7fdc4e8.css integrity="sha256-Sa0g8oWfgVUPhSxIh1yp5y5CZ0We1v6C/JtPPPf9xOg=" disabled><link id=darkSyntaxStyle rel=stylesheet href=https://rezvan.xyz/css/dark_syntax.min.1a878f3d8fb43359bd3b44bc70c4074f682f11066c6537bf6248b696cbe56586.css integrity="sha256-GoePPY+0M1m9O0S8cMQHT2gvEQZsZTe/Yki2lsvlZYY=" disabled><script type=text/javascript src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type=text/x-mathjax-config>
 		MathJax.Hub.Config({
 			tex2jax: {
 				inlineMath: [['$','$'], ['\\(','\\)']],
@@ -52,127 +14,13 @@ Weighted Graphs As we have seen in the last part - graphs can we directed or und
 						 extensions: ["AMSmath.js", "AMSsymbols.js"] }
 			}
 		});
-		</script>
-    
-
-    
-    
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css">
-    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js"
-        onload="renderMathInElement(document.body);"></script>
-
-    
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            renderMathInElement(document.body, {
-                delimiters: [
-                    {left: "$$", right: "$$", display: true},
-                    {left: "$", right: "$", display: false}
-                ]
-            });
-        });
-    </script>
-    
-</head>
-<body>
-    <div class="content"><header>
-    <nav id="site-navbar">
-        <div class="menu-items">
-            
-            <a href="/">home</a>
-            
-            <a href="/principles">principles</a>
-            
-            <a href="/cv">cv</a>
-            
-            <a href="/posts">posts</a>
-            
-            <a href="/school">school</a>
-            
-        </div>
-        <div class="theme-toggle">
-            <span id="dark-mode-toggle" onclick="toggleTheme()"><i data-feather="moon"></i></span>
-            <script src="https://rezvan.xyz/js/themetoggle.js"></script>
-        </div>
-        
-    </nav>
-</header>
-
-<main>
-    <article>
-        <div class="title">
-            <h1>Part 9 - Shortest Path &amp; Spanning Trees</h1>
-            <div class="meta">Posted on Dec 7, 2022
-            </div>
-            <div class="meta">
-                (Last updated: May 26, 2024)
-            </div>
-
-        </div>
-        
-        <section class="body">
-            <p>In this part we&rsquo;ll cover spanning trees along with how we can use these to solve pathfinding problems!</p>
-<h3 id="weighted-graphs">Weighted Graphs</h3>
-<p>As we have seen in the last part - graphs can we directed or undirected, the same thing goes for the <em>weights</em> on the edge.
-These represent some kind of &lsquo;cost&rsquo;, usually these are positive float numbers, but they <em>could</em> be anything - although many algorithms only work for positive weights.</p>
-<h3 id="spanning-trees">Spanning Trees</h3>
-<p>A <em>spanning tree</em> of an <strong>undirected</strong> graph, $G$, is a <em>sub graph</em> $T$ such that:</p>
-<ul>
-<li>Is <em>connected</em></li>
-<li>Is acyclic</li>
-<li>Includes all the nodes</li>
-</ul>
-<p>The important thing here is that the graph is <strong>connected</strong>, which means we don&rsquo;t have any <em>lose</em> sub graphs, we must have one <strong>connected</strong> unit.</p>
-<h3 id="minimum-spanning-tree-problem">Minimum Spanning Tree Problem</h3>
-<p>Given a connected, undirected <strong>weighted</strong> graph, $G$ - what is the spanning tree with the <em>minimum total weight</em></p>
-<p>This specific tree is called the <em>MST</em>, or <strong>M</strong>inimum <strong>S</strong>panning <strong>T</strong>ree. MSTs have a lot of applications in the real-world.</p>
-<p>Let&rsquo;s begin to look at some algorithms which find these MSTs.</p>
-<h3 id="greedy-algorithms">Greedy algorithms</h3>
-<p>Before we jump into the actual algorithms, let&rsquo;s look at some fundamental properties first.</p>
-<ul>
-<li>A <em>cut</em> in a graph is a <em>partition</em> of its nodes into two (nonempty) sets.</li>
-<li>A <em>crossing edge</em> <strong>connects</strong> a node in one set with a node in another set.</li>
-</ul>
-<p>With these two properties, there&rsquo;s a theorem which proves that:</p>
-<ul>
-<li>Given any cut, the crossing edge of <strong>minimal weight</strong> is in the MST</li>
-</ul>
-<p>Algorithmic idea:</p>
-<ul>
-<li>Start with all edges colored gray</li>
-<li>Find <em>cut</em> with no black <em>crossing edges</em>; Color it&rsquo;s min-weight edge black</li>
-<li>Repeat until $V - 1$ edges are black</li>
-</ul>
-<p>This isn&rsquo;t <em>quite</em> enough for an actual implementation since:</p>
-<ul>
-<li>How do we choose the cut?</li>
-<li>How do we <em>actually</em> choose the edge with minimum weight after finding all crossing edges?</li>
-</ul>
-<p>We&rsquo;ll now cover some actual algorithms which implements this.</p>
-<h3 id="overview">Overview</h3>
-<p>We&rsquo;ll cover <em>Kruskal&rsquo;s algorithm</em> and <em>Prim&rsquo;s algorithm</em></p>
-<p>The basic idea for Kruskal&rsquo;s is:</p>
-<ul>
-<li>Consider edges in ascending order of weight</li>
-<li>Add next edge to the MST, unless doing so would create a cycle</li>
-<li>Repeat until there are $V - 1$ edges in the MST</li>
-</ul>
-<p>And for Prim&rsquo;s algorithm:</p>
-<ul>
-<li>Start with node 0 and greedily grow the MST</li>
-<li>Add to the MST the minimum weight edge with exactly one endpoint in the MST</li>
-<li>Repeat until there are $V - 1$ edges in the MST</li>
-</ul>
-<p>We&rsquo;ll begin with Kruskal&rsquo;s algorithm</p>
-<h3 id="kruskals-algorithm">Kruskal&rsquo;s algorithm</h3>
-<p>So, as in the overview, kruskal&rsquo;s algorithm is quite simple in the idea - but the only implementation challenge is - how do we determine if we create a cycle?</p>
-<p>But let&rsquo;s break it down. The algorithm stores several <em>disjoint</em> subtrees of the final MST - when we add a edge, it merges two of the subtrees.</p>
-<p>So testing for cyclicity, we need to check if two nodes appear in the same set!</p>
-<p>There&rsquo;s actually a good (and well-known) data structure for this exact problem, the <em>disjoint-set</em> data structure.
-It supports merging and testing in $\mathcal{O}(log*\ n)$ time. (Note log* is an actual function, it&rsquo;s constant for all practical purposes)</p>
-<p>A pseudocode implementation would be:</p>
-<pre tabindex="0"><code>def kruskals(graph: Graph):
+		</script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css><script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js onload=renderMathInElement(document.body)></script><script>document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]})})</script></head><body><div class=content><header><nav id=site-navbar><div class=navbar-content><a href=https://rezvan.xyz/ class=logo>rezvan.xyz</a><div class=navbar-links><a href=/principles class=nav-link><span class=bracket>[</span>principles<span class=bracket>]</span></a>
+<a href=/cv class=nav-link><span class=bracket>[</span>cv<span class=bracket>]</span></a>
+<a href=/posts class=nav-link><span class=bracket>[</span>posts<span class=bracket>]</span></a>
+<a href=/school class=nav-link><span class=bracket>[</span>school<span class=bracket>]</span></a></div><div class=theme-toggle><span id=dark-mode-toggle onclick=toggleTheme() aria-label="Toggle theme">○
+</span><script src=https://rezvan.xyz/js/themetoggle.js></script></div></div></nav></header><main><article><div class=title><h1>Part 9 - Shortest Path & Spanning Trees</h1><div class=meta>Posted on Dec 7, 2022</div><div class=meta>(Last updated: May 26, 2024)</div></div><section class=body><p>In this part we&rsquo;ll cover spanning trees along with how we can use these to solve pathfinding problems!</p><h3 id=weighted-graphs>Weighted Graphs</h3><p>As we have seen in the last part - graphs can we directed or undirected, the same thing goes for the <em>weights</em> on the edge.
+These represent some kind of &lsquo;cost&rsquo;, usually these are positive float numbers, but they <em>could</em> be anything - although many algorithms only work for positive weights.</p><h3 id=spanning-trees>Spanning Trees</h3><p>A <em>spanning tree</em> of an <strong>undirected</strong> graph, $G$, is a <em>sub graph</em> $T$ such that:</p><ul><li>Is <em>connected</em></li><li>Is acyclic</li><li>Includes all the nodes</li></ul><p>The important thing here is that the graph is <strong>connected</strong>, which means we don&rsquo;t have any <em>lose</em> sub graphs, we must have one <strong>connected</strong> unit.</p><h3 id=minimum-spanning-tree-problem>Minimum Spanning Tree Problem</h3><p>Given a connected, undirected <strong>weighted</strong> graph, $G$ - what is the spanning tree with the <em>minimum total weight</em></p><p>This specific tree is called the <em>MST</em>, or <strong>M</strong>inimum <strong>S</strong>panning <strong>T</strong>ree. MSTs have a lot of applications in the real-world.</p><p>Let&rsquo;s begin to look at some algorithms which find these MSTs.</p><h3 id=greedy-algorithms>Greedy algorithms</h3><p>Before we jump into the actual algorithms, let&rsquo;s look at some fundamental properties first.</p><ul><li>A <em>cut</em> in a graph is a <em>partition</em> of its nodes into two (nonempty) sets.</li><li>A <em>crossing edge</em> <strong>connects</strong> a node in one set with a node in another set.</li></ul><p>With these two properties, there&rsquo;s a theorem which proves that:</p><ul><li>Given any cut, the crossing edge of <strong>minimal weight</strong> is in the MST</li></ul><p>Algorithmic idea:</p><ul><li>Start with all edges colored gray</li><li>Find <em>cut</em> with no black <em>crossing edges</em>; Color it&rsquo;s min-weight edge black</li><li>Repeat until $V - 1$ edges are black</li></ul><p>This isn&rsquo;t <em>quite</em> enough for an actual implementation since:</p><ul><li>How do we choose the cut?</li><li>How do we <em>actually</em> choose the edge with minimum weight after finding all crossing edges?</li></ul><p>We&rsquo;ll now cover some actual algorithms which implements this.</p><h3 id=overview>Overview</h3><p>We&rsquo;ll cover <em>Kruskal&rsquo;s algorithm</em> and <em>Prim&rsquo;s algorithm</em></p><p>The basic idea for Kruskal&rsquo;s is:</p><ul><li>Consider edges in ascending order of weight</li><li>Add next edge to the MST, unless doing so would create a cycle</li><li>Repeat until there are $V - 1$ edges in the MST</li></ul><p>And for Prim&rsquo;s algorithm:</p><ul><li>Start with node 0 and greedily grow the MST</li><li>Add to the MST the minimum weight edge with exactly one endpoint in the MST</li><li>Repeat until there are $V - 1$ edges in the MST</li></ul><p>We&rsquo;ll begin with Kruskal&rsquo;s algorithm</p><h3 id=kruskals-algorithm>Kruskal&rsquo;s algorithm</h3><p>So, as in the overview, kruskal&rsquo;s algorithm is quite simple in the idea - but the only implementation challenge is - how do we determine if we create a cycle?</p><p>But let&rsquo;s break it down. The algorithm stores several <em>disjoint</em> subtrees of the final MST - when we add a edge, it merges two of the subtrees.</p><p>So testing for cyclicity, we need to check if two nodes appear in the same set!</p><p>There&rsquo;s actually a good (and well-known) data structure for this exact problem, the <em>disjoint-set</em> data structure.
+It supports merging and testing in $\mathcal{O}(log*\ n)$ time. (Note log* is an actual function, it&rsquo;s constant for all practical purposes)</p><p>A pseudocode implementation would be:</p><pre tabindex=0><code>def kruskals(graph: Graph):
     result = []
     i, e = 0, 0
     graph = sort(graph)
@@ -191,65 +39,10 @@ It supports merging and testing in $\mathcal{O}(log*\ n)$ time. (Note log* is an
             e = e + 1
             result.append([u, v, w])
             graph.apply_union(parent, rank, x, y)
-</code></pre><h3 id="prims-algorithm">Prim&rsquo;s algorithm</h3>
-<p>The challenge here is instead to find and remove the min weight edge with exactly one endpoint in T.</p>
-<p>If try all edges we will of course have a complexity of $\mathcal{O}(E^2)$. So let&rsquo;s not do that :)</p>
-<p>However, if we use a priority queue, we can get a $\mathcal{O}(E\ log(E))$. This is still the &rsquo;lazy&rsquo; version but let&rsquo;s look at the idea:</p>
-<p>Maintain a PQ of edges having (at least) one endpoint in T:</p>
-<ul>
-<li>Remove the minimum edge to determine next edge $e = v - w$ to add to T.</li>
-<li>Disregard $e$ if both endpoints $v$ and $w$ are marked (both in T).</li>
-<li>Otherwise, let $w$ be the unmarked node (not in T).
-<ul>
-<li>Add to the PQ, any outgoing edge from $w$ (assuming other endpoint is not in T).</li>
-<li>Add $e$ to T and mark $w$.</li>
-</ul>
-</li>
-</ul>
-<p>The <em>eager</em> solution would be the same <em>but</em>:
+</code></pre><h3 id=prims-algorithm>Prim&rsquo;s algorithm</h3><p>The challenge here is instead to find and remove the min weight edge with exactly one endpoint in T.</p><p>If try all edges we will of course have a complexity of $\mathcal{O}(E^2)$. So let&rsquo;s not do that :)</p><p>However, if we use a priority queue, we can get a $\mathcal{O}(E\ log(E))$. This is still the &rsquo;lazy&rsquo; version but let&rsquo;s look at the idea:</p><p>Maintain a PQ of edges having (at least) one endpoint in T:</p><ul><li>Remove the minimum edge to determine next edge $e = v - w$ to add to T.</li><li>Disregard $e$ if both endpoints $v$ and $w$ are marked (both in T).</li><li>Otherwise, let $w$ be the unmarked node (not in T).<ul><li>Add to the PQ, any outgoing edge from $w$ (assuming other endpoint is not in T).</li><li>Add $e$ to T and mark $w$.</li></ul></li></ul><p>The <em>eager</em> solution would be the same <em>but</em>:
 Maintain a PQ of <strong>nodes</strong> (PQ has at most one entry per node) connected by an edge to T,
-where priority of node $v$ = weight of shortest edge connecting $v$ to T.</p>
-<ul>
-<li>Remove the minimum node $v$ and add its associated edge $e = v - w$ to T.</li>
-<li>Update PQ by considering all edges $e = v - u$ incident to $v$
-<ul>
-<li>Ignore if $u$ is already in T.</li>
-<li>Add $u$ to PQ if not already on it.</li>
-<li><strong>Decrease priority</strong> of $u$ if $v - u$ becomes shortest edge connecting $u$ to T.</li>
-</ul>
-</li>
-</ul>
-<p>Note this requires an index PQ, which we haven&rsquo;t implemented or went over.</p>
-<h3 id="complexity">Complexity</h3>
-<p>The complexity of these algorithms are:</p>
-<ul>
-<li>Prim&rsquo;s
-<ul>
-<li>$\mathcal{O}(E\ log(E))$</li>
-</ul>
-</li>
-<li>Kruskal&rsquo;s
-<ul>
-<li>$\mathcal{O}(E\ log(E))$</li>
-</ul>
-</li>
-</ul>
-<h3 id="shortest-path-algorithms">Shortest Path Algorithms</h3>
-<p>Finding the shortest path in a given tree is a very complex problem which we will encounter in the real-world in many applications!</p>
-<p>For example in: Map Navigation, Robot navigation, Urban traffic planning, Network routing (OSPF, BGP, RIP) etc.</p>
-<h3 id="variants">Variants</h3>
-<p>There are many different problems when it comes to the shortest path problem - Do we want the shortest path between:</p>
-<ul>
-<li>Single source: One node, S, to <em>every other node</em></li>
-<li>Single sink: From every node to one node, T.</li>
-<li>Source-sink: From one node, S, to another node, T.</li>
-<li>All pairs: Between all possible pairs of nodes.</li>
-</ul>
-<p>But we also need to weigh in, is there any restrictions on the edge weights?
-Also, if we have any restraints on cycles?</p>
-<p>But with all this in mind - let&rsquo;s simplify - the shortest path from S to each node V <strong>exists</strong>.</p>
-<p>If you remember, here&rsquo;s our ADT/API for directed graphs:</p>
-<pre tabindex="0"><code>class Graph&lt;Vertices&gt;:
+where priority of node $v$ = weight of shortest edge connecting $v$ to T.</p><ul><li>Remove the minimum node $v$ and add its associated edge $e = v - w$ to T.</li><li>Update PQ by considering all edges $e = v - u$ incident to $v$<ul><li>Ignore if $u$ is already in T.</li><li>Add $u$ to PQ if not already on it.</li><li><strong>Decrease priority</strong> of $u$ if $v - u$ becomes shortest edge connecting $u$ to T.</li></ul></li></ul><p>Note this requires an index PQ, which we haven&rsquo;t implemented or went over.</p><h3 id=complexity>Complexity</h3><p>The complexity of these algorithms are:</p><ul><li>Prim&rsquo;s<ul><li>$\mathcal{O}(E\ log(E))$</li></ul></li><li>Kruskal&rsquo;s<ul><li>$\mathcal{O}(E\ log(E))$</li></ul></li></ul><h3 id=shortest-path-algorithms>Shortest Path Algorithms</h3><p>Finding the shortest path in a given tree is a very complex problem which we will encounter in the real-world in many applications!</p><p>For example in: Map Navigation, Robot navigation, Urban traffic planning, Network routing (OSPF, BGP, RIP) etc.</p><h3 id=variants>Variants</h3><p>There are many different problems when it comes to the shortest path problem - Do we want the shortest path between:</p><ul><li>Single source: One node, S, to <em>every other node</em></li><li>Single sink: From every node to one node, T.</li><li>Source-sink: From one node, S, to another node, T.</li><li>All pairs: Between all possible pairs of nodes.</li></ul><p>But we also need to weigh in, is there any restrictions on the edge weights?
+Also, if we have any restraints on cycles?</p><p>But with all this in mind - let&rsquo;s simplify - the shortest path from S to each node V <strong>exists</strong>.</p><p>If you remember, here&rsquo;s our ADT/API for directed graphs:</p><pre tabindex=0><code>class Graph&lt;Vertices&gt;:
     // Adds an edge to the graph
     add_edge(e: Edge&lt;Vertices&gt;)
 
@@ -272,35 +65,14 @@ class Edge&lt;Vertices&gt;:
     from   : Vertices
     to     : Vertices
     weight : float = 1.0
-</code></pre><h3 id="single-source-shortest-paths">Single-source shortest paths</h3>
-<p>The <em>single-source shortest path</em> problem or, SSSP for short. We want to find the shortest path from S to every other node.</p>
-<p>The solution is spanning trees! However, it&rsquo;s not the MST but the so called <strong>shortest-paths tree</strong>, SPT.</p>
-<p>In an SPT, the starting node $s$ is the root of the tree:</p>
-<ul>
-<li>How do we retrace the shortest path from and to any nodes?
-<ul>
-<li>This consists of all ancestors of $t$, <strong>in reverse order</strong></li>
-<li>Therefore, all information we need is the parent of every node in the SPT</li>
-</ul>
-</li>
-<li>How do we determine the length of the shortest path from and to any nodes?
-<ul>
-<li>This is the sum of the edge in that path</li>
-<li>So either we need to store the edge weight, or the edge itself in the SPT</li>
-</ul>
-</li>
-</ul>
-<p>So a generalized generic <code>GraphSearch</code> would be:</p>
-<pre tabindex="0"><code>GraphSearch(start: V):
+</code></pre><h3 id=single-source-shortest-paths>Single-source shortest paths</h3><p>The <em>single-source shortest path</em> problem or, SSSP for short. We want to find the shortest path from S to every other node.</p><p>The solution is spanning trees! However, it&rsquo;s not the MST but the so called <strong>shortest-paths tree</strong>, SPT.</p><p>In an SPT, the starting node $s$ is the root of the tree:</p><ul><li>How do we retrace the shortest path from and to any nodes?<ul><li>This consists of all ancestors of $t$, <strong>in reverse order</strong></li><li>Therefore, all information we need is the parent of every node in the SPT</li></ul></li><li>How do we determine the length of the shortest path from and to any nodes?<ul><li>This is the sum of the edge in that path</li><li>So either we need to store the edge weight, or the edge itself in the SPT</li></ul></li></ul><p>So a generalized generic <code>GraphSearch</code> would be:</p><pre tabindex=0><code>GraphSearch(start: V):
     put start in collection
     repeat until the colletion is empty:
         remove a vertex v
         if v is not visited:
             mark v as visited
             add all unvisited adjacent nodes
-</code></pre><p>Now let&rsquo;s suppose this collection is a <strong>priority queue</strong> - the weights are the <strong>total cost from s to v</strong></p>
-<p>This is the so-called Dijkstra&rsquo;s/uniform cost algorithm/search.</p>
-<pre tabindex="0"><code>UCS(start: V):
+</code></pre><p>Now let&rsquo;s suppose this collection is a <strong>priority queue</strong> - the weights are the <strong>total cost from s to v</strong></p><p>This is the so-called Dijkstra&rsquo;s/uniform cost algorithm/search.</p><pre tabindex=0><code>UCS(start: V):
     Q = PQ // Order by the cost from start
     Q.put(start)
     while is not Q.isempty():
@@ -310,8 +82,7 @@ class Edge&lt;Vertices&gt;:
             for unvisited vertex w adjacent to v:
                 the cost from s to w = cost from s to v + the cost from v to w
                 Q.put(w)
-</code></pre><p>This is the so-called <strong>single source</strong> algorithm, if we want a <strong>source-sink</strong> we just add:</p>
-<pre tabindex="0"><code>UCS(start: V):
+</code></pre><p>This is the so-called <strong>single source</strong> algorithm, if we want a <strong>source-sink</strong> we just add:</p><pre tabindex=0><code>UCS(start: V):
     Q = PQ // Order by the cost from start
     Q.put(start)
     while is not Q.isempty():
@@ -322,159 +93,8 @@ class Edge&lt;Vertices&gt;:
             for unvisited vertex w adjacent to v:
                 the cost from s to w = cost from s to v + the cost from v to w
                 Q.put(w)
-</code></pre><h3 id="shortest-path-in-a-dag">Shortest path in a DAG</h3>
-<p>If we know the graph doesn&rsquo;t contain any cycles, this problem become <strong>a lot</strong> easier.</p>
-<p>We use the same algorithm as a UCS - but we don&rsquo;t need a PQ and, we can consider the nodes in a <em>topological order</em>.</p>
-<p>This reduces the complexity to $\mathcal{O}(E)$.</p>
-<h3 id="negative-weights">Negative weights</h3>
-<p>Dijkstras/UCS won&rsquo;t work with negative edge weights - we really can&rsquo;t fix this, so instead we use the <em>Bellman-ford</em> algorithm.</p>
-<h3 id="complexity-1">Complexity</h3>
-<p>Here&rsquo;s a table of all the complexities:</p>
-<ul>
-<li>Topological Sort
-<ul>
-<li>Restriction
-<ul>
-<li>No directed cycles</li>
-</ul>
-</li>
-<li>Worst-case time complexity
-<ul>
-<li>$\mathcal{O}(E + V)$</li>
-</ul>
-</li>
-<li>Space-usage
-<ul>
-<li>$\mathcal{O}(V)$</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>UCS/Dijkstras
-<ul>
-<li>Restriction
-<ul>
-<li>No negative weights</li>
-</ul>
-</li>
-<li>Worst-case time complexity
-<ul>
-<li>$\mathcal{O}(E\ log(E))$</li>
-</ul>
-</li>
-<li>Space-usage
-<ul>
-<li>$\mathcal{O}(E)$</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>Dijkstras eager
-<ul>
-<li>Restriction
-<ul>
-<li>No negative weights</li>
-</ul>
-</li>
-<li>Worst-case time complexity
-<ul>
-<li>$\mathcal{O}(E\ log(V))$</li>
-</ul>
-</li>
-<li>Space-usage
-<ul>
-<li>$\mathcal{O}(V)$</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>Bellman-ford
-<ul>
-<li>Restriction
-<ul>
-<li>No negative <strong>cycles</strong></li>
-</ul>
-</li>
-<li>Worst-case time complexity
-<ul>
-<li>$\mathcal{O}(E\ V)$</li>
-</ul>
-</li>
-<li>Space-usage
-<ul>
-<li>$\mathcal{O}(V)$</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="summary">Summary</h3>
-<p>So the summary really here is knowing when to use what depending on what you have.</p>
-<p>So in the case we have non-negative weights (which is the most often scenario),
-we can almost always use UCS/Dijkstras, since this is almost linear.</p>
-<p>If we encounter a DAG, we should perform a Topological sort algorithm, since it&rsquo;s linear</p>
-<p>Negative weights and negative cycles, If we have no negative cycles - then Bellman-ford is the approach,
-otherwise we can find <strong>some path</strong> via Bellman-ford.</p>
-
-        </section>
-    </article>
-
-    <nav class="navigation">
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-
-        
-        
-
-        <div class="nav-item previous">
-            
-            
-            <a href="/school/dat038/dat038_8/" title="Previous: Part 8 - Graphs">&larr; Previous</a>
-            
-            
-        </div>
-
-        <div class="nav-item next">
-            
-            
-            <a href="/school/dat038/dat038_10/" title="Next: Part 10 - Complexity (2)">Next &rarr;</a>
-            
-            
-        </div>
-    </nav>
-</main>
-<footer id="site-footer">
-    <div class="social-links">
-        
-        <a href="https://github.com/rezaarezvan" title="">github</a>
-        
-        <a href="https://x.com/rzvan__/" title="">x</a>
-        
-    </div><p class="footer-msg">memento mori</p>
-</footer></div>
-</body>
-
-</html>
+</code></pre><h3 id=shortest-path-in-a-dag>Shortest path in a DAG</h3><p>If we know the graph doesn&rsquo;t contain any cycles, this problem become <strong>a lot</strong> easier.</p><p>We use the same algorithm as a UCS - but we don&rsquo;t need a PQ and, we can consider the nodes in a <em>topological order</em>.</p><p>This reduces the complexity to $\mathcal{O}(E)$.</p><h3 id=negative-weights>Negative weights</h3><p>Dijkstras/UCS won&rsquo;t work with negative edge weights - we really can&rsquo;t fix this, so instead we use the <em>Bellman-ford</em> algorithm.</p><h3 id=complexity-1>Complexity</h3><p>Here&rsquo;s a table of all the complexities:</p><ul><li>Topological Sort<ul><li>Restriction<ul><li>No directed cycles</li></ul></li><li>Worst-case time complexity<ul><li>$\mathcal{O}(E + V)$</li></ul></li><li>Space-usage<ul><li>$\mathcal{O}(V)$</li></ul></li></ul></li><li>UCS/Dijkstras<ul><li>Restriction<ul><li>No negative weights</li></ul></li><li>Worst-case time complexity<ul><li>$\mathcal{O}(E\ log(E))$</li></ul></li><li>Space-usage<ul><li>$\mathcal{O}(E)$</li></ul></li></ul></li><li>Dijkstras eager<ul><li>Restriction<ul><li>No negative weights</li></ul></li><li>Worst-case time complexity<ul><li>$\mathcal{O}(E\ log(V))$</li></ul></li><li>Space-usage<ul><li>$\mathcal{O}(V)$</li></ul></li></ul></li><li>Bellman-ford<ul><li>Restriction<ul><li>No negative <strong>cycles</strong></li></ul></li><li>Worst-case time complexity<ul><li>$\mathcal{O}(E\ V)$</li></ul></li><li>Space-usage<ul><li>$\mathcal{O}(V)$</li></ul></li></ul></li></ul><h3 id=summary>Summary</h3><p>So the summary really here is knowing when to use what depending on what you have.</p><p>So in the case we have non-negative weights (which is the most often scenario),
+we can almost always use UCS/Dijkstras, since this is almost linear.</p><p>If we encounter a DAG, we should perform a Topological sort algorithm, since it&rsquo;s linear</p><p>Negative weights and negative cycles, If we have no negative cycles - then Bellman-ford is the approach,
+otherwise we can find <strong>some path</strong> via Bellman-ford.</p></section></article><nav class=navigation><div class="nav-item previous"><a href=/school/dat038/dat038_8/ title="Previous: Part 8 - Graphs">&larr; Previous</a></div><div class="nav-item next"><a href=/school/dat038/dat038_10/ title="Next: Part 10 - Complexity (2)">Next &rarr;</a></div></nav></main><footer id=site-footer><div class=social-links><a href=https://github.com/rezaarezvan title class=social-link><span class=bracket>[</span>github<span class=bracket>]</span></a>
+<a href=https://x.com/rzvan__/ title class=social-link><span class=bracket>[</span>x<span class=bracket>]</span></a></div><div class=footer-marquee><div class=footer-marquee__content><span class=footer-marquee__item>memento mori • amor fati • sic parvis magna • per aspera ad astra</span>
+<span class=footer-marquee__item>memento mori • amor fati • sic parvis magna • per aspera ad astra</span></div></div></footer></div></body></html>

@@ -1,58 +1,20 @@
-<!DOCTYPE html>
-<html><head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"><title>rezvan | Part 2 - System properties &amp; LTI</title><link rel="icon" type="image/png" href="https://rezvan.xyz/images/icon.png" /><meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description"
-        content="Introduction In this part we will learn to classify systems and recognize a Linear-Time Invariant System
+<!doctype html><html><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge"><title>rezvan | Part 2 - System properties & LTI</title><link rel=icon type=image/png href=https://rezvan.xyz/images/icon.png><meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=description content="Introduction In this part we will learn to classify systems and recognize a Linear-Time Invariant System
 Let&rsquo;s first define what a system is.
 Systems Our definition of a system will be:
 An entity that processes a signal/a set of signals to yield another signal/set of signals.
 The input, also called excitation, goes through the system and the system spits out an output, also called response.
-Interconnection We can have multiple systems." />
-    <meta property="og:image" content="https://raw.githubusercontent.com/rezaarezvan/rezvan.xyz/main/images/icon.png" />
-    <meta property="og:url" content="https://rezvan.xyz/school/ssy081/ssy081_2/">
-  <meta property="og:site_name" content="rezvan">
-  <meta property="og:title" content="Part 2 - System properties &amp; LTI">
-  <meta property="og:description" content="Introduction In this part we will learn to classify systems and recognize a Linear-Time Invariant System
+Interconnection We can have multiple systems."><meta property="og:image" content="https://raw.githubusercontent.com/rezaarezvan/rezvan.xyz/main/images/icon.png"><meta property="og:url" content="https://rezvan.xyz/school/ssy081/ssy081_2/"><meta property="og:site_name" content="rezvan"><meta property="og:title" content="Part 2 - System properties & LTI"><meta property="og:description" content="Introduction In this part we will learn to classify systems and recognize a Linear-Time Invariant System
 Let’s first define what a system is.
 Systems Our definition of a system will be:
 An entity that processes a signal/a set of signals to yield another signal/set of signals.
 The input, also called excitation, goes through the system and the system spits out an output, also called response.
-Interconnection We can have multiple systems.">
-  <meta property="og:locale" content="en_us">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="school">
-    <meta property="article:published_time" content="2023-09-04T22:03:17+02:00">
-    <meta property="article:modified_time" content="2024-05-26T11:09:10+02:00">
-
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Part 2 - System properties &amp; LTI">
-  <meta name="twitter:description" content="Introduction In this part we will learn to classify systems and recognize a Linear-Time Invariant System
+Interconnection We can have multiple systems."><meta property="og:locale" content="en_us"><meta property="og:type" content="article"><meta property="article:section" content="school"><meta property="article:published_time" content="2023-09-04T22:03:17+02:00"><meta property="article:modified_time" content="2024-05-26T11:09:10+02:00"><meta name=twitter:card content="summary"><meta name=twitter:title content="Part 2 - System properties & LTI"><meta name=twitter:description content="Introduction In this part we will learn to classify systems and recognize a Linear-Time Invariant System
 Let’s first define what a system is.
 Systems Our definition of a system will be:
 An entity that processes a signal/a set of signals to yield another signal/set of signals.
 The input, also called excitation, goes through the system and the system spits out an output, also called response.
-Interconnection We can have multiple systems.">
-<script src="https://rezvan.xyz/js/feather.min.js"></script>
-    
-
-    
-    
-    <link rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/main.73f3431f38ac72fc2890b3747cc9c6d55d5756f3ba40e590c77627ae6c16e46b.css" />
-    <link id="lightSyntaxStyle" rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/light_syntax.65408cc3a5c02070b661c3e4e79306fc261cc63620f4adce9a30eafcba4ab79e.css" />
-    
-    <link id="darkModeStyle" rel="stylesheet" type="text/css" href="https://rezvan.xyz/css/dark.13c6bfb747b76fdd2dc198b1172afdd77e7ce604de43f343ce643378bafc58af.css"  disabled />
-    <link id="darkSyntaxStyle" rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/dark_syntax.2b10cc1a2156b30874a063b7439a993bc3b43d476c5e1d8598d769c929c7b381.css" />
-    
-
-    
-    
-    <script type="text/javascript"
-        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-        </script>
-
-    
-    <script type="text/x-mathjax-config">
+Interconnection We can have multiple systems."><link rel=stylesheet href=https://rezvan.xyz/css/combined.min.51ec65976b416262d827f98c76ca037bf7aeea27590e3c120eac32afbfbc40ee.css integrity="sha256-Uexll2tBYmLYJ/mMdsoDe/eu6idZDjwSDqwyr7+8QO4="><link id=lightSyntaxStyle rel=stylesheet href=https://rezvan.xyz/css/light_syntax.min.d9e0828a4ff7f2d7317942062fc751fa487b2ac2c47b934ad082abd7d3ca6690.css integrity="sha256-2eCCik/38tcxeUIGL8dR+kh7KsLEe5NK0IKr19PKZpA="><link id=darkModeStyle rel=stylesheet href=https://rezvan.xyz/css/dark.min.49ad20f2859f81550f852c48875ca9e72e4267459ed6fe82fc9b4f3cf7fdc4e8.css integrity="sha256-Sa0g8oWfgVUPhSxIh1yp5y5CZ0We1v6C/JtPPPf9xOg=" disabled><link id=darkSyntaxStyle rel=stylesheet href=https://rezvan.xyz/css/dark_syntax.min.1a878f3d8fb43359bd3b44bc70c4074f682f11066c6537bf6248b696cbe56586.css integrity="sha256-GoePPY+0M1m9O0S8cMQHT2gvEQZsZTe/Yki2lsvlZYY=" disabled><script type=text/javascript src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type=text/x-mathjax-config>
 		MathJax.Hub.Config({
 			tex2jax: {
 				inlineMath: [['$','$'], ['\\(','\\)']],
@@ -64,217 +26,44 @@ Interconnection We can have multiple systems.">
 						 extensions: ["AMSmath.js", "AMSsymbols.js"] }
 			}
 		});
-		</script>
-    
-
-    
-    
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css">
-    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js"
-        onload="renderMathInElement(document.body);"></script>
-
-    
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            renderMathInElement(document.body, {
-                delimiters: [
-                    {left: "$$", right: "$$", display: true},
-                    {left: "$", right: "$", display: false}
-                ]
-            });
-        });
-    </script>
-    
-</head>
-<body>
-    <div class="content"><header>
-    <nav id="site-navbar">
-        <div class="menu-items">
-            
-            <a href="/">home</a>
-            
-            <a href="/principles">principles</a>
-            
-            <a href="/cv">cv</a>
-            
-            <a href="/posts">posts</a>
-            
-            <a href="/school">school</a>
-            
-        </div>
-        <div class="theme-toggle">
-            <span id="dark-mode-toggle" onclick="toggleTheme()"><i data-feather="moon"></i></span>
-            <script src="https://rezvan.xyz/js/themetoggle.js"></script>
-        </div>
-        
-    </nav>
-</header>
-
-<main>
-    <article>
-        <div class="title">
-            <h1>Part 2 - System properties &amp; LTI</h1>
-            <div class="meta">Posted on Sep 4, 2023
-            </div>
-            <div class="meta">
-                (Last updated: May 26, 2024)
-            </div>
-
-        </div>
-        
-        <section class="body">
-            <h3 id="introduction">Introduction</h3>
-<p>In this part we will learn to classify systems and recognize a <strong>L</strong>inear-<strong>T</strong>ime <strong>I</strong>nvariant System</p>
-<p>Let&rsquo;s first define what a system is.</p>
-<h3 id="systems">Systems</h3>
-<p>Our definition of a system will be:</p>
-<blockquote>
-<p>An entity that processes a signal/a set of signals to yield another signal/set of signals.</p>
-</blockquote>
-<p>The input, also called excitation, goes through the system and the system spits out an output, also called response.</p>
-<h3 id="interconnection">Interconnection</h3>
-<p>We can have multiple systems.</p>
-<p>If they are in sequence, we call it a series connection.
-We can also have parallel connection.</p>
-<p><img src="/school/images/inter.png#center" alt=""></p>
-<h3 id="number-of-inputs-and-outputs">Number of inputs and outputs</h3>
-<ul>
-<li><strong>S</strong>ingle <strong>I</strong>nput <strong>S</strong>ingle <strong>O</strong>utput</li>
-<li><strong>S</strong>ingle <strong>I</strong>nput <strong>M</strong>ultiple <strong>O</strong>utput</li>
-<li><strong>M</strong>ultiple <strong>I</strong>nput <strong>S</strong>ingle <strong>O</strong>utput</li>
-<li><strong>M</strong>ultiple <strong>I</strong>nput <strong>M</strong>ultiple <strong>O</strong>utput</li>
-</ul>
-<p><img src="/school/images/inpout.png#center" alt=""></p>
-<h3 id="linearity">Linearity</h3>
-<p>A system is said to be <strong>linear</strong> if a linear combination of inputs yields the same linear combination of the outputs to each individual input:
+		</script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css><script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js onload=renderMathInElement(document.body)></script><script>document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]})})</script></head><body><div class=content><header><nav id=site-navbar><div class=navbar-content><a href=https://rezvan.xyz/ class=logo>rezvan.xyz</a><div class=navbar-links><a href=/principles class=nav-link><span class=bracket>[</span>principles<span class=bracket>]</span></a>
+<a href=/cv class=nav-link><span class=bracket>[</span>cv<span class=bracket>]</span></a>
+<a href=/posts class=nav-link><span class=bracket>[</span>posts<span class=bracket>]</span></a>
+<a href=/school class=nav-link><span class=bracket>[</span>school<span class=bracket>]</span></a></div><div class=theme-toggle><span id=dark-mode-toggle onclick=toggleTheme() aria-label="Toggle theme">○
+</span><script src=https://rezvan.xyz/js/themetoggle.js></script></div></div></nav></header><main><article><div class=title><h1>Part 2 - System properties & LTI</h1><div class=meta>Posted on Sep 4, 2023</div><div class=meta>(Last updated: May 26, 2024)</div></div><section class=body><h3 id=introduction>Introduction</h3><p>In this part we will learn to classify systems and recognize a <strong>L</strong>inear-<strong>T</strong>ime <strong>I</strong>nvariant System</p><p>Let&rsquo;s first define what a system is.</p><h3 id=systems>Systems</h3><p>Our definition of a system will be:</p><blockquote><p>An entity that processes a signal/a set of signals to yield another signal/set of signals.</p></blockquote><p>The input, also called excitation, goes through the system and the system spits out an output, also called response.</p><h3 id=interconnection>Interconnection</h3><p>We can have multiple systems.</p><p>If they are in sequence, we call it a series connection.
+We can also have parallel connection.</p><p><img src=/school/images/inter.png#center alt></p><h3 id=number-of-inputs-and-outputs>Number of inputs and outputs</h3><ul><li><strong>S</strong>ingle <strong>I</strong>nput <strong>S</strong>ingle <strong>O</strong>utput</li><li><strong>S</strong>ingle <strong>I</strong>nput <strong>M</strong>ultiple <strong>O</strong>utput</li><li><strong>M</strong>ultiple <strong>I</strong>nput <strong>S</strong>ingle <strong>O</strong>utput</li><li><strong>M</strong>ultiple <strong>I</strong>nput <strong>M</strong>ultiple <strong>O</strong>utput</li></ul><p><img src=/school/images/inpout.png#center alt></p><h3 id=linearity>Linearity</h3><p>A system is said to be <strong>linear</strong> if a linear combination of inputs yields the same linear combination of the outputs to each individual input:
 $$
 x_1(t) \to y_1(t) \newline
 x_2(t) \to y_2(t)
-$$</p>
-<p>$$
+$$</p><p>$$
 a x_1(t) + b x_2(t) \to a y_1(t) + b y_2(t) \ | \ \text{Superposition principle}
-$$</p>
-<p>Recall that, Superposition $=$ homogeneity + additivity.</p>
-<p>Homogeneity:
+$$</p><p>Recall that, Superposition $=$ homogeneity + additivity.</p><p>Homogeneity:
 $$
 a x(t) \to a y(t)
-$$</p>
-<p>Additivity:
+$$</p><p>Additivity:
 $$
 x_1(t) + x_2(t) \to a y_1(t) y_2(t)
-$$</p>
-<h3 id="time-invariance">Time-invariance</h3>
-<p>A system is said to be <strong>time-invariant</strong> if a time shift in the input signal results in the same time shift in the output signal:
+$$</p><h3 id=time-invariance>Time-invariance</h3><p>A system is said to be <strong>time-invariant</strong> if a time shift in the input signal results in the same time shift in the output signal:
 $$
 x(t) \to y(t) \newline
 x(t - t_0) \to y(t - t_0)
-$$</p>
-<h4 id="example">Example</h4>
-<p>$$
+$$</p><h4 id=example>Example</h4><p>$$
 y(t) = (sin(t))x(t)
-$$</p>
-<p>$$
+$$</p><p>$$
 y(t - t_0) = (sin(t - t_0))x(t - t_0) \neq (sin(t))x(t - t_0)
-$$</p>
-<p>Which means this function is time variant!</p>
-<h3 id="bibo-stability">BIBO-stability</h3>
-<p>A system is BIBO-stable if a bounded input results in a bounded output</p>
-<h4 id="example-1">Example</h4>
-<p>$$
+$$</p><p>Which means this function is time variant!</p><h3 id=bibo-stability>BIBO-stability</h3><p>A system is BIBO-stable if a bounded input results in a bounded output</p><h4 id=example-1>Example</h4><p>$$
 y(t) = 3x(t) + 2
-$$</p>
-<p>$$
+$$</p><p>$$
 |x(t)| \leq C \to |y(t)| \leq 3C + 2
-$$</p>
-<p>Bounded means the input/output is stable!</p>
-<h3 id="causality">Causality</h3>
-<p>A system is <strong>causal</strong> if the value of the output at the present
-instant depends only on the present and past values of the input. Therefor all physical systems are causal!</p>
-<h4 id="example-2">Example</h4>
-<p>$$
+$$</p><p>Bounded means the input/output is stable!</p><h3 id=causality>Causality</h3><p>A system is <strong>causal</strong> if the value of the output at the present
+instant depends only on the present and past values of the input. Therefor all physical systems are causal!</p><h4 id=example-2>Example</h4><p>$$
 y[n] = \dfrac{1}{3}\{x[n - 2] + x[n - 1] + x[n]\}
-$$</p>
-<p>Note that this input is discrete, this is because all of these system properties apply to both continuous and discrete cases!</p>
-<h3 id="dynamic">Dynamic</h3>
-<p>A system is <strong>instantaneous</strong> or <strong>memoryless</strong> if it&rsquo;s output at a
+$$</p><p>Note that this input is discrete, this is because all of these system properties apply to both continuous and discrete cases!</p><h3 id=dynamic>Dynamic</h3><p>A system is <strong>instantaneous</strong> or <strong>memoryless</strong> if it&rsquo;s output at a
 certain time instant depends only on the input at the same time
-instant. If this doesn&rsquo;t hold, this must mean the system is <strong>dynamic</strong>!</p>
-<h4 id="example-3">Example</h4>
-<p>$$
+instant. If this doesn&rsquo;t hold, this must mean the system is <strong>dynamic</strong>!</p><h4 id=example-3>Example</h4><p>$$
 y[n] = \dfrac{1}{3}\{x[n - 2] + x[n - 1] + x[n]\} \ | \ \text{dynamic!}
-$$</p>
-<p>Note, if it said to be instantaneous or memoryless, this also implies that the system is causal!</p>
-<h3 id="invertible">Invertible</h3>
-<p>If a system is said to be invertible, this means that observing one output leads us to a single input.</p>
-<h4 id="example-4">Example</h4>
-<p>$$
+$$</p><p>Note, if it said to be instantaneous or memoryless, this also implies that the system is causal!</p><h3 id=invertible>Invertible</h3><p>If a system is said to be invertible, this means that observing one output leads us to a single input.</p><h4 id=example-4>Example</h4><p>$$
 y(t) = x^2(t) \ | \ \text{\textbf{not} invertible!}
-$$</p>
-<h3 id="lti">LTI</h3>
-<p>Now, LTI, as we defined earlier, are system that are both liner and time time-invariant!. We&rsquo;ll see why these are important later on!</p>
-
-        </section>
-    </article>
-
-    <nav class="navigation">
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-
-        
-        
-
-        <div class="nav-item previous">
-            
-            
-            <a href="/school/ssy081/ssy081/" title="Previous: Part 1 - Signals">&larr; Previous</a>
-            
-            
-        </div>
-
-        <div class="nav-item next">
-            
-            
-            <a href="/school/ssy081/ssy081_3/" title="Next: Part 3 - Convolution">Next &rarr;</a>
-            
-            
-        </div>
-    </nav>
-</main>
-<footer id="site-footer">
-    <div class="social-links">
-        
-        <a href="https://github.com/rezaarezvan" title="">github</a>
-        
-        <a href="https://x.com/rzvan__/" title="">x</a>
-        
-    </div><p class="footer-msg">memento mori</p>
-</footer></div>
-</body>
-
-</html>
+$$</p><h3 id=lti>LTI</h3><p>Now, LTI, as we defined earlier, are system that are both liner and time time-invariant!. We&rsquo;ll see why these are important later on!</p></section></article><nav class=navigation><div class="nav-item previous"><a href=/school/ssy081/ssy081/ title="Previous: Part 1 - Signals">&larr; Previous</a></div><div class="nav-item next"><a href=/school/ssy081/ssy081_3/ title="Next: Part 3 - Convolution">Next &rarr;</a></div></nav></main><footer id=site-footer><div class=social-links><a href=https://github.com/rezaarezvan title class=social-link><span class=bracket>[</span>github<span class=bracket>]</span></a>
+<a href=https://x.com/rzvan__/ title class=social-link><span class=bracket>[</span>x<span class=bracket>]</span></a></div><div class=footer-marquee><div class=footer-marquee__content><span class=footer-marquee__item>memento mori • amor fati • sic parvis magna • per aspera ad astra</span>
+<span class=footer-marquee__item>memento mori • amor fati • sic parvis magna • per aspera ad astra</span></div></div></footer></div></body></html>

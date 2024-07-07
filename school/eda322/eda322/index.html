@@ -1,49 +1,11 @@
-<!DOCTYPE html>
-<html><head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"><title>rezvan | Part 1 - Introduction &amp; Boolean Algebra</title><link rel="icon" type="image/png" href="https://rezvan.xyz/images/icon.png" /><meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description"
-        content="In our day-to-day lives, we use digital circuits all the time, without really thinking about them.
+<!doctype html><html><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge"><title>rezvan | Part 1 - Introduction & Boolean Algebra</title><link rel=icon type=image/png href=https://rezvan.xyz/images/icon.png><meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=description content="In our day-to-day lives, we use digital circuits all the time, without really thinking about them.
 Even most software developers do not appreciate the abstraction which digital circuits are built upon. What are digital circuits built from then? Chips! What are chips built from then? Logical gates! What are logical gates built from then? Transistor circuits! What are these circuits built from? Transistors! (duh).
-As you can see it&rsquo;s quite a few steps." />
-    <meta property="og:image" content="https://raw.githubusercontent.com/rezaarezvan/rezvan.xyz/main/images/icon.png" />
-    <meta property="og:url" content="https://rezvan.xyz/school/eda322/eda322/">
-  <meta property="og:site_name" content="rezvan">
-  <meta property="og:title" content="Part 1 - Introduction &amp; Boolean Algebra">
-  <meta property="og:description" content="In our day-to-day lives, we use digital circuits all the time, without really thinking about them.
+As you can see it&rsquo;s quite a few steps."><meta property="og:image" content="https://raw.githubusercontent.com/rezaarezvan/rezvan.xyz/main/images/icon.png"><meta property="og:url" content="https://rezvan.xyz/school/eda322/eda322/"><meta property="og:site_name" content="rezvan"><meta property="og:title" content="Part 1 - Introduction & Boolean Algebra"><meta property="og:description" content="In our day-to-day lives, we use digital circuits all the time, without really thinking about them.
 Even most software developers do not appreciate the abstraction which digital circuits are built upon. What are digital circuits built from then? Chips! What are chips built from then? Logical gates! What are logical gates built from then? Transistor circuits! What are these circuits built from? Transistors! (duh).
-As you can see it’s quite a few steps.">
-  <meta property="og:locale" content="en_us">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="school">
-    <meta property="article:published_time" content="2023-01-16T00:00:00+00:00">
-    <meta property="article:modified_time" content="2024-05-26T11:09:10+02:00">
-
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Part 1 - Introduction &amp; Boolean Algebra">
-  <meta name="twitter:description" content="In our day-to-day lives, we use digital circuits all the time, without really thinking about them.
+As you can see it’s quite a few steps."><meta property="og:locale" content="en_us"><meta property="og:type" content="article"><meta property="article:section" content="school"><meta property="article:published_time" content="2023-01-16T00:00:00+00:00"><meta property="article:modified_time" content="2024-05-26T11:09:10+02:00"><meta name=twitter:card content="summary"><meta name=twitter:title content="Part 1 - Introduction & Boolean Algebra"><meta name=twitter:description content="In our day-to-day lives, we use digital circuits all the time, without really thinking about them.
 Even most software developers do not appreciate the abstraction which digital circuits are built upon. What are digital circuits built from then? Chips! What are chips built from then? Logical gates! What are logical gates built from then? Transistor circuits! What are these circuits built from? Transistors! (duh).
-As you can see it’s quite a few steps.">
-<script src="https://rezvan.xyz/js/feather.min.js"></script>
-    
-
-    
-    
-    <link rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/main.73f3431f38ac72fc2890b3747cc9c6d55d5756f3ba40e590c77627ae6c16e46b.css" />
-    <link id="lightSyntaxStyle" rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/light_syntax.65408cc3a5c02070b661c3e4e79306fc261cc63620f4adce9a30eafcba4ab79e.css" />
-    
-    <link id="darkModeStyle" rel="stylesheet" type="text/css" href="https://rezvan.xyz/css/dark.13c6bfb747b76fdd2dc198b1172afdd77e7ce604de43f343ce643378bafc58af.css"  disabled />
-    <link id="darkSyntaxStyle" rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/dark_syntax.2b10cc1a2156b30874a063b7439a993bc3b43d476c5e1d8598d769c929c7b381.css" />
-    
-
-    
-    
-    <script type="text/javascript"
-        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-        </script>
-
-    
-    <script type="text/x-mathjax-config">
+As you can see it’s quite a few steps."><link rel=stylesheet href=https://rezvan.xyz/css/combined.min.51ec65976b416262d827f98c76ca037bf7aeea27590e3c120eac32afbfbc40ee.css integrity="sha256-Uexll2tBYmLYJ/mMdsoDe/eu6idZDjwSDqwyr7+8QO4="><link id=lightSyntaxStyle rel=stylesheet href=https://rezvan.xyz/css/light_syntax.min.d9e0828a4ff7f2d7317942062fc751fa487b2ac2c47b934ad082abd7d3ca6690.css integrity="sha256-2eCCik/38tcxeUIGL8dR+kh7KsLEe5NK0IKr19PKZpA="><link id=darkModeStyle rel=stylesheet href=https://rezvan.xyz/css/dark.min.49ad20f2859f81550f852c48875ca9e72e4267459ed6fe82fc9b4f3cf7fdc4e8.css integrity="sha256-Sa0g8oWfgVUPhSxIh1yp5y5CZ0We1v6C/JtPPPf9xOg=" disabled><link id=darkSyntaxStyle rel=stylesheet href=https://rezvan.xyz/css/dark_syntax.min.1a878f3d8fb43359bd3b44bc70c4074f682f11066c6537bf6248b696cbe56586.css integrity="sha256-GoePPY+0M1m9O0S8cMQHT2gvEQZsZTe/Yki2lsvlZYY=" disabled><script type=text/javascript src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type=text/x-mathjax-config>
 		MathJax.Hub.Config({
 			tex2jax: {
 				inlineMath: [['$','$'], ['\\(','\\)']],
@@ -55,122 +17,17 @@ As you can see it’s quite a few steps.">
 						 extensions: ["AMSmath.js", "AMSsymbols.js"] }
 			}
 		});
-		</script>
-    
-
-    
-    
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css">
-    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js"
-        onload="renderMathInElement(document.body);"></script>
-
-    
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            renderMathInElement(document.body, {
-                delimiters: [
-                    {left: "$$", right: "$$", display: true},
-                    {left: "$", right: "$", display: false}
-                ]
-            });
-        });
-    </script>
-    
-</head>
-<body>
-    <div class="content"><header>
-    <nav id="site-navbar">
-        <div class="menu-items">
-            
-            <a href="/">home</a>
-            
-            <a href="/principles">principles</a>
-            
-            <a href="/cv">cv</a>
-            
-            <a href="/posts">posts</a>
-            
-            <a href="/school">school</a>
-            
-        </div>
-        <div class="theme-toggle">
-            <span id="dark-mode-toggle" onclick="toggleTheme()"><i data-feather="moon"></i></span>
-            <script src="https://rezvan.xyz/js/themetoggle.js"></script>
-        </div>
-        
-    </nav>
-</header>
-
-<main>
-    <article>
-        <div class="title">
-            <h1>Part 1 - Introduction &amp; Boolean Algebra</h1>
-            <div class="meta">Posted on Jan 16, 2023
-            </div>
-            <div class="meta">
-                (Last updated: May 26, 2024)
-            </div>
-
-        </div>
-        
-        <section class="body">
-            <p>In our day-to-day lives, we use digital circuits all the time, without really thinking about them.</p>
-<p>Even most software developers do not appreciate the abstraction which digital circuits are built upon.
+		</script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css><script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js onload=renderMathInElement(document.body)></script><script>document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]})})</script></head><body><div class=content><header><nav id=site-navbar><div class=navbar-content><a href=https://rezvan.xyz/ class=logo>rezvan.xyz</a><div class=navbar-links><a href=/principles class=nav-link><span class=bracket>[</span>principles<span class=bracket>]</span></a>
+<a href=/cv class=nav-link><span class=bracket>[</span>cv<span class=bracket>]</span></a>
+<a href=/posts class=nav-link><span class=bracket>[</span>posts<span class=bracket>]</span></a>
+<a href=/school class=nav-link><span class=bracket>[</span>school<span class=bracket>]</span></a></div><div class=theme-toggle><span id=dark-mode-toggle onclick=toggleTheme() aria-label="Toggle theme">○
+</span><script src=https://rezvan.xyz/js/themetoggle.js></script></div></div></nav></header><main><article><div class=title><h1>Part 1 - Introduction & Boolean Algebra</h1><div class=meta>Posted on Jan 16, 2023</div><div class=meta>(Last updated: May 26, 2024)</div></div><section class=body><p>In our day-to-day lives, we use digital circuits all the time, without really thinking about them.</p><p>Even most software developers do not appreciate the abstraction which digital circuits are built upon.
 What are digital circuits built from then? Chips! What are chips built from then? Logical gates!
 What are logical gates built from then? Transistor circuits! What are these circuits built from?
-Transistors! (duh).</p>
-<p>As you can see it&rsquo;s quite a few steps. So let&rsquo;s try to understand digital circuits better.</p>
-<h1 id="integrated-circuits">Integrated circuits</h1>
-<p>There are two different kinds of circuits we&rsquo;ll be looking at:</p>
-<ul>
-<li>ASIC (<strong>A</strong>pplication <strong>S</strong>pecific <strong>I</strong>ntegrated <strong>C</strong>ircuits)
-<ul>
-<li>Full-Custom ASICs</li>
-<li>Standard-cell ASICs
-<ul>
-<li>You use a kind of library to</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>Reconfigurable
-<ul>
-<li>FPGA (<strong>F</strong>ield <strong>P</strong>rogrammable <strong>G</strong>ate <strong>A</strong>rrays)
-<ul>
-<li>FPGAs are made up by so-called configurable logic blocks,
-we can program these to be any kind of gate and make our own chip, with our own needs.</li>
-</ul>
-</li>
-<li>PLD (<strong>P</strong>rogrammable <strong>L</strong>ogic <strong>D</strong>evice)</li>
-</ul>
-</li>
-</ul>
-<p>The main difference is:</p>
-<p>ASICs, once they are fabricated (in silicone for example), we can not change the hardware design.
-They&rsquo;re also more expensive to make, since, we need to produce them in a (semiconductor-)factory.</p>
-<p>FPGA, they&rsquo;re generic and can therefore support different hardware designs.</p>
-<h1 id="design-flow-of-digital-hardware">Design Flow of Digital hardware</h1>
-<p>When creating a digital circuit, we can break it down into several layers.</p>
-<p>For a ASIC, we can rank them as:</p>
-<ul>
-<li>Algorithmic Level</li>
-<li>Register Transfer Level</li>
-<li>Logic gate Level</li>
-<li>Circuit transistor Level</li>
-<li>Physical Level</li>
-</ul>
-<p>For an FPGA these would be:</p>
-<ul>
-<li>High-Level Synthesis (HLS)</li>
-<li>Logic gate Level</li>
-</ul>
-<p>These layers are quite self-explanatory, the algorithmic level is the top level design level of the whole circuit. What&rsquo;s the purpose?
-Register Transfer Level is about how we <em>transfer</em> our register between states.</p>
-<h1 id="boolean-logic">Boolean logic</h1>
-<p>Now that we have seen the beginning of digital circuits, let&rsquo;s dive into their core purpose, doing (boolean) math!</p>
-<p>Let&rsquo;s write down all the &lsquo;rules&rsquo; for boolean algebra - learn by doing:</p>
-<p>$$
+Transistors! (duh).</p><p>As you can see it&rsquo;s quite a few steps. So let&rsquo;s try to understand digital circuits better.</p><h1 id=integrated-circuits>Integrated circuits</h1><p>There are two different kinds of circuits we&rsquo;ll be looking at:</p><ul><li>ASIC (<strong>A</strong>pplication <strong>S</strong>pecific <strong>I</strong>ntegrated <strong>C</strong>ircuits)<ul><li>Full-Custom ASICs</li><li>Standard-cell ASICs<ul><li>You use a kind of library to</li></ul></li></ul></li><li>Reconfigurable<ul><li>FPGA (<strong>F</strong>ield <strong>P</strong>rogrammable <strong>G</strong>ate <strong>A</strong>rrays)<ul><li>FPGAs are made up by so-called configurable logic blocks,
+we can program these to be any kind of gate and make our own chip, with our own needs.</li></ul></li><li>PLD (<strong>P</strong>rogrammable <strong>L</strong>ogic <strong>D</strong>evice)</li></ul></li></ul><p>The main difference is:</p><p>ASICs, once they are fabricated (in silicone for example), we can not change the hardware design.
+They&rsquo;re also more expensive to make, since, we need to produce them in a (semiconductor-)factory.</p><p>FPGA, they&rsquo;re generic and can therefore support different hardware designs.</p><h1 id=design-flow-of-digital-hardware>Design Flow of Digital hardware</h1><p>When creating a digital circuit, we can break it down into several layers.</p><p>For a ASIC, we can rank them as:</p><ul><li>Algorithmic Level</li><li>Register Transfer Level</li><li>Logic gate Level</li><li>Circuit transistor Level</li><li>Physical Level</li></ul><p>For an FPGA these would be:</p><ul><li>High-Level Synthesis (HLS)</li><li>Logic gate Level</li></ul><p>These layers are quite self-explanatory, the algorithmic level is the top level design level of the whole circuit. What&rsquo;s the purpose?
+Register Transfer Level is about how we <em>transfer</em> our register between states.</p><h1 id=boolean-logic>Boolean logic</h1><p>Now that we have seen the beginning of digital circuits, let&rsquo;s dive into their core purpose, doing (boolean) math!</p><p>Let&rsquo;s write down all the &lsquo;rules&rsquo; for boolean algebra - learn by doing:</p><p>$$
 X \cdot\ 0 = 0 \newline
 X \cdot\ 1 = 1 \newline
 X \cdot\ X = X \newline
@@ -180,113 +37,35 @@ X + 1 = 1 \newline
 X + X = X \newline
 X + \bar{X} = 1 \newline
 \bar{\bar{X}} = X
-$$</p>
-<p>These are the absolute <strong>basic</strong> let&rsquo;s cover some more advanced cases as well.</p>
-<p>Commutative Law:
+$$</p><p>These are the absolute <strong>basic</strong> let&rsquo;s cover some more advanced cases as well.</p><p>Commutative Law:
 $$
 X \cdot Y = Y \cdot X \newline
 X + Y = Y + X \newline
-$$</p>
-<p>Associative Law:
+$$</p><p>Associative Law:
 $$
 X(YZ) = (XY)Z \newline
 X + (Y + Z) = (X + Y) + Z \newline
-$$</p>
-<p>Distributive Law:
+$$</p><p>Distributive Law:
 $$
 X(Y + Z) = XY + XZ \newline
 X + (YZ) = (X + Y)(X + Z)\newline
 (X + Y)(W + Z) = XW + XZ + YW + YZ
-$$</p>
-<p>Consensus Theorem:
+$$</p><p>Consensus Theorem:
 $$
 X + \bar{X}Y = X + Y \newline
 \bar{X} + XY = \bar{X} + Y \newline
 X + \bar{X}\bar{Y} = X + \bar{Y} \newline
 \bar{X} + X\bar{Y} = \bar{X} + \bar{Y} \newline
-$$</p>
-<p>And finally (and most important) DeMorgan&rsquo;s Theorem:
+$$</p><p>And finally (and most important) DeMorgan&rsquo;s Theorem:
 $$
 \bar{XY} = \bar{X} + \bar{Y} \newline
 \bar{(X + Y)} = \bar{X}\bar{Y} \newline
-$$</p>
-<h1 id="different-forms-of-logical-functions">Different Forms of Logical Functions</h1>
-<p>We can write logical functions in different forms, so-called SOP (<strong>S</strong>um <strong>O</strong>f <strong>P</strong>roduct)
-and POS (<strong>P</strong>roduct <strong>O</strong>f <strong>S</strong>ums)</p>
-<p>We use these to find the so-called max and minterms. A minterm is a <strong>product</strong> term in which <em>all the variables appear exactly once</em>.</p>
-<p>And the max term exactly the same but is a <strong>sum</strong> term. So, a minterm is a SOP and maxterm is a POS.</p>
-<p>One more theorem we have to use is the so-called <em>Shannon&rsquo;s expansion theorem</em>.
+$$</p><h1 id=different-forms-of-logical-functions>Different Forms of Logical Functions</h1><p>We can write logical functions in different forms, so-called SOP (<strong>S</strong>um <strong>O</strong>f <strong>P</strong>roduct)
+and POS (<strong>P</strong>roduct <strong>O</strong>f <strong>S</strong>ums)</p><p>We use these to find the so-called max and minterms. A minterm is a <strong>product</strong> term in which <em>all the variables appear exactly once</em>.</p><p>And the max term exactly the same but is a <strong>sum</strong> term. So, a minterm is a SOP and maxterm is a POS.</p><p>One more theorem we have to use is the so-called <em>Shannon&rsquo;s expansion theorem</em>.
 $$
 f(x_1, x_2, \dots, x_n) = x_1 \cdot\ f(1, x_2, \dots, x_n) + \bar{x_1} \cdot\ f(0, x_2, \dots, x_n) \newline
 f(x_1, x_2, \dots, x_n) = [x_1 + f(1, x_2, \dots, x_n)] [\bar{x_1} + f(0, x_2, \dots, x_n)]
-$$</p>
-<h1 id="logical-minimization">Logical Minimization</h1>
-<p>In real-world applications we would want to make the cheapest and smallest circuits that still have the same logic.</p>
-<p>This is when it&rsquo;s useful to minimize the logical circuits. In these cases we use <strong>Karnaugh-diagrams</strong>.
-That&rsquo;s a topic that requires you to do a few examples to understand it. So Google it and do a few examples, they&rsquo;re super easy.</p>
-<p>But let&rsquo;s cover some terminology:</p>
-<ul>
-<li>A function, f, <strong>covers</strong> another function, g, if it takes the value &lsquo;1&rsquo; when the function g does.</li>
-<li><strong>Implicant</strong>, a product of variables of a function, f, for which f gets the value &lsquo;1&rsquo;.</li>
-<li><strong>Prime Implicant</strong>, an <em>implicant</em> that cannot be covered by a more general implicant.</li>
-<li><strong>Essential Prime Implicant</strong>, a prime implicant of a function, f, that includes a minterm, not included by any other prime implicant of the function.</li>
-</ul>
-
-        </section>
-    </article>
-
-    <nav class="navigation">
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-
-        
-        
-
-        <div class="nav-item previous">
-            
-        </div>
-
-        <div class="nav-item next">
-            
-            
-            <a href="/school/eda322/eda322_2/" title="Next: Part 2 - Binary Adders">Next &rarr;</a>
-            
-            
-        </div>
-    </nav>
-</main>
-<footer id="site-footer">
-    <div class="social-links">
-        
-        <a href="https://github.com/rezaarezvan" title="">github</a>
-        
-        <a href="https://x.com/rzvan__/" title="">x</a>
-        
-    </div><p class="footer-msg">memento mori</p>
-</footer></div>
-</body>
-
-</html>
+$$</p><h1 id=logical-minimization>Logical Minimization</h1><p>In real-world applications we would want to make the cheapest and smallest circuits that still have the same logic.</p><p>This is when it&rsquo;s useful to minimize the logical circuits. In these cases we use <strong>Karnaugh-diagrams</strong>.
+That&rsquo;s a topic that requires you to do a few examples to understand it. So Google it and do a few examples, they&rsquo;re super easy.</p><p>But let&rsquo;s cover some terminology:</p><ul><li>A function, f, <strong>covers</strong> another function, g, if it takes the value &lsquo;1&rsquo; when the function g does.</li><li><strong>Implicant</strong>, a product of variables of a function, f, for which f gets the value &lsquo;1&rsquo;.</li><li><strong>Prime Implicant</strong>, an <em>implicant</em> that cannot be covered by a more general implicant.</li><li><strong>Essential Prime Implicant</strong>, a prime implicant of a function, f, that includes a minterm, not included by any other prime implicant of the function.</li></ul></section></article><nav class=navigation><div class="nav-item previous"></div><div class="nav-item next"><a href=/school/eda322/eda322_2/ title="Next: Part 2 - Binary Adders">Next &rarr;</a></div></nav></main><footer id=site-footer><div class=social-links><a href=https://github.com/rezaarezvan title class=social-link><span class=bracket>[</span>github<span class=bracket>]</span></a>
+<a href=https://x.com/rzvan__/ title class=social-link><span class=bracket>[</span>x<span class=bracket>]</span></a></div><div class=footer-marquee><div class=footer-marquee__content><span class=footer-marquee__item>memento mori • amor fati • sic parvis magna • per aspera ad astra</span>
+<span class=footer-marquee__item>memento mori • amor fati • sic parvis magna • per aspera ad astra</span></div></div></footer></div></body></html>

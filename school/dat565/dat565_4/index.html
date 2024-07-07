@@ -1,52 +1,14 @@
-<!DOCTYPE html>
-<html><head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"><title>rezvan | Part 4 - Data visualization</title><link rel="icon" type="image/png" href="https://rezvan.xyz/images/icon.png" /><meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description"
-        content="Introduction In this part we&rsquo;ll discuss some principles when it comes to data visualization
+<!doctype html><html><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge"><title>rezvan | Part 4 - Data visualization</title><link rel=icon type=image/png href=https://rezvan.xyz/images/icon.png><meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=description content="Introduction In this part we&rsquo;ll discuss some principles when it comes to data visualization
 Five-point summary The five-point summary is a very common and effective summary of data to get a quick overview and feeling for the data.
 To understand what the five-point summary tells us, let&rsquo;s first understand quantiles and quartiles.
-A quantile is a cut-point of a distribution (or a dataset). Quantiles are usually obtained by sorting the data and selecting an appropriate value at an appropriate rank." />
-    <meta property="og:image" content="https://raw.githubusercontent.com/rezaarezvan/rezvan.xyz/main/images/icon.png" />
-    <meta property="og:url" content="https://rezvan.xyz/school/dat565/dat565_4/">
-  <meta property="og:site_name" content="rezvan">
-  <meta property="og:title" content="Part 4 - Data visualization">
-  <meta property="og:description" content="Introduction In this part we’ll discuss some principles when it comes to data visualization
+A quantile is a cut-point of a distribution (or a dataset). Quantiles are usually obtained by sorting the data and selecting an appropriate value at an appropriate rank."><meta property="og:image" content="https://raw.githubusercontent.com/rezaarezvan/rezvan.xyz/main/images/icon.png"><meta property="og:url" content="https://rezvan.xyz/school/dat565/dat565_4/"><meta property="og:site_name" content="rezvan"><meta property="og:title" content="Part 4 - Data visualization"><meta property="og:description" content="Introduction In this part we’ll discuss some principles when it comes to data visualization
 Five-point summary The five-point summary is a very common and effective summary of data to get a quick overview and feeling for the data.
 To understand what the five-point summary tells us, let’s first understand quantiles and quartiles.
-A quantile is a cut-point of a distribution (or a dataset). Quantiles are usually obtained by sorting the data and selecting an appropriate value at an appropriate rank.">
-  <meta property="og:locale" content="en_us">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="school">
-    <meta property="article:published_time" content="2024-01-26T00:00:00+00:00">
-    <meta property="article:modified_time" content="2024-05-26T11:09:10+02:00">
-
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Part 4 - Data visualization">
-  <meta name="twitter:description" content="Introduction In this part we’ll discuss some principles when it comes to data visualization
+A quantile is a cut-point of a distribution (or a dataset). Quantiles are usually obtained by sorting the data and selecting an appropriate value at an appropriate rank."><meta property="og:locale" content="en_us"><meta property="og:type" content="article"><meta property="article:section" content="school"><meta property="article:published_time" content="2024-01-26T00:00:00+00:00"><meta property="article:modified_time" content="2024-05-26T11:09:10+02:00"><meta name=twitter:card content="summary"><meta name=twitter:title content="Part 4 - Data visualization"><meta name=twitter:description content="Introduction In this part we’ll discuss some principles when it comes to data visualization
 Five-point summary The five-point summary is a very common and effective summary of data to get a quick overview and feeling for the data.
 To understand what the five-point summary tells us, let’s first understand quantiles and quartiles.
-A quantile is a cut-point of a distribution (or a dataset). Quantiles are usually obtained by sorting the data and selecting an appropriate value at an appropriate rank.">
-<script src="https://rezvan.xyz/js/feather.min.js"></script>
-    
-
-    
-    
-    <link rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/main.73f3431f38ac72fc2890b3747cc9c6d55d5756f3ba40e590c77627ae6c16e46b.css" />
-    <link id="lightSyntaxStyle" rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/light_syntax.65408cc3a5c02070b661c3e4e79306fc261cc63620f4adce9a30eafcba4ab79e.css" />
-    
-    <link id="darkModeStyle" rel="stylesheet" type="text/css" href="https://rezvan.xyz/css/dark.13c6bfb747b76fdd2dc198b1172afdd77e7ce604de43f343ce643378bafc58af.css"  disabled />
-    <link id="darkSyntaxStyle" rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/dark_syntax.2b10cc1a2156b30874a063b7439a993bc3b43d476c5e1d8598d769c929c7b381.css" />
-    
-
-    
-    
-    <script type="text/javascript"
-        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-        </script>
-
-    
-    <script type="text/x-mathjax-config">
+A quantile is a cut-point of a distribution (or a dataset). Quantiles are usually obtained by sorting the data and selecting an appropriate value at an appropriate rank."><link rel=stylesheet href=https://rezvan.xyz/css/combined.min.51ec65976b416262d827f98c76ca037bf7aeea27590e3c120eac32afbfbc40ee.css integrity="sha256-Uexll2tBYmLYJ/mMdsoDe/eu6idZDjwSDqwyr7+8QO4="><link id=lightSyntaxStyle rel=stylesheet href=https://rezvan.xyz/css/light_syntax.min.d9e0828a4ff7f2d7317942062fc751fa487b2ac2c47b934ad082abd7d3ca6690.css integrity="sha256-2eCCik/38tcxeUIGL8dR+kh7KsLEe5NK0IKr19PKZpA="><link id=darkModeStyle rel=stylesheet href=https://rezvan.xyz/css/dark.min.49ad20f2859f81550f852c48875ca9e72e4267459ed6fe82fc9b4f3cf7fdc4e8.css integrity="sha256-Sa0g8oWfgVUPhSxIh1yp5y5CZ0We1v6C/JtPPPf9xOg=" disabled><link id=darkSyntaxStyle rel=stylesheet href=https://rezvan.xyz/css/dark_syntax.min.1a878f3d8fb43359bd3b44bc70c4074f682f11066c6537bf6248b696cbe56586.css integrity="sha256-GoePPY+0M1m9O0S8cMQHT2gvEQZsZTe/Yki2lsvlZYY=" disabled><script type=text/javascript src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type=text/x-mathjax-config>
 		MathJax.Hub.Config({
 			tex2jax: {
 				inlineMath: [['$','$'], ['\\(','\\)']],
@@ -58,210 +20,30 @@ A quantile is a cut-point of a distribution (or a dataset). Quantiles are usuall
 						 extensions: ["AMSmath.js", "AMSsymbols.js"] }
 			}
 		});
-		</script>
-    
-
-    
-    
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css">
-    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js"
-        onload="renderMathInElement(document.body);"></script>
-
-    
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            renderMathInElement(document.body, {
-                delimiters: [
-                    {left: "$$", right: "$$", display: true},
-                    {left: "$", right: "$", display: false}
-                ]
-            });
-        });
-    </script>
-    
-</head>
-<body>
-    <div class="content"><header>
-    <nav id="site-navbar">
-        <div class="menu-items">
-            
-            <a href="/">home</a>
-            
-            <a href="/principles">principles</a>
-            
-            <a href="/cv">cv</a>
-            
-            <a href="/posts">posts</a>
-            
-            <a href="/school">school</a>
-            
-        </div>
-        <div class="theme-toggle">
-            <span id="dark-mode-toggle" onclick="toggleTheme()"><i data-feather="moon"></i></span>
-            <script src="https://rezvan.xyz/js/themetoggle.js"></script>
-        </div>
-        
-    </nav>
-</header>
-
-<main>
-    <article>
-        <div class="title">
-            <h1>Part 4 - Data visualization</h1>
-            <div class="meta">Posted on Jan 26, 2024
-            </div>
-            <div class="meta">
-                (Last updated: May 26, 2024)
-            </div>
-
-        </div>
-        
-        <section class="body">
-            <h3 id="introduction">Introduction</h3>
-<p>In this part we&rsquo;ll discuss some principles when it comes to data visualization</p>
-<h3 id="five-point-summary">Five-point summary</h3>
-<p>The five-point summary is a very common and effective summary of data to get a quick overview and feeling for the data.</p>
-<p>To understand what the five-point summary tells us, let&rsquo;s first understand quantiles and quartiles.</p>
-<p>A <strong>quantile</strong> is a cut-point of a distribution (or a dataset).
-Quantiles are usually obtained by sorting the data and selecting an appropriate value at an appropriate rank.</p>
-<p><strong>Quartiles</strong> are quantiles that are placed such that 25% of the data is between them.
+		</script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css><script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js onload=renderMathInElement(document.body)></script><script>document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]})})</script></head><body><div class=content><header><nav id=site-navbar><div class=navbar-content><a href=https://rezvan.xyz/ class=logo>rezvan.xyz</a><div class=navbar-links><a href=/principles class=nav-link><span class=bracket>[</span>principles<span class=bracket>]</span></a>
+<a href=/cv class=nav-link><span class=bracket>[</span>cv<span class=bracket>]</span></a>
+<a href=/posts class=nav-link><span class=bracket>[</span>posts<span class=bracket>]</span></a>
+<a href=/school class=nav-link><span class=bracket>[</span>school<span class=bracket>]</span></a></div><div class=theme-toggle><span id=dark-mode-toggle onclick=toggleTheme() aria-label="Toggle theme">○
+</span><script src=https://rezvan.xyz/js/themetoggle.js></script></div></div></nav></header><main><article><div class=title><h1>Part 4 - Data visualization</h1><div class=meta>Posted on Jan 26, 2024</div><div class=meta>(Last updated: May 26, 2024)</div></div><section class=body><h3 id=introduction>Introduction</h3><p>In this part we&rsquo;ll discuss some principles when it comes to data visualization</p><h3 id=five-point-summary>Five-point summary</h3><p>The five-point summary is a very common and effective summary of data to get a quick overview and feeling for the data.</p><p>To understand what the five-point summary tells us, let&rsquo;s first understand quantiles and quartiles.</p><p>A <strong>quantile</strong> is a cut-point of a distribution (or a dataset).
+Quantiles are usually obtained by sorting the data and selecting an appropriate value at an appropriate rank.</p><p><strong>Quartiles</strong> are quantiles that are placed such that 25% of the data is between them.
 This means that the 1st quartile, $Q_1$, is a value such that at least 25% of the dataset is at most $Q_1$.
 The 2nd quartile, $Q_2$, is a value such that at least 50% of the dataset is at most $Q_2$, or just the <strong>median</strong>.
-The 3rd quartile, $Q_3$, is a value such that at least 75% of the dataset is at most $Q_3$.</p>
-<p>We could have deciles (10% apart) and centiles (1% apart).</p>
-<p>The five-number summary consits of:</p>
-<ul>
-<li>The sample minimum</li>
-<li>The 1st quartile $Q_1$</li>
-<li>The median $Q_2$</li>
-<li>The 3rd quartile $Q_3$</li>
-<li>The sample maximum</li>
-</ul>
-<h3 id="creating-good-figures">Creating good figures</h3>
-<p>Human beings are visual creatures, and a message is often better conveyed graphically than numerically.</p>
-<p>Plots are good for summarization and showing trends, however, the plots need to be good and correct.</p>
-<ul>
-<li><strong>Be sparing</strong>: Whenever you choose to employ visualizations, they should support your message and aid in communication.</li>
-<li><strong>K</strong>eep <strong>I</strong>t <strong>S</strong>imple <strong>S</strong>tupid (KISS): A simple plot is better than a cluttered one.</li>
-</ul>
-<p>Colors are often used to distinguish between classes and encoding of numerical values in charts.
+The 3rd quartile, $Q_3$, is a value such that at least 75% of the dataset is at most $Q_3$.</p><p>We could have deciles (10% apart) and centiles (1% apart).</p><p>The five-number summary consits of:</p><ul><li>The sample minimum</li><li>The 1st quartile $Q_1$</li><li>The median $Q_2$</li><li>The 3rd quartile $Q_3$</li><li>The sample maximum</li></ul><h3 id=creating-good-figures>Creating good figures</h3><p>Human beings are visual creatures, and a message is often better conveyed graphically than numerically.</p><p>Plots are good for summarization and showing trends, however, the plots need to be good and correct.</p><ul><li><strong>Be sparing</strong>: Whenever you choose to employ visualizations, they should support your message and aid in communication.</li><li><strong>K</strong>eep <strong>I</strong>t <strong>S</strong>imple <strong>S</strong>tupid (KISS): A simple plot is better than a cluttered one.</li></ul><p>Colors are often used to distinguish between classes and encoding of numerical values in charts.
 Different kinds of entities should be colored differently if present in the same plot.
 Use colors that have inherent meaning, if possible, e.g., losses with red, environmental causes with green etc.
-If colors have a numerical meaning, beware of choosing an appropriate color map, as the color maps tend to be non-linear</p>
-<h3 id="type-of-charts">Type of charts</h3>
-<p>There are a lot of different charts that we usually see, let&rsquo;s cover them.</p>
-<h4 id="line-plots">Line plots</h4>
-<p>Line plot is the familiar plot of $f(x) = y$.
-Line plots are appropriate for showing the change of one variable as a function of another.</p>
-<p>Place the variable that is varied horizontally (on $x$-axis).
-Place the function of that variable on the $y$-axis.</p>
-<p>Connecting the dots implies that there are values between; it may be appropriate to
-highlight the data points with markers (unless there is a very large number of points).</p>
-<p>A <strong>dot plot</strong> is obtained when the points are not connected with lines and can be appropriate to avoid confusion.</p>
-<h4 id="scatter-plots">Scatter plots</h4>
-<p>Scatter plots place all points of the dataset on a Cartesian plane.
-This can readily show the bivariate relationship between, such as correlation</p>
-<p>Use appropriately-sized dots so that the dots don’t mask the data.
-Density can be represented with color as in heatmap, or points can be shifted slightly at random to show where the density is the highest.</p>
-<p><strong>Bubble plots</strong> vary dot sizes to match some third variable, this can be a useful variant in addition to color</p>
-<h4 id="barplot">Barplot</h4>
-<p>Barplots can be used to describe the relative proportions of categorical variables.</p>
-<p>In addition to grouping along an axis (e.g., year on the $x$-axis), different categories can be shown in different colors.</p>
-<h4 id="histograms">Histograms</h4>
-<p>Histograms describe the frequency distribution of a variable.</p>
-<p>Divides the range of the data into equal-sized intervals or <em>bins</em>.
-The surface area of a bar in the histogram is thus proportional to the fraction of elements falling into the bin.</p>
-<p>Choosing the number of bins is important. Too small width makes random noise too pronounced.
-Too large width masks the structure of the data.</p>
-<p>There is no correct choice, there are only better and worse choices.</p>
-<h4 id="ways-to-choose-bin-width">Ways to choose bin width</h4>
-<p>Suppose the data is $x = \{x_1, x_2, \ldots, x_n \}$.
+If colors have a numerical meaning, beware of choosing an appropriate color map, as the color maps tend to be non-linear</p><h3 id=type-of-charts>Type of charts</h3><p>There are a lot of different charts that we usually see, let&rsquo;s cover them.</p><h4 id=line-plots>Line plots</h4><p>Line plot is the familiar plot of $f(x) = y$.
+Line plots are appropriate for showing the change of one variable as a function of another.</p><p>Place the variable that is varied horizontally (on $x$-axis).
+Place the function of that variable on the $y$-axis.</p><p>Connecting the dots implies that there are values between; it may be appropriate to
+highlight the data points with markers (unless there is a very large number of points).</p><p>A <strong>dot plot</strong> is obtained when the points are not connected with lines and can be appropriate to avoid confusion.</p><h4 id=scatter-plots>Scatter plots</h4><p>Scatter plots place all points of the dataset on a Cartesian plane.
+This can readily show the bivariate relationship between, such as correlation</p><p>Use appropriately-sized dots so that the dots don’t mask the data.
+Density can be represented with color as in heatmap, or points can be shifted slightly at random to show where the density is the highest.</p><p><strong>Bubble plots</strong> vary dot sizes to match some third variable, this can be a useful variant in addition to color</p><h4 id=barplot>Barplot</h4><p>Barplots can be used to describe the relative proportions of categorical variables.</p><p>In addition to grouping along an axis (e.g., year on the $x$-axis), different categories can be shown in different colors.</p><h4 id=histograms>Histograms</h4><p>Histograms describe the frequency distribution of a variable.</p><p>Divides the range of the data into equal-sized intervals or <em>bins</em>.
+The surface area of a bar in the histogram is thus proportional to the fraction of elements falling into the bin.</p><p>Choosing the number of bins is important. Too small width makes random noise too pronounced.
+Too large width masks the structure of the data.</p><p>There is no correct choice, there are only better and worse choices.</p><h4 id=ways-to-choose-bin-width>Ways to choose bin width</h4><p>Suppose the data is $x = \{x_1, x_2, \ldots, x_n \}$.
 Bin width $h$ and the number of bins $k$ are related via
 $$
 k = \biggr\lceil\dfrac{x_{max} - x_{min}}{h}\biggr\rceil
-$$</p>
-<p>There are some default choices:</p>
-<ul>
-<li>Square root rule: $k = \lceil\sqrt{n}\rceil$</li>
-<li>Sturges’ formula: $k = \lceil\log_2(n) + 1\rceil$, implicitly assumes normal distribution</li>
-<li>Rice’s formula: $k = \lceil\sqrt[\leftroot{-2}\uproot{2}3]{n}\rceil$</li>
-<li>Doane’s formula: $k = 1 + \log_2(n) + \log_2\left(1 + \frac{|g_1|}{\sigma_{g_1}}\right)$
-<ul>
-<li>Where $g_1 = \frac{1}{n} \sum_{i = 1}{n} \left(\frac{x - \hat{\mu}}{\hat{\sigma}}\right)^3$ is an estimator for sample skewness.</li>
-<li>$\hat{\mu} = \frac{1}{n} \sum_{i = 1}{n} x_i$, is the sample mean.</li>
-<li>$\hat{\sigma} = \sqrt{\frac{1}{n - 1} \sum_{i = 1}{n} (x - \hat{\mu})^2}$, is the sample standard deviation.</li>
-<li>$\sigma_{g_1} = \sqrt{\frac{6(n - 2)}{(n + 1)(n + 3)}}$</li>
-</ul>
-</li>
-<li>Scott’s rule: $h = \frac{3.49\hat{\sigma}}{\sqrt[\leftroot{-2}\uproot{2}3]{n}}$, where $\hat{\sigma}$ is the sample standard deviation, this is optimal for normally distributed data.</li>
-<li>Feedman-Diaconis’ rule: $h = 2 \cdot \frac{IQR(x)}{\sqrt[\leftroot{-2}\uproot{2}3]{n}}$, where $IQR(x) = Q_3 - Q_1$ is the interquartile range.</li>
-</ul>
-<h4 id="boxplot">Boxplot</h4>
-<p>The boxplot, or the box and whiskers plot, is a concise way to represent the different quartiles of the data.
+$$</p><p>There are some default choices:</p><ul><li>Square root rule: $k = \lceil\sqrt{n}\rceil$</li><li>Sturges’ formula: $k = \lceil\log_2(n) + 1\rceil$, implicitly assumes normal distribution</li><li>Rice’s formula: $k = \lceil\sqrt[\leftroot{-2}\uproot{2}3]{n}\rceil$</li><li>Doane’s formula: $k = 1 + \log_2(n) + \log_2\left(1 + \frac{|g_1|}{\sigma_{g_1}}\right)$<ul><li>Where $g_1 = \frac{1}{n} \sum_{i = 1}{n} \left(\frac{x - \hat{\mu}}{\hat{\sigma}}\right)^3$ is an estimator for sample skewness.</li><li>$\hat{\mu} = \frac{1}{n} \sum_{i = 1}{n} x_i$, is the sample mean.</li><li>$\hat{\sigma} = \sqrt{\frac{1}{n - 1} \sum_{i = 1}{n} (x - \hat{\mu})^2}$, is the sample standard deviation.</li><li>$\sigma_{g_1} = \sqrt{\frac{6(n - 2)}{(n + 1)(n + 3)}}$</li></ul></li><li>Scott’s rule: $h = \frac{3.49\hat{\sigma}}{\sqrt[\leftroot{-2}\uproot{2}3]{n}}$, where $\hat{\sigma}$ is the sample standard deviation, this is optimal for normally distributed data.</li><li>Feedman-Diaconis’ rule: $h = 2 \cdot \frac{IQR(x)}{\sqrt[\leftroot{-2}\uproot{2}3]{n}}$, where $IQR(x) = Q_3 - Q_1$ is the interquartile range.</li></ul><h4 id=boxplot>Boxplot</h4><p>The boxplot, or the box and whiskers plot, is a concise way to represent the different quartiles of the data.
 The box shows the upper and lower quartiles of the data
-(50% of the data lies inside the box, that is, the bottom of the box shows where 25% quartile is, and the top of the box where the 75% quartile is).</p>
-<p>The median of the data is shown with a line.</p>
-
-        </section>
-    </article>
-
-    <nav class="navigation">
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-
-        
-        
-
-        <div class="nav-item previous">
-            
-            
-            <a href="/school/dat565/dat565_3/" title="Previous: Part 3 - Data munging">&larr; Previous</a>
-            
-            
-        </div>
-
-        <div class="nav-item next">
-            
-            
-            <a href="/school/dat565/dat565_5/" title="Next: Part 5 - Statistical analysis">Next &rarr;</a>
-            
-            
-        </div>
-    </nav>
-</main>
-<footer id="site-footer">
-    <div class="social-links">
-        
-        <a href="https://github.com/rezaarezvan" title="">github</a>
-        
-        <a href="https://x.com/rzvan__/" title="">x</a>
-        
-    </div><p class="footer-msg">memento mori</p>
-</footer></div>
-</body>
-
-</html>
+(50% of the data lies inside the box, that is, the bottom of the box shows where 25% quartile is, and the top of the box where the 75% quartile is).</p><p>The median of the data is shown with a line.</p></section></article><nav class=navigation><div class="nav-item previous"><a href=/school/dat565/dat565_3/ title="Previous: Part 3 - Data munging">&larr; Previous</a></div><div class="nav-item next"><a href=/school/dat565/dat565_5/ title="Next: Part 5 - Statistical analysis">Next &rarr;</a></div></nav></main><footer id=site-footer><div class=social-links><a href=https://github.com/rezaarezvan title class=social-link><span class=bracket>[</span>github<span class=bracket>]</span></a>
+<a href=https://x.com/rzvan__/ title class=social-link><span class=bracket>[</span>x<span class=bracket>]</span></a></div><div class=footer-marquee><div class=footer-marquee__content><span class=footer-marquee__item>memento mori • amor fati • sic parvis magna • per aspera ad astra</span>
+<span class=footer-marquee__item>memento mori • amor fati • sic parvis magna • per aspera ad astra</span></div></div></footer></div></body></html>

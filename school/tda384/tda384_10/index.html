@@ -1,9 +1,5 @@
-<!DOCTYPE html>
-<html><head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"><title>rezvan | Part 10 - Parallel linked lists</title><link rel="icon" type="image/png" href="https://rezvan.xyz/images/icon.png" /><meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description"
-        content="In this part we&rsquo;ll cover the synchronization challenges that arise when designing (correct) and efficient parallelizations.
+<!doctype html><html><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge"><title>rezvan | Part 10 - Parallel linked lists</title><link rel=icon type=image/png href=https://rezvan.xyz/images/icon.png><meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=description content="In this part we&rsquo;ll cover the synchronization challenges that arise when designing (correct) and efficient parallelizations.
 But let&rsquo;s first see the burdens with locks
 The trouble with locks Standard techniques for concurrent programming are ultimately based on locks.
 Programming with locks has several drawbacks:
@@ -12,12 +8,7 @@ Lock granularity is hard to choose:
 Not enough locking: race conditions.
 Too much locking: not enough parallelism.
 Risk of deadlock and starvation.
-Lock-based implementations do not compose (easily)." />
-    <meta property="og:image" content="https://raw.githubusercontent.com/rezaarezvan/rezvan.xyz/main/images/icon.png" />
-    <meta property="og:url" content="https://rezvan.xyz/school/tda384/tda384_10/">
-  <meta property="og:site_name" content="rezvan">
-  <meta property="og:title" content="Part 10 - Parallel linked lists">
-  <meta property="og:description" content="In this part we’ll cover the synchronization challenges that arise when designing (correct) and efficient parallelizations.
+Lock-based implementations do not compose (easily)."><meta property="og:image" content="https://raw.githubusercontent.com/rezaarezvan/rezvan.xyz/main/images/icon.png"><meta property="og:url" content="https://rezvan.xyz/school/tda384/tda384_10/"><meta property="og:site_name" content="rezvan"><meta property="og:title" content="Part 10 - Parallel linked lists"><meta property="og:description" content="In this part we’ll cover the synchronization challenges that arise when designing (correct) and efficient parallelizations.
 But let’s first see the burdens with locks
 The trouble with locks Standard techniques for concurrent programming are ultimately based on locks.
 Programming with locks has several drawbacks:
@@ -26,16 +17,7 @@ Lock granularity is hard to choose:
 Not enough locking: race conditions.
 Too much locking: not enough parallelism.
 Risk of deadlock and starvation.
-Lock-based implementations do not compose (easily).">
-  <meta property="og:locale" content="en_us">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="school">
-    <meta property="article:published_time" content="2023-02-19T00:00:00+00:00">
-    <meta property="article:modified_time" content="2024-05-26T11:09:10+02:00">
-
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Part 10 - Parallel linked lists">
-  <meta name="twitter:description" content="In this part we’ll cover the synchronization challenges that arise when designing (correct) and efficient parallelizations.
+Lock-based implementations do not compose (easily)."><meta property="og:locale" content="en_us"><meta property="og:type" content="article"><meta property="article:section" content="school"><meta property="article:published_time" content="2023-02-19T00:00:00+00:00"><meta property="article:modified_time" content="2024-05-26T11:09:10+02:00"><meta name=twitter:card content="summary"><meta name=twitter:title content="Part 10 - Parallel linked lists"><meta name=twitter:description content="In this part we’ll cover the synchronization challenges that arise when designing (correct) and efficient parallelizations.
 But let’s first see the burdens with locks
 The trouble with locks Standard techniques for concurrent programming are ultimately based on locks.
 Programming with locks has several drawbacks:
@@ -44,27 +26,7 @@ Lock granularity is hard to choose:
 Not enough locking: race conditions.
 Too much locking: not enough parallelism.
 Risk of deadlock and starvation.
-Lock-based implementations do not compose (easily).">
-<script src="https://rezvan.xyz/js/feather.min.js"></script>
-    
-
-    
-    
-    <link rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/main.73f3431f38ac72fc2890b3747cc9c6d55d5756f3ba40e590c77627ae6c16e46b.css" />
-    <link id="lightSyntaxStyle" rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/light_syntax.65408cc3a5c02070b661c3e4e79306fc261cc63620f4adce9a30eafcba4ab79e.css" />
-    
-    <link id="darkModeStyle" rel="stylesheet" type="text/css" href="https://rezvan.xyz/css/dark.13c6bfb747b76fdd2dc198b1172afdd77e7ce604de43f343ce643378bafc58af.css"  disabled />
-    <link id="darkSyntaxStyle" rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/dark_syntax.2b10cc1a2156b30874a063b7439a993bc3b43d476c5e1d8598d769c929c7b381.css" />
-    
-
-    
-    
-    <script type="text/javascript"
-        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-        </script>
-
-    
-    <script type="text/x-mathjax-config">
+Lock-based implementations do not compose (easily)."><link rel=stylesheet href=https://rezvan.xyz/css/combined.min.51ec65976b416262d827f98c76ca037bf7aeea27590e3c120eac32afbfbc40ee.css integrity="sha256-Uexll2tBYmLYJ/mMdsoDe/eu6idZDjwSDqwyr7+8QO4="><link id=lightSyntaxStyle rel=stylesheet href=https://rezvan.xyz/css/light_syntax.min.d9e0828a4ff7f2d7317942062fc751fa487b2ac2c47b934ad082abd7d3ca6690.css integrity="sha256-2eCCik/38tcxeUIGL8dR+kh7KsLEe5NK0IKr19PKZpA="><link id=darkModeStyle rel=stylesheet href=https://rezvan.xyz/css/dark.min.49ad20f2859f81550f852c48875ca9e72e4267459ed6fe82fc9b4f3cf7fdc4e8.css integrity="sha256-Sa0g8oWfgVUPhSxIh1yp5y5CZ0We1v6C/JtPPPf9xOg=" disabled><link id=darkSyntaxStyle rel=stylesheet href=https://rezvan.xyz/css/dark_syntax.min.1a878f3d8fb43359bd3b44bc70c4074f682f11066c6537bf6248b696cbe56586.css integrity="sha256-GoePPY+0M1m9O0S8cMQHT2gvEQZsZTe/Yki2lsvlZYY=" disabled><script type=text/javascript src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type=text/x-mathjax-config>
 		MathJax.Hub.Config({
 			tex2jax: {
 				inlineMath: [['$','$'], ['\\(','\\)']],
@@ -76,141 +38,12 @@ Lock-based implementations do not compose (easily).">
 						 extensions: ["AMSmath.js", "AMSsymbols.js"] }
 			}
 		});
-		</script>
-    
-
-    
-    
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css">
-    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js"
-        onload="renderMathInElement(document.body);"></script>
-
-    
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            renderMathInElement(document.body, {
-                delimiters: [
-                    {left: "$$", right: "$$", display: true},
-                    {left: "$", right: "$", display: false}
-                ]
-            });
-        });
-    </script>
-    
-</head>
-<body>
-    <div class="content"><header>
-    <nav id="site-navbar">
-        <div class="menu-items">
-            
-            <a href="/">home</a>
-            
-            <a href="/principles">principles</a>
-            
-            <a href="/cv">cv</a>
-            
-            <a href="/posts">posts</a>
-            
-            <a href="/school">school</a>
-            
-        </div>
-        <div class="theme-toggle">
-            <span id="dark-mode-toggle" onclick="toggleTheme()"><i data-feather="moon"></i></span>
-            <script src="https://rezvan.xyz/js/themetoggle.js"></script>
-        </div>
-        
-    </nav>
-</header>
-
-<main>
-    <article>
-        <div class="title">
-            <h1>Part 10 - Parallel linked lists</h1>
-            <div class="meta">Posted on Feb 19, 2023
-            </div>
-            <div class="meta">
-                (Last updated: May 26, 2024)
-            </div>
-
-        </div>
-        
-        <section class="body">
-            <p>In this part we&rsquo;ll cover the <em>synchronization challenges</em> that arise when designing (correct) and efficient parallelizations.</p>
-<p>But let&rsquo;s first see the burdens with locks</p>
-<h3 id="the-trouble-with-locks">The trouble with locks</h3>
-<p>Standard techniques for concurrent programming are ultimately based on locks.</p>
-<p>Programming with locks has several drawbacks:</p>
-<ul>
-<li>
-<p>Performance overhead.</p>
-</li>
-<li>
-<p>Lock granularity is hard to choose:</p>
-<ul>
-<li>
-<p>Not enough locking: race conditions.</p>
-</li>
-<li>
-<p>Too much locking: not enough parallelism.</p>
-</li>
-</ul>
-</li>
-<li>
-<p>Risk of deadlock and starvation.</p>
-</li>
-<li>
-<p>Lock-based implementations do not compose (easily).</p>
-</li>
-<li>
-<p>Lock-based programs are hard to maintain and modify.</p>
-</li>
-</ul>
-<p>Message-passing programming is higher-level, but it also inevitably incurs on
-synchronization costs – of magnitude comparable to those associated with locks.</p>
-<p>A good rule of thumb is:</p>
-<ul>
-<li>
-<p>Lock-based programming is <em>pessimistic</em>: be prepared for the worst possible conditions:</p>
-<ul>
-<li>If things can go wrong, they will.</li>
-</ul>
-</li>
-<li>
-<p>Lock-free programming is <em>optimistic</em>: do what you have to do without worrying about race conditions:</p>
-<ul>
-<li>If things go wrong, just try again!</li>
-</ul>
-</li>
-</ul>
-<p>Ultimately, what Lock-free programming relies on is:</p>
-<ul>
-<li>
-<p>Using stronger primitives for atomic access.</p>
-</li>
-<li>
-<p>Building optimistic algorithms using those primitives.</p>
-</li>
-</ul>
-<p>For example, remember the <code>compare-and-set</code> and <code>test-and-set</code> methods we have encountered.</p>
-<p>Even if these are not &lsquo;free&rsquo;, these operations also take time and performance.</p>
-<p>There are two different classes of lock-free algorithms:</p>
-<ul>
-<li>
-<p>Lock-free: guarantee <em>system-wide</em> progress: infinitely often, some process makes progress.</p>
-</li>
-<li>
-<p>Wait-free: guarantee <em>per-process</em> progress: every process eventually makes progress.</p>
-</li>
-</ul>
-<p>Wait-free is stronger than lock-free:</p>
-<ul>
-<li>Lock-free algorithms are free from deadlock.</li>
-<li>Wait-free algorithms are free from deadlock <em>and starvation</em>.</li>
-</ul>
-<p>Let&rsquo;s see how we can parallelize linked lists!</p>
-<p>But before that, let&rsquo;s quickly just have our linked list defined:</p>
-<pre tabindex="0"><code>class SequentialNode&lt;T&gt; implements Node&lt;T&gt; {
+		</script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css><script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js onload=renderMathInElement(document.body)></script><script>document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]})})</script></head><body><div class=content><header><nav id=site-navbar><div class=navbar-content><a href=https://rezvan.xyz/ class=logo>rezvan.xyz</a><div class=navbar-links><a href=/principles class=nav-link><span class=bracket>[</span>principles<span class=bracket>]</span></a>
+<a href=/cv class=nav-link><span class=bracket>[</span>cv<span class=bracket>]</span></a>
+<a href=/posts class=nav-link><span class=bracket>[</span>posts<span class=bracket>]</span></a>
+<a href=/school class=nav-link><span class=bracket>[</span>school<span class=bracket>]</span></a></div><div class=theme-toggle><span id=dark-mode-toggle onclick=toggleTheme() aria-label="Toggle theme">○
+</span><script src=https://rezvan.xyz/js/themetoggle.js></script></div></div></nav></header><main><article><div class=title><h1>Part 10 - Parallel linked lists</h1><div class=meta>Posted on Feb 19, 2023</div><div class=meta>(Last updated: May 26, 2024)</div></div><section class=body><p>In this part we&rsquo;ll cover the <em>synchronization challenges</em> that arise when designing (correct) and efficient parallelizations.</p><p>But let&rsquo;s first see the burdens with locks</p><h3 id=the-trouble-with-locks>The trouble with locks</h3><p>Standard techniques for concurrent programming are ultimately based on locks.</p><p>Programming with locks has several drawbacks:</p><ul><li><p>Performance overhead.</p></li><li><p>Lock granularity is hard to choose:</p><ul><li><p>Not enough locking: race conditions.</p></li><li><p>Too much locking: not enough parallelism.</p></li></ul></li><li><p>Risk of deadlock and starvation.</p></li><li><p>Lock-based implementations do not compose (easily).</p></li><li><p>Lock-based programs are hard to maintain and modify.</p></li></ul><p>Message-passing programming is higher-level, but it also inevitably incurs on
+synchronization costs – of magnitude comparable to those associated with locks.</p><p>A good rule of thumb is:</p><ul><li><p>Lock-based programming is <em>pessimistic</em>: be prepared for the worst possible conditions:</p><ul><li>If things can go wrong, they will.</li></ul></li><li><p>Lock-free programming is <em>optimistic</em>: do what you have to do without worrying about race conditions:</p><ul><li>If things go wrong, just try again!</li></ul></li></ul><p>Ultimately, what Lock-free programming relies on is:</p><ul><li><p>Using stronger primitives for atomic access.</p></li><li><p>Building optimistic algorithms using those primitives.</p></li></ul><p>For example, remember the <code>compare-and-set</code> and <code>test-and-set</code> methods we have encountered.</p><p>Even if these are not &lsquo;free&rsquo;, these operations also take time and performance.</p><p>There are two different classes of lock-free algorithms:</p><ul><li><p>Lock-free: guarantee <em>system-wide</em> progress: infinitely often, some process makes progress.</p></li><li><p>Wait-free: guarantee <em>per-process</em> progress: every process eventually makes progress.</p></li></ul><p>Wait-free is stronger than lock-free:</p><ul><li>Lock-free algorithms are free from deadlock.</li><li>Wait-free algorithms are free from deadlock <em>and starvation</em>.</li></ul><p>Let&rsquo;s see how we can parallelize linked lists!</p><p>But before that, let&rsquo;s quickly just have our linked list defined:</p><pre tabindex=0><code>class SequentialNode&lt;T&gt; implements Node&lt;T&gt; {
     // Value stored in node
     private T item;
 
@@ -281,9 +114,7 @@ synchronization costs – of magnitude comparable to those associated with locks
         }
     }
 }
-</code></pre><h3 id="coarse-grained-locking">Coarse grained locking</h3>
-<p>The simple idea is to lock every method.</p>
-<pre tabindex="0"><code>class CoarseSet&lt;T&gt; extends SequentialSet&lt;T&gt; {
+</code></pre><h3 id=coarse-grained-locking>Coarse grained locking</h3><p>The simple idea is to lock every method.</p><pre tabindex=0><code>class CoarseSet&lt;T&gt; extends SequentialSet&lt;T&gt; {
     // Lock controlling access to the whole set
     private Lock lock = new ReentrantLock();
 
@@ -322,38 +153,7 @@ synchronization costs – of magnitude comparable to those associated with locks
         }
     }
 }
-</code></pre><p>Now this is a <strong>very</strong> naive approach - but let&rsquo;s list the pros and cons:</p>
-<ul>
-<li>
-<p>Pros:</p>
-<ul>
-<li>
-<p>Obviously correct – avoids race conditions and deadlocks.</p>
-</li>
-<li>
-<p>If the lock is fair, so is access to the list.</p>
-</li>
-<li>
-<p>If contention is low (not many threads accessing the set concurrently), <code>CoarseSet</code> is quite efficient.</p>
-</li>
-</ul>
-</li>
-<li>
-<p>Cons:</p>
-<ul>
-<li>
-<p>Access to the list is sequential – missing opportunities for parallelization.</p>
-</li>
-<li>
-<p>If contention is high (many threads accessing the set concurrently), <code>CoarseSet</code> is quite slow.</p>
-</li>
-</ul>
-</li>
-</ul>
-<p>Now let&rsquo;s look at <code>CoarseSet</code> predecessor</p>
-<h3 id="fine-grained-locking">Fine-grained locking</h3>
-<p>The idea here is, instead of locking the whole list when doing operations, we just lock that specific node(s).</p>
-<pre tabindex="0"><code>public class FineSet&lt;T&gt; extends SequentialSet&lt;T&gt; {
+</code></pre><p>Now this is a <strong>very</strong> naive approach - but let&rsquo;s list the pros and cons:</p><ul><li><p>Pros:</p><ul><li><p>Obviously correct – avoids race conditions and deadlocks.</p></li><li><p>If the lock is fair, so is access to the list.</p></li><li><p>If contention is low (not many threads accessing the set concurrently), <code>CoarseSet</code> is quite efficient.</p></li></ul></li><li><p>Cons:</p><ul><li><p>Access to the list is sequential – missing opportunities for parallelization.</p></li><li><p>If contention is high (many threads accessing the set concurrently), <code>CoarseSet</code> is quite slow.</p></li></ul></li></ul><p>Now let&rsquo;s look at <code>CoarseSet</code> predecessor</p><h3 id=fine-grained-locking>Fine-grained locking</h3><p>The idea here is, instead of locking the whole list when doing operations, we just lock that specific node(s).</p><pre tabindex=0><code>public class FineSet&lt;T&gt; extends SequentialSet&lt;T&gt; {
     public FineSet() {
         // Smallest key
         head = new LockableNode&lt;&gt;(Integer.MIN _ VALUE);
@@ -364,15 +164,13 @@ synchronization costs – of magnitude comparable to those associated with locks
         head.setNext(tail);
     }
 }
-</code></pre><p>Since each node is lockable:</p>
-<pre tabindex="0"><code>class LockableNode&lt;T&gt; extends SequentialNode&lt;T&gt; {
+</code></pre><p>Since each node is lockable:</p><pre tabindex=0><code>class LockableNode&lt;T&gt; extends SequentialNode&lt;T&gt; {
     private Lock lock = new ReentrantLock();
         void lock() { lock.lock(); }
         void unlock() { lock.unlock(); }
     }
 }
-</code></pre><p>Now let&rsquo;s see the implementations of each operation:</p>
-<pre tabindex="0"><code>// Find while locking pred and curr, return locked position
+</code></pre><p>Now let&rsquo;s see the implementations of each operation:</p><pre tabindex=0><code>// Find while locking pred and curr, return locked position
 protected Node&lt;T&gt;, Node&lt;T&gt; find(Node&lt;T&gt; start, int key) {
     Node&lt;T&gt; pred, curr;
     pred = start; curr = start.next();
@@ -420,65 +218,15 @@ public boolean has(T item) {
         pred.unlock(); curr.unlock();
     }
 }
-</code></pre><p>As we see, it&rsquo;s all about the <code>find</code> operation.</p>
-<p>Pros and cons:</p>
-<ul>
-<li>
-<p>Pros:</p>
-<ul>
-<li>
-<p>If locks are fair, so is access to the list, because threads proceed along the list one
-after the other without changing order.</p>
-</li>
-<li>
-<p>Threads operating on disjoint portions of the list may be able to operate in parallel.</p>
-</li>
-</ul>
-</li>
-<li>
-<p>Cons:</p>
-<ul>
-<li>
-<p>It is still possible that one thread prevents another thread from operating in parallel on
+</code></pre><p>As we see, it&rsquo;s all about the <code>find</code> operation.</p><p>Pros and cons:</p><ul><li><p>Pros:</p><ul><li><p>If locks are fair, so is access to the list, because threads proceed along the list one
+after the other without changing order.</p></li><li><p>Threads operating on disjoint portions of the list may be able to operate in parallel.</p></li></ul></li><li><p>Cons:</p><ul><li><p>It is still possible that one thread prevents another thread from operating in parallel on
 a disjoint portion of the list – for example, if one thread wants to access the end of the
-list but, another thread blocks it while locking the beginning of the list.</p>
-</li>
-<li>
-<p>The hand-over-hand locking protocol may be quite slow, as it involves a significant
-number of lock operations.</p>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="optimistic-locking">Optimistic locking</h3>
-<p>Let&rsquo;s try to implement <code>find</code> without using locks. The idea is to <em>validate</em>
+list but, another thread blocks it while locking the beginning of the list.</p></li><li><p>The hand-over-hand locking protocol may be quite slow, as it involves a significant
+number of lock operations.</p></li></ul></li></ul><h3 id=optimistic-locking>Optimistic locking</h3><p>Let&rsquo;s try to implement <code>find</code> without using locks. The idea is to <em>validate</em>
 a position <em>after finding it</em>, there is some implementation detail about the nodes,
-for example we need to make sure we have the <code>volatile</code> keyword for the <code>next</code> attribute in a node.</p>
-<p>But that is besides the point, let&rsquo;s take an overview of how the operations should work:</p>
-<ol>
-<li>
-<p>Find the item’s position inside the list without locking.</p>
-</li>
-<li>
-<p>Lock the position’s nodes <code>pred</code> and <code>curr</code>.</p>
-</li>
-<li>
-<p>Validate the position while the nodes are locked:</p>
-<ul>
-<li>
-<p>3.1 If the position is <strong>valid</strong>, perform the operation while the nodes are locked, then
-release locks.</p>
-</li>
-<li>
-<p>3.2 If the position is <strong>invalid</strong>, release locks and repeat the operation from <strong>scratch</strong>.</p>
-</li>
-</ul>
-</li>
-</ol>
-<p>This approach is optimistic because it works well when validation is often successful
-(so we don’t have to repeat operations).</p>
-<p>Now let&rsquo;s implement these operations:</p>
-<pre tabindex="0"><code>// Find as in SequentialSet find
+for example we need to make sure we have the <code>volatile</code> keyword for the <code>next</code> attribute in a node.</p><p>But that is besides the point, let&rsquo;s take an overview of how the operations should work:</p><ol><li><p>Find the item’s position inside the list without locking.</p></li><li><p>Lock the position’s nodes <code>pred</code> and <code>curr</code>.</p></li><li><p>Validate the position while the nodes are locked:</p><ul><li><p>3.1 If the position is <strong>valid</strong>, perform the operation while the nodes are locked, then
+release locks.</p></li><li><p>3.2 If the position is <strong>invalid</strong>, release locks and repeat the operation from <strong>scratch</strong>.</p></li></ul></li></ol><p>This approach is optimistic because it works well when validation is often successful
+(so we don’t have to repeat operations).</p><p>Now let&rsquo;s implement these operations:</p><pre tabindex=0><code>// Find as in SequentialSet find
 
 public boolean add(T item) {
     Node&lt;T&gt; node = new ReadWriteNode&lt;&gt;(item);
@@ -538,54 +286,11 @@ protected boolean valid(Node&lt;T&gt; pred, Node&lt;T&gt; curr) {
 
     return false;
 }
-</code></pre><ul>
-<li>
-<p>Pros:</p>
-<ul>
-<li>
-<p>Threads operating on disjoint portions of the list can operate in parallel.</p>
-</li>
-<li>
-<p>When validation often succeeds, there is much less locking involved than in <code>FineSet</code>.</p>
-</li>
-</ul>
-</li>
-<li>
-<p>Cons:</p>
-<ul>
-<li>
-<p><code>OptimisticSet</code> is not starvation free; A thread, $t$, may fail validation forever
+</code></pre><ul><li><p>Pros:</p><ul><li><p>Threads operating on disjoint portions of the list can operate in parallel.</p></li><li><p>When validation often succeeds, there is much less locking involved than in <code>FineSet</code>.</p></li></ul></li><li><p>Cons:</p><ul><li><p><code>OptimisticSet</code> is not starvation free; A thread, $t$, may fail validation forever
 if other threads keep removing and adding <code>pred</code> / <code>curr</code> between when $t$ performs
-<code>find</code> and when it locks <code>pred</code> and <code>curr</code>.</p>
-</li>
-<li>
-<p>If traversing the list twice without locking is not significantly faster than traversing it
-once with locking, <code>OptimisticSet</code> does not have a clear advantage over <code>FineSet</code>.</p>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="lazy-node-removal">Lazy node removal</h3>
-<p>This is the idea that, we need a way to atomically share the information that a node is being removed, but
-without locking.</p>
-<p>To this end, each node includes a flag <code>valid</code> with setters and getters.</p>
-<p>Which means:</p>
-<ul>
-<li>
-<p>Validation only needs to check the mark <code>valid</code>.</p>
-</li>
-<li>
-<p>Operation <code>remove</code> marks a node invalid before removing it.</p>
-</li>
-<li>
-<p>Operation <code>has</code> is lock-free.</p>
-</li>
-<li>
-<p>Operation <code>add</code> works as in <code>OptimisticSet</code>.</p>
-</li>
-</ul>
-<p>Let&rsquo;s start with the implementation:</p>
-<pre tabindex="0"><code>public class LazySet&lt;T&gt; extends OptimisticSet&lt;T&gt; {
+<code>find</code> and when it locks <code>pred</code> and <code>curr</code>.</p></li><li><p>If traversing the list twice without locking is not significantly faster than traversing it
+once with locking, <code>OptimisticSet</code> does not have a clear advantage over <code>FineSet</code>.</p></li></ul></li></ul><h3 id=lazy-node-removal>Lazy node removal</h3><p>This is the idea that, we need a way to atomically share the information that a node is being removed, but
+without locking.</p><p>To this end, each node includes a flag <code>valid</code> with setters and getters.</p><p>Which means:</p><ul><li><p>Validation only needs to check the mark <code>valid</code>.</p></li><li><p>Operation <code>remove</code> marks a node invalid before removing it.</p></li><li><p>Operation <code>has</code> is lock-free.</p></li><li><p>Operation <code>add</code> works as in <code>OptimisticSet</code>.</p></li></ul><p>Let&rsquo;s start with the implementation:</p><pre tabindex=0><code>public class LazySet&lt;T&gt; extends OptimisticSet&lt;T&gt; {
     public LazySet() {
         head = new ValidatedNode&lt;&gt;(Integer.MIN_VALUE);
         tail = new ValidatedNode&lt;&gt;(Integer.MAX_VALUE);
@@ -623,38 +328,11 @@ public boolean remove(T item) {
         }
     } while (true);
 }
-</code></pre><ul>
-<li>
-<p>Pros:</p>
-<ul>
-<li>
-<p>Validation is constant time.</p>
-</li>
-<li>
-<p>Membership checking does not require any locking – it’s even wait-free (it traverses
-the list once without locking).</p>
-</li>
-<li>
-<p>Physical removal of logically removed nodes could be batched and performed when
+</code></pre><ul><li><p>Pros:</p><ul><li><p>Validation is constant time.</p></li><li><p>Membership checking does not require any locking – it’s even wait-free (it traverses
+the list once without locking).</p></li><li><p>Physical removal of logically removed nodes could be batched and performed when
 convenient – thus reducing the number of times the physical chain of nodes is
-changed, in turn reducing the expensive propagation of information between threads.</p>
-</li>
-</ul>
-</li>
-<li>
-<p>Cons:</p>
-<ul>
-<li>Operations add and remove still require locking (as in OptimisticSet), which may
-reduce the amount of parallelism.</li>
-</ul>
-</li>
-</ul>
-<p>Now lastly, let&rsquo;s solve this using <em>no locks</em>!</p>
-<h3 id="lock-free-access">Lock free access</h3>
-<p>If we&rsquo;re not using locks we need to use stronger synchronization primitives than locks.</p>
-<p>Therefore we&rsquo;ll use the <code>compare-and-set</code> operation.</p>
-<p>Let&rsquo;s try to implement <code>remove</code> using this:</p>
-<pre tabindex="0"><code>public boolean remove(T item) {
+changed, in turn reducing the expensive propagation of information between threads.</p></li></ul></li><li><p>Cons:</p><ul><li>Operations add and remove still require locking (as in OptimisticSet), which may
+reduce the amount of parallelism.</li></ul></li></ul><p>Now lastly, let&rsquo;s solve this using <em>no locks</em>!</p><h3 id=lock-free-access>Lock free access</h3><p>If we&rsquo;re not using locks we need to use stronger synchronization primitives than locks.</p><p>Therefore we&rsquo;ll use the <code>compare-and-set</code> operation.</p><p>Let&rsquo;s try to implement <code>remove</code> using this:</p><pre tabindex=0><code>public boolean remove(T item) {
     boolean done;
     do {
         Node&lt;T&gt; pred, curr = find(head, item.key());
@@ -671,10 +349,7 @@ reduce the amount of parallelism.</li>
     return true;
 }
 </code></pre><p>This is however a naive approach and will not work, unfortunately. If two threads call <code>remove</code> at the same time,
-it is possible that only one of them are successful.</p>
-<p>We will need to borrow the idea of marking and updating nodes from <code>LazySet</code>.</p>
-<p>Which means:</p>
-<pre tabindex="0"><code>class AtomicMarkableReference&lt;V&gt; {
+it is possible that only one of them are successful.</p><p>We will need to borrow the idea of marking and updating nodes from <code>LazySet</code>.</p><p>Which means:</p><pre tabindex=0><code>class AtomicMarkableReference&lt;V&gt; {
     // Current reference and mark
     V, boolean get();
 
@@ -689,8 +364,7 @@ it is possible that only one of them are successful.</p>
 
     boolean compareAndSet(V expectRef, V newRef, boolean expectMark, boolean newMark)
 }
-</code></pre><p>There are some more implementation details about our nodes, but let&rsquo;s skip that :).</p>
-<pre tabindex="0"><code>public boolean remove(T item) {
+</code></pre><p>There are some more implementation details about our nodes, but let&rsquo;s skip that :).</p><pre tabindex=0><code>public boolean remove(T item) {
     do {
         Node&lt;T&gt; pred, curr = find(head, item.key());
         if (curr.key() != item.key() || !curr.valid()) {
@@ -745,111 +419,12 @@ protected Node&lt;T&gt;, Node&lt;T&gt; find(Node&lt;T&gt; start, int key) {
         } while (true);
     } while (true);
 }
-</code></pre><ul>
-<li>
-<p>Pros:</p>
-<ul>
-<li>
-<p>No operations require locking: maximum potential for parallelism.</p>
-</li>
-<li>
-<p>Membership checking does not require any locking – it’s even wait-free (it traverses
-the list once without locking).</p>
-</li>
-</ul>
-</li>
-<li>
-<p>Cons:</p>
-<ul>
-<li>
-<p>The implementation needs test-and-set-like synchronization primitives, which have to
-be supported and come with their own performance costs.</p>
-</li>
-<li>
-<p>Operations add and remove are lock-free but not wait-free: they may have to repeat
+</code></pre><ul><li><p>Pros:</p><ul><li><p>No operations require locking: maximum potential for parallelism.</p></li><li><p>Membership checking does not require any locking – it’s even wait-free (it traverses
+the list once without locking).</p></li></ul></li><li><p>Cons:</p><ul><li><p>The implementation needs test-and-set-like synchronization primitives, which have to
+be supported and come with their own performance costs.</p></li><li><p>Operations add and remove are lock-free but not wait-free: they may have to repeat
 operations, and they may be delayed while they physically remove invalid nodes, with
 the risk of introducing contention on nodes that have been already previously
-logically deleted.</p>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="when-to-lock-and-not">When to lock and not</h3>
-<p>Each of the different implementations of concurrent set is the best choice for certain
-applications and not for others:</p>
-<ul>
-<li>
-<p><code>CoarseSet</code> works well with low contention.</p>
-</li>
-<li>
-<p><code>FineSet</code> works well when threads tend to access the list orderly.</p>
-</li>
-<li>
-<p><code>OptimisticSet</code> works well to let threads operate on disjoint portions of the list.</p>
-</li>
-<li>
-<p><code>LazySet</code> works well when batching invalid node removal is convenient.</p>
-</li>
-<li>
-<p><code>LockFreeSet</code> works well when locking is quite expensive</p>
-</li>
-</ul>
-
-        </section>
-    </article>
-
-    <nav class="navigation">
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-
-        
-        
-
-        <div class="nav-item previous">
-            
-            
-            <a href="/school/tda384/tda384_9/" title="Previous: Part 9 - Parallelizing computations">&larr; Previous</a>
-            
-            
-        </div>
-
-        <div class="nav-item next">
-            
-        </div>
-    </nav>
-</main>
-<footer id="site-footer">
-    <div class="social-links">
-        
-        <a href="https://github.com/rezaarezvan" title="">github</a>
-        
-        <a href="https://x.com/rzvan__/" title="">x</a>
-        
-    </div><p class="footer-msg">memento mori</p>
-</footer></div>
-</body>
-
-</html>
+logically deleted.</p></li></ul></li></ul><h3 id=when-to-lock-and-not>When to lock and not</h3><p>Each of the different implementations of concurrent set is the best choice for certain
+applications and not for others:</p><ul><li><p><code>CoarseSet</code> works well with low contention.</p></li><li><p><code>FineSet</code> works well when threads tend to access the list orderly.</p></li><li><p><code>OptimisticSet</code> works well to let threads operate on disjoint portions of the list.</p></li><li><p><code>LazySet</code> works well when batching invalid node removal is convenient.</p></li><li><p><code>LockFreeSet</code> works well when locking is quite expensive</p></li></ul></section></article><nav class=navigation><div class="nav-item previous"><a href=/school/tda384/tda384_9/ title="Previous: Part 9 - Parallelizing computations">&larr; Previous</a></div><div class="nav-item next"></div></nav></main><footer id=site-footer><div class=social-links><a href=https://github.com/rezaarezvan title class=social-link><span class=bracket>[</span>github<span class=bracket>]</span></a>
+<a href=https://x.com/rzvan__/ title class=social-link><span class=bracket>[</span>x<span class=bracket>]</span></a></div><div class=footer-marquee><div class=footer-marquee__content><span class=footer-marquee__item>memento mori • amor fati • sic parvis magna • per aspera ad astra</span>
+<span class=footer-marquee__item>memento mori • amor fati • sic parvis magna • per aspera ad astra</span></div></div></footer></div></body></html>

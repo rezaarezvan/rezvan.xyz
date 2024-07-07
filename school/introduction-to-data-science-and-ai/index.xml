@@ -1,75 +1,31 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>Introduction to Data Science and Ai on rezvan</title>
-    <link>https://rezvan.xyz/school/introduction-to-data-science-and-ai/</link>
-    <description>Recent content in Introduction to Data Science and Ai on rezvan</description>
-    <generator>Hugo</generator>
-    <language>en-us</language>
-    <lastBuildDate>Sun, 26 May 2024 11:09:10 +0200</lastBuildDate>
-    <atom:link href="https://rezvan.xyz/school/introduction-to-data-science-and-ai/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Part 9 - Machine Learning</title>
-      <link>https://rezvan.xyz/school/dat565/dat565_9/</link>
-      <pubDate>Tue, 20 Feb 2024 00:00:00 +0000</pubDate>
-      <guid>https://rezvan.xyz/school/dat565/dat565_9/</guid>
-      <description>Introduction In this part, we will discuss machine learning and neural networks. We will start with a brief introduction to machine learning.&#xA;Learning types There are three types of learning:&#xA;Supervised learning Unsupervised learning Semi-supervised learning Self-supervised learning Supervised learning In supervised learning, we have for each input $x$ a label $y$, that we want to predict. Models are trained to minimize the difference between their prediction and the labels.</description>
-    </item>
-    <item>
-      <title>Part 8 - Distance and network methods</title>
-      <link>https://rezvan.xyz/school/dat565/dat565_8/</link>
-      <pubDate>Tue, 13 Feb 2024 00:00:00 +0000</pubDate>
-      <guid>https://rezvan.xyz/school/dat565/dat565_8/</guid>
-      <description>Introduction In data science, classification stands out as a fundamental technique. It involves the art of categorizing data into distinct classes based on various features and attributes.&#xA;Different type of classifiers Within the arsenal of classification algorithms, we encounter a diverse array of tools. From the simplicity of Logistic Regression to the complexity of Support Vector Machines, each classifier brings its unique strengths to the table.&#xA;Measuring Distances The most common metric for distance is euclidean distance: $$ d(p, q) = \sqrt{\sum_{i=1}^{n} |q_i - p_i|^2} $$</description>
-    </item>
-    <item>
-      <title>Part 7 - Linear and logistic regression</title>
-      <link>https://rezvan.xyz/school/dat565/dat565_7/</link>
-      <pubDate>Tue, 06 Feb 2024 00:00:00 +0000</pubDate>
-      <guid>https://rezvan.xyz/school/dat565/dat565_7/</guid>
-      <description>Introduction In this part we&amp;rsquo;ll cover linear and logistic regression.&#xA;Core data science tasks Regression is one of the core data science tasks:&#xA;Regression Predicting a numerical quantity Classification Assigning a label from a discrete set of possibilities Clustering Grouping items by similarity We will cover clustering in a few parts.&#xA;Linear regression Regression line is useful for visualization and a method for forecasting numerical values. Residual error of a regression line is the difference between the predicted and actual values.</description>
-    </item>
-    <item>
-      <title>Part 6 - Mathematical models</title>
-      <link>https://rezvan.xyz/school/dat565/dat565_6/</link>
-      <pubDate>Fri, 02 Feb 2024 00:00:00 +0000</pubDate>
-      <guid>https://rezvan.xyz/school/dat565/dat565_6/</guid>
-      <description>Introduction In this part we&amp;rsquo;ll cover some central mathematical models and their applications.&#xA;Mathematical models All models are wrong, but some models are useful - George Box&#xA;Before we start, let&amp;rsquo;s remember that a model is not perfect by any means, and it is just a tool for a subset of tasks.&#xA;Linear VS. Non-linear models Let&amp;rsquo;s define what a linear and non-linear model is.&#xA;In mathematics, a linear polynomial has the form $f(x) = ax + b$ for some constants $a, b$, so it corresponds to a line drawn on the Cartesian plane.</description>
-    </item>
-    <item>
-      <title>Part 5 - Statistical analysis</title>
-      <link>https://rezvan.xyz/school/dat565/dat565_5/</link>
-      <pubDate>Sat, 27 Jan 2024 00:00:00 +0000</pubDate>
-      <guid>https://rezvan.xyz/school/dat565/dat565_5/</guid>
-      <description>Introduction In this part we&amp;rsquo;ll cover some very central and fundamental concepts and theorems from statistics that are used.&#xA;The statistic paradigm The bread and butter of statistics is inferring the properties of the population from a random sample.&#xA;Properties of the random sample are determined by the underlying properties of the population and probability. The random sample can be described in terms of descriptive statistics, such as summary statistics e.</description>
-    </item>
-    <item>
-      <title>Part 4 - Data visualization</title>
-      <link>https://rezvan.xyz/school/dat565/dat565_4/</link>
-      <pubDate>Fri, 26 Jan 2024 00:00:00 +0000</pubDate>
-      <guid>https://rezvan.xyz/school/dat565/dat565_4/</guid>
-      <description>Introduction In this part we&amp;rsquo;ll discuss some principles when it comes to data visualization&#xA;Five-point summary The five-point summary is a very common and effective summary of data to get a quick overview and feeling for the data.&#xA;To understand what the five-point summary tells us, let&amp;rsquo;s first understand quantiles and quartiles.&#xA;A quantile is a cut-point of a distribution (or a dataset). Quantiles are usually obtained by sorting the data and selecting an appropriate value at an appropriate rank.</description>
-    </item>
-    <item>
-      <title>Part 3 - Data munging</title>
-      <link>https://rezvan.xyz/school/dat565/dat565_3/</link>
-      <pubDate>Tue, 23 Jan 2024 00:00:00 +0000</pubDate>
-      <guid>https://rezvan.xyz/school/dat565/dat565_3/</guid>
-      <description>Introduction In this part we&amp;rsquo;re going to discuss different data munging techniques.&#xA;Data munging is the process of transforming &amp;ldquo;raw&amp;rdquo; data into a readable format.&#xA;One of the most common processes is when we want to scrape data from a website.&#xA;HTML The web is built on Hypertext Markup Language.&#xA;HTML form a tree of nested elements, marked with tags.&#xA;&amp;lt;p class=&amp;#34;foo&amp;#34;&amp;gt; bar &amp;lt;/p&amp;gt; This creates a paragraph element.&#xA;&amp;lt;img src=&amp;#34;url&amp;#34; alt=&amp;#34;text&amp;#34;&amp;gt; This creates an image element.</description>
-    </item>
-    <item>
-      <title>Part 2 - Python tools for data science</title>
-      <link>https://rezvan.xyz/school/dat565/dat565_2/</link>
-      <pubDate>Fri, 19 Jan 2024 00:00:00 +0000</pubDate>
-      <guid>https://rezvan.xyz/school/dat565/dat565_2/</guid>
-      <description>Introduction In this part we&amp;rsquo;re going to explore some popular Python tools for data science.&#xA;NumPy Numerical Python, is the standard package for computation and array operations.&#xA;Low-level functions are written in C, therefore, very fast.&#xA;Basic operations in NumPy We usually import as:&#xA;import numpy as np NumPy arrays can be constructed with the following:&#xA;A = np.array([69, 420, 1337, 42]) A NumPy array is defined by:&#xA;The number of dimensions it has (ndim) The number of elements it has (size) Its shape (number of elements along an axis) Its dtype A = np.</description>
-    </item>
-    <item>
-      <title>Part 1 - Introduction</title>
-      <link>https://rezvan.xyz/school/dat565/dat565/</link>
-      <pubDate>Tue, 16 Jan 2024 00:00:00 +0000</pubDate>
-      <guid>https://rezvan.xyz/school/dat565/dat565/</guid>
-      <description>Introduction In this series we&amp;rsquo;ll cover the very large and mystical field of data science and AI. We&amp;rsquo;re going to spend these first few parts to understand what data science is.&#xA;Data science What is data science? (Theoretical) Computer science is method-driven and often abstract. In data science, the question is often answered with insights derived from the data.&#xA;Data scientists aim for results that can describe the world, or a business sector, that needs it.</description>
-    </item>
-  </channel>
-</rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Introduction to Data Science and Ai on rezvan</title><link>https://rezvan.xyz/school/introduction-to-data-science-and-ai/</link><description>Recent content in Introduction to Data Science and Ai on rezvan</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Sun, 26 May 2024 11:09:10 +0200</lastBuildDate><atom:link href="https://rezvan.xyz/school/introduction-to-data-science-and-ai/index.xml" rel="self" type="application/rss+xml"/><item><title>Part 9 - Machine Learning</title><link>https://rezvan.xyz/school/dat565/dat565_9/</link><pubDate>Tue, 20 Feb 2024 00:00:00 +0000</pubDate><guid>https://rezvan.xyz/school/dat565/dat565_9/</guid><description>Introduction In this part, we will discuss machine learning and neural networks. We will start with a brief introduction to machine learning.
+Learning types There are three types of learning:
+Supervised learning Unsupervised learning Semi-supervised learning Self-supervised learning Supervised learning In supervised learning, we have for each input $x$ a label $y$, that we want to predict. Models are trained to minimize the difference between their prediction and the labels.</description></item><item><title>Part 8 - Distance and network methods</title><link>https://rezvan.xyz/school/dat565/dat565_8/</link><pubDate>Tue, 13 Feb 2024 00:00:00 +0000</pubDate><guid>https://rezvan.xyz/school/dat565/dat565_8/</guid><description>Introduction In data science, classification stands out as a fundamental technique. It involves the art of categorizing data into distinct classes based on various features and attributes.
+Different type of classifiers Within the arsenal of classification algorithms, we encounter a diverse array of tools. From the simplicity of Logistic Regression to the complexity of Support Vector Machines, each classifier brings its unique strengths to the table.
+Measuring Distances The most common metric for distance is euclidean distance: $$ d(p, q) = \sqrt{\sum_{i=1}^{n} |q_i - p_i|^2} $$</description></item><item><title>Part 7 - Linear and logistic regression</title><link>https://rezvan.xyz/school/dat565/dat565_7/</link><pubDate>Tue, 06 Feb 2024 00:00:00 +0000</pubDate><guid>https://rezvan.xyz/school/dat565/dat565_7/</guid><description>Introduction In this part we&amp;rsquo;ll cover linear and logistic regression.
+Core data science tasks Regression is one of the core data science tasks:
+Regression Predicting a numerical quantity Classification Assigning a label from a discrete set of possibilities Clustering Grouping items by similarity We will cover clustering in a few parts.
+Linear regression Regression line is useful for visualization and a method for forecasting numerical values. Residual error of a regression line is the difference between the predicted and actual values.</description></item><item><title>Part 6 - Mathematical models</title><link>https://rezvan.xyz/school/dat565/dat565_6/</link><pubDate>Fri, 02 Feb 2024 00:00:00 +0000</pubDate><guid>https://rezvan.xyz/school/dat565/dat565_6/</guid><description>Introduction In this part we&amp;rsquo;ll cover some central mathematical models and their applications.
+Mathematical models All models are wrong, but some models are useful - George Box
+Before we start, let&amp;rsquo;s remember that a model is not perfect by any means, and it is just a tool for a subset of tasks.
+Linear VS. Non-linear models Let&amp;rsquo;s define what a linear and non-linear model is.
+In mathematics, a linear polynomial has the form $f(x) = ax + b$ for some constants $a, b$, so it corresponds to a line drawn on the Cartesian plane.</description></item><item><title>Part 5 - Statistical analysis</title><link>https://rezvan.xyz/school/dat565/dat565_5/</link><pubDate>Sat, 27 Jan 2024 00:00:00 +0000</pubDate><guid>https://rezvan.xyz/school/dat565/dat565_5/</guid><description>Introduction In this part we&amp;rsquo;ll cover some very central and fundamental concepts and theorems from statistics that are used.
+The statistic paradigm The bread and butter of statistics is inferring the properties of the population from a random sample.
+Properties of the random sample are determined by the underlying properties of the population and probability. The random sample can be described in terms of descriptive statistics, such as summary statistics e.</description></item><item><title>Part 4 - Data visualization</title><link>https://rezvan.xyz/school/dat565/dat565_4/</link><pubDate>Fri, 26 Jan 2024 00:00:00 +0000</pubDate><guid>https://rezvan.xyz/school/dat565/dat565_4/</guid><description>Introduction In this part we&amp;rsquo;ll discuss some principles when it comes to data visualization
+Five-point summary The five-point summary is a very common and effective summary of data to get a quick overview and feeling for the data.
+To understand what the five-point summary tells us, let&amp;rsquo;s first understand quantiles and quartiles.
+A quantile is a cut-point of a distribution (or a dataset). Quantiles are usually obtained by sorting the data and selecting an appropriate value at an appropriate rank.</description></item><item><title>Part 3 - Data munging</title><link>https://rezvan.xyz/school/dat565/dat565_3/</link><pubDate>Tue, 23 Jan 2024 00:00:00 +0000</pubDate><guid>https://rezvan.xyz/school/dat565/dat565_3/</guid><description>Introduction In this part we&amp;rsquo;re going to discuss different data munging techniques.
+Data munging is the process of transforming &amp;ldquo;raw&amp;rdquo; data into a readable format.
+One of the most common processes is when we want to scrape data from a website.
+HTML The web is built on Hypertext Markup Language.
+HTML form a tree of nested elements, marked with tags.
+&amp;lt;p class=&amp;#34;foo&amp;#34;&amp;gt; bar &amp;lt;/p&amp;gt; This creates a paragraph element.
+&amp;lt;img src=&amp;#34;url&amp;#34; alt=&amp;#34;text&amp;#34;&amp;gt; This creates an image element.</description></item><item><title>Part 2 - Python tools for data science</title><link>https://rezvan.xyz/school/dat565/dat565_2/</link><pubDate>Fri, 19 Jan 2024 00:00:00 +0000</pubDate><guid>https://rezvan.xyz/school/dat565/dat565_2/</guid><description>Introduction In this part we&amp;rsquo;re going to explore some popular Python tools for data science.
+NumPy Numerical Python, is the standard package for computation and array operations.
+Low-level functions are written in C, therefore, very fast.
+Basic operations in NumPy We usually import as:
+import numpy as np NumPy arrays can be constructed with the following:
+A = np.array([69, 420, 1337, 42]) A NumPy array is defined by:
+The number of dimensions it has (ndim) The number of elements it has (size) Its shape (number of elements along an axis) Its dtype A = np.</description></item><item><title>Part 1 - Introduction</title><link>https://rezvan.xyz/school/dat565/dat565/</link><pubDate>Tue, 16 Jan 2024 00:00:00 +0000</pubDate><guid>https://rezvan.xyz/school/dat565/dat565/</guid><description>Introduction In this series we&amp;rsquo;ll cover the very large and mystical field of data science and AI. We&amp;rsquo;re going to spend these first few parts to understand what data science is.
+Data science What is data science? (Theoretical) Computer science is method-driven and often abstract. In data science, the question is often answered with insights derived from the data.
+Data scientists aim for results that can describe the world, or a business sector, that needs it.</description></item></channel></rss>

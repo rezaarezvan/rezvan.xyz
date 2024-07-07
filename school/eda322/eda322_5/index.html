@@ -1,55 +1,17 @@
-<!DOCTYPE html>
-<html><head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"><title>rezvan | Part 5 - Arithmetic Units</title><link rel="icon" type="image/png" href="https://rezvan.xyz/images/icon.png" /><meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description"
-        content="In this part we&rsquo;ll cover arithmetic units. Specifically multipliers and divers.
+<!doctype html><html><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge"><title>rezvan | Part 5 - Arithmetic Units</title><link rel=icon type=image/png href=https://rezvan.xyz/images/icon.png><meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=description content="In this part we&rsquo;ll cover arithmetic units. Specifically multipliers and divers.
 We&rsquo;ll also cover some number representations.
 Arithmetic Units It may be common knowledge that, when we want to perform multiplication and division, by powers of 2, we perform so-called shift operations on the bits.
 If we for example want to multiply a number with the binary number 100, or 4 in decimal.
-We would just shift all bits two steps to the left." />
-    <meta property="og:image" content="https://raw.githubusercontent.com/rezaarezvan/rezvan.xyz/main/images/icon.png" />
-    <meta property="og:url" content="https://rezvan.xyz/school/eda322/eda322_5/">
-  <meta property="og:site_name" content="rezvan">
-  <meta property="og:title" content="Part 5 - Arithmetic Units">
-  <meta property="og:description" content="In this part we’ll cover arithmetic units. Specifically multipliers and divers.
+We would just shift all bits two steps to the left."><meta property="og:image" content="https://raw.githubusercontent.com/rezaarezvan/rezvan.xyz/main/images/icon.png"><meta property="og:url" content="https://rezvan.xyz/school/eda322/eda322_5/"><meta property="og:site_name" content="rezvan"><meta property="og:title" content="Part 5 - Arithmetic Units"><meta property="og:description" content="In this part we’ll cover arithmetic units. Specifically multipliers and divers.
 We’ll also cover some number representations.
 Arithmetic Units It may be common knowledge that, when we want to perform multiplication and division, by powers of 2, we perform so-called shift operations on the bits.
 If we for example want to multiply a number with the binary number 100, or 4 in decimal.
-We would just shift all bits two steps to the left.">
-  <meta property="og:locale" content="en_us">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="school">
-    <meta property="article:published_time" content="2023-02-03T00:00:00+00:00">
-    <meta property="article:modified_time" content="2024-05-26T11:09:10+02:00">
-
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Part 5 - Arithmetic Units">
-  <meta name="twitter:description" content="In this part we’ll cover arithmetic units. Specifically multipliers and divers.
+We would just shift all bits two steps to the left."><meta property="og:locale" content="en_us"><meta property="og:type" content="article"><meta property="article:section" content="school"><meta property="article:published_time" content="2023-02-03T00:00:00+00:00"><meta property="article:modified_time" content="2024-05-26T11:09:10+02:00"><meta name=twitter:card content="summary"><meta name=twitter:title content="Part 5 - Arithmetic Units"><meta name=twitter:description content="In this part we’ll cover arithmetic units. Specifically multipliers and divers.
 We’ll also cover some number representations.
 Arithmetic Units It may be common knowledge that, when we want to perform multiplication and division, by powers of 2, we perform so-called shift operations on the bits.
 If we for example want to multiply a number with the binary number 100, or 4 in decimal.
-We would just shift all bits two steps to the left.">
-<script src="https://rezvan.xyz/js/feather.min.js"></script>
-    
-
-    
-    
-    <link rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/main.73f3431f38ac72fc2890b3747cc9c6d55d5756f3ba40e590c77627ae6c16e46b.css" />
-    <link id="lightSyntaxStyle" rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/light_syntax.65408cc3a5c02070b661c3e4e79306fc261cc63620f4adce9a30eafcba4ab79e.css" />
-    
-    <link id="darkModeStyle" rel="stylesheet" type="text/css" href="https://rezvan.xyz/css/dark.13c6bfb747b76fdd2dc198b1172afdd77e7ce604de43f343ce643378bafc58af.css"  disabled />
-    <link id="darkSyntaxStyle" rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/dark_syntax.2b10cc1a2156b30874a063b7439a993bc3b43d476c5e1d8598d769c929c7b381.css" />
-    
-
-    
-    
-    <script type="text/javascript"
-        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-        </script>
-
-    
-    <script type="text/x-mathjax-config">
+We would just shift all bits two steps to the left."><link rel=stylesheet href=https://rezvan.xyz/css/combined.min.51ec65976b416262d827f98c76ca037bf7aeea27590e3c120eac32afbfbc40ee.css integrity="sha256-Uexll2tBYmLYJ/mMdsoDe/eu6idZDjwSDqwyr7+8QO4="><link id=lightSyntaxStyle rel=stylesheet href=https://rezvan.xyz/css/light_syntax.min.d9e0828a4ff7f2d7317942062fc751fa487b2ac2c47b934ad082abd7d3ca6690.css integrity="sha256-2eCCik/38tcxeUIGL8dR+kh7KsLEe5NK0IKr19PKZpA="><link id=darkModeStyle rel=stylesheet href=https://rezvan.xyz/css/dark.min.49ad20f2859f81550f852c48875ca9e72e4267459ed6fe82fc9b4f3cf7fdc4e8.css integrity="sha256-Sa0g8oWfgVUPhSxIh1yp5y5CZ0We1v6C/JtPPPf9xOg=" disabled><link id=darkSyntaxStyle rel=stylesheet href=https://rezvan.xyz/css/dark_syntax.min.1a878f3d8fb43359bd3b44bc70c4074f682f11066c6537bf6248b696cbe56586.css integrity="sha256-GoePPY+0M1m9O0S8cMQHT2gvEQZsZTe/Yki2lsvlZYY=" disabled><script type=text/javascript src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type=text/x-mathjax-config>
 		MathJax.Hub.Config({
 			tex2jax: {
 				inlineMath: [['$','$'], ['\\(','\\)']],
@@ -61,235 +23,38 @@ We would just shift all bits two steps to the left.">
 						 extensions: ["AMSmath.js", "AMSsymbols.js"] }
 			}
 		});
-		</script>
-    
-
-    
-    
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css">
-    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js"
-        onload="renderMathInElement(document.body);"></script>
-
-    
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            renderMathInElement(document.body, {
-                delimiters: [
-                    {left: "$$", right: "$$", display: true},
-                    {left: "$", right: "$", display: false}
-                ]
-            });
-        });
-    </script>
-    
-</head>
-<body>
-    <div class="content"><header>
-    <nav id="site-navbar">
-        <div class="menu-items">
-            
-            <a href="/">home</a>
-            
-            <a href="/principles">principles</a>
-            
-            <a href="/cv">cv</a>
-            
-            <a href="/posts">posts</a>
-            
-            <a href="/school">school</a>
-            
-        </div>
-        <div class="theme-toggle">
-            <span id="dark-mode-toggle" onclick="toggleTheme()"><i data-feather="moon"></i></span>
-            <script src="https://rezvan.xyz/js/themetoggle.js"></script>
-        </div>
-        
-    </nav>
-</header>
-
-<main>
-    <article>
-        <div class="title">
-            <h1>Part 5 - Arithmetic Units</h1>
-            <div class="meta">Posted on Feb 3, 2023
-            </div>
-            <div class="meta">
-                (Last updated: May 26, 2024)
-            </div>
-
-        </div>
-        
-        <section class="body">
-            <p>In this part we&rsquo;ll cover arithmetic units. Specifically multipliers and divers.</p>
-<p>We&rsquo;ll also cover some number representations.</p>
-<h3 id="arithmetic-units">Arithmetic Units</h3>
-<p>It may be common knowledge that, when we want to perform multiplication and division,
-by powers of 2, we perform so-called shift operations on the bits.</p>
-<p>If we for example want to multiply a number with the binary number <code>100</code>, or 4 in decimal.</p>
-<p>We would just shift all bits two steps to the left. Same logic goes for division, but it is right shifts.</p>
-<p>But we won&rsquo;t always have powers of 2 when multiplying. If we for example multiplied with <code>101</code> instead, or 5 in decimal</p>
-<p>We can rewrite the multiplication as:
+		</script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css><script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js onload=renderMathInElement(document.body)></script><script>document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]})})</script></head><body><div class=content><header><nav id=site-navbar><div class=navbar-content><a href=https://rezvan.xyz/ class=logo>rezvan.xyz</a><div class=navbar-links><a href=/principles class=nav-link><span class=bracket>[</span>principles<span class=bracket>]</span></a>
+<a href=/cv class=nav-link><span class=bracket>[</span>cv<span class=bracket>]</span></a>
+<a href=/posts class=nav-link><span class=bracket>[</span>posts<span class=bracket>]</span></a>
+<a href=/school class=nav-link><span class=bracket>[</span>school<span class=bracket>]</span></a></div><div class=theme-toggle><span id=dark-mode-toggle onclick=toggleTheme() aria-label="Toggle theme">○
+</span><script src=https://rezvan.xyz/js/themetoggle.js></script></div></div></nav></header><main><article><div class=title><h1>Part 5 - Arithmetic Units</h1><div class=meta>Posted on Feb 3, 2023</div><div class=meta>(Last updated: May 26, 2024)</div></div><section class=body><p>In this part we&rsquo;ll cover arithmetic units. Specifically multipliers and divers.</p><p>We&rsquo;ll also cover some number representations.</p><h3 id=arithmetic-units>Arithmetic Units</h3><p>It may be common knowledge that, when we want to perform multiplication and division,
+by powers of 2, we perform so-called shift operations on the bits.</p><p>If we for example want to multiply a number with the binary number <code>100</code>, or 4 in decimal.</p><p>We would just shift all bits two steps to the left. Same logic goes for division, but it is right shifts.</p><p>But we won&rsquo;t always have powers of 2 when multiplying. If we for example multiplied with <code>101</code> instead, or 5 in decimal</p><p>We can rewrite the multiplication as:
 $$
 5 * X = 4 * X + X
-$$</p>
-<p>So we perform a left shift with 2 bits, and add the initial value to that.</p>
-<h4 id="multiplication-algorithm">Multiplication Algorithm</h4>
-<p>When multiplying two binary numbers with each other, our usual &lsquo;partial products&rsquo; algorithm works in base 2 as well.</p>
-<p>So we can write out our algorithm as:</p>
-<p>for i = 1 to n, where n = # of bits of the operands</p>
-<p>If the $i$-th bit of the <em>multiplier</em> is 1:</p>
-<p>Add <em>multiplicand</em> $\cdot\ 2^{i - 1}$ to the final product.</p>
-<p>For any operands of size <code>N</code> bits, the final result will become <code>2N</code> in size.</p>
-<p>If we want to make a multiplier circuit, we would firstly need a register of size <code>2N</code>.</p>
-<p>Secondly, we would need to test the LSB <code>N</code> times of the multiplier, and per bit, we would need to perform 3 operations,
-shift right, shift left and add.</p>
-<p>This is a really slow and expensive circuit.</p>
-<p>To speed up the process, we can share one register for both the result and multiplicand + 1 extra bit (for carry out).</p>
-<p>So we have one single register that is <code>2N + 1</code> in size and our <code>N</code> sized multiplier.</p>
-<p>We still test the LSB <code>N</code> times for the multiplier, but each bit we only perform 2 operations now.
-Shift right and add, since each right shift handles the multiplicand and the result now.</p>
-<h3 id="multiplying-with-signs">Multiplying with signs</h3>
-<p>If we encounter numbers with signs, we convert these numbers to their respective magnitudes.</p>
-<p>Multiply the two magnitudes, if the signs differ of the operands, we negate our result.</p>
-<p>So we can still use our circuit for the multiplication!</p>
-<h3 id="adding-partial-products">Adding partial products</h3>
-<p>If we for example multiply two four bit numbers,
-in the general case, we would need to perform three 4-bit additions due to the carryout(s) that can occur.</p>
-<p>Which is slow! So as we have done before when adding numbers, we can do a so-called carry forward.</p>
-<p>So the carry is added to the next partial product, and an image to illustrate.
-<img src="/school/images/carryforward.png" alt=""></p>
-<p>This means we need to have a FA at each of the &rsquo;transition&rsquo; states (the arrows) along the usual AND gates.</p>
-<p>Even though it may seem like having this many FAs can be slow, it&rsquo;s better than the first solution.</p>
-<h3 id="binary-division">Binary Division</h3>
-<p>When performing binary division, we firstly <strong>always</strong> need to check so that the divisor is not 0.</p>
-<p>Then we have two approaches:</p>
-<ul>
-<li>Long division approach
-<ul>
-<li>If divisor $\leq$ dividend bits:
-<ul>
-<li>1 bit in quotient, subtract</li>
-</ul>
-</li>
-<li>Otherwise:
-<ul>
-<li>0 bit in quotient, bring down next dividend bit.</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>Restoring division
-<ul>
-<li>Do the subtraction, and if remainder goes $&lt;$ 0, add divisor <em>back</em></li>
-</ul>
-</li>
-<li>Signed division
-<ul>
-<li>Divide using absolute values (magnitudes)
-<ul>
-<li>Adjust sign of quotient and remainder as required (if they differ, negate).</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<p>So we can use the same technique as before, the quotient and the dividend share one register together,
-but now we need an extra remainder register. Then we just implement this algorithm into a sequential circuit.</p>
-<h3 id="fixed-point--floating-point-numbers">Fixed-point &amp; Floating-point numbers</h3>
-<p>Often we may need to represent rational numbers. Let&rsquo;s first define integers and rational numbers in binary.</p>
-<p>An integer can be represented as:
+$$</p><p>So we perform a left shift with 2 bits, and add the initial value to that.</p><h4 id=multiplication-algorithm>Multiplication Algorithm</h4><p>When multiplying two binary numbers with each other, our usual &lsquo;partial products&rsquo; algorithm works in base 2 as well.</p><p>So we can write out our algorithm as:</p><p>for i = 1 to n, where n = # of bits of the operands</p><p>If the $i$-th bit of the <em>multiplier</em> is 1:</p><p>Add <em>multiplicand</em> $\cdot\ 2^{i - 1}$ to the final product.</p><p>For any operands of size <code>N</code> bits, the final result will become <code>2N</code> in size.</p><p>If we want to make a multiplier circuit, we would firstly need a register of size <code>2N</code>.</p><p>Secondly, we would need to test the LSB <code>N</code> times of the multiplier, and per bit, we would need to perform 3 operations,
+shift right, shift left and add.</p><p>This is a really slow and expensive circuit.</p><p>To speed up the process, we can share one register for both the result and multiplicand + 1 extra bit (for carry out).</p><p>So we have one single register that is <code>2N + 1</code> in size and our <code>N</code> sized multiplier.</p><p>We still test the LSB <code>N</code> times for the multiplier, but each bit we only perform 2 operations now.
+Shift right and add, since each right shift handles the multiplicand and the result now.</p><h3 id=multiplying-with-signs>Multiplying with signs</h3><p>If we encounter numbers with signs, we convert these numbers to their respective magnitudes.</p><p>Multiply the two magnitudes, if the signs differ of the operands, we negate our result.</p><p>So we can still use our circuit for the multiplication!</p><h3 id=adding-partial-products>Adding partial products</h3><p>If we for example multiply two four bit numbers,
+in the general case, we would need to perform three 4-bit additions due to the carryout(s) that can occur.</p><p>Which is slow! So as we have done before when adding numbers, we can do a so-called carry forward.</p><p>So the carry is added to the next partial product, and an image to illustrate.
+<img src=/school/images/carryforward.png alt></p><p>This means we need to have a FA at each of the &rsquo;transition&rsquo; states (the arrows) along the usual AND gates.</p><p>Even though it may seem like having this many FAs can be slow, it&rsquo;s better than the first solution.</p><h3 id=binary-division>Binary Division</h3><p>When performing binary division, we firstly <strong>always</strong> need to check so that the divisor is not 0.</p><p>Then we have two approaches:</p><ul><li>Long division approach<ul><li>If divisor $\leq$ dividend bits:<ul><li>1 bit in quotient, subtract</li></ul></li><li>Otherwise:<ul><li>0 bit in quotient, bring down next dividend bit.</li></ul></li></ul></li><li>Restoring division<ul><li>Do the subtraction, and if remainder goes $&lt;$ 0, add divisor <em>back</em></li></ul></li><li>Signed division<ul><li>Divide using absolute values (magnitudes)<ul><li>Adjust sign of quotient and remainder as required (if they differ, negate).</li></ul></li></ul></li></ul><p>So we can use the same technique as before, the quotient and the dividend share one register together,
+but now we need an extra remainder register. Then we just implement this algorithm into a sequential circuit.</p><h3 id=fixed-point--floating-point-numbers>Fixed-point & Floating-point numbers</h3><p>Often we may need to represent rational numbers. Let&rsquo;s first define integers and rational numbers in binary.</p><p>An integer can be represented as:
 $$
 v = \sum_{i = 0}^{n - 1}\ a_i\ 2^i
-$$</p>
-<p>One way of representing a rational number is using something called a fixed-point number:</p>
-<p>$$
+$$</p><p>One way of representing a rational number is using something called a fixed-point number:</p><p>$$
 v = r\ \sum_{i = 0}^{n - 1}\ a_i\ 2^i
-$$</p>
-<p>Where $r$ is called the resolution and is defined as $r = 2^{\text{number of fractional bits}}$</p>
-<p>We represent the fixed point numbers with using the <code>.</code> separator.
-So the <code>1.3</code>format and specifically <code>1.011</code>. Where the <code>.</code> is says what resolution we have.</p>
-<p>So by our definition, <code>1.011</code> has integer value 11. The resolution is 3 bits or, $2^{-3} = \frac{1}{8}$</p>
-<p>Therefore, our final value becomes $\frac{1}{8} \cdot\ 11 = \frac{11}{8}$.</p>
-<p>Now floating-point numbers are a bit harder to grasp by their definition:
+$$</p><p>Where $r$ is called the resolution and is defined as $r = 2^{\text{number of fractional bits}}$</p><p>We represent the fixed point numbers with using the <code>.</code> separator.
+So the <code>1.3</code>format and specifically <code>1.011</code>. Where the <code>.</code> is says what resolution we have.</p><p>So by our definition, <code>1.011</code> has integer value 11. The resolution is 3 bits or, $2^{-3} = \frac{1}{8}$</p><p>Therefore, our final value becomes $\frac{1}{8} \cdot\ 11 = \frac{11}{8}$.</p><p>Now floating-point numbers are a bit harder to grasp by their definition:
 $$
 v = m \cdot\ 2^{e - x} = r\ \sum_{i = 0}^{n - 1}\ m_i\ 2^{i - n} \cdot\ 2^{\sum_{i = 0}^{k - 1} e_i 2^k - x}
-$$</p>
-<p>Now we also have $m$ which is the <em>mantissa</em> or the binary fraction.
-We also have $e$ which is the exponent, or the binary integer.</p>
-<p>The floating-point numbers are derived from scientific notation.</p>
-<p>So an example, say we have:
+$$</p><p>Now we also have $m$ which is the <em>mantissa</em> or the binary fraction.
+We also have $e$ which is the exponent, or the binary integer.</p><p>The floating-point numbers are derived from scientific notation.</p><p>So an example, say we have:
 $$
 m = 10010, e = 011
-$$</p>
-<p>Therefore, we have:
+$$</p><p>Therefore, we have:
 $$
 10010E011
-$$</p>
-<p>Which represents:
+$$</p><p>Which represents:
 $$
 v = \frac{18}{32} \cdot\ 8
-$$</p>
-
-        </section>
-    </article>
-
-    <nav class="navigation">
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-
-        
-        
-
-        <div class="nav-item previous">
-            
-            
-            <a href="/school/eda322/eda322_4/" title="Previous: Part 4 - Finite State Machines">&larr; Previous</a>
-            
-            
-        </div>
-
-        <div class="nav-item next">
-            
-            
-            <a href="/school/eda322/eda322_6/" title="Next: Part 6 - Reconfigurable Hardware">Next &rarr;</a>
-            
-            
-        </div>
-    </nav>
-</main>
-<footer id="site-footer">
-    <div class="social-links">
-        
-        <a href="https://github.com/rezaarezvan" title="">github</a>
-        
-        <a href="https://x.com/rzvan__/" title="">x</a>
-        
-    </div><p class="footer-msg">memento mori</p>
-</footer></div>
-</body>
-
-</html>
+$$</p></section></article><nav class=navigation><div class="nav-item previous"><a href=/school/eda322/eda322_4/ title="Previous: Part 4 - Finite State Machines">&larr; Previous</a></div><div class="nav-item next"><a href=/school/eda322/eda322_6/ title="Next: Part 6 - Reconfigurable Hardware">Next &rarr;</a></div></nav></main><footer id=site-footer><div class=social-links><a href=https://github.com/rezaarezvan title class=social-link><span class=bracket>[</span>github<span class=bracket>]</span></a>
+<a href=https://x.com/rzvan__/ title class=social-link><span class=bracket>[</span>x<span class=bracket>]</span></a></div><div class=footer-marquee><div class=footer-marquee__content><span class=footer-marquee__item>memento mori • amor fati • sic parvis magna • per aspera ad astra</span>
+<span class=footer-marquee__item>memento mori • amor fati • sic parvis magna • per aspera ad astra</span></div></div></footer></div></body></html>

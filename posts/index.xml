@@ -1,54 +1,8 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>Posts on rezvan</title>
-    <link>https://rezvan.xyz/posts/</link>
-    <description>Recent content in Posts on rezvan</description>
-    <generator>Hugo</generator>
-    <language>en-us</language>
-    <lastBuildDate>Wed, 19 Jun 2024 23:05:41 +0200</lastBuildDate>
-    <atom:link href="https://rezvan.xyz/posts/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>My BSc Thesis, ClaudesLens</title>
-      <link>https://rezvan.xyz/posts/claudeslens/</link>
-      <pubDate>Tue, 18 Jun 2024 21:03:25 +0200</pubDate>
-      <guid>https://rezvan.xyz/posts/claudeslens/</guid>
-      <description>Introduction I have finally finished undergrad and would like to make a blog post about what I have been working on these past ~6 months. The tile of our thesis is:&#xA;ClaudesLens: Uncertainty Quantification in Computer Vision Models&#xA;However, before I dive into the project and what we actually did, let me tell you what we wanted to do.&#xA;BayesLens Originally, we wanted to create &amp;ldquo;Uncertainty-Aware Attention Mechanisms&amp;rdquo;. What we specifically had in mind was to create a transformer model that used Bayesian Neural Networks (BNNs), and even more ambitiously, apply this to self-driving cars.</description>
-    </item>
-    <item>
-      <title>Programming Principles</title>
-      <link>https://rezvan.xyz/posts/programming_principles/</link>
-      <pubDate>Mon, 09 Jan 2023 17:03:59 +0100</pubDate>
-      <guid>https://rezvan.xyz/posts/programming_principles/</guid>
-      <description>One of the core things that makes programming fun in my eyes are the standards and conventions that we&amp;rsquo;ve built. I want to write down my principles that I follow when writing code. I think it&amp;rsquo;s an essential part of every engineer that they have their own guidelines and principles they follow.&#xA;Consistency Before we even dive into an actual programming principle I want to talk about consistency. Guidelines and principles won&amp;rsquo;t even matter if we aren&amp;rsquo;t consistent with them.</description>
-    </item>
-    <item>
-      <title>Julia projects</title>
-      <link>https://rezvan.xyz/posts/julia/</link>
-      <pubDate>Tue, 23 Aug 2022 21:00:47 +0200</pubDate>
-      <guid>https://rezvan.xyz/posts/julia/</guid>
-      <description>I&amp;rsquo;ve recently felt the urge to make some math-related projects and visualization projects. So I picked up Julia and have so far learned the basics of the language - it&amp;rsquo;s a quite simple and dynamic language which I appreciate, especially after my most recent projects have been in C/C++ and Rust - it&amp;rsquo;s a great refresh in programming.&#xA;So far I&amp;rsquo;ve made quite small projects with a lot of built-in libraries.</description>
-    </item>
-    <item>
-      <title>Vim-like editor</title>
-      <link>https://rezvan.xyz/posts/editor/</link>
-      <pubDate>Wed, 10 Aug 2022 21:04:50 +0200</pubDate>
-      <guid>https://rezvan.xyz/posts/editor/</guid>
-      <description>I&amp;rsquo;ve wanted to learn Rust for a long time - I&amp;rsquo;ve dabbled and manged to learn the basic syntax a while ago. However, you haven&amp;rsquo;t truly learned a language until you made a project and the code would be considered &amp;lsquo;idiomatic&amp;rsquo; - or at least in my opinion.&#xA;So I decided to make a Vim-like text editor. I took a lot of inspiration from this post from medium, so all credits to Kofi.</description>
-    </item>
-    <item>
-      <title>My personal bucket list</title>
-      <link>https://rezvan.xyz/posts/bucketlist/</link>
-      <pubDate>Sun, 31 Jul 2022 17:21:34 +0200</pubDate>
-      <guid>https://rezvan.xyz/posts/bucketlist/</guid>
-      <description>One day each and one of us will die - this is a universal truth. I am writing this to keep my self accountable and remind my future self to recognize where I was and where I&amp;rsquo;ve gotten to.&#xA;Build/own my own place Make a difference in the world (well, hard to define) Fall in love Be successful working for myself (finical security) Create something meaningful (film, book, podcast, etc.) Live in another country Trace my ancestry Read 100 200 books Mentor someone Help someone achieve their dreams Get a PhD Watch over 100 200 movies </description>
-    </item>
-    <item>
-      <title>Initial post</title>
-      <link>https://rezvan.xyz/posts/initialpost/</link>
-      <pubDate>Fri, 29 Jul 2022 17:18:30 +0200</pubDate>
-      <guid>https://rezvan.xyz/posts/initialpost/</guid>
-      <description>This is just an initial post - I&amp;rsquo;ll mainly write about things I find fascinating/interesting on this site :).</description>
-    </item>
-  </channel>
-</rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on rezvan</title><link>https://rezvan.xyz/posts/</link><description>Recent content in Posts on rezvan</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Wed, 19 Jun 2024 23:05:41 +0200</lastBuildDate><atom:link href="https://rezvan.xyz/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>My BSc Thesis, ClaudesLens</title><link>https://rezvan.xyz/posts/claudeslens/</link><pubDate>Tue, 18 Jun 2024 21:03:25 +0200</pubDate><guid>https://rezvan.xyz/posts/claudeslens/</guid><description>Introduction I have finally finished undergrad and would like to make a blog post about what I have been working on these past ~6 months. The tile of our thesis is:
+ClaudesLens: Uncertainty Quantification in Computer Vision Models
+However, before I dive into the project and what we actually did, let me tell you what we wanted to do.
+BayesLens Originally, we wanted to create &amp;ldquo;Uncertainty-Aware Attention Mechanisms&amp;rdquo;. What we specifically had in mind was to create a transformer model that used Bayesian Neural Networks (BNNs), and even more ambitiously, apply this to self-driving cars.</description></item><item><title>Programming Principles</title><link>https://rezvan.xyz/posts/programming_principles/</link><pubDate>Mon, 09 Jan 2023 17:03:59 +0100</pubDate><guid>https://rezvan.xyz/posts/programming_principles/</guid><description>One of the core things that makes programming fun in my eyes are the standards and conventions that we&amp;rsquo;ve built. I want to write down my principles that I follow when writing code. I think it&amp;rsquo;s an essential part of every engineer that they have their own guidelines and principles they follow.
+Consistency Before we even dive into an actual programming principle I want to talk about consistency. Guidelines and principles won&amp;rsquo;t even matter if we aren&amp;rsquo;t consistent with them.</description></item><item><title>Julia projects</title><link>https://rezvan.xyz/posts/julia/</link><pubDate>Tue, 23 Aug 2022 21:00:47 +0200</pubDate><guid>https://rezvan.xyz/posts/julia/</guid><description>I&amp;rsquo;ve recently felt the urge to make some math-related projects and visualization projects. So I picked up Julia and have so far learned the basics of the language - it&amp;rsquo;s a quite simple and dynamic language which I appreciate, especially after my most recent projects have been in C/C++ and Rust - it&amp;rsquo;s a great refresh in programming.
+So far I&amp;rsquo;ve made quite small projects with a lot of built-in libraries.</description></item><item><title>Vim-like editor</title><link>https://rezvan.xyz/posts/editor/</link><pubDate>Wed, 10 Aug 2022 21:04:50 +0200</pubDate><guid>https://rezvan.xyz/posts/editor/</guid><description>I&amp;rsquo;ve wanted to learn Rust for a long time - I&amp;rsquo;ve dabbled and manged to learn the basic syntax a while ago. However, you haven&amp;rsquo;t truly learned a language until you made a project and the code would be considered &amp;lsquo;idiomatic&amp;rsquo; - or at least in my opinion.
+So I decided to make a Vim-like text editor. I took a lot of inspiration from this post from medium, so all credits to Kofi.</description></item><item><title>My personal bucket list</title><link>https://rezvan.xyz/posts/bucketlist/</link><pubDate>Sun, 31 Jul 2022 17:21:34 +0200</pubDate><guid>https://rezvan.xyz/posts/bucketlist/</guid><description>One day each and one of us will die - this is a universal truth. I am writing this to keep my self accountable and remind my future self to recognize where I was and where I&amp;rsquo;ve gotten to.
+Build/own my own place Make a difference in the world (well, hard to define) Fall in love Be successful working for myself (finical security) Create something meaningful (film, book, podcast, etc.) Live in another country Trace my ancestry Read 100 200 books Mentor someone Help someone achieve their dreams Get a PhD Watch over 100 200 movies</description></item><item><title>Initial post</title><link>https://rezvan.xyz/posts/initialpost/</link><pubDate>Fri, 29 Jul 2022 17:18:30 +0200</pubDate><guid>https://rezvan.xyz/posts/initialpost/</guid><description>This is just an initial post - I&amp;rsquo;ll mainly write about things I find fascinating/interesting on this site :).</description></item></channel></rss>

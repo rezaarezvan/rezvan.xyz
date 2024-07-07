@@ -1,52 +1,14 @@
-<!DOCTYPE html>
-<html><head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"><title>rezvan | Part 14 - Curves</title><link rel="icon" type="image/png" href="https://rezvan.xyz/images/icon.png" /><meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description"
-        content="Introduction In this part we&rsquo;ll cover curves and how we can parameterize curve.
+<!doctype html><html><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge"><title>rezvan | Part 14 - Curves</title><link rel=icon type=image/png href=https://rezvan.xyz/images/icon.png><meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=description content="Introduction In this part we&rsquo;ll cover curves and how we can parameterize curve.
 Definition Let, $f(t)$, $g(t)$ and $h(t)$ be continuous functions on some interval, $I$. The connection of points $(x, y, z)$, where $x = f(t)$, $y = g(t)$ and $z = h(t)$, is a curve.
 Equivalently, we can say that: $$ \vec{r}(t) = \langle f(t), g(t), h(t) \rangle $$
-We call this the parameterization of the curve. Where $t$ is the parameter." />
-    <meta property="og:image" content="https://raw.githubusercontent.com/rezaarezvan/rezvan.xyz/main/images/icon.png" />
-    <meta property="og:url" content="https://rezvan.xyz/school/lma017/lma017_14/">
-  <meta property="og:site_name" content="rezvan">
-  <meta property="og:title" content="Part 14 - Curves">
-  <meta property="og:description" content="Introduction In this part we’ll cover curves and how we can parameterize curve.
+We call this the parameterization of the curve. Where $t$ is the parameter."><meta property="og:image" content="https://raw.githubusercontent.com/rezaarezvan/rezvan.xyz/main/images/icon.png"><meta property="og:url" content="https://rezvan.xyz/school/lma017/lma017_14/"><meta property="og:site_name" content="rezvan"><meta property="og:title" content="Part 14 - Curves"><meta property="og:description" content="Introduction In this part we’ll cover curves and how we can parameterize curve.
 Definition Let, $f(t)$, $g(t)$ and $h(t)$ be continuous functions on some interval, $I$. The connection of points $(x, y, z)$, where $x = f(t)$, $y = g(t)$ and $z = h(t)$, is a curve.
 Equivalently, we can say that: $$ \vec{r}(t) = \langle f(t), g(t), h(t) \rangle $$
-We call this the parameterization of the curve. Where $t$ is the parameter.">
-  <meta property="og:locale" content="en_us">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="school">
-    <meta property="article:published_time" content="2023-09-27T00:00:00+00:00">
-    <meta property="article:modified_time" content="2024-05-26T11:09:10+02:00">
-
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Part 14 - Curves">
-  <meta name="twitter:description" content="Introduction In this part we’ll cover curves and how we can parameterize curve.
+We call this the parameterization of the curve. Where $t$ is the parameter."><meta property="og:locale" content="en_us"><meta property="og:type" content="article"><meta property="article:section" content="school"><meta property="article:published_time" content="2023-09-27T00:00:00+00:00"><meta property="article:modified_time" content="2024-05-26T11:09:10+02:00"><meta name=twitter:card content="summary"><meta name=twitter:title content="Part 14 - Curves"><meta name=twitter:description content="Introduction In this part we’ll cover curves and how we can parameterize curve.
 Definition Let, $f(t)$, $g(t)$ and $h(t)$ be continuous functions on some interval, $I$. The connection of points $(x, y, z)$, where $x = f(t)$, $y = g(t)$ and $z = h(t)$, is a curve.
 Equivalently, we can say that: $$ \vec{r}(t) = \langle f(t), g(t), h(t) \rangle $$
-We call this the parameterization of the curve. Where $t$ is the parameter.">
-<script src="https://rezvan.xyz/js/feather.min.js"></script>
-    
-
-    
-    
-    <link rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/main.73f3431f38ac72fc2890b3747cc9c6d55d5756f3ba40e590c77627ae6c16e46b.css" />
-    <link id="lightSyntaxStyle" rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/light_syntax.65408cc3a5c02070b661c3e4e79306fc261cc63620f4adce9a30eafcba4ab79e.css" />
-    
-    <link id="darkModeStyle" rel="stylesheet" type="text/css" href="https://rezvan.xyz/css/dark.13c6bfb747b76fdd2dc198b1172afdd77e7ce604de43f343ce643378bafc58af.css"  disabled />
-    <link id="darkSyntaxStyle" rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/dark_syntax.2b10cc1a2156b30874a063b7439a993bc3b43d476c5e1d8598d769c929c7b381.css" />
-    
-
-    
-    
-    <script type="text/javascript"
-        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-        </script>
-
-    
-    <script type="text/x-mathjax-config">
+We call this the parameterization of the curve. Where $t$ is the parameter."><link rel=stylesheet href=https://rezvan.xyz/css/combined.min.51ec65976b416262d827f98c76ca037bf7aeea27590e3c120eac32afbfbc40ee.css integrity="sha256-Uexll2tBYmLYJ/mMdsoDe/eu6idZDjwSDqwyr7+8QO4="><link id=lightSyntaxStyle rel=stylesheet href=https://rezvan.xyz/css/light_syntax.min.d9e0828a4ff7f2d7317942062fc751fa487b2ac2c47b934ad082abd7d3ca6690.css integrity="sha256-2eCCik/38tcxeUIGL8dR+kh7KsLEe5NK0IKr19PKZpA="><link id=darkModeStyle rel=stylesheet href=https://rezvan.xyz/css/dark.min.49ad20f2859f81550f852c48875ca9e72e4267459ed6fe82fc9b4f3cf7fdc4e8.css integrity="sha256-Sa0g8oWfgVUPhSxIh1yp5y5CZ0We1v6C/JtPPPf9xOg=" disabled><link id=darkSyntaxStyle rel=stylesheet href=https://rezvan.xyz/css/dark_syntax.min.1a878f3d8fb43359bd3b44bc70c4074f682f11066c6537bf6248b696cbe56586.css integrity="sha256-GoePPY+0M1m9O0S8cMQHT2gvEQZsZTe/Yki2lsvlZYY=" disabled><script type=text/javascript src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type=text/x-mathjax-config>
 		MathJax.Hub.Config({
 			tex2jax: {
 				inlineMath: [['$','$'], ['\\(','\\)']],
@@ -58,271 +20,80 @@ We call this the parameterization of the curve. Where $t$ is the parameter.">
 						 extensions: ["AMSmath.js", "AMSsymbols.js"] }
 			}
 		});
-		</script>
-    
-
-    
-    
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css">
-    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js"
-        onload="renderMathInElement(document.body);"></script>
-
-    
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            renderMathInElement(document.body, {
-                delimiters: [
-                    {left: "$$", right: "$$", display: true},
-                    {left: "$", right: "$", display: false}
-                ]
-            });
-        });
-    </script>
-    
-</head>
-<body>
-    <div class="content"><header>
-    <nav id="site-navbar">
-        <div class="menu-items">
-            
-            <a href="/">home</a>
-            
-            <a href="/principles">principles</a>
-            
-            <a href="/cv">cv</a>
-            
-            <a href="/posts">posts</a>
-            
-            <a href="/school">school</a>
-            
-        </div>
-        <div class="theme-toggle">
-            <span id="dark-mode-toggle" onclick="toggleTheme()"><i data-feather="moon"></i></span>
-            <script src="https://rezvan.xyz/js/themetoggle.js"></script>
-        </div>
-        
-    </nav>
-</header>
-
-<main>
-    <article>
-        <div class="title">
-            <h1>Part 14 - Curves</h1>
-            <div class="meta">Posted on Sep 27, 2023
-            </div>
-            <div class="meta">
-                (Last updated: May 26, 2024)
-            </div>
-
-        </div>
-        
-        <section class="body">
-            <h3 id="introduction">Introduction</h3>
-<p>In this part we&rsquo;ll cover curves and how we can parameterize curve.</p>
-<h3 id="definition">Definition</h3>
-<p>Let, $f(t)$, $g(t)$ and $h(t)$ be continuous functions on some interval, $I$. The connection of points $(x, y, z)$, where $x = f(t)$, $y = g(t)$ and $z = h(t)$, is a curve.</p>
-<p>Equivalently, we can say that:
+		</script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css><script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js onload=renderMathInElement(document.body)></script><script>document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]})})</script></head><body><div class=content><header><nav id=site-navbar><div class=navbar-content><a href=https://rezvan.xyz/ class=logo>rezvan.xyz</a><div class=navbar-links><a href=/principles class=nav-link><span class=bracket>[</span>principles<span class=bracket>]</span></a>
+<a href=/cv class=nav-link><span class=bracket>[</span>cv<span class=bracket>]</span></a>
+<a href=/posts class=nav-link><span class=bracket>[</span>posts<span class=bracket>]</span></a>
+<a href=/school class=nav-link><span class=bracket>[</span>school<span class=bracket>]</span></a></div><div class=theme-toggle><span id=dark-mode-toggle onclick=toggleTheme() aria-label="Toggle theme">○
+</span><script src=https://rezvan.xyz/js/themetoggle.js></script></div></div></nav></header><main><article><div class=title><h1>Part 14 - Curves</h1><div class=meta>Posted on Sep 27, 2023</div><div class=meta>(Last updated: May 26, 2024)</div></div><section class=body><h3 id=introduction>Introduction</h3><p>In this part we&rsquo;ll cover curves and how we can parameterize curve.</p><h3 id=definition>Definition</h3><p>Let, $f(t)$, $g(t)$ and $h(t)$ be continuous functions on some interval, $I$. The connection of points $(x, y, z)$, where $x = f(t)$, $y = g(t)$ and $z = h(t)$, is a curve.</p><p>Equivalently, we can say that:
 $$
 \vec{r}(t) = \langle f(t), g(t), h(t) \rangle
-$$</p>
-<p>We call this the <strong>parameterization</strong> of the curve. Where $t$ is the parameter.</p>
-<h3 id="example">Example</h3>
-<p>Given the function $y = x$. In the interval, $0 \leq t \leq 1$.</p>
-<p>We can parameterize and say:
+$$</p><p>We call this the <strong>parameterization</strong> of the curve. Where $t$ is the parameter.</p><h3 id=example>Example</h3><p>Given the function $y = x$. In the interval, $0 \leq t \leq 1$.</p><p>We can parameterize and say:
 $$
 \vec{r}(t) = \langle t, t \rangle \ | \ 0 \leq t \leq 1
-$$</p>
-<p>But we could also say that:
+$$</p><p>But we could also say that:
 $$
 \vec{r}(t) = \langle t^2, t^2 \rangle \ | \ 0 \leq t \leq 1
-$$</p>
-<p>So, there isn&rsquo;t necessarily a unique parameterization for a function.</p>
-<p>We can also change the &ldquo;direction&rdquo;:
+$$</p><p>So, there isn&rsquo;t necessarily a unique parameterization for a function.</p><p>We can also change the &ldquo;direction&rdquo;:
 $$
 \vec{r}(t) = \langle 1 - t, 1 - t \rangle \ | \ 0 \leq t \leq 1
-$$</p>
-<p>Let&rsquo;s try for a more complex function. Given the unit circle, $x^2 + y^2 = 1$.
+$$</p><p>Let&rsquo;s try for a more complex function. Given the unit circle, $x^2 + y^2 = 1$.
 $$
 \vec{r}(t) = \langle cos(t), sin(t) \rangle \ | \ 0 \leq t \leq 2\pi
-$$</p>
-<p>In general:
+$$</p><p>In general:
 $$
 \vec{r}(t) = \langle t, f(t) \rangle \ | \ a \leq t \leq b
-$$</p>
-<h3 id="definition-1">Definition</h3>
-<p>If a curve, $C$, is given by a parameterization:
+$$</p><h3 id=definition-1>Definition</h3><p>If a curve, $C$, is given by a parameterization:
 $$
 \vec{r}(t) = \langle f(t), g(t), h(t)
-$$</p>
-<p>Then:
+$$</p><p>Then:
 $$
 \vec{r}\ ^\prime(t) = \langle f^\prime(t), g^\prime(t), h^\prime(t)
-$$</p>
-<p>is <strong>the tangent vector</strong>.</p>
-<h3 id="definition-2">Definition</h3>
-<p>$$
+$$</p><p>is <strong>the tangent vector</strong>.</p><h3 id=definition-2>Definition</h3><p>$$
 \vec{T}(t) = \dfrac{\vec{r}\ ^\prime(t)}{|\vec{r}\ ^\prime(t)|}
-$$</p>
-<p>is <strong>the unit tangent vector</strong>.</p>
-<h3 id="examples">Examples</h3>
-<p>For the curve $\vec{r}(t) = \sqrt(t) \vec{i} + (2 - t)\vec{j}$.</p>
-<p>Find $\vec{T}(t)$ at $t = 1$.</p>
-<p>Let&rsquo;s rewrite $\vec{r}(t)$ in usual notation:
+$$</p><p>is <strong>the unit tangent vector</strong>.</p><h3 id=examples>Examples</h3><p>For the curve $\vec{r}(t) = \sqrt(t) \vec{i} + (2 - t)\vec{j}$.</p><p>Find $\vec{T}(t)$ at $t = 1$.</p><p>Let&rsquo;s rewrite $\vec{r}(t)$ in usual notation:
 $$
 \vec{r}(t) = \langle \sqrt{t}, 2 - t \rangle
-$$</p>
-<p>$$
+$$</p><p>$$
 \vec{r}\ ^\prime (t) = \langle \dfrac{1}{2\sqrt{t}}, -1 \rangle
-$$</p>
-<p>$$
+$$</p><p>$$
 \vec{r}\ ^\prime (1) = \langle \dfrac{1}{2}, -1 \rangle
-$$</p>
-<p>$$
+$$</p><p>$$
 |\vec{r}\ ^\prime (1)| = \ldots = \dfrac{\sqrt{5}}{2}
-$$</p>
-<p>$$
+$$</p><p>$$
 \vec{T}(1) = \dfrac{\vec{r}\ ^\prime(1)}{|\vec{r}\ ^\prime(1)|}
-$$</p>
-<p>$$
+$$</p><p>$$
 \vec{T}(1) = \dfrac{\langle \dfrac{1}{2}, -1 \rangle}{\dfrac{\sqrt{5}}{2}}
-$$</p>
-<p>$$
+$$</p><p>$$
 \vec{T}(1) = \langle \dfrac{1}{\sqrt{5}}, - \dfrac{2}{\sqrt{5}} \rangle
-$$</p>
-<h3 id="parameterization-over-line">Parameterization over line</h3>
-<p>Given a line that passes through the point $(x_0, y_0, z_0)$, with a direction of the vector, $\vec{v} = \langle a, b, c \rangle$.</p>
-<p>If we want to parameterize this line, we can choose another point that this vector passes through as:
+$$</p><h3 id=parameterization-over-line>Parameterization over line</h3><p>Given a line that passes through the point $(x_0, y_0, z_0)$, with a direction of the vector, $\vec{v} = \langle a, b, c \rangle$.</p><p>If we want to parameterize this line, we can choose another point that this vector passes through as:
 $$
 \vec{r}(t) = \vec{r}(t_0) + t\vec{v}
-$$</p>
-<p>$$
+$$</p><p>$$
 (x(t), y(t), z(t)) = (x_0, y_0, z_0) + t(a, b, c)
-$$</p>
-<p>This means that:
+$$</p><p>This means that:
 $$
 x(t) = x_0 + ta
-$$</p>
-<p>$$
+$$</p><p>$$
 y(t) = y_0 + tb
-$$</p>
-<p>$$
+$$</p><p>$$
 z(t) = z_0 + tc
-$$</p>
-<h3 id="example-1">Example</h3>
-<p>Find the parameterization equation to the tangent line to the helix, $x = 2cos(t), y = sin(t), z = t$. At point $(0, 1, \dfrac{\pi}{2})$.</p>
-<p>From this we easily see that $t = \dfrac{\pi}{2}$.</p>
-<p>The tangent line passes through $\vec{T}(\dfrac{\pi}{2})$.</p>
-<p>Let&rsquo;s find this.</p>
-<p>$$
+$$</p><h3 id=example-1>Example</h3><p>Find the parameterization equation to the tangent line to the helix, $x = 2cos(t), y = sin(t), z = t$. At point $(0, 1, \dfrac{\pi}{2})$.</p><p>From this we easily see that $t = \dfrac{\pi}{2}$.</p><p>The tangent line passes through $\vec{T}(\dfrac{\pi}{2})$.</p><p>Let&rsquo;s find this.</p><p>$$
 \vec{r}(t) = \langle 2 cos(t), sin(t), t \rangle
-$$</p>
-<p>$$
+$$</p><p>$$
 \vec{r}\ ^\prime(t) = \langle -2 sin(t), cos(t), 1 \rangle
-$$</p>
-<p>$$
+$$</p><p>$$
 \vec{r}\ ^\prime(\dfrac{\pi}{2}) = \langle -2, 0, 1 \rangle
-$$</p>
-<p>$$
+$$</p><p>$$
 |\vec{r}\ ^\prime(\dfrac{\pi}{2})| = \sqrt{(-2)^2 + 0^2 + 1^2} = \sqrt{5}
-$$</p>
-<p>$$
+$$</p><p>$$
 \vec{T}(\dfrac{\pi}{2}) = \langle - \dfrac{2}{\sqrt{5}}, 0, \dfrac{1}{\sqrt{5}} \rangle
-$$</p>
-<p>Now let&rsquo;s set this into our equation:
+$$</p><p>Now let&rsquo;s set this into our equation:
 $$
 x(t) = 0 + t \cdot -\dfrac{2}{\sqrt{5}} = \boxed{-\dfrac{2t}{\sqrt{5}}}
-$$</p>
-<p>$$
+$$</p><p>$$
 y(t) = 1 + t \cdot 0 = \boxed{1}
-$$</p>
-<p>$$
+$$</p><p>$$
 z(t) = \dfrac{\pi}{2} + t \dfrac{1}{\sqrt{5}} = \boxed{\dfrac{\pi}{2} + \dfrac{t}{\sqrt{5}}}
-$$</p>
-
-        </section>
-    </article>
-
-    <nav class="navigation">
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-
-        
-        
-
-        <div class="nav-item previous">
-            
-            
-            <a href="/school/lma017/lma017_13/" title="Previous: Part 13 - The Jacobian">&larr; Previous</a>
-            
-            
-        </div>
-
-        <div class="nav-item next">
-            
-            
-            <a href="/school/lma017/lma017_15/" title="Next: Part 15 - Line integrals">Next &rarr;</a>
-            
-            
-        </div>
-    </nav>
-</main>
-<footer id="site-footer">
-    <div class="social-links">
-        
-        <a href="https://github.com/rezaarezvan" title="">github</a>
-        
-        <a href="https://x.com/rzvan__/" title="">x</a>
-        
-    </div><p class="footer-msg">memento mori</p>
-</footer></div>
-</body>
-
-</html>
+$$</p></section></article><nav class=navigation><div class="nav-item previous"><a href=/school/lma017/lma017_13/ title="Previous: Part 13 - The Jacobian">&larr; Previous</a></div><div class="nav-item next"><a href=/school/lma017/lma017_15/ title="Next: Part 15 - Line integrals">Next &rarr;</a></div></nav></main><footer id=site-footer><div class=social-links><a href=https://github.com/rezaarezvan title class=social-link><span class=bracket>[</span>github<span class=bracket>]</span></a>
+<a href=https://x.com/rzvan__/ title class=social-link><span class=bracket>[</span>x<span class=bracket>]</span></a></div><div class=footer-marquee><div class=footer-marquee__content><span class=footer-marquee__item>memento mori • amor fati • sic parvis magna • per aspera ad astra</span>
+<span class=footer-marquee__item>memento mori • amor fati • sic parvis magna • per aspera ad astra</span></div></div></footer></div></body></html>

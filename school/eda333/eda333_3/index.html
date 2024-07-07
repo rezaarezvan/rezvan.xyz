@@ -1,9 +1,5 @@
-<!DOCTYPE html>
-<html><head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"><title>rezvan | Part 3 - Pipelining</title><link rel="icon" type="image/png" href="https://rezvan.xyz/images/icon.png" /><meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description"
-        content="In this part we&rsquo;ll cover the idea of pipelining - and it&rsquo;s performance effects it has on computer systems.
+<!doctype html><html><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge"><title>rezvan | Part 3 - Pipelining</title><link rel=icon type=image/png href=https://rezvan.xyz/images/icon.png><meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=description content="In this part we&rsquo;ll cover the idea of pipelining - and it&rsquo;s performance effects it has on computer systems.
 Let&rsquo;s first cover what every computer does to perform complex tasks.
 Instruction execution Every computer does these five stages:
 Fetch Instruction. PC → Instruction memory.
@@ -12,12 +8,7 @@ Execute the instruction.
 Arithmetic/logical computation.
 Computation of effective memory address.
 Computation of jump address/conditional address.
-Read / Write from / to memory for load/store instructions." />
-    <meta property="og:image" content="https://raw.githubusercontent.com/rezaarezvan/rezvan.xyz/main/images/icon.png" />
-    <meta property="og:url" content="https://rezvan.xyz/school/eda333/eda333_3/">
-  <meta property="og:site_name" content="rezvan">
-  <meta property="og:title" content="Part 3 - Pipelining">
-  <meta property="og:description" content="In this part we’ll cover the idea of pipelining - and it’s performance effects it has on computer systems.
+Read / Write from / to memory for load/store instructions."><meta property="og:image" content="https://raw.githubusercontent.com/rezaarezvan/rezvan.xyz/main/images/icon.png"><meta property="og:url" content="https://rezvan.xyz/school/eda333/eda333_3/"><meta property="og:site_name" content="rezvan"><meta property="og:title" content="Part 3 - Pipelining"><meta property="og:description" content="In this part we’ll cover the idea of pipelining - and it’s performance effects it has on computer systems.
 Let’s first cover what every computer does to perform complex tasks.
 Instruction execution Every computer does these five stages:
 Fetch Instruction. PC → Instruction memory.
@@ -26,16 +17,7 @@ Execute the instruction.
 Arithmetic/logical computation.
 Computation of effective memory address.
 Computation of jump address/conditional address.
-Read / Write from / to memory for load/store instructions.">
-  <meta property="og:locale" content="en_us">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="school">
-    <meta property="article:published_time" content="2023-03-27T00:00:00+00:00">
-    <meta property="article:modified_time" content="2024-05-26T11:09:10+02:00">
-
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Part 3 - Pipelining">
-  <meta name="twitter:description" content="In this part we’ll cover the idea of pipelining - and it’s performance effects it has on computer systems.
+Read / Write from / to memory for load/store instructions."><meta property="og:locale" content="en_us"><meta property="og:type" content="article"><meta property="article:section" content="school"><meta property="article:published_time" content="2023-03-27T00:00:00+00:00"><meta property="article:modified_time" content="2024-05-26T11:09:10+02:00"><meta name=twitter:card content="summary"><meta name=twitter:title content="Part 3 - Pipelining"><meta name=twitter:description content="In this part we’ll cover the idea of pipelining - and it’s performance effects it has on computer systems.
 Let’s first cover what every computer does to perform complex tasks.
 Instruction execution Every computer does these five stages:
 Fetch Instruction. PC → Instruction memory.
@@ -44,27 +26,7 @@ Execute the instruction.
 Arithmetic/logical computation.
 Computation of effective memory address.
 Computation of jump address/conditional address.
-Read / Write from / to memory for load/store instructions.">
-<script src="https://rezvan.xyz/js/feather.min.js"></script>
-    
-
-    
-    
-    <link rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/main.73f3431f38ac72fc2890b3747cc9c6d55d5756f3ba40e590c77627ae6c16e46b.css" />
-    <link id="lightSyntaxStyle" rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/light_syntax.65408cc3a5c02070b661c3e4e79306fc261cc63620f4adce9a30eafcba4ab79e.css" />
-    
-    <link id="darkModeStyle" rel="stylesheet" type="text/css" href="https://rezvan.xyz/css/dark.13c6bfb747b76fdd2dc198b1172afdd77e7ce604de43f343ce643378bafc58af.css"  disabled />
-    <link id="darkSyntaxStyle" rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/dark_syntax.2b10cc1a2156b30874a063b7439a993bc3b43d476c5e1d8598d769c929c7b381.css" />
-    
-
-    
-    
-    <script type="text/javascript"
-        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-        </script>
-
-    
-    <script type="text/x-mathjax-config">
+Read / Write from / to memory for load/store instructions."><link rel=stylesheet href=https://rezvan.xyz/css/combined.min.51ec65976b416262d827f98c76ca037bf7aeea27590e3c120eac32afbfbc40ee.css integrity="sha256-Uexll2tBYmLYJ/mMdsoDe/eu6idZDjwSDqwyr7+8QO4="><link id=lightSyntaxStyle rel=stylesheet href=https://rezvan.xyz/css/light_syntax.min.d9e0828a4ff7f2d7317942062fc751fa487b2ac2c47b934ad082abd7d3ca6690.css integrity="sha256-2eCCik/38tcxeUIGL8dR+kh7KsLEe5NK0IKr19PKZpA="><link id=darkModeStyle rel=stylesheet href=https://rezvan.xyz/css/dark.min.49ad20f2859f81550f852c48875ca9e72e4267459ed6fe82fc9b4f3cf7fdc4e8.css integrity="sha256-Sa0g8oWfgVUPhSxIh1yp5y5CZ0We1v6C/JtPPPf9xOg=" disabled><link id=darkSyntaxStyle rel=stylesheet href=https://rezvan.xyz/css/dark_syntax.min.1a878f3d8fb43359bd3b44bc70c4074f682f11066c6537bf6248b696cbe56586.css integrity="sha256-GoePPY+0M1m9O0S8cMQHT2gvEQZsZTe/Yki2lsvlZYY=" disabled><script type=text/javascript src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type=text/x-mathjax-config>
 		MathJax.Hub.Config({
 			tex2jax: {
 				inlineMath: [['$','$'], ['\\(','\\)']],
@@ -76,392 +38,33 @@ Read / Write from / to memory for load/store instructions.">
 						 extensions: ["AMSmath.js", "AMSsymbols.js"] }
 			}
 		});
-		</script>
-    
-
-    
-    
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css">
-    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js"
-        onload="renderMathInElement(document.body);"></script>
-
-    
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            renderMathInElement(document.body, {
-                delimiters: [
-                    {left: "$$", right: "$$", display: true},
-                    {left: "$", right: "$", display: false}
-                ]
-            });
-        });
-    </script>
-    
-</head>
-<body>
-    <div class="content"><header>
-    <nav id="site-navbar">
-        <div class="menu-items">
-            
-            <a href="/">home</a>
-            
-            <a href="/principles">principles</a>
-            
-            <a href="/cv">cv</a>
-            
-            <a href="/posts">posts</a>
-            
-            <a href="/school">school</a>
-            
-        </div>
-        <div class="theme-toggle">
-            <span id="dark-mode-toggle" onclick="toggleTheme()"><i data-feather="moon"></i></span>
-            <script src="https://rezvan.xyz/js/themetoggle.js"></script>
-        </div>
-        
-    </nav>
-</header>
-
-<main>
-    <article>
-        <div class="title">
-            <h1>Part 3 - Pipelining</h1>
-            <div class="meta">Posted on Mar 27, 2023
-            </div>
-            <div class="meta">
-                (Last updated: May 26, 2024)
-            </div>
-
-        </div>
-        
-        <section class="body">
-            <p>In this part we&rsquo;ll cover the idea of pipelining - and it&rsquo;s performance effects it has on computer systems.</p>
-<p>Let&rsquo;s first cover what every computer does to perform complex tasks.</p>
-<h3 id="instruction-execution">Instruction execution</h3>
-<p>Every computer does these five stages:</p>
-<ol>
-<li>
-<p><strong>Fetch</strong> Instruction. PC → Instruction memory.</p>
-</li>
-<li>
-<p><strong>Decode</strong> the instruction and read from registers.</p>
-</li>
-<li>
-<p><strong>Execute</strong> the instruction.</p>
-<ul>
-<li>
-<p>Arithmetic/logical computation.</p>
-</li>
-<li>
-<p>Computation of effective memory address.</p>
-</li>
-<li>
-<p>Computation of jump address/conditional address.</p>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>Read / Write from / to memory</strong> for load/store instructions.</p>
-</li>
-<li>
-<p><strong>Write back</strong> the result into the result register (RF).</p>
-</li>
-</ol>
-<p>Let&rsquo;s take a look how this logic is implemented:
-<img src="/school/images/SL.png#center" alt=""></p>
-<p>A good refresher that we&rsquo;ll need to remember is that:</p>
-<blockquote>
-<p>The longest critical path determines our clock frequency.</p>
-</blockquote>
-<p>Let&rsquo;s now look into each stage, so we understand them properly.</p>
-<h4 id="instruction-fetch-if">Instruction Fetch (IF)</h4>
-<p>Let&rsquo;s begin by dissecting the <strong>fetch</strong> stage:</p>
-<p><img src="/school/images/IF.png#center" alt=""></p>
-<p>We see that everything starts in PC, we read our current address (PC Value), we have this black box of a decoder which outputs the instruction (32-bits).</p>
-<p>Notice that we also take our current PC value and add <code>4</code> to it, why <code>4</code>?, because each instruction is 32-bits, or 4 bytes.</p>
-<h4 id="r-format-instructions">R-Format Instructions</h4>
-<p>For instructions with the R-format, we have the following:
-<img src="/school/images/RF.png#center" alt=""></p>
-<p>We take in our two register operands, compute the arithmetic/logical computation and store the result to the result register.</p>
-<h4 id="loadstore-instructions">Load/Store Instructions</h4>
-<p>For instructions that we either load/store to memory:</p>
-<p><img src="/school/images/LS.png#center" alt=""></p>
-<p>Here we have two important parts, we need to read our register operands but also compute our offset.</p>
-<p>Since the offset is 16-bits and the register operands 32-bits, we need to sign extend our 16-bit offset to 32-bits.</p>
-<h4 id="conditional-jump-instructions">Conditional jump instructions</h4>
-<p>For these type of instructions, we need to compare our registers, we do this by doing a subtraction and looking at the &ldquo;zero&rdquo; output from our ALU.</p>
-<p>But we also need to compute our jump address, to do this we do:</p>
-<ul>
-<li>
-<p>Sign extend our offset</p>
-</li>
-<li>
-<p>Left shift by 2 bits, due to word displacement</p>
-</li>
-<li>
-<p>Now add this offset to PC.</p>
-</li>
-</ul>
-<h3 id="in-depth-overview">In-depth overview</h3>
-<p>Now let&rsquo;s take a look at the first picture, but with some more details:</p>
-<p><img src="/school/images/TP.png#center" alt=""></p>
-<p>If we try to deduce what our critical path is, we quickly find that load instructions are really slow.</p>
-<p>Since they go through:</p>
-<blockquote>
-<p>Instruction memory → Registers → ALU → Data memory → Registers</p>
-</blockquote>
-<p>Now, let&rsquo;s pipeline this processor to increase the <em>speed</em>.</p>
-<h3 id="pipelined-version">Pipelined version</h3>
-<p>Naturally, since we have five stages, let&rsquo;s pipeline it into 5 separate stages as well!</p>
-<p><img src="/school/images/PL.png#center" alt="">
-Note: The dotted lines represents registers that separate each stage</p>
-<p>As we can see now, we can handle 5 separate instructions at once!</p>
-<p>If our pipelining is &ldquo;balanced&rdquo;, meaning each stage takes the same amount of time, then we can see a resulting speed up of:
+		</script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css><script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js onload=renderMathInElement(document.body)></script><script>document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]})})</script></head><body><div class=content><header><nav id=site-navbar><div class=navbar-content><a href=https://rezvan.xyz/ class=logo>rezvan.xyz</a><div class=navbar-links><a href=/principles class=nav-link><span class=bracket>[</span>principles<span class=bracket>]</span></a>
+<a href=/cv class=nav-link><span class=bracket>[</span>cv<span class=bracket>]</span></a>
+<a href=/posts class=nav-link><span class=bracket>[</span>posts<span class=bracket>]</span></a>
+<a href=/school class=nav-link><span class=bracket>[</span>school<span class=bracket>]</span></a></div><div class=theme-toggle><span id=dark-mode-toggle onclick=toggleTheme() aria-label="Toggle theme">○
+</span><script src=https://rezvan.xyz/js/themetoggle.js></script></div></div></nav></header><main><article><div class=title><h1>Part 3 - Pipelining</h1><div class=meta>Posted on Mar 27, 2023</div><div class=meta>(Last updated: May 26, 2024)</div></div><section class=body><p>In this part we&rsquo;ll cover the idea of pipelining - and it&rsquo;s performance effects it has on computer systems.</p><p>Let&rsquo;s first cover what every computer does to perform complex tasks.</p><h3 id=instruction-execution>Instruction execution</h3><p>Every computer does these five stages:</p><ol><li><p><strong>Fetch</strong> Instruction. PC → Instruction memory.</p></li><li><p><strong>Decode</strong> the instruction and read from registers.</p></li><li><p><strong>Execute</strong> the instruction.</p><ul><li><p>Arithmetic/logical computation.</p></li><li><p>Computation of effective memory address.</p></li><li><p>Computation of jump address/conditional address.</p></li></ul></li><li><p><strong>Read / Write from / to memory</strong> for load/store instructions.</p></li><li><p><strong>Write back</strong> the result into the result register (RF).</p></li></ol><p>Let&rsquo;s take a look how this logic is implemented:
+<img src=/school/images/SL.png#center alt></p><p>A good refresher that we&rsquo;ll need to remember is that:</p><blockquote><p>The longest critical path determines our clock frequency.</p></blockquote><p>Let&rsquo;s now look into each stage, so we understand them properly.</p><h4 id=instruction-fetch-if>Instruction Fetch (IF)</h4><p>Let&rsquo;s begin by dissecting the <strong>fetch</strong> stage:</p><p><img src=/school/images/IF.png#center alt></p><p>We see that everything starts in PC, we read our current address (PC Value), we have this black box of a decoder which outputs the instruction (32-bits).</p><p>Notice that we also take our current PC value and add <code>4</code> to it, why <code>4</code>?, because each instruction is 32-bits, or 4 bytes.</p><h4 id=r-format-instructions>R-Format Instructions</h4><p>For instructions with the R-format, we have the following:
+<img src=/school/images/RF.png#center alt></p><p>We take in our two register operands, compute the arithmetic/logical computation and store the result to the result register.</p><h4 id=loadstore-instructions>Load/Store Instructions</h4><p>For instructions that we either load/store to memory:</p><p><img src=/school/images/LS.png#center alt></p><p>Here we have two important parts, we need to read our register operands but also compute our offset.</p><p>Since the offset is 16-bits and the register operands 32-bits, we need to sign extend our 16-bit offset to 32-bits.</p><h4 id=conditional-jump-instructions>Conditional jump instructions</h4><p>For these type of instructions, we need to compare our registers, we do this by doing a subtraction and looking at the &ldquo;zero&rdquo; output from our ALU.</p><p>But we also need to compute our jump address, to do this we do:</p><ul><li><p>Sign extend our offset</p></li><li><p>Left shift by 2 bits, due to word displacement</p></li><li><p>Now add this offset to PC.</p></li></ul><h3 id=in-depth-overview>In-depth overview</h3><p>Now let&rsquo;s take a look at the first picture, but with some more details:</p><p><img src=/school/images/TP.png#center alt></p><p>If we try to deduce what our critical path is, we quickly find that load instructions are really slow.</p><p>Since they go through:</p><blockquote><p>Instruction memory → Registers → ALU → Data memory → Registers</p></blockquote><p>Now, let&rsquo;s pipeline this processor to increase the <em>speed</em>.</p><h3 id=pipelined-version>Pipelined version</h3><p>Naturally, since we have five stages, let&rsquo;s pipeline it into 5 separate stages as well!</p><p><img src=/school/images/PL.png#center alt>
+Note: The dotted lines represents registers that separate each stage</p><p>As we can see now, we can handle 5 separate instructions at once!</p><p>If our pipelining is &ldquo;balanced&rdquo;, meaning each stage takes the same amount of time, then we can see a resulting speed up of:
 $$
 \textbf{Speedup} = \frac{T_{c \quad | \quad \text{Non-pipelined version}}}{T_{c \quad | \quad \text{Pipelined version}}} \approx \text{Number of pipeline stages}
-$$</p>
-<p>If our pipelining is unbalanced, we&rsquo;ll see a smaller increase.</p>
-<p>However, doing 5 instructions at once comes with a cost, we no longer have a perfect CPU. We have several hazards that we need to consider now.</p>
-<h3 id="hazards">Hazards</h3>
-<p>There are three different types of hazards that we&rsquo;ll need to take care off:</p>
-<ul>
-<li>
-<p>Structural hazards</p>
-<ul>
-<li>A stage is currently busy doing an operation</li>
-</ul>
-</li>
-<li>
-<p>Data hazards</p>
-<ul>
-<li>An instruction that depends on a earlier instruction.</li>
-</ul>
-</li>
-<li>
-<p>Control hazards</p>
-<ul>
-<li>The condition and potential address of a jump has not yet by the instruction fetch.</li>
-</ul>
-</li>
-</ul>
-<p>Let&rsquo;s look into how to solve each of these.</p>
-<h4 id="structural-hazards">Structural hazards</h4>
-<p>As we defined earlier, it is when two or more instruction need to access the same stage simultaneously.</p>
-<p>There are two main examples of this:</p>
-<ul>
-<li>
-<p>Registers: Reading and writing to the same register:</p>
-<ul>
-<li>Solution: Write and read in separate half cycles.</li>
-</ul>
-</li>
-<li>
-<p>If the pipeline only has one (1) shared memory:</p>
-<ul>
-<li>Solution: Don&rsquo;t. All pipeline models use separate memory for instructions and data memory.</li>
-</ul>
-</li>
-</ul>
-<h4 id="data-hazards">Data hazards</h4>
-<p>If we have the following MIPS:</p>
-<pre tabindex="0"><code>add    $s0, $t0, $t1
+$$</p><p>If our pipelining is unbalanced, we&rsquo;ll see a smaller increase.</p><p>However, doing 5 instructions at once comes with a cost, we no longer have a perfect CPU. We have several hazards that we need to consider now.</p><h3 id=hazards>Hazards</h3><p>There are three different types of hazards that we&rsquo;ll need to take care off:</p><ul><li><p>Structural hazards</p><ul><li>A stage is currently busy doing an operation</li></ul></li><li><p>Data hazards</p><ul><li>An instruction that depends on a earlier instruction.</li></ul></li><li><p>Control hazards</p><ul><li>The condition and potential address of a jump has not yet by the instruction fetch.</li></ul></li></ul><p>Let&rsquo;s look into how to solve each of these.</p><h4 id=structural-hazards>Structural hazards</h4><p>As we defined earlier, it is when two or more instruction need to access the same stage simultaneously.</p><p>There are two main examples of this:</p><ul><li><p>Registers: Reading and writing to the same register:</p><ul><li>Solution: Write and read in separate half cycles.</li></ul></li><li><p>If the pipeline only has one (1) shared memory:</p><ul><li>Solution: Don&rsquo;t. All pipeline models use separate memory for instructions and data memory.</li></ul></li></ul><h4 id=data-hazards>Data hazards</h4><p>If we have the following MIPS:</p><pre tabindex=0><code>add    $s0, $t0, $t1
 add    $t2, $s0, $t3
-</code></pre><p>Notice that both instructions either write or read <code>$s0</code>.</p>
-<p>A data hazard occurs specifically after a RAW (<strong>R</strong>ead <strong>A</strong>fter <strong>W</strong>rite)</p>
-<p>There are two solutions:</p>
-<ul>
-<li>
-<p>If the case is like above we can do:</p>
-<ul>
-<li>
-<p>Forwarding (Bypassing)</p>
-<ul>
-<li>
-<p>Use the result instantly when computed from the ALU</p>
-</li>
-<li>
-<p>Do not wait to store it until the Write Back phase.</p>
-</li>
-<li>
-<p>But, does require more logic and path in our data path.</p>
-</li>
-<li>
-<p>But, no stalling!</p>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p>Forwarding doesn&rsquo;t solve all cases, for example, load instructions.</p>
-<ul>
-<li>
-<p>We cannot do a forwarding, &ldquo;back in time&rdquo;</p>
-</li>
-<li>
-<p>Therefore, requires a stalling cycle.</p>
-</li>
-</ul>
-</li>
-</ul>
-<p>But consider this following example:</p>
-<pre tabindex="0"><code>lw  $t1, 0($t0)
+</code></pre><p>Notice that both instructions either write or read <code>$s0</code>.</p><p>A data hazard occurs specifically after a RAW (<strong>R</strong>ead <strong>A</strong>fter <strong>W</strong>rite)</p><p>There are two solutions:</p><ul><li><p>If the case is like above we can do:</p><ul><li><p>Forwarding (Bypassing)</p><ul><li><p>Use the result instantly when computed from the ALU</p></li><li><p>Do not wait to store it until the Write Back phase.</p></li><li><p>But, does require more logic and path in our data path.</p></li><li><p>But, no stalling!</p></li></ul></li></ul></li><li><p>Forwarding doesn&rsquo;t solve all cases, for example, load instructions.</p><ul><li><p>We cannot do a forwarding, &ldquo;back in time&rdquo;</p></li><li><p>Therefore, requires a stalling cycle.</p></li></ul></li></ul><p>But consider this following example:</p><pre tabindex=0><code>lw  $t1, 0($t0)
 lw  $t2, 4($t0)
 add $t3, $t1, $t2
 sw  $t3, 12($t0)
 lw  $t4, 8($t0)
 add $t5, $t1, $t4
 sw  $t5, 16($t0)
-</code></pre><p>In this we&rsquo;ll have two stalling cycles, but with some smart thinking (or a smart compiler) we can instead do:</p>
-<pre tabindex="0"><code>lw  $t1, 0($t0)
+</code></pre><p>In this we&rsquo;ll have two stalling cycles, but with some smart thinking (or a smart compiler) we can instead do:</p><pre tabindex=0><code>lw  $t1, 0($t0)
 lw  $t2, 4($t0)
 lw  $t4, 8($t0)
 add $t3, $t1, $t2
 sw  $t3, 12($t0)
 add $t5, $t1, $t4
 sw  $t5, 16($t0)
-</code></pre><p>Just by changing one line we reduced our clock cycle count from 9 to 7!</p>
-<h4 id="control-hazards">Control hazards</h4>
-<ul>
-<li>
-<p>Problem: We want to compare registers and compute the jump address earlier in the program</p>
-<ul>
-<li>
-<p>Solution: Move/Add more logic to the instruction decode stage.</p>
-</li>
-<li>
-<p>This will result that we only need to wait (stall) for one cycle!</p>
-</li>
-</ul>
-</li>
-</ul>
-<p>But, often longer pipelines cannot do this approach, since it will still result in a lot of stalling cycles.</p>
-<p>The solution in modern CPUs is, predict the jump! If we fail to predict, then we stall to restore our failed prediction.</p>
-<p>There are two different types:</p>
-<ul>
-<li>
-<p>At compile time/Static jump-predictions:</p>
-<ul>
-<li>
-<p>Based on typical jump-behavior</p>
-</li>
-<li>
-<p>Examples: loops and if-conditions:</p>
-<ul>
-<li>
-<p>Predict backwards jump as &ldquo;taken&rdquo;</p>
-</li>
-<li>
-<p>Predict forward jump as &ldquo;not taken&rdquo;</p>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p>At run time/Dynamic jump-predictions:</p>
-<ul>
-<li>
-<p>Hardware keeps track/notes the current jump-behavior</p>
-<ul>
-<li>Keeps statistics of jumps</li>
-</ul>
-</li>
-<li>
-<p>From the statistics tries to predict, can be as simple as, do as the last time.</p>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="summary">Summary</h3>
-<p>Okay, so we&rsquo;ve seen the power and beauty of pipelining.</p>
-<p>So let&rsquo;s make a little summary:</p>
-<ul>
-<li>
-<p>Pipelining boosts the performance, by increasing the total instruction-flow to the CPU.</p>
-<ul>
-<li>Multiple instructions execute in parallel.</li>
-</ul>
-</li>
-<li>
-<p>Although great, it comes with some hazards:</p>
-<ul>
-<li>
-<p>Structural hazards, data hazards (RAW), and control hazards.</p>
-</li>
-<li>
-<p>Can both be solved with hardware and software.</p>
-</li>
-</ul>
-</li>
-<li>
-<p>There is a strong correlation between the ISA and the complexity of the pipeline.</p>
-</li>
-</ul>
-<p>That last one might not be so clear from the start, but if we had very complex functions like</p>
-<pre tabindex="0"><code>add M[$t0], M[$t1], M[$t2]
-</code></pre><p>This would be a headache, since then we are in the execute stage and read/write to memory simultaneously.</p>
-
-        </section>
-    </article>
-
-    <nav class="navigation">
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-
-        
-        
-
-        <div class="nav-item previous">
-            
-            
-            <a href="/school/eda333/eda333_2/" title="Previous: Part 2 - MIPS">&larr; Previous</a>
-            
-            
-        </div>
-
-        <div class="nav-item next">
-            
-            
-            <a href="/school/eda333/eda333_4/" title="Next: Part 4 - Pipeline hardware">Next &rarr;</a>
-            
-            
-        </div>
-    </nav>
-</main>
-<footer id="site-footer">
-    <div class="social-links">
-        
-        <a href="https://github.com/rezaarezvan" title="">github</a>
-        
-        <a href="https://x.com/rzvan__/" title="">x</a>
-        
-    </div><p class="footer-msg">memento mori</p>
-</footer></div>
-</body>
-
-</html>
+</code></pre><p>Just by changing one line we reduced our clock cycle count from 9 to 7!</p><h4 id=control-hazards>Control hazards</h4><ul><li><p>Problem: We want to compare registers and compute the jump address earlier in the program</p><ul><li><p>Solution: Move/Add more logic to the instruction decode stage.</p></li><li><p>This will result that we only need to wait (stall) for one cycle!</p></li></ul></li></ul><p>But, often longer pipelines cannot do this approach, since it will still result in a lot of stalling cycles.</p><p>The solution in modern CPUs is, predict the jump! If we fail to predict, then we stall to restore our failed prediction.</p><p>There are two different types:</p><ul><li><p>At compile time/Static jump-predictions:</p><ul><li><p>Based on typical jump-behavior</p></li><li><p>Examples: loops and if-conditions:</p><ul><li><p>Predict backwards jump as &ldquo;taken&rdquo;</p></li><li><p>Predict forward jump as &ldquo;not taken&rdquo;</p></li></ul></li></ul></li><li><p>At run time/Dynamic jump-predictions:</p><ul><li><p>Hardware keeps track/notes the current jump-behavior</p><ul><li>Keeps statistics of jumps</li></ul></li><li><p>From the statistics tries to predict, can be as simple as, do as the last time.</p></li></ul></li></ul><h3 id=summary>Summary</h3><p>Okay, so we&rsquo;ve seen the power and beauty of pipelining.</p><p>So let&rsquo;s make a little summary:</p><ul><li><p>Pipelining boosts the performance, by increasing the total instruction-flow to the CPU.</p><ul><li>Multiple instructions execute in parallel.</li></ul></li><li><p>Although great, it comes with some hazards:</p><ul><li><p>Structural hazards, data hazards (RAW), and control hazards.</p></li><li><p>Can both be solved with hardware and software.</p></li></ul></li><li><p>There is a strong correlation between the ISA and the complexity of the pipeline.</p></li></ul><p>That last one might not be so clear from the start, but if we had very complex functions like</p><pre tabindex=0><code>add M[$t0], M[$t1], M[$t2]
+</code></pre><p>This would be a headache, since then we are in the execute stage and read/write to memory simultaneously.</p></section></article><nav class=navigation><div class="nav-item previous"><a href=/school/eda333/eda333_2/ title="Previous: Part 2 - MIPS">&larr; Previous</a></div><div class="nav-item next"><a href=/school/eda333/eda333_4/ title="Next: Part 4 - Pipeline hardware">Next &rarr;</a></div></nav></main><footer id=site-footer><div class=social-links><a href=https://github.com/rezaarezvan title class=social-link><span class=bracket>[</span>github<span class=bracket>]</span></a>
+<a href=https://x.com/rzvan__/ title class=social-link><span class=bracket>[</span>x<span class=bracket>]</span></a></div><div class=footer-marquee><div class=footer-marquee__content><span class=footer-marquee__item>memento mori • amor fati • sic parvis magna • per aspera ad astra</span>
+<span class=footer-marquee__item>memento mori • amor fati • sic parvis magna • per aspera ad astra</span></div></div></footer></div></body></html>

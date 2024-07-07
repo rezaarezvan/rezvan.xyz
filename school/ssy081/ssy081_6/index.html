@@ -1,49 +1,11 @@
-<!DOCTYPE html>
-<html><head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"><title>rezvan | Part 6 - Fourier Transform</title><link rel="icon" type="image/png" href="https://rezvan.xyz/images/icon.png" /><meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description"
-        content="Introduction In this part we&rsquo;ll define and understand Fourier transforms. In the last part we covered the concept of Fourier series.
+<!doctype html><html><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge"><title>rezvan | Part 6 - Fourier Transform</title><link rel=icon type=image/png href=https://rezvan.xyz/images/icon.png><meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=description content="Introduction In this part we&rsquo;ll define and understand Fourier transforms. In the last part we covered the concept of Fourier series.
 Which was a way of describing periodic functions as a linear combination (sum) of simple trigonometric functions. The Fourier transform takes this one step further, it&rsquo;s a way to extend the Fourier series of non-periodic functions.
-Definition Given a function in the time-domain, the equivalent function in the frequency domain is: $$ F(\omega) = \int_{-\infty}^{\infty} f(t) e^{-j\omega t}\ dt $$" />
-    <meta property="og:image" content="https://raw.githubusercontent.com/rezaarezvan/rezvan.xyz/main/images/icon.png" />
-    <meta property="og:url" content="https://rezvan.xyz/school/ssy081/ssy081_6/">
-  <meta property="og:site_name" content="rezvan">
-  <meta property="og:title" content="Part 6 - Fourier Transform">
-  <meta property="og:description" content="Introduction In this part we’ll define and understand Fourier transforms. In the last part we covered the concept of Fourier series.
+Definition Given a function in the time-domain, the equivalent function in the frequency domain is: $$ F(\omega) = \int_{-\infty}^{\infty} f(t) e^{-j\omega t}\ dt $$"><meta property="og:image" content="https://raw.githubusercontent.com/rezaarezvan/rezvan.xyz/main/images/icon.png"><meta property="og:url" content="https://rezvan.xyz/school/ssy081/ssy081_6/"><meta property="og:site_name" content="rezvan"><meta property="og:title" content="Part 6 - Fourier Transform"><meta property="og:description" content="Introduction In this part we’ll define and understand Fourier transforms. In the last part we covered the concept of Fourier series.
 Which was a way of describing periodic functions as a linear combination (sum) of simple trigonometric functions. The Fourier transform takes this one step further, it’s a way to extend the Fourier series of non-periodic functions.
-Definition Given a function in the time-domain, the equivalent function in the frequency domain is: $$ F(\omega) = \int_{-\infty}^{\infty} f(t) e^{-j\omega t}\ dt $$">
-  <meta property="og:locale" content="en_us">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="school">
-    <meta property="article:published_time" content="2023-09-20T00:00:00+00:00">
-    <meta property="article:modified_time" content="2024-05-26T11:09:10+02:00">
-
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Part 6 - Fourier Transform">
-  <meta name="twitter:description" content="Introduction In this part we’ll define and understand Fourier transforms. In the last part we covered the concept of Fourier series.
+Definition Given a function in the time-domain, the equivalent function in the frequency domain is: $$ F(\omega) = \int_{-\infty}^{\infty} f(t) e^{-j\omega t}\ dt $$"><meta property="og:locale" content="en_us"><meta property="og:type" content="article"><meta property="article:section" content="school"><meta property="article:published_time" content="2023-09-20T00:00:00+00:00"><meta property="article:modified_time" content="2024-05-26T11:09:10+02:00"><meta name=twitter:card content="summary"><meta name=twitter:title content="Part 6 - Fourier Transform"><meta name=twitter:description content="Introduction In this part we’ll define and understand Fourier transforms. In the last part we covered the concept of Fourier series.
 Which was a way of describing periodic functions as a linear combination (sum) of simple trigonometric functions. The Fourier transform takes this one step further, it’s a way to extend the Fourier series of non-periodic functions.
-Definition Given a function in the time-domain, the equivalent function in the frequency domain is: $$ F(\omega) = \int_{-\infty}^{\infty} f(t) e^{-j\omega t}\ dt $$">
-<script src="https://rezvan.xyz/js/feather.min.js"></script>
-    
-
-    
-    
-    <link rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/main.73f3431f38ac72fc2890b3747cc9c6d55d5756f3ba40e590c77627ae6c16e46b.css" />
-    <link id="lightSyntaxStyle" rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/light_syntax.65408cc3a5c02070b661c3e4e79306fc261cc63620f4adce9a30eafcba4ab79e.css" />
-    
-    <link id="darkModeStyle" rel="stylesheet" type="text/css" href="https://rezvan.xyz/css/dark.13c6bfb747b76fdd2dc198b1172afdd77e7ce604de43f343ce643378bafc58af.css"  disabled />
-    <link id="darkSyntaxStyle" rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/dark_syntax.2b10cc1a2156b30874a063b7439a993bc3b43d476c5e1d8598d769c929c7b381.css" />
-    
-
-    
-    
-    <script type="text/javascript"
-        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-        </script>
-
-    
-    <script type="text/x-mathjax-config">
+Definition Given a function in the time-domain, the equivalent function in the frequency domain is: $$ F(\omega) = \int_{-\infty}^{\infty} f(t) e^{-j\omega t}\ dt $$"><link rel=stylesheet href=https://rezvan.xyz/css/combined.min.51ec65976b416262d827f98c76ca037bf7aeea27590e3c120eac32afbfbc40ee.css integrity="sha256-Uexll2tBYmLYJ/mMdsoDe/eu6idZDjwSDqwyr7+8QO4="><link id=lightSyntaxStyle rel=stylesheet href=https://rezvan.xyz/css/light_syntax.min.d9e0828a4ff7f2d7317942062fc751fa487b2ac2c47b934ad082abd7d3ca6690.css integrity="sha256-2eCCik/38tcxeUIGL8dR+kh7KsLEe5NK0IKr19PKZpA="><link id=darkModeStyle rel=stylesheet href=https://rezvan.xyz/css/dark.min.49ad20f2859f81550f852c48875ca9e72e4267459ed6fe82fc9b4f3cf7fdc4e8.css integrity="sha256-Sa0g8oWfgVUPhSxIh1yp5y5CZ0We1v6C/JtPPPf9xOg=" disabled><link id=darkSyntaxStyle rel=stylesheet href=https://rezvan.xyz/css/dark_syntax.min.1a878f3d8fb43359bd3b44bc70c4074f682f11066c6537bf6248b696cbe56586.css integrity="sha256-GoePPY+0M1m9O0S8cMQHT2gvEQZsZTe/Yki2lsvlZYY=" disabled><script type=text/javascript src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type=text/x-mathjax-config>
 		MathJax.Hub.Config({
 			tex2jax: {
 				inlineMath: [['$','$'], ['\\(','\\)']],
@@ -55,259 +17,88 @@ Definition Given a function in the time-domain, the equivalent function in the f
 						 extensions: ["AMSmath.js", "AMSsymbols.js"] }
 			}
 		});
-		</script>
-    
-
-    
-    
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css">
-    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js"
-        onload="renderMathInElement(document.body);"></script>
-
-    
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            renderMathInElement(document.body, {
-                delimiters: [
-                    {left: "$$", right: "$$", display: true},
-                    {left: "$", right: "$", display: false}
-                ]
-            });
-        });
-    </script>
-    
-</head>
-<body>
-    <div class="content"><header>
-    <nav id="site-navbar">
-        <div class="menu-items">
-            
-            <a href="/">home</a>
-            
-            <a href="/principles">principles</a>
-            
-            <a href="/cv">cv</a>
-            
-            <a href="/posts">posts</a>
-            
-            <a href="/school">school</a>
-            
-        </div>
-        <div class="theme-toggle">
-            <span id="dark-mode-toggle" onclick="toggleTheme()"><i data-feather="moon"></i></span>
-            <script src="https://rezvan.xyz/js/themetoggle.js"></script>
-        </div>
-        
-    </nav>
-</header>
-
-<main>
-    <article>
-        <div class="title">
-            <h1>Part 6 - Fourier Transform</h1>
-            <div class="meta">Posted on Sep 20, 2023
-            </div>
-            <div class="meta">
-                (Last updated: May 26, 2024)
-            </div>
-
-        </div>
-        
-        <section class="body">
-            <h3 id="introduction">Introduction</h3>
-<p>In this part we&rsquo;ll define and understand Fourier transforms. In the last part we covered the concept of Fourier series.</p>
-<p>Which was a way of describing periodic functions as a linear combination (sum) of simple trigonometric functions. The Fourier transform takes this one step further, it&rsquo;s a way to extend the Fourier series of non-periodic functions.</p>
-<h3 id="definition">Definition</h3>
-<p>Given a function in the time-domain, the equivalent function in the frequency domain is:
+		</script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css><script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js onload=renderMathInElement(document.body)></script><script>document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]})})</script></head><body><div class=content><header><nav id=site-navbar><div class=navbar-content><a href=https://rezvan.xyz/ class=logo>rezvan.xyz</a><div class=navbar-links><a href=/principles class=nav-link><span class=bracket>[</span>principles<span class=bracket>]</span></a>
+<a href=/cv class=nav-link><span class=bracket>[</span>cv<span class=bracket>]</span></a>
+<a href=/posts class=nav-link><span class=bracket>[</span>posts<span class=bracket>]</span></a>
+<a href=/school class=nav-link><span class=bracket>[</span>school<span class=bracket>]</span></a></div><div class=theme-toggle><span id=dark-mode-toggle onclick=toggleTheme() aria-label="Toggle theme">○
+</span><script src=https://rezvan.xyz/js/themetoggle.js></script></div></div></nav></header><main><article><div class=title><h1>Part 6 - Fourier Transform</h1><div class=meta>Posted on Sep 20, 2023</div><div class=meta>(Last updated: May 26, 2024)</div></div><section class=body><h3 id=introduction>Introduction</h3><p>In this part we&rsquo;ll define and understand Fourier transforms. In the last part we covered the concept of Fourier series.</p><p>Which was a way of describing periodic functions as a linear combination (sum) of simple trigonometric functions. The Fourier transform takes this one step further, it&rsquo;s a way to extend the Fourier series of non-periodic functions.</p><h3 id=definition>Definition</h3><p>Given a function in the time-domain, the equivalent function in the frequency domain is:
 $$
 F(\omega) = \int_{-\infty}^{\infty} f(t) e^{-j\omega t}\ dt
-$$</p>
-<p>The other way around:
+$$</p><p>The other way around:
 $$
 f(t) = \dfrac{1}{2\pi} \int_{-\infty}^{\infty} F(\omega) e^{j\omega t}\ d\omega
-$$</p>
-<p>We call these functions the Fourier pair. Meaning they are the same functions, in different domains. They represent the same signal.</p>
-<p>$$
+$$</p><p>We call these functions the Fourier pair. Meaning they are the same functions, in different domains. They represent the same signal.</p><p>$$
 f(t) \iff F(\omega)
-$$</p>
-<p>So the notation for the Fourier transform is:
+$$</p><p>So the notation for the Fourier transform is:
 $$
 F(\omega) = \mathcal{F}[f(t)]
-$$</p>
-<p>$$
+$$</p><p>$$
 f(t) = \mathcal{F}^{-1}[F(\omega)]
-$$</p>
-<p>Let&rsquo;s do our first Fourier transform!</p>
-<h3 id="example">Example</h3>
-<p>Let&rsquo;s do this on a simple unit gate function, let&rsquo;s do it on a general unit gate function.</p>
-<p>$$
+$$</p><p>Let&rsquo;s do our first Fourier transform!</p><h3 id=example>Example</h3><p>Let&rsquo;s do this on a simple unit gate function, let&rsquo;s do it on a general unit gate function.</p><p>$$
 f(t) = rect\left(\dfrac{t}{\tau}\right)
-$$</p>
-<p>$$
+$$</p><p>$$
 F(\omega) = \int_{-\infty}^{\infty} rect\left(\dfrac{t}{\tau}\right) e^{-j\omega t}\ dt
-$$</p>
-<p>Since the gate function is only defined at $t = -\dfrac{\tau}{2}$ and $t = \dfrac{\tau}{2}$, and in this interval it is constant 1.
+$$</p><p>Since the gate function is only defined at $t = -\dfrac{\tau}{2}$ and $t = \dfrac{\tau}{2}$, and in this interval it is constant 1.
 $$
 F(\omega) = \int_{-\frac{\tau}{2}}^{\frac{\tau}{2}} e^{-j\omega t}\ dt
-$$</p>
-<p>$$
+$$</p><p>$$
 F(\omega) = -\dfrac{1}{j\omega} e^{-j\omega t} \bigg\rvert_{\frac{\tau}{2}}^{-\frac{\tau}{2}}
-$$</p>
-<p>$$
+$$</p><p>$$
 F(\omega) = -\dfrac{1}{j\omega} \left(e^{-j\omega \dfrac{\tau}{2}} - e^{j\omega t \dfrac{\tau}{2}}\right)
-$$</p>
-<p>Using Euler&rsquo;s formula:
+$$</p><p>Using Euler&rsquo;s formula:
 $$
 F(\omega) = \dfrac{2 sin\left(\dfrac{\omega \tau}{2}\right)}{\omega}
-$$</p>
-<p>Let&rsquo;s rewrite it as:
+$$</p><p>Let&rsquo;s rewrite it as:
 $$
 F(\omega) = \tau \dfrac{sin\left(\dfrac{\omega \tau}{2}\right)}{\dfrac{\omega \tau}{2}}
-$$</p>
-<p>We can rewrite using $sinc(x) = \dfrac{sin(\pi x)}{\pi x}$:
+$$</p><p>We can rewrite using $sinc(x) = \dfrac{sin(\pi x)}{\pi x}$:
 $$
 F(\omega) = \tau sinc\left(\dfrac{\omega \tau}{2}\right)
-$$</p>
-<p>So, this means that:
+$$</p><p>So, this means that:
 $$
 rect\left(\dfrac{t}{\tau}\right) \iff \tau sinc\left(\dfrac{\omega \tau}{2}\right)
-$$</p>
-<p>Now, we can do this manually each time, but that&rsquo;s tedious, that&rsquo;s why we&rsquo;ll usually use a Fourier table.</p>
-<p>Let&rsquo;s cover some important Fourier transforms.</p>
-<h3 id="important-fourier-transforms">Important Fourier transforms</h3>
-<p>$$
+$$</p><p>Now, we can do this manually each time, but that&rsquo;s tedious, that&rsquo;s why we&rsquo;ll usually use a Fourier table.</p><p>Let&rsquo;s cover some important Fourier transforms.</p><h3 id=important-fourier-transforms>Important Fourier transforms</h3><p>$$
 cos(\omega_0 t) \iff \pi [\delta(\omega + \omega_0) + \delta(\omega - \omega_0)]
-$$</p>
-<p>$$
+$$</p><p>$$
 sin(\omega_0 t) \iff j\pi [\delta(\omega + \omega_0) + \delta(\omega - \omega_0)]
-$$</p>
-<p>We&rsquo;ll use these often.</p>
-<h3 id="fourier-transform-properties">Fourier transform properties</h3>
-<h4 id="symmetry">Symmetry</h4>
-<p>After we have obtained one representation of the signal, it doesn&rsquo;t stop us from just replacing $t$ or $\omega$ with the other.</p>
-<p>For example:
+$$</p><p>We&rsquo;ll use these often.</p><h3 id=fourier-transform-properties>Fourier transform properties</h3><h4 id=symmetry>Symmetry</h4><p>After we have obtained one representation of the signal, it doesn&rsquo;t stop us from just replacing $t$ or $\omega$ with the other.</p><p>For example:
 $$
 rect\left(\dfrac{t}{\tau}\right) \iff \tau sinc\left(\dfrac{\omega \tau}{2}\right)
-$$</p>
-<p>We can do:
+$$</p><p>We can do:
 $$
 F(t) = \tau sinc\left(\dfrac{t \tau}{2}\right)
-$$</p>
-<p>We can utilize:
+$$</p><p>We can utilize:
 $$
 F(t) \iff 2\pi f(-\omega)
-$$</p>
-<p>Now this means:
+$$</p><p>Now this means:
 $$
 F(t) \iff 2\pi f(-\omega) = 2\pi \ rect\left(\dfrac{-\omega}{\tau}\right)
-$$</p>
-<p>Since the unit gate function is an even function:
+$$</p><p>Since the unit gate function is an even function:
 $$
 F(t) \iff 2\pi f(-\omega) = 2\pi \ rect\left(\dfrac{\omega}{\tau}\right)
-$$</p>
-<h4 id="scaling">Scaling</h4>
-<p>$$
+$$</p><h4 id=scaling>Scaling</h4><p>$$
 f(at) \iff \dfrac{1}{|a|} F\left(\dfrac{\omega}{a}\right)
-$$</p>
-<p>As we can see, an expansion in the time domain, means a compression in the frequency domain and vice-versa.</p>
-<p>From this we can also gain the time and frequency inversion property:
+$$</p><p>As we can see, an expansion in the time domain, means a compression in the frequency domain and vice-versa.</p><p>From this we can also gain the time and frequency inversion property:
 $$
 f(-t) \iff F(-\omega)
-$$</p>
-<h4 id="time-and-frequency-shifting">Time and frequency shifting</h4>
-<p>$$
+$$</p><h4 id=time-and-frequency-shifting>Time and frequency shifting</h4><p>$$
 f(t - t_0) \iff F(\omega) e^{-j\omega t_0}
-$$</p>
-<p>This also means:
+$$</p><p>This also means:
 $$
 f(t) e^{j\omega_0 t} \iff F(\omega - \omega_0)
-$$</p>
-<h4 id="time-differentiation-and-integration">Time differentiation and integration</h4>
-<p>$$
+$$</p><h4 id=time-differentiation-and-integration>Time differentiation and integration</h4><p>$$
 \dfrac{df}{dt} \iff j\omega F(\omega)
-$$</p>
-<p>$$
+$$</p><p>$$
 \int_{-\infty}^{t} f(\tau)\ d\tau \iff \dfrac{F(\omega)}{j\omega} + \pi F(0)\delta(\omega)
-$$</p>
-<p>Now, for the most powerful and beautiful property, which we&rsquo;ll use.</p>
-<h4 id="convolution">Convolution</h4>
-<p>Given $f_1(t) \iff F_1(\omega)$ and $f_2(t) \iff F_2(\omega)$.</p>
-<p>Time convolution:
+$$</p><p>Now, for the most powerful and beautiful property, which we&rsquo;ll use.</p><h4 id=convolution>Convolution</h4><p>Given $f_1(t) \iff F_1(\omega)$ and $f_2(t) \iff F_2(\omega)$.</p><p>Time convolution:
 $$
 f_1(t) * f_2(t) \iff F_1(\omega) F_2(\omega)
-$$</p>
-<p>Frequency convolution
+$$</p><p>Frequency convolution
 $$
 f_1(t) f_2(t) \iff \dfrac{1}{2\pi} F_1(\omega) * F_2(\omega)
-$$</p>
-<h3 id="does-the-fourier-transform-always-exist">Does the Fourier transform always exist?</h3>
-<p>The Fourier transform exist, if:
+$$</p><h3 id=does-the-fourier-transform-always-exist>Does the Fourier transform always exist?</h3><p>The Fourier transform exist, if:
 $$
 \int_{-\infty}^{\infty} |f(t)|\ dt &lt; \infty
-$$</p>
-
-        </section>
-    </article>
-
-    <nav class="navigation">
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-
-        
-        
-
-        <div class="nav-item previous">
-            
-            
-            <a href="/school/ssy081/ssy081_5/" title="Previous: Part 5 - Fourier series">&larr; Previous</a>
-            
-            
-        </div>
-
-        <div class="nav-item next">
-            
-            
-            <a href="/school/ssy081/ssy081_7/" title="Next: Part 7 - Nyquist-Shannon sampling theorem">Next &rarr;</a>
-            
-            
-        </div>
-    </nav>
-</main>
-<footer id="site-footer">
-    <div class="social-links">
-        
-        <a href="https://github.com/rezaarezvan" title="">github</a>
-        
-        <a href="https://x.com/rzvan__/" title="">x</a>
-        
-    </div><p class="footer-msg">memento mori</p>
-</footer></div>
-</body>
-
-</html>
+$$</p></section></article><nav class=navigation><div class="nav-item previous"><a href=/school/ssy081/ssy081_5/ title="Previous: Part 5 - Fourier series">&larr; Previous</a></div><div class="nav-item next"><a href=/school/ssy081/ssy081_7/ title="Next: Part 7 - Nyquist-Shannon sampling theorem">Next &rarr;</a></div></nav></main><footer id=site-footer><div class=social-links><a href=https://github.com/rezaarezvan title class=social-link><span class=bracket>[</span>github<span class=bracket>]</span></a>
+<a href=https://x.com/rzvan__/ title class=social-link><span class=bracket>[</span>x<span class=bracket>]</span></a></div><div class=footer-marquee><div class=footer-marquee__content><span class=footer-marquee__item>memento mori • amor fati • sic parvis magna • per aspera ad astra</span>
+<span class=footer-marquee__item>memento mori • amor fati • sic parvis magna • per aspera ad astra</span></div></div></footer></div></body></html>

@@ -1,55 +1,17 @@
-<!DOCTYPE html>
-<html><head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"><title>rezvan | Part 10 - Design of controllers</title><link rel="icon" type="image/png" href="https://rezvan.xyz/images/icon.png" /><meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description"
-        content="Introduction In this part we&rsquo;ll see how we can design different type of controllers to make a system behave as wanted.
-PD-controller $$ G(s) = \dfrac{K}{s(1 &#43; sT)} $$
-$$ F(s) = K_p &#43; K_d s $$
-The loop transfer function is: $$ L(s) = F(s)G(s) = \dfrac{K(K_p &#43; K_d s)}{s(1 &#43; sT)} = \dfrac{\frac{K}{T} (K_p &#43; K_d s)}{s^2 &#43; \frac{1}{T} s} $$
-$$ G_{ry}(s) = \dfrac{L(s)}{1 &#43; L(s)} = \dfrac{\dfrac{\frac{K}{T} (K_p &#43; K_d s)}{s^2 &#43; \frac{1}{T} s}}{1 &#43; \dfrac{\frac{K}{T} (K_p &#43; K_d s)}{s^2 &#43; \frac{1}{T} s}} = \dfrac{\frac{K}{T}(K_p &#43; K_d s)}{s^2 &#43; \frac{1}{T} s &#43; \frac{K}{T}(K_p &#43; K_d s)} = \dfrac{K_p \frac{K}{T} &#43; K_d \frac{K}{T} s}{s^2 &#43; (1 &#43; K_d K) s &#43; K_p \frac{K}{T}} $$" />
-    <meta property="og:image" content="https://raw.githubusercontent.com/rezaarezvan/rezvan.xyz/main/images/icon.png" />
-    <meta property="og:url" content="https://rezvan.xyz/school/ere103/ere103_10/">
-  <meta property="og:site_name" content="rezvan">
-  <meta property="og:title" content="Part 10 - Design of controllers">
-  <meta property="og:description" content="Introduction In this part we’ll see how we can design different type of controllers to make a system behave as wanted.
-PD-controller $$ G(s) = \dfrac{K}{s(1 &#43; sT)} $$
-$$ F(s) = K_p &#43; K_d s $$
-The loop transfer function is: $$ L(s) = F(s)G(s) = \dfrac{K(K_p &#43; K_d s)}{s(1 &#43; sT)} = \dfrac{\frac{K}{T} (K_p &#43; K_d s)}{s^2 &#43; \frac{1}{T} s} $$
-$$ G_{ry}(s) = \dfrac{L(s)}{1 &#43; L(s)} = \dfrac{\dfrac{\frac{K}{T} (K_p &#43; K_d s)}{s^2 &#43; \frac{1}{T} s}}{1 &#43; \dfrac{\frac{K}{T} (K_p &#43; K_d s)}{s^2 &#43; \frac{1}{T} s}} = \dfrac{\frac{K}{T}(K_p &#43; K_d s)}{s^2 &#43; \frac{1}{T} s &#43; \frac{K}{T}(K_p &#43; K_d s)} = \dfrac{K_p \frac{K}{T} &#43; K_d \frac{K}{T} s}{s^2 &#43; (1 &#43; K_d K) s &#43; K_p \frac{K}{T}} $$">
-  <meta property="og:locale" content="en_us">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="school">
-    <meta property="article:published_time" content="2023-11-27T00:00:00+00:00">
-    <meta property="article:modified_time" content="2024-05-26T11:09:10+02:00">
-
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Part 10 - Design of controllers">
-  <meta name="twitter:description" content="Introduction In this part we’ll see how we can design different type of controllers to make a system behave as wanted.
-PD-controller $$ G(s) = \dfrac{K}{s(1 &#43; sT)} $$
-$$ F(s) = K_p &#43; K_d s $$
-The loop transfer function is: $$ L(s) = F(s)G(s) = \dfrac{K(K_p &#43; K_d s)}{s(1 &#43; sT)} = \dfrac{\frac{K}{T} (K_p &#43; K_d s)}{s^2 &#43; \frac{1}{T} s} $$
-$$ G_{ry}(s) = \dfrac{L(s)}{1 &#43; L(s)} = \dfrac{\dfrac{\frac{K}{T} (K_p &#43; K_d s)}{s^2 &#43; \frac{1}{T} s}}{1 &#43; \dfrac{\frac{K}{T} (K_p &#43; K_d s)}{s^2 &#43; \frac{1}{T} s}} = \dfrac{\frac{K}{T}(K_p &#43; K_d s)}{s^2 &#43; \frac{1}{T} s &#43; \frac{K}{T}(K_p &#43; K_d s)} = \dfrac{K_p \frac{K}{T} &#43; K_d \frac{K}{T} s}{s^2 &#43; (1 &#43; K_d K) s &#43; K_p \frac{K}{T}} $$">
-<script src="https://rezvan.xyz/js/feather.min.js"></script>
-    
-
-    
-    
-    <link rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/main.73f3431f38ac72fc2890b3747cc9c6d55d5756f3ba40e590c77627ae6c16e46b.css" />
-    <link id="lightSyntaxStyle" rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/light_syntax.65408cc3a5c02070b661c3e4e79306fc261cc63620f4adce9a30eafcba4ab79e.css" />
-    
-    <link id="darkModeStyle" rel="stylesheet" type="text/css" href="https://rezvan.xyz/css/dark.13c6bfb747b76fdd2dc198b1172afdd77e7ce604de43f343ce643378bafc58af.css"  disabled />
-    <link id="darkSyntaxStyle" rel="stylesheet" type="text/css" media="screen" href="https://rezvan.xyz/css/dark_syntax.2b10cc1a2156b30874a063b7439a993bc3b43d476c5e1d8598d769c929c7b381.css" />
-    
-
-    
-    
-    <script type="text/javascript"
-        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-        </script>
-
-    
-    <script type="text/x-mathjax-config">
+<!doctype html><html><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge"><title>rezvan | Part 10 - Design of controllers</title><link rel=icon type=image/png href=https://rezvan.xyz/images/icon.png><meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=description content="Introduction In this part we&rsquo;ll see how we can design different type of controllers to make a system behave as wanted.
+PD-controller $$ G(s) = \dfrac{K}{s(1 + sT)} $$
+$$ F(s) = K_p + K_d s $$
+The loop transfer function is: $$ L(s) = F(s)G(s) = \dfrac{K(K_p + K_d s)}{s(1 + sT)} = \dfrac{\frac{K}{T} (K_p + K_d s)}{s^2 + \frac{1}{T} s} $$
+$$ G_{ry}(s) = \dfrac{L(s)}{1 + L(s)} = \dfrac{\dfrac{\frac{K}{T} (K_p + K_d s)}{s^2 + \frac{1}{T} s}}{1 + \dfrac{\frac{K}{T} (K_p + K_d s)}{s^2 + \frac{1}{T} s}} = \dfrac{\frac{K}{T}(K_p + K_d s)}{s^2 + \frac{1}{T} s + \frac{K}{T}(K_p + K_d s)} = \dfrac{K_p \frac{K}{T} + K_d \frac{K}{T} s}{s^2 + (1 + K_d K) s + K_p \frac{K}{T}} $$"><meta property="og:image" content="https://raw.githubusercontent.com/rezaarezvan/rezvan.xyz/main/images/icon.png"><meta property="og:url" content="https://rezvan.xyz/school/ere103/ere103_10/"><meta property="og:site_name" content="rezvan"><meta property="og:title" content="Part 10 - Design of controllers"><meta property="og:description" content="Introduction In this part we’ll see how we can design different type of controllers to make a system behave as wanted.
+PD-controller $$ G(s) = \dfrac{K}{s(1 + sT)} $$
+$$ F(s) = K_p + K_d s $$
+The loop transfer function is: $$ L(s) = F(s)G(s) = \dfrac{K(K_p + K_d s)}{s(1 + sT)} = \dfrac{\frac{K}{T} (K_p + K_d s)}{s^2 + \frac{1}{T} s} $$
+$$ G_{ry}(s) = \dfrac{L(s)}{1 + L(s)} = \dfrac{\dfrac{\frac{K}{T} (K_p + K_d s)}{s^2 + \frac{1}{T} s}}{1 + \dfrac{\frac{K}{T} (K_p + K_d s)}{s^2 + \frac{1}{T} s}} = \dfrac{\frac{K}{T}(K_p + K_d s)}{s^2 + \frac{1}{T} s + \frac{K}{T}(K_p + K_d s)} = \dfrac{K_p \frac{K}{T} + K_d \frac{K}{T} s}{s^2 + (1 + K_d K) s + K_p \frac{K}{T}} $$"><meta property="og:locale" content="en_us"><meta property="og:type" content="article"><meta property="article:section" content="school"><meta property="article:published_time" content="2023-11-27T00:00:00+00:00"><meta property="article:modified_time" content="2024-05-26T11:09:10+02:00"><meta name=twitter:card content="summary"><meta name=twitter:title content="Part 10 - Design of controllers"><meta name=twitter:description content="Introduction In this part we’ll see how we can design different type of controllers to make a system behave as wanted.
+PD-controller $$ G(s) = \dfrac{K}{s(1 + sT)} $$
+$$ F(s) = K_p + K_d s $$
+The loop transfer function is: $$ L(s) = F(s)G(s) = \dfrac{K(K_p + K_d s)}{s(1 + sT)} = \dfrac{\frac{K}{T} (K_p + K_d s)}{s^2 + \frac{1}{T} s} $$
+$$ G_{ry}(s) = \dfrac{L(s)}{1 + L(s)} = \dfrac{\dfrac{\frac{K}{T} (K_p + K_d s)}{s^2 + \frac{1}{T} s}}{1 + \dfrac{\frac{K}{T} (K_p + K_d s)}{s^2 + \frac{1}{T} s}} = \dfrac{\frac{K}{T}(K_p + K_d s)}{s^2 + \frac{1}{T} s + \frac{K}{T}(K_p + K_d s)} = \dfrac{K_p \frac{K}{T} + K_d \frac{K}{T} s}{s^2 + (1 + K_d K) s + K_p \frac{K}{T}} $$"><link rel=stylesheet href=https://rezvan.xyz/css/combined.min.51ec65976b416262d827f98c76ca037bf7aeea27590e3c120eac32afbfbc40ee.css integrity="sha256-Uexll2tBYmLYJ/mMdsoDe/eu6idZDjwSDqwyr7+8QO4="><link id=lightSyntaxStyle rel=stylesheet href=https://rezvan.xyz/css/light_syntax.min.d9e0828a4ff7f2d7317942062fc751fa487b2ac2c47b934ad082abd7d3ca6690.css integrity="sha256-2eCCik/38tcxeUIGL8dR+kh7KsLEe5NK0IKr19PKZpA="><link id=darkModeStyle rel=stylesheet href=https://rezvan.xyz/css/dark.min.49ad20f2859f81550f852c48875ca9e72e4267459ed6fe82fc9b4f3cf7fdc4e8.css integrity="sha256-Sa0g8oWfgVUPhSxIh1yp5y5CZ0We1v6C/JtPPPf9xOg=" disabled><link id=darkSyntaxStyle rel=stylesheet href=https://rezvan.xyz/css/dark_syntax.min.1a878f3d8fb43359bd3b44bc70c4074f682f11066c6537bf6248b696cbe56586.css integrity="sha256-GoePPY+0M1m9O0S8cMQHT2gvEQZsZTe/Yki2lsvlZYY=" disabled><script type=text/javascript src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type=text/x-mathjax-config>
 		MathJax.Hub.Config({
 			tex2jax: {
 				inlineMath: [['$','$'], ['\\(','\\)']],
@@ -61,324 +23,132 @@ $$ G_{ry}(s) = \dfrac{L(s)}{1 &#43; L(s)} = \dfrac{\dfrac{\frac{K}{T} (K_p &#43;
 						 extensions: ["AMSmath.js", "AMSsymbols.js"] }
 			}
 		});
-		</script>
-    
-
-    
-    
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css">
-    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js"
-        onload="renderMathInElement(document.body);"></script>
-
-    
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            renderMathInElement(document.body, {
-                delimiters: [
-                    {left: "$$", right: "$$", display: true},
-                    {left: "$", right: "$", display: false}
-                ]
-            });
-        });
-    </script>
-    
-</head>
-<body>
-    <div class="content"><header>
-    <nav id="site-navbar">
-        <div class="menu-items">
-            
-            <a href="/">home</a>
-            
-            <a href="/principles">principles</a>
-            
-            <a href="/cv">cv</a>
-            
-            <a href="/posts">posts</a>
-            
-            <a href="/school">school</a>
-            
-        </div>
-        <div class="theme-toggle">
-            <span id="dark-mode-toggle" onclick="toggleTheme()"><i data-feather="moon"></i></span>
-            <script src="https://rezvan.xyz/js/themetoggle.js"></script>
-        </div>
-        
-    </nav>
-</header>
-
-<main>
-    <article>
-        <div class="title">
-            <h1>Part 10 - Design of controllers</h1>
-            <div class="meta">Posted on Nov 27, 2023
-            </div>
-            <div class="meta">
-                (Last updated: May 26, 2024)
-            </div>
-
-        </div>
-        
-        <section class="body">
-            <h3 id="introduction">Introduction</h3>
-<p>In this part we&rsquo;ll see how we can design different type of controllers to make a system behave as wanted.</p>
-<h3 id="pd-controller">PD-controller</h3>
-<p>$$
+		</script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css><script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js onload=renderMathInElement(document.body)></script><script>document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]})})</script></head><body><div class=content><header><nav id=site-navbar><div class=navbar-content><a href=https://rezvan.xyz/ class=logo>rezvan.xyz</a><div class=navbar-links><a href=/principles class=nav-link><span class=bracket>[</span>principles<span class=bracket>]</span></a>
+<a href=/cv class=nav-link><span class=bracket>[</span>cv<span class=bracket>]</span></a>
+<a href=/posts class=nav-link><span class=bracket>[</span>posts<span class=bracket>]</span></a>
+<a href=/school class=nav-link><span class=bracket>[</span>school<span class=bracket>]</span></a></div><div class=theme-toggle><span id=dark-mode-toggle onclick=toggleTheme() aria-label="Toggle theme">○
+</span><script src=https://rezvan.xyz/js/themetoggle.js></script></div></div></nav></header><main><article><div class=title><h1>Part 10 - Design of controllers</h1><div class=meta>Posted on Nov 27, 2023</div><div class=meta>(Last updated: May 26, 2024)</div></div><section class=body><h3 id=introduction>Introduction</h3><p>In this part we&rsquo;ll see how we can design different type of controllers to make a system behave as wanted.</p><h3 id=pd-controller>PD-controller</h3><p>$$
 G(s) = \dfrac{K}{s(1 + sT)}
-$$</p>
-<p>$$
+$$</p><p>$$
 F(s) = K_p + K_d s
-$$</p>
-<p>The loop transfer function is:
+$$</p><p>The loop transfer function is:
 $$
 L(s) = F(s)G(s) = \dfrac{K(K_p + K_d s)}{s(1 + sT)} = \dfrac{\frac{K}{T} (K_p + K_d s)}{s^2 + \frac{1}{T} s}
-$$</p>
-<p>$$
+$$</p><p>$$
 G_{ry}(s) = \dfrac{L(s)}{1 + L(s)} = \dfrac{\dfrac{\frac{K}{T} (K_p + K_d s)}{s^2 + \frac{1}{T} s}}{1 + \dfrac{\frac{K}{T} (K_p + K_d s)}{s^2 + \frac{1}{T} s}} = \dfrac{\frac{K}{T}(K_p + K_d s)}{s^2 + \frac{1}{T} s + \frac{K}{T}(K_p + K_d s)} = \dfrac{K_p \frac{K}{T} + K_d \frac{K}{T} s}{s^2 + (1 + K_d K) s + K_p \frac{K}{T}}
-$$</p>
-<p>Which we can view as a second-order system where:
+$$</p><p>Which we can view as a second-order system where:
 $$
 \omega_n = \sqrt{K_p \frac{K}{T}} \\
-$$</p>
-<p>$$
+$$</p><p>$$
 \zeta = \dfrac{1 + K_d K}{2 \omega_n} = \dfrac{1 + K_d K}{2\sqrt{K_p \frac{K}{T}}}
-$$</p>
-<p>If $K_d$ increases, $\zeta$ will also increase. This means that the phase margin will increase.</p>
-<p>If $K_d$ decreases, $\zeta$ will also decrease. This means that the phase margin will decrease.</p>
-<h3 id="example">Example</h3>
-<p>In this case we have a simple I-controller.</p>
-<p>$$
+$$</p><p>If $K_d$ increases, $\zeta$ will also increase. This means that the phase margin will increase.</p><p>If $K_d$ decreases, $\zeta$ will also decrease. This means that the phase margin will decrease.</p><h3 id=example>Example</h3><p>In this case we have a simple I-controller.</p><p>$$
 u(t) = K_i \int_0^t e(\tau)\ d\tau \iff F(s) = \dfrac{K_i}{s}
-$$</p>
-<p>Given that our process is:
+$$</p><p>Given that our process is:
 $$
 G(s) = \dfrac{b}{s + a}
-$$</p>
-<p>Our loop transfer function is:
+$$</p><p>Our loop transfer function is:
 $$
 L(s) = F(s)G(s) = \dfrac{K_i b}{s(s + a)}
-$$</p>
-<p>What should $K_i$ be if we want a phase margin of $45^\circ$, meaning $\phi_m = 45^\circ$.
+$$</p><p>What should $K_i$ be if we want a phase margin of $45^\circ$, meaning $\phi_m = 45^\circ$.
 $$
 L(j\omega) = \dfrac{K_i b}{j\omega(j\omega + a)}
-$$</p>
-<p>We defined the phase margin as:
+$$</p><p>We defined the phase margin as:
 $$
 \phi_m = arg(L(j\omega_c)) + 180^\circ
-$$</p>
-<p>$$
+$$</p><p>$$
 45^\circ = arg(L(j\omega_c)) + 180^\circ
-$$</p>
-<p>$$
+$$</p><p>$$
 arg(L(j\omega_c)) = -135^\circ
-$$</p>
-<p>$$
+$$</p><p>$$
 -90^\circ - arctan(\dfrac{\omega_c}{a}) = -135^\circ
-$$</p>
-<p>$$
+$$</p><p>$$
 arctan(\dfrac{\omega_c}{a}) = 45^\circ
-$$</p>
-<p>$$
+$$</p><p>$$
 \dfrac{\omega_c}{a} = 1
-$$</p>
-<p>$$
+$$</p><p>$$
 \omega_c = a
-$$</p>
-<p>Using the fact that $|L(j\omega_c)| = 1$:
+$$</p><p>Using the fact that $|L(j\omega_c)| = 1$:
 $$
 |L(j\omega_c)| = 1
-$$</p>
-<p>$$
+$$</p><p>$$
 \dfrac{K_i b}{\omega_c \sqrt{\omega_c^2 + a^2}} = 1
-$$</p>
-<p>$$
+$$</p><p>$$
 \dfrac{K_i b}{a \sqrt{a^2 + a^2}} = 1
-$$</p>
-<p>$$
+$$</p><p>$$
 \dfrac{K_i b}{a \sqrt{2a^2}} = 1
-$$</p>
-<p>$$
+$$</p><p>$$
 \dfrac{K_i b}{\sqrt{2}\ a^2} = 1
-$$</p>
-<p>$$
+$$</p><p>$$
 K_i b = \sqrt{2}\ a^2
-$$</p>
-<p>$$
+$$</p><p>$$
 K_i = \dfrac{\sqrt{2}\ a^2}{b}
-$$</p>
-<p>Let&rsquo;s put this into $L(s)$
+$$</p><p>Let&rsquo;s put this into $L(s)$
 $$
 L(s) = \dfrac{\sqrt{2}\ a^2}{s(s + a)}
-$$</p>
-<p>Let&rsquo;s now find $G_{ry}(s)$
+$$</p><p>Let&rsquo;s now find $G_{ry}(s)$
 $$
 G_{ry}(s) = \dfrac{L(s)}{1 + L(s)} = \ldots = \dfrac{\sqrt{2}\ a^2}{s(s + a) + \sqrt{2}\ a^2} = \dfrac{\sqrt{2}\ a^2}{s^2 + as + \sqrt{2}\ a^2}
-$$</p>
-<p>Second-order system!
+$$</p><p>Second-order system!
 $$
 \omega_n = \sqrt{\sqrt{2}\ a^2} = 2^{\frac{1}{4}}\ a \\
 \zeta = \dfrac{a}{2 \omega_n} = \dfrac{a}{2(2^{\frac{1}{4}}\ a)} = \dfrac{1}{2 \cdot 2^{\frac{1}{4}}} = 0.42
-$$</p>
-<h3 id="example-1">Example</h3>
-<p>Let&rsquo;s now do a PI-controller</p>
-<p>Given the system:
+$$</p><h3 id=example-1>Example</h3><p>Let&rsquo;s now do a PI-controller</p><p>Given the system:
 $$
 G(s) = \dfrac{1}{s(s + 8)^2}
-$$</p>
-<p>Design a PI-controller so that the phase margin is $50^\circ$, given that $\omega_c = 0.3 \omega_{\pi}$</p>
-<p><strong>NB</strong>: This notation, $\omega_c = C \cdot \omega_{\pi}$ means that $|G(j\omega_c)| = 1$ and $arg(G(j\omega_{\pi}) = -180^\circ$, not the loop transfer function. One can also denote it as $\omega_{cG}$</p>
-<p>A general PI-controller is written as:
+$$</p><p>Design a PI-controller so that the phase margin is $50^\circ$, given that $\omega_c = 0.3 \omega_{\pi}$</p><p><strong>NB</strong>: This notation, $\omega_c = C \cdot \omega_{\pi}$ means that $|G(j\omega_c)| = 1$ and $arg(G(j\omega_{\pi}) = -180^\circ$, not the loop transfer function. One can also denote it as $\omega_{cG}$</p><p>A general PI-controller is written as:
 $$
 F(s) = K_p + \dfrac{K_i}{s} = K_p(1 + \dfrac{1}{T_i s}) = K_p(\dfrac{1 + T_i s}{T_i s})
-$$</p>
-<p>We know that:
+$$</p><p>We know that:
 $$
 arg(G(j\omega_{\pi})) = -180^\circ
-$$</p>
-<p>$$
+$$</p><p>$$
 G(j\omega) = \dfrac{1}{j\omega(j\omega + 8)^2}
-$$</p>
-<p>Which means:
+$$</p><p>Which means:
 $$
 arg(G(j\omega)) = -90^\circ - 2 arctan(\dfrac{\omega}{8})
-$$</p>
-<p>$$
+$$</p><p>$$
 -90^\circ - 2 arctan(\dfrac{\omega_{\pi}}{8}) = -180^\circ
-$$</p>
-<p>$$
+$$</p><p>$$
 2 arctan(\dfrac{\omega_{\pi}}{8}) = 90^\circ
-$$</p>
-<p>$$
+$$</p><p>$$
 arctan(\dfrac{\omega_{\pi}}{8}) = 45^\circ
-$$</p>
-<p>$$
+$$</p><p>$$
 \dfrac{\omega_{\pi}}{8} = 1
-$$</p>
-<p>$$
+$$</p><p>$$
 \omega_{\pi} = 8
-$$</p>
-<p>From our initial condition:
+$$</p><p>From our initial condition:
 $$
 \omega_c = 0.3 \cdot \omega_{\pi} = 2.4
-$$</p>
-<p>A phase margin of $50^\circ$ means:
+$$</p><p>A phase margin of $50^\circ$ means:
 $$
 \phi_m = 50^\circ \iff arg(L(j\omega_c)) + 180^\circ = 50^\circ
-$$</p>
-<p>We actually don&rsquo;t need to calculate what the loop transfer function is here, we can use the fact that $L(s) = F(s)G(s)$, which means $arg(L(j\omega)) = arg(F(j\omega)) + arg(G(j\omega))$.</p>
-<p>$$
+$$</p><p>We actually don&rsquo;t need to calculate what the loop transfer function is here, we can use the fact that $L(s) = F(s)G(s)$, which means $arg(L(j\omega)) = arg(F(j\omega)) + arg(G(j\omega))$.</p><p>$$
 arg(G(j\omega)) = -90^\circ - 2 arctan(\dfrac{2.4}{8}) = -123.4^\circ
-$$</p>
-<p>$$
+$$</p><p>$$
 F(j\omega) = K_p(\dfrac{1 + T_i j\omega}{T_i j\omega})
-$$</p>
-<p>$$
+$$</p><p>$$
 arg(F(j\omega)) = arctan(T_i \omega) - 90^\circ
-$$</p>
-<p>$$
+$$</p><p>$$
 arg(L(j\omega_c)) + 180^\circ = 50^\circ
-$$</p>
-<p>$$
+$$</p><p>$$
 arctan(T_i \omega_c) - 90^\circ -123.4^\circ + 180^\circ = 50^\circ
-$$</p>
-<p>$$
+$$</p><p>$$
 arctan(T_i \omega_c) = 83.4^\circ
-$$</p>
-<p>$$
+$$</p><p>$$
 2.4 T_i = tan(83.4^\circ)
-$$</p>
-<p>$$
+$$</p><p>$$
 T_i = \dfrac{tan(83.4^\circ)}{2.4} = 3.6
-$$</p>
-<p>Now, let&rsquo;s use that $|L(j\omega_c)| = 1$
+$$</p><p>Now, let&rsquo;s use that $|L(j\omega_c)| = 1$
 $$
 |L(j\omega_c)| = 1
-$$</p>
-<p>$$
+$$</p><p>$$
 |F(j\omega)G(j\omega)| = 1
-$$</p>
-<p>$$
+$$</p><p>$$
 |F(j\omega)| |G(j\omega)| = 1
-$$</p>
-<p>$$
+$$</p><p>$$
 K_p \cdot \dfrac{\sqrt{1^2 + (\omega_c \cdot T_i)^2}}{\omega_c \cdot T_i} \cdot \dfrac{1}{\omega_c \sqrt{\omega_c^2 + 8^2}^2} = 1
-$$</p>
-<p>$$
+$$</p><p>$$
 K_p = \ldots \approx 166.31
-$$</p>
-
-        </section>
-    </article>
-
-    <nav class="navigation">
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-
-        
-        
-
-        <div class="nav-item previous">
-            
-            
-            <a href="/school/ere103/ere103_9/" title="Previous: Part 9 - General controller structure">&larr; Previous</a>
-            
-            
-        </div>
-
-        <div class="nav-item next">
-            
-            
-            <a href="/school/ere103/ere103_11/" title="Next: Part 11 - Design of controllers (2)">Next &rarr;</a>
-            
-            
-        </div>
-    </nav>
-</main>
-<footer id="site-footer">
-    <div class="social-links">
-        
-        <a href="https://github.com/rezaarezvan" title="">github</a>
-        
-        <a href="https://x.com/rzvan__/" title="">x</a>
-        
-    </div><p class="footer-msg">memento mori</p>
-</footer></div>
-</body>
-
-</html>
+$$</p></section></article><nav class=navigation><div class="nav-item previous"><a href=/school/ere103/ere103_9/ title="Previous: Part 9 - General controller structure">&larr; Previous</a></div><div class="nav-item next"><a href=/school/ere103/ere103_11/ title="Next: Part 11 - Design of controllers (2)">Next &rarr;</a></div></nav></main><footer id=site-footer><div class=social-links><a href=https://github.com/rezaarezvan title class=social-link><span class=bracket>[</span>github<span class=bracket>]</span></a>
+<a href=https://x.com/rzvan__/ title class=social-link><span class=bracket>[</span>x<span class=bracket>]</span></a></div><div class=footer-marquee><div class=footer-marquee__content><span class=footer-marquee__item>memento mori • amor fati • sic parvis magna • per aspera ad astra</span>
+<span class=footer-marquee__item>memento mori • amor fati • sic parvis magna • per aspera ad astra</span></div></div></footer></div></body></html>
