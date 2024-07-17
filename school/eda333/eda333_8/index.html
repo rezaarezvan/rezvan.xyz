@@ -1,32 +1,95 @@
-<!doctype html><html><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge"><title>rezvan | Part 8 - Parallel Processors</title><link rel=icon type=image/png href=https://rezvan.xyz/images/icon.png><meta name=viewport content="width=device-width,initial-scale=1">
-<meta name=description content="In this part we&rsquo;ll talk about parallel processors, multithreading and other different techniques that we can use to speed up our programs and computers.
-Multithreading We&rsquo;ve seen and learned about threads when we covered concurrent programming.
-The idea here is same, if we can utilize threads to parallelize our programs, we can achieve a higher efficiency rate on our clock cycles.
-But when and how do we decide choose what thread?"><meta property="og:image" content="https://raw.githubusercontent.com/rezaarezvan/rezvan.xyz/main/images/icon.png"><meta property="og:url" content="https://rezvan.xyz/school/eda333/eda333_8/"><meta property="og:site_name" content="rezvan"><meta property="og:title" content="Part 8 - Parallel Processors"><meta property="og:description" content="In this part we’ll talk about parallel processors, multithreading and other different techniques that we can use to speed up our programs and computers.
-Multithreading We’ve seen and learned about threads when we covered concurrent programming.
-The idea here is same, if we can utilize threads to parallelize our programs, we can achieve a higher efficiency rate on our clock cycles.
-But when and how do we decide choose what thread?"><meta property="og:locale" content="en_us"><meta property="og:type" content="article"><meta property="article:section" content="school"><meta property="article:published_time" content="2023-04-28T18:12:01+02:00"><meta property="article:modified_time" content="2024-05-26T11:09:10+02:00"><meta name=twitter:card content="summary"><meta name=twitter:title content="Part 8 - Parallel Processors"><meta name=twitter:description content="In this part we’ll talk about parallel processors, multithreading and other different techniques that we can use to speed up our programs and computers.
-Multithreading We’ve seen and learned about threads when we covered concurrent programming.
-The idea here is same, if we can utilize threads to parallelize our programs, we can achieve a higher efficiency rate on our clock cycles.
-But when and how do we decide choose what thread?"><link rel=stylesheet href=https://rezvan.xyz/css/combined.min.285bd67a05674fdcb27bb67f867c7ac6b2e0c0b5535c536ba4bb37cd80e377e9.css integrity="sha256-KFvWegVnT9yye7Z/hnx6xrLgwLVTXFNrpLs3zYDjd+k="><link id=lightSyntaxStyle rel=stylesheet href=https://rezvan.xyz/css/light_syntax.min.d9e0828a4ff7f2d7317942062fc751fa487b2ac2c47b934ad082abd7d3ca6690.css integrity="sha256-2eCCik/38tcxeUIGL8dR+kh7KsLEe5NK0IKr19PKZpA="><link id=darkModeStyle rel=stylesheet href=https://rezvan.xyz/css/dark.min.113ab1177b874ffa2011e31f94df77b25b4c0aee6c35e5db0e6c54ebe2071597.css integrity="sha256-ETqxF3uHT/ogEeMflN93sltMCu5sNeXbDmxU6+IHFZc=" disabled><link id=darkSyntaxStyle rel=stylesheet href=https://rezvan.xyz/css/dark_syntax.min.1a878f3d8fb43359bd3b44bc70c4074f682f11066c6537bf6248b696cbe56586.css integrity="sha256-GoePPY+0M1m9O0S8cMQHT2gvEQZsZTe/Yki2lsvlZYY=" disabled><script type=text/javascript src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type=text/x-mathjax-config>
-		MathJax.Hub.Config({
-			tex2jax: {
-				inlineMath: [['$','$'], ['\\(','\\)']],
-				displayMath: [['$$','$$'], ['\[','\]']],
-				processEscapes: true,
-				processEnvironments: true,
-				skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
-				TeX: { equationNumbers: { autoNumber: "AMS" },
-						 extensions: ["AMSmath.js", "AMSsymbols.js"] }
-			}
-		});
-		</script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css><script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js onload=renderMathInElement(document.body)></script><script>document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]})})</script></head><body><header><nav id=site-navbar><div class=navbar-content><a href=https://rezvan.xyz/ class=logo>rezvan.xyz</a><div class=navbar-links><a href=/principles class=nav-link><span class=bracket>[</span>principles<span class=bracket>]</span></a>
-<a href=/cv class=nav-link><span class=bracket>[</span>cv<span class=bracket>]</span></a>
-<a href=/posts class=nav-link><span class=bracket>[</span>posts<span class=bracket>]</span></a>
-<a href=/school class=nav-link><span class=bracket>[</span>school<span class=bracket>]</span></a></div><div class=theme-toggle><span id=dark-mode-toggle onclick=toggleTheme() aria-label="Toggle theme">○
-</span><script src=https://rezvan.xyz/js/themetoggle.js></script></div></div></nav></header><div class=content><main><article><div class=title><h1>Part 8 - Parallel Processors</h1><div class=meta>Posted on Apr 28, 2023</div><div class=meta>(Last updated: May 26, 2024)</div></div><section class=body><p>In this part we&rsquo;ll talk about parallel processors, multithreading and other different techniques that we can use to speed up our programs and computers.</p><h3 id=multithreading>Multithreading</h3><p>We&rsquo;ve seen and learned about threads when we covered concurrent programming.</p><p>The idea here is same, if we can utilize threads to parallelize our programs, we can achieve a higher efficiency rate on our clock cycles.</p><p>But when and how do we decide choose what thread? There are three different approaches:</p><ul><li><p>Interleaved</p><ul><li>Switch thread each clock cycle.</li></ul></li><li><p>Blocked</p><ul><li>Switch thread when experience long latency (usually a cache miss).</li></ul></li><li><p>Simultaneous:</p><ul><li>Threads share the architecture resources.</li></ul></li></ul><h4 id=interleaved-multithreading>Interleaved multithreading</h4><p>To achieve interleaved multithreading - we need to add a new stage into our pipeline. The <strong>T</strong>hread <strong>S</strong>elect stage.</p><p>This thread selection usually uses a round-robin to select thread. However, we also need to have a setup of all individual registers, but also program counters, for each thread.</p><p>Note, we have an inefficient use of CPU resources due to frequent context switching.</p><p><img src=/school/images/TI.png#center alt></p><h4 id=blocked-multithreading>Blocked multithreading</h4><p>To achieve blocked multithreading - our thread selection stages now relies on some kind of signal where we &ldquo;have waited for too long&rdquo;.</p><p>Usually this is due to a cache miss. One important fact is that, when a cache miss arises, we need to flush the entire pipeline.</p><p>Which means we&rsquo;ll lose some clock cycles in the end. Cache misses are in the 100-500s number of clock cycles, so losing a few clock cycles for that price is still really good.</p><p><img src=/school/images/BT.png#center alt></p><h3 id=simultaneous-multithreading>Simultaneous multithreading</h3><p>Is an interesting one. Instead of fetching just one instruction, we fetch multiple to our threads. To achieve this, we need to basically dupe all of our hardware.</p><p>But the efficiency on the CPU resources becomes immense.</p><p><img src=/school/images/SM.png#center alt></p><h3 id=amdahls-law>Amdahl&rsquo;s Law</h3><p>We&rsquo;ve discussed this law earlier, so I won&rsquo;t go into much detail - Amdahl&rsquo;s law describes to us that, the sequential part of a program is the bottleneck for potential speed up from parallelism.</p><p>Formula for speed up:
-$$
-Speed up = \dfrac{1}{x + \dfrac{(1 - x)}{N}}
-$$</p><p>Where, $x$, is the portion of the program which is sequential. $N$, is the number of threads.</p><h3 id=parallel-processorscomputers>Parallel processors/computers</h3><p>The main goal with parallel processors and computers is that we want to connect multiple processors/computers to achieve better performance, natural.</p><p><strong>C</strong>hip-<strong>M</strong>ulti-<strong>P</strong>rocessor, or CMP. They are parallel processors on a <em>singular</em> chip. They have so called on-chip communication.</p><p>But in today&rsquo;s computers we mostly see multicore processors. These are chips that consists of multiple processors (cores).</p><p>However, we can&rsquo;t just put as many cores and increase the frequency of these chips to whatever. The power wall, memory wall and, ILP (Instruction Level Programming) wall are all a huge road block.</p><h3 id=flynns-classification-of-computers>Flynn&rsquo;s classification of computers</h3><p>You&rsquo;ve probably heard of SIMD, we&rsquo;ll cover all four types that exist!</p><p>Let&rsquo;s begin with the most simple one, <strong>SISD</strong>. Single Instruction, Single Data.</p><p>We fetch a single instruction and use a single data-flow to memory.</p><p><img src=/school/images/SISD.png#center alt></p><p>SIMD, or, Single Instruction Multipe Data. This model is when we fetch a single instruction, but perform multiple instances of that instruction. This is a very powerful for performing vectorized operations.</p><p>Note, each processor has it own <strong>local</strong> memory and data.</p><p><img src=/school/images/SIMD.png#center alt></p><p>The next class is, MIMD, or Multiple Instruction Multiple Data. As the name suggests, it&rsquo;s basically parallelizing SIMD.</p><p><img src=/school/images/MIMD.png#center alt></p><p>We also have MISD, Multiple Instruction Single Data. This is a very niche class that is used basically only for machine learning areas (hardware accelerators).</p><h3 id=cache-coherence>Cache Coherence</h3><p>When we&rsquo;re dealing with multiple processors - we need to decide how we use our main memory.</p><p>Just as in concurrent programming, we have two paradigms, shared memory and message passing.</p><p>For our <strong>S</strong>hare <strong>M</strong>emory multi<strong>P</strong>rocessor, we need to use synchronization primitives, to avoid cache invalidation.</p><p>We can solve these problems using FSMs as well to set up a clear protocol.</p><p>For message passing, we do not share memory - but we send messages between processors to synchronize.</p></section></article><nav class=navigation><div class="nav-item previous"><a href=/school/eda333/eda333_7/ title="Previous: Part 7 - Floating-point arithmetic">&larr; Previous</a></div><div class="nav-item next"><a href=/school/eda333/eda333_summary/ title="Next: Part 9 - Summary">Next &rarr;</a></div></nav></main></div><footer id=site-footer><div class=social-links><a href=https://github.com/rezaarezvan title class=social-link><span class=bracket>[</span>github<span class=bracket>]</span></a>
-<a href=https://x.com/rzvan__/ title class=social-link><span class=bracket>[</span>x<span class=bracket>]</span></a></div><div class=footer-marquee><div class=footer-marquee__content><span class=footer-marquee__item>memento mori • amor fati • sic parvis magna • per aspera ad astra</span>
-<span class=footer-marquee__item>memento mori • amor fati • sic parvis magna • per aspera ad astra</span></div></div></footer></body></html>
+<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width"><meta name="generator" content="Astro v4.11.5"><link rel="icon" type="image" href="/favicon.ico"><title>Part 8 - Parallel Processors</title><!-- KaTeX support --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script><!-- inline KaTeX --><link rel="stylesheet" href="/_astro/index.BZ7em0Mc.css">
+<link rel="stylesheet" href="/_astro/_slug_.DPnDUiRI.css">
+<style>article[data-astro-cid-v5ro3oot]{max-width:80ch;margin:0 auto}
+</style><script type="module">document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]})});
+</script></head> <body class="font-sans antialiased"> <div class="container mx-auto flex min-h-screen"> <aside class="w-64 border-r border-[var(--border-color)] border-dashed pt-8"> <header class="flex flex-col h-full"> <div class="flex items-center mb-4"> <script>
+  function setTheme(mode) {
+    localStorage.setItem("theme-storage", mode);
+    document.documentElement.setAttribute('data-theme', mode);
+  }
+  function toggleTheme() {
+    const currentTheme = localStorage.getItem("theme-storage") || "light";
+    const newTheme = currentTheme === "light" ? "dark" : "light";
+    setTheme(newTheme);
+  }
+  const savedTheme = localStorage.getItem("theme-storage") || "light";
+  setTheme(savedTheme);
+  window.toggleTheme = toggleTheme;
+</script> <button id="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme" class="flex items-center justify-center w-6" data-astro-cid-x3pjskd3>○</button>  <a href="/" class="text-2xl font-semibold ml-3 h-10 pr-3">rezvan.xyz</a> </div> <nav class="flex flex-col space-y-2"> <a href="/principles" class="hover:text-orange-500 dark:hover:text-orange-400 transition-colors">
+[principles]
+</a><a href="/cv" class="hover:text-orange-500 dark:hover:text-orange-400 transition-colors">
+[cv]
+</a><a href="/posts" class="hover:text-orange-500 dark:hover:text-orange-400 transition-colors">
+[posts]
+</a><a href="/school" class="hover:text-orange-500 dark:hover:text-orange-400 transition-colors">
+[school]
+</a> </nav> </header> </aside> <main class="flex-grow px-8 py-8 overflow-y-auto">  <article class="prose prose-sm sm:prose lg:prose-lg xl:prose-xl max-w-none" data-astro-cid-v5ro3oot> <h1 class="text-4xl font-bold mb-4" data-astro-cid-v5ro3oot>Part 8 - Parallel Processors</h1> <p class="text-sm text-muted-foreground mb-4" data-astro-cid-v5ro3oot>
+Date: 4/28/2023 </p>  <p>In this part we’ll talk about parallel processors, multithreading and other different techniques that we can use to speed up our programs and computers.</p>
+<h3 id="multithreading">Multithreading</h3>
+<p>We’ve seen and learned about threads when we covered concurrent programming.</p>
+<p>The idea here is same, if we can utilize threads to parallelize our programs, we can achieve a higher efficiency rate on our clock cycles.</p>
+<p>But when and how do we decide choose what thread? There are three different approaches:</p>
+<ul>
+<li>
+<p>Interleaved</p>
+<ul>
+<li>Switch thread each clock cycle.</li>
+</ul>
+</li>
+<li>
+<p>Blocked</p>
+<ul>
+<li>Switch thread when experience long latency (usually a cache miss).</li>
+</ul>
+</li>
+<li>
+<p>Simultaneous:</p>
+<ul>
+<li>Threads share the architecture resources.</li>
+</ul>
+</li>
+</ul>
+<h4 id="interleaved-multithreading">Interleaved multithreading</h4>
+<p>To achieve interleaved multithreading - we need to add a new stage into our pipeline. The <strong>T</strong>hread <strong>S</strong>elect stage.</p>
+<p>This thread selection usually uses a round-robin to select thread. However, we also need to have a setup of all individual registers, but also program counters, for each thread.</p>
+<p>Note, we have an inefficient use of CPU resources due to frequent context switching.</p>
+<p><img src="/images/school/TI.png#center" alt=""></p>
+<h4 id="blocked-multithreading">Blocked multithreading</h4>
+<p>To achieve blocked multithreading - our thread selection stages now relies on some kind of signal where we “have waited for too long”.</p>
+<p>Usually this is due to a cache miss. One important fact is that, when a cache miss arises, we need to flush the entire pipeline.</p>
+<p>Which means we’ll lose some clock cycles in the end. Cache misses are in the 100-500s number of clock cycles, so losing a few clock cycles for that price is still really good.</p>
+<p><img src="/images/school/BT.png#center" alt=""></p>
+<h3 id="simultaneous-multithreading">Simultaneous multithreading</h3>
+<p>Is an interesting one. Instead of fetching just one instruction, we fetch multiple to our threads. To achieve this, we need to basically dupe all of our hardware.</p>
+<p>But the efficiency on the CPU resources becomes immense.</p>
+<p><img src="/images/school/SM.png#center" alt=""></p>
+<h3 id="amdahls-law">Amdahl’s Law</h3>
+<p>We’ve discussed this law earlier, so I won’t go into much detail - Amdahl’s law describes to us that, the sequential part of a program is the bottleneck for potential speed up from parallelism.</p>
+<p>Formula for speed up:</p>
+<span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>S</mi><mi>p</mi><mi>e</mi><mi>e</mi><mi>d</mi><mi>u</mi><mi>p</mi><mo>=</mo><mfrac><mn>1</mn><mrow><mi>x</mi><mo>+</mo><mfrac><mrow><mo stretchy="false">(</mo><mn>1</mn><mo>−</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><mi>N</mi></mfrac></mrow></mfrac></mrow><annotation encoding="application/x-tex">Speed up = \dfrac{1}{x + \dfrac{(1 - x)}{N}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord mathnormal">Sp</span><span class="mord mathnormal">ee</span><span class="mord mathnormal">d</span><span class="mord mathnormal">u</span><span class="mord mathnormal">p</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:3.3244em;vertical-align:-2.003em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3214em;"><span style="top:-2.11em;"><span class="pstrut" style="height:3.427em;"></span><span class="mord"><span class="mord mathnormal">x</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.427em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.10903em;">N</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mopen">(</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord mathnormal">x</span><span class="mclose">)</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span><span style="top:-3.657em;"><span class="pstrut" style="height:3.427em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-4.104em;"><span class="pstrut" style="height:3.427em;"></span><span class="mord"><span class="mord">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:2.003em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span>
+<p>Where, <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">x</span></span></span></span>, is the portion of the program which is sequential. <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>N</mi></mrow><annotation encoding="application/x-tex">N</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.10903em;">N</span></span></span></span>, is the number of threads.</p>
+<h3 id="parallel-processorscomputers">Parallel processors/computers</h3>
+<p>The main goal with parallel processors and computers is that we want to connect multiple processors/computers to achieve better performance, natural.</p>
+<p><strong>C</strong>hip-<strong>M</strong>ulti-<strong>P</strong>rocessor, or CMP. They are parallel processors on a <em>singular</em> chip. They have so called on-chip communication.</p>
+<p>But in today’s computers we mostly see multicore processors. These are chips that consists of multiple processors (cores).</p>
+<p>However, we can’t just put as many cores and increase the frequency of these chips to whatever. The power wall, memory wall and, ILP (Instruction Level Programming) wall are all a huge road block.</p>
+<h3 id="flynns-classification-of-computers">Flynn’s classification of computers</h3>
+<p>You’ve probably heard of SIMD, we’ll cover all four types that exist!</p>
+<p>Let’s begin with the most simple one, <strong>SISD</strong>. Single Instruction, Single Data.</p>
+<p>We fetch a single instruction and use a single data-flow to memory.</p>
+<p><img src="/images/school/SISD.png#center" alt=""></p>
+<p>SIMD, or, Single Instruction Multipe Data. This model is when we fetch a single instruction, but perform multiple instances of that instruction. This is a very powerful for performing vectorized operations.</p>
+<p>Note, each processor has it own <strong>local</strong> memory and data.</p>
+<p><img src="/images/school/SIMD.png#center" alt=""></p>
+<p>The next class is, MIMD, or Multiple Instruction Multiple Data. As the name suggests, it’s basically parallelizing SIMD.</p>
+<p><img src="/images/school/MIMD.png#center" alt=""></p>
+<p>We also have MISD, Multiple Instruction Single Data. This is a very niche class that is used basically only for machine learning areas (hardware accelerators).</p>
+<h3 id="cache-coherence">Cache Coherence</h3>
+<p>When we’re dealing with multiple processors - we need to decide how we use our main memory.</p>
+<p>Just as in concurrent programming, we have two paradigms, shared memory and message passing.</p>
+<p>For our <strong>S</strong>hare <strong>M</strong>emory multi<strong>P</strong>rocessor, we need to use synchronization primitives, to avoid cache invalidation.</p>
+<p>We can solve these problems using FSMs as well to set up a clear protocol.</p>
+<p>For message passing, we do not share memory - but we send messages between processors to synchronize.</p>  <nav class="flex justify-between mt-8 pt-4 border-t border-border" data-astro-cid-v5ro3oot> <a href="/school/eda333/eda333_7" class="text-primary hover:text-primary/80 transition-colors" data-astro-cid-v5ro3oot>
+← Previous: Part 7 - Floating-point arithmetic </a> <a href="/school/eda333/eda333_summary" class="text-primary hover:text-primary/80 transition-colors" data-astro-cid-v5ro3oot>
+Next: Part 9 - Summary →
+</a> </nav> </article>  </main> </div> </body></html> 

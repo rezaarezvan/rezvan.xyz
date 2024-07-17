@@ -1,395 +1,490 @@
-<!doctype html><html><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge"><title>rezvan | Part 8 - Synchronization problems (2)</title><link rel=icon type=image/png href=https://rezvan.xyz/images/icon.png><meta name=viewport content="width=device-width,initial-scale=1">
-<meta name=description content="In this part we&rsquo;ll cover the classical problems that occur when dealing with synchronization.
-But within this paradigm, we don&rsquo;t encounter the same problems as when using semaphores. Mutual exclusion is not an issue, since we never share any resource, the big problem today will be synchronization and coordination.
-We&rsquo;ll see that many problems have the solution of a server-client architecture.
-Barriers Let&rsquo;s quickly recap what our barriers should be able to do:"><meta property="og:image" content="https://raw.githubusercontent.com/rezaarezvan/rezvan.xyz/main/images/icon.png"><meta property="og:url" content="https://rezvan.xyz/school/tda384/tda384_8/"><meta property="og:site_name" content="rezvan"><meta property="og:title" content="Part 8 - Synchronization problems (2)"><meta property="og:description" content="In this part we’ll cover the classical problems that occur when dealing with synchronization.
-But within this paradigm, we don’t encounter the same problems as when using semaphores. Mutual exclusion is not an issue, since we never share any resource, the big problem today will be synchronization and coordination.
-We’ll see that many problems have the solution of a server-client architecture.
-Barriers Let’s quickly recap what our barriers should be able to do:"><meta property="og:locale" content="en_us"><meta property="og:type" content="article"><meta property="article:section" content="school"><meta property="article:published_time" content="2023-02-07T14:05:43+01:00"><meta property="article:modified_time" content="2024-05-26T11:09:10+02:00"><meta name=twitter:card content="summary"><meta name=twitter:title content="Part 8 - Synchronization problems (2)"><meta name=twitter:description content="In this part we’ll cover the classical problems that occur when dealing with synchronization.
-But within this paradigm, we don’t encounter the same problems as when using semaphores. Mutual exclusion is not an issue, since we never share any resource, the big problem today will be synchronization and coordination.
-We’ll see that many problems have the solution of a server-client architecture.
-Barriers Let’s quickly recap what our barriers should be able to do:"><link rel=stylesheet href=https://rezvan.xyz/css/combined.min.285bd67a05674fdcb27bb67f867c7ac6b2e0c0b5535c536ba4bb37cd80e377e9.css integrity="sha256-KFvWegVnT9yye7Z/hnx6xrLgwLVTXFNrpLs3zYDjd+k="><link id=lightSyntaxStyle rel=stylesheet href=https://rezvan.xyz/css/light_syntax.min.d9e0828a4ff7f2d7317942062fc751fa487b2ac2c47b934ad082abd7d3ca6690.css integrity="sha256-2eCCik/38tcxeUIGL8dR+kh7KsLEe5NK0IKr19PKZpA="><link id=darkModeStyle rel=stylesheet href=https://rezvan.xyz/css/dark.min.113ab1177b874ffa2011e31f94df77b25b4c0aee6c35e5db0e6c54ebe2071597.css integrity="sha256-ETqxF3uHT/ogEeMflN93sltMCu5sNeXbDmxU6+IHFZc=" disabled><link id=darkSyntaxStyle rel=stylesheet href=https://rezvan.xyz/css/dark_syntax.min.1a878f3d8fb43359bd3b44bc70c4074f682f11066c6537bf6248b696cbe56586.css integrity="sha256-GoePPY+0M1m9O0S8cMQHT2gvEQZsZTe/Yki2lsvlZYY=" disabled><script type=text/javascript src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type=text/x-mathjax-config>
-		MathJax.Hub.Config({
-			tex2jax: {
-				inlineMath: [['$','$'], ['\\(','\\)']],
-				displayMath: [['$$','$$'], ['\[','\]']],
-				processEscapes: true,
-				processEnvironments: true,
-				skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
-				TeX: { equationNumbers: { autoNumber: "AMS" },
-						 extensions: ["AMSmath.js", "AMSsymbols.js"] }
-			}
-		});
-		</script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css><script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js onload=renderMathInElement(document.body)></script><script>document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]})})</script></head><body><header><nav id=site-navbar><div class=navbar-content><a href=https://rezvan.xyz/ class=logo>rezvan.xyz</a><div class=navbar-links><a href=/principles class=nav-link><span class=bracket>[</span>principles<span class=bracket>]</span></a>
-<a href=/cv class=nav-link><span class=bracket>[</span>cv<span class=bracket>]</span></a>
-<a href=/posts class=nav-link><span class=bracket>[</span>posts<span class=bracket>]</span></a>
-<a href=/school class=nav-link><span class=bracket>[</span>school<span class=bracket>]</span></a></div><div class=theme-toggle><span id=dark-mode-toggle onclick=toggleTheme() aria-label="Toggle theme">○
-</span><script src=https://rezvan.xyz/js/themetoggle.js></script></div></div></nav></header><div class=content><main><article><div class=title><h1>Part 8 - Synchronization problems (2)</h1><div class=meta>Posted on Feb 7, 2023</div><div class=meta>(Last updated: May 26, 2024)</div></div><section class=body><p>In this part we&rsquo;ll cover the classical problems that occur when dealing with synchronization.</p><p>But within this paradigm, we don&rsquo;t encounter the same problems as when using semaphores.
+<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width"><meta name="generator" content="Astro v4.11.5"><link rel="icon" type="image" href="/favicon.ico"><title>Part 8 - Synchronization problems (2)</title><!-- KaTeX support --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script><!-- inline KaTeX --><link rel="stylesheet" href="/_astro/index.BZ7em0Mc.css">
+<link rel="stylesheet" href="/_astro/_slug_.DPnDUiRI.css">
+<style>article[data-astro-cid-v5ro3oot]{max-width:80ch;margin:0 auto}
+</style><script type="module">document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]})});
+</script></head> <body class="font-sans antialiased"> <div class="container mx-auto flex min-h-screen"> <aside class="w-64 border-r border-[var(--border-color)] border-dashed pt-8"> <header class="flex flex-col h-full"> <div class="flex items-center mb-4"> <script>
+  function setTheme(mode) {
+    localStorage.setItem("theme-storage", mode);
+    document.documentElement.setAttribute('data-theme', mode);
+  }
+  function toggleTheme() {
+    const currentTheme = localStorage.getItem("theme-storage") || "light";
+    const newTheme = currentTheme === "light" ? "dark" : "light";
+    setTheme(newTheme);
+  }
+  const savedTheme = localStorage.getItem("theme-storage") || "light";
+  setTheme(savedTheme);
+  window.toggleTheme = toggleTheme;
+</script> <button id="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme" class="flex items-center justify-center w-6" data-astro-cid-x3pjskd3>○</button>  <a href="/" class="text-2xl font-semibold ml-3 h-10 pr-3">rezvan.xyz</a> </div> <nav class="flex flex-col space-y-2"> <a href="/principles" class="hover:text-orange-500 dark:hover:text-orange-400 transition-colors">
+[principles]
+</a><a href="/cv" class="hover:text-orange-500 dark:hover:text-orange-400 transition-colors">
+[cv]
+</a><a href="/posts" class="hover:text-orange-500 dark:hover:text-orange-400 transition-colors">
+[posts]
+</a><a href="/school" class="hover:text-orange-500 dark:hover:text-orange-400 transition-colors">
+[school]
+</a> </nav> </header> </aside> <main class="flex-grow px-8 py-8 overflow-y-auto">  <article class="prose prose-sm sm:prose lg:prose-lg xl:prose-xl max-w-none" data-astro-cid-v5ro3oot> <h1 class="text-4xl font-bold mb-4" data-astro-cid-v5ro3oot>Part 8 - Synchronization problems (2)</h1> <p class="text-sm text-muted-foreground mb-4" data-astro-cid-v5ro3oot>
+Date: 2/7/2023 </p>  <p>In this part we’ll cover the classical problems that occur when dealing with synchronization.</p>
+<p>But within this paradigm, we don’t encounter the same problems as when using semaphores.
 Mutual exclusion is not an issue, since we never share any resource,
-the big problem today will be synchronization and coordination.</p><p>We&rsquo;ll see that many problems have the solution of a server-client architecture.</p><h3 id=barriers>Barriers</h3><p>Let&rsquo;s quickly recap what our barriers should be able to do:</p><pre tabindex=0><code>-module(barrier).
-
-% Initialize barrier for ‘Expected’ processes
-init(Expected) -&gt;
-    % TODO
-
-% Block at ‘Barrier’ until all processes have reached it
-wait(Barrier) -&gt;
-    % TODO
-</code></pre><p>Since we are talking about processes, it&rsquo;s natural to have a process for the barrier itself.
-This process keeps track of what <em>other</em> processes that has arrived at the barrier point.</p><p>When a new process arrives at the barrier, it sends a <code>arrived</code> message to the barrier process.
-When the list of all arrived processes is complete, the barrier process sends a <code>continue</code> message to everyone.</p><p>After notifying all other processes, the barrier processes itself, goes back to its initial state.</p><p>So we need to implement the barrier&rsquo;s event loop as a server function:</p><pre tabindex=0><code>barrier(Arrived, Expected, PidRefs)
-</code></pre><p>Let&rsquo;s implement this:</p><pre tabindex=0><code>% event loop of barrier for ‘Expected’ processes
-% Arrived: number of processes arrived so far
-% PidRefs: list of {Pid, Ref} of processes arrived so far
-
-% All processes arrived notify all waiting processes:
-barrier(Arrived, Expected, PidRefs) when Arrived =:= Expected -&gt;
-    [To ! {continue, Ref} || {To, Ref} &lt;- PidRefs],
-
-    % Reset barrier
-    barrier(0, Expected, []);
-
-% Still waiting for some processes
-barrier(Arrived, Expected, PidRefs) -&gt;
-    receive
-        {arrived, From, Ref} -&gt;
-            % one more arrived: add {From, Ref} to PidRefs list:
-            barrier(Arrived + 1, Expected, [{From, Ref}|PidRefs])
-end.
-</code></pre><p>Now for the <code>wait</code> function:</p><pre tabindex=0><code>% Block at ‘Barrier’ until all processes have reached it
-wait(Barrier) -&gt;
-    % Notify barrier of arrival
-    Ref = make _ ref(),
-
-    % Wait for signal to continue
-    Barrier ! {arrived, self(), Ref},
-
-    receive {continue, Ref} -&gt; through end.
-</code></pre><p>And finally, the <code>init</code> function, simple:</p><pre tabindex=0><code>% Initialize barrier for ‘Expected’ processes
-init(Expected) -&gt;
-    spawn(fun () -&gt; barrier(0, Expected, []) end).
-</code></pre><h3 id=resource-allocator>Resource allocator</h3><p>Let&rsquo;s recap the problem, an *<em>allocator</em> grants <em>users</em>, exclusive access to a number of resources.</p><p>Users asynchronously request and release resources back.
-The allocator ensures exclusive access to a single user, and keeps tracks of the number of available resources.</p><p>So our module would look like:</p><pre tabindex=0><code>-module(allocator).
-
-% Register allocator with list of Resources
-init(Resources) -&gt;
-    % TODO
-
-% Get N resources from allocator
-request(N) -&gt;
-    % TODO
-
-% Release Resources to allocator
-release(Resources) -&gt;
-    % TODO
-</code></pre><p>The user would perform something like:</p><pre tabindex=0><code>user() -&gt;
-    % How many resources are needed?
-    N = howMany(),
-
-    % Get resources from allocator
-    Resources = allocator:request(N),
-
-    % Do something with resources
-    use(Resources),
-
-    % Release resources
-    allocator:release(Resources),
-
-    user().
-</code></pre><p>Again, in the message-passing world, using a server-client architecture often solves the problem.</p><p>We dedicate a process to the allocator, which keeps track of list of resources.</p><p>When a process requests for some resources that are available, the allocator sends a <code>granted</code> message.
-Then accordingly removes those resources from the list.</p><p>When a process releases some resources, the allocator sends a <code>released</code>, and then adds the resources to the list.</p><p>If requests exceed the availability, the fall into our built-in mailbox.
-The allocator process will resolve this as soon as they pattern-match again (resources available again).</p><pre tabindex=0><code>allocator(Resources) -&gt;
-    % Count how many resources are available
-    Available = length(Resources),
-    receive
-
-        % Serve requests if enough resources are available
-        {request, From, Ref, N} when N =&lt; Available -&gt;
-
-            % Granted ++ Remaining =:= Resources
-            % Length(Granted) =:= N
-            {Granted, Remaining} = lists:split(N, Resources),
-
-            % Send resources to requesting process
-            From ! {granted, Ref, Granted},
-
-            % Continue with Remaining resources
-            allocator(Remaining);
-
-
-        % Serve releases
-        {releases, From, Ref, Released} -&gt;
-            % Notify releasing process
-            From ! {released, Ref},
-
-            % Continue with previous and released resources
-            allocator(Resources ++ Released)
-</code></pre><p>The request function:</p><pre tabindex=0><code>% Get N resources from allocator, gets blocked if not available
-request(N) -&gt;
-    Ref = make_ref(),
-    allocator ! {request, self(), Ref, N},
-    recieve {granted, Ref, Granted} -&gt; Granted end.
-
-% Release Resources to allocator
-release(Resources) -&gt;
-    Ref = make_ref(),
-    allocator ! {release, self(), Ref, Resources},
-    recieve {released, Ref} -&gt; released end.
-</code></pre><h3 id=producer-consumer>Producer-consumer</h3><p>Recap; Implement a <code>buffer</code> such that:</p><ul><li>Producers and consumers access the buffer atomically</li><li>Consumers block when the buffer is empty</li><li>Producers block when the buffer is full (bounded buffer variant)</li></ul><pre tabindex=0><code>-module(buffer).
-
-% Initialize buffer with size Bound
-init_buffer(Bound) -&gt;
-    % TODO
-
-% Put Item in Buffer; Block if full
-put(Buffer, Item) -&gt;
-    % TODO
-
-% Get Item from Buffer; Block if empty
-get(Buffer) -&gt;
-    % TODO
-</code></pre><p>The producer and buffer:</p><pre tabindex=0><code>producer(Buffer) -&gt;
-    Item = produce(),
-    buffer:put(Buffer, Item),
-    producer(Buffer).
-
-
-consumer(Buffer) -&gt;
-    Item = buffer:get(Buffer),
-    % Do something with Item
-
-    consume(Item),
-    consumer(Buffer).
-</code></pre><p>At this point you pretty much can see the pattern here that arises:</p><pre tabindex=0><code>buffer(Content, Count, Bound) -&gt;
-    receive
-
-    % Serve gets when buffer not empty
-    {get, From, Ref} when Count &gt; 0 -&gt;
-        % Match first item
-        [First | Rest] = Content,
-
-        % Send it out
-        From ! {item, Ref, First},
-
-        % Remove it from buffer
-        buffer(Rest, Count-1, Bound);
-
-    % Serve puts when buffer not full
-    {put, From, Ref, Item} when Count &lt; Bound -&gt;
-
-        % Send ack
-        From ! {done, Ref},
-
-        % Add item to end
-        buffer(Content ++ [Item], Count + 1, Bound)
-end.
-</code></pre><p>In this solution, both a bounded and unbounded will work - due to Erlang&rsquo;s order between numbers and atoms!</p><p>Now for get and put:</p><pre tabindex=0><code>% Get item from ‘Buffer’; block if empty
-get(Buffer) -&gt;
-    Ref = make_ref(),
-    Buffer ! {get, self(), Ref},
-    receive {item, Ref, Item} -&gt; Item end.
-
-% Put ‘Item’ in ‘Buffer’; block if full
-put(Buffer, Item) -&gt;
-    Ref = make_ref(),
-    Buffer ! {put, self(), Ref, Item},
-    receive {done, Ref} -&gt; done end.
-</code></pre><h3 id=readers-writers>Readers-writers</h3><pre tabindex=0><code>-module(board).
-
-% Register board with Name
-init(Name) -&gt;
-    % TODO
-
-% Get read access to Board
-begin_read(Board) -&gt;
-    % TODO
-
-% Release read access to Board
-end_read(Board) -&gt;
-    % TODO
-
-% Get write access to Board
-begin_write(Board) -&gt;
-    % TODO
-
-% Release write access to Board
-end_write(Board) -&gt;
-    % TODO
-</code></pre><p>Our first naive server function would be:</p><pre tabindex=0><code>% ‘Readers’ active readers and ‘Writers’ active writers
-board_row(Readers, Writers) -&gt;
-receive
-    {begin_read, From, Ref} when Writers =:= 0 -&gt;
-        From ! {ok_ to_ read, Ref},
-        board_row(Readers+1, Writers);
-
-    {begin_write, From, Ref} when (Writers =:= 0) and (Readers =:= 0) -&gt;
-        From ! {ok_ to_ write, Ref},
-        board_row(Readers, Writers+1);
-
-    {end_read, From, Ref} -&gt; From ! {ok, Ref},
-        board_row(Readers-1, Writers);
-
-    {end_write, From, Ref} -&gt; From ! {ok, Ref},
-        board_row(Readers, Writers-1)
-end.
-</code></pre><p>Just as our naive solution when using semaphores,
-this doesn&rsquo;t prevent starvation due to this version prioritizes readers.</p><p>The solution based on two monitors is a approach here, but it&rsquo;s quite cumbersome for a message-passing program.</p><p>We instead implement two <strong>macro states</strong>:</p><ul><li>Empty - no readers or writers</li><li>Readers - Readers but no writers</li></ul><p>The initial board is in empty state, then:</p><ul><li>When board is in state <code>emtpy</code>:<ul><li>Read requests - served immediately, then switches to <code>readers</code> state.</li><li>Write requests - served immediately and <strong>synchronously</strong>, wait until writing ends, then go into <code>empty</code> state.</li></ul></li></ul><ul><li>When board is in state <code>readers</code>:<ul><li>Read requests - served immediately and stays in <code>readers</code>.</li><li>Write requests - served <em>as soon as possible</em>, board waits until all reading ends, <em>then</em> request is served. Back to <code>empty</code> state.</li></ul></li></ul><p>For this we&rsquo;ll need two server functions, <code>empty_board</code> and <code>readers_board</code>:</p><pre tabindex=0><code>% Board with no readers and no writers
-empty_board() -&gt;
-    receive
-
-    % Serve read request
-    {begin_read, From, Ref} -&gt;
-
-        % Notify reader
-        From ! {ok_to_read, Ref},
-
-        % Board has one reader
-        readers_board(1);
-
-    % Serve write request synchronously
-    {begin_write, From, Ref} -&gt;
-        % Notify writer
-        From ! {ok_to_write, Ref},
-
-        % Wait for writer to finish
-        Receive
-            {end_write, _From, _Ref} -&gt;
-                % Board is empty again
-                empty_board()
-        end
-end.
-
-% Board with no readers (and no writers)
-readers_ board(0) -&gt; empty_ board();
-
-% Board with ‘Readers’ active readers
-% (and no writers)
-readers_board(Readers) -&gt;
-    receive
-
-        % Serve write request
-        {begin_write, From, Ref} -&gt;
-            % Wait until all ‘Readers’ have finished
-            [receive {end_read, _From, _Ref} -&gt; end_read end || _ &lt;- lists:seq(1, Readers)],
-
-            % Notify writer
-            From ! {ok_to_write, Ref},
-
-            % Wait for writer to finish
-            receive
-                {end_write, _From, _Ref} -&gt; empty_board()
-            end;
-
-        % Serve read request
-        {begin_read, From, Ref} -&gt;
-            % Notify reader
-            From ! {ok _ to _ read, Ref},
-
-            % Board has one more reader
-            readers _ board(Readers+1);
-
-        % Serve end read
-        {end_read, From, Ref} -&gt;
-
-            % Board has one less reader
-            readers_board(Readers-1)
-end.
-</code></pre><h3 id=dining-philosophers>Dining Philosophers</h3><pre tabindex=0><code>-module(philosophers).
-
-% Set up table of N philosophers
-init(N) -&gt;
-    % TODO
-
-% Philosopher picks up Fork
-get_fork(Fork) -&gt;
-    % TODO
-
-% Philosopher releases Fork
-put_fork(Fork) -&gt;
-    % TODO
-</code></pre><p>We could explore the solutions we did based on locking and breaking symmetry -
-but there is a solution which better fits into the message-passing paradigm</p><p>We have a waiter (process) who supervises access to the table.
-So each philosopher asks for <em>permission</em> to sit at the table <strong>before</strong> picking up both forks.</p><p>So, as long as the waiter allows strictly fewer philosopher than the total number of forks to sit around the table, deadlock and starvation are avoided.</p><p>Waiter interface:</p><pre tabindex=0><code>% Ask Waiter to be seated; may wait
-sit(Waiter) -&gt;
-    % TODO
-
-% Ssk Waiter to leave
-leave(Waiter) -&gt;
-    % TODO
-</code></pre><p>Our server function:</p><pre tabindex=0><code>waiter(Eating, Seats) -&gt;
-    receive
-
-    % Serve as long as seats are available
-    {sit, From, Ref} when Eating &lt; Seats -&gt;
-        From ! {ok_to_sit, Ref},
-
-        % One more eating
-        waiter(Eating+1, Seats);
-
-    % Can leave at any time
-    {leave, From, Ref} -&gt;
-        From ! {ok_to_leave, Ref},
-
-        % One less eating
-        waiter(Eating-1, Seats)
-end.
-</code></pre><p>And <code>sit</code> and <code>leave</code>:</p><pre tabindex=0><code>% ask Waiter to be seated; may wait
-sit(Waiter) -&gt;
-    Ref = make _ ref(),
-    Waiter ! {sit, self(), Ref},
-    receive {ok_to_sit, Ref} -&gt; ok end.
-
-% ask Waiter to leave
-leave(Waiter) -&gt;
-    Ref = make _ ref(),
-    Waiter ! {leave, self(), Ref},
-    receive {ok_to_leave, Ref} -&gt; ok end.
-</code></pre><p>Now, each <code>fork</code> is also a process, which keeps track of whether the for is free or not.</p><p>Server function:</p><pre tabindex=0><code>% Fork not held by anyone
-fork() -&gt;
-    receive
-        {get, From, Ref} -&gt;
-            From ! {ack, Ref},
-
-            % Fork held
-            fork(From)
-end.
-
-% a fork held by Owner
-fork(Owner) -&gt;
-    receive
-        {put, Owner, _ Ref} -&gt;
-            % Fork not held
-            fork()
-end.
-</code></pre><p>and the <code>get</code> and <code>put</code> for the forks:</p><pre tabindex=0><code>% Pick up Fork; block until available
-get_fork(Fork) -&gt;
-    Ref = make _ ref(),
-    Fork ! {get, self(), Ref},
-    receive {ack, Ref} -&gt; ack end.
-
-% Put down Fork
-put_fork(Fork) -&gt;
-    Ref = make _ ref(),
-    Fork ! {put, self(), Ref}.
-</code></pre><p>And finally, the <code>init</code> function for the whole problem:</p><pre tabindex=0><code>% Set up table of ‘N’ philosophers
-init(N) -&gt;
-    % Spawn waiter process
-    Waiter = spawn(fun () -&gt; waiter(0, N-1) end),
-
-    % [1, 2, ..., N]
-    Ids = lists:seq(1,N),
-
-    % Spawn fork processes
-    Forks = [spawn(fun fork/0) || _ &lt;- Ids],
-
-    % Spawn philosopher processes
-    [spawn(fun () -&gt;
-        Left = lists:nth(I, Forks),
-
-        % 1-based indexes
-        Right = lists:nth(1+(I rem N), Forks),
-        philosopher(#forks{left=Left, right=Right}, Waiter)
-    end) || I &lt;- Ids].
-</code></pre></section></article><nav class=navigation><div class="nav-item previous"><a href=/school/tda384/tda384_6/ title="Previous: Part 6 & 7 - Message-Passing Concurrency">&larr; Previous</a></div><div class="nav-item next"><a href=/school/tda384/tda384_9/ title="Next: Part 9 - Parallelizing computations">Next &rarr;</a></div></nav></main></div><footer id=site-footer><div class=social-links><a href=https://github.com/rezaarezvan title class=social-link><span class=bracket>[</span>github<span class=bracket>]</span></a>
-<a href=https://x.com/rzvan__/ title class=social-link><span class=bracket>[</span>x<span class=bracket>]</span></a></div><div class=footer-marquee><div class=footer-marquee__content><span class=footer-marquee__item>memento mori • amor fati • sic parvis magna • per aspera ad astra</span>
-<span class=footer-marquee__item>memento mori • amor fati • sic parvis magna • per aspera ad astra</span></div></div></footer></body></html>
+the big problem today will be synchronization and coordination.</p>
+<p>We’ll see that many problems have the solution of a server-client architecture.</p>
+<h3 id="barriers">Barriers</h3>
+<p>Let’s quickly recap what our barriers should be able to do:</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>-module(barrier).</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>% Initialize barrier for ‘Expected’ processes</span></span>
+<span class="line"><span>init(Expected) -></span></span>
+<span class="line"><span>    % TODO</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>% Block at ‘Barrier’ until all processes have reached it</span></span>
+<span class="line"><span>wait(Barrier) -></span></span>
+<span class="line"><span>    % TODO</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>Since we are talking about processes, it’s natural to have a process for the barrier itself.
+This process keeps track of what <em>other</em> processes that has arrived at the barrier point.</p>
+<p>When a new process arrives at the barrier, it sends a <code>arrived</code> message to the barrier process.
+When the list of all arrived processes is complete, the barrier process sends a <code>continue</code> message to everyone.</p>
+<p>After notifying all other processes, the barrier processes itself, goes back to its initial state.</p>
+<p>So we need to implement the barrier’s event loop as a server function:</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>barrier(Arrived, Expected, PidRefs)</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>Let’s implement this:</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>% event loop of barrier for ‘Expected’ processes</span></span>
+<span class="line"><span>% Arrived: number of processes arrived so far</span></span>
+<span class="line"><span>% PidRefs: list of {Pid, Ref} of processes arrived so far</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>% All processes arrived notify all waiting processes:</span></span>
+<span class="line"><span>barrier(Arrived, Expected, PidRefs) when Arrived =:= Expected -></span></span>
+<span class="line"><span>    [To ! {continue, Ref} || {To, Ref} &#x3C;- PidRefs],</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    % Reset barrier</span></span>
+<span class="line"><span>    barrier(0, Expected, []);</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>% Still waiting for some processes</span></span>
+<span class="line"><span>barrier(Arrived, Expected, PidRefs) -></span></span>
+<span class="line"><span>    receive</span></span>
+<span class="line"><span>        {arrived, From, Ref} -></span></span>
+<span class="line"><span>            % one more arrived: add {From, Ref} to PidRefs list:</span></span>
+<span class="line"><span>            barrier(Arrived + 1, Expected, [{From, Ref}|PidRefs])</span></span>
+<span class="line"><span>end.</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>Now for the <code>wait</code> function:</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>% Block at ‘Barrier’ until all processes have reached it</span></span>
+<span class="line"><span>wait(Barrier) -></span></span>
+<span class="line"><span>    % Notify barrier of arrival</span></span>
+<span class="line"><span>    Ref = make _ ref(),</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    % Wait for signal to continue</span></span>
+<span class="line"><span>    Barrier ! {arrived, self(), Ref},</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    receive {continue, Ref} -> through end.</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>And finally, the <code>init</code> function, simple:</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>% Initialize barrier for ‘Expected’ processes</span></span>
+<span class="line"><span>init(Expected) -></span></span>
+<span class="line"><span>    spawn(fun () -> barrier(0, Expected, []) end).</span></span>
+<span class="line"><span></span></span></code></pre>
+<h3 id="resource-allocator">Resource allocator</h3>
+<p>Let’s recap the problem, an *<em>allocator</em> grants <em>users</em>, exclusive access to a number of resources.</p>
+<p>Users asynchronously request and release resources back.
+The allocator ensures exclusive access to a single user, and keeps tracks of the number of available resources.</p>
+<p>So our module would look like:</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>-module(allocator).</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>% Register allocator with list of Resources</span></span>
+<span class="line"><span>init(Resources) -></span></span>
+<span class="line"><span>    % TODO</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>% Get N resources from allocator</span></span>
+<span class="line"><span>request(N) -></span></span>
+<span class="line"><span>    % TODO</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>% Release Resources to allocator</span></span>
+<span class="line"><span>release(Resources) -></span></span>
+<span class="line"><span>    % TODO</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>The user would perform something like:</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>user() -></span></span>
+<span class="line"><span>    % How many resources are needed?</span></span>
+<span class="line"><span>    N = howMany(),</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    % Get resources from allocator</span></span>
+<span class="line"><span>    Resources = allocator:request(N),</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    % Do something with resources</span></span>
+<span class="line"><span>    use(Resources),</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    % Release resources</span></span>
+<span class="line"><span>    allocator:release(Resources),</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    user().</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>Again, in the message-passing world, using a server-client architecture often solves the problem.</p>
+<p>We dedicate a process to the allocator, which keeps track of list of resources.</p>
+<p>When a process requests for some resources that are available, the allocator sends a <code>granted</code> message.
+Then accordingly removes those resources from the list.</p>
+<p>When a process releases some resources, the allocator sends a <code>released</code>, and then adds the resources to the list.</p>
+<p>If requests exceed the availability, the fall into our built-in mailbox.
+The allocator process will resolve this as soon as they pattern-match again (resources available again).</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>allocator(Resources) -></span></span>
+<span class="line"><span>    % Count how many resources are available</span></span>
+<span class="line"><span>    Available = length(Resources),</span></span>
+<span class="line"><span>    receive</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        % Serve requests if enough resources are available</span></span>
+<span class="line"><span>        {request, From, Ref, N} when N =&#x3C; Available -></span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>            % Granted ++ Remaining =:= Resources</span></span>
+<span class="line"><span>            % Length(Granted) =:= N</span></span>
+<span class="line"><span>            {Granted, Remaining} = lists:split(N, Resources),</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>            % Send resources to requesting process</span></span>
+<span class="line"><span>            From ! {granted, Ref, Granted},</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>            % Continue with Remaining resources</span></span>
+<span class="line"><span>            allocator(Remaining);</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        % Serve releases</span></span>
+<span class="line"><span>        {releases, From, Ref, Released} -></span></span>
+<span class="line"><span>            % Notify releasing process</span></span>
+<span class="line"><span>            From ! {released, Ref},</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>            % Continue with previous and released resources</span></span>
+<span class="line"><span>            allocator(Resources ++ Released)</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>The request function:</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>% Get N resources from allocator, gets blocked if not available</span></span>
+<span class="line"><span>request(N) -></span></span>
+<span class="line"><span>    Ref = make_ref(),</span></span>
+<span class="line"><span>    allocator ! {request, self(), Ref, N},</span></span>
+<span class="line"><span>    recieve {granted, Ref, Granted} -> Granted end.</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>% Release Resources to allocator</span></span>
+<span class="line"><span>release(Resources) -></span></span>
+<span class="line"><span>    Ref = make_ref(),</span></span>
+<span class="line"><span>    allocator ! {release, self(), Ref, Resources},</span></span>
+<span class="line"><span>    recieve {released, Ref} -> released end.</span></span>
+<span class="line"><span></span></span></code></pre>
+<h3 id="producer-consumer">Producer-consumer</h3>
+<p>Recap; Implement a <code>buffer</code> such that:</p>
+<ul>
+<li>Producers and consumers access the buffer atomically</li>
+<li>Consumers block when the buffer is empty</li>
+<li>Producers block when the buffer is full (bounded buffer variant)</li>
+</ul>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>-module(buffer).</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>% Initialize buffer with size Bound</span></span>
+<span class="line"><span>init_buffer(Bound) -></span></span>
+<span class="line"><span>    % TODO</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>% Put Item in Buffer; Block if full</span></span>
+<span class="line"><span>put(Buffer, Item) -></span></span>
+<span class="line"><span>    % TODO</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>% Get Item from Buffer; Block if empty</span></span>
+<span class="line"><span>get(Buffer) -></span></span>
+<span class="line"><span>    % TODO</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>The producer and buffer:</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>producer(Buffer) -></span></span>
+<span class="line"><span>    Item = produce(),</span></span>
+<span class="line"><span>    buffer:put(Buffer, Item),</span></span>
+<span class="line"><span>    producer(Buffer).</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>consumer(Buffer) -></span></span>
+<span class="line"><span>    Item = buffer:get(Buffer),</span></span>
+<span class="line"><span>    % Do something with Item</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    consume(Item),</span></span>
+<span class="line"><span>    consumer(Buffer).</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>At this point you pretty much can see the pattern here that arises:</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>buffer(Content, Count, Bound) -></span></span>
+<span class="line"><span>    receive</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    % Serve gets when buffer not empty</span></span>
+<span class="line"><span>    {get, From, Ref} when Count > 0 -></span></span>
+<span class="line"><span>        % Match first item</span></span>
+<span class="line"><span>        [First | Rest] = Content,</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        % Send it out</span></span>
+<span class="line"><span>        From ! {item, Ref, First},</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        % Remove it from buffer</span></span>
+<span class="line"><span>        buffer(Rest, Count-1, Bound);</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    % Serve puts when buffer not full</span></span>
+<span class="line"><span>    {put, From, Ref, Item} when Count &#x3C; Bound -></span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        % Send ack</span></span>
+<span class="line"><span>        From ! {done, Ref},</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        % Add item to end</span></span>
+<span class="line"><span>        buffer(Content ++ [Item], Count + 1, Bound)</span></span>
+<span class="line"><span>end.</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>In this solution, both a bounded and unbounded will work - due to Erlang’s order between numbers and atoms!</p>
+<p>Now for get and put:</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>% Get item from ‘Buffer’; block if empty</span></span>
+<span class="line"><span>get(Buffer) -></span></span>
+<span class="line"><span>    Ref = make_ref(),</span></span>
+<span class="line"><span>    Buffer ! {get, self(), Ref},</span></span>
+<span class="line"><span>    receive {item, Ref, Item} -> Item end.</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>% Put ‘Item’ in ‘Buffer’; block if full</span></span>
+<span class="line"><span>put(Buffer, Item) -></span></span>
+<span class="line"><span>    Ref = make_ref(),</span></span>
+<span class="line"><span>    Buffer ! {put, self(), Ref, Item},</span></span>
+<span class="line"><span>    receive {done, Ref} -> done end.</span></span>
+<span class="line"><span></span></span></code></pre>
+<h3 id="readers-writers">Readers-writers</h3>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>-module(board).</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>% Register board with Name</span></span>
+<span class="line"><span>init(Name) -></span></span>
+<span class="line"><span>    % TODO</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>% Get read access to Board</span></span>
+<span class="line"><span>begin_read(Board) -></span></span>
+<span class="line"><span>    % TODO</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>% Release read access to Board</span></span>
+<span class="line"><span>end_read(Board) -></span></span>
+<span class="line"><span>    % TODO</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>% Get write access to Board</span></span>
+<span class="line"><span>begin_write(Board) -></span></span>
+<span class="line"><span>    % TODO</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>% Release write access to Board</span></span>
+<span class="line"><span>end_write(Board) -></span></span>
+<span class="line"><span>    % TODO</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>Our first naive server function would be:</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>% ‘Readers’ active readers and ‘Writers’ active writers</span></span>
+<span class="line"><span>board_row(Readers, Writers) -></span></span>
+<span class="line"><span>receive</span></span>
+<span class="line"><span>    {begin_read, From, Ref} when Writers =:= 0 -></span></span>
+<span class="line"><span>        From ! {ok_ to_ read, Ref},</span></span>
+<span class="line"><span>        board_row(Readers+1, Writers);</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    {begin_write, From, Ref} when (Writers =:= 0) and (Readers =:= 0) -></span></span>
+<span class="line"><span>        From ! {ok_ to_ write, Ref},</span></span>
+<span class="line"><span>        board_row(Readers, Writers+1);</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    {end_read, From, Ref} -> From ! {ok, Ref},</span></span>
+<span class="line"><span>        board_row(Readers-1, Writers);</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    {end_write, From, Ref} -> From ! {ok, Ref},</span></span>
+<span class="line"><span>        board_row(Readers, Writers-1)</span></span>
+<span class="line"><span>end.</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>Just as our naive solution when using semaphores,
+this doesn’t prevent starvation due to this version prioritizes readers.</p>
+<p>The solution based on two monitors is a approach here, but it’s quite cumbersome for a message-passing program.</p>
+<p>We instead implement two <strong>macro states</strong>:</p>
+<ul>
+<li>Empty - no readers or writers</li>
+<li>Readers - Readers but no writers</li>
+</ul>
+<p>The initial board is in empty state, then:</p>
+<ul>
+<li>When board is in state <code>emtpy</code>:
+<ul>
+<li>Read requests - served immediately, then switches to <code>readers</code> state.</li>
+<li>Write requests - served immediately and <strong>synchronously</strong>, wait until writing ends, then go into <code>empty</code> state.</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>When board is in state <code>readers</code>:
+<ul>
+<li>Read requests - served immediately and stays in <code>readers</code>.</li>
+<li>Write requests - served <em>as soon as possible</em>, board waits until all reading ends, <em>then</em> request is served. Back to <code>empty</code> state.</li>
+</ul>
+</li>
+</ul>
+<p>For this we’ll need two server functions, <code>empty_board</code> and <code>readers_board</code>:</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>% Board with no readers and no writers</span></span>
+<span class="line"><span>empty_board() -></span></span>
+<span class="line"><span>    receive</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    % Serve read request</span></span>
+<span class="line"><span>    {begin_read, From, Ref} -></span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        % Notify reader</span></span>
+<span class="line"><span>        From ! {ok_to_read, Ref},</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        % Board has one reader</span></span>
+<span class="line"><span>        readers_board(1);</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    % Serve write request synchronously</span></span>
+<span class="line"><span>    {begin_write, From, Ref} -></span></span>
+<span class="line"><span>        % Notify writer</span></span>
+<span class="line"><span>        From ! {ok_to_write, Ref},</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        % Wait for writer to finish</span></span>
+<span class="line"><span>        Receive</span></span>
+<span class="line"><span>            {end_write, _From, _Ref} -></span></span>
+<span class="line"><span>                % Board is empty again</span></span>
+<span class="line"><span>                empty_board()</span></span>
+<span class="line"><span>        end</span></span>
+<span class="line"><span>end.</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>% Board with no readers (and no writers)</span></span>
+<span class="line"><span>readers_ board(0) -> empty_ board();</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>% Board with ‘Readers’ active readers</span></span>
+<span class="line"><span>% (and no writers)</span></span>
+<span class="line"><span>readers_board(Readers) -></span></span>
+<span class="line"><span>    receive</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        % Serve write request</span></span>
+<span class="line"><span>        {begin_write, From, Ref} -></span></span>
+<span class="line"><span>            % Wait until all ‘Readers’ have finished</span></span>
+<span class="line"><span>            [receive {end_read, _From, _Ref} -> end_read end || _ &#x3C;- lists:seq(1, Readers)],</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>            % Notify writer</span></span>
+<span class="line"><span>            From ! {ok_to_write, Ref},</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>            % Wait for writer to finish</span></span>
+<span class="line"><span>            receive</span></span>
+<span class="line"><span>                {end_write, _From, _Ref} -> empty_board()</span></span>
+<span class="line"><span>            end;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        % Serve read request</span></span>
+<span class="line"><span>        {begin_read, From, Ref} -></span></span>
+<span class="line"><span>            % Notify reader</span></span>
+<span class="line"><span>            From ! {ok _ to _ read, Ref},</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>            % Board has one more reader</span></span>
+<span class="line"><span>            readers _ board(Readers+1);</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        % Serve end read</span></span>
+<span class="line"><span>        {end_read, From, Ref} -></span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>            % Board has one less reader</span></span>
+<span class="line"><span>            readers_board(Readers-1)</span></span>
+<span class="line"><span>end.</span></span>
+<span class="line"><span></span></span></code></pre>
+<h3 id="dining-philosophers">Dining Philosophers</h3>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>-module(philosophers).</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>% Set up table of N philosophers</span></span>
+<span class="line"><span>init(N) -></span></span>
+<span class="line"><span>    % TODO</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>% Philosopher picks up Fork</span></span>
+<span class="line"><span>get_fork(Fork) -></span></span>
+<span class="line"><span>    % TODO</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>% Philosopher releases Fork</span></span>
+<span class="line"><span>put_fork(Fork) -></span></span>
+<span class="line"><span>    % TODO</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>We could explore the solutions we did based on locking and breaking symmetry -
+but there is a solution which better fits into the message-passing paradigm</p>
+<p>We have a waiter (process) who supervises access to the table.
+So each philosopher asks for <em>permission</em> to sit at the table <strong>before</strong> picking up both forks.</p>
+<p>So, as long as the waiter allows strictly fewer philosopher than the total number of forks to sit around the table, deadlock and starvation are avoided.</p>
+<p>Waiter interface:</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>% Ask Waiter to be seated; may wait</span></span>
+<span class="line"><span>sit(Waiter) -></span></span>
+<span class="line"><span>    % TODO</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>% Ssk Waiter to leave</span></span>
+<span class="line"><span>leave(Waiter) -></span></span>
+<span class="line"><span>    % TODO</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>Our server function:</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>waiter(Eating, Seats) -></span></span>
+<span class="line"><span>    receive</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    % Serve as long as seats are available</span></span>
+<span class="line"><span>    {sit, From, Ref} when Eating &#x3C; Seats -></span></span>
+<span class="line"><span>        From ! {ok_to_sit, Ref},</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        % One more eating</span></span>
+<span class="line"><span>        waiter(Eating+1, Seats);</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    % Can leave at any time</span></span>
+<span class="line"><span>    {leave, From, Ref} -></span></span>
+<span class="line"><span>        From ! {ok_to_leave, Ref},</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        % One less eating</span></span>
+<span class="line"><span>        waiter(Eating-1, Seats)</span></span>
+<span class="line"><span>end.</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>And <code>sit</code> and <code>leave</code>:</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>% ask Waiter to be seated; may wait</span></span>
+<span class="line"><span>sit(Waiter) -></span></span>
+<span class="line"><span>    Ref = make _ ref(),</span></span>
+<span class="line"><span>    Waiter ! {sit, self(), Ref},</span></span>
+<span class="line"><span>    receive {ok_to_sit, Ref} -> ok end.</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>% ask Waiter to leave</span></span>
+<span class="line"><span>leave(Waiter) -></span></span>
+<span class="line"><span>    Ref = make _ ref(),</span></span>
+<span class="line"><span>    Waiter ! {leave, self(), Ref},</span></span>
+<span class="line"><span>    receive {ok_to_leave, Ref} -> ok end.</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>Now, each <code>fork</code> is also a process, which keeps track of whether the for is free or not.</p>
+<p>Server function:</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>% Fork not held by anyone</span></span>
+<span class="line"><span>fork() -></span></span>
+<span class="line"><span>    receive</span></span>
+<span class="line"><span>        {get, From, Ref} -></span></span>
+<span class="line"><span>            From ! {ack, Ref},</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>            % Fork held</span></span>
+<span class="line"><span>            fork(From)</span></span>
+<span class="line"><span>end.</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>% a fork held by Owner</span></span>
+<span class="line"><span>fork(Owner) -></span></span>
+<span class="line"><span>    receive</span></span>
+<span class="line"><span>        {put, Owner, _ Ref} -></span></span>
+<span class="line"><span>            % Fork not held</span></span>
+<span class="line"><span>            fork()</span></span>
+<span class="line"><span>end.</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>and the <code>get</code> and <code>put</code> for the forks:</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>% Pick up Fork; block until available</span></span>
+<span class="line"><span>get_fork(Fork) -></span></span>
+<span class="line"><span>    Ref = make _ ref(),</span></span>
+<span class="line"><span>    Fork ! {get, self(), Ref},</span></span>
+<span class="line"><span>    receive {ack, Ref} -> ack end.</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>% Put down Fork</span></span>
+<span class="line"><span>put_fork(Fork) -></span></span>
+<span class="line"><span>    Ref = make _ ref(),</span></span>
+<span class="line"><span>    Fork ! {put, self(), Ref}.</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>And finally, the <code>init</code> function for the whole problem:</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>% Set up table of ‘N’ philosophers</span></span>
+<span class="line"><span>init(N) -></span></span>
+<span class="line"><span>    % Spawn waiter process</span></span>
+<span class="line"><span>    Waiter = spawn(fun () -> waiter(0, N-1) end),</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    % [1, 2, ..., N]</span></span>
+<span class="line"><span>    Ids = lists:seq(1,N),</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    % Spawn fork processes</span></span>
+<span class="line"><span>    Forks = [spawn(fun fork/0) || _ &#x3C;- Ids],</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    % Spawn philosopher processes</span></span>
+<span class="line"><span>    [spawn(fun () -></span></span>
+<span class="line"><span>        Left = lists:nth(I, Forks),</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        % 1-based indexes</span></span>
+<span class="line"><span>        Right = lists:nth(1+(I rem N), Forks),</span></span>
+<span class="line"><span>        philosopher(#forks{left=Left, right=Right}, Waiter)</span></span>
+<span class="line"><span>    end) || I &#x3C;- Ids].</span></span>
+<span class="line"><span></span></span></code></pre>  <nav class="flex justify-between mt-8 pt-4 border-t border-border" data-astro-cid-v5ro3oot> <a href="/school/tda384/tda384_6" class="text-primary hover:text-primary/80 transition-colors" data-astro-cid-v5ro3oot>
+← Previous: Part 6 &amp; 7 - Message-Passing Concurrency </a> <a href="/school/tda384/tda384_9" class="text-primary hover:text-primary/80 transition-colors" data-astro-cid-v5ro3oot>
+Next: Part 9 - Parallelizing computations →
+</a> </nav> </article>  </main> </div> </body></html> 

@@ -1,166 +1,241 @@
-<!doctype html><html><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge"><title>rezvan | Part 8 - Graphs</title><link rel=icon type=image/png href=https://rezvan.xyz/images/icon.png><meta name=viewport content="width=device-width,initial-scale=1">
-<meta name=description content="In this part we&rsquo;ll so-called graphs and their applications.
-Introduction of Graphs A graph is a set of vertices connected pairwise by edges. So a very natural thing is that these edged can be either undirected or directed!
-A node can have a so-called degree describing how many in/outgoing edges it has. In the directed case we split this variable to &lsquo;out degree&rsquo; and &lsquo;in degree&rsquo;.
-Another basic term that we&rsquo;ll encounter is a cycle."><meta property="og:image" content="https://raw.githubusercontent.com/rezaarezvan/rezvan.xyz/main/images/icon.png"><meta property="og:url" content="https://rezvan.xyz/school/dat038/dat038_8/"><meta property="og:site_name" content="rezvan"><meta property="og:title" content="Part 8 - Graphs"><meta property="og:description" content="In this part we’ll so-called graphs and their applications.
-Introduction of Graphs A graph is a set of vertices connected pairwise by edges. So a very natural thing is that these edged can be either undirected or directed!
-A node can have a so-called degree describing how many in/outgoing edges it has. In the directed case we split this variable to ‘out degree’ and ‘in degree’.
-Another basic term that we’ll encounter is a cycle."><meta property="og:locale" content="en_us"><meta property="og:type" content="article"><meta property="article:section" content="school"><meta property="article:published_time" content="2022-12-06T13:08:43+01:00"><meta property="article:modified_time" content="2024-05-26T11:09:10+02:00"><meta name=twitter:card content="summary"><meta name=twitter:title content="Part 8 - Graphs"><meta name=twitter:description content="In this part we’ll so-called graphs and their applications.
-Introduction of Graphs A graph is a set of vertices connected pairwise by edges. So a very natural thing is that these edged can be either undirected or directed!
-A node can have a so-called degree describing how many in/outgoing edges it has. In the directed case we split this variable to ‘out degree’ and ‘in degree’.
-Another basic term that we’ll encounter is a cycle."><link rel=stylesheet href=https://rezvan.xyz/css/combined.min.285bd67a05674fdcb27bb67f867c7ac6b2e0c0b5535c536ba4bb37cd80e377e9.css integrity="sha256-KFvWegVnT9yye7Z/hnx6xrLgwLVTXFNrpLs3zYDjd+k="><link id=lightSyntaxStyle rel=stylesheet href=https://rezvan.xyz/css/light_syntax.min.d9e0828a4ff7f2d7317942062fc751fa487b2ac2c47b934ad082abd7d3ca6690.css integrity="sha256-2eCCik/38tcxeUIGL8dR+kh7KsLEe5NK0IKr19PKZpA="><link id=darkModeStyle rel=stylesheet href=https://rezvan.xyz/css/dark.min.113ab1177b874ffa2011e31f94df77b25b4c0aee6c35e5db0e6c54ebe2071597.css integrity="sha256-ETqxF3uHT/ogEeMflN93sltMCu5sNeXbDmxU6+IHFZc=" disabled><link id=darkSyntaxStyle rel=stylesheet href=https://rezvan.xyz/css/dark_syntax.min.1a878f3d8fb43359bd3b44bc70c4074f682f11066c6537bf6248b696cbe56586.css integrity="sha256-GoePPY+0M1m9O0S8cMQHT2gvEQZsZTe/Yki2lsvlZYY=" disabled><script type=text/javascript src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type=text/x-mathjax-config>
-		MathJax.Hub.Config({
-			tex2jax: {
-				inlineMath: [['$','$'], ['\\(','\\)']],
-				displayMath: [['$$','$$'], ['\[','\]']],
-				processEscapes: true,
-				processEnvironments: true,
-				skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
-				TeX: { equationNumbers: { autoNumber: "AMS" },
-						 extensions: ["AMSmath.js", "AMSsymbols.js"] }
-			}
-		});
-		</script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css><script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js onload=renderMathInElement(document.body)></script><script>document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]})})</script></head><body><header><nav id=site-navbar><div class=navbar-content><a href=https://rezvan.xyz/ class=logo>rezvan.xyz</a><div class=navbar-links><a href=/principles class=nav-link><span class=bracket>[</span>principles<span class=bracket>]</span></a>
-<a href=/cv class=nav-link><span class=bracket>[</span>cv<span class=bracket>]</span></a>
-<a href=/posts class=nav-link><span class=bracket>[</span>posts<span class=bracket>]</span></a>
-<a href=/school class=nav-link><span class=bracket>[</span>school<span class=bracket>]</span></a></div><div class=theme-toggle><span id=dark-mode-toggle onclick=toggleTheme() aria-label="Toggle theme">○
-</span><script src=https://rezvan.xyz/js/themetoggle.js></script></div></div></nav></header><div class=content><main><article><div class=title><h1>Part 8 - Graphs</h1><div class=meta>Posted on Dec 6, 2022</div><div class=meta>(Last updated: May 26, 2024)</div></div><section class=body><p>In this part we&rsquo;ll so-called graphs and their applications.</p><h3 id=introduction-of-graphs>Introduction of Graphs</h3><p>A graph is a <em>set</em> of <strong>vertices</strong> connected <em>pairwise</em> by <strong>edges</strong>.
-So a very natural thing is that these edged can be either undirected or directed!</p><p>A node can have a so-called <strong>degree</strong> describing how many in/outgoing edges it has.
-In the directed case we split this variable to &lsquo;out degree&rsquo; and &lsquo;in degree&rsquo;.</p><p>Another basic term that we&rsquo;ll encounter is a <strong>cycle</strong>.
-A cycle is just as it sounds, a <em>cycle</em>, meaning that you start in a certain node and after a <em>walk</em> you end up in the same node again.</p><p>Also, we can see the undirected graphs as directed graphs, but just having edges in both directions.
-We&rsquo;ll mainly look at the use cases for directed graphs.</p><h3 id=pseudo-code-for-graphs>Pseudo Code for Graphs</h3><p>There are a lot of different ADT/API&rsquo;s for graphs, we&rsquo;ll be using this:</p><pre tabindex=0><code>class Graph&lt;Vertices&gt;:
-    // Adds an edge to the graph
-    add_edge(e: Edge&lt;Vertices&gt;)
-
-    // Removes an edge from the graph
-    remove_edge(e: Edge&lt;Vertices&gt;)
-
-    // Returns true if the edge is present in the graph, otherwise false
-    contains_edge(e: Edge&lt;Vertices&gt;) -&gt; boolean
-
-    // Returns all the edges which are connected with the vertices
-    outgoing_edges(from: Vertices) -&gt; Collection&lt;Edge&lt;Vertices&gt;&gt;
-
-    // Returns the number of vertices present in the graph
-    n_vertices() -&gt; Int
-
-    // Returns the number of edges present in the graph
-    n_edges() -&gt; Int
-</code></pre><p>Now this depends on the <code>Edge</code> class which will be implemented as:</p><pre tabindex=0><code>class Edge&lt;Vertices&gt;:
-    from   : Vertices
-    to     : Vertices
-    weight : float = 1.0
-</code></pre><h3 id=graph-representation>Graph Representation</h3><p>We can represent a graph by doing:</p><ul><li>A set of edges</li><li>An adjacency list</li><li>An adjacency matrix</li></ul><h4 id=representation-set-of-edges>Representation: Set of edges</h4><p>We can use set data structure for this. If the graph is undirected we only need to keep one pair of the direction.
+<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width"><meta name="generator" content="Astro v4.11.5"><link rel="icon" type="image" href="/favicon.ico"><title>Part 8 - Graphs</title><!-- KaTeX support --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script><!-- inline KaTeX --><link rel="stylesheet" href="/_astro/index.BZ7em0Mc.css">
+<link rel="stylesheet" href="/_astro/_slug_.DPnDUiRI.css">
+<style>article[data-astro-cid-v5ro3oot]{max-width:80ch;margin:0 auto}
+</style><script type="module">document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]})});
+</script></head> <body class="font-sans antialiased"> <div class="container mx-auto flex min-h-screen"> <aside class="w-64 border-r border-[var(--border-color)] border-dashed pt-8"> <header class="flex flex-col h-full"> <div class="flex items-center mb-4"> <script>
+  function setTheme(mode) {
+    localStorage.setItem("theme-storage", mode);
+    document.documentElement.setAttribute('data-theme', mode);
+  }
+  function toggleTheme() {
+    const currentTheme = localStorage.getItem("theme-storage") || "light";
+    const newTheme = currentTheme === "light" ? "dark" : "light";
+    setTheme(newTheme);
+  }
+  const savedTheme = localStorage.getItem("theme-storage") || "light";
+  setTheme(savedTheme);
+  window.toggleTheme = toggleTheme;
+</script> <button id="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme" class="flex items-center justify-center w-6" data-astro-cid-x3pjskd3>○</button>  <a href="/" class="text-2xl font-semibold ml-3 h-10 pr-3">rezvan.xyz</a> </div> <nav class="flex flex-col space-y-2"> <a href="/principles" class="hover:text-orange-500 dark:hover:text-orange-400 transition-colors">
+[principles]
+</a><a href="/cv" class="hover:text-orange-500 dark:hover:text-orange-400 transition-colors">
+[cv]
+</a><a href="/posts" class="hover:text-orange-500 dark:hover:text-orange-400 transition-colors">
+[posts]
+</a><a href="/school" class="hover:text-orange-500 dark:hover:text-orange-400 transition-colors">
+[school]
+</a> </nav> </header> </aside> <main class="flex-grow px-8 py-8 overflow-y-auto">  <article class="prose prose-sm sm:prose lg:prose-lg xl:prose-xl max-w-none" data-astro-cid-v5ro3oot> <h1 class="text-4xl font-bold mb-4" data-astro-cid-v5ro3oot>Part 8 - Graphs</h1> <p class="text-sm text-muted-foreground mb-4" data-astro-cid-v5ro3oot>
+Date: 12/6/2022 </p>  <p>In this part we’ll so-called graphs and their applications.</p>
+<h3 id="introduction-of-graphs">Introduction of Graphs</h3>
+<p>A graph is a <em>set</em> of <strong>vertices</strong> connected <em>pairwise</em> by <strong>edges</strong>.
+So a very natural thing is that these edged can be either undirected or directed!</p>
+<p>A node can have a so-called <strong>degree</strong> describing how many in/outgoing edges it has.
+In the directed case we split this variable to ‘out degree’ and ‘in degree’.</p>
+<p>Another basic term that we’ll encounter is a <strong>cycle</strong>.
+A cycle is just as it sounds, a <em>cycle</em>, meaning that you start in a certain node and after a <em>walk</em> you end up in the same node again.</p>
+<p>Also, we can see the undirected graphs as directed graphs, but just having edges in both directions.
+We’ll mainly look at the use cases for directed graphs.</p>
+<h3 id="pseudo-code-for-graphs">Pseudo Code for Graphs</h3>
+<p>There are a lot of different ADT/API’s for graphs, we’ll be using this:</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>class Graph&#x3C;Vertices>:</span></span>
+<span class="line"><span>    // Adds an edge to the graph</span></span>
+<span class="line"><span>    add_edge(e: Edge&#x3C;Vertices>)</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    // Removes an edge from the graph</span></span>
+<span class="line"><span>    remove_edge(e: Edge&#x3C;Vertices>)</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    // Returns true if the edge is present in the graph, otherwise false</span></span>
+<span class="line"><span>    contains_edge(e: Edge&#x3C;Vertices>) -> boolean</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    // Returns all the edges which are connected with the vertices</span></span>
+<span class="line"><span>    outgoing_edges(from: Vertices) -> Collection&#x3C;Edge&#x3C;Vertices>></span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    // Returns the number of vertices present in the graph</span></span>
+<span class="line"><span>    n_vertices() -> Int</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    // Returns the number of edges present in the graph</span></span>
+<span class="line"><span>    n_edges() -> Int</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>Now this depends on the <code>Edge</code> class which will be implemented as:</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>class Edge&#x3C;Vertices>:</span></span>
+<span class="line"><span>    from   : Vertices</span></span>
+<span class="line"><span>    to     : Vertices</span></span>
+<span class="line"><span>    weight : float = 1.0</span></span>
+<span class="line"><span></span></span></code></pre>
+<h3 id="graph-representation">Graph Representation</h3>
+<p>We can represent a graph by doing:</p>
+<ul>
+<li>A set of edges</li>
+<li>An adjacency list</li>
+<li>An adjacency matrix</li>
+</ul>
+<h4 id="representation-set-of-edges">Representation: Set of edges</h4>
+<p>We can use set data structure for this. If the graph is undirected we only need to keep one pair of the direction.
 This is a quite good implementation for undirected graphs,
-since the complexity of finding all adjacent neighbors to a vertex v would be $\mathcal{O}(E)$,
-where E is the total number of edges in the graph.</p><p>It can look something like:</p><pre tabindex=0><code>0 1
-0 2
-0 5
-0 6
-3 4
-3 5
-4 5
-4 6
-7 8
-9 10
-9 11
-9 12
-11 12
-</code></pre><p>We can look at these as tuples, where $(v_1, v_2)$ means that $v_1$ has a connecting edge to $v_2$.
-This is directed, but as we said, if we have an undirected graph, then it is enough to store just one of them.</p><h4 id=representation-adjacency-list>Representation: Adjacency list</h4><p>We maintain a <em>map</em> from vertices to collections of edges, we could alternatively also do a collection of vertices.</p><p>If the graph is <strong>undirected</strong>, then we need to include <strong>both</strong> directions.</p><p>The complexity for iterating over all the vertices adjacent to a vertex is $\mathcal{O}(v_a)$,
-we can write this as $\mathcal{O}(degree(V))$.
-So it&rsquo;s good, note this is if the lookup for the key is $\mathcal{O}(1)$.</p><h4 id=representation-adjacency-matrix>Representation: Adjacency matrix</h4><p>We maintain a 2d $V \times V$ boolean array. Where true represent a connecting edge.</p><p>The complexity of this is quite bad, since we need to loop through one of the dimensions, the complexity becomes $\mathcal{O}(V)$.</p><h4 id=representation>Representation</h4><p>In most real-world cases we use adjacency lists</p><h3 id=implementation>Implementation</h3><p>So let&rsquo;s try to implement a directed graph using an adjacency list!</p><pre tabindex=0><code>class Graph&lt;V&gt;:
-    all_edges    : Map&lt;V, Collection&lt;Edge&lt;V&gt;&gt;&gt;
-    n_edges      : int
-    all_vertices : Set&lt;V&gt;
-
-    outgoing_edges(from: V) -&gt; Collection&lt;Edge&lt;V&gt;&gt;:
-        return all_edges.get(from)
-
-    contains_edge(e: Edge&lt;V&gt;) -&gt; boolean:
-        return e in outgoing_edges(edge.from)
-
-    add(e: Edge&lt;V&gt;):
-        outgoing = outgoing_edges(e.from)
-
-        if e not in outgoing:
-            outgoing.add(e)
-            n_edges += 1
-            all_vertices.add(e.from)
-            all_vertices.add(e.to)
-
-    remove(e: Edge&lt;V&gt;):
-        outgoing = outgoing_edges(e.from)
-        if edge in outgoing:
-            outgoing.remove(e)
-            n_edges -= 1
-</code></pre><h3 id=searching-in-graphs>Searching in Graphs</h3><p>In many real-world applications, graphs will represent some sort of maze, or other structure, where we want to find a path.
-Sometimes the path with the least resistance/weight/length. There are two primary search algorithms for graphs.</p><p>So called <strong>D</strong>epth-<strong>F</strong>irst <strong>S</strong>earch or DFS for short. The other called <strong>B</strong>readth-<strong>F</strong>irst <strong>S</strong>earch or BFS for short.</p><p>Let&rsquo;s begin with DFS.</p><h4 id=depth-first-search>Depth-first search</h4><p>Depth-first search is a way to traverse a graph systematically.</p><p>A short pseudocode of a DFS would be:</p><pre tabindex=0><code>DFS(to visit a vertex v):
-    mark v as visited
-    recursively visit all unmarked vertices w adjacent to v
-</code></pre><p>We&rsquo;ve encountered DFS for trees, the difference here as we can see is that we &lsquo;mark&rsquo; each vertex we visit.
-Because in a graph, there might be cycles, so we don&rsquo;t want to be stuck in them.</p><p>Applications of using a DFS are usually,
-finding all vertices connected to a source vertex, or simply, finding a path between two vertices.</p><h4 id=implementation-1>Implementation</h4><p>To implement this we need data structures! To store all marked vertices, we will use a Set.
-To keep track of the path we&rsquo;ve taken, we&rsquo;ll use a map which contains vertices tuples.</p><pre tabindex=0><code>recursiveDFS(v : V):
-    add v to visited
-    for edge in outgoing_edges(v):
-        w = endpoint of edge
-        if v not in visited:
-            recursiveDFS(w)
-            cameFrom[w] = v
-</code></pre><h3 id=breadth-first-search>Breadth-First Search</h3><p>For our DFS we used an underlying stack for our recursive calls, the function stack.</p><p>BFS uses a <em>queue</em> instead of stack, so we have to implement this ourselves.</p><p>So a breakdown of what we have to do:</p><pre tabindex=0><code>BFS(from a starting vertex s):
-    put s into FIFO queue, mark as visited
-    while queue not empty:
-        dequeue a vertex v
-        for each unmarked vertex w adjacent to v:
-            enqueue w, mark it as visited
-</code></pre><p>So really, the only difference for BFS in trees compared to graphs is that we have to keep track of the visited vertices.</p><h4 id=implementation-2>Implementation</h4><p>So a pseudocode implementation would look something like:</p><pre tabindex=0><code>iterativeBFS(start: V):
-    visited = new Set&lt;V&gt;
-    agenda = new Queue&lt;V&gt;
-    agenda.enqueue(start)
-
-    while agenda is not empty:
-        agenda.dequeue(v)
-        if v not in visited:
-            add v to visited
-            for edge in outgoing_edges(v):
-                w = endpoint of edge
-                if w not in visited:
-                    add w to agenda
-</code></pre><p>If we want to retrace our steps, we would need a <code>cameFrom</code> Map as in the DFS.</p><p>Also, one thing to note, if we replace the queue, with a stack, we&rsquo;ll just end up with a <code>iterativeDFS</code> instead!</p><h4 id=bfs-properties>BFS properties</h4><p>In a BFS search, what do we actually get/perform? We get a path yes -
-but it&rsquo;s always the <strong>shortest</strong> path from <code>s</code> to all other vertices!
-It actually does this in $\mathcal{O}(E + V)$</p><h4 id=implementation-calculating-the-distance>Implementation: Calculating the distance</h4><p>In this implementation we&rsquo;ll add a map that hold the distances between every vertex.
-(I also added that <code>cameFrom</code> map that I discussed earlier)</p><pre tabindex=0><code>iterativeBFS(start: V):
-    visited = new Set&lt;V&gt;
-    agenda = new Queue&lt;V&gt;
-    cameFrom = new Map&lt;V,V&gt;
-    distTo = new empty Map&lt;V, Int&gt;
-
-    agenda.enqueue(start)
-    distTo[start] = 0
-
-    while agenda is not empty:
-        agenda.dequeue(v)
-        if v not in visited:
-            add v to visited
-            for edge in outgoing_edges(v):
-                w = endpoint of edge
-                if w not in visited:
-                    add w to agenda
-                    cameFrom[w] = v
-                    distTo[w] = 1 + distTo[v]
-</code></pre><h3 id=example-problems>Example Problems</h3><p>So now that we&rsquo;ve seen DFS, BFS and understood graphs - let&rsquo;s see what we can do with them.</p><p>A very important kind of graph is a <strong>DAG</strong>, or a Directed <strong>acyclic</strong> graph. This means the graph doesn&rsquo;t contain any cycles.</p><p>This is especially useful for scheduling, for example. But we need to know if a graph contains a cycle - how can we detect a cycle?</p><p>That&rsquo;s a very common problem that many applications implement into their programs.
+since the complexity of finding all adjacent neighbors to a vertex v would be <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="script">O</mi><mo stretchy="false">(</mo><mi>E</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\mathcal{O}(E)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathcal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.05764em;">E</span><span class="mclose">)</span></span></span></span>,
+where E is the total number of edges in the graph.</p>
+<p>It can look something like:</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>0 1</span></span>
+<span class="line"><span>0 2</span></span>
+<span class="line"><span>0 5</span></span>
+<span class="line"><span>0 6</span></span>
+<span class="line"><span>3 4</span></span>
+<span class="line"><span>3 5</span></span>
+<span class="line"><span>4 5</span></span>
+<span class="line"><span>4 6</span></span>
+<span class="line"><span>7 8</span></span>
+<span class="line"><span>9 10</span></span>
+<span class="line"><span>9 11</span></span>
+<span class="line"><span>9 12</span></span>
+<span class="line"><span>11 12</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>We can look at these as tuples, where <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">(</mo><msub><mi>v</mi><mn>1</mn></msub><mo separator="true">,</mo><msub><mi>v</mi><mn>2</mn></msub><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(v_1, v_2)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">v</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0359em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">v</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0359em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span> means that <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>v</mi><mn>1</mn></msub></mrow><annotation encoding="application/x-tex">v_1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.5806em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">v</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0359em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> has a connecting edge to <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>v</mi><mn>2</mn></msub></mrow><annotation encoding="application/x-tex">v_2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.5806em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">v</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0359em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>.
+This is directed, but as we said, if we have an undirected graph, then it is enough to store just one of them.</p>
+<h4 id="representation-adjacency-list">Representation: Adjacency list</h4>
+<p>We maintain a <em>map</em> from vertices to collections of edges, we could alternatively also do a collection of vertices.</p>
+<p>If the graph is <strong>undirected</strong>, then we need to include <strong>both</strong> directions.</p>
+<p>The complexity for iterating over all the vertices adjacent to a vertex is <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="script">O</mi><mo stretchy="false">(</mo><msub><mi>v</mi><mi>a</mi></msub><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\mathcal{O}(v_a)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathcal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">v</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.0359em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">a</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span>,
+we can write this as <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="script">O</mi><mo stretchy="false">(</mo><mi>d</mi><mi>e</mi><mi>g</mi><mi>r</mi><mi>e</mi><mi>e</mi><mo stretchy="false">(</mo><mi>V</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\mathcal{O}(degree(V))</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathcal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathnormal">d</span><span class="mord mathnormal">e</span><span class="mord mathnormal" style="margin-right:0.03588em;">g</span><span class="mord mathnormal">ree</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.22222em;">V</span><span class="mclose">))</span></span></span></span>.
+So it’s good, note this is if the lookup for the key is <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="script">O</mi><mo stretchy="false">(</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\mathcal{O}(1)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathcal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord">1</span><span class="mclose">)</span></span></span></span>.</p>
+<h4 id="representation-adjacency-matrix">Representation: Adjacency matrix</h4>
+<p>We maintain a 2d <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>V</mi><mo>×</mo><mi>V</mi></mrow><annotation encoding="application/x-tex">V \times V</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7667em;vertical-align:-0.0833em;"></span><span class="mord mathnormal" style="margin-right:0.22222em;">V</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.22222em;">V</span></span></span></span> boolean array. Where true represent a connecting edge.</p>
+<p>The complexity of this is quite bad, since we need to loop through one of the dimensions, the complexity becomes <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="script">O</mi><mo stretchy="false">(</mo><mi>V</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\mathcal{O}(V)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathcal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.22222em;">V</span><span class="mclose">)</span></span></span></span>.</p>
+<h4 id="representation">Representation</h4>
+<p>In most real-world cases we use adjacency lists</p>
+<h3 id="implementation">Implementation</h3>
+<p>So let’s try to implement a directed graph using an adjacency list!</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>class Graph&#x3C;V>:</span></span>
+<span class="line"><span>    all_edges    : Map&#x3C;V, Collection&#x3C;Edge&#x3C;V>>></span></span>
+<span class="line"><span>    n_edges      : int</span></span>
+<span class="line"><span>    all_vertices : Set&#x3C;V></span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    outgoing_edges(from: V) -> Collection&#x3C;Edge&#x3C;V>>:</span></span>
+<span class="line"><span>        return all_edges.get(from)</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    contains_edge(e: Edge&#x3C;V>) -> boolean:</span></span>
+<span class="line"><span>        return e in outgoing_edges(edge.from)</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    add(e: Edge&#x3C;V>):</span></span>
+<span class="line"><span>        outgoing = outgoing_edges(e.from)</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        if e not in outgoing:</span></span>
+<span class="line"><span>            outgoing.add(e)</span></span>
+<span class="line"><span>            n_edges += 1</span></span>
+<span class="line"><span>            all_vertices.add(e.from)</span></span>
+<span class="line"><span>            all_vertices.add(e.to)</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    remove(e: Edge&#x3C;V>):</span></span>
+<span class="line"><span>        outgoing = outgoing_edges(e.from)</span></span>
+<span class="line"><span>        if edge in outgoing:</span></span>
+<span class="line"><span>            outgoing.remove(e)</span></span>
+<span class="line"><span>            n_edges -= 1</span></span>
+<span class="line"><span></span></span></code></pre>
+<h3 id="searching-in-graphs">Searching in Graphs</h3>
+<p>In many real-world applications, graphs will represent some sort of maze, or other structure, where we want to find a path.
+Sometimes the path with the least resistance/weight/length. There are two primary search algorithms for graphs.</p>
+<p>So called <strong>D</strong>epth-<strong>F</strong>irst <strong>S</strong>earch or DFS for short. The other called <strong>B</strong>readth-<strong>F</strong>irst <strong>S</strong>earch or BFS for short.</p>
+<p>Let’s begin with DFS.</p>
+<h4 id="depth-first-search">Depth-first search</h4>
+<p>Depth-first search is a way to traverse a graph systematically.</p>
+<p>A short pseudocode of a DFS would be:</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>DFS(to visit a vertex v):</span></span>
+<span class="line"><span>    mark v as visited</span></span>
+<span class="line"><span>    recursively visit all unmarked vertices w adjacent to v</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>We’ve encountered DFS for trees, the difference here as we can see is that we ‘mark’ each vertex we visit.
+Because in a graph, there might be cycles, so we don’t want to be stuck in them.</p>
+<p>Applications of using a DFS are usually,
+finding all vertices connected to a source vertex, or simply, finding a path between two vertices.</p>
+<h4 id="implementation-1">Implementation</h4>
+<p>To implement this we need data structures! To store all marked vertices, we will use a Set.
+To keep track of the path we’ve taken, we’ll use a map which contains vertices tuples.</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>recursiveDFS(v : V):</span></span>
+<span class="line"><span>    add v to visited</span></span>
+<span class="line"><span>    for edge in outgoing_edges(v):</span></span>
+<span class="line"><span>        w = endpoint of edge</span></span>
+<span class="line"><span>        if v not in visited:</span></span>
+<span class="line"><span>            recursiveDFS(w)</span></span>
+<span class="line"><span>            cameFrom[w] = v</span></span>
+<span class="line"><span></span></span></code></pre>
+<h3 id="breadth-first-search">Breadth-First Search</h3>
+<p>For our DFS we used an underlying stack for our recursive calls, the function stack.</p>
+<p>BFS uses a <em>queue</em> instead of stack, so we have to implement this ourselves.</p>
+<p>So a breakdown of what we have to do:</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>BFS(from a starting vertex s):</span></span>
+<span class="line"><span>    put s into FIFO queue, mark as visited</span></span>
+<span class="line"><span>    while queue not empty:</span></span>
+<span class="line"><span>        dequeue a vertex v</span></span>
+<span class="line"><span>        for each unmarked vertex w adjacent to v:</span></span>
+<span class="line"><span>            enqueue w, mark it as visited</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>So really, the only difference for BFS in trees compared to graphs is that we have to keep track of the visited vertices.</p>
+<h4 id="implementation-2">Implementation</h4>
+<p>So a pseudocode implementation would look something like:</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>iterativeBFS(start: V):</span></span>
+<span class="line"><span>    visited = new Set&#x3C;V></span></span>
+<span class="line"><span>    agenda = new Queue&#x3C;V></span></span>
+<span class="line"><span>    agenda.enqueue(start)</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    while agenda is not empty:</span></span>
+<span class="line"><span>        agenda.dequeue(v)</span></span>
+<span class="line"><span>        if v not in visited:</span></span>
+<span class="line"><span>            add v to visited</span></span>
+<span class="line"><span>            for edge in outgoing_edges(v):</span></span>
+<span class="line"><span>                w = endpoint of edge</span></span>
+<span class="line"><span>                if w not in visited:</span></span>
+<span class="line"><span>                    add w to agenda</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>If we want to retrace our steps, we would need a <code>cameFrom</code> Map as in the DFS.</p>
+<p>Also, one thing to note, if we replace the queue, with a stack, we’ll just end up with a <code>iterativeDFS</code> instead!</p>
+<h4 id="bfs-properties">BFS properties</h4>
+<p>In a BFS search, what do we actually get/perform? We get a path yes -
+but it’s always the <strong>shortest</strong> path from <code>s</code> to all other vertices!
+It actually does this in <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="script">O</mi><mo stretchy="false">(</mo><mi>E</mi><mo>+</mo><mi>V</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\mathcal{O}(E + V)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathcal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.05764em;">E</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.22222em;">V</span><span class="mclose">)</span></span></span></span></p>
+<h4 id="implementation-calculating-the-distance">Implementation: Calculating the distance</h4>
+<p>In this implementation we’ll add a map that hold the distances between every vertex.
+(I also added that <code>cameFrom</code> map that I discussed earlier)</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>iterativeBFS(start: V):</span></span>
+<span class="line"><span>    visited = new Set&#x3C;V></span></span>
+<span class="line"><span>    agenda = new Queue&#x3C;V></span></span>
+<span class="line"><span>    cameFrom = new Map&#x3C;V,V></span></span>
+<span class="line"><span>    distTo = new empty Map&#x3C;V, Int></span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    agenda.enqueue(start)</span></span>
+<span class="line"><span>    distTo[start] = 0</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    while agenda is not empty:</span></span>
+<span class="line"><span>        agenda.dequeue(v)</span></span>
+<span class="line"><span>        if v not in visited:</span></span>
+<span class="line"><span>            add v to visited</span></span>
+<span class="line"><span>            for edge in outgoing_edges(v):</span></span>
+<span class="line"><span>                w = endpoint of edge</span></span>
+<span class="line"><span>                if w not in visited:</span></span>
+<span class="line"><span>                    add w to agenda</span></span>
+<span class="line"><span>                    cameFrom[w] = v</span></span>
+<span class="line"><span>                    distTo[w] = 1 + distTo[v]</span></span>
+<span class="line"><span></span></span></code></pre>
+<h3 id="example-problems">Example Problems</h3>
+<p>So now that we’ve seen DFS, BFS and understood graphs - let’s see what we can do with them.</p>
+<p>A very important kind of graph is a <strong>DAG</strong>, or a Directed <strong>acyclic</strong> graph. This means the graph doesn’t contain any cycles.</p>
+<p>This is especially useful for scheduling, for example. But we need to know if a graph contains a cycle - how can we detect a cycle?</p>
+<p>That’s a very common problem that many applications implement into their programs.
 There are multiple ways of detecting a cycle in a graph, for example,
-we can use a DFS, and if we encounter a node that we&rsquo;ve visited before, we know that we have a cycle.</p><p>Also, a good note here, If we ever want the <em>preorder</em>, <em>post order</em> or <em>reverse post order</em> we just modify our DFS by one line -
-we change where the enqueue/push goes.</p><pre tabindex=0><code>DFS(v : V):
-    visited.add(v)
-    preorder.enqueue(v)
-    for w in outgoing_edges(v):
-        if w not in visited:
-            visited.add(w)
-    postorder.enqueue(v)
-    reversePostorder.push(v)
-</code></pre><p>Note that the <code>reversePostorder</code> is a stack, therefore we will get the reverse order.</p><p>There are many finding &lsquo;connected components&rsquo; problems, here&rsquo;s a good picture to illustrate what we can use and not:
-<img src=/school/images/Graphs.png alt=Graphs></p><h3 id=conclusion>Conclusion</h3><p>So that&rsquo;s it for graphs - in the next part we&rsquo;ll cover <em>minimum spanning trees</em> and <em>shortest path algorithms</em>.</p></section></article><nav class=navigation><div class="nav-item previous"><a href=/school/dat038/dat038_7/ title="Previous: Part 7 - Binary Heaps">&larr; Previous</a></div><div class="nav-item next"><a href=/school/dat038/dat038_9/ title="Next: Part 9 - Shortest Path & Spanning Trees">Next &rarr;</a></div></nav></main></div><footer id=site-footer><div class=social-links><a href=https://github.com/rezaarezvan title class=social-link><span class=bracket>[</span>github<span class=bracket>]</span></a>
-<a href=https://x.com/rzvan__/ title class=social-link><span class=bracket>[</span>x<span class=bracket>]</span></a></div><div class=footer-marquee><div class=footer-marquee__content><span class=footer-marquee__item>memento mori • amor fati • sic parvis magna • per aspera ad astra</span>
-<span class=footer-marquee__item>memento mori • amor fati • sic parvis magna • per aspera ad astra</span></div></div></footer></body></html>
+we can use a DFS, and if we encounter a node that we’ve visited before, we know that we have a cycle.</p>
+<p>Also, a good note here, If we ever want the <em>preorder</em>, <em>post order</em> or <em>reverse post order</em> we just modify our DFS by one line -
+we change where the enqueue/push goes.</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>DFS(v : V):</span></span>
+<span class="line"><span>    visited.add(v)</span></span>
+<span class="line"><span>    preorder.enqueue(v)</span></span>
+<span class="line"><span>    for w in outgoing_edges(v):</span></span>
+<span class="line"><span>        if w not in visited:</span></span>
+<span class="line"><span>            visited.add(w)</span></span>
+<span class="line"><span>    postorder.enqueue(v)</span></span>
+<span class="line"><span>    reversePostorder.push(v)</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>Note that the <code>reversePostorder</code> is a stack, therefore we will get the reverse order.</p>
+<p>There are many finding ‘connected components’ problems, here’s a good picture to illustrate what we can use and not:
+<img src="/images/school/Graphs.png" alt="Graphs"></p>
+<h3 id="conclusion">Conclusion</h3>
+<p>So that’s it for graphs - in the next part we’ll cover <em>minimum spanning trees</em> and <em>shortest path algorithms</em>.</p>  <nav class="flex justify-between mt-8 pt-4 border-t border-border" data-astro-cid-v5ro3oot> <a href="/school/dat038/dat038_7" class="text-primary hover:text-primary/80 transition-colors" data-astro-cid-v5ro3oot>
+← Previous: Part 7 - Binary Heaps </a> <a href="/school/dat038/dat038_9" class="text-primary hover:text-primary/80 transition-colors" data-astro-cid-v5ro3oot>
+Next: Part 9 - Shortest Path &amp; Spanning Trees →
+</a> </nav> </article>  </main> </div> </body></html> 

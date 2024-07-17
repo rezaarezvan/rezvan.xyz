@@ -1,73 +1,348 @@
-<!doctype html><html><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge"><title>rezvan | Part 4 - Pipeline hardware</title><link rel=icon type=image/png href=https://rezvan.xyz/images/icon.png><meta name=viewport content="width=device-width,initial-scale=1">
-<meta name=description content="In this part we&rsquo;ll cover the actual hardware specifications/solutions to our potential problems with our newly pipelined CPU.
-Data hazards If we have the following scenario:
-sub $2, $1, $3 and $12, $2, $5 Here we will have a data hazard. As we covered in the last part the solution here is so-called &ldquo;forwarding&rdquo;.
-But how do we detect how to forward our result immediately?
-The answer is sending along the register&rsquo;s number in the pipeline!"><meta property="og:image" content="https://raw.githubusercontent.com/rezaarezvan/rezvan.xyz/main/images/icon.png"><meta property="og:url" content="https://rezvan.xyz/school/eda333/eda333_4/"><meta property="og:site_name" content="rezvan"><meta property="og:title" content="Part 4 - Pipeline hardware"><meta property="og:description" content="In this part we’ll cover the actual hardware specifications/solutions to our potential problems with our newly pipelined CPU.
-Data hazards If we have the following scenario:
-sub $2, $1, $3 and $12, $2, $5 Here we will have a data hazard. As we covered in the last part the solution here is so-called “forwarding”.
-But how do we detect how to forward our result immediately?
-The answer is sending along the register’s number in the pipeline!"><meta property="og:locale" content="en_us"><meta property="og:type" content="article"><meta property="article:section" content="school"><meta property="article:published_time" content="2023-03-28T00:00:00+00:00"><meta property="article:modified_time" content="2024-05-26T11:09:10+02:00"><meta name=twitter:card content="summary"><meta name=twitter:title content="Part 4 - Pipeline hardware"><meta name=twitter:description content="In this part we’ll cover the actual hardware specifications/solutions to our potential problems with our newly pipelined CPU.
-Data hazards If we have the following scenario:
-sub $2, $1, $3 and $12, $2, $5 Here we will have a data hazard. As we covered in the last part the solution here is so-called “forwarding”.
-But how do we detect how to forward our result immediately?
-The answer is sending along the register’s number in the pipeline!"><link rel=stylesheet href=https://rezvan.xyz/css/combined.min.285bd67a05674fdcb27bb67f867c7ac6b2e0c0b5535c536ba4bb37cd80e377e9.css integrity="sha256-KFvWegVnT9yye7Z/hnx6xrLgwLVTXFNrpLs3zYDjd+k="><link id=lightSyntaxStyle rel=stylesheet href=https://rezvan.xyz/css/light_syntax.min.d9e0828a4ff7f2d7317942062fc751fa487b2ac2c47b934ad082abd7d3ca6690.css integrity="sha256-2eCCik/38tcxeUIGL8dR+kh7KsLEe5NK0IKr19PKZpA="><link id=darkModeStyle rel=stylesheet href=https://rezvan.xyz/css/dark.min.113ab1177b874ffa2011e31f94df77b25b4c0aee6c35e5db0e6c54ebe2071597.css integrity="sha256-ETqxF3uHT/ogEeMflN93sltMCu5sNeXbDmxU6+IHFZc=" disabled><link id=darkSyntaxStyle rel=stylesheet href=https://rezvan.xyz/css/dark_syntax.min.1a878f3d8fb43359bd3b44bc70c4074f682f11066c6537bf6248b696cbe56586.css integrity="sha256-GoePPY+0M1m9O0S8cMQHT2gvEQZsZTe/Yki2lsvlZYY=" disabled><script type=text/javascript src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type=text/x-mathjax-config>
-		MathJax.Hub.Config({
-			tex2jax: {
-				inlineMath: [['$','$'], ['\\(','\\)']],
-				displayMath: [['$$','$$'], ['\[','\]']],
-				processEscapes: true,
-				processEnvironments: true,
-				skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
-				TeX: { equationNumbers: { autoNumber: "AMS" },
-						 extensions: ["AMSmath.js", "AMSsymbols.js"] }
-			}
-		});
-		</script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css><script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js onload=renderMathInElement(document.body)></script><script>document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]})})</script></head><body><header><nav id=site-navbar><div class=navbar-content><a href=https://rezvan.xyz/ class=logo>rezvan.xyz</a><div class=navbar-links><a href=/principles class=nav-link><span class=bracket>[</span>principles<span class=bracket>]</span></a>
-<a href=/cv class=nav-link><span class=bracket>[</span>cv<span class=bracket>]</span></a>
-<a href=/posts class=nav-link><span class=bracket>[</span>posts<span class=bracket>]</span></a>
-<a href=/school class=nav-link><span class=bracket>[</span>school<span class=bracket>]</span></a></div><div class=theme-toggle><span id=dark-mode-toggle onclick=toggleTheme() aria-label="Toggle theme">○
-</span><script src=https://rezvan.xyz/js/themetoggle.js></script></div></div></nav></header><div class=content><main><article><div class=title><h1>Part 4 - Pipeline hardware</h1><div class=meta>Posted on Mar 28, 2023</div><div class=meta>(Last updated: May 26, 2024)</div></div><section class=body><p>In this part we&rsquo;ll cover the actual hardware specifications/solutions to our potential problems with our newly pipelined CPU.</p><h3 id=data-hazards>Data hazards</h3><p>If we have the following scenario:</p><pre tabindex=0><code>sub    $2, $1, $3
-and    $12, $2, $5
-</code></pre><p>Here we will have a data hazard. As we covered in the last part the solution here is so-called &ldquo;forwarding&rdquo;.</p><p>But how do we detect how to forward our result immediately?</p><p>The answer is sending along the register&rsquo;s number in the pipeline!</p><p>We use the convention that when we&rsquo;re in the registers in between stages we use the notation, <code>ID/EX</code>, for example.</p><p>So, we get data hazards when:</p><pre tabindex=0><code>EX/MEM.RegisteRd = ID/EX.RegisterRs
-EX/MEM.RegisteRd = ID/EX.RegisterRt
-MEM/WB.RegisteRd = ID/EX.RegisterRs
-MEM/WB.RegisteRd = ID/EX.RegisterRt
-</code></pre><p>So we need to detect <em>when</em> we need to forward, it shall only forward if:</p><ul><li><p>Only if we&rsquo;re writing to one register:</p><ul><li><code>EX/MEM.RegWrite, MEM/WB.RegWrite</code></li></ul></li><li><p>And, if <code>Rd</code> for the instruction isn&rsquo;t <code>$zero</code>:</p><ul><li><code>EX/MEM.RegisterRd != 0, MEM/WB.RegisterRd != 0</code></li></ul></li></ul><p>The hardware would be:
-<img src=/school/images/FU.png#center alt></p><p>We can write up some conditions:</p><ul><li><p><code>EX</code> Hazard</p><ul><li><pre tabindex=0><code>If(EX/MEM.RegWrite and (EX/MEM.RegisterRd != 0)
-  and(EX/MEM.RegisterRd = ID/EX.RegisterRs))
-</code></pre><ul><li>→ <code>ForwardA = 10</code></li></ul></li><li><pre tabindex=0><code>If(EX/MEM.RegWrite and (EX/MEM.RegisterRd != 0)
-  and(EX/MEM.RegisterRd = ID/EX.RegisterRt))
-</code></pre><ul><li>→ <code>ForwardB = 10</code></li></ul></li></ul></li><li><p><code>MEM</code> Hazard</p><ul><li><pre tabindex=0><code>If(MEM/WB.RegWrite and (MEM/WB.RegisterRd != 0)
-  and(MEM/WB.RegisterRd = ID/EX.RegisterRs))
-</code></pre><ul><li>→ <code>ForwardA = 01</code></li></ul></li><li><pre tabindex=0><code>If(MEM/WB.RegWrite and (MEM/WB.RegisterRd != 0)
-  and(MEM/WB.RegisterRd = ID/EX.RegisterRt))
-</code></pre><ul><li>→ <code>ForwardB = 01</code></li></ul></li></ul></li></ul><p>But there is another case we haven&rsquo;t talked about yet, that doesn&rsquo;t get solved with this solution, the double data hazard.</p><p>If we have the following MIPS:</p><pre tabindex=0><code>add $1, $2, $3
-add $1, $1, $3
-add $1, $1, $4
-</code></pre><p>Here we have two hazards, both will occur, but we want to use the <em>latest</em> result.</p><p>Therefore, we need to update our conditions for <code>MEM</code> hazards: Only forward from MEM <em>if</em> no EX hazards!</p><ul><li><p><code>MEM</code> Hazard</p><ul><li><pre tabindex=0><code>If(MEM/WB.RegWrite and (MEM/WB.RegisterRd != 0)
-  and not(EX/MEM.RegWrite and (EX/MEM.RegisterRd != 0)
-      and(EX/MEM.RegisterRd = ID/EX.Register.Rs))
-  and(MEM/WB.RegisterRd = ID/EX.RegisterRs))
-</code></pre><ul><li>→ <code>ForwardA = 01</code></li></ul></li><li><pre tabindex=0><code>If(MEM/WB.RegWrite and (MEM/WB.RegisterRd != 0)
-  and not(EX/MEM.RegWrite and (EX/MEM.RegisterRd != 0)
-      and(EX/MEM.RegisterRd = ID/EX.Register.Rt))
-  and(MEM/WB.RegisterRd = ID/EX.RegisterRt))
-</code></pre><ul><li>→ <code>ForwardB = 01</code></li></ul></li></ul></li></ul><p>Therefore, the final implementation would be:
-<img src=/school/images/FU2.png#center alt></p><h3 id=load-use-data-hazards>Load-use data hazards</h3><p>As we discussed in the last part when we have:</p><pre tabindex=0><code>lw $2, 20($1)
-and $4, $2, $5
-</code></pre><p>We either need to stall one whole clock cycle, or, place an uncorrelated instruction in between.
-So we need a way to detect this:</p><ul><li><p>Check if the &ldquo;using&rdquo; instruction is present in the ID stage.</p></li><li><p>The ALU operand register number in the ID stage is from:</p><ul><li><code>IF/ID.RegisterRs</code> or <code>IF/ID.RegisterRt</code>.</li></ul></li><li><p>We have a load-use hazard if:</p><ul><li><pre tabindex=0><code>ID/EX.MemRead and
-((ID/EX.RegisterRd = IF/ID.RegisterRs) or
- (ID/EX.RegisterRd = IF/ID.RegisterRt))
-</code></pre></li><li>If true, stall the pipeline.</li></ul></li></ul><p>Stalling essentially means we input a <code>NOP</code> instruction instead.
-So the operations bits in the <code>ID/EX</code> register becomes all 0 (<code>NOP</code>).</p><p>We also stop the incrementation of <code>PC</code> (and the <code>IF/ID</code> register).</p><h3 id=jump-conflicts>Jump conflicts</h3><p>Remember that conditional jump instructions evaluates in the <code>EX</code> stage.</p><p>Which means it takes three cycles for a conditional jump instruction to get determined where the next instruction is.</p><p>Which means our performance for jumps are, three cycles.</p><p>Let&rsquo;s cover some strategies for jump instructions.</p><h4 id=delay-jumping>Delay jumping</h4><p>This stragety makes use of these stall cycles, so we <strong>always</strong> execute the next instruction after the jump.
-This instruction is called the &ldquo;delayed slot&rdquo;.</p><p>We fill this slot with either a &ldquo;productive&rdquo; instruction, if we can not do that, we fill it with a <code>NOP</code>.</p><h3 id=exceptions-and-interrupts>Exceptions and Interrupts</h3><p>Exceptions and interrupts are crucial concepts for a processor.</p><p>Let&rsquo;s first define what these are:</p><ul><li><p>Exceptions</p><ul><li><p>Internally in the processor:</p><ul><li>For example: Invalid opcode, Overflow, Syscalls</li></ul></li></ul></li><li><p>Interrupts</p><ul><li>From an external I/O controller.</li></ul></li><li><p>MIPS handles exceptions by a so-called &ldquo;System Control Coprocessor&rdquo; (CPo)</p></li><li><p>When we receive an exception, we need to first store <code>PC</code>. In MIPS we do this via the &ldquo;Exception Program Counter&rdquo; (EPC).</p></li><li><p>We save the <em>cause</em> of this exception in the &ldquo;Cause&rdquo; register.</p></li><li><p>Then we finally, jump to the exception handler</p></li></ul><p>This approach works for a non-pipelined version.</p><p>Let&rsquo;s look at how we should handle it from a pipelined version.</p><p>Say we have an overflow exception in the <code>EX</code> stage from:</p><pre tabindex=0><code>add $s1, $s2, $s1
-</code></pre><p>What we need to make sure:</p><ul><li><p>Do no update the <code>$s1</code> register.</p></li><li><p>Every instruction that was <strong>before</strong> this one needs to complete.</p></li><li><p>Eliminate the effect the instruction had and &ldquo;flush&rdquo; the instructions that came after.a</p></li><li><p>Set the cause and EPC registers.</p></li><li><p>Jump to the exception handler.</p></li></ul><p>So our final CPU looks like:
-<img src=/school/images/PE.png#center alt></p><h3 id=advanced-methods>Advanced methods</h3><p>Now we&rsquo;ll cover some more advanced methods - note that this is a very quick overview, and we will not go in depth at all.</p><h4 id=dynamic-jump-prediction>Dynamic jump prediction</h4><p>In deeper and more complex pipelines, the performance loss for each jump is a lot larger.</p><p>Therefore, they usually use something called dynamic jump prediction:</p><ul><li><p>Use a &ldquo;Branch prediction buffer&rdquo;/&ldquo;Branch history table&rdquo;.</p></li><li><p>Indexes with the jumping address.</p></li><li><p>The table stores the outcome (branch taken/not taken).</p></li><li><p>So when a jump comes:</p><ul><li><p>Read the table.</p></li><li><p>Get the next instruction by the jump prediction.</p></li><li><p>If wrong, flush the pipeline and update the prediction.</p></li></ul></li></ul><p>So, if we have a 1-bit jump table, our prediction is either &ldquo;Take jump&rdquo; or &ldquo;Do not take jump&rdquo;.</p><p>But, if we instead use, for example, a 2-bit jump table, we can also keep the <em>previous</em> state.</p><p>This is a kind of FSM if you will:
-<img src=/school/images/JFSM.png#center alt></p><h3 id=instruction-level-parallelism>Instruction-level parallelism</h3><p>To increase our parallelism, specifically our ILP, we need deeper pipelines.</p><blockquote><p>Less work per stage → Less time per clock cycle</p></blockquote><p>But that always comes with the cost of more potential hazards!</p><p>One solution is, <em>Multiple issue CPU</em>.</p><p>We start up multiple instructions per clock cycle, using more pipelines (Functional Units, FUs).</p><p>This can result in CPI (Clock cycles per instruction) &lt; 1. So therefore we instead use &ldquo;Instructions per Cycle&rdquo; now instead:
-$$
-\text{IPC} = \frac{1}{\text{CPI}}
-$$</p><p>We have two types, static and dynamic multiple issue CPUs.</p><p>The static ones use the so-called &ldquo;Very Long Instruction Word&rdquo;:</p><ul><li><p>The compiler groups up instructions that start simultaneously.</p></li><li><p>Packets them into instruction words of a fixed size.</p></li><li><p>The compiler detects and handles hazards.</p></li></ul><p>The dynamic ones use the super scalar approach:</p><ul><li><p>The CPU hardware detects the instruction feed and chooses which one starts on what clock cycle.</p></li><li><p>The compiler can help by reordering the instruction feed.</p></li><li><p>The processor handles pipeline conflicts during execution time.</p></li></ul><h4 id=speculative-execution>Speculative execution</h4><p>One modern approach is also that we &ldquo;guess&rdquo; what will happen. If we were correct, great! Otherwise, go back to previous state.</p><p>Usually done with loads and jumps.</p><h3 id=loop-unrolling>Loop unrolling</h3><p>Loop unrolling is a quite simple conecpt, we just replicate the loop code to achieve more parallelism.</p><p>Uses different registers per replication</p><h3 id=summary>Summary</h3><ul><li><p>Pipelining increases the instruction flow by parallelising.</p><ul><li><p>More instructions per second</p></li><li><p><strong>But</strong>, each individual instruction still takes the same amount of time.</p></li></ul></li><li><p>Multiple issue processors (VLIW and super scalar).</p></li><li><p>Dynamical scheduling and speculative execution:</p><ul><li><p>Hazards limits the achievable parallelism.</p></li><li><p>CPU complexity → &ldquo;The power wall&rdquo;.</p></li></ul></li></ul></section></article><nav class=navigation><div class="nav-item previous"><a href=/school/eda333/eda333_3/ title="Previous: Part 3 - Pipelining">&larr; Previous</a></div><div class="nav-item next"><a href=/school/eda333/eda333_5/ title="Next: Part 5 - Cache memory">Next &rarr;</a></div></nav></main></div><footer id=site-footer><div class=social-links><a href=https://github.com/rezaarezvan title class=social-link><span class=bracket>[</span>github<span class=bracket>]</span></a>
-<a href=https://x.com/rzvan__/ title class=social-link><span class=bracket>[</span>x<span class=bracket>]</span></a></div><div class=footer-marquee><div class=footer-marquee__content><span class=footer-marquee__item>memento mori • amor fati • sic parvis magna • per aspera ad astra</span>
-<span class=footer-marquee__item>memento mori • amor fati • sic parvis magna • per aspera ad astra</span></div></div></footer></body></html>
+<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width"><meta name="generator" content="Astro v4.11.5"><link rel="icon" type="image" href="/favicon.ico"><title>Part 4 - Pipeline hardware</title><!-- KaTeX support --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script><!-- inline KaTeX --><link rel="stylesheet" href="/_astro/index.BZ7em0Mc.css">
+<link rel="stylesheet" href="/_astro/_slug_.DPnDUiRI.css">
+<style>article[data-astro-cid-v5ro3oot]{max-width:80ch;margin:0 auto}
+</style><script type="module">document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]})});
+</script></head> <body class="font-sans antialiased"> <div class="container mx-auto flex min-h-screen"> <aside class="w-64 border-r border-[var(--border-color)] border-dashed pt-8"> <header class="flex flex-col h-full"> <div class="flex items-center mb-4"> <script>
+  function setTheme(mode) {
+    localStorage.setItem("theme-storage", mode);
+    document.documentElement.setAttribute('data-theme', mode);
+  }
+  function toggleTheme() {
+    const currentTheme = localStorage.getItem("theme-storage") || "light";
+    const newTheme = currentTheme === "light" ? "dark" : "light";
+    setTheme(newTheme);
+  }
+  const savedTheme = localStorage.getItem("theme-storage") || "light";
+  setTheme(savedTheme);
+  window.toggleTheme = toggleTheme;
+</script> <button id="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme" class="flex items-center justify-center w-6" data-astro-cid-x3pjskd3>○</button>  <a href="/" class="text-2xl font-semibold ml-3 h-10 pr-3">rezvan.xyz</a> </div> <nav class="flex flex-col space-y-2"> <a href="/principles" class="hover:text-orange-500 dark:hover:text-orange-400 transition-colors">
+[principles]
+</a><a href="/cv" class="hover:text-orange-500 dark:hover:text-orange-400 transition-colors">
+[cv]
+</a><a href="/posts" class="hover:text-orange-500 dark:hover:text-orange-400 transition-colors">
+[posts]
+</a><a href="/school" class="hover:text-orange-500 dark:hover:text-orange-400 transition-colors">
+[school]
+</a> </nav> </header> </aside> <main class="flex-grow px-8 py-8 overflow-y-auto">  <article class="prose prose-sm sm:prose lg:prose-lg xl:prose-xl max-w-none" data-astro-cid-v5ro3oot> <h1 class="text-4xl font-bold mb-4" data-astro-cid-v5ro3oot>Part 4 - Pipeline hardware</h1> <p class="text-sm text-muted-foreground mb-4" data-astro-cid-v5ro3oot>
+Date: 3/28/2023 </p>  <p>In this part we’ll cover the actual hardware specifications/solutions to our potential problems with our newly pipelined CPU.</p>
+<h3 id="data-hazards">Data hazards</h3>
+<p>If we have the following scenario:</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>sub    $2, $1, $3</span></span>
+<span class="line"><span>and    $12, $2, $5</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>Here we will have a data hazard. As we covered in the last part the solution here is so-called “forwarding”.</p>
+<p>But how do we detect how to forward our result immediately?</p>
+<p>The answer is sending along the register’s number in the pipeline!</p>
+<p>We use the convention that when we’re in the registers in between stages we use the notation, <code>ID/EX</code>, for example.</p>
+<p>So, we get data hazards when:</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>EX/MEM.RegisteRd = ID/EX.RegisterRs</span></span>
+<span class="line"><span>EX/MEM.RegisteRd = ID/EX.RegisterRt</span></span>
+<span class="line"><span>MEM/WB.RegisteRd = ID/EX.RegisterRs</span></span>
+<span class="line"><span>MEM/WB.RegisteRd = ID/EX.RegisterRt</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>So we need to detect <em>when</em> we need to forward, it shall only forward if:</p>
+<ul>
+<li>
+<p>Only if we’re writing to one register:</p>
+<ul>
+<li><code>EX/MEM.RegWrite, MEM/WB.RegWrite</code></li>
+</ul>
+</li>
+<li>
+<p>And, if <code>Rd</code> for the instruction isn’t <code>$zero</code>:</p>
+<ul>
+<li><code>EX/MEM.RegisterRd != 0, MEM/WB.RegisterRd != 0</code></li>
+</ul>
+</li>
+</ul>
+<p>The hardware would be:
+<img src="/images/school/FU.png#center" alt=""></p>
+<p>We can write up some conditions:</p>
+<ul>
+<li>
+<p><code>EX</code> Hazard</p>
+<ul>
+<li>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>If(EX/MEM.RegWrite and (EX/MEM.RegisterRd != 0)</span></span>
+<span class="line"><span>  and(EX/MEM.RegisterRd = ID/EX.RegisterRs))</span></span>
+<span class="line"><span></span></span></code></pre>
+<ul>
+<li>→ <code>ForwardA = 10</code></li>
+</ul>
+</li>
+<li>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>If(EX/MEM.RegWrite and (EX/MEM.RegisterRd != 0)</span></span>
+<span class="line"><span>  and(EX/MEM.RegisterRd = ID/EX.RegisterRt))</span></span>
+<span class="line"><span></span></span></code></pre>
+<ul>
+<li>→ <code>ForwardB = 10</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><code>MEM</code> Hazard</p>
+<ul>
+<li>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>If(MEM/WB.RegWrite and (MEM/WB.RegisterRd != 0)</span></span>
+<span class="line"><span>  and(MEM/WB.RegisterRd = ID/EX.RegisterRs))</span></span>
+<span class="line"><span></span></span></code></pre>
+<ul>
+<li>→ <code>ForwardA = 01</code></li>
+</ul>
+</li>
+<li>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>If(MEM/WB.RegWrite and (MEM/WB.RegisterRd != 0)</span></span>
+<span class="line"><span>  and(MEM/WB.RegisterRd = ID/EX.RegisterRt))</span></span>
+<span class="line"><span></span></span></code></pre>
+<ul>
+<li>→ <code>ForwardB = 01</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>But there is another case we haven’t talked about yet, that doesn’t get solved with this solution, the double data hazard.</p>
+<p>If we have the following MIPS:</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>add $1, $2, $3</span></span>
+<span class="line"><span>add $1, $1, $3</span></span>
+<span class="line"><span>add $1, $1, $4</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>Here we have two hazards, both will occur, but we want to use the <em>latest</em> result.</p>
+<p>Therefore, we need to update our conditions for <code>MEM</code> hazards: Only forward from MEM <em>if</em> no EX hazards!</p>
+<ul>
+<li>
+<p><code>MEM</code> Hazard</p>
+<ul>
+<li>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>If(MEM/WB.RegWrite and (MEM/WB.RegisterRd != 0)</span></span>
+<span class="line"><span>  and not(EX/MEM.RegWrite and (EX/MEM.RegisterRd != 0)</span></span>
+<span class="line"><span>      and(EX/MEM.RegisterRd = ID/EX.Register.Rs))</span></span>
+<span class="line"><span>  and(MEM/WB.RegisterRd = ID/EX.RegisterRs))</span></span>
+<span class="line"><span></span></span></code></pre>
+<ul>
+<li>→ <code>ForwardA = 01</code></li>
+</ul>
+</li>
+<li>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>If(MEM/WB.RegWrite and (MEM/WB.RegisterRd != 0)</span></span>
+<span class="line"><span>  and not(EX/MEM.RegWrite and (EX/MEM.RegisterRd != 0)</span></span>
+<span class="line"><span>      and(EX/MEM.RegisterRd = ID/EX.Register.Rt))</span></span>
+<span class="line"><span>  and(MEM/WB.RegisterRd = ID/EX.RegisterRt))</span></span>
+<span class="line"><span></span></span></code></pre>
+<ul>
+<li>→ <code>ForwardB = 01</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>Therefore, the final implementation would be:
+<img src="/images/school/FU2.png#center" alt=""></p>
+<h3 id="load-use-data-hazards">Load-use data hazards</h3>
+<p>As we discussed in the last part when we have:</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>lw $2, 20($1)</span></span>
+<span class="line"><span>and $4, $2, $5</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>We either need to stall one whole clock cycle, or, place an uncorrelated instruction in between.
+So we need a way to detect this:</p>
+<ul>
+<li>
+<p>Check if the “using” instruction is present in the ID stage.</p>
+</li>
+<li>
+<p>The ALU operand register number in the ID stage is from:</p>
+<ul>
+<li><code>IF/ID.RegisterRs</code> or <code>IF/ID.RegisterRt</code>.</li>
+</ul>
+</li>
+<li>
+<p>We have a load-use hazard if:</p>
+<ul>
+<li>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>ID/EX.MemRead and</span></span>
+<span class="line"><span>((ID/EX.RegisterRd = IF/ID.RegisterRs) or</span></span>
+<span class="line"><span> (ID/EX.RegisterRd = IF/ID.RegisterRt))</span></span>
+<span class="line"><span></span></span></code></pre>
+</li>
+<li>If true, stall the pipeline.</li>
+</ul>
+</li>
+</ul>
+<p>Stalling essentially means we input a <code>NOP</code> instruction instead.
+So the operations bits in the <code>ID/EX</code> register becomes all 0 (<code>NOP</code>).</p>
+<p>We also stop the incrementation of <code>PC</code> (and the <code>IF/ID</code> register).</p>
+<h3 id="jump-conflicts">Jump conflicts</h3>
+<p>Remember that conditional jump instructions evaluates in the <code>EX</code> stage.</p>
+<p>Which means it takes three cycles for a conditional jump instruction to get determined where the next instruction is.</p>
+<p>Which means our performance for jumps are, three cycles.</p>
+<p>Let’s cover some strategies for jump instructions.</p>
+<h4 id="delay-jumping">Delay jumping</h4>
+<p>This stragety makes use of these stall cycles, so we <strong>always</strong> execute the next instruction after the jump.
+This instruction is called the “delayed slot”.</p>
+<p>We fill this slot with either a “productive” instruction, if we can not do that, we fill it with a <code>NOP</code>.</p>
+<h3 id="exceptions-and-interrupts">Exceptions and Interrupts</h3>
+<p>Exceptions and interrupts are crucial concepts for a processor.</p>
+<p>Let’s first define what these are:</p>
+<ul>
+<li>
+<p>Exceptions</p>
+<ul>
+<li>
+<p>Internally in the processor:</p>
+<ul>
+<li>For example: Invalid opcode, Overflow, Syscalls</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Interrupts</p>
+<ul>
+<li>From an external I/O controller.</li>
+</ul>
+</li>
+<li>
+<p>MIPS handles exceptions by a so-called “System Control Coprocessor” (CPo)</p>
+</li>
+<li>
+<p>When we receive an exception, we need to first store <code>PC</code>. In MIPS we do this via the “Exception Program Counter” (EPC).</p>
+</li>
+<li>
+<p>We save the <em>cause</em> of this exception in the “Cause” register.</p>
+</li>
+<li>
+<p>Then we finally, jump to the exception handler</p>
+</li>
+</ul>
+<p>This approach works for a non-pipelined version.</p>
+<p>Let’s look at how we should handle it from a pipelined version.</p>
+<p>Say we have an overflow exception in the <code>EX</code> stage from:</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>add $s1, $s2, $s1</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>What we need to make sure:</p>
+<ul>
+<li>
+<p>Do no update the <code>$s1</code> register.</p>
+</li>
+<li>
+<p>Every instruction that was <strong>before</strong> this one needs to complete.</p>
+</li>
+<li>
+<p>Eliminate the effect the instruction had and “flush” the instructions that came after.a</p>
+</li>
+<li>
+<p>Set the cause and EPC registers.</p>
+</li>
+<li>
+<p>Jump to the exception handler.</p>
+</li>
+</ul>
+<p>So our final CPU looks like:
+<img src="/images/school/PE.png#center" alt=""></p>
+<h3 id="advanced-methods">Advanced methods</h3>
+<p>Now we’ll cover some more advanced methods - note that this is a very quick overview, and we will not go in depth at all.</p>
+<h4 id="dynamic-jump-prediction">Dynamic jump prediction</h4>
+<p>In deeper and more complex pipelines, the performance loss for each jump is a lot larger.</p>
+<p>Therefore, they usually use something called dynamic jump prediction:</p>
+<ul>
+<li>
+<p>Use a “Branch prediction buffer”/“Branch history table”.</p>
+</li>
+<li>
+<p>Indexes with the jumping address.</p>
+</li>
+<li>
+<p>The table stores the outcome (branch taken/not taken).</p>
+</li>
+<li>
+<p>So when a jump comes:</p>
+<ul>
+<li>
+<p>Read the table.</p>
+</li>
+<li>
+<p>Get the next instruction by the jump prediction.</p>
+</li>
+<li>
+<p>If wrong, flush the pipeline and update the prediction.</p>
+</li>
+</ul>
+</li>
+</ul>
+<p>So, if we have a 1-bit jump table, our prediction is either “Take jump” or “Do not take jump”.</p>
+<p>But, if we instead use, for example, a 2-bit jump table, we can also keep the <em>previous</em> state.</p>
+<p>This is a kind of FSM if you will:
+<img src="/images/school/JFSM.png#center" alt=""></p>
+<h3 id="instruction-level-parallelism">Instruction-level parallelism</h3>
+<p>To increase our parallelism, specifically our ILP, we need deeper pipelines.</p>
+<blockquote>
+<p>Less work per stage → Less time per clock cycle</p>
+</blockquote>
+<p>But that always comes with the cost of more potential hazards!</p>
+<p>One solution is, <em>Multiple issue CPU</em>.</p>
+<p>We start up multiple instructions per clock cycle, using more pipelines (Functional Units, FUs).</p>
+<p>This can result in CPI (Clock cycles per instruction) &#x3C; 1. So therefore we instead use “Instructions per Cycle” now instead:</p>
+<span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mtext>IPC</mtext><mo>=</mo><mfrac><mn>1</mn><mtext>CPI</mtext></mfrac></mrow><annotation encoding="application/x-tex">\text{IPC} = \frac{1}{\text{CPI}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord text"><span class="mord">IPC</span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.0074em;vertical-align:-0.686em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3214em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord text"><span class="mord">CPI</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span>
+<p>We have two types, static and dynamic multiple issue CPUs.</p>
+<p>The static ones use the so-called “Very Long Instruction Word”:</p>
+<ul>
+<li>
+<p>The compiler groups up instructions that start simultaneously.</p>
+</li>
+<li>
+<p>Packets them into instruction words of a fixed size.</p>
+</li>
+<li>
+<p>The compiler detects and handles hazards.</p>
+</li>
+</ul>
+<p>The dynamic ones use the super scalar approach:</p>
+<ul>
+<li>
+<p>The CPU hardware detects the instruction feed and chooses which one starts on what clock cycle.</p>
+</li>
+<li>
+<p>The compiler can help by reordering the instruction feed.</p>
+</li>
+<li>
+<p>The processor handles pipeline conflicts during execution time.</p>
+</li>
+</ul>
+<h4 id="speculative-execution">Speculative execution</h4>
+<p>One modern approach is also that we “guess” what will happen. If we were correct, great! Otherwise, go back to previous state.</p>
+<p>Usually done with loads and jumps.</p>
+<h3 id="loop-unrolling">Loop unrolling</h3>
+<p>Loop unrolling is a quite simple conecpt, we just replicate the loop code to achieve more parallelism.</p>
+<p>Uses different registers per replication</p>
+<h3 id="summary">Summary</h3>
+<ul>
+<li>
+<p>Pipelining increases the instruction flow by parallelising.</p>
+<ul>
+<li>
+<p>More instructions per second</p>
+</li>
+<li>
+<p><strong>But</strong>, each individual instruction still takes the same amount of time.</p>
+</li>
+</ul>
+</li>
+<li>
+<p>Multiple issue processors (VLIW and super scalar).</p>
+</li>
+<li>
+<p>Dynamical scheduling and speculative execution:</p>
+<ul>
+<li>
+<p>Hazards limits the achievable parallelism.</p>
+</li>
+<li>
+<p>CPU complexity → “The power wall”.</p>
+</li>
+</ul>
+</li>
+</ul>  <nav class="flex justify-between mt-8 pt-4 border-t border-border" data-astro-cid-v5ro3oot> <a href="/school/eda333/eda333_3" class="text-primary hover:text-primary/80 transition-colors" data-astro-cid-v5ro3oot>
+← Previous: Part 3 - Pipelining </a> <a href="/school/eda333/eda333_5" class="text-primary hover:text-primary/80 transition-colors" data-astro-cid-v5ro3oot>
+Next: Part 5 - Cache memory →
+</a> </nav> </article>  </main> </div> </body></html> 

@@ -1,85 +1,180 @@
-<!doctype html><html><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge"><title>rezvan | Part 1 - Introduction</title><link rel=icon type=image/png href=https://rezvan.xyz/images/icon.png><meta name=viewport content="width=device-width,initial-scale=1">
-<meta name=description content="Concurrency, multi-threading, parallelism. These are all big terms thrown around in the computer-science world. For an outsider it can be quite confusing what these exactly are and how they differ from each other. In this series we&rsquo;ll cover and dive into concurrency and its applications.
-Let&rsquo;s start by defining what we mean by concurrency.
-Introduction Concurrency, in its very definition is, the fact of two or more events or circumstances happening or existing at the same time."><meta property="og:image" content="https://raw.githubusercontent.com/rezaarezvan/rezvan.xyz/main/images/icon.png"><meta property="og:url" content="https://rezvan.xyz/school/tda384/tda384/"><meta property="og:site_name" content="rezvan"><meta property="og:title" content="Part 1 - Introduction"><meta property="og:description" content="Concurrency, multi-threading, parallelism. These are all big terms thrown around in the computer-science world. For an outsider it can be quite confusing what these exactly are and how they differ from each other. In this series we’ll cover and dive into concurrency and its applications.
-Let’s start by defining what we mean by concurrency.
-Introduction Concurrency, in its very definition is, the fact of two or more events or circumstances happening or existing at the same time."><meta property="og:locale" content="en_us"><meta property="og:type" content="article"><meta property="article:section" content="school"><meta property="article:published_time" content="2023-01-16T00:00:00+00:00"><meta property="article:modified_time" content="2024-05-26T11:09:10+02:00"><meta name=twitter:card content="summary"><meta name=twitter:title content="Part 1 - Introduction"><meta name=twitter:description content="Concurrency, multi-threading, parallelism. These are all big terms thrown around in the computer-science world. For an outsider it can be quite confusing what these exactly are and how they differ from each other. In this series we’ll cover and dive into concurrency and its applications.
-Let’s start by defining what we mean by concurrency.
-Introduction Concurrency, in its very definition is, the fact of two or more events or circumstances happening or existing at the same time."><link rel=stylesheet href=https://rezvan.xyz/css/combined.min.285bd67a05674fdcb27bb67f867c7ac6b2e0c0b5535c536ba4bb37cd80e377e9.css integrity="sha256-KFvWegVnT9yye7Z/hnx6xrLgwLVTXFNrpLs3zYDjd+k="><link id=lightSyntaxStyle rel=stylesheet href=https://rezvan.xyz/css/light_syntax.min.d9e0828a4ff7f2d7317942062fc751fa487b2ac2c47b934ad082abd7d3ca6690.css integrity="sha256-2eCCik/38tcxeUIGL8dR+kh7KsLEe5NK0IKr19PKZpA="><link id=darkModeStyle rel=stylesheet href=https://rezvan.xyz/css/dark.min.113ab1177b874ffa2011e31f94df77b25b4c0aee6c35e5db0e6c54ebe2071597.css integrity="sha256-ETqxF3uHT/ogEeMflN93sltMCu5sNeXbDmxU6+IHFZc=" disabled><link id=darkSyntaxStyle rel=stylesheet href=https://rezvan.xyz/css/dark_syntax.min.1a878f3d8fb43359bd3b44bc70c4074f682f11066c6537bf6248b696cbe56586.css integrity="sha256-GoePPY+0M1m9O0S8cMQHT2gvEQZsZTe/Yki2lsvlZYY=" disabled><script type=text/javascript src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type=text/x-mathjax-config>
-		MathJax.Hub.Config({
-			tex2jax: {
-				inlineMath: [['$','$'], ['\\(','\\)']],
-				displayMath: [['$$','$$'], ['\[','\]']],
-				processEscapes: true,
-				processEnvironments: true,
-				skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
-				TeX: { equationNumbers: { autoNumber: "AMS" },
-						 extensions: ["AMSmath.js", "AMSsymbols.js"] }
-			}
-		});
-		</script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css><script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js onload=renderMathInElement(document.body)></script><script>document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]})})</script></head><body><header><nav id=site-navbar><div class=navbar-content><a href=https://rezvan.xyz/ class=logo>rezvan.xyz</a><div class=navbar-links><a href=/principles class=nav-link><span class=bracket>[</span>principles<span class=bracket>]</span></a>
-<a href=/cv class=nav-link><span class=bracket>[</span>cv<span class=bracket>]</span></a>
-<a href=/posts class=nav-link><span class=bracket>[</span>posts<span class=bracket>]</span></a>
-<a href=/school class=nav-link><span class=bracket>[</span>school<span class=bracket>]</span></a></div><div class=theme-toggle><span id=dark-mode-toggle onclick=toggleTheme() aria-label="Toggle theme">○
-</span><script src=https://rezvan.xyz/js/themetoggle.js></script></div></div></nav></header><div class=content><main><article><div class=title><h1>Part 1 - Introduction</h1><div class=meta>Posted on Jan 16, 2023</div><div class=meta>(Last updated: May 26, 2024)</div></div><section class=body><p>Concurrency, multi-threading, parallelism. These are all big terms thrown around in the computer-science world.
+<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width"><meta name="generator" content="Astro v4.11.5"><link rel="icon" type="image" href="/favicon.ico"><title>Part 1 - Introduction</title><!-- KaTeX support --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script><!-- inline KaTeX --><link rel="stylesheet" href="/_astro/index.BZ7em0Mc.css">
+<link rel="stylesheet" href="/_astro/_slug_.DPnDUiRI.css">
+<style>article[data-astro-cid-v5ro3oot]{max-width:80ch;margin:0 auto}
+</style><script type="module">document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]})});
+</script></head> <body class="font-sans antialiased"> <div class="container mx-auto flex min-h-screen"> <aside class="w-64 border-r border-[var(--border-color)] border-dashed pt-8"> <header class="flex flex-col h-full"> <div class="flex items-center mb-4"> <script>
+  function setTheme(mode) {
+    localStorage.setItem("theme-storage", mode);
+    document.documentElement.setAttribute('data-theme', mode);
+  }
+  function toggleTheme() {
+    const currentTheme = localStorage.getItem("theme-storage") || "light";
+    const newTheme = currentTheme === "light" ? "dark" : "light";
+    setTheme(newTheme);
+  }
+  const savedTheme = localStorage.getItem("theme-storage") || "light";
+  setTheme(savedTheme);
+  window.toggleTheme = toggleTheme;
+</script> <button id="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme" class="flex items-center justify-center w-6" data-astro-cid-x3pjskd3>○</button>  <a href="/" class="text-2xl font-semibold ml-3 h-10 pr-3">rezvan.xyz</a> </div> <nav class="flex flex-col space-y-2"> <a href="/principles" class="hover:text-orange-500 dark:hover:text-orange-400 transition-colors">
+[principles]
+</a><a href="/cv" class="hover:text-orange-500 dark:hover:text-orange-400 transition-colors">
+[cv]
+</a><a href="/posts" class="hover:text-orange-500 dark:hover:text-orange-400 transition-colors">
+[posts]
+</a><a href="/school" class="hover:text-orange-500 dark:hover:text-orange-400 transition-colors">
+[school]
+</a> </nav> </header> </aside> <main class="flex-grow px-8 py-8 overflow-y-auto">  <article class="prose prose-sm sm:prose lg:prose-lg xl:prose-xl max-w-none" data-astro-cid-v5ro3oot> <h1 class="text-4xl font-bold mb-4" data-astro-cid-v5ro3oot>Part 1 - Introduction</h1> <p class="text-sm text-muted-foreground mb-4" data-astro-cid-v5ro3oot>
+Date: 1/16/2023 </p>  <p>Concurrency, multi-threading, parallelism. These are all big terms thrown around in the computer-science world.
 For an outsider it can be quite confusing what these exactly are and how they differ from each other.
-In this series we&rsquo;ll cover and dive into concurrency and its applications.</p><p>Let&rsquo;s start by defining what we mean by concurrency.</p><h1 id=introduction>Introduction</h1><p>Concurrency, in its very definition is, the fact of two or more events or circumstances happening or existing at the same time.</p><p>If we apply this to computer-science, we can see that&rsquo;s a very natural thing.
-Executing two or more events at the same time is something we would love. The only problem is that, we can not guarantee safety.</p><p>Let&rsquo;s look at an example.</p><h4 id=simple-example>Simple example</h4><p>Let&rsquo;s look at a Java program which increments a simple counter:</p><p>In a sequential (non-concurrent) program this would be:</p><pre tabindex=0><code>public class Counter {
-    private int counter = 0;
-
-    public void run() {
-        int cnt = counter;
-        counter = cnt + 1;
-    }
-
-    public int counter() {
-        return counter;
-    }
-}
-</code></pre><pre tabindex=0><code>public class SequentialCount {
-    public static void main(String[] args) {
-        Counter counter = new Counter();
-
-        counter.run();
-        counter.run();
-
-        System.out.println(counter.counter());
-    }
-}
-</code></pre><p>This program will <strong>always</strong> print out 2. There&rsquo;s no doubt in that.</p><p>If we now introduce concurrency, we will now run these at the same time, or in <em>parallel</em>, do not confuse this with parallelism.
-They&rsquo;re not the same.</p><p>So the idea is that we run the block of code we have on <strong>independent</strong> execution units (so-called threads in Java).</p><p>Specifically, in Java, these threads will run on the <strong>same</strong> <code>counter</code> object. So they will share the global variable called <code>counter</code>.</p><p>We, the programmers, don&rsquo;t have any control in what order these threads will be executed, this is the <em>schedulers</em> job.</p><pre tabindex=0><code>public class ConcurrentCounter extends Counter implements Runnable {
-    /*
-
-    threads will execute run()
-
-    */
-}
-</code></pre><pre tabindex=0><code>public class ConcurrentCount {
-    public static void main(String[] args) {
-        ConcurrentCounter counter = new ConcurrentCounter();
-
-        Thread t = new Thread(counter);
-        Thread u = new Thread(counter);
-
-        t.start();
-        u.start();
-
-        try { t.join(); u.join(); }
-
-        catch (InterruptedException e) {
-            System.out.println(&#34;Interrupted!&#34;);
-        }
-
-        System.out.println(counter.counter());
-    }
-}
-</code></pre><p>If we compile and run this, we necessarily won&rsquo;t always get the expected answer, 2. In some (rare) cases, we will get the answer 1.</p><p>But if there is a risk for failure, why would we even want to write concurrent programs? Well, the answer can be described in three points.</p><ul><li>Abstraction<ul><li>By separating tasks and making sure we don&rsquo;t have to worry about them. For example downloading multiple files at once.</li></ul></li><li>Responsiveness<ul><li>We can provide a responsive, user interface by writing concurrent programs. For example, browsing YouTube while downloading files.</li></ul></li><li>Performance<ul><li>Splitting complex tasks, into smaller, subtasks will greatly increase the pure computer performance.</li></ul></li></ul><p>Let&rsquo;s also make one thing clear. Concurrency vs Parallelism. Concurrency is &ldquo;logical parallelism&rdquo; and parallelism is &ldquo;physical parallelism&rdquo; and parallelism is &ldquo;physical parallelism&rdquo;.</p><p>Parallelism is about taking advantage of redundant hardware.</p><p>Today, concurrency is everywhere, all operating-systems are based on concurrency and making sure things are speedy.</p><p>But these speedups aren&rsquo;t always free.</p><h1 id=amdahls-law>Amdahl&rsquo;s law</h1><p>Amdahl&rsquo;s law gives us an equation that, given $n$ processors (these are not necessarily physical processors but can be execution units) that can run in parallel.</p><p>What&rsquo;s the maximum speedup we can gain?
-$$
-\text{max speedup} = \frac{1}{(1 - p) + \frac{p}{n}}
-$$</p><p>$p$ is the % of the program that is being run in parallel. By plugging in some arbitrary values we find quickly that, after a certain threshold, more parallelism doesn&rsquo;t help.</p><h1 id=terminology>Terminology</h1><p>Now that we&rsquo;ve looked at the basics, let&rsquo;s look at some important terminology.</p><p>A process is an <strong>independent unit of execution</strong>. It&rsquo;s an abstraction of a running sequential program.
-This is what the operating system <strong>schedules</strong>, which <strong>process</strong> to run.</p><p>The <strong>scheduler</strong> is the system unit that is in charge of the <strong>process state</strong>.
-There are 3 states in which a process can be in:</p><ul><li>Ready<ul><li>Ready to be executed, but not allocated to any execution unit.</li></ul></li><li>Blocked<ul><li>Waiting for an event to happen</li></ul></li><li>Running<ul><li>Running on some execution unit</li></ul></li></ul><p>A <strong>thread</strong> is a <em>lightweight process</em>. The actual difference between a process and a thread is fuzzy and implementation specific.</p><p>Our definition will be:</p><p>Process: Executing units that do <strong>not</strong> share memory.<br>Threads: Executing units that share memory.</p><p>An important thing to remember is that, threads (or execution units that share memory) <strong>communicate</strong> via memory.
-While processes (or execution units that do not share memory) send real messages between the processes themselves.</p><p>These models are called, <strong>shared memory</strong> and <strong>distributed memory</strong>.</p><h1 id=traces>Traces</h1><p>A trace is an abstraction of concrete executions, these executions being:</p><ul><li>Atomic/linearized<ul><li>The effects of each thread appear as if they happened instantaneously.</li></ul></li><li>Complete<ul><li>The trace includes all intermediate atomic states.</li></ul></li><li>Interleaved<ul><li>The trace is an interleaving of each thread’s linear trace (in particular, no simultaneity).</li></ul></li></ul><p>What this means is, the sequence of <em>states</em> gives an execution <strong>trace</strong> of the concurrent program.</p><p>So different <em>traces</em> lead to different results in the program.</p><h1 id=conclusion>Conclusion</h1><p>This concludes this first part in this series, we&rsquo;ve only looked at the pure basics and terminology here.
-In the next part we&rsquo;ll cover races, locks and semaphores, which are the first real concurrency principles we&rsquo;ll look at.</p></section></article><nav class=navigation><div class="nav-item previous"></div><div class="nav-item next"><a href=/school/tda384/tda384_2/ title="Next: Part 2 - Races, Locks, and Semaphores">Next &rarr;</a></div></nav></main></div><footer id=site-footer><div class=social-links><a href=https://github.com/rezaarezvan title class=social-link><span class=bracket>[</span>github<span class=bracket>]</span></a>
-<a href=https://x.com/rzvan__/ title class=social-link><span class=bracket>[</span>x<span class=bracket>]</span></a></div><div class=footer-marquee><div class=footer-marquee__content><span class=footer-marquee__item>memento mori • amor fati • sic parvis magna • per aspera ad astra</span>
-<span class=footer-marquee__item>memento mori • amor fati • sic parvis magna • per aspera ad astra</span></div></div></footer></body></html>
+In this series we’ll cover and dive into concurrency and its applications.</p>
+<p>Let’s start by defining what we mean by concurrency.</p>
+<h1 id="introduction">Introduction</h1>
+<p>Concurrency, in its very definition is, the fact of two or more events or circumstances happening or existing at the same time.</p>
+<p>If we apply this to computer-science, we can see that’s a very natural thing.
+Executing two or more events at the same time is something we would love. The only problem is that, we can not guarantee safety.</p>
+<p>Let’s look at an example.</p>
+<h4 id="simple-example">Simple example</h4>
+<p>Let’s look at a Java program which increments a simple counter:</p>
+<p>In a sequential (non-concurrent) program this would be:</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>public class Counter {</span></span>
+<span class="line"><span>    private int counter = 0;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    public void run() {</span></span>
+<span class="line"><span>        int cnt = counter;</span></span>
+<span class="line"><span>        counter = cnt + 1;</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    public int counter() {</span></span>
+<span class="line"><span>        return counter;</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>public class SequentialCount {</span></span>
+<span class="line"><span>    public static void main(String[] args) {</span></span>
+<span class="line"><span>        Counter counter = new Counter();</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        counter.run();</span></span>
+<span class="line"><span>        counter.run();</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        System.out.println(counter.counter());</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>This program will <strong>always</strong> print out 2. There’s no doubt in that.</p>
+<p>If we now introduce concurrency, we will now run these at the same time, or in <em>parallel</em>, do not confuse this with parallelism.
+They’re not the same.</p>
+<p>So the idea is that we run the block of code we have on <strong>independent</strong> execution units (so-called threads in Java).</p>
+<p>Specifically, in Java, these threads will run on the <strong>same</strong> <code>counter</code> object. So they will share the global variable called <code>counter</code>.</p>
+<p>We, the programmers, don’t have any control in what order these threads will be executed, this is the <em>schedulers</em> job.</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>public class ConcurrentCounter extends Counter implements Runnable {</span></span>
+<span class="line"><span>    /*</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    threads will execute run()</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    */</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>public class ConcurrentCount {</span></span>
+<span class="line"><span>    public static void main(String[] args) {</span></span>
+<span class="line"><span>        ConcurrentCounter counter = new ConcurrentCounter();</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        Thread t = new Thread(counter);</span></span>
+<span class="line"><span>        Thread u = new Thread(counter);</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        t.start();</span></span>
+<span class="line"><span>        u.start();</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        try { t.join(); u.join(); }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        catch (InterruptedException e) {</span></span>
+<span class="line"><span>            System.out.println("Interrupted!");</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        System.out.println(counter.counter());</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>If we compile and run this, we necessarily won’t always get the expected answer, 2. In some (rare) cases, we will get the answer 1.</p>
+<p>But if there is a risk for failure, why would we even want to write concurrent programs? Well, the answer can be described in three points.</p>
+<ul>
+<li>Abstraction
+<ul>
+<li>By separating tasks and making sure we don’t have to worry about them. For example downloading multiple files at once.</li>
+</ul>
+</li>
+<li>Responsiveness
+<ul>
+<li>We can provide a responsive, user interface by writing concurrent programs. For example, browsing YouTube while downloading files.</li>
+</ul>
+</li>
+<li>Performance
+<ul>
+<li>Splitting complex tasks, into smaller, subtasks will greatly increase the pure computer performance.</li>
+</ul>
+</li>
+</ul>
+<p>Let’s also make one thing clear. Concurrency vs Parallelism. Concurrency is “logical parallelism” and parallelism is “physical parallelism” and parallelism is “physical parallelism”.</p>
+<p>Parallelism is about taking advantage of redundant hardware.</p>
+<p>Today, concurrency is everywhere, all operating-systems are based on concurrency and making sure things are speedy.</p>
+<p>But these speedups aren’t always free.</p>
+<h1 id="amdahls-law">Amdahl’s law</h1>
+<p>Amdahl’s law gives us an equation that, given <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">n</span></span></span></span> processors (these are not necessarily physical processors but can be execution units) that can run in parallel.</p>
+<p>What’s the maximum speedup we can gain?</p>
+<span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mtext>max speedup</mtext><mo>=</mo><mfrac><mn>1</mn><mrow><mo stretchy="false">(</mo><mn>1</mn><mo>−</mo><mi>p</mi><mo stretchy="false">)</mo><mo>+</mo><mfrac><mi>p</mi><mi>n</mi></mfrac></mrow></mfrac></mrow><annotation encoding="application/x-tex">\text{max speedup} = \frac{1}{(1 - p) + \frac{p}{n}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord text"><span class="mord">max speedup</span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.3524em;vertical-align:-1.031em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3214em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mopen">(</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord mathnormal">p</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.7475em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">n</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.4461em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">p</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.031em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>p</mi></mrow><annotation encoding="application/x-tex">p</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.1944em;"></span><span class="mord mathnormal">p</span></span></span></span> is the % of the program that is being run in parallel. By plugging in some arbitrary values we find quickly that, after a certain threshold, more parallelism doesn’t help.</p>
+<h1 id="terminology">Terminology</h1>
+<p>Now that we’ve looked at the basics, let’s look at some important terminology.</p>
+<p>A process is an <strong>independent unit of execution</strong>. It’s an abstraction of a running sequential program.
+This is what the operating system <strong>schedules</strong>, which <strong>process</strong> to run.</p>
+<p>The <strong>scheduler</strong> is the system unit that is in charge of the <strong>process state</strong>.
+There are 3 states in which a process can be in:</p>
+<ul>
+<li>Ready
+<ul>
+<li>Ready to be executed, but not allocated to any execution unit.</li>
+</ul>
+</li>
+<li>Blocked
+<ul>
+<li>Waiting for an event to happen</li>
+</ul>
+</li>
+<li>Running
+<ul>
+<li>Running on some execution unit</li>
+</ul>
+</li>
+</ul>
+<p>A <strong>thread</strong> is a <em>lightweight process</em>. The actual difference between a process and a thread is fuzzy and implementation specific.</p>
+<p>Our definition will be:</p>
+<p>Process: Executing units that do <strong>not</strong> share memory.<br>
+Threads: Executing units that share memory.</p>
+<p>An important thing to remember is that, threads (or execution units that share memory) <strong>communicate</strong> via memory.
+While processes (or execution units that do not share memory) send real messages between the processes themselves.</p>
+<p>These models are called, <strong>shared memory</strong> and <strong>distributed memory</strong>.</p>
+<h1 id="traces">Traces</h1>
+<p>A trace is an abstraction of concrete executions, these executions being:</p>
+<ul>
+<li>Atomic/linearized
+<ul>
+<li>The effects of each thread appear as if they happened instantaneously.</li>
+</ul>
+</li>
+<li>Complete
+<ul>
+<li>The trace includes all intermediate atomic states.</li>
+</ul>
+</li>
+<li>Interleaved
+<ul>
+<li>The trace is an interleaving of each thread’s linear trace (in particular, no simultaneity).</li>
+</ul>
+</li>
+</ul>
+<p>What this means is, the sequence of <em>states</em> gives an execution <strong>trace</strong> of the concurrent program.</p>
+<p>So different <em>traces</em> lead to different results in the program.</p>
+<h1 id="conclusion">Conclusion</h1>
+<p>This concludes this first part in this series, we’ve only looked at the pure basics and terminology here.
+In the next part we’ll cover races, locks and semaphores, which are the first real concurrency principles we’ll look at.</p>  <nav class="flex justify-between mt-8 pt-4 border-t border-border" data-astro-cid-v5ro3oot>  <a href="/school/tda384/tda384_2" class="text-primary hover:text-primary/80 transition-colors" data-astro-cid-v5ro3oot>
+Next: Part 2 - Races, Locks, and Semaphores →
+</a> </nav> </article>  </main> </div> </body></html> 

@@ -1,86 +1,178 @@
-<!doctype html><html><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge"><title>rezvan | Part 2 - MIPS</title><link rel=icon type=image/png href=https://rezvan.xyz/images/icon.png><meta name=viewport content="width=device-width,initial-scale=1">
-<meta name=description content="In this part we&rsquo;ll properly cover the MIPS architecture in depth.
-Parameter transferring When calling a function in C code, what is happening at the assembler level is, calling a subroutine (usually).
-What we need to do before a subroutine call, is the following:
-Place the input parameters into their respective registers Call the function/subroutine Allocate memory for eventual saved and local variables Execute the function/procedure Place the result in a register Reset the stack, if needed Return to where the function/subroutine got called."><meta property="og:image" content="https://raw.githubusercontent.com/rezaarezvan/rezvan.xyz/main/images/icon.png"><meta property="og:url" content="https://rezvan.xyz/school/eda333/eda333_2/"><meta property="og:site_name" content="rezvan"><meta property="og:title" content="Part 2 - MIPS"><meta property="og:description" content="In this part we’ll properly cover the MIPS architecture in depth.
-Parameter transferring When calling a function in C code, what is happening at the assembler level is, calling a subroutine (usually).
-What we need to do before a subroutine call, is the following:
-Place the input parameters into their respective registers Call the function/subroutine Allocate memory for eventual saved and local variables Execute the function/procedure Place the result in a register Reset the stack, if needed Return to where the function/subroutine got called."><meta property="og:locale" content="en_us"><meta property="og:type" content="article"><meta property="article:section" content="school"><meta property="article:published_time" content="2023-03-22T00:00:00+00:00"><meta property="article:modified_time" content="2024-05-26T11:09:10+02:00"><meta name=twitter:card content="summary"><meta name=twitter:title content="Part 2 - MIPS"><meta name=twitter:description content="In this part we’ll properly cover the MIPS architecture in depth.
-Parameter transferring When calling a function in C code, what is happening at the assembler level is, calling a subroutine (usually).
-What we need to do before a subroutine call, is the following:
-Place the input parameters into their respective registers Call the function/subroutine Allocate memory for eventual saved and local variables Execute the function/procedure Place the result in a register Reset the stack, if needed Return to where the function/subroutine got called."><link rel=stylesheet href=https://rezvan.xyz/css/combined.min.285bd67a05674fdcb27bb67f867c7ac6b2e0c0b5535c536ba4bb37cd80e377e9.css integrity="sha256-KFvWegVnT9yye7Z/hnx6xrLgwLVTXFNrpLs3zYDjd+k="><link id=lightSyntaxStyle rel=stylesheet href=https://rezvan.xyz/css/light_syntax.min.d9e0828a4ff7f2d7317942062fc751fa487b2ac2c47b934ad082abd7d3ca6690.css integrity="sha256-2eCCik/38tcxeUIGL8dR+kh7KsLEe5NK0IKr19PKZpA="><link id=darkModeStyle rel=stylesheet href=https://rezvan.xyz/css/dark.min.113ab1177b874ffa2011e31f94df77b25b4c0aee6c35e5db0e6c54ebe2071597.css integrity="sha256-ETqxF3uHT/ogEeMflN93sltMCu5sNeXbDmxU6+IHFZc=" disabled><link id=darkSyntaxStyle rel=stylesheet href=https://rezvan.xyz/css/dark_syntax.min.1a878f3d8fb43359bd3b44bc70c4074f682f11066c6537bf6248b696cbe56586.css integrity="sha256-GoePPY+0M1m9O0S8cMQHT2gvEQZsZTe/Yki2lsvlZYY=" disabled><script type=text/javascript src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type=text/x-mathjax-config>
-		MathJax.Hub.Config({
-			tex2jax: {
-				inlineMath: [['$','$'], ['\\(','\\)']],
-				displayMath: [['$$','$$'], ['\[','\]']],
-				processEscapes: true,
-				processEnvironments: true,
-				skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
-				TeX: { equationNumbers: { autoNumber: "AMS" },
-						 extensions: ["AMSmath.js", "AMSsymbols.js"] }
-			}
-		});
-		</script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css><script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js onload=renderMathInElement(document.body)></script><script>document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]})})</script></head><body><header><nav id=site-navbar><div class=navbar-content><a href=https://rezvan.xyz/ class=logo>rezvan.xyz</a><div class=navbar-links><a href=/principles class=nav-link><span class=bracket>[</span>principles<span class=bracket>]</span></a>
-<a href=/cv class=nav-link><span class=bracket>[</span>cv<span class=bracket>]</span></a>
-<a href=/posts class=nav-link><span class=bracket>[</span>posts<span class=bracket>]</span></a>
-<a href=/school class=nav-link><span class=bracket>[</span>school<span class=bracket>]</span></a></div><div class=theme-toggle><span id=dark-mode-toggle onclick=toggleTheme() aria-label="Toggle theme">○
-</span><script src=https://rezvan.xyz/js/themetoggle.js></script></div></div></nav></header><div class=content><main><article><div class=title><h1>Part 2 - MIPS</h1><div class=meta>Posted on Mar 22, 2023</div><div class=meta>(Last updated: May 26, 2024)</div></div><section class=body><p>In this part we&rsquo;ll properly cover the MIPS architecture in depth.</p><h3 id=parameter-transferring>Parameter transferring</h3><p>When calling a function in C code, what is happening at the assembler level is, calling a subroutine (usually).</p><p>What we need to do before a subroutine call, is the following:</p><ol><li>Place the input parameters into their respective registers</li><li>Call the function/subroutine</li><li>Allocate memory for eventual saved and local variables</li><li>Execute the function/procedure</li><li>Place the result in a register</li><li>Reset the stack, if needed</li><li>Return to where the function/subroutine got called.</li></ol><h3 id=register-conventions>Register conventions</h3><p>Since we now need to store our input parameters into register before we call a function, we need to create a convention to where we expect things to be.</p><p>MIPS has this following convention:</p><ul><li><p>$a_0 - a_3$: Input parameters</p></li><li><p>$v_0, v_1$: Result values</p></li><li><p>$t_0 - t_9$: Temporary variables</p></li><li><p>$s_0 - s_7$: &ldquo;Saved&rdquo; registers</p><ul><li>Must be saved and reset by each respective subroutine.</li></ul></li><li><p>$gp$: global pointer</p></li><li><p>$sp$: stack pointer</p></li><li><p>$fp$: frame pointer</p></li><li><p>$ra$: return address</p></li></ul><p>We discussed a lot of subroutines, but how do we actually call one?</p><p><code>jal Label</code> will jump to a label (starting point of a subroutine).</p><p>To return from a subroutine call <code>jr $ra</code>.</p><p>A very simple function like:</p><pre tabindex=0><code>int example(int g, int h, int i, int j) {
-    int f;
-    f = (g + h) - (i + j);
-    return f;
-}
-</code></pre><p>Given that the arguments are in $a_0, \ldots, a_3$, f is in $s_0$ (therefore we must save $s_0$ to the stack before!).</p><p>The result will be stored in $v_0$</p><p>MIPS Code:</p><pre tabindex=0><code>example:
-    addi $sp, $sp, -4   # Allocate space for one variable, s_0
-    sw   $s0, 0($sp)    # Save s_0
-
-    add  $t0, $a0, $a1  # (g + h)
-    add  $t1, $a2, $a3  # (i + j)
-    sub  $s0, $t0, $t1  # f = (g + h) - (i + j)a
-
-    add  $v0, $s0, $zero # Store value
-
-    lw   $s0, 0($sp) # Reset s_0 value
-    addi $sp, $sp, 4 # Reset stack pointer
-
-    jr   $ra         # Return
-</code></pre><p>Let&rsquo;s now take a recursive</p><pre tabindex=0><code>int fact(int n) {
-    if(n &lt; 1) {
-        return 1;
-    } else {
-        return n * fact(n - 1);
-    }
-}
-</code></pre><p>input parameter n in $a_0$, result in $v_0$</p><p>MIPS:</p><pre tabindex=0><code>fact:
-    addi $sp, $sp, -8   # Adjust stack so we can store 2 variables
-    sw   $ra, 4($sp)    # Save return address
-    sw   $a0, 0($sp)    # Save input register
-
-    slti $t0, $a0, 1    # test for n &lt; 1
-    beq  $t0, $zero, L1
-    addi $v0, $zero, 1  # If n &lt; 1, result = 1
-
-    addi $sp, $sp, 8    # Pop stack
-    jr   $ra            # Return
-
-L1: addi $a0, $a0, -1   # Decrement n
-    jal  fact           # Recursive call
-
-    lw   $a0, 0($sp)    # restore orignal n
-    lw   $ra  4($sp)    # and return address
-
-    addi $sp, $sp, 8    # Pop stack
-    mul  $v0, $a0, $v0  # n * fact(n - 1)
-    jr   $ra            # return
-</code></pre><h3 id=less-than-a-word>Less than a word</h3><p>Sometimes we want to only access a byte or half-word:</p><pre tabindex=0><code>lb rt, offset(rs)
-lh rt, offset(rs)
-
-# Unsigned
-lbu rt, offset(rs)
-lhu rt, offset(rs)
-
-# Save
-sb rt, offset(rs)
-sh rt, offset(rs)
-</code></pre><h3 id=indexing-vs-pointers>Indexing vs Pointers</h3><ul><li><p>Vector indexing requires:</p><ul><li><p>Multiplication of the index with length</p></li><li><p>Summation of this product to the vectors start address</p></li></ul></li><li><p>Pointer corresponds directly to a memory address</p><ul><li>Therefore, it&rsquo;s faster</li></ul></li></ul><h3 id=common-mistakes>Common mistakes</h3><p>Common mistakes when writing programs in MIPS are:</p><ul><li><p>Incrementing with 1 and not 4!</p></li><li><p>MIPS uses byte addressing</p></li></ul></section></article><nav class=navigation><div class="nav-item previous"><a href=/school/eda333/eda333/ title="Previous: Part 1 - Introduction">&larr; Previous</a></div><div class="nav-item next"><a href=/school/eda333/eda333_3/ title="Next: Part 3 - Pipelining">Next &rarr;</a></div></nav></main></div><footer id=site-footer><div class=social-links><a href=https://github.com/rezaarezvan title class=social-link><span class=bracket>[</span>github<span class=bracket>]</span></a>
-<a href=https://x.com/rzvan__/ title class=social-link><span class=bracket>[</span>x<span class=bracket>]</span></a></div><div class=footer-marquee><div class=footer-marquee__content><span class=footer-marquee__item>memento mori • amor fati • sic parvis magna • per aspera ad astra</span>
-<span class=footer-marquee__item>memento mori • amor fati • sic parvis magna • per aspera ad astra</span></div></div></footer></body></html>
+<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width"><meta name="generator" content="Astro v4.11.5"><link rel="icon" type="image" href="/favicon.ico"><title>Part 2 - MIPS</title><!-- KaTeX support --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script><!-- inline KaTeX --><link rel="stylesheet" href="/_astro/index.BZ7em0Mc.css">
+<link rel="stylesheet" href="/_astro/_slug_.DPnDUiRI.css">
+<style>article[data-astro-cid-v5ro3oot]{max-width:80ch;margin:0 auto}
+</style><script type="module">document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]})});
+</script></head> <body class="font-sans antialiased"> <div class="container mx-auto flex min-h-screen"> <aside class="w-64 border-r border-[var(--border-color)] border-dashed pt-8"> <header class="flex flex-col h-full"> <div class="flex items-center mb-4"> <script>
+  function setTheme(mode) {
+    localStorage.setItem("theme-storage", mode);
+    document.documentElement.setAttribute('data-theme', mode);
+  }
+  function toggleTheme() {
+    const currentTheme = localStorage.getItem("theme-storage") || "light";
+    const newTheme = currentTheme === "light" ? "dark" : "light";
+    setTheme(newTheme);
+  }
+  const savedTheme = localStorage.getItem("theme-storage") || "light";
+  setTheme(savedTheme);
+  window.toggleTheme = toggleTheme;
+</script> <button id="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme" class="flex items-center justify-center w-6" data-astro-cid-x3pjskd3>○</button>  <a href="/" class="text-2xl font-semibold ml-3 h-10 pr-3">rezvan.xyz</a> </div> <nav class="flex flex-col space-y-2"> <a href="/principles" class="hover:text-orange-500 dark:hover:text-orange-400 transition-colors">
+[principles]
+</a><a href="/cv" class="hover:text-orange-500 dark:hover:text-orange-400 transition-colors">
+[cv]
+</a><a href="/posts" class="hover:text-orange-500 dark:hover:text-orange-400 transition-colors">
+[posts]
+</a><a href="/school" class="hover:text-orange-500 dark:hover:text-orange-400 transition-colors">
+[school]
+</a> </nav> </header> </aside> <main class="flex-grow px-8 py-8 overflow-y-auto">  <article class="prose prose-sm sm:prose lg:prose-lg xl:prose-xl max-w-none" data-astro-cid-v5ro3oot> <h1 class="text-4xl font-bold mb-4" data-astro-cid-v5ro3oot>Part 2 - MIPS</h1> <p class="text-sm text-muted-foreground mb-4" data-astro-cid-v5ro3oot>
+Date: 3/22/2023 </p>  <p>In this part we’ll properly cover the MIPS architecture in depth.</p>
+<h3 id="parameter-transferring">Parameter transferring</h3>
+<p>When calling a function in C code, what is happening at the assembler level is, calling a subroutine (usually).</p>
+<p>What we need to do before a subroutine call, is the following:</p>
+<ol>
+<li>Place the input parameters into their respective registers</li>
+<li>Call the function/subroutine</li>
+<li>Allocate memory for eventual saved and local variables</li>
+<li>Execute the function/procedure</li>
+<li>Place the result in a register</li>
+<li>Reset the stack, if needed</li>
+<li>Return to where the function/subroutine got called.</li>
+</ol>
+<h3 id="register-conventions">Register conventions</h3>
+<p>Since we now need to store our input parameters into register before we call a function, we need to create a convention to where we expect things to be.</p>
+<p>MIPS has this following convention:</p>
+<ul>
+<li>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>a</mi><mn>0</mn></msub><mo>−</mo><msub><mi>a</mi><mn>3</mn></msub></mrow><annotation encoding="application/x-tex">a_0 - a_3</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.5806em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">3</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>: Input parameters</p>
+</li>
+<li>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>v</mi><mn>0</mn></msub><mo separator="true">,</mo><msub><mi>v</mi><mn>1</mn></msub></mrow><annotation encoding="application/x-tex">v_0, v_1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.1944em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">v</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0359em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">v</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0359em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>: Result values</p>
+</li>
+<li>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>t</mi><mn>0</mn></msub><mo>−</mo><msub><mi>t</mi><mn>9</mn></msub></mrow><annotation encoding="application/x-tex">t_0 - t_9</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7651em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal">t</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.7651em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal">t</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">9</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>: Temporary variables</p>
+</li>
+<li>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>s</mi><mn>0</mn></msub><mo>−</mo><msub><mi>s</mi><mn>7</mn></msub></mrow><annotation encoding="application/x-tex">s_0 - s_7</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal">s</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.5806em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal">s</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">7</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>: “Saved” registers</p>
+<ul>
+<li>Must be saved and reset by each respective subroutine.</li>
+</ul>
+</li>
+<li>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>g</mi><mi>p</mi></mrow><annotation encoding="application/x-tex">gp</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">g</span><span class="mord mathnormal">p</span></span></span></span>: global pointer</p>
+</li>
+<li>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>s</mi><mi>p</mi></mrow><annotation encoding="application/x-tex">sp</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.1944em;"></span><span class="mord mathnormal">s</span><span class="mord mathnormal">p</span></span></span></span>: stack pointer</p>
+</li>
+<li>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mi>p</mi></mrow><annotation encoding="application/x-tex">fp</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mord mathnormal">p</span></span></span></span>: frame pointer</p>
+</li>
+<li>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>r</mi><mi>a</mi></mrow><annotation encoding="application/x-tex">ra</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">r</span><span class="mord mathnormal">a</span></span></span></span>: return address</p>
+</li>
+</ul>
+<p>We discussed a lot of subroutines, but how do we actually call one?</p>
+<p><code>jal Label</code> will jump to a label (starting point of a subroutine).</p>
+<p>To return from a subroutine call <code>jr $ra</code>.</p>
+<p>A very simple function like:</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>int example(int g, int h, int i, int j) {</span></span>
+<span class="line"><span>    int f;</span></span>
+<span class="line"><span>    f = (g + h) - (i + j);</span></span>
+<span class="line"><span>    return f;</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>Given that the arguments are in <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>a</mi><mn>0</mn></msub><mo separator="true">,</mo><mo>…</mo><mo separator="true">,</mo><msub><mi>a</mi><mn>3</mn></msub></mrow><annotation encoding="application/x-tex">a_0, \ldots, a_3</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.1944em;"></span><span class="mord"><span class="mord mathnormal">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="minner">…</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">3</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>, f is in <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>s</mi><mn>0</mn></msub></mrow><annotation encoding="application/x-tex">s_0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.5806em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal">s</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> (therefore we must save <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>s</mi><mn>0</mn></msub></mrow><annotation encoding="application/x-tex">s_0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.5806em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal">s</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> to the stack before!).</p>
+<p>The result will be stored in <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>v</mi><mn>0</mn></msub></mrow><annotation encoding="application/x-tex">v_0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.5806em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">v</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0359em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></p>
+<p>MIPS Code:</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>example:</span></span>
+<span class="line"><span>    addi $sp, $sp, -4   # Allocate space for one variable, s_0</span></span>
+<span class="line"><span>    sw   $s0, 0($sp)    # Save s_0</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    add  $t0, $a0, $a1  # (g + h)</span></span>
+<span class="line"><span>    add  $t1, $a2, $a3  # (i + j)</span></span>
+<span class="line"><span>    sub  $s0, $t0, $t1  # f = (g + h) - (i + j)a</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    add  $v0, $s0, $zero # Store value</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    lw   $s0, 0($sp) # Reset s_0 value</span></span>
+<span class="line"><span>    addi $sp, $sp, 4 # Reset stack pointer</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    jr   $ra         # Return</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>Let’s now take a recursive</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>int fact(int n) {</span></span>
+<span class="line"><span>    if(n &#x3C; 1) {</span></span>
+<span class="line"><span>        return 1;</span></span>
+<span class="line"><span>    } else {</span></span>
+<span class="line"><span>        return n * fact(n - 1);</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>input parameter n in <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>a</mi><mn>0</mn></msub></mrow><annotation encoding="application/x-tex">a_0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.5806em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>, result in <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>v</mi><mn>0</mn></msub></mrow><annotation encoding="application/x-tex">v_0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.5806em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">v</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0359em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></p>
+<p>MIPS:</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>fact:</span></span>
+<span class="line"><span>    addi $sp, $sp, -8   # Adjust stack so we can store 2 variables</span></span>
+<span class="line"><span>    sw   $ra, 4($sp)    # Save return address</span></span>
+<span class="line"><span>    sw   $a0, 0($sp)    # Save input register</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    slti $t0, $a0, 1    # test for n &#x3C; 1</span></span>
+<span class="line"><span>    beq  $t0, $zero, L1</span></span>
+<span class="line"><span>    addi $v0, $zero, 1  # If n &#x3C; 1, result = 1</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    addi $sp, $sp, 8    # Pop stack</span></span>
+<span class="line"><span>    jr   $ra            # Return</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>L1: addi $a0, $a0, -1   # Decrement n</span></span>
+<span class="line"><span>    jal  fact           # Recursive call</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    lw   $a0, 0($sp)    # restore orignal n</span></span>
+<span class="line"><span>    lw   $ra  4($sp)    # and return address</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    addi $sp, $sp, 8    # Pop stack</span></span>
+<span class="line"><span>    mul  $v0, $a0, $v0  # n * fact(n - 1)</span></span>
+<span class="line"><span>    jr   $ra            # return</span></span>
+<span class="line"><span></span></span></code></pre>
+<h3 id="less-than-a-word">Less than a word</h3>
+<p>Sometimes we want to only access a byte or half-word:</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>lb rt, offset(rs)</span></span>
+<span class="line"><span>lh rt, offset(rs)</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span># Unsigned</span></span>
+<span class="line"><span>lbu rt, offset(rs)</span></span>
+<span class="line"><span>lhu rt, offset(rs)</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span># Save</span></span>
+<span class="line"><span>sb rt, offset(rs)</span></span>
+<span class="line"><span>sh rt, offset(rs)</span></span>
+<span class="line"><span></span></span></code></pre>
+<h3 id="indexing-vs-pointers">Indexing vs Pointers</h3>
+<ul>
+<li>
+<p>Vector indexing requires:</p>
+<ul>
+<li>
+<p>Multiplication of the index with length</p>
+</li>
+<li>
+<p>Summation of this product to the vectors start address</p>
+</li>
+</ul>
+</li>
+<li>
+<p>Pointer corresponds directly to a memory address</p>
+<ul>
+<li>Therefore, it’s faster</li>
+</ul>
+</li>
+</ul>
+<h3 id="common-mistakes">Common mistakes</h3>
+<p>Common mistakes when writing programs in MIPS are:</p>
+<ul>
+<li>
+<p>Incrementing with 1 and not 4!</p>
+</li>
+<li>
+<p>MIPS uses byte addressing</p>
+</li>
+</ul>  <nav class="flex justify-between mt-8 pt-4 border-t border-border" data-astro-cid-v5ro3oot> <a href="/school/eda333/eda333" class="text-primary hover:text-primary/80 transition-colors" data-astro-cid-v5ro3oot>
+← Previous: Part 1 - Introduction </a> <a href="/school/eda333/eda333_3" class="text-primary hover:text-primary/80 transition-colors" data-astro-cid-v5ro3oot>
+Next: Part 3 - Pipelining →
+</a> </nav> </article>  </main> </div> </body></html> 

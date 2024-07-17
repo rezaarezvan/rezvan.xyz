@@ -1,87 +1,176 @@
-<!doctype html><html><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge"><title>rezvan | Part 1 - Introduction</title><link rel=icon type=image/png href=https://rezvan.xyz/images/icon.png><meta name=viewport content="width=device-width,initial-scale=1">
-<meta name=description content="In this series we&rsquo;ll understand and learn how to compute, quantify and, measure the performance of different systems and programs.
-To compute, quantify and, measure performance let&rsquo;s start by first defining what performance depends on.
-Performance dependencies When we&rsquo;re making a system or a program a lot of different factors will weigh in the total performance:
-The underlying algorithm
-Determines number of operations required, which directly impacts the performance. Programming language, compile, and, architecture of choice."><meta property="og:image" content="https://raw.githubusercontent.com/rezaarezvan/rezvan.xyz/main/images/icon.png"><meta property="og:url" content="https://rezvan.xyz/school/eda333/eda333/"><meta property="og:site_name" content="rezvan"><meta property="og:title" content="Part 1 - Introduction"><meta property="og:description" content="In this series we’ll understand and learn how to compute, quantify and, measure the performance of different systems and programs.
-To compute, quantify and, measure performance let’s start by first defining what performance depends on.
-Performance dependencies When we’re making a system or a program a lot of different factors will weigh in the total performance:
-The underlying algorithm
-Determines number of operations required, which directly impacts the performance. Programming language, compile, and, architecture of choice."><meta property="og:locale" content="en_us"><meta property="og:type" content="article"><meta property="article:section" content="school"><meta property="article:published_time" content="2023-03-21T00:00:00+00:00"><meta property="article:modified_time" content="2024-05-26T11:09:10+02:00"><meta name=twitter:card content="summary"><meta name=twitter:title content="Part 1 - Introduction"><meta name=twitter:description content="In this series we’ll understand and learn how to compute, quantify and, measure the performance of different systems and programs.
-To compute, quantify and, measure performance let’s start by first defining what performance depends on.
-Performance dependencies When we’re making a system or a program a lot of different factors will weigh in the total performance:
-The underlying algorithm
-Determines number of operations required, which directly impacts the performance. Programming language, compile, and, architecture of choice."><link rel=stylesheet href=https://rezvan.xyz/css/combined.min.285bd67a05674fdcb27bb67f867c7ac6b2e0c0b5535c536ba4bb37cd80e377e9.css integrity="sha256-KFvWegVnT9yye7Z/hnx6xrLgwLVTXFNrpLs3zYDjd+k="><link id=lightSyntaxStyle rel=stylesheet href=https://rezvan.xyz/css/light_syntax.min.d9e0828a4ff7f2d7317942062fc751fa487b2ac2c47b934ad082abd7d3ca6690.css integrity="sha256-2eCCik/38tcxeUIGL8dR+kh7KsLEe5NK0IKr19PKZpA="><link id=darkModeStyle rel=stylesheet href=https://rezvan.xyz/css/dark.min.113ab1177b874ffa2011e31f94df77b25b4c0aee6c35e5db0e6c54ebe2071597.css integrity="sha256-ETqxF3uHT/ogEeMflN93sltMCu5sNeXbDmxU6+IHFZc=" disabled><link id=darkSyntaxStyle rel=stylesheet href=https://rezvan.xyz/css/dark_syntax.min.1a878f3d8fb43359bd3b44bc70c4074f682f11066c6537bf6248b696cbe56586.css integrity="sha256-GoePPY+0M1m9O0S8cMQHT2gvEQZsZTe/Yki2lsvlZYY=" disabled><script type=text/javascript src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type=text/x-mathjax-config>
-		MathJax.Hub.Config({
-			tex2jax: {
-				inlineMath: [['$','$'], ['\\(','\\)']],
-				displayMath: [['$$','$$'], ['\[','\]']],
-				processEscapes: true,
-				processEnvironments: true,
-				skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
-				TeX: { equationNumbers: { autoNumber: "AMS" },
-						 extensions: ["AMSmath.js", "AMSsymbols.js"] }
-			}
-		});
-		</script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css><script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js onload=renderMathInElement(document.body)></script><script>document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]})})</script></head><body><header><nav id=site-navbar><div class=navbar-content><a href=https://rezvan.xyz/ class=logo>rezvan.xyz</a><div class=navbar-links><a href=/principles class=nav-link><span class=bracket>[</span>principles<span class=bracket>]</span></a>
-<a href=/cv class=nav-link><span class=bracket>[</span>cv<span class=bracket>]</span></a>
-<a href=/posts class=nav-link><span class=bracket>[</span>posts<span class=bracket>]</span></a>
-<a href=/school class=nav-link><span class=bracket>[</span>school<span class=bracket>]</span></a></div><div class=theme-toggle><span id=dark-mode-toggle onclick=toggleTheme() aria-label="Toggle theme">○
-</span><script src=https://rezvan.xyz/js/themetoggle.js></script></div></div></nav></header><div class=content><main><article><div class=title><h1>Part 1 - Introduction</h1><div class=meta>Posted on Mar 21, 2023</div><div class=meta>(Last updated: May 26, 2024)</div></div><section class=body><p>In this series we&rsquo;ll understand and learn how to compute, quantify and, measure the performance of different systems and programs.</p><p>To compute, quantify and, measure performance let&rsquo;s start by first defining what performance depends on.</p><h3 id=performance-dependencies>Performance dependencies</h3><p>When we&rsquo;re making a system or a program a lot of different factors will weigh in the total performance:</p><ul><li><p>The underlying algorithm</p><ul><li>Determines number of operations required, which directly impacts the performance.</li></ul></li><li><p>Programming language, compile, and, architecture of choice.</p><ul><li>Determines number of instructions.</li></ul></li><li><p>Processor and memory</p><ul><li>Determines how quickly each instruction executes</li></ul></li><li><p>I/O System (Includes the OS)</p><ul><li>Determines how quickly each I/O operation executes</li></ul></li></ul><h3 id=cpu-time>CPU Time</h3><p>We can define CPU time by a very nice equation:
-$$
-\text{CPU Time} = \frac{\text{Instructions}}{\text{Program}} \cdot\ \frac{\text{Clock cycles}}{\text{Instruction}} \cdot\ \frac{\text{Seconds}}{\text{Clock cycle}}
-$$</p><p>We will call these as the following:
-$$
-\text{CPU Time} = IC \cdot\ CPI \cdot\ T_c
-$$</p><p>One way to actually then measure computers or programs is using SPEC.</p><p>SPEC, or <strong>S</strong>tandard <strong>P</strong>erformance <strong>E</strong>valuation <strong>C</strong>orp, is a company which specialize in measuring.</p><p>The idea is to normalize compared to a reference computer using geometric means.</p><p>This is called the SPECvalue.</p><p>Geometric mean:
-$$
-\sqrt[n]{\prod_{i = 1}^{n} \text{Execution time ratio}_i}
-$$</p><h3 id=risccisc-architecture>RISC/CISC Architecture</h3><p>In the early days, it was thought that, if we made the machine instructions closer to real (higher-level) programming functions,
-it would be faster for the computer.</p><p>We now know this is not true, and machine instructions are therefore as small and atomic as possible.
-These two approaches are known as RISC and CISC.</p><ul><li>RISC (<strong>R</strong>educed <strong>I</strong>nstruction <strong>S</strong>et <strong>C</strong>omputers)</li><li>CISC (<strong>C</strong>omplex <strong>I</strong>nstruction <strong>S</strong>et <strong>C</strong>omputers)</li></ul><h3 id=mips>MIPS</h3><p>In this series we will use a MIPS instruction set, MIPS is still used widely in the real world, but it&rsquo;s slowly fading away to due RISC V&rsquo;s popularity.</p><p>Let&rsquo;s see some MIPS operations:</p><h4 id=arithmetic-operations>Arithmetic operations</h4><pre tabindex=0><code>add a, b, c # a := b + c
-</code></pre><p>All arithmetic operations have this form, two source register and one destination registers.</p><p>We also see that comments are denoted by a <code>#</code> in MIPS programs.</p><h4 id=register-operations>Register operations</h4><p>All operations in assembly languages utilize <em>registers</em>.</p><p>MIPS has a 32 x 32 bit <strong>register file</strong> (RF)</p><p>They are numbered 0 to 31 and, just a refresher, 32-bit data is called a &ldquo;word&rdquo;.</p><p>Example:</p><pre tabindex=0><code>f = (g + h) - (i + j);
-</code></pre><p>Given that $f, \ldots, j$ are in registers $s_0, \ldots, s_4$, in MIPS this will become:</p><pre tabindex=0><code>add $t0, $s1, $s2 # temp0 := g + h
-add $t1, $s3, $s4 # temp1 := i + j
-sub $s0, $t0, $t1 # f := t0 - t1
-</code></pre><h4 id=memory-operations>Memory operations</h4><p>Since MIPS is byte addressable, it means that each &ldquo;word&rdquo; has 4 bytes.
-Also good to note here is that MIPS uses <strong>big endian</strong></p><p>Example:</p><pre tabindex=0><code>g = h + A[8];
-</code></pre><p>Given that g is in $s_1$, h in $s_2$ and, the starting address for A is at $s_3$</p><p>We will get the following MIPS code:</p><pre tabindex=0><code>lw $t0, 32($s3)     # load word
-add $s1, $s2, $t0
-</code></pre><p>Example 2:</p><pre tabindex=0><code>A[12] = h + A[8];
-</code></pre><p>Given that h is in $s_2$, and, the starting address for A is at $s_3$</p><pre tabindex=0><code>lw $t0, 32($s3)     # load word
-add $t0, $s2, $t0
-sw $t0, 48($s3)     # store word
-</code></pre><h4 id=immediate-operations>Immediate operations</h4><p>Instead of, for example, adding two registers, we may just want to add a constant, this can be done via:</p><pre tabindex=0><code>addi $s3, $s3, 4
-</code></pre><p>For subtracting we just do:</p><pre tabindex=0><code>addi $s2, $s1, -1
-</code></pre><h4 id=zero-register>Zero register</h4><p>In MIPS there is a hard-coded zero register, that always contains the value zero, this can be used to quickly move values between registers:</p><pre tabindex=0><code>add $t2, $s1, $zero     # t2 := s1
-</code></pre><h4 id=logical-operations>Logical operations</h4><p>In MIPS there are of course logical operations:</p><pre tabindex=0><code># Logical Shifts
-sll $t0, $t1, 2     # t0 := t1 * 4
-srl $t0, $t1, 2     # t0 := t1 / 4
-
-# Logical AND
-and $t0, $t1, $t2   # t0 := t1 &amp; t2
-andi $t0, $t1, 2   # t0 := t1 &amp; 2
-
-# Logical OR
-or $t0, $t1, $t2   # t0 := t1 | t2
-ori $t0, $t1, 2   # t0 := t1 | 2
-
-# Logical NOT
-nor $t0, $t1, $zero # := NOT(t1)
-</code></pre><p>Notice there isn&rsquo;t an explicit <code>not</code> operation, but rather we use a <code>nor</code> operation with the zero register.</p><h4 id=conditional-jumps>Conditional jumps</h4><p>In MIPS there is only two conditional jumps, <code>beq</code> and <code>bne</code>:</p><pre tabindex=0><code>beq rs, rt, L1 # if(rs == rt); Jump to L1
-bne rs, rt, L1 # if(rs != rt); Jump to L1
-j L1           # Jump to L1
-</code></pre><p>So for example the following C-code:</p><pre tabindex=0><code>if(i == j) {
-    f = g + h;
-} else {
-    f = g - h;
-}
-</code></pre><p>Given that $f, g, \ldots$ is in $s_0, s_1, \ldots$</p><p>MIPS:</p><pre tabindex=0><code>bne $s3, $s4, Else # if(i == j) jump to Else
-add $s0, $s1, $s2  # f = g + h
-j Exit             # Jump to exit
-
-Else: sub $s0, $s1, $s2 # f = g - h
-Exit: ...
-</code></pre><p>Notice how there isn&rsquo;t any usual <code>blt, bge</code>, since MIPS is of RISC architecture, we don&rsquo;t need those.</p><p>Instead, what we can do is using <code>slt</code>. Which stands for set less than, we can now use this to replicate a <code>blt</code> or <code>bge</code>.</p><p>However, <code>blt, bge</code> are still pseudo-keywords in MIPS. The assembler will still be able to interpret these.</p><p>On the topic of pseudo-keywords, things like <code>move</code> and <code>li</code> are also pseudo-keywords.</p></section></article><nav class=navigation><div class="nav-item previous"></div><div class="nav-item next"><a href=/school/eda333/eda333_2/ title="Next: Part 2 - MIPS">Next &rarr;</a></div></nav></main></div><footer id=site-footer><div class=social-links><a href=https://github.com/rezaarezvan title class=social-link><span class=bracket>[</span>github<span class=bracket>]</span></a>
-<a href=https://x.com/rzvan__/ title class=social-link><span class=bracket>[</span>x<span class=bracket>]</span></a></div><div class=footer-marquee><div class=footer-marquee__content><span class=footer-marquee__item>memento mori • amor fati • sic parvis magna • per aspera ad astra</span>
-<span class=footer-marquee__item>memento mori • amor fati • sic parvis magna • per aspera ad astra</span></div></div></footer></body></html>
+<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width"><meta name="generator" content="Astro v4.11.5"><link rel="icon" type="image" href="/favicon.ico"><title>Part 1 - Introduction</title><!-- KaTeX support --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script><!-- inline KaTeX --><link rel="stylesheet" href="/_astro/index.BZ7em0Mc.css">
+<link rel="stylesheet" href="/_astro/_slug_.DPnDUiRI.css">
+<style>article[data-astro-cid-v5ro3oot]{max-width:80ch;margin:0 auto}
+</style><script type="module">document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]})});
+</script></head> <body class="font-sans antialiased"> <div class="container mx-auto flex min-h-screen"> <aside class="w-64 border-r border-[var(--border-color)] border-dashed pt-8"> <header class="flex flex-col h-full"> <div class="flex items-center mb-4"> <script>
+  function setTheme(mode) {
+    localStorage.setItem("theme-storage", mode);
+    document.documentElement.setAttribute('data-theme', mode);
+  }
+  function toggleTheme() {
+    const currentTheme = localStorage.getItem("theme-storage") || "light";
+    const newTheme = currentTheme === "light" ? "dark" : "light";
+    setTheme(newTheme);
+  }
+  const savedTheme = localStorage.getItem("theme-storage") || "light";
+  setTheme(savedTheme);
+  window.toggleTheme = toggleTheme;
+</script> <button id="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme" class="flex items-center justify-center w-6" data-astro-cid-x3pjskd3>○</button>  <a href="/" class="text-2xl font-semibold ml-3 h-10 pr-3">rezvan.xyz</a> </div> <nav class="flex flex-col space-y-2"> <a href="/principles" class="hover:text-orange-500 dark:hover:text-orange-400 transition-colors">
+[principles]
+</a><a href="/cv" class="hover:text-orange-500 dark:hover:text-orange-400 transition-colors">
+[cv]
+</a><a href="/posts" class="hover:text-orange-500 dark:hover:text-orange-400 transition-colors">
+[posts]
+</a><a href="/school" class="hover:text-orange-500 dark:hover:text-orange-400 transition-colors">
+[school]
+</a> </nav> </header> </aside> <main class="flex-grow px-8 py-8 overflow-y-auto">  <article class="prose prose-sm sm:prose lg:prose-lg xl:prose-xl max-w-none" data-astro-cid-v5ro3oot> <h1 class="text-4xl font-bold mb-4" data-astro-cid-v5ro3oot>Part 1 - Introduction</h1> <p class="text-sm text-muted-foreground mb-4" data-astro-cid-v5ro3oot>
+Date: 3/21/2023 </p>  <p>In this series we’ll understand and learn how to compute, quantify and, measure the performance of different systems and programs.</p>
+<p>To compute, quantify and, measure performance let’s start by first defining what performance depends on.</p>
+<h3 id="performance-dependencies">Performance dependencies</h3>
+<p>When we’re making a system or a program a lot of different factors will weigh in the total performance:</p>
+<ul>
+<li>
+<p>The underlying algorithm</p>
+<ul>
+<li>Determines number of operations required, which directly impacts the performance.</li>
+</ul>
+</li>
+<li>
+<p>Programming language, compile, and, architecture of choice.</p>
+<ul>
+<li>Determines number of instructions.</li>
+</ul>
+</li>
+<li>
+<p>Processor and memory</p>
+<ul>
+<li>Determines how quickly each instruction executes</li>
+</ul>
+</li>
+<li>
+<p>I/O System (Includes the OS)</p>
+<ul>
+<li>Determines how quickly each I/O operation executes</li>
+</ul>
+</li>
+</ul>
+<h3 id="cpu-time">CPU Time</h3>
+<p>We can define CPU time by a very nice equation:</p>
+<span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mtext>CPU Time</mtext><mo>=</mo><mfrac><mtext>Instructions</mtext><mtext>Program</mtext></mfrac><mo>⋅</mo><mtext> </mtext><mfrac><mtext>Clock cycles</mtext><mtext>Instruction</mtext></mfrac><mo>⋅</mo><mtext> </mtext><mfrac><mtext>Seconds</mtext><mtext>Clock cycle</mtext></mfrac></mrow><annotation encoding="application/x-tex">\text{CPU Time} = \frac{\text{Instructions}}{\text{Program}} \cdot\ \frac{\text{Clock cycles}}{\text{Instruction}} \cdot\ \frac{\text{Seconds}}{\text{Clock cycle}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord text"><span class="mord">CPU Time</span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.2408em;vertical-align:-0.8804em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3603em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord text"><span class="mord">Program</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord text"><span class="mord">Instructions</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.8804em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">⋅</span><span class="mspace"> </span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:2.0574em;vertical-align:-0.686em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3714em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord text"><span class="mord">Instruction</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord text"><span class="mord">Clock cycles</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">⋅</span><span class="mspace"> </span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:2.2519em;vertical-align:-0.8804em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3714em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord text"><span class="mord">Clock cycle</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord text"><span class="mord">Seconds</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.8804em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span>
+<p>We will call these as the following:</p>
+<span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mtext>CPU Time</mtext><mo>=</mo><mi>I</mi><mi>C</mi><mo>⋅</mo><mtext> </mtext><mi>C</mi><mi>P</mi><mi>I</mi><mo>⋅</mo><mtext> </mtext><msub><mi>T</mi><mi>c</mi></msub></mrow><annotation encoding="application/x-tex">\text{CPU Time} = IC \cdot\ CPI \cdot\ T_c</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord text"><span class="mord">CPU Time</span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.07847em;">I</span><span class="mord mathnormal" style="margin-right:0.07153em;">C</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">⋅</span><span class="mspace"> </span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">CP</span><span class="mord mathnormal" style="margin-right:0.07847em;">I</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">⋅</span><span class="mspace"> </span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.13889em;">T</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.1389em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">c</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></span>
+<p>One way to actually then measure computers or programs is using SPEC.</p>
+<p>SPEC, or <strong>S</strong>tandard <strong>P</strong>erformance <strong>E</strong>valuation <strong>C</strong>orp, is a company which specialize in measuring.</p>
+<p>The idea is to normalize compared to a reference computer using geometric means.</p>
+<p>This is called the SPECvalue.</p>
+<p>Geometric mean:</p>
+<span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mroot><mrow><munderover><mo>∏</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><msub><mtext>Execution time ratio</mtext><mi>i</mi></msub></mrow><mi>n</mi></mroot></mrow><annotation encoding="application/x-tex">\sqrt[n]{\prod_{i = 1}^{n} \text{Execution time ratio}_i}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:3.1568em;vertical-align:-1.2777em;"></span><span class="mord sqrt"><span class="root"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.5762em;"><span style="top:-2.8609em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size6 size1 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">n</span></span></span></span></span></span></span></span><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.8791em;"><span class="svg-align" style="top:-5.1168em;"><span class="pstrut" style="height:5.1168em;"></span><span class="mord" style="padding-left:1.056em;"><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.6514em;"><span style="top:-1.8723em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">i</span><span class="mrel mtight">=</span><span class="mord mtight">1</span></span></span></span><span style="top:-3.05em;"><span class="pstrut" style="height:3.05em;"></span><span><span class="mop op-symbol large-op">∏</span></span></span><span style="top:-4.3em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">n</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.2777em;"><span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord text"><span class="mord">Execution time ratio</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span><span style="top:-3.8391em;"><span class="pstrut" style="height:5.1168em;"></span><span class="hide-tail" style="min-width:0.742em;height:3.1968em;"><svg xmlns="http://www.w3.org/2000/svg" width="400em" height="3.1968em" viewBox="0 0 400000 3196" preserveAspectRatio="xMinYMin slice"><path d="M702 80H40000040
+H742v3062l-4 4-4 4c-.667.7 -2 1.5-4 2.5s-4.167 1.833-6.5 2.5-5.5 1-9.5 1
+h-12l-28-84c-16.667-52-96.667 -294.333-240-727l-212 -643 -85 170
+c-4-3.333-8.333-7.667-13 -13l-13-13l77-155 77-156c66 199.333 139 419.667
+219 661 l218 661zM702 80H400000v40H742z"></path></svg></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.2777em;"><span></span></span></span></span></span></span></span></span></span>
+<h3 id="risccisc-architecture">RISC/CISC Architecture</h3>
+<p>In the early days, it was thought that, if we made the machine instructions closer to real (higher-level) programming functions,
+it would be faster for the computer.</p>
+<p>We now know this is not true, and machine instructions are therefore as small and atomic as possible.
+These two approaches are known as RISC and CISC.</p>
+<ul>
+<li>RISC (<strong>R</strong>educed <strong>I</strong>nstruction <strong>S</strong>et <strong>C</strong>omputers)</li>
+<li>CISC (<strong>C</strong>omplex <strong>I</strong>nstruction <strong>S</strong>et <strong>C</strong>omputers)</li>
+</ul>
+<h3 id="mips">MIPS</h3>
+<p>In this series we will use a MIPS instruction set, MIPS is still used widely in the real world, but it’s slowly fading away to due RISC V’s popularity.</p>
+<p>Let’s see some MIPS operations:</p>
+<h4 id="arithmetic-operations">Arithmetic operations</h4>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>add a, b, c # a := b + c</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>All arithmetic operations have this form, two source register and one destination registers.</p>
+<p>We also see that comments are denoted by a <code>#</code> in MIPS programs.</p>
+<h4 id="register-operations">Register operations</h4>
+<p>All operations in assembly languages utilize <em>registers</em>.</p>
+<p>MIPS has a 32 x 32 bit <strong>register file</strong> (RF)</p>
+<p>They are numbered 0 to 31 and, just a refresher, 32-bit data is called a “word”.</p>
+<p>Example:</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>f = (g + h) - (i + j);</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>Given that <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mo separator="true">,</mo><mo>…</mo><mo separator="true">,</mo><mi>j</mi></mrow><annotation encoding="application/x-tex">f, \ldots, j</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="minner">…</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.05724em;">j</span></span></span></span> are in registers <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>s</mi><mn>0</mn></msub><mo separator="true">,</mo><mo>…</mo><mo separator="true">,</mo><msub><mi>s</mi><mn>4</mn></msub></mrow><annotation encoding="application/x-tex">s_0, \ldots, s_4</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.1944em;"></span><span class="mord"><span class="mord mathnormal">s</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="minner">…</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal">s</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">4</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>, in MIPS this will become:</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>add $t0, $s1, $s2 # temp0 := g + h</span></span>
+<span class="line"><span>add $t1, $s3, $s4 # temp1 := i + j</span></span>
+<span class="line"><span>sub $s0, $t0, $t1 # f := t0 - t1</span></span>
+<span class="line"><span></span></span></code></pre>
+<h4 id="memory-operations">Memory operations</h4>
+<p>Since MIPS is byte addressable, it means that each “word” has 4 bytes.
+Also good to note here is that MIPS uses <strong>big endian</strong></p>
+<p>Example:</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>g = h + A[8];</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>Given that g is in <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>s</mi><mn>1</mn></msub></mrow><annotation encoding="application/x-tex">s_1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.5806em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal">s</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>, h in <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>s</mi><mn>2</mn></msub></mrow><annotation encoding="application/x-tex">s_2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.5806em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal">s</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> and, the starting address for A is at <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>s</mi><mn>3</mn></msub></mrow><annotation encoding="application/x-tex">s_3</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.5806em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal">s</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">3</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></p>
+<p>We will get the following MIPS code:</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>lw $t0, 32($s3)     # load word</span></span>
+<span class="line"><span>add $s1, $s2, $t0</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>Example 2:</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>A[12] = h + A[8];</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>Given that h is in <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>s</mi><mn>2</mn></msub></mrow><annotation encoding="application/x-tex">s_2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.5806em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal">s</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>, and, the starting address for A is at <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>s</mi><mn>3</mn></msub></mrow><annotation encoding="application/x-tex">s_3</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.5806em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal">s</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">3</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>lw $t0, 32($s3)     # load word</span></span>
+<span class="line"><span>add $t0, $s2, $t0</span></span>
+<span class="line"><span>sw $t0, 48($s3)     # store word</span></span>
+<span class="line"><span></span></span></code></pre>
+<h4 id="immediate-operations">Immediate operations</h4>
+<p>Instead of, for example, adding two registers, we may just want to add a constant, this can be done via:</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>addi $s3, $s3, 4</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>For subtracting we just do:</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>addi $s2, $s1, -1</span></span>
+<span class="line"><span></span></span></code></pre>
+<h4 id="zero-register">Zero register</h4>
+<p>In MIPS there is a hard-coded zero register, that always contains the value zero, this can be used to quickly move values between registers:</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>add $t2, $s1, $zero     # t2 := s1</span></span>
+<span class="line"><span></span></span></code></pre>
+<h4 id="logical-operations">Logical operations</h4>
+<p>In MIPS there are of course logical operations:</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span># Logical Shifts</span></span>
+<span class="line"><span>sll $t0, $t1, 2     # t0 := t1 * 4</span></span>
+<span class="line"><span>srl $t0, $t1, 2     # t0 := t1 / 4</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span># Logical AND</span></span>
+<span class="line"><span>and $t0, $t1, $t2   # t0 := t1 &#x26; t2</span></span>
+<span class="line"><span>andi $t0, $t1, 2   # t0 := t1 &#x26; 2</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span># Logical OR</span></span>
+<span class="line"><span>or $t0, $t1, $t2   # t0 := t1 | t2</span></span>
+<span class="line"><span>ori $t0, $t1, 2   # t0 := t1 | 2</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span># Logical NOT</span></span>
+<span class="line"><span>nor $t0, $t1, $zero # := NOT(t1)</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>Notice there isn’t an explicit <code>not</code> operation, but rather we use a <code>nor</code> operation with the zero register.</p>
+<h4 id="conditional-jumps">Conditional jumps</h4>
+<p>In MIPS there is only two conditional jumps, <code>beq</code> and <code>bne</code>:</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>beq rs, rt, L1 # if(rs == rt); Jump to L1</span></span>
+<span class="line"><span>bne rs, rt, L1 # if(rs != rt); Jump to L1</span></span>
+<span class="line"><span>j L1           # Jump to L1</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>So for example the following C-code:</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>if(i == j) {</span></span>
+<span class="line"><span>    f = g + h;</span></span>
+<span class="line"><span>} else {</span></span>
+<span class="line"><span>    f = g - h;</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>Given that <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mo separator="true">,</mo><mi>g</mi><mo separator="true">,</mo><mo>…</mo></mrow><annotation encoding="application/x-tex">f, g, \ldots</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">g</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="minner">…</span></span></span></span> is in <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>s</mi><mn>0</mn></msub><mo separator="true">,</mo><msub><mi>s</mi><mn>1</mn></msub><mo separator="true">,</mo><mo>…</mo></mrow><annotation encoding="application/x-tex">s_0, s_1, \ldots</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.1944em;"></span><span class="mord"><span class="mord mathnormal">s</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal">s</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="minner">…</span></span></span></span></p>
+<p>MIPS:</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>bne $s3, $s4, Else # if(i == j) jump to Else</span></span>
+<span class="line"><span>add $s0, $s1, $s2  # f = g + h</span></span>
+<span class="line"><span>j Exit             # Jump to exit</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>Else: sub $s0, $s1, $s2 # f = g - h</span></span>
+<span class="line"><span>Exit: ...</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>Notice how there isn’t any usual <code>blt, bge</code>, since MIPS is of RISC architecture, we don’t need those.</p>
+<p>Instead, what we can do is using <code>slt</code>. Which stands for set less than, we can now use this to replicate a <code>blt</code> or <code>bge</code>.</p>
+<p>However, <code>blt, bge</code> are still pseudo-keywords in MIPS. The assembler will still be able to interpret these.</p>
+<p>On the topic of pseudo-keywords, things like <code>move</code> and <code>li</code> are also pseudo-keywords.</p>  <nav class="flex justify-between mt-8 pt-4 border-t border-border" data-astro-cid-v5ro3oot>  <a href="/school/eda333/eda333_2" class="text-primary hover:text-primary/80 transition-colors" data-astro-cid-v5ro3oot>
+Next: Part 2 - MIPS →
+</a> </nav> </article>  </main> </div> </body></html> 

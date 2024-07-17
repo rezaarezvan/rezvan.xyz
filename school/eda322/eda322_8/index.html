@@ -1,42 +1,183 @@
-<!doctype html><html><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge"><title>rezvan | Part 8 - Interfaces and Memory</title><link rel=icon type=image/png href=https://rezvan.xyz/images/icon.png><meta name=viewport content="width=device-width,initial-scale=1">
-<meta name=description content="In this part we&rsquo;ll cover interfaces, interconnects as well as memory.
-Interface timing In digital circuits, we often want to send data, from a sender, to a receiver.
-How can we achieve this data passing from one module to another?
-The answer is:
-Open loop Flow Control Serialized In an open loop, we either have so that it&rsquo;s always &ldquo;valid&rdquo; to send data, or periodically.
-In flow control, as the name suggests, the data-flow is controlled."><meta property="og:image" content="https://raw.githubusercontent.com/rezaarezvan/rezvan.xyz/main/images/icon.png"><meta property="og:url" content="https://rezvan.xyz/school/eda322/eda322_8/"><meta property="og:site_name" content="rezvan"><meta property="og:title" content="Part 8 - Interfaces and Memory"><meta property="og:description" content="In this part we’ll cover interfaces, interconnects as well as memory.
-Interface timing In digital circuits, we often want to send data, from a sender, to a receiver.
-How can we achieve this data passing from one module to another?
-The answer is:
-Open loop Flow Control Serialized In an open loop, we either have so that it’s always “valid” to send data, or periodically.
-In flow control, as the name suggests, the data-flow is controlled."><meta property="og:locale" content="en_us"><meta property="og:type" content="article"><meta property="article:section" content="school"><meta property="article:published_time" content="2023-02-19T00:00:00+00:00"><meta property="article:modified_time" content="2024-05-26T11:09:10+02:00"><meta name=twitter:card content="summary"><meta name=twitter:title content="Part 8 - Interfaces and Memory"><meta name=twitter:description content="In this part we’ll cover interfaces, interconnects as well as memory.
-Interface timing In digital circuits, we often want to send data, from a sender, to a receiver.
-How can we achieve this data passing from one module to another?
-The answer is:
-Open loop Flow Control Serialized In an open loop, we either have so that it’s always “valid” to send data, or periodically.
-In flow control, as the name suggests, the data-flow is controlled."><link rel=stylesheet href=https://rezvan.xyz/css/combined.min.285bd67a05674fdcb27bb67f867c7ac6b2e0c0b5535c536ba4bb37cd80e377e9.css integrity="sha256-KFvWegVnT9yye7Z/hnx6xrLgwLVTXFNrpLs3zYDjd+k="><link id=lightSyntaxStyle rel=stylesheet href=https://rezvan.xyz/css/light_syntax.min.d9e0828a4ff7f2d7317942062fc751fa487b2ac2c47b934ad082abd7d3ca6690.css integrity="sha256-2eCCik/38tcxeUIGL8dR+kh7KsLEe5NK0IKr19PKZpA="><link id=darkModeStyle rel=stylesheet href=https://rezvan.xyz/css/dark.min.113ab1177b874ffa2011e31f94df77b25b4c0aee6c35e5db0e6c54ebe2071597.css integrity="sha256-ETqxF3uHT/ogEeMflN93sltMCu5sNeXbDmxU6+IHFZc=" disabled><link id=darkSyntaxStyle rel=stylesheet href=https://rezvan.xyz/css/dark_syntax.min.1a878f3d8fb43359bd3b44bc70c4074f682f11066c6537bf6248b696cbe56586.css integrity="sha256-GoePPY+0M1m9O0S8cMQHT2gvEQZsZTe/Yki2lsvlZYY=" disabled><script type=text/javascript src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type=text/x-mathjax-config>
-		MathJax.Hub.Config({
-			tex2jax: {
-				inlineMath: [['$','$'], ['\\(','\\)']],
-				displayMath: [['$$','$$'], ['\[','\]']],
-				processEscapes: true,
-				processEnvironments: true,
-				skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
-				TeX: { equationNumbers: { autoNumber: "AMS" },
-						 extensions: ["AMSmath.js", "AMSsymbols.js"] }
-			}
-		});
-		</script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css><script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js onload=renderMathInElement(document.body)></script><script>document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]})})</script></head><body><header><nav id=site-navbar><div class=navbar-content><a href=https://rezvan.xyz/ class=logo>rezvan.xyz</a><div class=navbar-links><a href=/principles class=nav-link><span class=bracket>[</span>principles<span class=bracket>]</span></a>
-<a href=/cv class=nav-link><span class=bracket>[</span>cv<span class=bracket>]</span></a>
-<a href=/posts class=nav-link><span class=bracket>[</span>posts<span class=bracket>]</span></a>
-<a href=/school class=nav-link><span class=bracket>[</span>school<span class=bracket>]</span></a></div><div class=theme-toggle><span id=dark-mode-toggle onclick=toggleTheme() aria-label="Toggle theme">○
-</span><script src=https://rezvan.xyz/js/themetoggle.js></script></div></div></nav></header><div class=content><main><article><div class=title><h1>Part 8 - Interfaces and Memory</h1><div class=meta>Posted on Feb 19, 2023</div><div class=meta>(Last updated: May 26, 2024)</div></div><section class=body><p>In this part we&rsquo;ll cover interfaces, interconnects as well as memory.</p><h3 id=interface-timing>Interface timing</h3><p>In digital circuits, we often want to send data, from a sender, to a receiver.</p><p>How can we achieve this data passing from one module to another?</p><p>The answer is:</p><ul><li>Open loop</li><li>Flow Control</li><li>Serialized</li></ul><p>In an open loop, we either have so that it&rsquo;s always &ldquo;valid&rdquo; to send data, or periodically.</p><p>In flow control, as the name suggests, the data-flow is controlled. The sender needs to output a &ldquo;valid&rdquo; signal,
-and the receiver needs to send a &ldquo;ready&rdquo; signal.</p><p>Then depending on what kind of control we have, either Push flow or Pull flow.</p><ul><li>Push flow<ul><li>Assume receiver always ready</li></ul></li><li>Pull flow<ul><li>Assume sender always has valid data</li></ul></li></ul><p>When these signals align in a clock pulse, we can send the data.</p><p>Serialization, is the idea that we split up the data into smaller chunks.
-When the <em>frame</em> signal is active, it means a serial frame is about to start, or in layman terms, the beginning of a new data pack.</p><p>Flow control can be at either frame level, or word level.</p><h3 id=interconnects>Interconnects</h3><p>In circuits, there is also a need that clients can communicate with each other - how do we achieve this?</p><p>The common solution is using a so-called bus. The bus is a shared resource which clients can communicate with each other.</p><p>But there are other solutions:</p><ul><li>Crossbar switch</li><li>Interconnection networks</li></ul><p>There are a lot of different factors that impact what solution you pick:</p><ul><li>Cost</li><li>Scalability</li><li># of connections</li></ul><p>Are just a few.</p><h3 id=memory>Memory</h3><p>We&rsquo;ve already seen and worked with memory, so let&rsquo;s refresh what we&rsquo;ve covered:</p><p>Uses:</p><ul><li>Data & program storage</li><li>General purpose registers</li><li>Buffering</li><li>Lookup tables</li><li>Combinational Logic implementation</li><li>Whenever a large collection of state elements is required.</li></ul><p>Types:</p><ul><li>RAM - random access memory</li><li>ROM - read only memory</li><li>EPROM, FLASH - electrically programmable read only memory</li></ul><p>What we usually mean by memory though is, many addressable fixed size locations.</p><p>$n$ bits allow the addressing of $2^n$ memory locations.
-Example: 24 bits can address $2^{24}$ = 16,777,216 locations</p><p>If each location holds 1 byte (= 8 bits) then the memory is 16 MB.
-If each location holds one word (32 bits = 4 bytes) then it is 64 MB.</p><p>Computers are either <em>byte</em> or <em>word</em> addressable, meaning that each memory location holds either 8 bits (1 byte),
-or a full standard <em>word</em> for that computer architecture.</p><ul><li>Each bit<ul><li>Is a gated D-latch</li></ul></li><li>Each location<ul><li>Consists of $w$ bits, either $w = 8$ or $w =$ max width</li></ul></li><li>Addressing<ul><li>$n$ locations means $log_2(n)$ address bits</li><li>Decoder circuit translates address into 1 of n locations</li></ul></li></ul><p>Now, let&rsquo;s define some words and terms that we encounter often while working with circuits:</p><ul><li>Bandwidth:<ul><li>Total amount of data across a device or across an interface,
-per unit time (usually Bytes/sec)</li></ul></li><li>Latency:<ul><li>A measure of the time from a request for a data transfer until the data is received.</li></ul></li><li>Memory Interfaces for Accessing Data<ul><li>Asynchronous (unclocked):<ul><li>A change in the address results in data appearing</li></ul></li><li>Synchronous (clocked):<ul><li>A change in address, followed by an edge on CLK results in data appearing.
-Sometimes, multiple requests may be outstanding.</li></ul></li></ul></li><li>Volatile:<ul><li>Looses its state when the power goes off. (the opposite: non-volatile)</li></ul></li></ul><p>Also, just to list out the volatile vs non-volatile list:</p><ul><li>Volatile:<ul><li>Random Access Memory (RAM):<ul><li>DRAM &ldquo;dynamic&rdquo;</li><li>SRAM &ldquo;static&rdquo;</li></ul></li></ul></li><li>Non-volatile:<ul><li>Read Only Memory (ROM):<ul><li>Mask ROM &ldquo;mask programmable&rdquo;</li><li>EPROM &ldquo;electrically programmable&rdquo;</li><li>EEPROM &ldquo;erasable electrically programmable&rdquo;</li><li>FLASH memory - similar to EEPROM with programmer integrated on chip</li></ul></li></ul></li></ul><p>Memory blocks can be (and often are) used to implement combinational logic functions.</p><p>Examples:</p><ul><li>LUTs in FPGAs</li><li>1Mbit x 8 EPROM can implement 8 independent functions each of $log_2(1M) = 20$ inputs.</li><li>The decoder part of a memory block can be considered a “minterm generator”.</li><li>The cell array part of a memory block can be considered an OR function over a subset of rows.</li></ul></section></article><nav class=navigation><div class="nav-item previous"><a href=/school/eda322/eda322_7/ title="Previous: Part 7 - Timing, delay & power">&larr; Previous</a></div><div class="nav-item next"><a href=/school/eda322/eda322_9/ title="Next: Part 9 - Testing">Next &rarr;</a></div></nav></main></div><footer id=site-footer><div class=social-links><a href=https://github.com/rezaarezvan title class=social-link><span class=bracket>[</span>github<span class=bracket>]</span></a>
-<a href=https://x.com/rzvan__/ title class=social-link><span class=bracket>[</span>x<span class=bracket>]</span></a></div><div class=footer-marquee><div class=footer-marquee__content><span class=footer-marquee__item>memento mori • amor fati • sic parvis magna • per aspera ad astra</span>
-<span class=footer-marquee__item>memento mori • amor fati • sic parvis magna • per aspera ad astra</span></div></div></footer></body></html>
+<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width"><meta name="generator" content="Astro v4.11.5"><link rel="icon" type="image" href="/favicon.ico"><title>Part 8 - Interfaces and Memory</title><!-- KaTeX support --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script><!-- inline KaTeX --><link rel="stylesheet" href="/_astro/index.BZ7em0Mc.css">
+<link rel="stylesheet" href="/_astro/_slug_.DPnDUiRI.css">
+<style>article[data-astro-cid-v5ro3oot]{max-width:80ch;margin:0 auto}
+</style><script type="module">document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]})});
+</script></head> <body class="font-sans antialiased"> <div class="container mx-auto flex min-h-screen"> <aside class="w-64 border-r border-[var(--border-color)] border-dashed pt-8"> <header class="flex flex-col h-full"> <div class="flex items-center mb-4"> <script>
+  function setTheme(mode) {
+    localStorage.setItem("theme-storage", mode);
+    document.documentElement.setAttribute('data-theme', mode);
+  }
+  function toggleTheme() {
+    const currentTheme = localStorage.getItem("theme-storage") || "light";
+    const newTheme = currentTheme === "light" ? "dark" : "light";
+    setTheme(newTheme);
+  }
+  const savedTheme = localStorage.getItem("theme-storage") || "light";
+  setTheme(savedTheme);
+  window.toggleTheme = toggleTheme;
+</script> <button id="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme" class="flex items-center justify-center w-6" data-astro-cid-x3pjskd3>○</button>  <a href="/" class="text-2xl font-semibold ml-3 h-10 pr-3">rezvan.xyz</a> </div> <nav class="flex flex-col space-y-2"> <a href="/principles" class="hover:text-orange-500 dark:hover:text-orange-400 transition-colors">
+[principles]
+</a><a href="/cv" class="hover:text-orange-500 dark:hover:text-orange-400 transition-colors">
+[cv]
+</a><a href="/posts" class="hover:text-orange-500 dark:hover:text-orange-400 transition-colors">
+[posts]
+</a><a href="/school" class="hover:text-orange-500 dark:hover:text-orange-400 transition-colors">
+[school]
+</a> </nav> </header> </aside> <main class="flex-grow px-8 py-8 overflow-y-auto">  <article class="prose prose-sm sm:prose lg:prose-lg xl:prose-xl max-w-none" data-astro-cid-v5ro3oot> <h1 class="text-4xl font-bold mb-4" data-astro-cid-v5ro3oot>Part 8 - Interfaces and Memory</h1> <p class="text-sm text-muted-foreground mb-4" data-astro-cid-v5ro3oot>
+Date: 2/19/2023 </p>  <p>In this part we’ll cover interfaces, interconnects as well as memory.</p>
+<h3 id="interface-timing">Interface timing</h3>
+<p>In digital circuits, we often want to send data, from a sender, to a receiver.</p>
+<p>How can we achieve this data passing from one module to another?</p>
+<p>The answer is:</p>
+<ul>
+<li>Open loop</li>
+<li>Flow Control</li>
+<li>Serialized</li>
+</ul>
+<p>In an open loop, we either have so that it’s always “valid” to send data, or periodically.</p>
+<p>In flow control, as the name suggests, the data-flow is controlled. The sender needs to output a “valid” signal,
+and the receiver needs to send a “ready” signal.</p>
+<p>Then depending on what kind of control we have, either Push flow or Pull flow.</p>
+<ul>
+<li>Push flow
+<ul>
+<li>Assume receiver always ready</li>
+</ul>
+</li>
+<li>Pull flow
+<ul>
+<li>Assume sender always has valid data</li>
+</ul>
+</li>
+</ul>
+<p>When these signals align in a clock pulse, we can send the data.</p>
+<p>Serialization, is the idea that we split up the data into smaller chunks.
+When the <em>frame</em> signal is active, it means a serial frame is about to start, or in layman terms, the beginning of a new data pack.</p>
+<p>Flow control can be at either frame level, or word level.</p>
+<h3 id="interconnects">Interconnects</h3>
+<p>In circuits, there is also a need that clients can communicate with each other - how do we achieve this?</p>
+<p>The common solution is using a so-called bus. The bus is a shared resource which clients can communicate with each other.</p>
+<p>But there are other solutions:</p>
+<ul>
+<li>Crossbar switch</li>
+<li>Interconnection networks</li>
+</ul>
+<p>There are a lot of different factors that impact what solution you pick:</p>
+<ul>
+<li>Cost</li>
+<li>Scalability</li>
+<li># of connections</li>
+</ul>
+<p>Are just a few.</p>
+<h3 id="memory">Memory</h3>
+<p>We’ve already seen and worked with memory, so let’s refresh what we’ve covered:</p>
+<p>Uses:</p>
+<ul>
+<li>Data &#x26; program storage</li>
+<li>General purpose registers</li>
+<li>Buffering</li>
+<li>Lookup tables</li>
+<li>Combinational Logic implementation</li>
+<li>Whenever a large collection of state elements is required.</li>
+</ul>
+<p>Types:</p>
+<ul>
+<li>RAM - random access memory</li>
+<li>ROM - read only memory</li>
+<li>EPROM, FLASH - electrically programmable read only memory</li>
+</ul>
+<p>What we usually mean by memory though is, many addressable fixed size locations.</p>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">n</span></span></span></span> bits allow the addressing of <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>2</mn><mi>n</mi></msup></mrow><annotation encoding="application/x-tex">2^n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6644em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.6644em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">n</span></span></span></span></span></span></span></span></span></span></span> memory locations.
+Example: 24 bits can address <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>2</mn><mn>24</mn></msup></mrow><annotation encoding="application/x-tex">2^{24}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">24</span></span></span></span></span></span></span></span></span></span></span></span> = 16,777,216 locations</p>
+<p>If each location holds 1 byte (= 8 bits) then the memory is 16 MB.
+If each location holds one word (32 bits = 4 bytes) then it is 64 MB.</p>
+<p>Computers are either <em>byte</em> or <em>word</em> addressable, meaning that each memory location holds either 8 bits (1 byte),
+or a full standard <em>word</em> for that computer architecture.</p>
+<ul>
+<li>Each bit
+<ul>
+<li>Is a gated D-latch</li>
+</ul>
+</li>
+<li>Each location
+<ul>
+<li>Consists of <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>w</mi></mrow><annotation encoding="application/x-tex">w</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal" style="margin-right:0.02691em;">w</span></span></span></span> bits, either <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>w</mi><mo>=</mo><mn>8</mn></mrow><annotation encoding="application/x-tex">w = 8</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal" style="margin-right:0.02691em;">w</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">8</span></span></span></span> or <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>w</mi><mo>=</mo></mrow><annotation encoding="application/x-tex">w =</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal" style="margin-right:0.02691em;">w</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span></span></span></span> max width</li>
+</ul>
+</li>
+<li>Addressing
+<ul>
+<li><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">n</span></span></span></span> locations means <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>l</mi><mi>o</mi><msub><mi>g</mi><mn>2</mn></msub><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">log_2(n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">o</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">g</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0359em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mclose">)</span></span></span></span> address bits</li>
+<li>Decoder circuit translates address into 1 of n locations</li>
+</ul>
+</li>
+</ul>
+<p>Now, let’s define some words and terms that we encounter often while working with circuits:</p>
+<ul>
+<li>Bandwidth:
+<ul>
+<li>Total amount of data across a device or across an interface,
+per unit time (usually Bytes/sec)</li>
+</ul>
+</li>
+<li>Latency:
+<ul>
+<li>A measure of the time from a request for a data transfer until the data is received.</li>
+</ul>
+</li>
+<li>Memory Interfaces for Accessing Data
+<ul>
+<li>Asynchronous (unclocked):
+<ul>
+<li>A change in the address results in data appearing</li>
+</ul>
+</li>
+<li>Synchronous (clocked):
+<ul>
+<li>A change in address, followed by an edge on CLK results in data appearing.
+Sometimes, multiple requests may be outstanding.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Volatile:
+<ul>
+<li>Looses its state when the power goes off. (the opposite: non-volatile)</li>
+</ul>
+</li>
+</ul>
+<p>Also, just to list out the volatile vs non-volatile list:</p>
+<ul>
+<li>Volatile:
+<ul>
+<li>Random Access Memory (RAM):
+<ul>
+<li>DRAM “dynamic”</li>
+<li>SRAM “static”</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Non-volatile:
+<ul>
+<li>Read Only Memory (ROM):
+<ul>
+<li>Mask ROM “mask programmable”</li>
+<li>EPROM “electrically programmable”</li>
+<li>EEPROM “erasable electrically programmable”</li>
+<li>FLASH memory - similar to EEPROM with programmer integrated on chip</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>Memory blocks can be (and often are) used to implement combinational logic functions.</p>
+<p>Examples:</p>
+<ul>
+<li>LUTs in FPGAs</li>
+<li>1Mbit x 8 EPROM can implement 8 independent functions each of <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>l</mi><mi>o</mi><msub><mi>g</mi><mn>2</mn></msub><mo stretchy="false">(</mo><mn>1</mn><mi>M</mi><mo stretchy="false">)</mo><mo>=</mo><mn>20</mn></mrow><annotation encoding="application/x-tex">log_2(1M) = 20</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">o</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">g</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0359em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord">1</span><span class="mord mathnormal" style="margin-right:0.10903em;">M</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">20</span></span></span></span> inputs.</li>
+<li>The decoder part of a memory block can be considered a “minterm generator”.</li>
+<li>The cell array part of a memory block can be considered an OR function over a subset of rows.</li>
+</ul>  <nav class="flex justify-between mt-8 pt-4 border-t border-border" data-astro-cid-v5ro3oot> <a href="/school/eda322/eda322_7" class="text-primary hover:text-primary/80 transition-colors" data-astro-cid-v5ro3oot>
+← Previous: Part 7 - Timing, delay &amp; power </a> <a href="/school/eda322/eda322_9" class="text-primary hover:text-primary/80 transition-colors" data-astro-cid-v5ro3oot>
+Next: Part 9 - Testing →
+</a> </nav> </article>  </main> </div> </body></html> 

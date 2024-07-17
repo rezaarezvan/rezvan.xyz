@@ -1,29 +1,104 @@
-<!doctype html><html><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge"><title>rezvan | Part 1 - Introduction</title><link rel=icon type=image/png href=https://rezvan.xyz/images/icon.png><meta name=viewport content="width=device-width,initial-scale=1">
-<meta name=description content="Introduction In this series we&rsquo;ll cover the very large and mystical field of data science and AI. We&rsquo;re going to spend these first few parts to understand what data science is.
-Data science What is data science? (Theoretical) Computer science is method-driven and often abstract. In data science, the question is often answered with insights derived from the data.
-Data scientists aim for results that can describe the world, or a business sector, that needs it."><meta property="og:image" content="https://raw.githubusercontent.com/rezaarezvan/rezvan.xyz/main/images/icon.png"><meta property="og:url" content="https://rezvan.xyz/school/dat565/dat565/"><meta property="og:site_name" content="rezvan"><meta property="og:title" content="Part 1 - Introduction"><meta property="og:description" content="Introduction In this series we’ll cover the very large and mystical field of data science and AI. We’re going to spend these first few parts to understand what data science is.
-Data science What is data science? (Theoretical) Computer science is method-driven and often abstract. In data science, the question is often answered with insights derived from the data.
-Data scientists aim for results that can describe the world, or a business sector, that needs it."><meta property="og:locale" content="en_us"><meta property="og:type" content="article"><meta property="article:section" content="school"><meta property="article:published_time" content="2024-01-16T00:00:00+00:00"><meta property="article:modified_time" content="2024-05-26T11:09:10+02:00"><meta name=twitter:card content="summary"><meta name=twitter:title content="Part 1 - Introduction"><meta name=twitter:description content="Introduction In this series we’ll cover the very large and mystical field of data science and AI. We’re going to spend these first few parts to understand what data science is.
-Data science What is data science? (Theoretical) Computer science is method-driven and often abstract. In data science, the question is often answered with insights derived from the data.
-Data scientists aim for results that can describe the world, or a business sector, that needs it."><link rel=stylesheet href=https://rezvan.xyz/css/combined.min.285bd67a05674fdcb27bb67f867c7ac6b2e0c0b5535c536ba4bb37cd80e377e9.css integrity="sha256-KFvWegVnT9yye7Z/hnx6xrLgwLVTXFNrpLs3zYDjd+k="><link id=lightSyntaxStyle rel=stylesheet href=https://rezvan.xyz/css/light_syntax.min.d9e0828a4ff7f2d7317942062fc751fa487b2ac2c47b934ad082abd7d3ca6690.css integrity="sha256-2eCCik/38tcxeUIGL8dR+kh7KsLEe5NK0IKr19PKZpA="><link id=darkModeStyle rel=stylesheet href=https://rezvan.xyz/css/dark.min.113ab1177b874ffa2011e31f94df77b25b4c0aee6c35e5db0e6c54ebe2071597.css integrity="sha256-ETqxF3uHT/ogEeMflN93sltMCu5sNeXbDmxU6+IHFZc=" disabled><link id=darkSyntaxStyle rel=stylesheet href=https://rezvan.xyz/css/dark_syntax.min.1a878f3d8fb43359bd3b44bc70c4074f682f11066c6537bf6248b696cbe56586.css integrity="sha256-GoePPY+0M1m9O0S8cMQHT2gvEQZsZTe/Yki2lsvlZYY=" disabled><script type=text/javascript src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type=text/x-mathjax-config>
-		MathJax.Hub.Config({
-			tex2jax: {
-				inlineMath: [['$','$'], ['\\(','\\)']],
-				displayMath: [['$$','$$'], ['\[','\]']],
-				processEscapes: true,
-				processEnvironments: true,
-				skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
-				TeX: { equationNumbers: { autoNumber: "AMS" },
-						 extensions: ["AMSmath.js", "AMSsymbols.js"] }
-			}
-		});
-		</script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css><script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js onload=renderMathInElement(document.body)></script><script>document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]})})</script></head><body><header><nav id=site-navbar><div class=navbar-content><a href=https://rezvan.xyz/ class=logo>rezvan.xyz</a><div class=navbar-links><a href=/principles class=nav-link><span class=bracket>[</span>principles<span class=bracket>]</span></a>
-<a href=/cv class=nav-link><span class=bracket>[</span>cv<span class=bracket>]</span></a>
-<a href=/posts class=nav-link><span class=bracket>[</span>posts<span class=bracket>]</span></a>
-<a href=/school class=nav-link><span class=bracket>[</span>school<span class=bracket>]</span></a></div><div class=theme-toggle><span id=dark-mode-toggle onclick=toggleTheme() aria-label="Toggle theme">○
-</span><script src=https://rezvan.xyz/js/themetoggle.js></script></div></div></nav></header><div class=content><main><article><div class=title><h1>Part 1 - Introduction</h1><div class=meta>Posted on Jan 16, 2024</div><div class=meta>(Last updated: May 26, 2024)</div></div><section class=body><h3 id=introduction>Introduction</h3><p>In this series we&rsquo;ll cover the very large and mystical field of data science and AI.
-We&rsquo;re going to spend these first few parts to understand what data science is.</p><h4 id=data-science>Data science</h4><p>What is data science? (Theoretical) Computer science is method-driven and often abstract.
-In data science, the question is often answered with insights derived from the data.</p><p>Data scientists aim for results that can describe the world, or a business sector, that needs it.
-Whereas in computer science, most of the time the worry is about the correctness of the output.</p><p>So data scientists worry about the robustness in face or noisy and incorrect data.</p><p>Thus, data science can be seen as a <strong>scientific method</strong>.</p><h3 id=the-basic-problems-of-data-science>The basic problems of data science</h3><p>The most basic of problems that we&rsquo;ll encounter in our data science journey will be:</p><ul><li><strong>Classification</strong><ul><li>Aims to give discrete labels to items in a dataset.</li></ul></li><li><strong>Regression</strong><ul><li>Aims to predict numerical quantities based on observations at some point outside the dataset.</li></ul></li></ul><p>These are computational problems, not research questions.</p><p>Classical examples from the data science world are:</p><ul><li>Classification problems:<ul><li><a href=http://yann.lecun.com/exdb/mnist/>MNIST</a></li><li><a href=https://github.com/allisonhorst/palmerpenguins>palmerpenguins</a></li><li><a href=https://en.wikipedia.org/wiki/Iris_flower_data_set>Iris flower</a></li></ul></li><li>Regression problems:<ul><li><a href=https://www.kaggle.com/code/prasadperera/the-boston-housing-dataset>Boston housing</a></li><li><a href=https://www.kaggle.com/datasets/camnugent/california-housing-prices>California housing</a></li><li><a href=https://www.kaggle.com/datasets/mathchi/diabetes-data-set>Diabetes dataset</a></li></ul></li></ul><h3 id=properties-of-data>Properties of data</h3><p>So we understand that data is clearly important, but can we classify and set properties on data? Of course.</p><ul><li><strong>Structured data</strong><ul><li>As the name suggests, well-defined, standardized format that is easy to manipulate algorithmically.</li></ul></li><li><strong>Unstructured data</strong><ul><li>Poorly defined and is not organized in a pre-defined manner, e.g. raw text documents, images, videos etc.</li></ul></li><li><strong>Quantitative data</strong><ul><li>Consists of numerical values, e.g. height and weight.</li></ul></li><li><strong>Categorical data</strong><ul><li>Consist of discrete labels, e.g. gender, hair color or occupation.</li></ul></li><li><strong>Big data</strong><ul><li>Buzz word, but this is often unstructured data that is too big for convenient processing because of its sheer volume, multiple sources etc.</li></ul></li><li><strong>Little data</strong><ul><li>Even if the dataset is small, it can answer the right question given that the dataset is correct.</li></ul></li></ul></section></article><nav class=navigation><div class="nav-item previous"></div><div class="nav-item next"><a href=/school/dat565/dat565_2/ title="Next: Part 2 - Python tools for data science">Next &rarr;</a></div></nav></main></div><footer id=site-footer><div class=social-links><a href=https://github.com/rezaarezvan title class=social-link><span class=bracket>[</span>github<span class=bracket>]</span></a>
-<a href=https://x.com/rzvan__/ title class=social-link><span class=bracket>[</span>x<span class=bracket>]</span></a></div><div class=footer-marquee><div class=footer-marquee__content><span class=footer-marquee__item>memento mori • amor fati • sic parvis magna • per aspera ad astra</span>
-<span class=footer-marquee__item>memento mori • amor fati • sic parvis magna • per aspera ad astra</span></div></div></footer></body></html>
+<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width"><meta name="generator" content="Astro v4.11.5"><link rel="icon" type="image" href="/favicon.ico"><title>Part 1 - Introduction</title><!-- KaTeX support --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script><!-- inline KaTeX --><link rel="stylesheet" href="/_astro/index.BZ7em0Mc.css">
+<link rel="stylesheet" href="/_astro/_slug_.DPnDUiRI.css">
+<style>article[data-astro-cid-v5ro3oot]{max-width:80ch;margin:0 auto}
+</style><script type="module">document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]})});
+</script></head> <body class="font-sans antialiased"> <div class="container mx-auto flex min-h-screen"> <aside class="w-64 border-r border-[var(--border-color)] border-dashed pt-8"> <header class="flex flex-col h-full"> <div class="flex items-center mb-4"> <script>
+  function setTheme(mode) {
+    localStorage.setItem("theme-storage", mode);
+    document.documentElement.setAttribute('data-theme', mode);
+  }
+  function toggleTheme() {
+    const currentTheme = localStorage.getItem("theme-storage") || "light";
+    const newTheme = currentTheme === "light" ? "dark" : "light";
+    setTheme(newTheme);
+  }
+  const savedTheme = localStorage.getItem("theme-storage") || "light";
+  setTheme(savedTheme);
+  window.toggleTheme = toggleTheme;
+</script> <button id="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme" class="flex items-center justify-center w-6" data-astro-cid-x3pjskd3>○</button>  <a href="/" class="text-2xl font-semibold ml-3 h-10 pr-3">rezvan.xyz</a> </div> <nav class="flex flex-col space-y-2"> <a href="/principles" class="hover:text-orange-500 dark:hover:text-orange-400 transition-colors">
+[principles]
+</a><a href="/cv" class="hover:text-orange-500 dark:hover:text-orange-400 transition-colors">
+[cv]
+</a><a href="/posts" class="hover:text-orange-500 dark:hover:text-orange-400 transition-colors">
+[posts]
+</a><a href="/school" class="hover:text-orange-500 dark:hover:text-orange-400 transition-colors">
+[school]
+</a> </nav> </header> </aside> <main class="flex-grow px-8 py-8 overflow-y-auto">  <article class="prose prose-sm sm:prose lg:prose-lg xl:prose-xl max-w-none" data-astro-cid-v5ro3oot> <h1 class="text-4xl font-bold mb-4" data-astro-cid-v5ro3oot>Part 1 - Introduction</h1> <p class="text-sm text-muted-foreground mb-4" data-astro-cid-v5ro3oot>
+Date: 1/16/2024 </p>  <h3 id="introduction">Introduction</h3>
+<p>In this series we’ll cover the very large and mystical field of data science and AI.
+We’re going to spend these first few parts to understand what data science is.</p>
+<h4 id="data-science">Data science</h4>
+<p>What is data science? (Theoretical) Computer science is method-driven and often abstract.
+In data science, the question is often answered with insights derived from the data.</p>
+<p>Data scientists aim for results that can describe the world, or a business sector, that needs it.
+Whereas in computer science, most of the time the worry is about the correctness of the output.</p>
+<p>So data scientists worry about the robustness in face or noisy and incorrect data.</p>
+<p>Thus, data science can be seen as a <strong>scientific method</strong>.</p>
+<h3 id="the-basic-problems-of-data-science">The basic problems of data science</h3>
+<p>The most basic of problems that we’ll encounter in our data science journey will be:</p>
+<ul>
+<li><strong>Classification</strong>
+<ul>
+<li>Aims to give discrete labels to items in a dataset.</li>
+</ul>
+</li>
+<li><strong>Regression</strong>
+<ul>
+<li>Aims to predict numerical quantities based on observations at some point outside the dataset.</li>
+</ul>
+</li>
+</ul>
+<p>These are computational problems, not research questions.</p>
+<p>Classical examples from the data science world are:</p>
+<ul>
+<li>Classification problems:
+<ul>
+<li><a href="http://yann.lecun.com/exdb/mnist/">MNIST</a></li>
+<li><a href="https://github.com/allisonhorst/palmerpenguins">palmerpenguins</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Iris_flower_data_set">Iris flower</a></li>
+</ul>
+</li>
+<li>Regression problems:
+<ul>
+<li><a href="https://www.kaggle.com/code/prasadperera/the-boston-housing-dataset">Boston housing</a></li>
+<li><a href="https://www.kaggle.com/datasets/camnugent/california-housing-prices">California housing</a></li>
+<li><a href="https://www.kaggle.com/datasets/mathchi/diabetes-data-set">Diabetes dataset</a></li>
+</ul>
+</li>
+</ul>
+<h3 id="properties-of-data">Properties of data</h3>
+<p>So we understand that data is clearly important, but can we classify and set properties on data? Of course.</p>
+<ul>
+<li><strong>Structured data</strong>
+<ul>
+<li>As the name suggests, well-defined, standardized format that is easy to manipulate algorithmically.</li>
+</ul>
+</li>
+<li><strong>Unstructured data</strong>
+<ul>
+<li>Poorly defined and is not organized in a pre-defined manner, e.g. raw text documents, images, videos etc.</li>
+</ul>
+</li>
+<li><strong>Quantitative data</strong>
+<ul>
+<li>Consists of numerical values, e.g. height and weight.</li>
+</ul>
+</li>
+<li><strong>Categorical data</strong>
+<ul>
+<li>Consist of discrete labels, e.g. gender, hair color or occupation.</li>
+</ul>
+</li>
+<li><strong>Big data</strong>
+<ul>
+<li>Buzz word, but this is often unstructured data that is too big for convenient processing because of its sheer volume, multiple sources etc.</li>
+</ul>
+</li>
+<li><strong>Little data</strong>
+<ul>
+<li>Even if the dataset is small, it can answer the right question given that the dataset is correct.</li>
+</ul>
+</li>
+</ul>  <nav class="flex justify-between mt-8 pt-4 border-t border-border" data-astro-cid-v5ro3oot>  <a href="/school/dat565/dat565_2" class="text-primary hover:text-primary/80 transition-colors" data-astro-cid-v5ro3oot>
+Next: Part 2 - Python tools for data science →
+</a> </nav> </article>  </main> </div> </body></html> 

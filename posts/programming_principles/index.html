@@ -1,46 +1,93 @@
-<!doctype html><html><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge"><title>rezvan | Programming Principles</title><link rel=icon type=image/png href=https://rezvan.xyz/images/icon.png><meta name=viewport content="width=device-width,initial-scale=1">
-<meta name=description content="One of the core things that makes programming fun in my eyes are the standards and conventions that we&rsquo;ve built. I want to write down my principles that I follow when writing code. I think it&rsquo;s an essential part of every engineer that they have their own guidelines and principles they follow.
-Consistency Before we even dive into an actual programming principle I want to talk about consistency. Guidelines and principles won&rsquo;t even matter if we aren&rsquo;t consistent with them."><meta property="og:image" content="https://raw.githubusercontent.com/rezaarezvan/rezvan.xyz/main/images/icon.png"><meta property="og:url" content="https://rezvan.xyz/posts/programming_principles/"><meta property="og:site_name" content="rezvan"><meta property="og:title" content="Programming Principles"><meta property="og:description" content="One of the core things that makes programming fun in my eyes are the standards and conventions that we’ve built. I want to write down my principles that I follow when writing code. I think it’s an essential part of every engineer that they have their own guidelines and principles they follow.
-Consistency Before we even dive into an actual programming principle I want to talk about consistency. Guidelines and principles won’t even matter if we aren’t consistent with them."><meta property="og:locale" content="en_us"><meta property="og:type" content="article"><meta property="article:section" content="posts"><meta property="article:published_time" content="2023-01-09T17:03:59+01:00"><meta property="article:modified_time" content="2024-01-26T09:55:10+01:00"><meta name=twitter:card content="summary"><meta name=twitter:title content="Programming Principles"><meta name=twitter:description content="One of the core things that makes programming fun in my eyes are the standards and conventions that we’ve built. I want to write down my principles that I follow when writing code. I think it’s an essential part of every engineer that they have their own guidelines and principles they follow.
-Consistency Before we even dive into an actual programming principle I want to talk about consistency. Guidelines and principles won’t even matter if we aren’t consistent with them."><link rel=stylesheet href=https://rezvan.xyz/css/combined.min.285bd67a05674fdcb27bb67f867c7ac6b2e0c0b5535c536ba4bb37cd80e377e9.css integrity="sha256-KFvWegVnT9yye7Z/hnx6xrLgwLVTXFNrpLs3zYDjd+k="><link id=lightSyntaxStyle rel=stylesheet href=https://rezvan.xyz/css/light_syntax.min.d9e0828a4ff7f2d7317942062fc751fa487b2ac2c47b934ad082abd7d3ca6690.css integrity="sha256-2eCCik/38tcxeUIGL8dR+kh7KsLEe5NK0IKr19PKZpA="><link id=darkModeStyle rel=stylesheet href=https://rezvan.xyz/css/dark.min.113ab1177b874ffa2011e31f94df77b25b4c0aee6c35e5db0e6c54ebe2071597.css integrity="sha256-ETqxF3uHT/ogEeMflN93sltMCu5sNeXbDmxU6+IHFZc=" disabled><link id=darkSyntaxStyle rel=stylesheet href=https://rezvan.xyz/css/dark_syntax.min.1a878f3d8fb43359bd3b44bc70c4074f682f11066c6537bf6248b696cbe56586.css integrity="sha256-GoePPY+0M1m9O0S8cMQHT2gvEQZsZTe/Yki2lsvlZYY=" disabled><script type=text/javascript src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type=text/x-mathjax-config>
-		MathJax.Hub.Config({
-			tex2jax: {
-				inlineMath: [['$','$'], ['\\(','\\)']],
-				displayMath: [['$$','$$'], ['\[','\]']],
-				processEscapes: true,
-				processEnvironments: true,
-				skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
-				TeX: { equationNumbers: { autoNumber: "AMS" },
-						 extensions: ["AMSmath.js", "AMSsymbols.js"] }
-			}
-		});
-		</script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css><script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js onload=renderMathInElement(document.body)></script><script>document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]})})</script></head><body><header><nav id=site-navbar><div class=navbar-content><a href=https://rezvan.xyz/ class=logo>rezvan.xyz</a><div class=navbar-links><a href=/principles class=nav-link><span class=bracket>[</span>principles<span class=bracket>]</span></a>
-<a href=/cv class=nav-link><span class=bracket>[</span>cv<span class=bracket>]</span></a>
-<a href=/posts class=nav-link><span class=bracket>[</span>posts<span class=bracket>]</span></a>
-<a href=/school class=nav-link><span class=bracket>[</span>school<span class=bracket>]</span></a></div><div class=theme-toggle><span id=dark-mode-toggle onclick=toggleTheme() aria-label="Toggle theme">○
-</span><script src=https://rezvan.xyz/js/themetoggle.js></script></div></div></nav></header><div class=content><main><article><div class=title><h1>Programming Principles</h1><div class=meta>Posted on Jan 9, 2023</div><div class=meta>(Last updated: Jan 26, 2024)</div></div><section class=body><p>One of the core things that makes programming fun in my eyes are the standards and conventions that we&rsquo;ve built.
-I want to write down my principles that I follow when writing code. I think it&rsquo;s an essential part of every engineer that they have their own guidelines and principles they follow.</p><h4 id=consistency>Consistency</h4><p>Before we even dive into an actual <em>programming</em> principle I want to talk about consistency.
-Guidelines and principles won&rsquo;t even matter if we aren&rsquo;t consistent with them.
+<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width"><meta name="generator" content="Astro v4.11.5"><link rel="icon" type="image" href="/favicon.ico"><title>Programming Principles</title><!-- KaTeX support --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script><!-- inline KaTeX --><link rel="stylesheet" href="/_astro/index.BZ7em0Mc.css">
+<style>article[data-astro-cid-gjtny2mx]{max-width:80ch;margin:0 auto}
+</style>
+<link rel="stylesheet" href="/_astro/_slug_.DPnDUiRI.css"><script type="module">document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]})});
+</script></head> <body class="font-sans antialiased"> <div class="container mx-auto flex min-h-screen"> <aside class="w-64 border-r border-[var(--border-color)] border-dashed pt-8"> <header class="flex flex-col h-full"> <div class="flex items-center mb-4"> <script>
+  function setTheme(mode) {
+    localStorage.setItem("theme-storage", mode);
+    document.documentElement.setAttribute('data-theme', mode);
+  }
+  function toggleTheme() {
+    const currentTheme = localStorage.getItem("theme-storage") || "light";
+    const newTheme = currentTheme === "light" ? "dark" : "light";
+    setTheme(newTheme);
+  }
+  const savedTheme = localStorage.getItem("theme-storage") || "light";
+  setTheme(savedTheme);
+  window.toggleTheme = toggleTheme;
+</script> <button id="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme" class="flex items-center justify-center w-6" data-astro-cid-x3pjskd3>○</button>  <a href="/" class="text-2xl font-semibold ml-3 h-10 pr-3">rezvan.xyz</a> </div> <nav class="flex flex-col space-y-2"> <a href="/principles" class="hover:text-orange-500 dark:hover:text-orange-400 transition-colors">
+[principles]
+</a><a href="/cv" class="hover:text-orange-500 dark:hover:text-orange-400 transition-colors">
+[cv]
+</a><a href="/posts" class="hover:text-orange-500 dark:hover:text-orange-400 transition-colors">
+[posts]
+</a><a href="/school" class="hover:text-orange-500 dark:hover:text-orange-400 transition-colors">
+[school]
+</a> </nav> </header> </aside> <main class="flex-grow px-8 py-8 overflow-y-auto">  <article class="prose prose-sm sm:prose lg:prose-lg xl:prose-xl max-w-none" data-astro-cid-gjtny2mx> <h1 class="text-4xl font-bold mb-4" data-astro-cid-gjtny2mx>Programming Principles</h1> <p class="text-sm text-muted-foreground mb-4" data-astro-cid-gjtny2mx>
+Date: 1/9/2023 </p>  <p>One of the core things that makes programming fun in my eyes are the standards and conventions that we’ve built.
+I want to write down my principles that I follow when writing code. I think it’s an essential part of every engineer that they have their own guidelines and principles they follow.</p>
+<h4 id="consistency">Consistency</h4>
+<p>Before we even dive into an actual <em>programming</em> principle I want to talk about consistency.
+Guidelines and principles won’t even matter if we aren’t consistent with them.
 I understand that each team or company will have their own principles to follow.
-But I believe that, having and trying to stick to your own principles, will ultimately lead to better code.</p><h4 id=naming-system>Naming system</h4><p>A famous quote that many programmers have probably heard before:</p><blockquote><p><em>There are only two hard things in Computer Science, cache invalidation and naming things</em> - Phil Karlton.</p></blockquote><p>While I believe there are more than two hard things in computer science, it is true that naming is one of them.
+But I believe that, having and trying to stick to your own principles, will ultimately lead to better code.</p>
+<h4 id="naming-system">Naming system</h4>
+<p>A famous quote that many programmers have probably heard before:</p>
+<blockquote>
+<p><em>There are only two hard things in Computer Science, cache invalidation and naming things</em> - Phil Karlton.</p>
+</blockquote>
+<p>While I believe there are more than two hard things in computer science, it is true that naming is one of them.
 Having a naming convention or system is essential to having a readable and clean codebase.
-I could write a whole blog post just about naming things - but I&rsquo;ll suffice to naming a few principles that I follow.</p><ul><li>Be explicit but concise:</li></ul><p>There are so many (horrific) examples one could talk, but in reality it&rsquo;s quite simple.</p><p>Name your things accordingly, no one (and certainly not your future self)
+I could write a whole blog post just about naming things - but I’ll suffice to naming a few principles that I follow.</p>
+<ul>
+<li>Be explicit but concise:</li>
+</ul>
+<p>There are so many (horrific) examples one could talk, but in reality it’s quite simple.</p>
+<p>Name your things accordingly, no one (and certainly not your future self)
 will understand what the variable <code>a</code> represents. But as in all cases, there are edge cases, sometimes names can be too explicit.
 <code>IndexVariableForArrayIndex</code> can just be <code>idx</code>. This is a hard thing to master -
-I&rsquo;m certain that any seniors that have read my code probably saw flaws in my own naming conventions, but let&rsquo;s try to learn, all of us.</p><ul><li>Plan before naming</li></ul><p>When creating a larger project I believe it&rsquo;s plan what to name things before <em>actually</em> naming them.
-It&rsquo;s easy to just begin naming structs, classes, objects etc. without <em>really</em> planning for their use or even worse, future improvements.
-That&rsquo;s why I strive for to follow a naming system that be expanded upon.</p><h4 id=backup-your-things>Backup your things</h4><p>This isn&rsquo;t necessarily a programming principle, rather a principle all programmers should follow.
+I’m certain that any seniors that have read my code probably saw flaws in my own naming conventions, but let’s try to learn, all of us.</p>
+<ul>
+<li>Plan before naming</li>
+</ul>
+<p>When creating a larger project I believe it’s plan what to name things before <em>actually</em> naming them.
+It’s easy to just begin naming structs, classes, objects etc. without <em>really</em> planning for their use or even worse, future improvements.
+That’s why I strive for to follow a naming system that be expanded upon.</p>
+<h4 id="backup-your-things">Backup your things</h4>
+<p>This isn’t necessarily a programming principle, rather a principle all programmers should follow.
 Backup your shit, shit can (and probably will) happen one day. There are plenty of tools that allow one to back up their files easily.
-Sometimes a simple symlink script will suffice as well. I myself just keep all my dot files in a <a href=https://github.com/rezaarezvan/.dotfiles>repository</a>.</p><h4 id=kiss--dry>KISS & DRY</h4><p>There a lot of principles and acronyms that are meant to remind a programmer to write good, clean solutions that can be reused for later use.</p><p><strong>KISS - Keep it simple, silly</strong><br><strong>DRY - Don&rsquo;t repeat yourself</strong></p><p>Are two that I like, it reminds one to keep it simple and never repeating yourself.
-Which are great guidelines when it comes to writing good and readable code.</p><ul><li>Keeping it simple</li></ul><p>Often, implementing the easy and brute force solution <strong>first</strong> is the best.
-You have a working solution and now have the time and energy to find a better working one.</p><p>In many scenarios it&rsquo;s often the more complex solutions that result in greater results -
+Sometimes a simple symlink script will suffice as well. I myself just keep all my dot files in a <a href="https://github.com/rezaarezvan/.dotfiles">repository</a>.</p>
+<h4 id="kiss--dry">KISS &#x26; DRY</h4>
+<p>There a lot of principles and acronyms that are meant to remind a programmer to write good, clean solutions that can be reused for later use.</p>
+<p><strong>KISS - Keep it simple, silly</strong><br>
+<strong>DRY - Don’t repeat yourself</strong></p>
+<p>Are two that I like, it reminds one to keep it simple and never repeating yourself.
+Which are great guidelines when it comes to writing good and readable code.</p>
+<ul>
+<li>Keeping it simple</li>
+</ul>
+<p>Often, implementing the easy and brute force solution <strong>first</strong> is the best.
+You have a working solution and now have the time and energy to find a better working one.</p>
+<p>In many scenarios it’s often the more complex solutions that result in greater results -
 but these complex solutions are probably built from the simpler solutions.
-That&rsquo;s why I think it&rsquo;s important to keep it simple, <em>for a start</em> then trying to expand on your solution.</p><ul><li>Don&rsquo;t repeat yourself</li></ul><p>This one should be obvious for many - programming itself allows us to solve problems with many iterative steps.</p><p>So writing code that is reusable is an important guideline. Write functions that have their own distinct functionality.</p><h4 id=testing>Testing</h4><p>Testing your code, solution, algorithm, you name it. Testing will always lead to finding small bugs or improvements that can be made.
-Also for any beginners that might read this, I&rsquo;ve heard so many beginners to programming asking &ldquo;will this work?&rdquo;, &ldquo;is this correct?&rdquo; etc.</p><p>My answer is always the same - just try it! - you and me are no compilers so, we can&rsquo;t be sure.
-A funny quote that I like is: &ldquo;Fuck around to find out&rdquo;. One can really apply this to any area of life - but I think this certainly holds true for programming.</p><h4 id=ergonomics>Ergonomics</h4><p>When I mean ergonomics I don&rsquo;t necessarily mean your posture. I mean developer ergonomics, how comfortable are you with the tools you use every day?</p><p>Is there maybe a tool or service that can make you even more comfortable and productive? In recent years we have seen the rise of an AI companion.
-Copilot and ChatGPT are certainly something that a lot of developers seem to love. I myself are neutral in those at the moment writing this.</p><p>But really knowing, understanding and being comfortable with your OS, editor, WM, programming language, framework, etc.
-Will ultimately yield better code, and certainly at a faster rate. So try something new, it just might be the thing that boosts your productivity.</p><h4 id=summary>Summary</h4><p>The common theme in this post is that, trying out new stuff and finding what fits you, and really sticking to those things -
+That’s why I think it’s important to keep it simple, <em>for a start</em> then trying to expand on your solution.</p>
+<ul>
+<li>Don’t repeat yourself</li>
+</ul>
+<p>This one should be obvious for many - programming itself allows us to solve problems with many iterative steps.</p>
+<p>So writing code that is reusable is an important guideline. Write functions that have their own distinct functionality.</p>
+<h4 id="testing">Testing</h4>
+<p>Testing your code, solution, algorithm, you name it. Testing will always lead to finding small bugs or improvements that can be made.
+Also for any beginners that might read this, I’ve heard so many beginners to programming asking “will this work?”, “is this correct?” etc.</p>
+<p>My answer is always the same - just try it! - you and me are no compilers so, we can’t be sure.
+A funny quote that I like is: “Fuck around to find out”. One can really apply this to any area of life - but I think this certainly holds true for programming.</p>
+<h4 id="ergonomics">Ergonomics</h4>
+<p>When I mean ergonomics I don’t necessarily mean your posture. I mean developer ergonomics, how comfortable are you with the tools you use every day?</p>
+<p>Is there maybe a tool or service that can make you even more comfortable and productive? In recent years we have seen the rise of an AI companion.
+Copilot and ChatGPT are certainly something that a lot of developers seem to love. I myself are neutral in those at the moment writing this.</p>
+<p>But really knowing, understanding and being comfortable with your OS, editor, WM, programming language, framework, etc.
+Will ultimately yield better code, and certainly at a faster rate. So try something new, it just might be the thing that boosts your productivity.</p>
+<h4 id="summary">Summary</h4>
+<p>The common theme in this post is that, trying out new stuff and finding what fits you, and really sticking to those things -
 is what makes a great engineer in my eyes.
-I hope my words had some impact and the person reading this, will try to find their own programming principles, and sticking to them.</p></section></article><nav class=navigation><div class="nav-item previous"></div><div class="nav-item next"></div></nav></main></div><footer id=site-footer><div class=social-links><a href=https://github.com/rezaarezvan title class=social-link><span class=bracket>[</span>github<span class=bracket>]</span></a>
-<a href=https://x.com/rzvan__/ title class=social-link><span class=bracket>[</span>x<span class=bracket>]</span></a></div><div class=footer-marquee><div class=footer-marquee__content><span class=footer-marquee__item>memento mori • amor fati • sic parvis magna • per aspera ad astra</span>
-<span class=footer-marquee__item>memento mori • amor fati • sic parvis magna • per aspera ad astra</span></div></div></footer></body></html>
+I hope my words had some impact and the person reading this, will try to find their own programming principles, and sticking to them.</p>  </article>  </main> </div> </body></html> 

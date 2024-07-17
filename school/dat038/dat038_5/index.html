@@ -1,277 +1,425 @@
-<!doctype html><html><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge"><title>rezvan | Part 5 - Hash Tables</title><link rel=icon type=image/png href=https://rezvan.xyz/images/icon.png><meta name=viewport content="width=device-width,initial-scale=1">
-<meta name=description content="Hash Tables Hash tables are one of the most famous (and widely used) data structures. But why are they so popular and powerful? Before we can answer that question we need to look back at sets and maps.
-Sets and Maps in Context Just to refresh our memory - a set is a collection of items, where duplicates aren&rsquo;t allowed. Maps are sets of keys, each having an associate value - or you can formulate it as - a set of key-value pairs."><meta property="og:image" content="https://raw.githubusercontent.com/rezaarezvan/rezvan.xyz/main/images/icon.png"><meta property="og:url" content="https://rezvan.xyz/school/dat038/dat038_5/"><meta property="og:site_name" content="rezvan"><meta property="og:title" content="Part 5 - Hash Tables"><meta property="og:description" content="Hash Tables Hash tables are one of the most famous (and widely used) data structures. But why are they so popular and powerful? Before we can answer that question we need to look back at sets and maps.
-Sets and Maps in Context Just to refresh our memory - a set is a collection of items, where duplicates aren’t allowed. Maps are sets of keys, each having an associate value - or you can formulate it as - a set of key-value pairs."><meta property="og:locale" content="en_us"><meta property="og:type" content="article"><meta property="article:section" content="school"><meta property="article:published_time" content="2022-11-29T18:50:23+01:00"><meta property="article:modified_time" content="2024-05-26T11:09:10+02:00"><meta name=twitter:card content="summary"><meta name=twitter:title content="Part 5 - Hash Tables"><meta name=twitter:description content="Hash Tables Hash tables are one of the most famous (and widely used) data structures. But why are they so popular and powerful? Before we can answer that question we need to look back at sets and maps.
-Sets and Maps in Context Just to refresh our memory - a set is a collection of items, where duplicates aren’t allowed. Maps are sets of keys, each having an associate value - or you can formulate it as - a set of key-value pairs."><link rel=stylesheet href=https://rezvan.xyz/css/combined.min.285bd67a05674fdcb27bb67f867c7ac6b2e0c0b5535c536ba4bb37cd80e377e9.css integrity="sha256-KFvWegVnT9yye7Z/hnx6xrLgwLVTXFNrpLs3zYDjd+k="><link id=lightSyntaxStyle rel=stylesheet href=https://rezvan.xyz/css/light_syntax.min.d9e0828a4ff7f2d7317942062fc751fa487b2ac2c47b934ad082abd7d3ca6690.css integrity="sha256-2eCCik/38tcxeUIGL8dR+kh7KsLEe5NK0IKr19PKZpA="><link id=darkModeStyle rel=stylesheet href=https://rezvan.xyz/css/dark.min.113ab1177b874ffa2011e31f94df77b25b4c0aee6c35e5db0e6c54ebe2071597.css integrity="sha256-ETqxF3uHT/ogEeMflN93sltMCu5sNeXbDmxU6+IHFZc=" disabled><link id=darkSyntaxStyle rel=stylesheet href=https://rezvan.xyz/css/dark_syntax.min.1a878f3d8fb43359bd3b44bc70c4074f682f11066c6537bf6248b696cbe56586.css integrity="sha256-GoePPY+0M1m9O0S8cMQHT2gvEQZsZTe/Yki2lsvlZYY=" disabled><script type=text/javascript src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type=text/x-mathjax-config>
-		MathJax.Hub.Config({
-			tex2jax: {
-				inlineMath: [['$','$'], ['\\(','\\)']],
-				displayMath: [['$$','$$'], ['\[','\]']],
-				processEscapes: true,
-				processEnvironments: true,
-				skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
-				TeX: { equationNumbers: { autoNumber: "AMS" },
-						 extensions: ["AMSmath.js", "AMSsymbols.js"] }
-			}
-		});
-		</script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css><script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js onload=renderMathInElement(document.body)></script><script>document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]})})</script></head><body><header><nav id=site-navbar><div class=navbar-content><a href=https://rezvan.xyz/ class=logo>rezvan.xyz</a><div class=navbar-links><a href=/principles class=nav-link><span class=bracket>[</span>principles<span class=bracket>]</span></a>
-<a href=/cv class=nav-link><span class=bracket>[</span>cv<span class=bracket>]</span></a>
-<a href=/posts class=nav-link><span class=bracket>[</span>posts<span class=bracket>]</span></a>
-<a href=/school class=nav-link><span class=bracket>[</span>school<span class=bracket>]</span></a></div><div class=theme-toggle><span id=dark-mode-toggle onclick=toggleTheme() aria-label="Toggle theme">○
-</span><script src=https://rezvan.xyz/js/themetoggle.js></script></div></div></nav></header><div class=content><main><article><div class=title><h1>Part 5 - Hash Tables</h1><div class=meta>Posted on Nov 29, 2022</div><div class=meta>(Last updated: May 26, 2024)</div></div><section class=body><h3 id=hash-tables>Hash Tables</h3><p>Hash tables are one of the most famous (and widely used) data structures. But why are they so popular and powerful?
-Before we can answer that question we need to look back at sets and maps.</p><h3 id=sets-and-maps-in-context>Sets and Maps in Context</h3><p>Just to refresh our memory - a set is a <em>collection of items</em>, where duplicates aren&rsquo;t allowed.
-Maps are <strong>sets</strong> of <em>keys</em>, each having an associate value - or you can formulate it as - a <strong>set</strong> of <em>key-value pairs</em>.</p><p>Maps are used in almost all programs and applications since they&rsquo;re very powerful and intuitive. They can act as databases (some databases are just straight up maps as well):</p><ul><li>Look up a person by their social security number.</li><li>Look up a file in a computer by its name/filetype/size.</li><li>Find all words appearing in a text/website/book.</li></ul><p>Only problem is that, our usual implementation of maps makes the <code>search()</code> and <code>update()</code> are quite slow, in fact, the complexity is usually
-$\mathcal{O}(n)$ or in case we&rsquo;re using a <em>mutlimap</em> $\mathcal{O}(n \cdot m)$.</p><p>We would like a complexity of $\mathcal{O}(log(n))$ or $\mathcal{O}(1)$. Even if we implement maps using all the different data structures we have - we still can&rsquo;t achieve this:</p><ul><li>Dynamic Array of key-value pairs<ul><li>Search takes linear time</li><li>Insertion takes linear time</li></ul></li><li>A Linked List<ul><li>Same as the dynamic array</li></ul></li><li>A <em>sorted</em> Dynamic Array<ul><li>Search takes logarithmic time (binary search).</li><li>Insertion still takes linear time&mldr;</li></ul></li></ul><p>The answer is <em><strong>Hash Tables</strong></em>!</p><h3 id=separate-chaining-hash-tables>Separate Chaining Hash Tables</h3><p>One thing to know before we dive in is - there are two different strategies when it comes to tables, we&rsquo;ll begin with separate chaining.</p><h4 id=hash-functions>Hash Functions</h4><p>Before we start talking about what a hash <strong>table</strong> is we first need to look into what a hash <strong>function</strong> is. The problem with ordinary maps that they are an unordered data structure.
-We need some kind of function which calculates, based on different parameters, where <code>Item x</code> should go into our map, because afterward, we can just search for that index, which is much faster. This is what hash functions are for!</p><p>At the same time our hash functions needs to be &lsquo;good&rsquo;. We can&rsquo;t have a hash functions that only returns index 1 and stack every item into the same slot. But we also can&rsquo;t be lazy, in the example of sorting a collection of people.
-We can&rsquo;t just go by their first letter in their name, there are a lot more names that begin with a &lsquo;A&rsquo; than a &lsquo;Z&rsquo; for example.</p><p>So we want a hash functions that also <em>evenly</em> distributes the objects, and at the same time efficient to compute.</p><p>With this in mind we can now define a hash table.</p><h3 id=hash-tables-1>Hash Tables</h3><p>A hash table uses a hash function to compute the array index. It&rsquo;s not possible to put more than one object into one array slot, so if our hash function returns the same index for different objects (we will later see, by definition, this is a bad hash function) we need a solution.
-Separate chaining is one of them.</p><h3 id=separate-chaining>Separate Chaining</h3><p>In a separate chaining hash table, instead of having just one array slot, we instead have the value/slots being a pointer. This pointer then points to collections of all the values/objects having the same hash value.</p><p>Usually this is a linked list, but any searchable collection works (A dynamic array for example).</p><h3 id=open-addressing-hash-tables>Open Addressing Hash Tables</h3><p>In the other case, being open addressing, each slot contains exactly one object/value. However - if we ever encounter a conflict, we just move that value/object into a free slot, the tricky part is an efficient way of finding a free slot.
-We&rsquo;ll see more of this later.</p><h3 id=separate-chaining-hash-set>Separate Chaining: Hash Set</h3><p>For our implementation of Hash tables using separate chaining we could use sets - and for the underlying collection, we usually use linked lists.</p><p>So a kind of implementation (in pseudocode) would be:</p><pre tabindex=0><code>class SeparateChainingHashSet &lt;Item&gt; implements Set&lt;Item&gt;:
-    table: Array of Set&lt;Item&gt;
-
-    // A given good hash function
-    hash(x : Item) -&gt; int:
-        // Returns good hash value
-
-    contains(x : Item) -&gt; boolean:
-        bucket : Set&lt;Item&gt; = table[hash(x)]
-        return bucket.contains(x)
-
-    add(x : Item):
-        bucket : Set&lt;Item&gt; = table[hash(x)]
-        bucket.add(x)
-
-    remove(x : Item):
-        bucket : Set&lt;Item&gt; = table[hash(x)]
-        bucket.remove(x)
-</code></pre><p>As we can see there is quite a lot of &lsquo;mental overhead&rsquo;, using an ordinary map it also becomes faster since we have actual key-value pairs, therefore being faster.
-Also, we need to know the size of the Hash table and also handle null pointers so let&rsquo;s fix that as well!</p><pre tabindex=0><code>class SeparateChainingHashMap&lt;Key, Value&gt; implements Map&lt;Key, Value&gt;:
-    table: Array of Map&lt;Key, Value&gt;
-    size : int = 0
-
-    hash(k : Key) -&gt; int:
-        // Returns good hash value
-
-    contains(k : Key) -&gt; boolean:
-        bucket : Map&lt;Key, Value&gt; = table[hash(k)]
-        return bucket.contains(k)
-
-    get(k : Key) -&gt; Value:
-        bucket : Map&lt;Key, Value&gt; = table[hash(k)]
-        return bucket.get(k)
-
-    put(k : Key, v : Value):
-        bucket : Map&lt;Key, Value&gt; = table[hash(k)]
-        if bucket == NULL:
-            bucket = table[hash(x)] = new Map()
-        if not bucket.contains(k):
-            bucket.put(k, v)
-            size += 1
-
-    remove(k : Key):
-        bucket : Map&lt;Key, Value&gt; = table[hash(k)]
-        bucket.remove(k)
-</code></pre><p>If we actually try to implement it with the underlying data structure, the linked list, it would look something like:</p><pre tabindex=0><code>class SeparateChainingHashMap&lt;Key, Value&gt; implements Map&lt;Key, Value&gt;:
-    ...
-    class Node:
-        key : Key
-        val : Value
-        next : Node
-
-    get(k : Key) -&gt; Value:
-        node : Node = table[hash(k)]
-        while node != NULL:
-            if k == node.key
-                return node.val
-            node = node.next
-        return NULL
-
-    put(k : Key, v : Value):
-        h : int = hash(k)
-        node : Node = table[h]
-        while node != NULL:
-            if k == node.key:
-                node.val = v
-                return
-            node = node.next
-        // If we are given a new key
-        table[h] = Node(k, v, table[h])
-</code></pre><h3 id=load-factor>Load Factor</h3><p>We should always assume that we have a good hash functions, since in most libraries, they are good! But to understand why it&rsquo;s &lsquo;good&rsquo; we need to understand something called <em>Load factor</em>.
-The load factor is the average number of elements per slot/index.</p><p>So load factor = $\frac{N}{M}$, where N is # of elements and M is the array size.
-We haven&rsquo;t discussed it yet but, what&rsquo;s the complexity of <code>contains</code>, <code>add</code>, and <code>put</code> for example? Well it depends on the total array size and the number of elements per slot. The load factor!</p><p>Therefore, the complexity of each operation is $\mathcal{O}(\frac{N}{M})$</p><p>Which tells us, if we can keep N and M roughly the same all of our operations will be constant! This is the magic with Hash tables.</p><p>So our array size must grow when the hash table grows. To achieve this we use a dynamic array, when we need to resize the hash table array, we create a new array and copy all old elements using <code>add()</code>.</p><pre tabindex=0><code>put(k : Key, v : Value):
-    if size &gt;= 8 * table.length:
-        resize(2 * table.length)
-    bucket : Map&lt;Key, Value&gt; = table[hash(k)]
-        if bucket == NULL:
-            bucket = table[hash(x)] = new Map()
-        if not bucket.contains(k):
-            bucket.put(k, v)
-            size += 1
-
-remove(k : Key):
-    if size ≤ 2 * table.length:
-        resize(table.length / 2)
-    bucket : Map&lt;Key, Value&gt; = table[hash(k)]
-        bucket.remove(k)
-
-resize(buckets : int):
-    oldtable = table
-    table = new Array with size buckets
-    size = 0
-    for bucket in oldtable:
-        for k,v in bucket:
-            this.put(k, v)
-</code></pre><p>In this example I&rsquo;ve chosen to resize the table with a factor of 2. However, this is can actually lead to some problems.
-The &lsquo;optimal&rsquo; way is to choose a <em>prime</em> closest to <code>2 * oldsize</code>.</p><h3 id=hash-and-compress>Hash and compress</h3><p>In actuality, the hash functions are a composition of functions. First we get the <em>hash code</em> for a given object/value. Then we need to <em>compress</em> it to fit inside our hash table.</p><p>How we compress our is quite simple (often) - it is:</p><pre tabindex=0><code>index = hash_code % array_size
-i = h % M
-</code></pre><p>This is called &lsquo;modular&rsquo; hashing, it&rsquo;s the most common one. One thing to remember that the <em>hash code</em> <strong>never</strong> changes. Only the compressed version can change since we can change the size of it.</p><p>So we might see different outputs for <code>hash(x)</code> depending on size - but remember, the actual <em>hash code</em> <strong>never</strong> changes.</p><h3 id=requirements-on-hash-functions>Requirements on hash functions</h3><p>There is one very strict requirement on hash functions:</p><ul><li>Equal objects must have equal hash codes</li></ul><p>Or in coding terms:</p><pre tabindex=0><code>if x === y then x.hash() == y.hash()
-</code></pre><p>There are some desirable properties:</p><ul><li>If x and y have the same <em>hash code</em>, then they are &rsquo;equal&rsquo;</li><li>The distribution should be uniform and independent</li></ul><h3 id=open-addressing-probing>Open Addressing: Probing</h3><p>As we defined earlier, open addressing is a method where we find a new empty slot if there&rsquo;s a conflict. Probing is how we find this empty slot.</p><p>The easiest approach is so called <em>linear probing</em>, where we simply go to the next index (increase with some constant) and check if it&rsquo;s empty, with wrapping around the array.</p><pre tabindex=0><code>class LinearProbingHashSet&lt;Item&gt;:
-    table: Array of Item
-    size : int = 0
-
-    add(x : Item):
-        i = hash(x)
-        while table[i] != NULL:
-                if x == table[i]:
-                    return
-                i = (i + 1) % table.length
-        table[i] = x
-        size += 1
-</code></pre><p>Or in the Hash Map case:</p><pre tabindex=0><code>class LinearProbingHashMap&lt;Key, Value&gt;:
-    table: Map&lt;Key, Value&gt;
-    size : int = 0
-
-    add(k : Key, v : Value):
-        i = hash(k)
-        while table[i] != NULL:
-                if k == table[i]:
-                    return
-                i = (i + 1) % table.length
-        table[i] = value
-        size += 1
-</code></pre><h3 id=open-addressing-compared-to-separate-chaining>Open Addressing compared to Separate Chaining</h3><p>Let&rsquo;s now compare both of these approaches now that we have a grasp of them.</p><ul><li>Separate Chaining<ul><li>Load factor can be > 1 without performance loss.</li><li>The extra list nodes take up unnecessary memory.</li><li>Since the list nodes are (usually) scattered in memory - we can not optimize via for example CPU caching.</li></ul></li><li>Open Addressing<ul><li>Load factor <strong>must</strong> be &lt; 1, and the performance drops when load factor > 3/4.</li><li>Doesn&rsquo;t take up unnecessary memory with extra list nodes.</li><li>Elements with the same hash code tend to be close in memory - therefore we can utilize CPU caching.</li></ul></li></ul><h3 id=deletion>Deletion</h3><p>If we want to delete object while using Open Addressing - we will encounter a very famous problem called &lsquo;clusters&rsquo;.
-A short definition of clusters is, due to Open Addressing, we will get small &lsquo;clusters&rsquo; or &lsquo;chunks&rsquo;. These are quite valuable since they tell us which objects have similar hash codes.</p><p>But first to understand why, let&rsquo;s see how we <em>would</em> delete items.</p><h4 id=naive-approach>Naive approach</h4><p>Our naive approach would look something like:</p><pre tabindex=0><code>remove(x : Item):
-    i = hash(x)
-    while table[i] != NULL:
-        if x == table[i]:
-            table[i] = NULL
-        i = (i + 1) % table.length
-</code></pre><p>And in the map case:</p><pre tabindex=0><code>remove(k : Key):
-    i = hash(x)
-    while table[i] != NULL:
-        if k == table[i]:
-            table[i] = NULL
-        i = (i + 1) % table.length
-</code></pre><p>But this won&rsquo;t work - if we then want to find something to the <strong>right</strong> of this deleted cell - but their hash is <strong>before</strong> the deleted cell, we won&rsquo;t be able to, since we find the &lsquo;NULL&rsquo; value before we can find the actual object.</p><p>There are two possible solutions:</p><ul><li>Lazy deletion:<ul><li>We don&rsquo;t necessarily &lsquo;delete&rsquo; the item, just &lsquo;mark&rsquo; it deleted, rather than empty.</li></ul></li><li>Recalculation:<ul><li>We reinsert all elements in the cluster that are to the <strong>right</strong> of the deleted element.</li></ul></li></ul><p>One problem we will also encounter is, we won&rsquo;t be able to properly count # of deleted cells - therefore our resizing calculations will suffer - the solution is to have a variable for each deleted cell.
-If this number exceeds some threshold we resize.</p><h3 id=final-implementations>Final implementations</h3><p>So, we have covered all topics and problems that come with implementing Hash tables - so let&rsquo;s implement the final version.</p><p>For a Hash <strong>Set</strong>:</p><pre tabindex=0><code>class LinearProbingHashSet&lt;Item&gt;:
-    table: Array of HashCell
-    size: int = 0
-    n_deleted: int = 0
-    DELETED: HashCell = HashCell(value = NULL)
-
-    class HashCell:
-        value: Item
-
-    load_factor() -&gt; float:
-        return (size + deleted) / table.length
-
-    add(x : Item):
-        if load_factor() &gt; 0.75:
-            resize(2 * table.length)
-        i = hash(x)
-
-        while table[i] != NULL and table[i] != DELETED:
-            if x == table[i].value:
-                return
-            i = (i + 1) % table.length
-        size += 1
-        if table[i] = DELETED:
-            n_deleted -= 1
-
-        table[i] = HashCell(value = x)
-
-    contains(x : Item) -&gt; boolean:
-        i = hash(x)
-        while table[i] != NULL:
-            if x == table[i].value:
-                return True
-            i = (i + 1) % table.length
-        return False
-
-    remove(x : Item):
-        i = hash(x)
-        while table[i] != NULL:
-            if x == table[i].value:
-                table[i] = DELETED
-                size -= 1
-                n_deleted += 1
-                if load_factor() &lt; 0.25:
-                    resize(table.length // 2)
-                return
-            i = (i + 1) % table.length
-
-    resize(buckets: int):
-        oldtable = table
-        table = new Array with size buckets
-        size = n_deleted = 0
-        for cell in oldtable:
-            if cell != NULL and cell != DELETED:
-                table.add(cell.value)
-</code></pre><p>And in the <strong>Map</strong> case:</p><pre tabindex=0><code>class LinearProbingHashMap&lt;Key, Value&gt;:
-    table: Array of HashCell
-    size: int = 0
-    n_deleted: int = 0
-    DELETED: HashCell = HashCell(key = NULL,value = NULL)
-
-    class HashCell:
-        key: Key
-        value: Value
-
-    load_factor() -&gt; float:
-        return (size + deleted) / table.length
-
-    put(k : Key, v : Value):
-        if load_factor() &gt; 0.75:
-            resize(2 * table.length)
-        i = hash(k)
-
-        while table[i] != NULL and table[i] != DELETED:
-            if k == table[i].key:
-                return
-            i = (i + 1) % table.length
-        size += 1
-        if table[i] = DELETED:
-            n_deleted -= 1
-
-        table[i] = HashCell(key = k, value = v)
-
-    contains(k : Key) -&gt; boolean:
-        i = hash(k)
-        while table[i] != NULL:
-            if k == table[i].key:
-                return True
-            i = (i + 1) % table.length
-        return False
-
-    remove(k : Key):
-        i = hash(k)
-        while table[i] != NULL:
-            if k == table[i].value:
-                table[i] = DELETED
-                size -= 1
-                n_deleted += 1
-                if load_factor() &lt; 0.25:
-                    resize(table.length // 2)
-                return
-            i = (i + 1) % table.length
-
-    resize(buckets: int):
-        oldtable = table
-        table = new Array with size buckets
-        size = n_deleted = 0
-        for cell in oldtable:
-            if cell != NULL and cell != DELETED:
-                table.add(cell.key, cell.value)
-</code></pre><h3 id=clustering>Clustering</h3><p>As mentioned before - clusters is by-product of open addressing - but these make the search times slower, in the worst time it becomes linear!</p><p>The famous Donald E. Knuth formulated the so called &lsquo;Knuth&rsquo;s parking problem&rsquo; which shows how rapid this cluster problem grows.</p><h3 id=alternatives-to-linear-probing>Alternatives to linear probing</h3><p>Instead of linearly increase, we could do <em>quadratic</em>, <em>double hashing</em> which depends on a <em>second</em> hash function, or <em>moving</em> alternatives such as:
-<em>cuckoo</em>, <em>hopscotch</em> and <em>Robin Hood</em> hashing. We will only use linear probing though&mldr;</p><h3 id=summary>Summary</h3><p>There&rsquo;s <strong>a lot</strong> to hashing and hash tables in general. But I think we&rsquo;ll leave it here, one final thing I want to bring up is:</p><p>Hash tables are not ordered! If we want to find a maximum value in a hash table - it will take linear time! Since there&rsquo;s no underlying order.</p><p>In the next part we&rsquo;ll begin looking at trees - starting at <strong>B</strong>alanced <strong>S</strong>earch <strong>T</strong>rees or BSTs for short. We&rsquo;ll actually compare them to Hash maps, since they are quite similar in some aspects.</p></section></article><nav class=navigation><div class="nav-item previous"><a href=/school/dat038/dat038_3/ title="Previous: Part 3 - Dynamic Arrays">&larr; Previous</a></div><div class="nav-item next"><a href=/school/dat038/dat038_6/ title="Next: Part 6 - Trees">Next &rarr;</a></div></nav></main></div><footer id=site-footer><div class=social-links><a href=https://github.com/rezaarezvan title class=social-link><span class=bracket>[</span>github<span class=bracket>]</span></a>
-<a href=https://x.com/rzvan__/ title class=social-link><span class=bracket>[</span>x<span class=bracket>]</span></a></div><div class=footer-marquee><div class=footer-marquee__content><span class=footer-marquee__item>memento mori • amor fati • sic parvis magna • per aspera ad astra</span>
-<span class=footer-marquee__item>memento mori • amor fati • sic parvis magna • per aspera ad astra</span></div></div></footer></body></html>
+<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width"><meta name="generator" content="Astro v4.11.5"><link rel="icon" type="image" href="/favicon.ico"><title>Part 5 - Hash Tables</title><!-- KaTeX support --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script><!-- inline KaTeX --><link rel="stylesheet" href="/_astro/index.BZ7em0Mc.css">
+<link rel="stylesheet" href="/_astro/_slug_.DPnDUiRI.css">
+<style>article[data-astro-cid-v5ro3oot]{max-width:80ch;margin:0 auto}
+</style><script type="module">document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]})});
+</script></head> <body class="font-sans antialiased"> <div class="container mx-auto flex min-h-screen"> <aside class="w-64 border-r border-[var(--border-color)] border-dashed pt-8"> <header class="flex flex-col h-full"> <div class="flex items-center mb-4"> <script>
+  function setTheme(mode) {
+    localStorage.setItem("theme-storage", mode);
+    document.documentElement.setAttribute('data-theme', mode);
+  }
+  function toggleTheme() {
+    const currentTheme = localStorage.getItem("theme-storage") || "light";
+    const newTheme = currentTheme === "light" ? "dark" : "light";
+    setTheme(newTheme);
+  }
+  const savedTheme = localStorage.getItem("theme-storage") || "light";
+  setTheme(savedTheme);
+  window.toggleTheme = toggleTheme;
+</script> <button id="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme" class="flex items-center justify-center w-6" data-astro-cid-x3pjskd3>○</button>  <a href="/" class="text-2xl font-semibold ml-3 h-10 pr-3">rezvan.xyz</a> </div> <nav class="flex flex-col space-y-2"> <a href="/principles" class="hover:text-orange-500 dark:hover:text-orange-400 transition-colors">
+[principles]
+</a><a href="/cv" class="hover:text-orange-500 dark:hover:text-orange-400 transition-colors">
+[cv]
+</a><a href="/posts" class="hover:text-orange-500 dark:hover:text-orange-400 transition-colors">
+[posts]
+</a><a href="/school" class="hover:text-orange-500 dark:hover:text-orange-400 transition-colors">
+[school]
+</a> </nav> </header> </aside> <main class="flex-grow px-8 py-8 overflow-y-auto">  <article class="prose prose-sm sm:prose lg:prose-lg xl:prose-xl max-w-none" data-astro-cid-v5ro3oot> <h1 class="text-4xl font-bold mb-4" data-astro-cid-v5ro3oot>Part 5 - Hash Tables</h1> <p class="text-sm text-muted-foreground mb-4" data-astro-cid-v5ro3oot>
+Date: 11/29/2022 </p>  <h3 id="hash-tables">Hash Tables</h3>
+<p>Hash tables are one of the most famous (and widely used) data structures. But why are they so popular and powerful?
+Before we can answer that question we need to look back at sets and maps.</p>
+<h3 id="sets-and-maps-in-context">Sets and Maps in Context</h3>
+<p>Just to refresh our memory - a set is a <em>collection of items</em>, where duplicates aren’t allowed.
+Maps are <strong>sets</strong> of <em>keys</em>, each having an associate value - or you can formulate it as - a <strong>set</strong> of <em>key-value pairs</em>.</p>
+<p>Maps are used in almost all programs and applications since they’re very powerful and intuitive. They can act as databases (some databases are just straight up maps as well):</p>
+<ul>
+<li>Look up a person by their social security number.</li>
+<li>Look up a file in a computer by its name/filetype/size.</li>
+<li>Find all words appearing in a text/website/book.</li>
+</ul>
+<p>Only problem is that, our usual implementation of maps makes the <code>search()</code> and <code>update()</code> are quite slow, in fact, the complexity is usually
+<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="script">O</mi><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\mathcal{O}(n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathcal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mclose">)</span></span></span></span> or in case we’re using a <em>mutlimap</em> <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="script">O</mi><mo stretchy="false">(</mo><mi>n</mi><mo>⋅</mo><mi>m</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\mathcal{O}(n \cdot m)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathcal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">m</span><span class="mclose">)</span></span></span></span>.</p>
+<p>We would like a complexity of <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="script">O</mi><mo stretchy="false">(</mo><mi>l</mi><mi>o</mi><mi>g</mi><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\mathcal{O}(log(n))</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathcal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">o</span><span class="mord mathnormal" style="margin-right:0.03588em;">g</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mclose">))</span></span></span></span> or <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="script">O</mi><mo stretchy="false">(</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\mathcal{O}(1)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathcal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord">1</span><span class="mclose">)</span></span></span></span>. Even if we implement maps using all the different data structures we have - we still can’t achieve this:</p>
+<ul>
+<li>Dynamic Array of key-value pairs
+<ul>
+<li>Search takes linear time</li>
+<li>Insertion takes linear time</li>
+</ul>
+</li>
+<li>A Linked List
+<ul>
+<li>Same as the dynamic array</li>
+</ul>
+</li>
+<li>A <em>sorted</em> Dynamic Array
+<ul>
+<li>Search takes logarithmic time (binary search).</li>
+<li>Insertion still takes linear time…</li>
+</ul>
+</li>
+</ul>
+<p>The answer is <em><strong>Hash Tables</strong></em>!</p>
+<h3 id="separate-chaining-hash-tables">Separate Chaining Hash Tables</h3>
+<p>One thing to know before we dive in is - there are two different strategies when it comes to tables, we’ll begin with separate chaining.</p>
+<h4 id="hash-functions">Hash Functions</h4>
+<p>Before we start talking about what a hash <strong>table</strong> is we first need to look into what a hash <strong>function</strong> is. The problem with ordinary maps that they are an unordered data structure.
+We need some kind of function which calculates, based on different parameters, where <code>Item x</code> should go into our map, because afterward, we can just search for that index, which is much faster. This is what hash functions are for!</p>
+<p>At the same time our hash functions needs to be ‘good’. We can’t have a hash functions that only returns index 1 and stack every item into the same slot. But we also can’t be lazy, in the example of sorting a collection of people.
+We can’t just go by their first letter in their name, there are a lot more names that begin with a ‘A’ than a ‘Z’ for example.</p>
+<p>So we want a hash functions that also <em>evenly</em> distributes the objects, and at the same time efficient to compute.</p>
+<p>With this in mind we can now define a hash table.</p>
+<h3 id="hash-tables-1">Hash Tables</h3>
+<p>A hash table uses a hash function to compute the array index. It’s not possible to put more than one object into one array slot, so if our hash function returns the same index for different objects (we will later see, by definition, this is a bad hash function) we need a solution.
+Separate chaining is one of them.</p>
+<h3 id="separate-chaining">Separate Chaining</h3>
+<p>In a separate chaining hash table, instead of having just one array slot, we instead have the value/slots being a pointer. This pointer then points to collections of all the values/objects having the same hash value.</p>
+<p>Usually this is a linked list, but any searchable collection works (A dynamic array for example).</p>
+<h3 id="open-addressing-hash-tables">Open Addressing Hash Tables</h3>
+<p>In the other case, being open addressing, each slot contains exactly one object/value. However - if we ever encounter a conflict, we just move that value/object into a free slot, the tricky part is an efficient way of finding a free slot.
+We’ll see more of this later.</p>
+<h3 id="separate-chaining-hash-set">Separate Chaining: Hash Set</h3>
+<p>For our implementation of Hash tables using separate chaining we could use sets - and for the underlying collection, we usually use linked lists.</p>
+<p>So a kind of implementation (in pseudocode) would be:</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>class SeparateChainingHashSet &#x3C;Item> implements Set&#x3C;Item>:</span></span>
+<span class="line"><span>    table: Array of Set&#x3C;Item></span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    // A given good hash function</span></span>
+<span class="line"><span>    hash(x : Item) -> int:</span></span>
+<span class="line"><span>        // Returns good hash value</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    contains(x : Item) -> boolean:</span></span>
+<span class="line"><span>        bucket : Set&#x3C;Item> = table[hash(x)]</span></span>
+<span class="line"><span>        return bucket.contains(x)</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    add(x : Item):</span></span>
+<span class="line"><span>        bucket : Set&#x3C;Item> = table[hash(x)]</span></span>
+<span class="line"><span>        bucket.add(x)</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    remove(x : Item):</span></span>
+<span class="line"><span>        bucket : Set&#x3C;Item> = table[hash(x)]</span></span>
+<span class="line"><span>        bucket.remove(x)</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>As we can see there is quite a lot of ‘mental overhead’, using an ordinary map it also becomes faster since we have actual key-value pairs, therefore being faster.
+Also, we need to know the size of the Hash table and also handle null pointers so let’s fix that as well!</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>class SeparateChainingHashMap&#x3C;Key, Value> implements Map&#x3C;Key, Value>:</span></span>
+<span class="line"><span>    table: Array of Map&#x3C;Key, Value></span></span>
+<span class="line"><span>    size : int = 0</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    hash(k : Key) -> int:</span></span>
+<span class="line"><span>        // Returns good hash value</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    contains(k : Key) -> boolean:</span></span>
+<span class="line"><span>        bucket : Map&#x3C;Key, Value> = table[hash(k)]</span></span>
+<span class="line"><span>        return bucket.contains(k)</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    get(k : Key) -> Value:</span></span>
+<span class="line"><span>        bucket : Map&#x3C;Key, Value> = table[hash(k)]</span></span>
+<span class="line"><span>        return bucket.get(k)</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    put(k : Key, v : Value):</span></span>
+<span class="line"><span>        bucket : Map&#x3C;Key, Value> = table[hash(k)]</span></span>
+<span class="line"><span>        if bucket == NULL:</span></span>
+<span class="line"><span>            bucket = table[hash(x)] = new Map()</span></span>
+<span class="line"><span>        if not bucket.contains(k):</span></span>
+<span class="line"><span>            bucket.put(k, v)</span></span>
+<span class="line"><span>            size += 1</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    remove(k : Key):</span></span>
+<span class="line"><span>        bucket : Map&#x3C;Key, Value> = table[hash(k)]</span></span>
+<span class="line"><span>        bucket.remove(k)</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>If we actually try to implement it with the underlying data structure, the linked list, it would look something like:</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>class SeparateChainingHashMap&#x3C;Key, Value> implements Map&#x3C;Key, Value>:</span></span>
+<span class="line"><span>    ...</span></span>
+<span class="line"><span>    class Node:</span></span>
+<span class="line"><span>        key : Key</span></span>
+<span class="line"><span>        val : Value</span></span>
+<span class="line"><span>        next : Node</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    get(k : Key) -> Value:</span></span>
+<span class="line"><span>        node : Node = table[hash(k)]</span></span>
+<span class="line"><span>        while node != NULL:</span></span>
+<span class="line"><span>            if k == node.key</span></span>
+<span class="line"><span>                return node.val</span></span>
+<span class="line"><span>            node = node.next</span></span>
+<span class="line"><span>        return NULL</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    put(k : Key, v : Value):</span></span>
+<span class="line"><span>        h : int = hash(k)</span></span>
+<span class="line"><span>        node : Node = table[h]</span></span>
+<span class="line"><span>        while node != NULL:</span></span>
+<span class="line"><span>            if k == node.key:</span></span>
+<span class="line"><span>                node.val = v</span></span>
+<span class="line"><span>                return</span></span>
+<span class="line"><span>            node = node.next</span></span>
+<span class="line"><span>        // If we are given a new key</span></span>
+<span class="line"><span>        table[h] = Node(k, v, table[h])</span></span>
+<span class="line"><span></span></span></code></pre>
+<h3 id="load-factor">Load Factor</h3>
+<p>We should always assume that we have a good hash functions, since in most libraries, they are good! But to understand why it’s ‘good’ we need to understand something called <em>Load factor</em>.
+The load factor is the average number of elements per slot/index.</p>
+<p>So load factor = <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mi>N</mi><mi>M</mi></mfrac></mrow><annotation encoding="application/x-tex">\frac{N}{M}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.2173em;vertical-align:-0.345em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8723em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.10903em;">M</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.10903em;">N</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span>, where N is # of elements and M is the array size.
+We haven’t discussed it yet but, what’s the complexity of <code>contains</code>, <code>add</code>, and <code>put</code> for example? Well it depends on the total array size and the number of elements per slot. The load factor!</p>
+<p>Therefore, the complexity of each operation is <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="script">O</mi><mo stretchy="false">(</mo><mfrac><mi>N</mi><mi>M</mi></mfrac><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\mathcal{O}(\frac{N}{M})</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.2173em;vertical-align:-0.345em;"></span><span class="mord mathcal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8723em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.10903em;">M</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.10903em;">N</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mclose">)</span></span></span></span></p>
+<p>Which tells us, if we can keep N and M roughly the same all of our operations will be constant! This is the magic with Hash tables.</p>
+<p>So our array size must grow when the hash table grows. To achieve this we use a dynamic array, when we need to resize the hash table array, we create a new array and copy all old elements using <code>add()</code>.</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>put(k : Key, v : Value):</span></span>
+<span class="line"><span>    if size >= 8 * table.length:</span></span>
+<span class="line"><span>        resize(2 * table.length)</span></span>
+<span class="line"><span>    bucket : Map&#x3C;Key, Value> = table[hash(k)]</span></span>
+<span class="line"><span>        if bucket == NULL:</span></span>
+<span class="line"><span>            bucket = table[hash(x)] = new Map()</span></span>
+<span class="line"><span>        if not bucket.contains(k):</span></span>
+<span class="line"><span>            bucket.put(k, v)</span></span>
+<span class="line"><span>            size += 1</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>remove(k : Key):</span></span>
+<span class="line"><span>    if size ≤ 2 * table.length:</span></span>
+<span class="line"><span>        resize(table.length / 2)</span></span>
+<span class="line"><span>    bucket : Map&#x3C;Key, Value> = table[hash(k)]</span></span>
+<span class="line"><span>        bucket.remove(k)</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>resize(buckets : int):</span></span>
+<span class="line"><span>    oldtable = table</span></span>
+<span class="line"><span>    table = new Array with size buckets</span></span>
+<span class="line"><span>    size = 0</span></span>
+<span class="line"><span>    for bucket in oldtable:</span></span>
+<span class="line"><span>        for k,v in bucket:</span></span>
+<span class="line"><span>            this.put(k, v)</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>In this example I’ve chosen to resize the table with a factor of 2. However, this is can actually lead to some problems.
+The ‘optimal’ way is to choose a <em>prime</em> closest to <code>2 * oldsize</code>.</p>
+<h3 id="hash-and-compress">Hash and compress</h3>
+<p>In actuality, the hash functions are a composition of functions. First we get the <em>hash code</em> for a given object/value. Then we need to <em>compress</em> it to fit inside our hash table.</p>
+<p>How we compress our is quite simple (often) - it is:</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>index = hash_code % array_size</span></span>
+<span class="line"><span>i = h % M</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>This is called ‘modular’ hashing, it’s the most common one. One thing to remember that the <em>hash code</em> <strong>never</strong> changes. Only the compressed version can change since we can change the size of it.</p>
+<p>So we might see different outputs for <code>hash(x)</code> depending on size - but remember, the actual <em>hash code</em> <strong>never</strong> changes.</p>
+<h3 id="requirements-on-hash-functions">Requirements on hash functions</h3>
+<p>There is one very strict requirement on hash functions:</p>
+<ul>
+<li>Equal objects must have equal hash codes</li>
+</ul>
+<p>Or in coding terms:</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>if x === y then x.hash() == y.hash()</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>There are some desirable properties:</p>
+<ul>
+<li>If x and y have the same <em>hash code</em>, then they are ‘equal’</li>
+<li>The distribution should be uniform and independent</li>
+</ul>
+<h3 id="open-addressing-probing">Open Addressing: Probing</h3>
+<p>As we defined earlier, open addressing is a method where we find a new empty slot if there’s a conflict. Probing is how we find this empty slot.</p>
+<p>The easiest approach is so called <em>linear probing</em>, where we simply go to the next index (increase with some constant) and check if it’s empty, with wrapping around the array.</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>class LinearProbingHashSet&#x3C;Item>:</span></span>
+<span class="line"><span>    table: Array of Item</span></span>
+<span class="line"><span>    size : int = 0</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    add(x : Item):</span></span>
+<span class="line"><span>        i = hash(x)</span></span>
+<span class="line"><span>        while table[i] != NULL:</span></span>
+<span class="line"><span>                if x == table[i]:</span></span>
+<span class="line"><span>                    return</span></span>
+<span class="line"><span>                i = (i + 1) % table.length</span></span>
+<span class="line"><span>        table[i] = x</span></span>
+<span class="line"><span>        size += 1</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>Or in the Hash Map case:</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>class LinearProbingHashMap&#x3C;Key, Value>:</span></span>
+<span class="line"><span>    table: Map&#x3C;Key, Value></span></span>
+<span class="line"><span>    size : int = 0</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    add(k : Key, v : Value):</span></span>
+<span class="line"><span>        i = hash(k)</span></span>
+<span class="line"><span>        while table[i] != NULL:</span></span>
+<span class="line"><span>                if k == table[i]:</span></span>
+<span class="line"><span>                    return</span></span>
+<span class="line"><span>                i = (i + 1) % table.length</span></span>
+<span class="line"><span>        table[i] = value</span></span>
+<span class="line"><span>        size += 1</span></span>
+<span class="line"><span></span></span></code></pre>
+<h3 id="open-addressing-compared-to-separate-chaining">Open Addressing compared to Separate Chaining</h3>
+<p>Let’s now compare both of these approaches now that we have a grasp of them.</p>
+<ul>
+<li>Separate Chaining
+<ul>
+<li>Load factor can be > 1 without performance loss.</li>
+<li>The extra list nodes take up unnecessary memory.</li>
+<li>Since the list nodes are (usually) scattered in memory - we can not optimize via for example CPU caching.</li>
+</ul>
+</li>
+<li>Open Addressing
+<ul>
+<li>Load factor <strong>must</strong> be &#x3C; 1, and the performance drops when load factor > 3/4.</li>
+<li>Doesn’t take up unnecessary memory with extra list nodes.</li>
+<li>Elements with the same hash code tend to be close in memory - therefore we can utilize CPU caching.</li>
+</ul>
+</li>
+</ul>
+<h3 id="deletion">Deletion</h3>
+<p>If we want to delete object while using Open Addressing - we will encounter a very famous problem called ‘clusters’.
+A short definition of clusters is, due to Open Addressing, we will get small ‘clusters’ or ‘chunks’. These are quite valuable since they tell us which objects have similar hash codes.</p>
+<p>But first to understand why, let’s see how we <em>would</em> delete items.</p>
+<h4 id="naive-approach">Naive approach</h4>
+<p>Our naive approach would look something like:</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>remove(x : Item):</span></span>
+<span class="line"><span>    i = hash(x)</span></span>
+<span class="line"><span>    while table[i] != NULL:</span></span>
+<span class="line"><span>        if x == table[i]:</span></span>
+<span class="line"><span>            table[i] = NULL</span></span>
+<span class="line"><span>        i = (i + 1) % table.length</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>And in the map case:</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>remove(k : Key):</span></span>
+<span class="line"><span>    i = hash(x)</span></span>
+<span class="line"><span>    while table[i] != NULL:</span></span>
+<span class="line"><span>        if k == table[i]:</span></span>
+<span class="line"><span>            table[i] = NULL</span></span>
+<span class="line"><span>        i = (i + 1) % table.length</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>But this won’t work - if we then want to find something to the <strong>right</strong> of this deleted cell - but their hash is <strong>before</strong> the deleted cell, we won’t be able to, since we find the ‘NULL’ value before we can find the actual object.</p>
+<p>There are two possible solutions:</p>
+<ul>
+<li>Lazy deletion:
+<ul>
+<li>We don’t necessarily ‘delete’ the item, just ‘mark’ it deleted, rather than empty.</li>
+</ul>
+</li>
+<li>Recalculation:
+<ul>
+<li>We reinsert all elements in the cluster that are to the <strong>right</strong> of the deleted element.</li>
+</ul>
+</li>
+</ul>
+<p>One problem we will also encounter is, we won’t be able to properly count # of deleted cells - therefore our resizing calculations will suffer - the solution is to have a variable for each deleted cell.
+If this number exceeds some threshold we resize.</p>
+<h3 id="final-implementations">Final implementations</h3>
+<p>So, we have covered all topics and problems that come with implementing Hash tables - so let’s implement the final version.</p>
+<p>For a Hash <strong>Set</strong>:</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>class LinearProbingHashSet&#x3C;Item>:</span></span>
+<span class="line"><span>    table: Array of HashCell</span></span>
+<span class="line"><span>    size: int = 0</span></span>
+<span class="line"><span>    n_deleted: int = 0</span></span>
+<span class="line"><span>    DELETED: HashCell = HashCell(value = NULL)</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    class HashCell:</span></span>
+<span class="line"><span>        value: Item</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    load_factor() -> float:</span></span>
+<span class="line"><span>        return (size + deleted) / table.length</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    add(x : Item):</span></span>
+<span class="line"><span>        if load_factor() > 0.75:</span></span>
+<span class="line"><span>            resize(2 * table.length)</span></span>
+<span class="line"><span>        i = hash(x)</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        while table[i] != NULL and table[i] != DELETED:</span></span>
+<span class="line"><span>            if x == table[i].value:</span></span>
+<span class="line"><span>                return</span></span>
+<span class="line"><span>            i = (i + 1) % table.length</span></span>
+<span class="line"><span>        size += 1</span></span>
+<span class="line"><span>        if table[i] = DELETED:</span></span>
+<span class="line"><span>            n_deleted -= 1</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        table[i] = HashCell(value = x)</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    contains(x : Item) -> boolean:</span></span>
+<span class="line"><span>        i = hash(x)</span></span>
+<span class="line"><span>        while table[i] != NULL:</span></span>
+<span class="line"><span>            if x == table[i].value:</span></span>
+<span class="line"><span>                return True</span></span>
+<span class="line"><span>            i = (i + 1) % table.length</span></span>
+<span class="line"><span>        return False</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    remove(x : Item):</span></span>
+<span class="line"><span>        i = hash(x)</span></span>
+<span class="line"><span>        while table[i] != NULL:</span></span>
+<span class="line"><span>            if x == table[i].value:</span></span>
+<span class="line"><span>                table[i] = DELETED</span></span>
+<span class="line"><span>                size -= 1</span></span>
+<span class="line"><span>                n_deleted += 1</span></span>
+<span class="line"><span>                if load_factor() &#x3C; 0.25:</span></span>
+<span class="line"><span>                    resize(table.length // 2)</span></span>
+<span class="line"><span>                return</span></span>
+<span class="line"><span>            i = (i + 1) % table.length</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    resize(buckets: int):</span></span>
+<span class="line"><span>        oldtable = table</span></span>
+<span class="line"><span>        table = new Array with size buckets</span></span>
+<span class="line"><span>        size = n_deleted = 0</span></span>
+<span class="line"><span>        for cell in oldtable:</span></span>
+<span class="line"><span>            if cell != NULL and cell != DELETED:</span></span>
+<span class="line"><span>                table.add(cell.value)</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>And in the <strong>Map</strong> case:</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>class LinearProbingHashMap&#x3C;Key, Value>:</span></span>
+<span class="line"><span>    table: Array of HashCell</span></span>
+<span class="line"><span>    size: int = 0</span></span>
+<span class="line"><span>    n_deleted: int = 0</span></span>
+<span class="line"><span>    DELETED: HashCell = HashCell(key = NULL,value = NULL)</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    class HashCell:</span></span>
+<span class="line"><span>        key: Key</span></span>
+<span class="line"><span>        value: Value</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    load_factor() -> float:</span></span>
+<span class="line"><span>        return (size + deleted) / table.length</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    put(k : Key, v : Value):</span></span>
+<span class="line"><span>        if load_factor() > 0.75:</span></span>
+<span class="line"><span>            resize(2 * table.length)</span></span>
+<span class="line"><span>        i = hash(k)</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        while table[i] != NULL and table[i] != DELETED:</span></span>
+<span class="line"><span>            if k == table[i].key:</span></span>
+<span class="line"><span>                return</span></span>
+<span class="line"><span>            i = (i + 1) % table.length</span></span>
+<span class="line"><span>        size += 1</span></span>
+<span class="line"><span>        if table[i] = DELETED:</span></span>
+<span class="line"><span>            n_deleted -= 1</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        table[i] = HashCell(key = k, value = v)</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    contains(k : Key) -> boolean:</span></span>
+<span class="line"><span>        i = hash(k)</span></span>
+<span class="line"><span>        while table[i] != NULL:</span></span>
+<span class="line"><span>            if k == table[i].key:</span></span>
+<span class="line"><span>                return True</span></span>
+<span class="line"><span>            i = (i + 1) % table.length</span></span>
+<span class="line"><span>        return False</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    remove(k : Key):</span></span>
+<span class="line"><span>        i = hash(k)</span></span>
+<span class="line"><span>        while table[i] != NULL:</span></span>
+<span class="line"><span>            if k == table[i].value:</span></span>
+<span class="line"><span>                table[i] = DELETED</span></span>
+<span class="line"><span>                size -= 1</span></span>
+<span class="line"><span>                n_deleted += 1</span></span>
+<span class="line"><span>                if load_factor() &#x3C; 0.25:</span></span>
+<span class="line"><span>                    resize(table.length // 2)</span></span>
+<span class="line"><span>                return</span></span>
+<span class="line"><span>            i = (i + 1) % table.length</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    resize(buckets: int):</span></span>
+<span class="line"><span>        oldtable = table</span></span>
+<span class="line"><span>        table = new Array with size buckets</span></span>
+<span class="line"><span>        size = n_deleted = 0</span></span>
+<span class="line"><span>        for cell in oldtable:</span></span>
+<span class="line"><span>            if cell != NULL and cell != DELETED:</span></span>
+<span class="line"><span>                table.add(cell.key, cell.value)</span></span>
+<span class="line"><span></span></span></code></pre>
+<h3 id="clustering">Clustering</h3>
+<p>As mentioned before - clusters is by-product of open addressing - but these make the search times slower, in the worst time it becomes linear!</p>
+<p>The famous Donald E. Knuth formulated the so called ‘Knuth’s parking problem’ which shows how rapid this cluster problem grows.</p>
+<h3 id="alternatives-to-linear-probing">Alternatives to linear probing</h3>
+<p>Instead of linearly increase, we could do <em>quadratic</em>, <em>double hashing</em> which depends on a <em>second</em> hash function, or <em>moving</em> alternatives such as:
+<em>cuckoo</em>, <em>hopscotch</em> and <em>Robin Hood</em> hashing. We will only use linear probing though…</p>
+<h3 id="summary">Summary</h3>
+<p>There’s <strong>a lot</strong> to hashing and hash tables in general. But I think we’ll leave it here, one final thing I want to bring up is:</p>
+<p>Hash tables are not ordered! If we want to find a maximum value in a hash table - it will take linear time! Since there’s no underlying order.</p>
+<p>In the next part we’ll begin looking at trees - starting at <strong>B</strong>alanced <strong>S</strong>earch <strong>T</strong>rees or BSTs for short. We’ll actually compare them to Hash maps, since they are quite similar in some aspects.</p>  <nav class="flex justify-between mt-8 pt-4 border-t border-border" data-astro-cid-v5ro3oot> <a href="/school/dat038/dat038_4" class="text-primary hover:text-primary/80 transition-colors" data-astro-cid-v5ro3oot>
+← Previous: Part 4 - Abstract Data Types </a> <a href="/school/dat038/dat038_6" class="text-primary hover:text-primary/80 transition-colors" data-astro-cid-v5ro3oot>
+Next: Part 6 - Trees →
+</a> </nav> </article>  </main> </div> </body></html> 

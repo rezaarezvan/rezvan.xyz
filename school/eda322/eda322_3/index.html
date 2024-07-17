@@ -1,33 +1,122 @@
-<!doctype html><html><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge"><title>rezvan | Part 3 - Sequential Circuits</title><link rel=icon type=image/png href=https://rezvan.xyz/images/icon.png><meta name=viewport content="width=device-width,initial-scale=1">
-<meta name=description content="Sequential Circuits When we usually look at circuits we have an input and output who are independent on each other. In a sequential circuit, as the name suggest, we have a sequence. Meaning we feed back our output as input.
-We can easily define this as: Our output no longer depends on the present input - but on the past behavior of the circuit.
-State-Holding Memory Elements We&rsquo;ve encountered latches and flip-flops before, they have a so-called memory element to them."><meta property="og:image" content="https://raw.githubusercontent.com/rezaarezvan/rezvan.xyz/main/images/icon.png"><meta property="og:url" content="https://rezvan.xyz/school/eda322/eda322_3/"><meta property="og:site_name" content="rezvan"><meta property="og:title" content="Part 3 - Sequential Circuits"><meta property="og:description" content="Sequential Circuits When we usually look at circuits we have an input and output who are independent on each other. In a sequential circuit, as the name suggest, we have a sequence. Meaning we feed back our output as input.
-We can easily define this as: Our output no longer depends on the present input - but on the past behavior of the circuit.
-State-Holding Memory Elements We’ve encountered latches and flip-flops before, they have a so-called memory element to them."><meta property="og:locale" content="en_us"><meta property="og:type" content="article"><meta property="article:section" content="school"><meta property="article:published_time" content="2023-01-24T00:00:00+00:00"><meta property="article:modified_time" content="2024-05-26T11:09:10+02:00"><meta name=twitter:card content="summary"><meta name=twitter:title content="Part 3 - Sequential Circuits"><meta name=twitter:description content="Sequential Circuits When we usually look at circuits we have an input and output who are independent on each other. In a sequential circuit, as the name suggest, we have a sequence. Meaning we feed back our output as input.
-We can easily define this as: Our output no longer depends on the present input - but on the past behavior of the circuit.
-State-Holding Memory Elements We’ve encountered latches and flip-flops before, they have a so-called memory element to them."><link rel=stylesheet href=https://rezvan.xyz/css/combined.min.285bd67a05674fdcb27bb67f867c7ac6b2e0c0b5535c536ba4bb37cd80e377e9.css integrity="sha256-KFvWegVnT9yye7Z/hnx6xrLgwLVTXFNrpLs3zYDjd+k="><link id=lightSyntaxStyle rel=stylesheet href=https://rezvan.xyz/css/light_syntax.min.d9e0828a4ff7f2d7317942062fc751fa487b2ac2c47b934ad082abd7d3ca6690.css integrity="sha256-2eCCik/38tcxeUIGL8dR+kh7KsLEe5NK0IKr19PKZpA="><link id=darkModeStyle rel=stylesheet href=https://rezvan.xyz/css/dark.min.113ab1177b874ffa2011e31f94df77b25b4c0aee6c35e5db0e6c54ebe2071597.css integrity="sha256-ETqxF3uHT/ogEeMflN93sltMCu5sNeXbDmxU6+IHFZc=" disabled><link id=darkSyntaxStyle rel=stylesheet href=https://rezvan.xyz/css/dark_syntax.min.1a878f3d8fb43359bd3b44bc70c4074f682f11066c6537bf6248b696cbe56586.css integrity="sha256-GoePPY+0M1m9O0S8cMQHT2gvEQZsZTe/Yki2lsvlZYY=" disabled><script type=text/javascript src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type=text/x-mathjax-config>
-		MathJax.Hub.Config({
-			tex2jax: {
-				inlineMath: [['$','$'], ['\\(','\\)']],
-				displayMath: [['$$','$$'], ['\[','\]']],
-				processEscapes: true,
-				processEnvironments: true,
-				skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
-				TeX: { equationNumbers: { autoNumber: "AMS" },
-						 extensions: ["AMSmath.js", "AMSsymbols.js"] }
-			}
-		});
-		</script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css><script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js onload=renderMathInElement(document.body)></script><script>document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]})})</script></head><body><header><nav id=site-navbar><div class=navbar-content><a href=https://rezvan.xyz/ class=logo>rezvan.xyz</a><div class=navbar-links><a href=/principles class=nav-link><span class=bracket>[</span>principles<span class=bracket>]</span></a>
-<a href=/cv class=nav-link><span class=bracket>[</span>cv<span class=bracket>]</span></a>
-<a href=/posts class=nav-link><span class=bracket>[</span>posts<span class=bracket>]</span></a>
-<a href=/school class=nav-link><span class=bracket>[</span>school<span class=bracket>]</span></a></div><div class=theme-toggle><span id=dark-mode-toggle onclick=toggleTheme() aria-label="Toggle theme">○
-</span><script src=https://rezvan.xyz/js/themetoggle.js></script></div></div></nav></header><div class=content><main><article><div class=title><h1>Part 3 - Sequential Circuits</h1><div class=meta>Posted on Jan 24, 2023</div><div class=meta>(Last updated: May 26, 2024)</div></div><section class=body><h3 id=sequential-circuits>Sequential Circuits</h3><p>When we usually look at circuits we have an input and output who are independent on each other.
-In a sequential circuit, as the name suggest, we have a sequence. Meaning we feed back our output as input.</p><p>We can easily define this as: Our output no longer depends on the present input - but on the past behavior of the circuit.</p><p><img src=/school/images/seqcircuit.png alt></p><h3 id=state-holding-memory-elements>State-Holding Memory Elements</h3><p>We&rsquo;ve encountered latches and flip-flops before, they have a so-called memory element to them.</p><p>Let&rsquo;s quickly go over the difference between a latch and a flip-flop.</p><ul><li>Latch<ul><li>Latches are <strong>level-sensitive</strong><ul><li>When the clock is <em>high</em>, the latch is <strong>transparent</strong> (output $\leq$ input)</li><li>When the clock is <em>low</em>, the latch <strong>keeps</strong> its previous state.</li></ul></li></ul></li><li>Flip-flop<ul><li>Flip-flops are <strong>edge-sensitive</strong><ul><li>Data passes through only on a rising/falling edge of the clock.</li></ul></li></ul></li></ul><p>Latches are also cheaper to implement than flip-flops, but flip-flops are easier to in designs than latches.</p><p>We&rsquo;ll primarily look over the so-called D flip-flop.</p><h3 id=d-latch>D Latch</h3><p><img src=/school/images/dlatch.png alt></p><table><thead><tr><th>C</th><th>D</th></tr></thead><tbody><tr><td>0</td><td>X</td></tr><tr><td>1</td><td>0</td></tr><tr><td>1</td><td>1</td></tr></tbody></table><p>As we can see, we just &ldquo;store&rdquo; the value we have set.
-To build a D flip-flop, we can use a master-slave architecture. We could also use a positive edge triggered architecture.</p><h4 id=setup-and-hold-time>Setup and hold time</h4><p>The D input signal must be stable when clock is changing from 0 -> 1 (setup).
-The same D signal must remain stable for a while after the clock change (hold).</p><p>Good to note is that the reset of a D flip-flop can be asynchronous or synchronous.</p><h3 id=registers-shift-registers-and-counters>Registers, Shift Registers and Counters</h3><p>A register is just a circuit which contains <code>N</code> flip-flops. Whilst a flip-flop stores 1-bit information.
-A register will contain <code>N</code>-bit information. Usually a <em>common clock</em> is used for each flip-flop in the register.</p><p>Shift registers are just as the name implies, you shift around the given input into each flip-flop.</p><h3 id=examples>Examples</h3><p>We can use what we&rsquo;ve learned to build a sequential circuit which detects two 1&rsquo;s in a row in a sequence.</p><p>If we go back to our general picture of a sequential circuit, and list our specifications:</p><ul><li>The circuit should have one input, w, and one output, z.</li><li>All changes occur on <strong>positive</strong> edge of the clock.</li><li>The output, z, should be equal to 1 if two immediately preceding clock cycles the input w was 1.
-Otherwise, z should be 0.</li></ul><p>If we plan our stat diagram we can say that:</p><p>We begin in state A when the power is on or during a <em>reset</em> signal. We keep being in state A as long as w $\to$ 0.</p><p>When w $\to$ 1, we move to state B.</p><p>If w $\to$ 0, then we move back to state A.
-If w $\to$ 1, then we move to state C and set z = 1</p><p>In state C, if w $\to$ 0, then move back to state A
-if w $\to$ 1, remain in state C.</p><p>After this we draw our state table, followed by the Karnaugh maps that follow from the state tables.</p><p>Then we can at last implement this circuit.</p><ul><li>Specifications</li><li>Derive the states, and create a state diagram</li><li>Create a state table</li><li>(State minimization)</li><li>State assignment</li><li>Choose flip-flops</li><li>Derive logic expressions for state and outputs</li><li>Implementation</li></ul></section></article><nav class=navigation><div class="nav-item previous"><a href=/school/eda322/eda322_2/ title="Previous: Part 2 - Binary Adders">&larr; Previous</a></div><div class="nav-item next"><a href=/school/eda322/eda322_4/ title="Next: Part 4 - Finite State Machines">Next &rarr;</a></div></nav></main></div><footer id=site-footer><div class=social-links><a href=https://github.com/rezaarezvan title class=social-link><span class=bracket>[</span>github<span class=bracket>]</span></a>
-<a href=https://x.com/rzvan__/ title class=social-link><span class=bracket>[</span>x<span class=bracket>]</span></a></div><div class=footer-marquee><div class=footer-marquee__content><span class=footer-marquee__item>memento mori • amor fati • sic parvis magna • per aspera ad astra</span>
-<span class=footer-marquee__item>memento mori • amor fati • sic parvis magna • per aspera ad astra</span></div></div></footer></body></html>
+<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width"><meta name="generator" content="Astro v4.11.5"><link rel="icon" type="image" href="/favicon.ico"><title>Part 3 - Sequential Circuits</title><!-- KaTeX support --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script><!-- inline KaTeX --><link rel="stylesheet" href="/_astro/index.BZ7em0Mc.css">
+<link rel="stylesheet" href="/_astro/_slug_.DPnDUiRI.css">
+<style>article[data-astro-cid-v5ro3oot]{max-width:80ch;margin:0 auto}
+</style><script type="module">document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]})});
+</script></head> <body class="font-sans antialiased"> <div class="container mx-auto flex min-h-screen"> <aside class="w-64 border-r border-[var(--border-color)] border-dashed pt-8"> <header class="flex flex-col h-full"> <div class="flex items-center mb-4"> <script>
+  function setTheme(mode) {
+    localStorage.setItem("theme-storage", mode);
+    document.documentElement.setAttribute('data-theme', mode);
+  }
+  function toggleTheme() {
+    const currentTheme = localStorage.getItem("theme-storage") || "light";
+    const newTheme = currentTheme === "light" ? "dark" : "light";
+    setTheme(newTheme);
+  }
+  const savedTheme = localStorage.getItem("theme-storage") || "light";
+  setTheme(savedTheme);
+  window.toggleTheme = toggleTheme;
+</script> <button id="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme" class="flex items-center justify-center w-6" data-astro-cid-x3pjskd3>○</button>  <a href="/" class="text-2xl font-semibold ml-3 h-10 pr-3">rezvan.xyz</a> </div> <nav class="flex flex-col space-y-2"> <a href="/principles" class="hover:text-orange-500 dark:hover:text-orange-400 transition-colors">
+[principles]
+</a><a href="/cv" class="hover:text-orange-500 dark:hover:text-orange-400 transition-colors">
+[cv]
+</a><a href="/posts" class="hover:text-orange-500 dark:hover:text-orange-400 transition-colors">
+[posts]
+</a><a href="/school" class="hover:text-orange-500 dark:hover:text-orange-400 transition-colors">
+[school]
+</a> </nav> </header> </aside> <main class="flex-grow px-8 py-8 overflow-y-auto">  <article class="prose prose-sm sm:prose lg:prose-lg xl:prose-xl max-w-none" data-astro-cid-v5ro3oot> <h1 class="text-4xl font-bold mb-4" data-astro-cid-v5ro3oot>Part 3 - Sequential Circuits</h1> <p class="text-sm text-muted-foreground mb-4" data-astro-cid-v5ro3oot>
+Date: 1/24/2023 </p>  <h3 id="sequential-circuits">Sequential Circuits</h3>
+<p>When we usually look at circuits we have an input and output who are independent on each other.
+In a sequential circuit, as the name suggest, we have a sequence. Meaning we feed back our output as input.</p>
+<p>We can easily define this as: Our output no longer depends on the present input - but on the past behavior of the circuit.</p>
+<p><img src="/images/school/seqcircuit.png" alt=""></p>
+<h3 id="state-holding-memory-elements">State-Holding Memory Elements</h3>
+<p>We’ve encountered latches and flip-flops before, they have a so-called memory element to them.</p>
+<p>Let’s quickly go over the difference between a latch and a flip-flop.</p>
+<ul>
+<li>Latch
+<ul>
+<li>Latches are <strong>level-sensitive</strong>
+<ul>
+<li>When the clock is <em>high</em>, the latch is <strong>transparent</strong> (output <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>≤</mo></mrow><annotation encoding="application/x-tex">\leq</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7719em;vertical-align:-0.136em;"></span><span class="mrel">≤</span></span></span></span> input)</li>
+<li>When the clock is <em>low</em>, the latch <strong>keeps</strong> its previous state.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Flip-flop
+<ul>
+<li>Flip-flops are <strong>edge-sensitive</strong>
+<ul>
+<li>Data passes through only on a rising/falling edge of the clock.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>Latches are also cheaper to implement than flip-flops, but flip-flops are easier to in designs than latches.</p>
+<p>We’ll primarily look over the so-called D flip-flop.</p>
+<h3 id="d-latch">D Latch</h3>
+<p><img src="/images/school/dlatch.png" alt=""></p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>C</th><th>D</th></tr></thead><tbody><tr><td>0</td><td>X</td></tr><tr><td>1</td><td>0</td></tr><tr><td>1</td><td>1</td></tr></tbody></table>
+<p>As we can see, we just “store” the value we have set.
+To build a D flip-flop, we can use a master-slave architecture. We could also use a positive edge triggered architecture.</p>
+<h4 id="setup-and-hold-time">Setup and hold time</h4>
+<p>The D input signal must be stable when clock is changing from 0 -> 1 (setup).
+The same D signal must remain stable for a while after the clock change (hold).</p>
+<p>Good to note is that the reset of a D flip-flop can be asynchronous or synchronous.</p>
+<h3 id="registers-shift-registers-and-counters">Registers, Shift Registers and Counters</h3>
+<p>A register is just a circuit which contains <code>N</code> flip-flops. Whilst a flip-flop stores 1-bit information.
+A register will contain <code>N</code>-bit information. Usually a <em>common clock</em> is used for each flip-flop in the register.</p>
+<p>Shift registers are just as the name implies, you shift around the given input into each flip-flop.</p>
+<h3 id="examples">Examples</h3>
+<p>We can use what we’ve learned to build a sequential circuit which detects two 1’s in a row in a sequence.</p>
+<p>If we go back to our general picture of a sequential circuit, and list our specifications:</p>
+<ul>
+<li>The circuit should have one input, w, and one output, z.</li>
+<li>All changes occur on <strong>positive</strong> edge of the clock.</li>
+<li>The output, z, should be equal to 1 if two immediately preceding clock cycles the input w was 1.
+Otherwise, z should be 0.</li>
+</ul>
+<p>If we plan our stat diagram we can say that:</p>
+<p>We begin in state A when the power is on or during a <em>reset</em> signal. We keep being in state A as long as w <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>→</mo></mrow><annotation encoding="application/x-tex">\to</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.3669em;"></span><span class="mrel">→</span></span></span></span> 0.</p>
+<p>When w <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>→</mo></mrow><annotation encoding="application/x-tex">\to</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.3669em;"></span><span class="mrel">→</span></span></span></span> 1, we move to state B.</p>
+<p>If w <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>→</mo></mrow><annotation encoding="application/x-tex">\to</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.3669em;"></span><span class="mrel">→</span></span></span></span> 0, then we move back to state A.
+If w <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>→</mo></mrow><annotation encoding="application/x-tex">\to</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.3669em;"></span><span class="mrel">→</span></span></span></span> 1, then we move to state C and set z = 1</p>
+<p>In state C, if w <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>→</mo></mrow><annotation encoding="application/x-tex">\to</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.3669em;"></span><span class="mrel">→</span></span></span></span> 0, then move back to state A
+if w <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>→</mo></mrow><annotation encoding="application/x-tex">\to</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.3669em;"></span><span class="mrel">→</span></span></span></span> 1, remain in state C.</p>
+<p>After this we draw our state table, followed by the Karnaugh maps that follow from the state tables.</p>
+<p>Then we can at last implement this circuit.</p>
+<ul>
+<li>Specifications</li>
+<li>Derive the states, and create a state diagram</li>
+<li>Create a state table</li>
+<li>(State minimization)</li>
+<li>State assignment</li>
+<li>Choose flip-flops</li>
+<li>Derive logic expressions for state and outputs</li>
+<li>Implementation</li>
+</ul>  <nav class="flex justify-between mt-8 pt-4 border-t border-border" data-astro-cid-v5ro3oot> <a href="/school/eda322/eda322_2" class="text-primary hover:text-primary/80 transition-colors" data-astro-cid-v5ro3oot>
+← Previous: Part 2 - Binary Adders </a> <a href="/school/eda322/eda322_4" class="text-primary hover:text-primary/80 transition-colors" data-astro-cid-v5ro3oot>
+Next: Part 4 - Finite State Machines →
+</a> </nav> </article>  </main> </div> </body></html> 

@@ -1,44 +1,172 @@
-<!doctype html><html><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge"><title>rezvan | Part 9 - Testing</title><link rel=icon type=image/png href=https://rezvan.xyz/images/icon.png><meta name=viewport content="width=device-width,initial-scale=1">
-<meta name=description content="When creating digital circuits, there are a lot of things that can go wrong.
-When designing the circuit, it may happen that the designers have implemented a bug into the circuit.
-We call these design bugs. On the other hand, when physically making the chip, it may happen that we get permanent (implementation) fault, or other (transient) faults.
-In the first case we need to perform verification, in the latter case, it&rsquo;s testing and fault tolerance."><meta property="og:image" content="https://raw.githubusercontent.com/rezaarezvan/rezvan.xyz/main/images/icon.png"><meta property="og:url" content="https://rezvan.xyz/school/eda322/eda322_9/"><meta property="og:site_name" content="rezvan"><meta property="og:title" content="Part 9 - Testing"><meta property="og:description" content="When creating digital circuits, there are a lot of things that can go wrong.
-When designing the circuit, it may happen that the designers have implemented a bug into the circuit.
-We call these design bugs. On the other hand, when physically making the chip, it may happen that we get permanent (implementation) fault, or other (transient) faults.
-In the first case we need to perform verification, in the latter case, it’s testing and fault tolerance."><meta property="og:locale" content="en_us"><meta property="og:type" content="article"><meta property="article:section" content="school"><meta property="article:published_time" content="2023-03-05T00:00:00+00:00"><meta property="article:modified_time" content="2024-05-26T11:09:10+02:00"><meta name=twitter:card content="summary"><meta name=twitter:title content="Part 9 - Testing"><meta name=twitter:description content="When creating digital circuits, there are a lot of things that can go wrong.
-When designing the circuit, it may happen that the designers have implemented a bug into the circuit.
-We call these design bugs. On the other hand, when physically making the chip, it may happen that we get permanent (implementation) fault, or other (transient) faults.
-In the first case we need to perform verification, in the latter case, it’s testing and fault tolerance."><link rel=stylesheet href=https://rezvan.xyz/css/combined.min.285bd67a05674fdcb27bb67f867c7ac6b2e0c0b5535c536ba4bb37cd80e377e9.css integrity="sha256-KFvWegVnT9yye7Z/hnx6xrLgwLVTXFNrpLs3zYDjd+k="><link id=lightSyntaxStyle rel=stylesheet href=https://rezvan.xyz/css/light_syntax.min.d9e0828a4ff7f2d7317942062fc751fa487b2ac2c47b934ad082abd7d3ca6690.css integrity="sha256-2eCCik/38tcxeUIGL8dR+kh7KsLEe5NK0IKr19PKZpA="><link id=darkModeStyle rel=stylesheet href=https://rezvan.xyz/css/dark.min.113ab1177b874ffa2011e31f94df77b25b4c0aee6c35e5db0e6c54ebe2071597.css integrity="sha256-ETqxF3uHT/ogEeMflN93sltMCu5sNeXbDmxU6+IHFZc=" disabled><link id=darkSyntaxStyle rel=stylesheet href=https://rezvan.xyz/css/dark_syntax.min.1a878f3d8fb43359bd3b44bc70c4074f682f11066c6537bf6248b696cbe56586.css integrity="sha256-GoePPY+0M1m9O0S8cMQHT2gvEQZsZTe/Yki2lsvlZYY=" disabled><script type=text/javascript src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type=text/x-mathjax-config>
-		MathJax.Hub.Config({
-			tex2jax: {
-				inlineMath: [['$','$'], ['\\(','\\)']],
-				displayMath: [['$$','$$'], ['\[','\]']],
-				processEscapes: true,
-				processEnvironments: true,
-				skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
-				TeX: { equationNumbers: { autoNumber: "AMS" },
-						 extensions: ["AMSmath.js", "AMSsymbols.js"] }
-			}
-		});
-		</script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css><script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js onload=renderMathInElement(document.body)></script><script>document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]})})</script></head><body><header><nav id=site-navbar><div class=navbar-content><a href=https://rezvan.xyz/ class=logo>rezvan.xyz</a><div class=navbar-links><a href=/principles class=nav-link><span class=bracket>[</span>principles<span class=bracket>]</span></a>
-<a href=/cv class=nav-link><span class=bracket>[</span>cv<span class=bracket>]</span></a>
-<a href=/posts class=nav-link><span class=bracket>[</span>posts<span class=bracket>]</span></a>
-<a href=/school class=nav-link><span class=bracket>[</span>school<span class=bracket>]</span></a></div><div class=theme-toggle><span id=dark-mode-toggle onclick=toggleTheme() aria-label="Toggle theme">○
-</span><script src=https://rezvan.xyz/js/themetoggle.js></script></div></div></nav></header><div class=content><main><article><div class=title><h1>Part 9 - Testing</h1><div class=meta>Posted on Mar 5, 2023</div><div class=meta>(Last updated: May 26, 2024)</div></div><section class=body><p>When creating digital circuits, there are a lot of things that can go wrong.</p><p>When designing the circuit, it may happen that the designers have implemented a <em>bug</em> into the circuit.</p><p>We call these <em>design bugs</em>. On the other hand, when physically making the chip, it may happen that we
-get permanent (implementation) fault, or other (transient) faults.</p><p>In the first case we need to perform verification, in the latter case, it&rsquo;s testing and fault tolerance.</p><h3 id=verification-vs-testing>Verification vs Testing</h3><p>Verification is the task of ensuring that a design meets its specification</p><ul><li>Looking for design mistakes</li></ul><p>Testing is performed to ensure that a particular instantiation of a design functions properly</p><ul><li>Looking for implementation faults</li></ul><h3 id=verification>Verification</h3><p>The verification should cover:</p><ul><li>The set of test patterns (test suit) written to verify a design should be complete.</li><li>Specification coverage<ul><li>All the features of the design have to be specified</li></ul></li><li>Implementation coverage<ul><li>Every line of the VHDL code should be checked.</li><li>Examples:<ul><li>Every case of a <code>case</code> statement, should be activated.</li><li>For every state machine in our design, every edge between states should be traversed.</li></ul></li></ul></li></ul><h3 id=faults>Faults</h3><p>There are different types of faults:</p><ul><li>Transient faults<ul><li>Faults that happen only once (and it’s VERY unlikely to happen again)</li><li>Causes:<ul><li>Electromagnetic Interference:<ul><li>Neighbors mobile phone</li><li>Static electricity</li></ul></li><li>Various particles hitting the silicon surface:<ul><li>Heavy ions such as iron, $\alpha$-particles, neutrons.</li></ul></li><li>Internal effects:<ul><li>Crosstalk, metastability, power supply disturbances</li></ul></li></ul></li></ul></li><li>Permanent faults<ul><li>Faults that are always there</li><li>Causes:<ul><li>Design defects</li><li>Manufacturing defects</li><li>Transistor aging</li></ul></li></ul></li><li>Intermittent faults<ul><li>Faults that come and go (probably periodically)</li><li>Causes: Variations<ul><li><strong>Static</strong>: transistors on a chip may not be exactly the same, although, they were supposed to be</li><li><strong>Dynamic</strong>: temperature changes</li></ul></li></ul></li></ul><h3 id=defects-and-yield>Defects and Yield</h3><p>$$
-yield = \frac{\text{number of working chips produced}}{\text{Total number of chips produced}}
-$$</p><p>$$
-cost = \frac{\text{Cost of fabricating and testing a wafer}}{\text{Yield} \cdot\ \text{Number of chip sites on the wafer}}
-$$</p><p>$$
-Y = \left(1 + \frac{Ad}{\alpha}\right)^{- \alpha} \newline
-A = \text{Chip area} \newline
-d = \text{Defect density} \newline
-\alpha = \text{Fault clustering parameter}
-$$</p><h3 id=testing>Testing</h3><p>When testing, for example, a 64-bit adder, it would take over 500+ years, if we could test an input each ns.</p><p>Therefore, a subset of all possible inputs are used when testing.</p><p>This subset of inputs is determined, as follows:</p><ul><li>Random test vectors</li><li>Based on the logical function (functional testing)<ul><li>E.g. check boundary conditions which make your circuit operate differently</li></ul></li><li>Based on the design structure (structural testing)<ul><li>E.g. partition your hardware in smaller blocks (exploit the hierarchy of your hardware design)</li></ul></li><li>Based on the fault model<ul><li>Group a huge number of things that can go wrong in a much smaller finite set of fault models</li></ul></li></ul><h3 id=fault-models>Fault models</h3><p>A fault model is an abstract model of
+<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width"><meta name="generator" content="Astro v4.11.5"><link rel="icon" type="image" href="/favicon.ico"><title>Part 9 - Testing</title><!-- KaTeX support --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script><!-- inline KaTeX --><link rel="stylesheet" href="/_astro/index.BZ7em0Mc.css">
+<link rel="stylesheet" href="/_astro/_slug_.DPnDUiRI.css">
+<style>article[data-astro-cid-v5ro3oot]{max-width:80ch;margin:0 auto}
+</style><script type="module">document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]})});
+</script></head> <body class="font-sans antialiased"> <div class="container mx-auto flex min-h-screen"> <aside class="w-64 border-r border-[var(--border-color)] border-dashed pt-8"> <header class="flex flex-col h-full"> <div class="flex items-center mb-4"> <script>
+  function setTheme(mode) {
+    localStorage.setItem("theme-storage", mode);
+    document.documentElement.setAttribute('data-theme', mode);
+  }
+  function toggleTheme() {
+    const currentTheme = localStorage.getItem("theme-storage") || "light";
+    const newTheme = currentTheme === "light" ? "dark" : "light";
+    setTheme(newTheme);
+  }
+  const savedTheme = localStorage.getItem("theme-storage") || "light";
+  setTheme(savedTheme);
+  window.toggleTheme = toggleTheme;
+</script> <button id="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme" class="flex items-center justify-center w-6" data-astro-cid-x3pjskd3>○</button>  <a href="/" class="text-2xl font-semibold ml-3 h-10 pr-3">rezvan.xyz</a> </div> <nav class="flex flex-col space-y-2"> <a href="/principles" class="hover:text-orange-500 dark:hover:text-orange-400 transition-colors">
+[principles]
+</a><a href="/cv" class="hover:text-orange-500 dark:hover:text-orange-400 transition-colors">
+[cv]
+</a><a href="/posts" class="hover:text-orange-500 dark:hover:text-orange-400 transition-colors">
+[posts]
+</a><a href="/school" class="hover:text-orange-500 dark:hover:text-orange-400 transition-colors">
+[school]
+</a> </nav> </header> </aside> <main class="flex-grow px-8 py-8 overflow-y-auto">  <article class="prose prose-sm sm:prose lg:prose-lg xl:prose-xl max-w-none" data-astro-cid-v5ro3oot> <h1 class="text-4xl font-bold mb-4" data-astro-cid-v5ro3oot>Part 9 - Testing</h1> <p class="text-sm text-muted-foreground mb-4" data-astro-cid-v5ro3oot>
+Date: 3/5/2023 </p>  <p>When creating digital circuits, there are a lot of things that can go wrong.</p>
+<p>When designing the circuit, it may happen that the designers have implemented a <em>bug</em> into the circuit.</p>
+<p>We call these <em>design bugs</em>. On the other hand, when physically making the chip, it may happen that we
+get permanent (implementation) fault, or other (transient) faults.</p>
+<p>In the first case we need to perform verification, in the latter case, it’s testing and fault tolerance.</p>
+<h3 id="verification-vs-testing">Verification vs Testing</h3>
+<p>Verification is the task of ensuring that a design meets its specification</p>
+<ul>
+<li>Looking for design mistakes</li>
+</ul>
+<p>Testing is performed to ensure that a particular instantiation of a design functions properly</p>
+<ul>
+<li>Looking for implementation faults</li>
+</ul>
+<h3 id="verification">Verification</h3>
+<p>The verification should cover:</p>
+<ul>
+<li>The set of test patterns (test suit) written to verify a design should be complete.</li>
+<li>Specification coverage
+<ul>
+<li>All the features of the design have to be specified</li>
+</ul>
+</li>
+<li>Implementation coverage
+<ul>
+<li>Every line of the VHDL code should be checked.</li>
+<li>Examples:
+<ul>
+<li>Every case of a <code>case</code> statement, should be activated.</li>
+<li>For every state machine in our design, every edge between states should be traversed.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="faults">Faults</h3>
+<p>There are different types of faults:</p>
+<ul>
+<li>Transient faults
+<ul>
+<li>Faults that happen only once (and it’s VERY unlikely to happen again)</li>
+<li>Causes:
+<ul>
+<li>Electromagnetic Interference:
+<ul>
+<li>Neighbors mobile phone</li>
+<li>Static electricity</li>
+</ul>
+</li>
+<li>Various particles hitting the silicon surface:
+<ul>
+<li>Heavy ions such as iron, <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>α</mi></mrow><annotation encoding="application/x-tex">\alpha</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal" style="margin-right:0.0037em;">α</span></span></span></span>-particles, neutrons.</li>
+</ul>
+</li>
+<li>Internal effects:
+<ul>
+<li>Crosstalk, metastability, power supply disturbances</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Permanent faults
+<ul>
+<li>Faults that are always there</li>
+<li>Causes:
+<ul>
+<li>Design defects</li>
+<li>Manufacturing defects</li>
+<li>Transistor aging</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Intermittent faults
+<ul>
+<li>Faults that come and go (probably periodically)</li>
+<li>Causes: Variations
+<ul>
+<li><strong>Static</strong>: transistors on a chip may not be exactly the same, although, they were supposed to be</li>
+<li><strong>Dynamic</strong>: temperature changes</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="defects-and-yield">Defects and Yield</h3>
+<span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>y</mi><mi>i</mi><mi>e</mi><mi>l</mi><mi>d</mi><mo>=</mo><mfrac><mtext>number of working chips produced</mtext><mtext>Total number of chips produced</mtext></mfrac></mrow><annotation encoding="application/x-tex">    yield = \frac{\text{number of working chips produced}}{\text{Total number of chips produced}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">y</span><span class="mord mathnormal">i</span><span class="mord mathnormal">e</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">d</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.2519em;vertical-align:-0.8804em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3714em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord text"><span class="mord">Total number of chips produced</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord text"><span class="mord">number of working chips produced</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.8804em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span>
+<span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>c</mi><mi>o</mi><mi>s</mi><mi>t</mi><mo>=</mo><mfrac><mtext>Cost of fabricating and testing a wafer</mtext><mrow><mtext>Yield</mtext><mo>⋅</mo><mtext> Number of chip sites on the wafer</mtext></mrow></mfrac></mrow><annotation encoding="application/x-tex">    cost = \frac{\text{Cost of fabricating and testing a wafer}}{\text{Yield} \cdot\ \text{Number of chip sites on the wafer}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6151em;"></span><span class="mord mathnormal">cos</span><span class="mord mathnormal">t</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.2519em;vertical-align:-0.8804em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3714em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord text"><span class="mord">Yield</span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">⋅</span><span class="mspace"> </span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord text"><span class="mord">Number of chip sites on the wafer</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord text"><span class="mord">Cost of fabricating and testing a wafer</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.8804em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span>
+<span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>Y</mi><mo>=</mo><msup><mrow><mo fence="true">(</mo><mn>1</mn><mo>+</mo><mfrac><mrow><mi>A</mi><mi>d</mi></mrow><mi>α</mi></mfrac><mo fence="true">)</mo></mrow><mrow><mo>−</mo><mi>α</mi></mrow></msup><mspace linebreak="newline"></mspace><mi>A</mi><mo>=</mo><mtext>Chip area</mtext><mspace linebreak="newline"></mspace><mi>d</mi><mo>=</mo><mtext>Defect density</mtext><mspace linebreak="newline"></mspace><mi>α</mi><mo>=</mo><mtext>Fault clustering parameter</mtext></mrow><annotation encoding="application/x-tex">    Y = \left(1 + \frac{Ad}{\alpha}\right)^{- \alpha} \newline
+    A = \text{Chip area} \newline
+    d = \text{Defect density} \newline
+    \alpha = \text{Fault clustering parameter}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.22222em;">Y</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.5613em;vertical-align:-0.95em;"></span><span class="minner"><span class="minner"><span class="mopen delimcenter" style="top:0em;"><span class="delimsizing size3">(</span></span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3714em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0037em;">α</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal">A</span><span class="mord mathnormal">d</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mclose delimcenter" style="top:0em;"><span class="delimsizing size3">)</span></span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:1.6112em;"><span style="top:-3.9029em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">−</span><span class="mord mathnormal mtight" style="margin-right:0.0037em;">α</span></span></span></span></span></span></span></span></span></span><span class="mspace newline"></span><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal">A</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord text"><span class="mord">Chip area</span></span></span><span class="mspace newline"></span><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal">d</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord text"><span class="mord">Defect density</span></span></span><span class="mspace newline"></span><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal" style="margin-right:0.0037em;">α</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord text"><span class="mord">Fault clustering parameter</span></span></span></span></span></span>
+<h3 id="testing">Testing</h3>
+<p>When testing, for example, a 64-bit adder, it would take over 500+ years, if we could test an input each ns.</p>
+<p>Therefore, a subset of all possible inputs are used when testing.</p>
+<p>This subset of inputs is determined, as follows:</p>
+<ul>
+<li>Random test vectors</li>
+<li>Based on the logical function (functional testing)
+<ul>
+<li>E.g. check boundary conditions which make your circuit operate differently</li>
+</ul>
+</li>
+<li>Based on the design structure (structural testing)
+<ul>
+<li>E.g. partition your hardware in smaller blocks (exploit the hierarchy of your hardware design)</li>
+</ul>
+</li>
+<li>Based on the fault model
+<ul>
+<li>Group a huge number of things that can go wrong in a much smaller finite  set of fault models</li>
+</ul>
+</li>
+</ul>
+<h3 id="fault-models">Fault models</h3>
+<p>A fault model is an abstract model of
 physical faults that could cause a chip not
-to work.</p><p>Stuck-at fault model: This model abstracts
+to work.</p>
+<p>Stuck-at fault model: This model abstracts
 all potential faults as resulting in a logical
 node of the circuit being either stuck at
-logic <code>0</code> or stuck at logic <code>1</code>.</p><h3 id=algorithm-for-path-sensitization>Algorithm for “path sensitization”</h3><ol><li><p>Activate: Specify inputs to generate the appropriate (opposite than the fault) value (0 for SA-1, 1 for SA-0) at the site of the fault.</p></li><li><p>Propagate: Select a path from the site of the fault to an output and specify additional signal values to propagate the fault signal along this path to the output (error propagation).</p></li><li><p>Justify: Specify input values to produce the signal values specified in (2) (line justification).</p></li></ol><ul><li>The process is finished when all the assigned values have been solved by &ldquo;justify&rdquo; and there are no conflicts</li><li>A conflict has occurred on two different Justifications require different values assigned to a node.<ul><li>An input value required to activate the fault is different from the input values required to propagate the fault.</li></ul></li><li>If a conflict arises, we look for another way for justification.</li></ul></section></article><nav class=navigation><div class="nav-item previous"><a href=/school/eda322/eda322_8/ title="Previous: Part 8 - Interfaces and Memory">&larr; Previous</a></div><div class="nav-item next"></div></nav></main></div><footer id=site-footer><div class=social-links><a href=https://github.com/rezaarezvan title class=social-link><span class=bracket>[</span>github<span class=bracket>]</span></a>
-<a href=https://x.com/rzvan__/ title class=social-link><span class=bracket>[</span>x<span class=bracket>]</span></a></div><div class=footer-marquee><div class=footer-marquee__content><span class=footer-marquee__item>memento mori • amor fati • sic parvis magna • per aspera ad astra</span>
-<span class=footer-marquee__item>memento mori • amor fati • sic parvis magna • per aspera ad astra</span></div></div></footer></body></html>
+logic <code>0</code> or stuck at logic <code>1</code>.</p>
+<h3 id="algorithm-for-path-sensitization">Algorithm for “path sensitization”</h3>
+<ol>
+<li>
+<p>Activate: Specify inputs to generate the appropriate (opposite than the fault) value (0 for SA-1, 1 for SA-0) at the site of the fault.</p>
+</li>
+<li>
+<p>Propagate: Select a path from the site of the fault to an output and specify additional signal values to propagate the fault signal along this path to the output (error propagation).</p>
+</li>
+<li>
+<p>Justify: Specify input values to produce the signal values specified in (2) (line justification).</p>
+</li>
+</ol>
+<ul>
+<li>The process is finished when all the assigned values have been solved by “justify” and there are no conflicts</li>
+<li>A conflict has occurred on two different Justifications require different values assigned to a node.
+<ul>
+<li>An input value required to activate the fault is different from the input values required to propagate the fault.</li>
+</ul>
+</li>
+<li>If a conflict arises, we look for another way for justification.</li>
+</ul>  <nav class="flex justify-between mt-8 pt-4 border-t border-border" data-astro-cid-v5ro3oot> <a href="/school/eda322/eda322_8" class="text-primary hover:text-primary/80 transition-colors" data-astro-cid-v5ro3oot>
+← Previous: Part 8 - Interfaces and Memory </a>  </nav> </article>  </main> </div> </body></html> 

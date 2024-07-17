@@ -1,68 +1,216 @@
-<!doctype html><html><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge"><title>rezvan | Part 9 - Parallelizing computations</title><link rel=icon type=image/png href=https://rezvan.xyz/images/icon.png><meta name=viewport content="width=device-width,initial-scale=1">
-<meta name=description content="Concurrent programming introduces:
-The potential for parallel execution (faster, better resource usage) The risk of race conditions (incorrect, unpredictable computations) The challenge of concurrent programming is introducing parallelism without affecting correctness.
-Let&rsquo;s define how to parallelize:
-A task $(F, D)$ consists in computing the result F $(D)$ of applying function $F$ to input data $D$
-A parallelization of $(F, D)$ is a collection $(F_1 , D_1 ),\ (F_2 , D_2),\ \dots$ of tasks such that $F (D)$ equals the composition of $F_1 (D_1),\ F_2 (D_2),\ \dots $"><meta property="og:image" content="https://raw.githubusercontent.com/rezaarezvan/rezvan.xyz/main/images/icon.png"><meta property="og:url" content="https://rezvan.xyz/school/tda384/tda384_9/"><meta property="og:site_name" content="rezvan"><meta property="og:title" content="Part 9 - Parallelizing computations"><meta property="og:description" content="Concurrent programming introduces:
-The potential for parallel execution (faster, better resource usage) The risk of race conditions (incorrect, unpredictable computations) The challenge of concurrent programming is introducing parallelism without affecting correctness.
-Let’s define how to parallelize:
-A task $(F, D)$ consists in computing the result F $(D)$ of applying function $F$ to input data $D$
-A parallelization of $(F, D)$ is a collection $(F_1 , D_1 ),\ (F_2 , D_2),\ \dots$ of tasks such that $F (D)$ equals the composition of $F_1 (D_1),\ F_2 (D_2),\ \dots $"><meta property="og:locale" content="en_us"><meta property="og:type" content="article"><meta property="article:section" content="school"><meta property="article:published_time" content="2023-02-13T00:00:00+00:00"><meta property="article:modified_time" content="2024-05-26T11:09:10+02:00"><meta name=twitter:card content="summary"><meta name=twitter:title content="Part 9 - Parallelizing computations"><meta name=twitter:description content="Concurrent programming introduces:
-The potential for parallel execution (faster, better resource usage) The risk of race conditions (incorrect, unpredictable computations) The challenge of concurrent programming is introducing parallelism without affecting correctness.
-Let’s define how to parallelize:
-A task $(F, D)$ consists in computing the result F $(D)$ of applying function $F$ to input data $D$
-A parallelization of $(F, D)$ is a collection $(F_1 , D_1 ),\ (F_2 , D_2),\ \dots$ of tasks such that $F (D)$ equals the composition of $F_1 (D_1),\ F_2 (D_2),\ \dots $"><link rel=stylesheet href=https://rezvan.xyz/css/combined.min.285bd67a05674fdcb27bb67f867c7ac6b2e0c0b5535c536ba4bb37cd80e377e9.css integrity="sha256-KFvWegVnT9yye7Z/hnx6xrLgwLVTXFNrpLs3zYDjd+k="><link id=lightSyntaxStyle rel=stylesheet href=https://rezvan.xyz/css/light_syntax.min.d9e0828a4ff7f2d7317942062fc751fa487b2ac2c47b934ad082abd7d3ca6690.css integrity="sha256-2eCCik/38tcxeUIGL8dR+kh7KsLEe5NK0IKr19PKZpA="><link id=darkModeStyle rel=stylesheet href=https://rezvan.xyz/css/dark.min.113ab1177b874ffa2011e31f94df77b25b4c0aee6c35e5db0e6c54ebe2071597.css integrity="sha256-ETqxF3uHT/ogEeMflN93sltMCu5sNeXbDmxU6+IHFZc=" disabled><link id=darkSyntaxStyle rel=stylesheet href=https://rezvan.xyz/css/dark_syntax.min.1a878f3d8fb43359bd3b44bc70c4074f682f11066c6537bf6248b696cbe56586.css integrity="sha256-GoePPY+0M1m9O0S8cMQHT2gvEQZsZTe/Yki2lsvlZYY=" disabled><script type=text/javascript src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script type=text/x-mathjax-config>
-		MathJax.Hub.Config({
-			tex2jax: {
-				inlineMath: [['$','$'], ['\\(','\\)']],
-				displayMath: [['$$','$$'], ['\[','\]']],
-				processEscapes: true,
-				processEnvironments: true,
-				skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
-				TeX: { equationNumbers: { autoNumber: "AMS" },
-						 extensions: ["AMSmath.js", "AMSsymbols.js"] }
-			}
-		});
-		</script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css><script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js onload=renderMathInElement(document.body)></script><script>document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]})})</script></head><body><header><nav id=site-navbar><div class=navbar-content><a href=https://rezvan.xyz/ class=logo>rezvan.xyz</a><div class=navbar-links><a href=/principles class=nav-link><span class=bracket>[</span>principles<span class=bracket>]</span></a>
-<a href=/cv class=nav-link><span class=bracket>[</span>cv<span class=bracket>]</span></a>
-<a href=/posts class=nav-link><span class=bracket>[</span>posts<span class=bracket>]</span></a>
-<a href=/school class=nav-link><span class=bracket>[</span>school<span class=bracket>]</span></a></div><div class=theme-toggle><span id=dark-mode-toggle onclick=toggleTheme() aria-label="Toggle theme">○
-</span><script src=https://rezvan.xyz/js/themetoggle.js></script></div></div></nav></header><div class=content><main><article><div class=title><h1>Part 9 - Parallelizing computations</h1><div class=meta>Posted on Feb 13, 2023</div><div class=meta>(Last updated: May 26, 2024)</div></div><section class=body><p>Concurrent programming introduces:</p><ul><li>The potential for parallel execution (faster, better resource usage)</li><li>The risk of race conditions (incorrect, unpredictable computations)</li></ul><p>The challenge of concurrent programming is introducing parallelism without affecting correctness.</p><p>Let&rsquo;s define how to parallelize:</p><p>A task $(F, D)$ consists in computing the result
-F $(D)$ of applying function $F$ to input data $D$</p><p>A parallelization of $(F, D)$ is a collection $(F_1 , D_1 ),\ (F_2 , D_2),\ \dots$ of tasks such that
-$F (D)$ equals the <em>composition</em> of $F_1 (D_1),\ F_2 (D_2),\ \dots $</p><h3 id=synchronization>Synchronization</h3><p>Synchronization is required to ensure correctness, but it also introduces mental overhead.</p><p>In shared-memory concurrency:</p><ul><li><p>Synchronization is based on locking.</p></li><li><p>Locking synchronizes data from cache to main memory, which may involve a 100x overhead.</p></li><li><p>Other costs with locking may include context switching (wait/signal)
-and system calls (mutual exclusion primitives).</p></li></ul><p>In message-passing concurrency:</p><ul><li><p>Synchronization is based on messages</p></li><li><p>Exchanging small messages is efficient, but sending around large data is quite expensive (still
-goes through main memory).</p></li><li><p>Other costs associated with message passing may include extra acknowledgment messages
-and mailbox management (removing unprocessed messages).</p></li></ul><p>Also, an important note is about processes, creating a new process is generally expensive compared to sequential
-function calls within the same process, since it involves:</p><ul><li><p>Reserving memory</p></li><li><p>Registering the new process with runtime system</p></li><li><p>Setting up the process’s local memory (stack and mailbox)</p></li></ul><p>Even if process creation is optimized, the cost of spawning
+<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width"><meta name="generator" content="Astro v4.11.5"><link rel="icon" type="image" href="/favicon.ico"><title>Part 9 - Parallelizing computations</title><!-- KaTeX support --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script><!-- inline KaTeX --><link rel="stylesheet" href="/_astro/index.BZ7em0Mc.css">
+<link rel="stylesheet" href="/_astro/_slug_.DPnDUiRI.css">
+<style>article[data-astro-cid-v5ro3oot]{max-width:80ch;margin:0 auto}
+</style><script type="module">document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]})});
+</script></head> <body class="font-sans antialiased"> <div class="container mx-auto flex min-h-screen"> <aside class="w-64 border-r border-[var(--border-color)] border-dashed pt-8"> <header class="flex flex-col h-full"> <div class="flex items-center mb-4"> <script>
+  function setTheme(mode) {
+    localStorage.setItem("theme-storage", mode);
+    document.documentElement.setAttribute('data-theme', mode);
+  }
+  function toggleTheme() {
+    const currentTheme = localStorage.getItem("theme-storage") || "light";
+    const newTheme = currentTheme === "light" ? "dark" : "light";
+    setTheme(newTheme);
+  }
+  const savedTheme = localStorage.getItem("theme-storage") || "light";
+  setTheme(savedTheme);
+  window.toggleTheme = toggleTheme;
+</script> <button id="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme" class="flex items-center justify-center w-6" data-astro-cid-x3pjskd3>○</button>  <a href="/" class="text-2xl font-semibold ml-3 h-10 pr-3">rezvan.xyz</a> </div> <nav class="flex flex-col space-y-2"> <a href="/principles" class="hover:text-orange-500 dark:hover:text-orange-400 transition-colors">
+[principles]
+</a><a href="/cv" class="hover:text-orange-500 dark:hover:text-orange-400 transition-colors">
+[cv]
+</a><a href="/posts" class="hover:text-orange-500 dark:hover:text-orange-400 transition-colors">
+[posts]
+</a><a href="/school" class="hover:text-orange-500 dark:hover:text-orange-400 transition-colors">
+[school]
+</a> </nav> </header> </aside> <main class="flex-grow px-8 py-8 overflow-y-auto">  <article class="prose prose-sm sm:prose lg:prose-lg xl:prose-xl max-w-none" data-astro-cid-v5ro3oot> <h1 class="text-4xl font-bold mb-4" data-astro-cid-v5ro3oot>Part 9 - Parallelizing computations</h1> <p class="text-sm text-muted-foreground mb-4" data-astro-cid-v5ro3oot>
+Date: 2/13/2023 </p>  <p>Concurrent programming introduces:</p>
+<ul>
+<li>The potential for parallel execution (faster, better resource usage)</li>
+<li>The risk of race conditions (incorrect, unpredictable computations)</li>
+</ul>
+<p>The challenge of concurrent programming is introducing parallelism without affecting correctness.</p>
+<p>Let’s define how to parallelize:</p>
+<p>A task <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">(</mo><mi>F</mi><mo separator="true">,</mo><mi>D</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(F, D)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.13889em;">F</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">D</span><span class="mclose">)</span></span></span></span> consists in computing the result
+F <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">(</mo><mi>D</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(D)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.02778em;">D</span><span class="mclose">)</span></span></span></span> of applying function <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>F</mi></mrow><annotation encoding="application/x-tex">F</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">F</span></span></span></span> to input data <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>D</mi></mrow><annotation encoding="application/x-tex">D</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">D</span></span></span></span></p>
+<p>A parallelization of <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">(</mo><mi>F</mi><mo separator="true">,</mo><mi>D</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(F, D)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.13889em;">F</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">D</span><span class="mclose">)</span></span></span></span> is a collection <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">(</mo><msub><mi>F</mi><mn>1</mn></msub><mo separator="true">,</mo><msub><mi>D</mi><mn>1</mn></msub><mo stretchy="false">)</mo><mo separator="true">,</mo><mtext> </mtext><mo stretchy="false">(</mo><msub><mi>F</mi><mn>2</mn></msub><mo separator="true">,</mo><msub><mi>D</mi><mn>2</mn></msub><mo stretchy="false">)</mo><mo separator="true">,</mo><mtext> </mtext><mo>…</mo></mrow><annotation encoding="application/x-tex">(F_1 , D_1 ),\ (F_2 , D_2),\ \dots</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.13889em;">F</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.1389em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.02778em;">D</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0278em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span><span class="mpunct">,</span><span class="mspace"> </span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.13889em;">F</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.1389em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.02778em;">D</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0278em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span><span class="mpunct">,</span><span class="mspace"> </span><span class="mspace" style="margin-right:0.1667em;"></span><span class="minner">…</span></span></span></span> of tasks such that
+<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>F</mi><mo stretchy="false">(</mo><mi>D</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">F (D)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">F</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.02778em;">D</span><span class="mclose">)</span></span></span></span> equals the <em>composition</em> of <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>F</mi><mn>1</mn></msub><mo stretchy="false">(</mo><msub><mi>D</mi><mn>1</mn></msub><mo stretchy="false">)</mo><mo separator="true">,</mo><mtext> </mtext><msub><mi>F</mi><mn>2</mn></msub><mo stretchy="false">(</mo><msub><mi>D</mi><mn>2</mn></msub><mo stretchy="false">)</mo><mo separator="true">,</mo><mtext> </mtext><mo>…</mo></mrow><annotation encoding="application/x-tex">F_1 (D_1),\ F_2 (D_2),\ \dots </annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.13889em;">F</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.1389em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.02778em;">D</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0278em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span><span class="mpunct">,</span><span class="mspace"> </span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.13889em;">F</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.1389em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.02778em;">D</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0278em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span><span class="mpunct">,</span><span class="mspace"> </span><span class="mspace" style="margin-right:0.1667em;"></span><span class="minner">…</span></span></span></span></p>
+<h3 id="synchronization">Synchronization</h3>
+<p>Synchronization is required to ensure correctness, but it also introduces mental overhead.</p>
+<p>In shared-memory concurrency:</p>
+<ul>
+<li>
+<p>Synchronization is based on locking.</p>
+</li>
+<li>
+<p>Locking synchronizes data from cache to main memory, which may involve a 100x overhead.</p>
+</li>
+<li>
+<p>Other costs with locking may include context switching (wait/signal)
+and system calls (mutual exclusion primitives).</p>
+</li>
+</ul>
+<p>In message-passing concurrency:</p>
+<ul>
+<li>
+<p>Synchronization is based on messages</p>
+</li>
+<li>
+<p>Exchanging small messages is efficient, but sending around large data is quite expensive (still
+goes through main memory).</p>
+</li>
+<li>
+<p>Other costs associated with message passing may include extra acknowledgment messages
+and mailbox management (removing unprocessed messages).</p>
+</li>
+</ul>
+<p>Also, an important note is about processes, creating a new process is generally expensive compared to sequential
+function calls within the same process, since it involves:</p>
+<ul>
+<li>
+<p>Reserving memory</p>
+</li>
+<li>
+<p>Registering the new process with runtime system</p>
+</li>
+<li>
+<p>Setting up the process’s local memory (stack and mailbox)</p>
+</li>
+</ul>
+<p>Even if process creation is optimized, the cost of spawning
 should be weighted against the speedup that can be obtained by
-additional parallelism.</p><p>In particular, when the processes become way more than the available
-processors, there will be diminishing returns with more spawning</p><p>Now let&rsquo;s cover the solutions</p><h3 id=forkjoin-parallelism>Fork/join parallelism</h3><ul><li><p>Forking: spawning child processes and assigning them smaller tasks</p></li><li><p>Joining: waiting for the child processes to complete and combining their results</p></li></ul><p>Note, the order in which we wait at a join node for forked children does not affect the total
-waiting time.</p><p>In order to obtain good performance using fork/join parallelism:</p><ul><li><p>After forking children tasks, keep some work for the parent task before it joins the
-children.</p></li><li><p>For the same reason, use <code>invoke</code> and <code>invokeAll</code> only at the top level as a norm.</p></li><li><p>Perform small enough tasks sequentially in the parent task, and fork children tasks
-only when there is a substantial chunk of work left</p></li><li><p>Make sure different tasks can proceed independently – minimize data dependencies</p></li></ul><p>The advantages of parallelism may only be visible with several physical processors, and
-on very large inputs.</p><h3 id=pools-and-work-stealing>Pools and work stealing</h3><p>Process pools are a technique to address the problem of using an appropriate
-number of processes.</p><p>A pool creates a number of worker processes upon initialization.
+additional parallelism.</p>
+<p>In particular, when the processes become way more than the available
+processors, there will be diminishing returns with more spawning</p>
+<p>Now let’s cover the solutions</p>
+<h3 id="forkjoin-parallelism">Fork/join parallelism</h3>
+<ul>
+<li>
+<p>Forking: spawning child processes and assigning them smaller tasks</p>
+</li>
+<li>
+<p>Joining: waiting for the child processes to complete and combining their results</p>
+</li>
+</ul>
+<p>Note, the order in which we wait at a join node for forked children does not affect the total
+waiting time.</p>
+<p>In order to obtain good performance using fork/join parallelism:</p>
+<ul>
+<li>
+<p>After forking children tasks, keep some work for the parent task before it joins the
+children.</p>
+</li>
+<li>
+<p>For the same reason, use <code>invoke</code> and <code>invokeAll</code> only at the top level as a norm.</p>
+</li>
+<li>
+<p>Perform small enough tasks sequentially in the parent task, and fork children tasks
+only when there is a substantial chunk of work left</p>
+</li>
+<li>
+<p>Make sure different tasks can proceed independently – minimize data dependencies</p>
+</li>
+</ul>
+<p>The advantages of parallelism may only be visible with several physical processors, and
+on very large inputs.</p>
+<h3 id="pools-and-work-stealing">Pools and work stealing</h3>
+<p>Process pools are a technique to address the problem of using an appropriate
+number of processes.</p>
+<p>A pool creates a number of worker processes upon initialization.
 The number of workers is chosen according to the actual available resources to
-run them in parallel – a detail which pool users need not know about:</p><ul><li><p>As long as more work is available, the pool deals a work assignment to
-a worker that is available.</p></li><li><p>The pool collects the results of the workers’ computations.</p></li><li><p>When all work is completed, the pool terminates and returns the overall result
-This kind of pool is called a dealing pool: it actively deals work to workers.</p></li></ul><p>Workers are servers that run as long as the pool that created them does
-A worker can be in one of two states:</p><ul><li><p>Idle: waiting for work assignments from the pool.</p></li><li><p>Busy: computing a work assignment.</p></li></ul><p>As soon as a worker completes its work assignments,
-it sends the result to the pool and goes back to being idle.</p><p>A pool keeps track of:</p><ul><li><p>The remaining work – not assigned yet</p></li><li><p>The busy workers</p></li><li><p>The idle workers</p></li></ul><p>The pool also stores:</p><ul><li><p>A split function, used to extract a single work item</p></li><li><p>A join function, used to combine partial results</p></li><li><p>The overall result of the computation that is underway</p></li></ul><p>The pool terminates and returns the result of the computation when there are no
+run them in parallel – a detail which pool users need not know about:</p>
+<ul>
+<li>
+<p>As long as more work is available, the pool deals a work assignment to
+a worker that is available.</p>
+</li>
+<li>
+<p>The pool collects the results of the workers’ computations.</p>
+</li>
+<li>
+<p>When all work is completed, the pool terminates and returns the overall result
+This kind of pool is called a dealing pool: it actively deals work to workers.</p>
+</li>
+</ul>
+<p>Workers are servers that run as long as the pool that created them does
+A worker can be in one of two states:</p>
+<ul>
+<li>
+<p>Idle: waiting for work assignments from the pool.</p>
+</li>
+<li>
+<p>Busy: computing a work assignment.</p>
+</li>
+</ul>
+<p>As soon as a worker completes its work assignments,
+it sends the result to the pool and goes back to being idle.</p>
+<p>A pool keeps track of:</p>
+<ul>
+<li>
+<p>The remaining work – not assigned yet</p>
+</li>
+<li>
+<p>The busy workers</p>
+</li>
+<li>
+<p>The idle workers</p>
+</li>
+</ul>
+<p>The pool also stores:</p>
+<ul>
+<li>
+<p>A split function, used to extract a single work item</p>
+</li>
+<li>
+<p>A join function, used to combine partial results</p>
+</li>
+<li>
+<p>The overall result of the computation that is underway</p>
+</li>
+</ul>
+<p>The pool terminates and returns the result of the computation when there are no
 pending work items, and all workers are idle (thus all work has been done).
 As long as there is some pending work and some idle workers, the pool deals work
-to some of those idle workers.</p><p>When there are no pending work items or all workers are busy, the pool can only wait
-for workers to send back results</p><p>Dealing pools work well if:</p><ul><li><p>The workload can be split in even chunks.</p></li><li><p>The workload does not change over time (for example if users send new
-tasks or cancel tasks dynamically).</p></li></ul><p>Under these conditions, the workload is balanced evenly between workers, so
+to some of those idle workers.</p>
+<p>When there are no pending work items or all workers are busy, the pool can only wait
+for workers to send back results</p>
+<p>Dealing pools work well if:</p>
+<ul>
+<li>
+<p>The workload can be split in even chunks.</p>
+</li>
+<li>
+<p>The workload does not change over time (for example if users send new
+tasks or cancel tasks dynamically).</p>
+</li>
+</ul>
+<p>Under these conditions, the workload is balanced evenly between workers, so
 as to maximize the amount of parallel computation
-In realistic applications, however, these conditions are not met:</p><ul><li>It may be hard to predict reliably which tasks take more time to compute the
-workload is highly dynamic</li></ul><p>Stealing pools use a different approach to allocating tasks to workers that better
-addresses these challenging conditions</p><p>A stealing pool associates a queue to every worker process
+In realistic applications, however, these conditions are not met:</p>
+<ul>
+<li>It may be hard to predict reliably which tasks take more time to compute the
+workload is highly dynamic</li>
+</ul>
+<p>Stealing pools use a different approach to allocating tasks to workers that better
+addresses these challenging conditions</p>
+<p>A stealing pool associates a queue to every worker process
 The pool distributes new tasks by adding them to the workers’ queues
-When a worker becomes idle:</p><ul><li><p>First, it gets the next task from its own queue</p></li><li><p>If its queue is empty, it can directly steal tasks from the queue of another
-worker that is currently busy.</p></li></ul><p>With this approach, workers adjust dynamically to the current working conditions
+When a worker becomes idle:</p>
+<ul>
+<li>
+<p>First, it gets the next task from its own queue</p>
+</li>
+<li>
+<p>If its queue is empty, it can directly steal tasks from the queue of another
+worker that is currently busy.</p>
+</li>
+</ul>
+<p>With this approach, workers adjust dynamically to the current working conditions
 without requiring a supervisor that can reliably predict the workload required by
-each task</p><p>With stealing, the pool may even send all tasks to one default thread, letting other
+each task</p>
+<p>With stealing, the pool may even send all tasks to one default thread, letting other
 idle threads steal directly from it, simplifying the pool and reducing the
-synchronization costs it incurs</p></section></article><nav class=navigation><div class="nav-item previous"><a href=/school/tda384/tda384_8/ title="Previous: Part 8 - Synchronization problems (2)">&larr; Previous</a></div><div class="nav-item next"><a href=/school/tda384/tda384_10/ title="Next: Part 10 - Parallel linked lists">Next &rarr;</a></div></nav></main></div><footer id=site-footer><div class=social-links><a href=https://github.com/rezaarezvan title class=social-link><span class=bracket>[</span>github<span class=bracket>]</span></a>
-<a href=https://x.com/rzvan__/ title class=social-link><span class=bracket>[</span>x<span class=bracket>]</span></a></div><div class=footer-marquee><div class=footer-marquee__content><span class=footer-marquee__item>memento mori • amor fati • sic parvis magna • per aspera ad astra</span>
-<span class=footer-marquee__item>memento mori • amor fati • sic parvis magna • per aspera ad astra</span></div></div></footer></body></html>
+synchronization costs it incurs</p>  <nav class="flex justify-between mt-8 pt-4 border-t border-border" data-astro-cid-v5ro3oot> <a href="/school/tda384/tda384_8" class="text-primary hover:text-primary/80 transition-colors" data-astro-cid-v5ro3oot>
+← Previous: Part 8 - Synchronization problems (2) </a> <a href="/school/tda384/tda384_10" class="text-primary hover:text-primary/80 transition-colors" data-astro-cid-v5ro3oot>
+Next: Part 10 - Parallel linked lists →
+</a> </nav> </article>  </main> </div> </body></html> 
