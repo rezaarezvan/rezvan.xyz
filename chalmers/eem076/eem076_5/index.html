@@ -1,0 +1,152 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="Astro v4.11.5"><link rel="icon" type="image" href="/favicon.ico"><title>Part 5 - Electrical fields</title><!-- KaTeX support --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script><!-- inline KaTeX --><link rel="stylesheet" href="/_astro/index.CwgzIfsj.css">
+<link rel="stylesheet" href="/_astro/_slug_.hCvEQTvV.css">
+<style>article[data-astro-cid-v5ro3oot]{max-width:80ch;margin:0 auto}.nav-button[data-astro-cid-v5ro3oot]{display:flex;align-items:center;padding:.5rem;border-radius:.5rem;transition:background-color .3s ease;text-decoration:none;color:var(--text-color);background-color:var(--bg-color);border:1px solid var(--border-color)}.nav-button[data-astro-cid-v5ro3oot]:hover{background-color:var(--hover-color)}.nav-button[data-astro-cid-v5ro3oot] .arrow[data-astro-cid-v5ro3oot]{font-size:1.5rem;line-height:1}.nav-button[data-astro-cid-v5ro3oot] .text[data-astro-cid-v5ro3oot]{display:flex;flex-direction:column;margin:0 .5rem}.nav-button[data-astro-cid-v5ro3oot] .label[data-astro-cid-v5ro3oot]{font-size:.8rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted-color)}.nav-button[data-astro-cid-v5ro3oot] .title[data-astro-cid-v5ro3oot]{font-weight:500}.prev-button[data-astro-cid-v5ro3oot]{justify-content:flex-start}.next-button[data-astro-cid-v5ro3oot]{justify-content:flex-end;text-align:right}@media (max-width: 640px){.nav-button[data-astro-cid-v5ro3oot]{width:100%}.next-button[data-astro-cid-v5ro3oot]{justify-content:flex-start;text-align:left}.next-button[data-astro-cid-v5ro3oot] .text[data-astro-cid-v5ro3oot]{order:2;margin-left:.5rem}.next-button[data-astro-cid-v5ro3oot] .arrow[data-astro-cid-v5ro3oot]{order:1}}
+</style><script type="module">document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]})});
+</script></head> <body> <div class="container mx-auto px-4 flex flex-col md:flex-row min-h-screen"> <aside class="w-full md:w-64 border-b md:border-r md:border-b-0 border-[var(--border-color)] border-dashed pt-8"> <header class="flex flex-col h-full"> <div class="flex items-center mb-4"> <script>
+  function setTheme(mode) {
+    localStorage.setItem("theme-storage", mode);
+    document.documentElement.setAttribute('data-theme', mode);
+  }
+  function toggleTheme() {
+    const currentTheme = localStorage.getItem("theme-storage") || "light";
+    const newTheme = currentTheme === "light" ? "dark" : "light";
+    setTheme(newTheme);
+  }
+  const savedTheme = localStorage.getItem("theme-storage") || "light";
+  setTheme(savedTheme);
+  window.toggleTheme = toggleTheme;
+</script> <button id="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme" class="w-6 h-6 cursor-pointer"> <div class="w-5 h-5 border-2 border-primary rounded-full transition-colors duration-300 ease-in-out hover:bg-primary"></div> </button> <a href="/" class="text-2xl font-semibold ml-3 h-10 pr-3">rezvan.xyz</a> </div> <nav class="flex flex-wrap gap-2 md:flex-col md:gap-2"> <a href="/principles" class="transition-colors">
+[principles]
+</a><a href="/cv" class="transition-colors">
+[cv]
+</a><a href="/posts" class="transition-colors">
+[posts]
+</a><a href="/chalmers" class="transition-colors">
+[chalmers]
+</a><a href="/cityu" class="transition-colors">
+[cityu]
+</a> </nav> </header> </aside> <main class="flex-grow px-4 md:px-8 py-8 overflow-y-auto">  <article class="prose prose-sm sm:prose lg:prose-lg xl:prose-xl max-w-none" data-astro-cid-v5ro3oot> <h1 class="text-3xl sm:text-4xl font-bold mb-4" data-astro-cid-v5ro3oot>Part 5 - Electrical fields</h1> <p class="text-sm text-muted-foreground mb-4" data-astro-cid-v5ro3oot>
+Date: 3/28/2023 </p> <div class="markdown-content" data-astro-cid-v5ro3oot>  <p>In this part we’ll discuss electrical fields and some tools we’ll begin to use.</p>
+<p>So far we’ve only analyzed the electrical circuits at a macro level. In this part we’ll try to dissect them at a micro-level, so let’s zoom in!</p>
+<h3 id="electrical-charge">Electrical charge</h3>
+<p>To understand electrical circuits, let’s first understand electrical <em>charge</em>.</p>
+<p>As we’ve seen, we use $q$, as the notation for charge.
+The elementary charge (the charge carried by a single proton) is:
+$$
+e^{-} = 1.602 \cdot\ 10^{-19} C
+$$</p>
+<p>We also need to remember this very important law:</p>
+<blockquote>
+<p>The total charge within a <strong>closed</strong> system cannot change. It can only be <strong>redistributed</strong>.</p>
+</blockquote>
+<p>Now that we’ve defined electrical charge, we can define electrical <strong>fields</strong>!</p>
+<h3 id="electrical-fields">Electrical fields</h3>
+<p>Let’s start by defining what an electrical field is!</p>
+<blockquote>
+<p>An electrical field is a force field created by electric charges.</p>
+</blockquote>
+<p>Always remember:</p>
+<ul>
+<li>
+<p><strong>Repulsive</strong> if charges are the <strong>same</strong>.</p>
+</li>
+<li>
+<p><strong>Attractive</strong> if charges are <strong>different</strong>.</p>
+</li>
+</ul>
+<h4 id="coulombs-law">Coulomb’s law</h4>
+<p><img src="/images/school/CL.png#center" alt=""></p>
+<p>This force field that is created by the charges, we can mathematically compute these forces:
+$$
+\mathbf{\vec{F_{12}}} = k_{e}\ \frac{q_1 q_20}{r^2} \mathbf{\vec{r_{12}}}
+$$</p>
+<p>Where $k_{e}$ is Coulomb’s constant:
+$$
+k_e = \frac{1}{4\pi\varepsilon_{0}}
+$$</p>
+<p>Where $\varepsilon_{0}$ is the vacuum permittivity, we’ll actually derive this later on!
+$$
+\varepsilon_{0} = \frac{10^{-9}}{36\pi}
+$$</p>
+<p>Alright with all of these tools, we can <em>finally</em> define electrical fields with some maths!</p>
+<p>$$
+\mathbf{\vec{E}} = k_{e}\ \frac{q}{r^2}\mathbf{\vec{r}}
+$$</p>
+<p>Also, given an <em>electrical field</em> we can calculate the force on a point of charge:
+$$
+\mathbf{\vec{F_{E}}} = q\ \mathbf{\vec{E}}
+$$</p>
+<p>Notice how these formulas are really similar to formulas of gravitation.</p>
+<h3 id="superposition">Superposition</h3>
+<p>As you could have guessed, yes, the superposition principle applies to the electrical forces and fields:
+$$
+\mathbf{\vec{F_{j}}} = \sum_{i = 1}^{N}\ \mathbf{\vec{F_{ij}}} \newline
+\mathbf{\vec{E}} = \sum_{i = 1}^{N}\ \mathbf{\vec{E_{i}}}
+$$</p>
+<h3 id="dipoles">Dipoles</h3>
+<p>Two equals and opposite charges are known as a <em>dipole</em>.</p>
+<p>A <em>dipole moment</em> is a measure of the density of the electrical field <em>of a dipole</em>.</p>
+<p>The formula
+$$
+\mathbf{\vec{p}} = q\mathbf{\vec{d}}
+$$</p>
+<p>Where $\mathbf{\vec{d}}$, is the direction vector, which is defined as, from negative charge to positive charge by convention.</p>
+<p>This means, placing a dipole in an electrical field, applies a <em>torque</em> on the dipole:
+<img src="/images/school/DP.png#center" alt=""></p>
+<p>Which means we can calculate the torque:
+$$
+\mathbf{\vec{\tau}} = \mathbf{\vec{p}} \times \mathbf{\vec{E}} \newline
+\tau = p \cdot\ E\ sin(\theta)
+$$</p>
+<h3 id="electrical-flux">Electrical flux</h3>
+<p>So far we’ve discussed discrete number of charges and points. Imagine now instead that we have a continuous line:
+<img src="/images/school/EF.png#center" alt=""></p>
+<p>So instead of:
+$$
+\mathbf{\vec{E}} = \sum_{i = 1}^{N}\ \mathbf{\vec{E_{i}}}
+$$</p>
+<p>We get:
+$$
+\mathbf{\vec{E}} = \int_{L_{1}}^{L_{2}}\ \mathbf{\vec{E_{l}}} dl
+$$</p>
+<p>Now, let’s flip it around. We instead have a single point of charge and want to know how much of its electrical field passes through a line.</p>
+<p>This is precisely electrical flux! We denote electrical flux with the $\Phi$.
+$$
+\Phi = \sum_{i = 1}^{N}\ \mathbf{\vec{E}} \cdot\ \hat{n}
+$$</p>
+<p>And for the continuous case:
+$$
+\Phi = \int_{L_{1}}^{L_{2}}\ \mathbf{\vec{E_{l}}} \cdot\ \hat{n} \cdot\ dl
+$$</p>
+<p>Let’s now add another dimension, so it’s a surface
+<img src="/images/school/EF3.png#center" alt="">
+$$
+\Phi = \iint \mathbf{\vec{E}} \cdot\ \hat{n} \cdot\ d\mathbf{\vec{A}} = \iint \mathbf{\vec{E}} \cdot\ d\mathbf{\vec{A}}\ cos(\theta)
+$$</p>
+<p>If we’re instead within a <strong>closed contour</strong>:
+<img src="/images/school/EF4.png#center" alt=""></p>
+<p>For this we use the special integral symbol:
+$$
+\Phi = \oiint\ \mathbf{\vec{E}} \cdot\ d\mathbf{\vec{A}}
+$$</p>
+<p>What is the total flux through this surface (circle).
+$$
+\mathbf{\vec{E}} = \frac{q}{4\pi r^2 \varepsilon_{0}} \newline
+A = 4\pi r^2
+$$</p>
+<p>Therefore:
+$$
+\Phi = \frac{q}{4\pi r^2 \varepsilon_{0}}\ 4\pi r^2 \newline
+$$</p>
+<p>$$
+\Phi = \frac{q}{\varepsilon_{0}}
+$$</p>
+<h3 id="gausss-law">Gauss’s law</h3>
+<p>This is Gauss’s law!
+$$
+\Phi_{E} = \oiint \mathbf{\vec{E}} \cdot\ d\mathbf{\vec{A}} = \frac{q}{\varepsilon_{0}}
+$$</p>
+<h4 id="gaussian-surfaces">Gaussian surfaces</h4>
+<p>Since this is from a specific surface, we’ll need to consider the different types:
+<img src="/images/school/GS.png#center" alt=""></p>
+<p>These are the gaussian surfaces that we’ll be looking into!</p>  </div> <nav class="flex flex-col sm:flex-row justify-between mt-8 pt-4 border-t border-border" data-astro-cid-v5ro3oot>   </nav> </article>  </main> </div> </body></html> 

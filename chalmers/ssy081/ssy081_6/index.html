@@ -1,0 +1,159 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="Astro v4.11.5"><link rel="icon" type="image" href="/favicon.ico"><title>Part 6 - Fourier Transform</title><!-- KaTeX support --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script><!-- inline KaTeX --><link rel="stylesheet" href="/_astro/index.CwgzIfsj.css">
+<link rel="stylesheet" href="/_astro/_slug_.hCvEQTvV.css">
+<style>article[data-astro-cid-v5ro3oot]{max-width:80ch;margin:0 auto}.nav-button[data-astro-cid-v5ro3oot]{display:flex;align-items:center;padding:.5rem;border-radius:.5rem;transition:background-color .3s ease;text-decoration:none;color:var(--text-color);background-color:var(--bg-color);border:1px solid var(--border-color)}.nav-button[data-astro-cid-v5ro3oot]:hover{background-color:var(--hover-color)}.nav-button[data-astro-cid-v5ro3oot] .arrow[data-astro-cid-v5ro3oot]{font-size:1.5rem;line-height:1}.nav-button[data-astro-cid-v5ro3oot] .text[data-astro-cid-v5ro3oot]{display:flex;flex-direction:column;margin:0 .5rem}.nav-button[data-astro-cid-v5ro3oot] .label[data-astro-cid-v5ro3oot]{font-size:.8rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted-color)}.nav-button[data-astro-cid-v5ro3oot] .title[data-astro-cid-v5ro3oot]{font-weight:500}.prev-button[data-astro-cid-v5ro3oot]{justify-content:flex-start}.next-button[data-astro-cid-v5ro3oot]{justify-content:flex-end;text-align:right}@media (max-width: 640px){.nav-button[data-astro-cid-v5ro3oot]{width:100%}.next-button[data-astro-cid-v5ro3oot]{justify-content:flex-start;text-align:left}.next-button[data-astro-cid-v5ro3oot] .text[data-astro-cid-v5ro3oot]{order:2;margin-left:.5rem}.next-button[data-astro-cid-v5ro3oot] .arrow[data-astro-cid-v5ro3oot]{order:1}}
+</style><script type="module">document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]})});
+</script></head> <body> <div class="container mx-auto px-4 flex flex-col md:flex-row min-h-screen"> <aside class="w-full md:w-64 border-b md:border-r md:border-b-0 border-[var(--border-color)] border-dashed pt-8"> <header class="flex flex-col h-full"> <div class="flex items-center mb-4"> <script>
+  function setTheme(mode) {
+    localStorage.setItem("theme-storage", mode);
+    document.documentElement.setAttribute('data-theme', mode);
+  }
+  function toggleTheme() {
+    const currentTheme = localStorage.getItem("theme-storage") || "light";
+    const newTheme = currentTheme === "light" ? "dark" : "light";
+    setTheme(newTheme);
+  }
+  const savedTheme = localStorage.getItem("theme-storage") || "light";
+  setTheme(savedTheme);
+  window.toggleTheme = toggleTheme;
+</script> <button id="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme" class="w-6 h-6 cursor-pointer"> <div class="w-5 h-5 border-2 border-primary rounded-full transition-colors duration-300 ease-in-out hover:bg-primary"></div> </button> <a href="/" class="text-2xl font-semibold ml-3 h-10 pr-3">rezvan.xyz</a> </div> <nav class="flex flex-wrap gap-2 md:flex-col md:gap-2"> <a href="/principles" class="transition-colors">
+[principles]
+</a><a href="/cv" class="transition-colors">
+[cv]
+</a><a href="/posts" class="transition-colors">
+[posts]
+</a><a href="/chalmers" class="transition-colors">
+[chalmers]
+</a><a href="/cityu" class="transition-colors">
+[cityu]
+</a> </nav> </header> </aside> <main class="flex-grow px-4 md:px-8 py-8 overflow-y-auto">  <article class="prose prose-sm sm:prose lg:prose-lg xl:prose-xl max-w-none" data-astro-cid-v5ro3oot> <h1 class="text-3xl sm:text-4xl font-bold mb-4" data-astro-cid-v5ro3oot>Part 6 - Fourier Transform</h1> <p class="text-sm text-muted-foreground mb-4" data-astro-cid-v5ro3oot>
+Date: 9/20/2023 </p> <div class="markdown-content" data-astro-cid-v5ro3oot>  <h3 id="introduction">Introduction</h3>
+<p>In this part we’ll define and understand Fourier transforms. In the last part we covered the concept of Fourier series.</p>
+<p>Which was a way of describing periodic functions as a linear combination (sum) of simple trigonometric functions. The Fourier transform takes this one step further, it’s a way to extend the Fourier series of non-periodic functions.</p>
+<h3 id="definition">Definition</h3>
+<p>Given a function in the time-domain, the equivalent function in the frequency domain is:
+$$
+F(\omega) = \int_{-\infty}^{\infty} f(t) e^{-j\omega t}\ dt
+$$</p>
+<p>The other way around:
+$$
+f(t) = \dfrac{1}{2\pi} \int_{-\infty}^{\infty} F(\omega) e^{j\omega t}\ d\omega
+$$</p>
+<p>We call these functions the Fourier pair. Meaning they are the same functions, in different domains. They represent the same signal.</p>
+<p>$$
+f(t) \iff F(\omega)
+$$</p>
+<p>So the notation for the Fourier transform is:
+$$
+F(\omega) = \mathcal{F}[f(t)]
+$$</p>
+<p>$$
+f(t) = \mathcal{F}^{-1}[F(\omega)]
+$$</p>
+<p>Let’s do our first Fourier transform!</p>
+<h3 id="example">Example</h3>
+<p>Let’s do this on a simple unit gate function, let’s do it on a general unit gate function.</p>
+<p>$$
+f(t) = rect\left(\dfrac{t}{\tau}\right)
+$$</p>
+<p>$$
+F(\omega) = \int_{-\infty}^{\infty} rect\left(\dfrac{t}{\tau}\right) e^{-j\omega t}\ dt
+$$</p>
+<p>Since the gate function is only defined at $t = -\dfrac{\tau}{2}$ and $t = \dfrac{\tau}{2}$, and in this interval it is constant 1.
+$$
+F(\omega) = \int_{-\frac{\tau}{2}}^{\frac{\tau}{2}} e^{-j\omega t}\ dt
+$$</p>
+<p>$$
+F(\omega) = -\dfrac{1}{j\omega} e^{-j\omega t} \bigg\rvert_{\frac{\tau}{2}}^{-\frac{\tau}{2}}
+$$</p>
+<p>$$
+F(\omega) = -\dfrac{1}{j\omega} \left(e^{-j\omega \dfrac{\tau}{2}} - e^{j\omega t \dfrac{\tau}{2}}\right)
+$$</p>
+<p>Using Euler’s formula:
+$$
+F(\omega) = \dfrac{2 sin\left(\dfrac{\omega \tau}{2}\right)}{\omega}
+$$</p>
+<p>Let’s rewrite it as:
+$$
+F(\omega) = \tau \dfrac{sin\left(\dfrac{\omega \tau}{2}\right)}{\dfrac{\omega \tau}{2}}
+$$</p>
+<p>We can rewrite using $sinc(x) = \dfrac{sin(\pi x)}{\pi x}$:
+$$
+F(\omega) = \tau sinc\left(\dfrac{\omega \tau}{2}\right)
+$$</p>
+<p>So, this means that:
+$$
+rect\left(\dfrac{t}{\tau}\right) \iff \tau sinc\left(\dfrac{\omega \tau}{2}\right)
+$$</p>
+<p>Now, we can do this manually each time, but that’s tedious, that’s why we’ll usually use a Fourier table.</p>
+<p>Let’s cover some important Fourier transforms.</p>
+<h3 id="important-fourier-transforms">Important Fourier transforms</h3>
+<p>$$
+cos(\omega_0 t) \iff \pi [\delta(\omega + \omega_0) + \delta(\omega - \omega_0)]
+$$</p>
+<p>$$
+sin(\omega_0 t) \iff j\pi [\delta(\omega + \omega_0) + \delta(\omega - \omega_0)]
+$$</p>
+<p>We’ll use these often.</p>
+<h3 id="fourier-transform-properties">Fourier transform properties</h3>
+<h4 id="symmetry">Symmetry</h4>
+<p>After we have obtained one representation of the signal, it doesn’t stop us from just replacing $t$ or $\omega$ with the other.</p>
+<p>For example:
+$$
+rect\left(\dfrac{t}{\tau}\right) \iff \tau sinc\left(\dfrac{\omega \tau}{2}\right)
+$$</p>
+<p>We can do:
+$$
+F(t) = \tau sinc\left(\dfrac{t \tau}{2}\right)
+$$</p>
+<p>We can utilize:
+$$
+F(t) \iff 2\pi f(-\omega)
+$$</p>
+<p>Now this means:
+$$
+F(t) \iff 2\pi f(-\omega) = 2\pi \ rect\left(\dfrac{-\omega}{\tau}\right)
+$$</p>
+<p>Since the unit gate function is an even function:
+$$
+F(t) \iff 2\pi f(-\omega) = 2\pi \ rect\left(\dfrac{\omega}{\tau}\right)
+$$</p>
+<h4 id="scaling">Scaling</h4>
+<p>$$
+f(at) \iff \dfrac{1}{|a|} F\left(\dfrac{\omega}{a}\right)
+$$</p>
+<p>As we can see, an expansion in the time domain, means a compression in the frequency domain and vice-versa.</p>
+<p>From this we can also gain the time and frequency inversion property:
+$$
+f(-t) \iff F(-\omega)
+$$</p>
+<h4 id="time-and-frequency-shifting">Time and frequency shifting</h4>
+<p>$$
+f(t - t_0) \iff F(\omega) e^{-j\omega t_0}
+$$</p>
+<p>This also means:
+$$
+f(t) e^{j\omega_0 t} \iff F(\omega - \omega_0)
+$$</p>
+<h4 id="time-differentiation-and-integration">Time differentiation and integration</h4>
+<p>$$
+\dfrac{df}{dt} \iff j\omega F(\omega)
+$$</p>
+<p>$$
+\int_{-\infty}^{t} f(\tau)\ d\tau \iff \dfrac{F(\omega)}{j\omega} + \pi F(0)\delta(\omega)
+$$</p>
+<p>Now, for the most powerful and beautiful property, which we’ll use.</p>
+<h4 id="convolution">Convolution</h4>
+<p>Given $f_1(t) \iff F_1(\omega)$ and $f_2(t) \iff F_2(\omega)$.</p>
+<p>Time convolution:
+$$
+f_1(t) * f_2(t) \iff F_1(\omega) F_2(\omega)
+$$</p>
+<p>Frequency convolution
+$$
+f_1(t) f_2(t) \iff \dfrac{1}{2\pi} F_1(\omega) * F_2(\omega)
+$$</p>
+<h3 id="does-the-fourier-transform-always-exist">Does the Fourier transform always exist?</h3>
+<p>The Fourier transform exist, if:
+$$
+\int_{-\infty}^{\infty} |f(t)|\ dt &#x3C; \infty
+$$</p>  </div> <nav class="flex flex-col sm:flex-row justify-between mt-8 pt-4 border-t border-border" data-astro-cid-v5ro3oot>   </nav> </article>  </main> </div> </body></html> 

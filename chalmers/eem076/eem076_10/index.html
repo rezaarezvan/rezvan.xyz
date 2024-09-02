@@ -1,0 +1,223 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="Astro v4.11.5"><link rel="icon" type="image" href="/favicon.ico"><title>Part 10 - Steady-state sinusoidal analysis</title><!-- KaTeX support --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script><!-- inline KaTeX --><link rel="stylesheet" href="/_astro/index.CwgzIfsj.css">
+<link rel="stylesheet" href="/_astro/_slug_.hCvEQTvV.css">
+<style>article[data-astro-cid-v5ro3oot]{max-width:80ch;margin:0 auto}.nav-button[data-astro-cid-v5ro3oot]{display:flex;align-items:center;padding:.5rem;border-radius:.5rem;transition:background-color .3s ease;text-decoration:none;color:var(--text-color);background-color:var(--bg-color);border:1px solid var(--border-color)}.nav-button[data-astro-cid-v5ro3oot]:hover{background-color:var(--hover-color)}.nav-button[data-astro-cid-v5ro3oot] .arrow[data-astro-cid-v5ro3oot]{font-size:1.5rem;line-height:1}.nav-button[data-astro-cid-v5ro3oot] .text[data-astro-cid-v5ro3oot]{display:flex;flex-direction:column;margin:0 .5rem}.nav-button[data-astro-cid-v5ro3oot] .label[data-astro-cid-v5ro3oot]{font-size:.8rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted-color)}.nav-button[data-astro-cid-v5ro3oot] .title[data-astro-cid-v5ro3oot]{font-weight:500}.prev-button[data-astro-cid-v5ro3oot]{justify-content:flex-start}.next-button[data-astro-cid-v5ro3oot]{justify-content:flex-end;text-align:right}@media (max-width: 640px){.nav-button[data-astro-cid-v5ro3oot]{width:100%}.next-button[data-astro-cid-v5ro3oot]{justify-content:flex-start;text-align:left}.next-button[data-astro-cid-v5ro3oot] .text[data-astro-cid-v5ro3oot]{order:2;margin-left:.5rem}.next-button[data-astro-cid-v5ro3oot] .arrow[data-astro-cid-v5ro3oot]{order:1}}
+</style><script type="module">document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]})});
+</script></head> <body> <div class="container mx-auto px-4 flex flex-col md:flex-row min-h-screen"> <aside class="w-full md:w-64 border-b md:border-r md:border-b-0 border-[var(--border-color)] border-dashed pt-8"> <header class="flex flex-col h-full"> <div class="flex items-center mb-4"> <script>
+  function setTheme(mode) {
+    localStorage.setItem("theme-storage", mode);
+    document.documentElement.setAttribute('data-theme', mode);
+  }
+  function toggleTheme() {
+    const currentTheme = localStorage.getItem("theme-storage") || "light";
+    const newTheme = currentTheme === "light" ? "dark" : "light";
+    setTheme(newTheme);
+  }
+  const savedTheme = localStorage.getItem("theme-storage") || "light";
+  setTheme(savedTheme);
+  window.toggleTheme = toggleTheme;
+</script> <button id="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme" class="w-6 h-6 cursor-pointer"> <div class="w-5 h-5 border-2 border-primary rounded-full transition-colors duration-300 ease-in-out hover:bg-primary"></div> </button> <a href="/" class="text-2xl font-semibold ml-3 h-10 pr-3">rezvan.xyz</a> </div> <nav class="flex flex-wrap gap-2 md:flex-col md:gap-2"> <a href="/principles" class="transition-colors">
+[principles]
+</a><a href="/cv" class="transition-colors">
+[cv]
+</a><a href="/posts" class="transition-colors">
+[posts]
+</a><a href="/chalmers" class="transition-colors">
+[chalmers]
+</a><a href="/cityu" class="transition-colors">
+[cityu]
+</a> </nav> </header> </aside> <main class="flex-grow px-4 md:px-8 py-8 overflow-y-auto">  <article class="prose prose-sm sm:prose lg:prose-lg xl:prose-xl max-w-none" data-astro-cid-v5ro3oot> <h1 class="text-3xl sm:text-4xl font-bold mb-4" data-astro-cid-v5ro3oot>Part 10 - Steady-state sinusoidal analysis</h1> <p class="text-sm text-muted-foreground mb-4" data-astro-cid-v5ro3oot>
+Date: 5/2/2023 </p> <div class="markdown-content" data-astro-cid-v5ro3oot>  <p>In this part we’ll properly define and understand what alternating-current (AC) is.</p>
+<h3 id="alternating-current">Alternating-current</h3>
+<p>As we have seen, AC is defined using sinusoidal functions:
+$$
+V(t) = V_m sin(\omega t)
+$$</p>
+<p>Where:
+$$
+V_m - \text{Amplitude}\ [V] \newline
+\omega - \text{Angular frequency}\ \left[\dfrac{rad}{s}\right] \newline
+T - \text{Period}\ [s] \newline
+f - \text{Frequency}\ [Hz] \newline
+$$</p>
+<p>We can write:
+$$
+T = \dfrac{2\pi}{\omega} = \dfrac{1}{f}
+$$</p>
+<p>If we want to write this even more generally we also add a constant:
+$$
+V(t) = V_m sin(\omega t + \theta)
+$$</p>
+<p>We say that this sine function <em>leads</em> the previous by $\theta$.
+The other way around works as well, the previous function <em>lags</em> this function by $\theta$.</p>
+<h3 id="root-mean-square">Root Mean Square</h3>
+<p>The <strong>R</strong>oot <strong>M</strong>ean <strong>S</strong>quare, or RMS, gives us a sensible comparision of our AC current/voltage to the equivalent DC current/voltage.</p>
+<p>This is useful for the power consumption - we define the RMS as:
+$$
+V_{RMS} = \sqrt{\dfrac{1}{T} \int_0^T V^2(t) dt}
+$$</p>
+<p>Which means, in our sinusoidal case:
+$$
+V_{RMS} = \dfrac{V_m}{\sqrt{2}} \newline
+I_{RMS} = \dfrac{I_m}{\sqrt{2}}
+$$</p>
+<p>Which means:
+$$
+P_{Avg} = \dfrac{(V_{RMS})^2}{R} = (I_{RMS})^2 R
+$$</p>
+<h3 id="radians-and-degrees">Radians and degrees</h3>
+<p>If your like me and always forget how to convert radians to degrees or the other way around - here’s a quick little reminder:
+$$
+rad = deg \cdot\ \dfrac{\pi}{180}
+$$</p>
+<p>Along with:
+$$
+sin(\omega t) = cos(\omega t - 90^\circ) \newline
+cos(\omega t) = sin(\omega t + 90^\circ)
+$$</p>
+<p>This is really important since, if we want to compare the <strong>phases</strong> of two wave functions - we need to:</p>
+<ul>
+<li>
+<p>Both must be written in <em>either</em> sine or cosine.</p>
+</li>
+<li>
+<p>Both must be written with <strong>positive</strong> amplitude.</p>
+</li>
+<li>
+<p>Each have the same constant frequency.</p>
+</li>
+</ul>
+<h3 id="phasors">Phasors</h3>
+<p>Now we’re going to talk about this beautiful idea that happens to perfectly fit our electrical needs!</p>
+<p>A phasor, is a complex number representing a sinusoidal function as vectors.</p>
+<p>The magnitude of the phasor (meaning, the magnitude of the vector) equals the amplitude of the sinusoidal function:
+$$
+V_m = V_m
+$$</p>
+<p>The angle of the phasor equals the phase of the sinusoidal function:
+$$
+\theta = \theta
+$$</p>
+<p>If you’re not familiar with complex numbers and their different representations, here is a quick overview:
+<img src="/images/school/UC.png#center" alt=""></p>
+<p>Note: In maths we usually denote the imaginary unit with $i$, in electrical engineering, we rather use $j$ to avoid confusion with the current.</p>
+<p>Rectangular form: $$
+z = x + jy \newline
+z = |z|(cos(\varphi) + j sin(\varphi))
+$$</p>
+<p>Polar form:
+$$
+z = |z|\angle{\theta^\circ} \newline
+z = |z|e^{j \theta^\circ}
+$$</p>
+<p>Polar <em>to</em> rectangular form:
+$$
+z = r\angle{\theta^\circ} \newline
+x = r cos(\theta^\circ) \newline
+y = r cos(\theta^\circ) \newline
+z = x + j y
+$$</p>
+<p>Rectangular <em>to</em> polar form:
+$$
+z = x + jy \newline
+r = \sqrt{x^2 + y^2} \newline
+\theta = tan^{-1}\left(\dfrac{y}{x}\right) = \arctan{\left(\dfrac{y}{x}\right)} \newline
+z = r\angle{\theta^\circ} \newline
+z = re^{j \theta^\circ} \newline
+z = r(cos(\theta) + j sin(\theta))
+$$</p>
+<p>Why do learn both forms and how to convert them? Because, if we want to perform multiplication or division - it’s much easier done in Polar form.</p>
+<p>If we want to perform addition or subtraction, it’s easier done in rectangular form.</p>
+<p>Multiplication:
+$$
+a = (b\angle{c^\circ}) \cdot\ (d\angle{e^\circ}) \newline
+a = (b \cdot\ d \angle{c^\circ + e^\circ})
+$$</p>
+<p>Division:</p>
+<p>$$
+a = \dfrac{(b\angle{c^\circ})}{(d\angle{e^\circ})} \newline
+a = (\dfrac{b}{d} \angle{c^\circ - e^\circ})
+$$</p>
+<h3 id="phasor-relations">Phasor relations</h3>
+<p>Now that we’ve defined phasors, let’s look at the relationship between different concepts we have encountered.</p>
+<h4 id="resistance">Resistance</h4>
+<p>As we know from Ohm’s law: $V = RI$. If our $V$ and $I$ both are phasors - it means that they are in parallel:
+<img src="/images/school/VI.png#center" alt=""></p>
+<h4 id="inductor">Inductor</h4>
+<p>As we know, $V = L \dfrac{dI}{dt}$. Now, if both our $V$ and $I$ are phasors, it means that taking the deriviate of $I$ will make it either sine or cosine.</p>
+<p>This means in the end that $V$ and $I$ will be $90^\circ$ apart!</p>
+<p><img src="/images/school/VIL.png#center" alt=""></p>
+<p>As you may or may not know, but multiplying something with the imaginary unit rotates it by $90^\circ$.
+This means that:
+$$
+V = j\omega LI
+$$</p>
+<h4 id="capacitor">Capacitor</h4>
+<p>We know that, $I = C \dfrac{dV}{dt}$. The same logic applies here, since taking the deriviate of a sinusoidal function will shift it by $90^\circ$ this means that:
+$$
+I = j\omega CV
+$$</p>
+<p><img src="/images/school/ICV.png#center" alt=""></p>
+<h4 id="summary">Summary</h4>
+<p>This means that we now have two different ways to calculate these equations - in the time domain or in the frequency domain:</p>
+<p>Time domain:
+$$
+V = RI \newline
+$$
+$$
+V = L \dfrac{dI}{dt} \newline
+$$
+$$
+V = \dfrac{1}{C} \int I dt \newline
+$$</p>
+<p>Frequency domain:
+$$
+V = RI \newline
+$$
+$$
+V = j\omega LI \newline
+$$
+$$
+V = \dfrac{1}{j\omega C} I
+$$</p>
+<h3 id="impedance">Impedance</h3>
+<p>The definiton of impedance can be quite dense and technical - but in this series we’ll settle with the definition that:
+$$
+Z = \dfrac{V}{I}
+$$</p>
+<p>This means that:
+$$
+Z_{R} = R \newline
+Z_{L} = j\omega L \newline
+Z_{C} = \dfrac{1}{j\omega C}
+$$</p>
+<p>Impedance is therefore complex number, but in the unit Ohm!</p>
+<p>We call the imaginary component of impedance <strong>reactance</strong>.</p>
+<p>A purely resitive impedance is equal to the resistance. A purely reactive impedance has no real component.</p>
+<p>Impedances in series and parallel apply to the same rules as resistors! So we can combine and simplifiy our circuits even more now!</p>
+<p>But the most important thing here is that, we can, just from impedance, understand what dominates in a circuit:
+<img src="/images/school/EI.png#center" alt="">
+$$
+\begin{align*}
+Z_{eq} &#x26; = 1.5 + \dfrac{(j)(1 - 2j)}{j + 1 - 2j} \newline
+&#x26; = 1.5 + \dfrac{2 + j}{1 - j} \newline
+&#x26; = 1.5 + \dfrac{(2 + j)(1 + j)}{(1 - j)(1 + j)} \newline
+&#x26; = 1.5 + \dfrac{1 + j3}{2} \newline
+&#x26; = 2.5\angle{36.87^\circ}\ k\Omega
+\end{align*}
+$$</p>
+<p>From this, we can see that, since we have a positive impedance, means that it’s mostly inductive than anything else. This tells us a lot about the circuit.</p>
+<p>Since inductors resists change in the current, it will ultimately mean that the current is <em>late</em>, or <em>lags</em> behind the voltage!</p>
+<p>Which is exactly what we’ll see if we calcuate $I(t)$:
+$$
+\begin{align*}
+I &#x26; = \dfrac{V}{Z_{eq}} \newline
+&#x26; = \dfrac{40\angle{- 90^\circ}}{2.5\angle{36.87^\circ}} \newline
+&#x26; = 16 \angle{-126.9^\circ} mA
+\end{align*}
+$$</p>
+<p>Which means:
+$$
+I(t) = 16 cos(3000t - 126.9^\circ) mA
+$$</p>
+<p>Just as we predicted, the current lags behind by a lot!</p>
+<p>As we can see, our new tools and knowledge about how we can use complex numbers are quite powerful!</p>  </div> <nav class="flex flex-col sm:flex-row justify-between mt-8 pt-4 border-t border-border" data-astro-cid-v5ro3oot>   </nav> </article>  </main> </div> </body></html> 

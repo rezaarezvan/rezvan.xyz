@@ -1,0 +1,403 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="Astro v4.11.5"><link rel="icon" type="image" href="/favicon.ico"><title>Part 13 - The Jacobian</title><!-- KaTeX support --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script><!-- inline KaTeX --><link rel="stylesheet" href="/_astro/index.CwgzIfsj.css">
+<link rel="stylesheet" href="/_astro/_slug_.hCvEQTvV.css">
+<style>article[data-astro-cid-v5ro3oot]{max-width:80ch;margin:0 auto}.nav-button[data-astro-cid-v5ro3oot]{display:flex;align-items:center;padding:.5rem;border-radius:.5rem;transition:background-color .3s ease;text-decoration:none;color:var(--text-color);background-color:var(--bg-color);border:1px solid var(--border-color)}.nav-button[data-astro-cid-v5ro3oot]:hover{background-color:var(--hover-color)}.nav-button[data-astro-cid-v5ro3oot] .arrow[data-astro-cid-v5ro3oot]{font-size:1.5rem;line-height:1}.nav-button[data-astro-cid-v5ro3oot] .text[data-astro-cid-v5ro3oot]{display:flex;flex-direction:column;margin:0 .5rem}.nav-button[data-astro-cid-v5ro3oot] .label[data-astro-cid-v5ro3oot]{font-size:.8rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted-color)}.nav-button[data-astro-cid-v5ro3oot] .title[data-astro-cid-v5ro3oot]{font-weight:500}.prev-button[data-astro-cid-v5ro3oot]{justify-content:flex-start}.next-button[data-astro-cid-v5ro3oot]{justify-content:flex-end;text-align:right}@media (max-width: 640px){.nav-button[data-astro-cid-v5ro3oot]{width:100%}.next-button[data-astro-cid-v5ro3oot]{justify-content:flex-start;text-align:left}.next-button[data-astro-cid-v5ro3oot] .text[data-astro-cid-v5ro3oot]{order:2;margin-left:.5rem}.next-button[data-astro-cid-v5ro3oot] .arrow[data-astro-cid-v5ro3oot]{order:1}}
+</style><script type="module">document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]})});
+</script></head> <body> <div class="container mx-auto px-4 flex flex-col md:flex-row min-h-screen"> <aside class="w-full md:w-64 border-b md:border-r md:border-b-0 border-[var(--border-color)] border-dashed pt-8"> <header class="flex flex-col h-full"> <div class="flex items-center mb-4"> <script>
+  function setTheme(mode) {
+    localStorage.setItem("theme-storage", mode);
+    document.documentElement.setAttribute('data-theme', mode);
+  }
+  function toggleTheme() {
+    const currentTheme = localStorage.getItem("theme-storage") || "light";
+    const newTheme = currentTheme === "light" ? "dark" : "light";
+    setTheme(newTheme);
+  }
+  const savedTheme = localStorage.getItem("theme-storage") || "light";
+  setTheme(savedTheme);
+  window.toggleTheme = toggleTheme;
+</script> <button id="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme" class="w-6 h-6 cursor-pointer"> <div class="w-5 h-5 border-2 border-primary rounded-full transition-colors duration-300 ease-in-out hover:bg-primary"></div> </button> <a href="/" class="text-2xl font-semibold ml-3 h-10 pr-3">rezvan.xyz</a> </div> <nav class="flex flex-wrap gap-2 md:flex-col md:gap-2"> <a href="/principles" class="transition-colors">
+[principles]
+</a><a href="/cv" class="transition-colors">
+[cv]
+</a><a href="/posts" class="transition-colors">
+[posts]
+</a><a href="/chalmers" class="transition-colors">
+[chalmers]
+</a><a href="/cityu" class="transition-colors">
+[cityu]
+</a> </nav> </header> </aside> <main class="flex-grow px-4 md:px-8 py-8 overflow-y-auto">  <article class="prose prose-sm sm:prose lg:prose-lg xl:prose-xl max-w-none" data-astro-cid-v5ro3oot> <h1 class="text-3xl sm:text-4xl font-bold mb-4" data-astro-cid-v5ro3oot>Part 13 - The Jacobian</h1> <p class="text-sm text-muted-foreground mb-4" data-astro-cid-v5ro3oot>
+Date: 9/26/2023 </p> <div class="markdown-content" data-astro-cid-v5ro3oot>  <h3 id="introduction">Introduction</h3>
+<p>In this part we’ll cover how we change our variables into others, in the most general case.</p>
+<h3 id="general-case-of-variable-change">General case of variable change</h3>
+<p>$$
+\iint_D f(x, y)\ dA
+$$</p>
+<p>We want to rewrite this in terms of $u$ and $v$. Let’s say that:
+$$
+x = g(u, v) \newline
+y = h(u, v)
+$$</p>
+<p>We can say that we have a <em>transformation</em>, $T$, from the $uv$-plane to the $xy$-plane, given by our functions $g$ and $h$.</p>
+<p>We need to make some assumptions of $T$ to make our lives easier.</p>
+<ol>
+<li>
+<p>$T$ is a $C^1$-transformation, meaning that $g$ and $h$ have continuous partial derivatives.</p>
+</li>
+<li>
+<p>$T$ is an injective transformation (meaning it is 1-to-1). This means that we can express $u$ and $v$ in terms of $x$ and $y$.</p>
+</li>
+</ol>
+<p>With this, we can define the Jacobian matrix.</p>
+<h3 id="definition">Definition</h3>
+<p>The jacobian matrix of a transformation, $T$, is:</p>
+<p>$$
+\dfrac{\partial(x, y)}{\partial(u, v)} =
+det
+\begin{bmatrix}
+\dfrac{\partial x}{\partial u} &#x26; \dfrac{\partial x}{\partial v}  \newline
+\dfrac{\partial y}{\partial u} &#x26; \dfrac{\partial y}{\partial v}
+\end{bmatrix}
+$$</p>
+<p>Suppose $T$ is a transformation, from the $uv$-plane to the $xy$-plane. Assuming that the jacobian for $T$, is non-zero, then:
+$$
+\iint_D f(x, y)\ dA = \iint_S f(x(u, v), y(u, v)) \vert \tfrac{\partial(x, y)}{\partial(u, v)} \vert \ dA
+$$</p>
+<h3 id="example">Example</h3>
+<p>Find
+$$
+\iint_D e^{\frac{x + y}{x - y}}\ dA
+$$</p>
+<p>Where $D$ is the trapezoidal region, with vertices, $(1, 0), (2, 0), (0, -2)$ and $(0, -1)$.</p>
+<p>Let $u = x + y$ and $v = x - y$.</p>
+<p>This means that:
+$$
+x = \frac{u + v}{2} \newline
+y = \frac{u - v}{2}
+$$</p>
+<p>Let’s compute the jacobian:
+$$
+\dfrac{\partial(x, y)}{\partial(u, v)} =
+det
+\begin{bmatrix}
+\dfrac{\partial x}{\partial u} &#x26; \dfrac{\partial x}{\partial v}  \newline
+\dfrac{\partial y}{\partial u} &#x26; \dfrac{\partial y}{\partial v}
+\end{bmatrix}
+$$</p>
+<p>$$
+\dfrac{\partial(x, y)}{\partial(u, v)} =
+det
+\begin{bmatrix}
+\frac{1}{2} &#x26; \frac{1}{2} \newline
+\frac{1}{2} &#x26; -\frac{1}{2}
+\end{bmatrix}
+$$</p>
+<p>$$
+\dfrac{\partial(x, y)}{\partial(u, v)} = -\frac{1}{2}
+$$</p>
+<p>Since our transformation is linear, we only need to recompute our vertices. Using our formulas we find that
+$$
+(1, 0) \rarr (1, 1) \newline
+(2, 0) \rarr (2, 2) \newline
+(0, -2) \rarr (-2, 2) \newline
+(0, -1) \rarr (-1, 1)
+$$</p>
+<p>If we plot our trapezodial, we find that it is a type II region. The left curve being $u = -v$ and the right curve $u = v$.</p>
+<p>Which means our integral becomes:
+$$
+\dfrac{1}{2} \int_1^2 \int_{-v}^{v} e^{\dfrac{u}{v}}\ du\ dv
+$$</p>
+<p>$$
+\dfrac{1}{2} \int_1^2 ve^{\dfrac{u}{v}} \bigg\rvert_{u = -v}^{u = v} \ dv
+$$</p>
+<p>$$
+\dfrac{1}{2} e - e^{-1} \int_1^2 v \ dv
+$$</p>
+<p>$$
+\dfrac{1}{2} e - e^{-1} \dfrac{v^2}{2} \bigg\rvert_{v = 1}^{v = 2}
+$$</p>
+<p>$$
+\boxed{\dfrac{3(e - e^{-1})}{4}}
+$$</p>
+<h3 id="in-three-variables">In three variables</h3>
+<p>It is the same approach. Let $x = x(u, v, w), y = y(u, v, w), z = z(u, v, w)$</p>
+<p>The jacobian is:
+$$
+\dfrac{\partial(x, y, z)}{\partial(u, v, w)} =
+det
+\begin{bmatrix}
+\dfrac{\partial x}{\partial u} &#x26; \dfrac{\partial x}{\partial v}  &#x26; \dfrac{\partial x}{\partial w} \newline
+\dfrac{\partial y}{\partial u} &#x26; \dfrac{\partial y}{\partial v}  &#x26; \dfrac{\partial y}{\partial w} \newline
+\dfrac{\partial z}{\partial u} &#x26; \dfrac{\partial z}{\partial v}  &#x26; \dfrac{\partial z}{\partial w}
+\end{bmatrix}
+$$</p>
+<p>Just as we did before:
+$$
+\iiint_E f(x, y, z)\ dV = \iiint_S f(x(u, v, w), y(u, v, w), z(u, v, w)) \vert \tfrac{\partial(x, y, z)}{\partial(u, v, w)} \vert \ dV
+$$</p>
+<p>Let’s now cover some special cases that we’ll often encounter.</p>
+<h3 id="cylindrical-coordinates">Cylindrical coordinates</h3>
+<p>Is just like polar coordinates but for three variables:
+$$
+(x, y, z) \rarr (r, \theta, z)
+$$</p>
+<p>If we have symmetry around the z-axis, it makes sense to use these variables.</p>
+<p>We know that:
+$$
+x = r cos(\theta) \newline
+y = r sin(\theta) \newline
+z = z
+$$</p>
+<p>Therefore, the jacobian for this becomes:
+$$
+\dfrac{\partial(x, y, z)}{\partial(u, v, w)} =
+det
+\begin{bmatrix}
+cos(\theta) &#x26; -r sin(\theta) &#x26; 0 \newline
+sin(\theta) &#x26; r cos(\theta) &#x26; 0 \newline
+0 &#x26; 0 &#x26; 1
+\end{bmatrix}
+$$</p>
+<p>$$
+\dfrac{\partial(x, y, z)}{\partial(u, v, w)} = 0 \cdot det
+\begin{bmatrix}
+-r sin(\theta) &#x26; 0 \newline
+r cos(\theta) &#x26; 0 \newline
+\end{bmatrix} - 0 \cdot det
+\begin{bmatrix}
+cos(\theta) &#x26; 0 \newline
+sin(\theta) &#x26; 0 \newline
+\end{bmatrix} + 1 \cdot det
+\begin{bmatrix}
+cos(\theta) &#x26; -r sin(\theta) \newline
+sin(\theta) &#x26; r cos(\theta) \newline
+\end{bmatrix}
+$$</p>
+<p>$$
+\dfrac{\partial(x, y, z)}{\partial(u, v, w)} = r cos^2(\theta) + r sin^2(\theta) = r(cos^2(\theta) + sin^2(\theta)) = \boxed{r}
+$$</p>
+<h3 id="change-to-spherical-coordinates">Change to spherical coordinates</h3>
+<p>$$
+\iiint_E f(x, y, z)\ dV = \iiint_S f(r cos(\theta), r sin(\theta), z) \cdot r \ dV
+$$</p>
+<h3 id="example-1">Example</h3>
+<p>Find
+$$
+\iint_E \sqrt{x^2 + y^2}\ dV
+$$</p>
+<p>Where $E$ is the solid lying within the cylinder, $x^2 + y^2 = 1$, below the plane $z = 4$ and above the paraboloid, $z = 1 - x^2 - y^2$.</p>
+<p>Let us describe the solid $E$:
+$$
+E = \{(x, y, z) | 0 \leq x^2 + y^2 \leq 1, 1 - x^2 - y^2 \leq z \leq 4\}
+$$</p>
+<p>In spherical coordinates:
+$$
+E = \{(x, y, z) | 0 \leq r \leq 1, 1 - r^2 \leq z \leq 4\}
+$$</p>
+<p>Let’s make $z$ our inner variable.
+$$
+\iint_E \sqrt{x^2 + y^2}\ dV = \iiint_S \sqrt{r^2} \cdot r\ dV
+$$</p>
+<p>$$
+\iiint_S r^2\ dV
+$$</p>
+<p>$$
+\int_0^{2\pi} \int_0^1 \int_{1 - r^2}^{4} r^2\ dz\ dr\ d\theta
+$$</p>
+<p>$$
+\int_0^{2\pi} \int_0^1 r^2 z \bigg\rvert_{z = 1 - r^2}^{z = 4} dr\ d\theta
+$$</p>
+<p>$$
+\int_0^{2\pi} \int_0^1 3r^2 + r^4\ dr\ d\theta
+$$</p>
+<p>$$
+\int_0^{2\pi} \int_0^1 r^3 + \dfrac{r^5}{5} \bigg\rvert_{r = 0}^{r = 1} dr\ d\theta
+$$</p>
+<p>$$
+\int_0^{2\pi} \dfrac{6}{5} d\theta
+$$</p>
+<p>$$
+\dfrac{6}{5}\theta \bigg\rvert_{\theta = 0}^{\theta = 2\pi}
+$$</p>
+<p>$$
+\boxed{\dfrac{12\pi}{5}}
+$$</p>
+<h3 id="spherical-coordinates">Spherical coordinates</h3>
+<p>In this coordinate system we introduce a completely new idea.</p>
+<p>Let:
+$$
+\rho - \text{distance form origin} \newline
+\varphi - \text{angle between positive } z\text{-axis} \newline
+\theta- \text{angle in } x\text{-plane}\newline
+$$</p>
+<p>This means:
+$$
+\rho \geq 0 \newline
+0 \leq \varphi \leq \pi \newline
+0 \leq \theta \leq 2\pi
+$$</p>
+<p>$$
+r = \rho sin(\varphi) \newline
+x = r cos(\theta) = \rho sin(\varphi) cos(\theta) \newline
+y = r sin(\theta) = \rho sin(\varphi) sin(\theta) \newline
+z = \rho cos(\varphi)
+$$</p>
+<p>The jacobian:
+$$
+\dfrac{\partial(x, y, z)}{\partial(u, v, w)} =
+det
+\begin{bmatrix}
+sin(\varphi) cos(\theta) &#x26; \rho cos(\varphi) cos(\theta) &#x26; -\rho sin(\varphi) sin(\theta) \newline
+sin(\varphi) sin(\theta) &#x26; \rho cos(\varphi) sin(\theta) &#x26; \rho sin(\varphi) cos(\theta) \newline
+cos(\varphi) &#x26; -\rho sin(\varphi) &#x26; 0
+\end{bmatrix}
+$$</p>
+<p>$$
+\dfrac{\partial(x, y, z)}{\partial(u, v, w)} = \ldots = \rho^2 sin(\varphi)
+$$</p>
+<h3 id="changing-to-spherical-coordinates">Changing to spherical coordinates</h3>
+<p>$$
+\iiint_E f(x, y, z)\ dV = \iiint_S f(\rho sin(\varphi) cos(\theta), \rho sin(\varphi) sin(\theta), \rho cos(\varphi)) \cdot \rho^2 sin(\varphi) \ dV
+$$</p>
+<p>It makes sense to change to spherical coordinates when our solid is bounded by spheres and/or cones.</p>
+<h3 id="example-2">Example</h3>
+<p>Find
+$$
+\iint_B e^{(x^2 + y^2 + z^2)^{\frac{3}{2}}}\ dV
+$$</p>
+<p>Where $B$ is the unit ball.</p>
+<p>$$
+B = \{(x, y, z) | x^2 + y^2 + z^2 \leq 1 \}
+$$</p>
+<p>In spherical coordinates:
+$$
+S = \{(\rho, \varphi, \theta) | 0 \leq \rho \leq 1, 0 \leq \varphi \leq \pi, 0 \leq \theta \leq 2\pi \}
+$$</p>
+<p>Which is easy to integrate over.
+$$
+\iint_B e^{(x^2 + y^2 + z^2)^{\frac{3}{2}}}\ dV = \iiint_S e^{(\rho^2)^{\frac{3}{2}}} \cdot \rho^2 sin(\varphi)\ dV
+$$</p>
+<p>$$
+\iiint_S e^{\rho^3} \cdot \rho^2 sin(\varphi)\ dV
+$$</p>
+<p>$$
+\int_0^{2\pi} \int_0^1 \int_0^{\pi} e^{\rho^3} \cdot \rho^2 sin(\varphi)\ d\varphi\ d\rho\ d\theta
+$$</p>
+<p>$$
+\int_0^{2\pi} \int_0^1 e^{\rho^3} \cdot \rho^2 \left[-cos(\varphi) \bigg\rvert_{\varphi = 0}^{\varphi = \pi} \right]\ d\rho\ d\theta
+$$</p>
+<p>$$
+\int_0^{2\pi} \int_0^1 2e^{\rho^3} \cdot \rho^2\ d\rho\ d\theta
+$$</p>
+<p>Let
+$$
+u = \rho^3
+$$</p>
+<p>$$
+du = 3 \rho^2 d\rho
+$$</p>
+<p>$$
+\frac{du}{3} = \rho^2 d\rho
+$$</p>
+<p>$$
+\int_0^{2\pi} \int_0^1 \frac{2}{3} e^u\ du\ d\theta
+$$</p>
+<p>$$
+\int_0^{2\pi} \frac{2}{3} e^u \bigg\rvert_{u = 0}^{u = 1} d\theta
+$$</p>
+<p>$$
+\int_0^{2\pi} \frac{2(e - 1)}{3} d\theta
+$$</p>
+<p>$$
+\int_0^{2\pi} \frac{2(e - 1)}{3} d\theta
+$$</p>
+<p>$$
+\frac{2(e - 1)}{3} \theta \bigg\rvert_{\theta = 0}^{\theta = 2\pi}
+$$</p>
+<p>$$
+\boxed{\frac{4\pi(e - 1)}{3}}
+$$</p>
+<h3 id="some-applications-of-multiple-integrals">Some applications of multiple integrals</h3>
+<p>Let’s see what we can achieve with multiple integrals.</p>
+<h3 id="computing-mass-of-solid">Computing mass of solid</h3>
+<p>Let $E$ be an arbitrary solid, with a density function, $\rho(x, y, z)$</p>
+<p>We say that the mass of the solid is:
+$$
+\iiint_E \rho(x, y, z)\ dV
+$$</p>
+<p>We perform the same proof as for integrals for solids, but with the density function instead. Taking the sum and limit of small points and their densities.</p>
+<h3 id="center-of-mass">Center of Mass</h3>
+<p>One very important application is finding the center of mass of a solid.</p>
+<p>Given a <strong>physical</strong> system with $m_i$ points, the center of mass has the coordinates, $(x_0, y_0, z_0)$.</p>
+<p>Therefore:
+$$
+x_0 = \dfrac{\sum m_i x_i}{\sum m_i}
+$$</p>
+<p>$$
+y_0 = \dfrac{\sum m_i y_i}{\sum m_i}
+$$</p>
+<p>$$
+z_0 = \dfrac{\sum m_i z_i}{\sum m_i}
+$$</p>
+<p>For an arbitrary solid, it’s almost sum same:
+$$
+x_0 = \dfrac{\iiint_E \rho(x, y, z) \cdot x\ dV}{\iiint_E \rho(x, y, z)\ dV}
+$$</p>
+<p>$$
+y_0 = \dfrac{\iiint_E \rho(x, y, z) \cdot y\ dV}{\iiint_E \rho(x, y, z)\ dV}
+$$</p>
+<p>$$
+z_0 = \dfrac{\iiint_E \rho(x, y, z) \cdot z\ dV}{\iiint_E \rho(x, y, z)\ dV}
+$$</p>
+<p>Again, the proof is the exact same as the previous one.</p>
+<h3 id="example-3">Example</h3>
+<blockquote>
+<p>A rectangular solid of width 2, length 10 and height 2 has the density function, $\rho(x, y, z) = y^3$, where $x, y, z$ are counted from the lower left farthest corner.
+Now the solid is place on a table, such that 2/3 of its length, counting from the left, lies on the table.
+Does the rectangular solid fall of the table?</p>
+</blockquote>
+<p>So, we need to compute the center of mass of the solid. If we think logically about this, the only coordinate that matters is the $y$ coordinate.</p>
+<p>If $y_0 \leq \dfrac{2}{3} \cdot 10$ it stays, otherwise it falls from the table. So let’s compute $y_0$.</p>
+<p>$$
+y_0 = \dfrac{\iiint_E \rho(x, y, z) \cdot y\ dV}{m}
+$$</p>
+<p>$$
+y_0 = \dfrac{\iiint_E y^3 \cdot y\ dV}{m}
+$$</p>
+<p>$$
+y_0 = \dfrac{\iiint_E y^4 \ dV}{m}
+$$</p>
+<p>Since we have a rectangular box:
+$$
+y_0 = \dfrac{\int_0^2 \int_0^2 \int_0^{10} y^4\ dy\ dx\ dz}{m}
+$$</p>
+<p>$$
+y_0 = \dfrac{\int_0^2 \int_0^2 \dfrac{10^5}{5}\ dx\ dz}{m}
+$$</p>
+<p>$$
+y_0 = \dfrac{\int_0^2 \dfrac{10^5}{5} \cdot 2\ dz}{m}
+$$</p>
+<p>$$
+y_0 = \dfrac{\dfrac{10^5}{5} \cdot 2 \cdot 2}{m}
+$$</p>
+<p>Now let’s compute $m$:
+$$
+m = \iiint_E \rho(x, y, z)\ dV
+$$</p>
+<p>$$
+m = \iiint_E y^3\ dV
+$$</p>
+<p>$$
+m = \int_0^2 \int_0^2 \int_0^{10} y^3\ dy\ dx\ dz
+$$</p>
+<p>$$
+m = \int_0^2 \int_0^2 \dfrac{10^4}{4}dx\ dz
+$$</p>
+<p>$$
+m = \int_0^2 \dfrac{10^4}{4} \cdot 2\ dz
+$$</p>
+<p>$$
+m = \dfrac{10^4}{4} \cdot 2 \cdot 2
+$$</p>
+<p>$$
+y_0 = \dfrac{\dfrac{10^5}{5} \cdot 2 \cdot 2}{\dfrac{10^4}{4} \cdot 2 \cdot 2} = \ldots = \boxed{8}
+$$</p>  </div> <nav class="flex flex-col sm:flex-row justify-between mt-8 pt-4 border-t border-border" data-astro-cid-v5ro3oot>   </nav> </article>  </main> </div> </body></html> 

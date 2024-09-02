@@ -1,0 +1,254 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="Astro v4.11.5"><link rel="icon" type="image" href="/favicon.ico"><title>Part 5 - Directional derivatives</title><!-- KaTeX support --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script><!-- inline KaTeX --><link rel="stylesheet" href="/_astro/index.CwgzIfsj.css">
+<link rel="stylesheet" href="/_astro/_slug_.hCvEQTvV.css">
+<style>article[data-astro-cid-v5ro3oot]{max-width:80ch;margin:0 auto}.nav-button[data-astro-cid-v5ro3oot]{display:flex;align-items:center;padding:.5rem;border-radius:.5rem;transition:background-color .3s ease;text-decoration:none;color:var(--text-color);background-color:var(--bg-color);border:1px solid var(--border-color)}.nav-button[data-astro-cid-v5ro3oot]:hover{background-color:var(--hover-color)}.nav-button[data-astro-cid-v5ro3oot] .arrow[data-astro-cid-v5ro3oot]{font-size:1.5rem;line-height:1}.nav-button[data-astro-cid-v5ro3oot] .text[data-astro-cid-v5ro3oot]{display:flex;flex-direction:column;margin:0 .5rem}.nav-button[data-astro-cid-v5ro3oot] .label[data-astro-cid-v5ro3oot]{font-size:.8rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted-color)}.nav-button[data-astro-cid-v5ro3oot] .title[data-astro-cid-v5ro3oot]{font-weight:500}.prev-button[data-astro-cid-v5ro3oot]{justify-content:flex-start}.next-button[data-astro-cid-v5ro3oot]{justify-content:flex-end;text-align:right}@media (max-width: 640px){.nav-button[data-astro-cid-v5ro3oot]{width:100%}.next-button[data-astro-cid-v5ro3oot]{justify-content:flex-start;text-align:left}.next-button[data-astro-cid-v5ro3oot] .text[data-astro-cid-v5ro3oot]{order:2;margin-left:.5rem}.next-button[data-astro-cid-v5ro3oot] .arrow[data-astro-cid-v5ro3oot]{order:1}}
+</style><script type="module">document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]})});
+</script></head> <body> <div class="container mx-auto px-4 flex flex-col md:flex-row min-h-screen"> <aside class="w-full md:w-64 border-b md:border-r md:border-b-0 border-[var(--border-color)] border-dashed pt-8"> <header class="flex flex-col h-full"> <div class="flex items-center mb-4"> <script>
+  function setTheme(mode) {
+    localStorage.setItem("theme-storage", mode);
+    document.documentElement.setAttribute('data-theme', mode);
+  }
+  function toggleTheme() {
+    const currentTheme = localStorage.getItem("theme-storage") || "light";
+    const newTheme = currentTheme === "light" ? "dark" : "light";
+    setTheme(newTheme);
+  }
+  const savedTheme = localStorage.getItem("theme-storage") || "light";
+  setTheme(savedTheme);
+  window.toggleTheme = toggleTheme;
+</script> <button id="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme" class="w-6 h-6 cursor-pointer"> <div class="w-5 h-5 border-2 border-primary rounded-full transition-colors duration-300 ease-in-out hover:bg-primary"></div> </button> <a href="/" class="text-2xl font-semibold ml-3 h-10 pr-3">rezvan.xyz</a> </div> <nav class="flex flex-wrap gap-2 md:flex-col md:gap-2"> <a href="/principles" class="transition-colors">
+[principles]
+</a><a href="/cv" class="transition-colors">
+[cv]
+</a><a href="/posts" class="transition-colors">
+[posts]
+</a><a href="/chalmers" class="transition-colors">
+[chalmers]
+</a><a href="/cityu" class="transition-colors">
+[cityu]
+</a> </nav> </header> </aside> <main class="flex-grow px-4 md:px-8 py-8 overflow-y-auto">  <article class="prose prose-sm sm:prose lg:prose-lg xl:prose-xl max-w-none" data-astro-cid-v5ro3oot> <h1 class="text-3xl sm:text-4xl font-bold mb-4" data-astro-cid-v5ro3oot>Part 5 - Directional derivatives</h1> <p class="text-sm text-muted-foreground mb-4" data-astro-cid-v5ro3oot>
+Date: 9/6/2023 </p> <div class="markdown-content" data-astro-cid-v5ro3oot>  <h3 id="introduction">Introduction</h3>
+<p>In this part we’ll cover directional derivatives and the gradient vector.</p>
+<h3 id="directional-derivatives">Directional derivatives</h3>
+<p>To understand this part, we’ll first need to recall vectors from linear algebra. <strong>Warning</strong>: In this series we’ll use notation that is not that common.</p>
+<h4 id="vectors">Vectors</h4>
+<p>We all know that vectors have a direction and a magnitude (or length), from physics and linear algebra. Let’s just quickly define these:
+$$
+\vec{a} = \langle a, b \rangle
+$$</p>
+<p>$$
+a = x_2 - x_1 \newline
+b = y_2 - y_1
+$$</p>
+<p>Length of $\vec{a}$:
+$$
+|\vec{a}| = \sqrt{a^2 + b^2}
+$$</p>
+<p>Important note, we call a vector a <strong>unit</strong> vector if it has the length one, meaning:
+$$
+|\vec{a}| = \sqrt{a^2 + b^2} = 1
+$$</p>
+<p>We will also use the dot product (also called scalar product) which is the operation denoted with $\cdot$
+$$
+\vec{a} =  \langle a_1, a_2, a_3 \rangle \newline
+\vec{b} = \langle b_1, b_2, b_3 \rangle \newline
+\vec{a} \cdot \vec{b} = a_1b_1 + a_2b_2 + a_3b_3
+$$</p>
+<p>We can also geometrically define the dot product with:
+$$
+\vec{a} \cdot \vec{b} = |\vec{a}| |\vec{b}| cos(\alpha)
+$$</p>
+<p>Where $\alpha$ is the angle between the vectors.</p>
+<p>Let’s quickly also recall the standard basis vectors:
+$$
+\vec{i} = \langle 1, 0, 0 \rangle \newline
+\vec{j} = \langle 0, 1, 0 \rangle \newline
+\vec{k} = \langle 0, 0, 1 \rangle
+$$</p>
+<p>Okay that’s all the linear algebra that we need. Let’s look at the definition of partial derivatives:
+$$
+f_x(x_0, y_0) = \lim_{h \to 0} \dfrac{f(x_0 + h, y_0) - f(x_0, y_0)}{h}
+$$</p>
+<p>For $y$:
+$$
+f_y(x_0, y_0) = \lim_{h \to 0} \dfrac{f(x_0, y_0 + h) - f(x_0, y_0)}{h}
+$$</p>
+<p>As we defined, we can interpret this as:</p>
+<blockquote>
+<p>Rate of change of, $f$, in the $\vec{i}/\vec{j}$ direction - near the point $(x_0, y_0)$.</p>
+</blockquote>
+<p>Therefore, we can ask the question. What is the rate of change of, $f$, in any arbitrary direction?</p>
+<p>Which we’ll now define.</p>
+<h3 id="definition-of-directional-derivatives">Definition of directional derivatives</h3>
+<p>The directional derivative of a function, $f$, of two variables, at point $(x_0, y_0)$ in the direction of a <strong>unit</strong> vector, $\vec{u}$.
+$$
+\vec{u} \langle a, b \rangle
+$$</p>
+<p>We denoted the directional derivative with a $D_{\vec{u}} f$.
+$$
+D_{\vec{u}} f(x_0, y_0) = \lim_{h \to 0} \dfrac{f(x_0 + ha, y_0 + hb) - f(x_0, y_0)}{h}
+$$</p>
+<h4 id="reminder">Reminder</h4>
+<p>Since the definition is a limit, this limit may not exist, the directional derivative may not exist in a certain direction.</p>
+<p>This also means that $f_x$ and $f_y$ are special cases for directional derivatives:
+$$
+D_{\vec{i}} f(x_0, y_0) = \lim_{h \to 0} \dfrac{f(x_0 + ha, y_0 + hb) - f(x_0, y_0)}{h} = f_x
+$$</p>
+<p>$$
+D_{\vec{j}} f(x_0, y_0) = \lim_{h \to 0} \dfrac{f(x_0 + ha, y_0 + hb) - f(x_0, y_0)}{h} = f_y
+$$</p>
+<h3 id="how-to-compute-the-directional-derivative">How to compute the directional derivative</h3>
+<p>How do we efficiently compute the directional derivate? We can use the limit definition, but this is tedious.</p>
+<p>Let’s denote $f(x_0 + ha, y_0 + hb)$ with $g(h)$. This means $g(0) = f(x_0, y_0)$.</p>
+<p>Which means we can write the equation as:
+$$
+D_{\vec{u}} f(x_0, y_0) = \lim_{h \to 0} \dfrac{g(h) - g(0)}{h}
+$$</p>
+<p>Which is just:
+$$
+D_{\vec{u}} f(x_0, y_0) = \lim_{h \to 0} \dfrac{g(h) - g(0)}{h} = g’(0)
+$$</p>
+<p>Let us call $x = x_0 + ha$ and $y = y_0 + hb$. By the chain rule this means!
+$$
+\dfrac{dg}{dh} = \dfrac{\partial f}{\partial x} \dfrac{dx}{dh} + \dfrac{\partial f}{\partial y} \dfrac{dy}{dh}
+$$</p>
+<p>Which is just:
+$$
+\dfrac{dg}{dh} = f_x a + f_y b
+$$</p>
+<p>Which means:
+$$
+g’(0) = f_x(x_0, y_0) a + f_y(x_0, y_0) b
+$$</p>
+<p>$$
+D_{\vec{u}} f = f_x a + f_y b
+$$</p>
+<p>Let’s rewrite this properly.</p>
+<h3 id="computation-of-directional-derivate">Computation of directional derivate</h3>
+<p>Let, $f$, be a differentiable function of two variables. The directional derivate in the direction of unit vector, $\vec{u} = \langle a, b \rangle$ is:
+$$
+\boxed{D_{\vec{u}} f = f_x a + f_y b}
+$$</p>
+<p>We can also express this as:
+$$
+D_{\vec{u}} f = \langle f_x, f_y \rangle \cdot \langle a, b \rangle
+$$</p>
+<p>This vector has a special name, it’s called the <em>gradient</em> and is denoted by nabla symbol, $\nabla$.</p>
+<h3 id="definition-of-gradient">Definition of gradient</h3>
+<p>The gradient of, $f$, is the vector-function:
+$$
+\nabla f = \langle f_x, f_y \rangle
+$$</p>
+<p>Therefore, we usually write:
+$$
+\boxed{D_{\vec{u}} f = \nabla f \cdot \vec{u}}
+$$</p>
+<p>Let’s try an example now</p>
+<h4 id="example">Example</h4>
+<p>Find the directional derivate of the function $f(x, y) = x^2y^3 - 4y$ at $(2, -1)$ in the direction:
+$$
+a)\ \vec{v} = \langle \dfrac{1}{\sqrt{2}}, \dfrac{1}{\sqrt{2}} \rangle
+$$</p>
+<p>$$
+b)\ \vec{v} = 2\vec{i} + 5\vec{j}
+$$</p>
+<p>Solution:
+$$
+a) D_{\vec{v}} f = \nabla f \cdot \vec{v}
+$$</p>
+<p>Let’s first compute the gradient:
+$$
+\nabla f = \langle f_x, f_y \rangle = \langle 2xy^3, 3x^2y^2 - 4 \rangle
+$$</p>
+<p>At point $(2, -1)$:
+$$
+\nabla f(2, -1) = \langle -4, 8 \rangle
+$$</p>
+<p>Now we need to check if our vector is a unit vector:
+$$
+|\vec{v}| = \sqrt{\left( \dfrac{1}{\sqrt{2}}\right)^2 + \left(\dfrac{1}{\sqrt{2}}\right)^2} = 1 \ | \ \text{unit vector}
+$$</p>
+<p>$$
+\begin{align*}
+D_{\vec{v}} f(2, -1) &#x26; = \langle -4, 8 \rangle \cdot \langle \dfrac{1}{\sqrt{2}}, \dfrac{1}{\sqrt{2}} \rangle \newline
+&#x26; = \dfrac{-4}{\sqrt{2}} + \dfrac{8}{\sqrt{2}} \newline
+&#x26; = \boxed{\dfrac{4}{\sqrt{2}}}
+\end{align*}
+$$</p>
+<p>For b):
+$$
+\vec{v} = 2\vec{i} + 5\vec{j} = \ldots = \langle 2, 5 \rangle
+$$</p>
+<p>Let’s check if this is a unit vector:
+$$
+|\vec{v}| = \sqrt{2^2 + 5^2} = \sqrt{29} \neq 1
+$$</p>
+<p>This means we need to normalize:
+$$
+\vec{u} = \dfrac{\vec{v}}{|\vec{v}|} = \langle \dfrac{2}{\sqrt{29}}, \dfrac{5}{\sqrt{29}} \rangle
+$$</p>
+<p>$$
+\begin{align*}
+D_{\vec{u}} f(2, -1) &#x26; = \langle -4, 8 \rangle \cdot \langle \dfrac{2}{\sqrt{29}}, \dfrac{5}{\sqrt{29}} \rangle \newline
+&#x26; = \dfrac{-8}{\sqrt{29}} + \dfrac{40}{\sqrt{29}} \newline
+&#x26; = \boxed{\dfrac{38}{\sqrt{29}}}
+\end{align*}
+$$</p>
+<p>Let’s take one more example:</p>
+<h4 id="example-1">Example</h4>
+<p>Find the rate of change of the function, $f(x, y) = xy^2 + x$ at the point $P(2, 0)$ in the direction from $P$ to $Q\left(\dfrac{1}{2}, 2\right)$</p>
+<p>The direction vector is:
+$$
+\vec{v} = \langle \dfrac{1}{2} - 2, 2 - 0 \rangle = \langle -\dfrac{3}{2}, 2 \rangle
+$$</p>
+<p>$$
+\nabla f = \langle f_x, f_y \rangle = \langle  y^2 + 1, 2xy \rangle
+$$</p>
+<p>$$
+\nabla f(2, 0) = \langle 1, 0 \rangle
+$$</p>
+<p>$$
+|\vec{v}| = \sqrt{\left(-\dfrac{3}{2}\right)^2 + 2^2} = \ldots = \dfrac{5}{2}
+$$</p>
+<p>We need to normalize:
+$$
+\vec{u} = \dfrac{\vec{v}}{|\vec{v}|} = \langle -\dfrac{3}{5}, \dfrac{4}{5} \rangle
+$$</p>
+<p>$$
+D_{\vec{u}} f(2, 0) = \langle 1, 0 \rangle \cdot \langle -\dfrac{3}{5}, \dfrac{4}{5} \rangle = -\dfrac{3}{5} + 0 = \boxed{-\dfrac{3}{5}}
+$$</p>
+<h3 id="maximum-rate-of-change">Maximum rate of change</h3>
+<p>If we ask ourselves the question, in what direction is $D_{\vec{u}} f(x_0, y_0)$ the largest?</p>
+<p>If we look at the definition:
+$$
+D_{\vec{u}} f(x_0, y_0) = \nabla f(x_0, y_0) \cdot \vec{u}
+$$</p>
+<p>If we use the geometrical definition:
+$$
+D_{\vec{u}} f(x_0, y_0) = |\nabla f(x_0, y_0)| |\vec{u}| cos(\alpha)
+$$</p>
+<p>This expression is the largest when $cos(\alpha) = 1$, which means $\alpha = 0$. In other words, the directional derivative is the largest when $\vec{u}$ is the same direction as $\nabla f(x_0, y_0)$.</p>
+<h3 id="geometrical-interpretition">Geometrical interpretition</h3>
+<p>Suppose we have a graph like a mountain, where $(x_0, y_0, f(x_0, y_0)$ is our position. The fastest way to get to the top of the mountain is going in the direction of the gradient.</p>
+<p>To go down the mountain, in the fastest way possible, we go in the direction of $-\nabla f$.</p>
+<h4 id="example-2">Example</h4>
+<p>Given $f(x, y) = xe^y$ and $P(2, 0)$.</p>
+<p>a) In what direction is the rate of change the largest?</p>
+<p>b) What is the maximum rate of change?</p>
+<p>a):</p>
+<p>In the direction of the gradient at the point:
+$$
+\nabla f(2, 0) = \langle f_x(2, 0), f_y(2, 0) \rangle \newline
+\nabla f(2, 0) = \langle e^0, 2e^0 \rangle = \langle 1, 2 \rangle
+$$</p>
+<p>b):
+$$
+|\nabla f(2, 0)| = \sqrt{1^2 + 2^2} = \boxed{\sqrt{5}}
+$$</p>
+<h3 id="gradient-and-level-curves">Gradient and level curves</h3>
+<p>Recall that level curves are curves with the equation:
+$$
+f(x, y) = k
+$$</p>
+<p>Where $k$ is just any constant. For each point $(x_0, y_0)$, $\nabla f(x_0, y_0)$ is orthogonal to the level curve that contains $(x_0, y_0)$</p>
+<h4 id="explanation">Explanation</h4>
+<p>We already know that the shortest way up the mountain is to go in the direction of the gradient. On the other hand, the shortest way is to go from level curve to level curve as fast as possible. But shortest way between two lines is the perpendicular way!</p>  </div> <nav class="flex flex-col sm:flex-row justify-between mt-8 pt-4 border-t border-border" data-astro-cid-v5ro3oot>   </nav> </article>  </main> </div> </body></html> 

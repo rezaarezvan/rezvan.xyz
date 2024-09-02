@@ -1,0 +1,304 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="Astro v4.11.5"><link rel="icon" type="image" href="/favicon.ico"><title>Part 7 - Bode plot</title><!-- KaTeX support --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script><!-- inline KaTeX --><link rel="stylesheet" href="/_astro/index.CwgzIfsj.css">
+<link rel="stylesheet" href="/_astro/_slug_.hCvEQTvV.css">
+<style>article[data-astro-cid-v5ro3oot]{max-width:80ch;margin:0 auto}.nav-button[data-astro-cid-v5ro3oot]{display:flex;align-items:center;padding:.5rem;border-radius:.5rem;transition:background-color .3s ease;text-decoration:none;color:var(--text-color);background-color:var(--bg-color);border:1px solid var(--border-color)}.nav-button[data-astro-cid-v5ro3oot]:hover{background-color:var(--hover-color)}.nav-button[data-astro-cid-v5ro3oot] .arrow[data-astro-cid-v5ro3oot]{font-size:1.5rem;line-height:1}.nav-button[data-astro-cid-v5ro3oot] .text[data-astro-cid-v5ro3oot]{display:flex;flex-direction:column;margin:0 .5rem}.nav-button[data-astro-cid-v5ro3oot] .label[data-astro-cid-v5ro3oot]{font-size:.8rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted-color)}.nav-button[data-astro-cid-v5ro3oot] .title[data-astro-cid-v5ro3oot]{font-weight:500}.prev-button[data-astro-cid-v5ro3oot]{justify-content:flex-start}.next-button[data-astro-cid-v5ro3oot]{justify-content:flex-end;text-align:right}@media (max-width: 640px){.nav-button[data-astro-cid-v5ro3oot]{width:100%}.next-button[data-astro-cid-v5ro3oot]{justify-content:flex-start;text-align:left}.next-button[data-astro-cid-v5ro3oot] .text[data-astro-cid-v5ro3oot]{order:2;margin-left:.5rem}.next-button[data-astro-cid-v5ro3oot] .arrow[data-astro-cid-v5ro3oot]{order:1}}
+</style><script type="module">document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]})});
+</script></head> <body> <div class="container mx-auto px-4 flex flex-col md:flex-row min-h-screen"> <aside class="w-full md:w-64 border-b md:border-r md:border-b-0 border-[var(--border-color)] border-dashed pt-8"> <header class="flex flex-col h-full"> <div class="flex items-center mb-4"> <script>
+  function setTheme(mode) {
+    localStorage.setItem("theme-storage", mode);
+    document.documentElement.setAttribute('data-theme', mode);
+  }
+  function toggleTheme() {
+    const currentTheme = localStorage.getItem("theme-storage") || "light";
+    const newTheme = currentTheme === "light" ? "dark" : "light";
+    setTheme(newTheme);
+  }
+  const savedTheme = localStorage.getItem("theme-storage") || "light";
+  setTheme(savedTheme);
+  window.toggleTheme = toggleTheme;
+</script> <button id="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme" class="w-6 h-6 cursor-pointer"> <div class="w-5 h-5 border-2 border-primary rounded-full transition-colors duration-300 ease-in-out hover:bg-primary"></div> </button> <a href="/" class="text-2xl font-semibold ml-3 h-10 pr-3">rezvan.xyz</a> </div> <nav class="flex flex-wrap gap-2 md:flex-col md:gap-2"> <a href="/principles" class="transition-colors">
+[principles]
+</a><a href="/cv" class="transition-colors">
+[cv]
+</a><a href="/posts" class="transition-colors">
+[posts]
+</a><a href="/chalmers" class="transition-colors">
+[chalmers]
+</a><a href="/cityu" class="transition-colors">
+[cityu]
+</a> </nav> </header> </aside> <main class="flex-grow px-4 md:px-8 py-8 overflow-y-auto">  <article class="prose prose-sm sm:prose lg:prose-lg xl:prose-xl max-w-none" data-astro-cid-v5ro3oot> <h1 class="text-3xl sm:text-4xl font-bold mb-4" data-astro-cid-v5ro3oot>Part 7 - Bode plot</h1> <p class="text-sm text-muted-foreground mb-4" data-astro-cid-v5ro3oot>
+Date: 11/13/2023 </p> <div class="markdown-content" data-astro-cid-v5ro3oot>  <h3 id="introduction">Introduction</h3>
+<p>In this part we’ll begin with the part about frequency analysis.</p>
+<h3 id="test-functions">Test functions</h3>
+<p>Often when we want to test our system to determine the overall stability, time it takes and the response we get.</p>
+<p>We often test with our unit step function:
+$$
+\sigma(t) =
+\begin{cases}
+1 &#x26; t \leq 0 \newline
+0 &#x26; t &#x3C; 0
+\end{cases}
+$$</p>
+<p>We call a system response to the unit step function for <em>unit step response</em>.</p>
+<p>Given a system of form:
+$$
+G(s) = \dfrac{K}{1 + Ts}
+$$</p>
+<p>We get a unit step response of $y(t) = K(1 - e^{-\dfrac{t}{\tau}})$.</p>
+<p>We also have our beloved impulse function, $\delta(t)$.</p>
+<p>$$
+\delta(t) = \lim_{\epsilon \to 0}
+\begin{cases}
+\dfrac{1}{\epsilon} &#x26; 0 \leq t \leq \epsilon \newline
+0 &#x26; t > \epsilon, t &#x3C; 0
+\end{cases}
+$$</p>
+<p>We also have the properties:
+$$
+\int_{-\infty}^{\infty} \delta(t)\ dt = 1
+$$</p>
+<p>$$
+\int_{-\infty}^{\infty} \delta(t - T) f(t)\ dt = f(T)
+$$</p>
+<p>$$
+\mathcal{L}\{\delta(t)\} = \int_0^{\infty} \delta(t) e^{-st} \ dt = e^{0t} = 1
+$$</p>
+<h3 id="delay-rate">Delay rate</h3>
+<p>We can “delay” a function using a unit step with a delay:
+$$
+\mathcal{L}\{y(t -T)\sigma(t - T)\} = e^{-Ts} \cdot \mathcal{L}\{y(t)\} = e^{-Ts}\ Y(s)
+$$</p>
+<h3 id="stable-systems">Stable systems</h3>
+<p>A system is stable if:
+$$
+\lim_{t \to \infty} \{\text{Impulse response}\} = 0
+$$</p>
+<h3 id="ramp-function">Ramp function</h3>
+<p>Another function that we’ll perform a lot of tests with is the ramp function. Which we define as:
+$$
+t\ \sigma(t)
+$$</p>
+<p>The Laplace transform of this is (using partial integration):
+$$
+\mathcal{L} \{t\ \sigma(t) \} = \dfrac{1}{s^2}
+$$</p>
+<h4 id="example">Example</h4>
+<p>Determine the long term error, when the insignal is a ramp function, $t\ \sigma(t)$.</p>
+<p>Given that:
+$$
+F(s) = \dfrac{s + 2}{s}
+$$</p>
+<p>$$
+G(s) = \dfrac{1}{s + 1}
+$$</p>
+<p>We know that:
+$$
+E(s) = R(s) - Y(s)
+$$</p>
+<p>$$
+Y(s) = \dfrac{L(s)}{1 + L(s)} \cdot R(s)
+$$</p>
+<p>$$
+L(s) = F(s)G(s) = \dfrac{s + 2}{s(s + 1)}
+$$</p>
+<p>So:
+$$
+\begin{align*}
+E(s) &#x26; = R(s) - \dfrac{L(s)}{1 + L(s)} \cdot R(s) \newline
+&#x26; = R(s) \left(1 - \dfrac{L(s)}{1 + L(s)} \right) \newline
+&#x26; = R(s) \left(\dfrac{1}{1 + L(s)} \right) \newline
+&#x26; = \dfrac{1}{s^2} \left(\frac{1}{1 + \frac{s + 2}{s(s + 1)}} \right) \newline
+&#x26; = \dfrac{1}{s^2} \left(\frac{s(s + 1)}{s(s + 1) + s + 2} \right) \newline
+&#x26; = \dfrac{1}{s^2} \left(\frac{s(s + 1)}{s^2 + 2s + 2} \right) \newline
+&#x26; = \frac{(s + 1)}{s(s^2 + 2s + 2)} \newline
+\end{align*}
+$$</p>
+<p>Using the final value theorem:
+$$
+\lim_{t \to \infty} e(t) = \lim_{s \to 0} s \cdot E(s) \newline
+e(\infty) = \lim_{s \to 0} s \cdot \frac{(s + 1)}{s(s^2 + 2s + 2)} \newline
+e(\infty) = \lim_{s \to 0} \frac{(s + 1)}{(s^2 + 2s + 2)} \newline
+e(\infty) = \boxed{\dfrac{1}{2}}
+$$</p>
+<h3 id="frequency-analysis">Frequency analysis</h3>
+<p>The frequency function, $G(j\omega)$ for a system is given by:
+$$
+G(j\omega) = G(s) \biggr\rvert_{s = j \omega}
+$$</p>
+<p>The polar form of this function will be written as:
+$$
+G(j\omega) = |G(j\omega)| \cdot e^{arg(G(j\omega))}
+$$</p>
+<h3 id="example-1">Example</h3>
+<p>Let $u(t) = A sin(\omega t + \phi)$ with the system, $G(s)$ what will our $y(t)$ be?</p>
+<p>$$
+y(t) = |G(j\omega)| \cdot A sin(\omega t + \phi + arg(G(j\omega)) (+ e^{-\lambda t})
+$$</p>
+<p>That last part is called the transient part and should in reality just be zero.</p>
+<h3 id="bode-plot">Bode plot</h3>
+<p>Bode plots are plots that show the system magnitude and phase shift in a system.</p>
+<p>Usually the magnitude can/will be in decibels.</p>
+<h4 id="example-2">Example</h4>
+<p><img src="/images/school/bode.png#center" alt=""></p>
+<p>Where the $y$-axis is either the phase ($arg(G(j\omega))$) or the magnitude ($|G(j \omega)|$).</p>
+<p>Remember that decibels are just:
+$$
+dB = 20 log(|G(j\omega)|)
+$$</p>
+<h3 id="example-3">Example</h3>
+<p>Given:
+$$
+G(s) = \dfrac{1}{s(s + 2)}
+$$</p>
+<p>This means that:
+$$
+G(j\omega) = \dfrac{1}{j\omega(j\omega + 2)}
+$$</p>
+<p>The magnitude is:
+$$
+|G(j\omega)| = \dfrac{1}{\omega \sqrt{\omega^2 + 2^2}} = \dfrac{1}{\omega \sqrt{4 + \omega^2}}
+$$</p>
+<p>The phase is:
+$$
+\begin{align*}
+arg(G(j\omega)) &#x26; = arg\left( \dfrac{1}{j\omega(j\omega + 2)} \right) \newline
+&#x26; = \dfrac{arg(1)}{arg(j\omega(j\omega + 2))} \newline
+&#x26; = arg(1) - arg(j\omega(j\omega + 2)) \newline
+&#x26; = arg(1) - (arg(j\omega) + arg(j\omega + 2)) \newline
+&#x26; = 0^\circ - \left(90^\circ + \arctan{\left(\dfrac{\omega}{2}\right)}\right) \newline
+&#x26; = -90^\circ - \arctan{\left(\dfrac{\omega}{2}\right)}
+\end{align*}
+$$</p>
+<p>If we now plot these:
+<img src="/images/school/bode2.png#center" alt=""></p>
+<h3 id="type-of-factors">Type of factors</h3>
+<p>In our systems we’ll deal/want these type of factors:
+$$
+s, 1 + \dfrac{s}{\omega_1}, e^{-Ts}, s^2 + 2 \zeta \omega_n s + \omega_n^2
+$$</p>
+<p>Also, good to remember, if $\zeta > 1$, then we can split up this second-order term into first-order term(s).</p>
+<p>Let’s do the bode plot for each term.</p>
+<p>$$
+G(s) = s
+$$</p>
+<p>$$
+G(j\omega) = j\omega
+$$</p>
+<p>$$
+|G(j\omega)| = \omega
+$$</p>
+<p>$$
+arg(G(j\omega)) = 90^\circ
+$$</p>
+<p>Plotting this:
+<img src="/images/school/bode3.png#center" alt=""></p>
+<p>Simple!</p>
+<p>Now, for $\dfrac{1}{s}$
+$$
+G(s) = \dfrac{1}{s}
+$$</p>
+<p>$$
+G(j\omega) = \dfrac{1}{j\omega}
+$$</p>
+<p>$$
+|G(j\omega)| = \dfrac{1}{\omega}
+$$</p>
+<p>$$
+arg(G(j\omega)) = -90^\circ
+$$</p>
+<p>Plotting this:
+<img src="/images/school/bode4.png#center" alt=""></p>
+<p>Now for $1 + \dfrac{s}{\omega_1}$
+$$
+G(s) = 1 + \dfrac{s}{\omega_1}
+$$</p>
+<p>$$
+G(j\omega) = 1 + \dfrac{j\omega}{\omega_1}
+$$</p>
+<p>For this we’ll need to understand some cases.</p>
+<p>Case $\omega \ll \omega_1$:
+$$
+G(j\omega) \approx 1
+$$</p>
+<p>$$
+|G(j\omega)| = 1
+$$</p>
+<p>$$
+arg(G(j\omega)) = 0^\circ
+$$</p>
+<p>Case $\omega = \omega_1$:
+$$
+G(j\omega) =  1 + j
+$$</p>
+<p>$$
+|G(j\omega)| = \sqrt{1^2 + 1^2} = \sqrt{2}
+$$</p>
+<p>$$
+arg(G(j\omega)) = 45^\circ
+$$</p>
+<p>Case $\omega \gg \omega_1$:
+$$
+G(j\omega) \approx j \dfrac{\omega}{\omega_1}
+$$</p>
+<p>$$
+|G(j\omega)| = \dfrac{\omega}{\omega_1}
+$$</p>
+<p>$$
+arg(G(j\omega)) = 90^\circ
+$$</p>
+<p>Plotting for $\omega_1 = 2$:
+<img src="/images/school/bode5.png#center" alt=""></p>
+<p>This is what we’ll call for low and high frequency asymptotes.</p>
+<p>Last factor before an example
+$$
+G(s) = \dfrac{1}{1 + \dfrac{s}{\omega_1}}
+$$</p>
+<p>$$
+G(j\omega) = \dfrac{1}{1 + \dfrac{j\omega}{\omega_1}}
+$$</p>
+<p>Case $\omega \ll \omega_1$:
+$$
+G(j\omega) \approx 1
+$$</p>
+<p>$$
+|G(j\omega)| = 1
+$$</p>
+<p>$$
+arg(G(j\omega)) = 0^\circ
+$$</p>
+<p>Case $\omega = \omega_1$:
+$$
+G(j\omega) =  \dfrac{1}{1 + j}
+$$</p>
+<p>$$
+|G(j\omega)| = \dfrac{1}{\sqrt{1^2 + 1^2}} = \dfrac{1}{\sqrt{2}}
+$$</p>
+<p>$$
+arg(G(j\omega)) = -45^\circ
+$$</p>
+<p>Case $\omega \gg \omega_1$:
+$$
+G(j\omega) \approx \dfrac{1}{j \dfrac{\omega}{\omega_1}}
+$$</p>
+<p>$$
+|G(j\omega)| = \dfrac{1}{\dfrac{\omega}{\omega_1}} = \dfrac{\omega_1}{\omega}
+$$</p>
+<p>$$
+arg(G(j\omega)) = -90^\circ
+$$</p>
+<p><img src="/images/school/bode6.png#center" alt=""></p>
+<h3 id="standard-form">Standard form</h3>
+<p>We’ll usually want to rewrite our transfer functions into these standard factor forms.</p>
+<p>Let’s take an example to see why</p>
+<h4 id="example-4">Example</h4>
+<p>$$
+\begin{align*}
+G(s) &#x26; = \dfrac{3(1 + s)e^{-0.5s}}{s(s + 2)(s + 3)} \newline
+&#x26; = \dfrac{3(1 + s)e^{-0.5s}}{2s(1 + \frac{s}{2})(s + 3)} \newline
+&#x26; = \dfrac{3(1 + s)e^{-0.5s}}{6s(1 + \frac{s}{2})(1 + \frac{s}{3})} \newline
+&#x26; = \boxed{\dfrac{0.5(1 + s)e^{-0.5s}}{s(1 + \frac{s}{2})(1 + \frac{s}{3})}}
+\end{align*}
+$$</p>
+<p>This is now in standard form.
+$$
+G(j\omega) = \boxed{\dfrac{0.5(1 + j\omega)e^{-0.5j\omega}}{j\omega(1 + \frac{j\omega}{2})(1 + \frac{j\omega}{3})}}
+$$</p>  </div> <nav class="flex flex-col sm:flex-row justify-between mt-8 pt-4 border-t border-border" data-astro-cid-v5ro3oot>   </nav> </article>  </main> </div> </body></html> 

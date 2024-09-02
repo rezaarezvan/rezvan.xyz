@@ -1,0 +1,567 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="Astro v4.11.5"><link rel="icon" type="image" href="/favicon.ico"><title>Part 4 - Synchronization problems (1)</title><!-- KaTeX support --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script><!-- inline KaTeX --><link rel="stylesheet" href="/_astro/index.CwgzIfsj.css">
+<link rel="stylesheet" href="/_astro/_slug_.hCvEQTvV.css">
+<style>article[data-astro-cid-v5ro3oot]{max-width:80ch;margin:0 auto}.nav-button[data-astro-cid-v5ro3oot]{display:flex;align-items:center;padding:.5rem;border-radius:.5rem;transition:background-color .3s ease;text-decoration:none;color:var(--text-color);background-color:var(--bg-color);border:1px solid var(--border-color)}.nav-button[data-astro-cid-v5ro3oot]:hover{background-color:var(--hover-color)}.nav-button[data-astro-cid-v5ro3oot] .arrow[data-astro-cid-v5ro3oot]{font-size:1.5rem;line-height:1}.nav-button[data-astro-cid-v5ro3oot] .text[data-astro-cid-v5ro3oot]{display:flex;flex-direction:column;margin:0 .5rem}.nav-button[data-astro-cid-v5ro3oot] .label[data-astro-cid-v5ro3oot]{font-size:.8rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted-color)}.nav-button[data-astro-cid-v5ro3oot] .title[data-astro-cid-v5ro3oot]{font-weight:500}.prev-button[data-astro-cid-v5ro3oot]{justify-content:flex-start}.next-button[data-astro-cid-v5ro3oot]{justify-content:flex-end;text-align:right}@media (max-width: 640px){.nav-button[data-astro-cid-v5ro3oot]{width:100%}.next-button[data-astro-cid-v5ro3oot]{justify-content:flex-start;text-align:left}.next-button[data-astro-cid-v5ro3oot] .text[data-astro-cid-v5ro3oot]{order:2;margin-left:.5rem}.next-button[data-astro-cid-v5ro3oot] .arrow[data-astro-cid-v5ro3oot]{order:1}}
+</style><script type="module">document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]})});
+</script></head> <body> <div class="container mx-auto px-4 flex flex-col md:flex-row min-h-screen"> <aside class="w-full md:w-64 border-b md:border-r md:border-b-0 border-[var(--border-color)] border-dashed pt-8"> <header class="flex flex-col h-full"> <div class="flex items-center mb-4"> <script>
+  function setTheme(mode) {
+    localStorage.setItem("theme-storage", mode);
+    document.documentElement.setAttribute('data-theme', mode);
+  }
+  function toggleTheme() {
+    const currentTheme = localStorage.getItem("theme-storage") || "light";
+    const newTheme = currentTheme === "light" ? "dark" : "light";
+    setTheme(newTheme);
+  }
+  const savedTheme = localStorage.getItem("theme-storage") || "light";
+  setTheme(savedTheme);
+  window.toggleTheme = toggleTheme;
+</script> <button id="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme" class="w-6 h-6 cursor-pointer"> <div class="w-5 h-5 border-2 border-primary rounded-full transition-colors duration-300 ease-in-out hover:bg-primary"></div> </button> <a href="/" class="text-2xl font-semibold ml-3 h-10 pr-3">rezvan.xyz</a> </div> <nav class="flex flex-wrap gap-2 md:flex-col md:gap-2"> <a href="/principles" class="transition-colors">
+[principles]
+</a><a href="/cv" class="transition-colors">
+[cv]
+</a><a href="/posts" class="transition-colors">
+[posts]
+</a><a href="/chalmers" class="transition-colors">
+[chalmers]
+</a><a href="/cityu" class="transition-colors">
+[cityu]
+</a> </nav> </header> </aside> <main class="flex-grow px-4 md:px-8 py-8 overflow-y-auto">  <article class="prose prose-sm sm:prose lg:prose-lg xl:prose-xl max-w-none" data-astro-cid-v5ro3oot> <h1 class="text-3xl sm:text-4xl font-bold mb-4" data-astro-cid-v5ro3oot>Part 4 - Synchronization problems (1)</h1> <p class="text-sm text-muted-foreground mb-4" data-astro-cid-v5ro3oot>
+Date: 2/1/2023 </p> <div class="markdown-content" data-astro-cid-v5ro3oot>  <p>In this part we’ll cover how to solve some classical synchronization problems using threads and semaphores.</p>
+<h3 id="dining-philosophers">Dining Philosophers</h3>
+<p>To refresh our memory on the problem let’s cover it again:</p>
+<p>The dining philosophers problem describes how to avoid deadlock (circular conditions).</p>
+<p>We have five philosophers (threads) sitting at a dining table. A fork is between each adjacent pair of philosophers.</p>
+<p>Each philosopher alternates between thinking (non-critical section) and eating (critical section).
+In order to eat, a philosopher needs to pick up both forks that lie to the right and left of the philosopher.</p>
+<p>Since the forks are shared, there is a synchronization problem.</p>
+<h4 id="solution">Solution</h4>
+<p>A good solution would allow:</p>
+<ul>
+<li>Having an arbitrary number of philosophers</li>
+</ul>
+<ul>
+<li>Deadlock freedom</li>
+</ul>
+<ul>
+<li>Starvation freedom</li>
+</ul>
+<ul>
+<li>Reasonable efficiency, it is possible to eat in parallel.</li>
+</ul>
+<p>Let’s create an interface for the table.</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>interface Table {</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    // Philosopher at idx picks up both forks</span></span>
+<span class="line"><span>    void getForks(int idx);</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    // Philosopher at idx lies down both forks</span></span>
+<span class="line"><span>    void putForks(int k);</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>Let’s also represent each philosopher</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>class Philosopher {</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    int idx;</span></span>
+<span class="line"><span>    Table table;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    void think() {</span></span>
+<span class="line"><span>        .</span></span>
+<span class="line"><span>        .</span></span>
+<span class="line"><span>        .</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    void eat() {</span></span>
+<span class="line"><span>        .</span></span>
+<span class="line"><span>        .</span></span>
+<span class="line"><span>        .</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    void run() {</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        while(true) {</span></span>
+<span class="line"><span>            think();</span></span>
+<span class="line"><span>            table.getForks();</span></span>
+<span class="line"><span>            eat();</span></span>
+<span class="line"><span>            table.putForks();</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>One possible solution is to number each fork and philosopher. That we can easily know what is right and left of each philosopher.</p>
+<p>For example:</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>public int left(int k) {</span></span>
+<span class="line"><span>    return k;</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>public int right(int k) {</span></span>
+<span class="line"><span>    return (k + 1) % N;</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>To ensure mutual exclusion of the forks we can use semaphores.</p>
+<p>We can even begin with using simple locks:</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>Lock[] forks = new Lock[N];</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>// To pick up fork i we do</span></span>
+<span class="line"><span>forks[i].lock();</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>// To put down fork i we do</span></span>
+<span class="line"><span>forks[i].unlock();</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>If we now implement a solution which makes all philosophers take up the left fork then the right fork.</p>
+<p>We have a potential for deadlock, since if everyone picks up their left fork first. We have a circular waiting condition.</p>
+<p>Instead, we implement a solution which ensures one philosopher picks up their right fork first, then left.
+By breaking the symmetry we break the deadlock.</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>public void getForks(int k) {</span></span>
+<span class="line"><span>    if (k == N) {</span></span>
+<span class="line"><span>        forks[right(k)].lock();</span></span>
+<span class="line"><span>        forks[left(k)].lock();</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    else {</span></span>
+<span class="line"><span>        forks[left(k)].lock();</span></span>
+<span class="line"><span>        forks[right(k)].lock();</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>Another strategy could be limiting the amount of philosophers that can sit at a table. If we pick <code>M &#x3C; N</code>, we also ensure deadlock freedom.</p>
+<p>We make each seat a semaphores like:</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>// M &#x3C; N</span></span>
+<span class="line"><span>Semaphore seats = new Semaphore(M);</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>public void getForks(int k) {</span></span>
+<span class="line"><span>    seats.down()</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    forks[left(k)].lock();</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    forks[right(k)].lock();</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>public void putForks(int k) {</span></span>
+<span class="line"><span>    forks[left(k)].lock();</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    forks[right(k)].lock();</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    seats.down()</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>One thing that might not be obvious at first glance is that these solutions also ensure starvation freedom.
+This is under the assumption that the locks/semaphores (and scheduling) are fair.</p>
+<h3 id="producer-consumer">Producer-Consumer</h3>
+<p>Producers and consumers exchange items through a so called shared (asynchronous) buffer.</p>
+<p>The producer (asynchronously) produces items and places them on the buffer. While the consumer (asynchronously) consumes (removes) the items from the buffer.</p>
+<p>So it’s clear that the buffer needs to be shared. Therefore, we need a buffer that:</p>
+<ul>
+<li>Producers and consumers access the buffer in <strong>mutual exclusion</strong></li>
+</ul>
+<ul>
+<li>Consumers are blocked when the buffer is empty (can’t consume emptiness)</li>
+</ul>
+<ul>
+<li>Producers are blocked when the buffer is full (can’t overproduce)</li>
+</ul>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>interface Buffer&#x3C;T> {</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    // Add item onto buffer; If full block</span></span>
+<span class="line"><span>    void put(T item);</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    // Extract item from buffer; If empty do nothing</span></span>
+<span class="line"><span>    T get();</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    // Get current number of items in buffer</span></span>
+<span class="line"><span>    int count();</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>Other properties that we would like:</p>
+<ul>
+<li>Support an arbitrary number of producers and consumers</li>
+</ul>
+<ul>
+<li>Deadlock freedom</li>
+</ul>
+<ul>
+<li>Starvation freedom</li>
+</ul>
+<h3 id="unbounded-shared-buffer">Unbounded shared buffer</h3>
+<p>One possible solution is using one lock and one semaphore:</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>public class UnboundedBuffer&#x3C;T> implements Buffer&#x3C;T> {</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    // Any collection (list, set, ...)</span></span>
+<span class="line"><span>    Collection storage = ...;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    // For exclusive access to buffer</span></span>
+<span class="line"><span>    Lock lock = new Lock();</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    // Number of items in buffer</span></span>
+<span class="line"><span>    Semaphore nItems = new Semaphore(0);</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    invariant {</span></span>
+<span class="line"><span>        storage.count() == nItems.count() +</span></span>
+<span class="line"><span>        at(nItems.up() in put,  lock.lock and T item = storage.remove() in get);</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    public void put(T item) {</span></span>
+<span class="line"><span>        // Lock to gain access to buffer</span></span>
+<span class="line"><span>        lock.lock();</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        /* Critical Section */</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        storage.add(item);</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        // update nItems</span></span>
+<span class="line"><span>        nItems.up();</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        /* End of Critical Section */</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        // Release access to buffer to others</span></span>
+<span class="line"><span>        lock.unlock();</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    public T get() {</span></span>
+<span class="line"><span>        // Wait until there is items on the buffer</span></span>
+<span class="line"><span>        nItems.down();</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        lock.lock();</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        /* Critical Section */</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        // Retrieve item</span></span>
+<span class="line"><span>        T item =storage.remove();</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        /* End of Critical Section */</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        lock.unlock();</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        return item;</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    public int count() {</span></span>
+<span class="line"><span>        return nItems.count();</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>This solution ensures that all requirements are met. There are some LOC that you can swap around.</p>
+<p>But this will do. We can write a solution that is a so-called, bounded shared buffer, that uses two semaphores.</p>
+<p>One for keeping track of how many items there are in buffer. The other to know how many slots are <strong>left</strong>.</p>
+<p>It’s essentially the same code.</p>
+<h3 id="barriers">Barriers</h3>
+<p>A barrier in a concurrent program, is a form of synchronization where there is a point in a program’s execution,
+where all threads in a group, need to reach <em>before</em> any of them are allowed to continue.</p>
+<p>A simple example is when we only have 2 threads. We use two binary semaphores:</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>Semaphore[] done = {new Semaphore(0), new Semaphore(0)};</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>$t_0$‘s code:</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>// Indicate that t0 is done</span></span>
+<span class="line"><span>done[t0].up();</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>// Wait until t1 is done</span></span>
+<span class="line"><span>done[t1].down();</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>$t_1$‘s code:</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>// Indicate that t1 is done</span></span>
+<span class="line"><span>done[t1].up();</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>// Wait until t0 is done</span></span>
+<span class="line"><span>done[t0].down();</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>We could also do:</p>
+<p>$t_0$‘s code:</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>// Wait until t1 is done</span></span>
+<span class="line"><span>done[t1].down();</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>// Indicate that t0 is done</span></span>
+<span class="line"><span>done[t0].up();</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span></span></span></code></pre>
+<p>$t_1$‘s code:</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>// Indicate that t1 is done</span></span>
+<span class="line"><span>done[t1].up();</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>// Wait until t0 is done</span></span>
+<span class="line"><span>done[t0].down();</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>This works if $t_0$ does <code>down</code> before <code>up</code>, or symmetrically, if $t_1$ does the same.</p>
+<p>This is however, less efficient, since, the last thread to reach the barrier has to yield for the other.</p>
+<p>One thing that might not be obvious but, if we do:</p>
+<p>$t_0$‘s code:</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>// Wait until t1 is done</span></span>
+<span class="line"><span>done[t1].down();</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>// Indicate that t0 is done</span></span>
+<span class="line"><span>done[t0].up();</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span></span></span></code></pre>
+<p>$t_1$‘s code:</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>// Wait until t0 is done</span></span>
+<span class="line"><span>done[t0].down();</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>// Indicate that t1 is done</span></span>
+<span class="line"><span>done[t1].up();</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>We will have a deadlock if $t_0$ and $t_1$ both perform <code>down</code> before any <code>up</code> calls.</p>
+<p>Let’s try to create a reusable, general barrier</p>
+<h3 id="reusable-barriers">Reusable Barriers</h3>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>interface Barrier {</span></span>
+<span class="line"><span>    // Block until expect() threads have reached barrier</span></span>
+<span class="line"><span>    void wait();</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    // Number of threads expected at the barrier</span></span>
+<span class="line"><span>    int expect();</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>Let’s try a naive approach and see what happens:</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>public class NonBarrier1 implements Barrier {</span></span>
+<span class="line"><span>    int nDone = 0; // number of done threads</span></span>
+<span class="line"><span>    Semaphore open = new Semaphore(0);</span></span>
+<span class="line"><span>    final int n;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    // initialize barrier for `n' threads</span></span>
+<span class="line"><span>    NonBarrier1(int n) {</span></span>
+<span class="line"><span>        this.n = n;</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    // number of threads expected at the barrier</span></span>
+<span class="line"><span>    int expect() {</span></span>
+<span class="line"><span>        return n;</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    public void wait() {</span></span>
+<span class="line"><span>        synchronized(this) {</span></span>
+<span class="line"><span>            nDone += 1;</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        if (nDone == n) {</span></span>
+<span class="line"><span>            // I'm the last arrived: All can go!</span></span>
+<span class="line"><span>            open.up();</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        // Proceed when possible</span></span>
+<span class="line"><span>        open.down()</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        // Let the next one go</span></span>
+<span class="line"><span>        open.up()</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        synchronized(this) {</span></span>
+<span class="line"><span>            nDone -= 1;</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        if (nDone == 0) {</span></span>
+<span class="line"><span>            // I'm the last through: Close barrier!</span></span>
+<span class="line"><span>            open.down();</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>This solution doesn’t work perfectly though. If the n threads wait at <code>if(nDone == 0)</code>
+then more than one thread may try to close the barrier, which results in a deadlock.</p>
+<p>The same goes for opening the barrier, if more than one thread tries to open the barrier,
+it’s possible that some threads may be executing <code>wait</code> again before the barrier is closed again.</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>public class NonBarrier2 implements Barrier {</span></span>
+<span class="line"><span>    int nDone = 0; // number of done threads</span></span>
+<span class="line"><span>    Semaphore open = new Semaphore(0);</span></span>
+<span class="line"><span>    final int n;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    // initialize barrier for `n' threads</span></span>
+<span class="line"><span>    NonBarrier1(int n) {</span></span>
+<span class="line"><span>        this.n = n;</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    // number of threads expected at the barrier</span></span>
+<span class="line"><span>    int expect() {</span></span>
+<span class="line"><span>        return n;</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    public void wait() {</span></span>
+<span class="line"><span>        synchronized(this) {</span></span>
+<span class="line"><span>            nDone += 1;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>            if (nDone == n) {</span></span>
+<span class="line"><span>                // I'm the last arrived: All can go!</span></span>
+<span class="line"><span>                open.up();</span></span>
+<span class="line"><span>            }</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        // Proceed when possible</span></span>
+<span class="line"><span>        open.down()</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        // Let the next one go</span></span>
+<span class="line"><span>        open.up()</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        synchronized(this) {</span></span>
+<span class="line"><span>            nDone -= 1;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>           if (nDone == 0) {</span></span>
+<span class="line"><span>                // I'm the last through: Close barrier!</span></span>
+<span class="line"><span>                open.down();</span></span>
+<span class="line"><span>            }</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>Now this solution fixes the past issues listed. This solution has a problem of its own though.</p>
+<p>If we have a thread which is incredibly fast, it may now get ahead of the other (slower) threads.
+Even if we use strong semaphores, we cannot prevent this. This is because this happens due to the
+last thread leaves the gate open.</p>
+<p>To fix this we use a kind of two gate mechanic.</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>public class SemaphoreBarrier implements Barrier {</span></span>
+<span class="line"><span>    int nDone = 0; // number of done threads</span></span>
+<span class="line"><span>    Semaphore gate1 = new Semaphore(0);// first gate</span></span>
+<span class="line"><span>    Semaphore gate2 = new Semaphore(1);// second gate</span></span>
+<span class="line"><span>    final int n;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    // initialize barrier for `n' threads</span></span>
+<span class="line"><span>    SemaphoreBarrier(int n) {</span></span>
+<span class="line"><span>        this.n = n;</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>    // number of threads expected at the barrier</span></span>
+<span class="line"><span>    int expect() {</span></span>
+<span class="line"><span>        return n;</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>public void wait() {</span></span>
+<span class="line"><span>    approach(); leave();</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>void approach() {</span></span>
+<span class="line"><span>    synchronized (this) {</span></span>
+<span class="line"><span>        nDone += 1; // arrived</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        if (nDone == n) { // if last in:</span></span>
+<span class="line"><span>            gate1.up(); // open gate1</span></span>
+<span class="line"><span>            gate2.down(); // close gate2</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    gate1.down(); // pass gate1</span></span>
+<span class="line"><span>    gate1.up(); // let next pass</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>void leave() {</span></span>
+<span class="line"><span>    synchronized (this) {</span></span>
+<span class="line"><span>        nDone -= 1; // going out</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        if (nDone == 0) { // if last out:</span></span>
+<span class="line"><span>            gate2.up(); // open gate2</span></span>
+<span class="line"><span>            gate1.down(); // close gate1</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    gate2.down(); // pass gate2</span></span>
+<span class="line"><span>    gate2.up(); // let next pass</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>This solution is what a good, reusable barrier should look like.</p>
+<h3 id="readers-writers">Readers-Writers</h3>
+<p>A problem which we can encounter every day, say we have a board displaying data.
+Readers and writers need to access this board to, read and write.</p>
+<p>We need a board which does:</p>
+<ul>
+<li>
+<p>Multiple readers can operate concurrently</p>
+</li>
+<li>
+<p>Each writer has exclusive access</p>
+<ul>
+<li>Meaning that we have the invariant: # of writers = 0 OR (# of writers == 1 AND # of Readers == 0)</li>
+</ul>
+</li>
+</ul>
+<p>A naive approach would be:</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>public class SyncBoard&#x3C;T> implements Board&#x3C;T> {</span></span>
+<span class="line"><span>    int nReaders = 0;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    // For exclusive access to nReaders</span></span>
+<span class="line"><span>    Lock lock = new Lock();</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    // 1 if and only if no active threads</span></span>
+<span class="line"><span>    Semaphore empty = new Semaphore(1);</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    T message;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    public T read() {</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        // Lock to update nReaders</span></span>
+<span class="line"><span>        lock.lock();</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        if(nReaders == 0) {</span></span>
+<span class="line"><span>            // If first reader, set not empty</span></span>
+<span class="line"><span>            empty.down();</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        // Update nReaders</span></span>
+<span class="line"><span>        nReaders += 1</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        // Release nReaders</span></span>
+<span class="line"><span>        lock.unlock();</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        // Read (critical section)</span></span>
+<span class="line"><span>        T msg = message;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        // Aquire nReaders</span></span>
+<span class="line"><span>        lock.lock();</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        nReaders -= 1;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        if(nReaders == 0) {</span></span>
+<span class="line"><span>            // If # of readers empty, set empty</span></span>
+<span class="line"><span>            empty.up();</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        // Releaes nReaders</span></span>
+<span class="line"><span>        lock.unlock();</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        return msg;</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    public void write(T msg) {</span></span>
+<span class="line"><span>        // Get exclusive access</span></span>
+<span class="line"><span>        empty.down();</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        message = msg;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        // Release board</span></span>
+<span class="line"><span>        empty.up();</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>This solution ensures almost everything we want, the only thing missing is that writers can now starve.</p>
+<p>If there is always one reader active, writers will not be able to access the board at all.</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>public class FairBoard&#x3C;T> extends SyncBoard&#x3C;T> {</span></span>
+<span class="line"><span>    Semaphore baton = new Semaphore(1, true);</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    public T read() {</span></span>
+<span class="line"><span>        // Wait until you get baton</span></span>
+<span class="line"><span>        baton.down();</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        // Release a waiting thread</span></span>
+<span class="line"><span>        baton.up();</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        // Read as in SyncBoard</span></span>
+<span class="line"><span>        return super.read();</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    public void write(T msg) {</span></span>
+<span class="line"><span>        // Wait until you get baton</span></span>
+<span class="line"><span>        baton.down();</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        // Write as in SyncBoard</span></span>
+<span class="line"><span>        super.write(msg);</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        // Release</span></span>
+<span class="line"><span>        baton.up();</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>This will ensure that readers and writers have the same priority.</p>
+<h3 id="summary">Summary</h3>
+<p>A looong part, but as we can see, all solution uses locks and semaphores.
+When writing solutions to concurrent programs, we will always need to use these.
+To lock and gain exclusive access.</p>  </div> <nav class="flex flex-col sm:flex-row justify-between mt-8 pt-4 border-t border-border" data-astro-cid-v5ro3oot>   </nav> </article>  </main> </div> </body></html> 

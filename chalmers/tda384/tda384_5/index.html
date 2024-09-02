@@ -1,0 +1,365 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="Astro v4.11.5"><link rel="icon" type="image" href="/favicon.ico"><title>Part 5 - Monitors</title><!-- KaTeX support --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script><!-- inline KaTeX --><link rel="stylesheet" href="/_astro/index.CwgzIfsj.css">
+<link rel="stylesheet" href="/_astro/_slug_.hCvEQTvV.css">
+<style>article[data-astro-cid-v5ro3oot]{max-width:80ch;margin:0 auto}.nav-button[data-astro-cid-v5ro3oot]{display:flex;align-items:center;padding:.5rem;border-radius:.5rem;transition:background-color .3s ease;text-decoration:none;color:var(--text-color);background-color:var(--bg-color);border:1px solid var(--border-color)}.nav-button[data-astro-cid-v5ro3oot]:hover{background-color:var(--hover-color)}.nav-button[data-astro-cid-v5ro3oot] .arrow[data-astro-cid-v5ro3oot]{font-size:1.5rem;line-height:1}.nav-button[data-astro-cid-v5ro3oot] .text[data-astro-cid-v5ro3oot]{display:flex;flex-direction:column;margin:0 .5rem}.nav-button[data-astro-cid-v5ro3oot] .label[data-astro-cid-v5ro3oot]{font-size:.8rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted-color)}.nav-button[data-astro-cid-v5ro3oot] .title[data-astro-cid-v5ro3oot]{font-weight:500}.prev-button[data-astro-cid-v5ro3oot]{justify-content:flex-start}.next-button[data-astro-cid-v5ro3oot]{justify-content:flex-end;text-align:right}@media (max-width: 640px){.nav-button[data-astro-cid-v5ro3oot]{width:100%}.next-button[data-astro-cid-v5ro3oot]{justify-content:flex-start;text-align:left}.next-button[data-astro-cid-v5ro3oot] .text[data-astro-cid-v5ro3oot]{order:2;margin-left:.5rem}.next-button[data-astro-cid-v5ro3oot] .arrow[data-astro-cid-v5ro3oot]{order:1}}
+</style><script type="module">document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]})});
+</script></head> <body> <div class="container mx-auto px-4 flex flex-col md:flex-row min-h-screen"> <aside class="w-full md:w-64 border-b md:border-r md:border-b-0 border-[var(--border-color)] border-dashed pt-8"> <header class="flex flex-col h-full"> <div class="flex items-center mb-4"> <script>
+  function setTheme(mode) {
+    localStorage.setItem("theme-storage", mode);
+    document.documentElement.setAttribute('data-theme', mode);
+  }
+  function toggleTheme() {
+    const currentTheme = localStorage.getItem("theme-storage") || "light";
+    const newTheme = currentTheme === "light" ? "dark" : "light";
+    setTheme(newTheme);
+  }
+  const savedTheme = localStorage.getItem("theme-storage") || "light";
+  setTheme(savedTheme);
+  window.toggleTheme = toggleTheme;
+</script> <button id="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme" class="w-6 h-6 cursor-pointer"> <div class="w-5 h-5 border-2 border-primary rounded-full transition-colors duration-300 ease-in-out hover:bg-primary"></div> </button> <a href="/" class="text-2xl font-semibold ml-3 h-10 pr-3">rezvan.xyz</a> </div> <nav class="flex flex-wrap gap-2 md:flex-col md:gap-2"> <a href="/principles" class="transition-colors">
+[principles]
+</a><a href="/cv" class="transition-colors">
+[cv]
+</a><a href="/posts" class="transition-colors">
+[posts]
+</a><a href="/chalmers" class="transition-colors">
+[chalmers]
+</a><a href="/cityu" class="transition-colors">
+[cityu]
+</a> </nav> </header> </aside> <main class="flex-grow px-4 md:px-8 py-8 overflow-y-auto">  <article class="prose prose-sm sm:prose lg:prose-lg xl:prose-xl max-w-none" data-astro-cid-v5ro3oot> <h1 class="text-3xl sm:text-4xl font-bold mb-4" data-astro-cid-v5ro3oot>Part 5 - Monitors</h1> <p class="text-sm text-muted-foreground mb-4" data-astro-cid-v5ro3oot>
+Date: 2/4/2023 </p> <div class="markdown-content" data-astro-cid-v5ro3oot>  <p>In this series we’ve covered locks and semaphores as synchronization mechanism.
+Although these are essential in concurrent programs, they’re quite low-level synchronization mechanisms.</p>
+<p>Semaphores for example have the problem that:</p>
+<ul>
+<li>They are <strong>global</strong> and <strong>unstructured</strong>,
+it can be quite difficult to understand what a certain semaphore does in a given piece of code.</li>
+</ul>
+<ul>
+<li>Often, we are prone to <strong>deadlocks</strong> or <strong>incorrect behavior</strong>,
+it’s easy to forget a simple <code>up()</code> or <code>down()</code> call in your programs.</li>
+</ul>
+<ul>
+<li>They do not support well <strong>different conditions</strong>.</li>
+</ul>
+<h3 id="monitors">Monitors</h3>
+<p>Remember the <code>synchronized</code> keyword that can be used in Java for either blocks or whole methods?</p>
+<p>Monitors are essentially a <code>synchronized</code> class. A more formal definition of a monitor would be.</p>
+<p>Monitors provide a structured synchronization mechanism built on top of object-oriented constructs
+– especially the notions of <strong>classes</strong>, <strong>objects</strong>, and <strong>encapsulation</strong>.</p>
+<p>In a monitor <strong>class</strong>:</p>
+<ul>
+<li>Attributes are private</li>
+</ul>
+<ul>
+<li>Methods execute in mutual exclusion</li>
+</ul>
+<p>A <strong>monitor</strong> is an object <em>instantiating</em> a monitor class that encapsulates
+synchronization mechanisms:</p>
+<ul>
+<li>Attributes are shared variables, which all threads running on the monitor
+can see and modify</li>
+</ul>
+<ul>
+<li>Methods define critical sections, with the built-in guarantee that at most
+one thread is active on a monitor at any time</li>
+</ul>
+<p>To gain access to these critical section methods, we have a so called <em>entry-queue</em>
+for these monitor objects. This is to ensure mutual access to the methods.</p>
+<p>Let’s write a simple monitor class in pseudocode:</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>monitor class Counter {</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    // Attribute, implicitly private</span></span>
+<span class="line"><span>    (private) int count = 0;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    // Methods, implicitly atomic</span></span>
+<span class="line"><span>    public void increment() {</span></span>
+<span class="line"><span>        count = count + 1;</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    public void decrement() {</span></span>
+<span class="line"><span>        count = count - 1;</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>What’s really powerful with monitors are <em>conditions variables</em>, sometimes we require more complex synchronization patterns.</p>
+<p>We can define a condition using an interface:</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>interface Condition {</span></span>
+<span class="line"><span>    // Block until signal</span></span>
+<span class="line"><span>    void wait();</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    // Signal to unblock</span></span>
+<span class="line"><span>    void signal();</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    // Is no thread waiting on this condition?</span></span>
+<span class="line"><span>    boolean isEmpty(); }</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>Each condition variable also has a FIFO queue, <code>blocked</code> which stores all the blocked threads.</p>
+<p>Which means:</p>
+<ul>
+<li><code>c.wait()</code> blocks the running thread, appends it to blocked, and releases the lock on the monitor</li>
+</ul>
+<ul>
+<li><code>c.signal()</code> removes one thread from blocked (if it’s not empty) and unblocks it</li>
+</ul>
+<ul>
+<li><code>c.isEmpty()</code> returns true if and only if, blocked is empty</li>
+</ul>
+<h3 id="producer-consumer-problem">Producer-Consumer problem</h3>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>interface Buffer&#x3C;T> {</span></span>
+<span class="line"><span>    // add item to buffer; block if full</span></span>
+<span class="line"><span>    void put(T item);</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    // remove item from buffer; block if empty</span></span>
+<span class="line"><span>    T get();</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    // number of items in buffer</span></span>
+<span class="line"><span>    int count();</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>Let’s solve this problem we have encountered earlier, using monitors now!</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>monitor class MonitorBuffer&#x3C;T> implements Buffer&#x3C;T> {</span></span>
+<span class="line"><span>    // Any collection (list, set, ...)</span></span>
+<span class="line"><span>    Collection storage = ...;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    // Signal when not empty</span></span>
+<span class="line"><span>    Condition notEmpty = new Condition();</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    public void put(T item) {</span></span>
+<span class="line"><span>        // Store item</span></span>
+<span class="line"><span>        storage.add(item);</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        // Signal buffer not empty</span></span>
+<span class="line"><span>        notEmpty.signal();</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    public T get() {</span></span>
+<span class="line"><span>        if (storage.count() == 0) {</span></span>
+<span class="line"><span>            // Wait until buffer not empty</span></span>
+<span class="line"><span>            notEmpty.wait();</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        // Retrieve item</span></span>
+<span class="line"><span>        return storage.remove();</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    invariant {</span></span>
+<span class="line"><span>        # of storage.add == # notEmpty.signal</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>And the bounded buffer:</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>monitor class BoundedMonitorBuffer&#x3C;T> extends MonitorBuffer&#x3C;T> {</span></span>
+<span class="line"><span>    // Signal when not full</span></span>
+<span class="line"><span>    Condition notFull = new Condition();</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    public void put(T item) {</span></span>
+<span class="line"><span>        if (storage.count() == capacity) {</span></span>
+<span class="line"><span>            // Wait until buffer not full</span></span>
+<span class="line"><span>            notFull.wait();</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        super.put(item); // do as in MonitorBuffer.put(item)</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>    public T get() {</span></span>
+<span class="line"><span>        // Do as in MonitorBuffer.get()</span></span>
+<span class="line"><span>        T item = super.get();</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        // Signal buffer not full</span></span>
+<span class="line"><span>        notFull.signal()</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        return item;</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
+<h3 id="signaling-disciplines">Signaling disciplines</h3>
+<p>When a thread, s, calls <code>signal()</code> it now signals to a thread that its being unblocked.</p>
+<p>Say the thread, u, being unblocked by s.
+The signaling discipline determines what happens to a signaling thread, s, <em>after</em> it unblocks thread u.</p>
+<p>There are two main choices for this:</p>
+<ul>
+<li>Signal and continue
+<ul>
+<li>s continues executing; u is moved to the entry queue of the monitor.</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>Signal and wait
+<ul>
+<li>s is moved to the entry queue of the monitor; u resumes executing (it silently gets the monitor’s lock).</li>
+</ul>
+</li>
+</ul>
+<p>Under the <strong>signal and wait</strong> discipline, it is guaranteed that the signaled condition holds when
+the unblocked thread resumes execution, because it immediately follows the signal</p>
+<p>In contrast, under the <strong>signal and continue</strong> discipline, the signaled condition may no longer
+hold when the unblocked thread, u, resumes execution - because the signaling thread, or
+other threads, may change the state while continuing</p>
+<p>There is one problem though - the <strong>signal and continue</strong> discipline does not guarantee that a thread <em>resuming</em>
+execution after a <code>wait</code>, will find that this condition has been met (true). The <code>signal</code> is like a hint.</p>
+<p>Therefore, most monitor implementations use the <strong>signal and continue</strong> discipline.
+Often when using the <strong>signal and continue</strong> discipline you will have access to a method called:</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>// Unblock all threads blocked on this condition</span></span>
+<span class="line"><span>void singalAll();</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>This is inefficient most of the time, but it <em>just works</em> for the given pattern.</p>
+<p>There is also the <strong>signal and urgent wait</strong> discipline:</p>
+<ul>
+<li>Signal and urgent wait
+<ul>
+<li>s is moved to the front of the entry queue, u resumes executing.</li>
+</ul>
+</li>
+</ul>
+<p>This means that <em>urgent</em> threads gets ahead of regular threads, but urgent threads still may need to queue amongst other urgent threads.</p>
+<p>So let’s summarize:</p>
+<ul>
+<li>Signal and continue
+<ul>
+<li>S > U = E</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>Urgent Signal and continue
+<ul>
+<li>S > U > E</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>Signal and wait
+<ul>
+<li>U > S = E</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>Signal and urgent wait
+<ul>
+<li>U > S > E</li>
+</ul>
+</li>
+</ul>
+<p>Where, S - signaling thread(s), U - unblocked thread(s), E - thread(s) in the entry queue.</p>
+<h3 id="implementation">Implementation</h3>
+<p>Let’s implement monitors now using semaphores!</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>class Counter {</span></span>
+<span class="line"><span>    // Strong/fair semaphore, initially 1</span></span>
+<span class="line"><span>    Semaphore entry = new Semaphore(1, true);</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    private int x = 0;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    public void inc() {</span></span>
+<span class="line"><span>        entry.down();</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        x = x + 1;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        entry.up();</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>Simple right!</p>
+<p>Now let’s look at conditions variables:</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>abstract class WaitVariable implements Condition {</span></span>
+<span class="line"><span>    // Queue of blocked threads</span></span>
+<span class="line"><span>    Queue blocked = new Queue&#x3C;Thread>();</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    // Block until signal</span></span>
+<span class="line"><span>    public void wait() {</span></span>
+<span class="line"><span>        // Release monitor lock</span></span>
+<span class="line"><span>        entry.up();</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        // Enqueue running thread</span></span>
+<span class="line"><span>        blocked.add(running);</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        // Set state as blocked</span></span>
+<span class="line"><span>        running.state = BLOCKED;</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    // Is no thread waiting?</span></span>
+<span class="line"><span>    public boolean isEmpty() {</span></span>
+<span class="line"><span>        return blocked.isEmpty();</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span></span></span></code></pre>
+<p>Quite simple :)!</p>
+<p>Now let’s try to implement two different disciplines:</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>class SCVariable extends WaitVariable {</span></span>
+<span class="line"><span>    // Signal to unblock</span></span>
+<span class="line"><span>    public void signal() {</span></span>
+<span class="line"><span>        if (!blocked.isEmpty()) {</span></span>
+<span class="line"><span>            // u is the unblocked thread</span></span>
+<span class="line"><span>            Thread u = blocked.remove();</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>            // u gets moved to entry queue</span></span>
+<span class="line"><span>            entry.blocked.add(u);</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>            // the running, signaling thread continues executing</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>And a signal wait:</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>class SWVariable extends WaitVariable {</span></span>
+<span class="line"><span>    // Signal to unblocked</span></span>
+<span class="line"><span>    public void signal() {</span></span>
+<span class="line"><span>        if(!blocked.isEmpty()) {</span></span>
+<span class="line"><span>            // Add the running, signaling  thread, to the entry queue</span></span>
+<span class="line"><span>            entry.blocked.add(running);</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>            // New unblocked thread, u</span></span>
+<span class="line"><span>            Thread u = blocked.remove();</span></span>
+<span class="line"><span>            // Set thread u to ready</span></span>
+<span class="line"><span>            u.state = READY;</span></span>
+<span class="line"><span>            // Block the old running thread</span></span>
+<span class="line"><span>            running.state = BLOCKED;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>            // the unblocked, signaled thread, u, continues executing</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>One fun little thing that one might have thought of is, can we implement semaphores <em>from</em> monitors?</p>
+<p>The answer is yes! But it’s quite useless and impractical, but in theory one can!</p>
+<h3 id="summary">Summary</h3>
+<p>Let’s try to write up all the pros and cons with monitors!</p>
+<ul>
+<li>Pros
+<ul>
+<li>They provide a structured approach to concurrent programming</li>
+</ul>
+<ul>
+<li>They raise the level of abstraction compared to
+primitives like locks and semaphores.</li>
+</ul>
+<ul>
+<li>Monitors introduce <strong>separation of concerns</strong>:
+<ul>
+<li>Mutual exclusion is implicit.</li>
+</ul>
+<ul>
+<li>Condition variables provide a clear vision of the synchronization</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>Cons
+<ul>
+<li>Monitors (generally) have a larger performance overhead than semaphores
+<ul>
+<li>Note that, sometimes, performance must be traded against error proneness</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>The different signaling disciplines can be confusing, which hurts
+the clarity of the monitor abstraction.</li>
+</ul>
+<ul>
+<li>For complex synchronization patterns, nested monitor calls will be complicated.</li>
+</ul>
+</li>
+</ul>  </div> <nav class="flex flex-col sm:flex-row justify-between mt-8 pt-4 border-t border-border" data-astro-cid-v5ro3oot>   </nav> </article>  </main> </div> </body></html> 

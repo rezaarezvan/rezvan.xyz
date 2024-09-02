@@ -1,0 +1,177 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="Astro v4.11.5"><link rel="icon" type="image" href="/favicon.ico"><title>Part 2 - MIPS</title><!-- KaTeX support --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script><!-- inline KaTeX --><link rel="stylesheet" href="/_astro/index.CwgzIfsj.css">
+<link rel="stylesheet" href="/_astro/_slug_.hCvEQTvV.css">
+<style>article[data-astro-cid-v5ro3oot]{max-width:80ch;margin:0 auto}.nav-button[data-astro-cid-v5ro3oot]{display:flex;align-items:center;padding:.5rem;border-radius:.5rem;transition:background-color .3s ease;text-decoration:none;color:var(--text-color);background-color:var(--bg-color);border:1px solid var(--border-color)}.nav-button[data-astro-cid-v5ro3oot]:hover{background-color:var(--hover-color)}.nav-button[data-astro-cid-v5ro3oot] .arrow[data-astro-cid-v5ro3oot]{font-size:1.5rem;line-height:1}.nav-button[data-astro-cid-v5ro3oot] .text[data-astro-cid-v5ro3oot]{display:flex;flex-direction:column;margin:0 .5rem}.nav-button[data-astro-cid-v5ro3oot] .label[data-astro-cid-v5ro3oot]{font-size:.8rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted-color)}.nav-button[data-astro-cid-v5ro3oot] .title[data-astro-cid-v5ro3oot]{font-weight:500}.prev-button[data-astro-cid-v5ro3oot]{justify-content:flex-start}.next-button[data-astro-cid-v5ro3oot]{justify-content:flex-end;text-align:right}@media (max-width: 640px){.nav-button[data-astro-cid-v5ro3oot]{width:100%}.next-button[data-astro-cid-v5ro3oot]{justify-content:flex-start;text-align:left}.next-button[data-astro-cid-v5ro3oot] .text[data-astro-cid-v5ro3oot]{order:2;margin-left:.5rem}.next-button[data-astro-cid-v5ro3oot] .arrow[data-astro-cid-v5ro3oot]{order:1}}
+</style><script type="module">document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]})});
+</script></head> <body> <div class="container mx-auto px-4 flex flex-col md:flex-row min-h-screen"> <aside class="w-full md:w-64 border-b md:border-r md:border-b-0 border-[var(--border-color)] border-dashed pt-8"> <header class="flex flex-col h-full"> <div class="flex items-center mb-4"> <script>
+  function setTheme(mode) {
+    localStorage.setItem("theme-storage", mode);
+    document.documentElement.setAttribute('data-theme', mode);
+  }
+  function toggleTheme() {
+    const currentTheme = localStorage.getItem("theme-storage") || "light";
+    const newTheme = currentTheme === "light" ? "dark" : "light";
+    setTheme(newTheme);
+  }
+  const savedTheme = localStorage.getItem("theme-storage") || "light";
+  setTheme(savedTheme);
+  window.toggleTheme = toggleTheme;
+</script> <button id="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme" class="w-6 h-6 cursor-pointer"> <div class="w-5 h-5 border-2 border-primary rounded-full transition-colors duration-300 ease-in-out hover:bg-primary"></div> </button> <a href="/" class="text-2xl font-semibold ml-3 h-10 pr-3">rezvan.xyz</a> </div> <nav class="flex flex-wrap gap-2 md:flex-col md:gap-2"> <a href="/principles" class="transition-colors">
+[principles]
+</a><a href="/cv" class="transition-colors">
+[cv]
+</a><a href="/posts" class="transition-colors">
+[posts]
+</a><a href="/chalmers" class="transition-colors">
+[chalmers]
+</a><a href="/cityu" class="transition-colors">
+[cityu]
+</a> </nav> </header> </aside> <main class="flex-grow px-4 md:px-8 py-8 overflow-y-auto">  <article class="prose prose-sm sm:prose lg:prose-lg xl:prose-xl max-w-none" data-astro-cid-v5ro3oot> <h1 class="text-3xl sm:text-4xl font-bold mb-4" data-astro-cid-v5ro3oot>Part 2 - MIPS</h1> <p class="text-sm text-muted-foreground mb-4" data-astro-cid-v5ro3oot>
+Date: 3/22/2023 </p> <div class="markdown-content" data-astro-cid-v5ro3oot>  <p>In this part we’ll properly cover the MIPS architecture in depth.</p>
+<h3 id="parameter-transferring">Parameter transferring</h3>
+<p>When calling a function in C code, what is happening at the assembler level is, calling a subroutine (usually).</p>
+<p>What we need to do before a subroutine call, is the following:</p>
+<ol>
+<li>Place the input parameters into their respective registers</li>
+<li>Call the function/subroutine</li>
+<li>Allocate memory for eventual saved and local variables</li>
+<li>Execute the function/procedure</li>
+<li>Place the result in a register</li>
+<li>Reset the stack, if needed</li>
+<li>Return to where the function/subroutine got called.</li>
+</ol>
+<h3 id="register-conventions">Register conventions</h3>
+<p>Since we now need to store our input parameters into register before we call a function, we need to create a convention to where we expect things to be.</p>
+<p>MIPS has this following convention:</p>
+<ul>
+<li>
+<p>$a_0 - a_3$: Input parameters</p>
+</li>
+<li>
+<p>$v_0, v_1$: Result values</p>
+</li>
+<li>
+<p>$t_0 - t_9$: Temporary variables</p>
+</li>
+<li>
+<p>$s_0 - s_7$: “Saved” registers</p>
+<ul>
+<li>Must be saved and reset by each respective subroutine.</li>
+</ul>
+</li>
+<li>
+<p>$gp$: global pointer</p>
+</li>
+<li>
+<p>$sp$: stack pointer</p>
+</li>
+<li>
+<p>$fp$: frame pointer</p>
+</li>
+<li>
+<p>$ra$: return address</p>
+</li>
+</ul>
+<p>We discussed a lot of subroutines, but how do we actually call one?</p>
+<p><code>jal Label</code> will jump to a label (starting point of a subroutine).</p>
+<p>To return from a subroutine call <code>jr $ra</code>.</p>
+<p>A very simple function like:</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>int example(int g, int h, int i, int j) {</span></span>
+<span class="line"><span>    int f;</span></span>
+<span class="line"><span>    f = (g + h) - (i + j);</span></span>
+<span class="line"><span>    return f;</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>Given that the arguments are in $a_0, \ldots, a_3$, f is in $s_0$ (therefore we must save $s_0$ to the stack before!).</p>
+<p>The result will be stored in $v_0$</p>
+<p>MIPS Code:</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>example:</span></span>
+<span class="line"><span>    addi $sp, $sp, -4   # Allocate space for one variable, s_0</span></span>
+<span class="line"><span>    sw   $s0, 0($sp)    # Save s_0</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    add  $t0, $a0, $a1  # (g + h)</span></span>
+<span class="line"><span>    add  $t1, $a2, $a3  # (i + j)</span></span>
+<span class="line"><span>    sub  $s0, $t0, $t1  # f = (g + h) - (i + j)a</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    add  $v0, $s0, $zero # Store value</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    lw   $s0, 0($sp) # Reset s_0 value</span></span>
+<span class="line"><span>    addi $sp, $sp, 4 # Reset stack pointer</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    jr   $ra         # Return</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>Let’s now take a recursive</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>int fact(int n) {</span></span>
+<span class="line"><span>    if(n &#x3C; 1) {</span></span>
+<span class="line"><span>        return 1;</span></span>
+<span class="line"><span>    } else {</span></span>
+<span class="line"><span>        return n * fact(n - 1);</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>input parameter n in $a_0$, result in $v_0$</p>
+<p>MIPS:</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>fact:</span></span>
+<span class="line"><span>    addi $sp, $sp, -8   # Adjust stack so we can store 2 variables</span></span>
+<span class="line"><span>    sw   $ra, 4($sp)    # Save return address</span></span>
+<span class="line"><span>    sw   $a0, 0($sp)    # Save input register</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    slti $t0, $a0, 1    # test for n &#x3C; 1</span></span>
+<span class="line"><span>    beq  $t0, $zero, L1</span></span>
+<span class="line"><span>    addi $v0, $zero, 1  # If n &#x3C; 1, result = 1</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    addi $sp, $sp, 8    # Pop stack</span></span>
+<span class="line"><span>    jr   $ra            # Return</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>L1: addi $a0, $a0, -1   # Decrement n</span></span>
+<span class="line"><span>    jal  fact           # Recursive call</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    lw   $a0, 0($sp)    # restore orignal n</span></span>
+<span class="line"><span>    lw   $ra  4($sp)    # and return address</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    addi $sp, $sp, 8    # Pop stack</span></span>
+<span class="line"><span>    mul  $v0, $a0, $v0  # n * fact(n - 1)</span></span>
+<span class="line"><span>    jr   $ra            # return</span></span>
+<span class="line"><span></span></span></code></pre>
+<h3 id="less-than-a-word">Less than a word</h3>
+<p>Sometimes we want to only access a byte or half-word:</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>lb rt, offset(rs)</span></span>
+<span class="line"><span>lh rt, offset(rs)</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span># Unsigned</span></span>
+<span class="line"><span>lbu rt, offset(rs)</span></span>
+<span class="line"><span>lhu rt, offset(rs)</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span># Save</span></span>
+<span class="line"><span>sb rt, offset(rs)</span></span>
+<span class="line"><span>sh rt, offset(rs)</span></span>
+<span class="line"><span></span></span></code></pre>
+<h3 id="indexing-vs-pointers">Indexing vs Pointers</h3>
+<ul>
+<li>
+<p>Vector indexing requires:</p>
+<ul>
+<li>
+<p>Multiplication of the index with length</p>
+</li>
+<li>
+<p>Summation of this product to the vectors start address</p>
+</li>
+</ul>
+</li>
+<li>
+<p>Pointer corresponds directly to a memory address</p>
+<ul>
+<li>Therefore, it’s faster</li>
+</ul>
+</li>
+</ul>
+<h3 id="common-mistakes">Common mistakes</h3>
+<p>Common mistakes when writing programs in MIPS are:</p>
+<ul>
+<li>
+<p>Incrementing with 1 and not 4!</p>
+</li>
+<li>
+<p>MIPS uses byte addressing</p>
+</li>
+</ul>  </div> <nav class="flex flex-col sm:flex-row justify-between mt-8 pt-4 border-t border-border" data-astro-cid-v5ro3oot>   </nav> </article>  </main> </div> </body></html> 

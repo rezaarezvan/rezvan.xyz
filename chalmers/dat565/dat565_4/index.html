@@ -1,0 +1,112 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="Astro v4.11.5"><link rel="icon" type="image" href="/favicon.ico"><title>Part 4 - Data visualization</title><!-- KaTeX support --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script><!-- inline KaTeX --><link rel="stylesheet" href="/_astro/index.CwgzIfsj.css">
+<link rel="stylesheet" href="/_astro/_slug_.hCvEQTvV.css">
+<style>article[data-astro-cid-v5ro3oot]{max-width:80ch;margin:0 auto}.nav-button[data-astro-cid-v5ro3oot]{display:flex;align-items:center;padding:.5rem;border-radius:.5rem;transition:background-color .3s ease;text-decoration:none;color:var(--text-color);background-color:var(--bg-color);border:1px solid var(--border-color)}.nav-button[data-astro-cid-v5ro3oot]:hover{background-color:var(--hover-color)}.nav-button[data-astro-cid-v5ro3oot] .arrow[data-astro-cid-v5ro3oot]{font-size:1.5rem;line-height:1}.nav-button[data-astro-cid-v5ro3oot] .text[data-astro-cid-v5ro3oot]{display:flex;flex-direction:column;margin:0 .5rem}.nav-button[data-astro-cid-v5ro3oot] .label[data-astro-cid-v5ro3oot]{font-size:.8rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted-color)}.nav-button[data-astro-cid-v5ro3oot] .title[data-astro-cid-v5ro3oot]{font-weight:500}.prev-button[data-astro-cid-v5ro3oot]{justify-content:flex-start}.next-button[data-astro-cid-v5ro3oot]{justify-content:flex-end;text-align:right}@media (max-width: 640px){.nav-button[data-astro-cid-v5ro3oot]{width:100%}.next-button[data-astro-cid-v5ro3oot]{justify-content:flex-start;text-align:left}.next-button[data-astro-cid-v5ro3oot] .text[data-astro-cid-v5ro3oot]{order:2;margin-left:.5rem}.next-button[data-astro-cid-v5ro3oot] .arrow[data-astro-cid-v5ro3oot]{order:1}}
+</style><script type="module">document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]})});
+</script></head> <body> <div class="container mx-auto px-4 flex flex-col md:flex-row min-h-screen"> <aside class="w-full md:w-64 border-b md:border-r md:border-b-0 border-[var(--border-color)] border-dashed pt-8"> <header class="flex flex-col h-full"> <div class="flex items-center mb-4"> <script>
+  function setTheme(mode) {
+    localStorage.setItem("theme-storage", mode);
+    document.documentElement.setAttribute('data-theme', mode);
+  }
+  function toggleTheme() {
+    const currentTheme = localStorage.getItem("theme-storage") || "light";
+    const newTheme = currentTheme === "light" ? "dark" : "light";
+    setTheme(newTheme);
+  }
+  const savedTheme = localStorage.getItem("theme-storage") || "light";
+  setTheme(savedTheme);
+  window.toggleTheme = toggleTheme;
+</script> <button id="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme" class="w-6 h-6 cursor-pointer"> <div class="w-5 h-5 border-2 border-primary rounded-full transition-colors duration-300 ease-in-out hover:bg-primary"></div> </button> <a href="/" class="text-2xl font-semibold ml-3 h-10 pr-3">rezvan.xyz</a> </div> <nav class="flex flex-wrap gap-2 md:flex-col md:gap-2"> <a href="/principles" class="transition-colors">
+[principles]
+</a><a href="/cv" class="transition-colors">
+[cv]
+</a><a href="/posts" class="transition-colors">
+[posts]
+</a><a href="/chalmers" class="transition-colors">
+[chalmers]
+</a><a href="/cityu" class="transition-colors">
+[cityu]
+</a> </nav> </header> </aside> <main class="flex-grow px-4 md:px-8 py-8 overflow-y-auto">  <article class="prose prose-sm sm:prose lg:prose-lg xl:prose-xl max-w-none" data-astro-cid-v5ro3oot> <h1 class="text-3xl sm:text-4xl font-bold mb-4" data-astro-cid-v5ro3oot>Part 4 - Data visualization</h1> <p class="text-sm text-muted-foreground mb-4" data-astro-cid-v5ro3oot>
+Date: 1/26/2024 </p> <div class="markdown-content" data-astro-cid-v5ro3oot>  <h3 id="introduction">Introduction</h3>
+<p>In this part we’ll discuss some principles when it comes to data visualization</p>
+<h3 id="five-point-summary">Five-point summary</h3>
+<p>The five-point summary is a very common and effective summary of data to get a quick overview and feeling for the data.</p>
+<p>To understand what the five-point summary tells us, let’s first understand quantiles and quartiles.</p>
+<p>A <strong>quantile</strong> is a cut-point of a distribution (or a dataset).
+Quantiles are usually obtained by sorting the data and selecting an appropriate value at an appropriate rank.</p>
+<p><strong>Quartiles</strong> are quantiles that are placed such that 25% of the data is between them.
+This means that the 1st quartile, $Q_1$, is a value such that at least 25% of the dataset is at most $Q_1$.
+The 2nd quartile, $Q_2$, is a value such that at least 50% of the dataset is at most $Q_2$, or just the <strong>median</strong>.
+The 3rd quartile, $Q_3$, is a value such that at least 75% of the dataset is at most $Q_3$.</p>
+<p>We could have deciles (10% apart) and centiles (1% apart).</p>
+<p>The five-number summary consits of:</p>
+<ul>
+<li>The sample minimum</li>
+<li>The 1st quartile $Q_1$</li>
+<li>The median $Q_2$</li>
+<li>The 3rd quartile $Q_3$</li>
+<li>The sample maximum</li>
+</ul>
+<h3 id="creating-good-figures">Creating good figures</h3>
+<p>Human beings are visual creatures, and a message is often better conveyed graphically than numerically.</p>
+<p>Plots are good for summarization and showing trends, however, the plots need to be good and correct.</p>
+<ul>
+<li><strong>Be sparing</strong>: Whenever you choose to employ visualizations, they should support your message and aid in communication.</li>
+<li><strong>K</strong>eep <strong>I</strong>t <strong>S</strong>imple <strong>S</strong>tupid (KISS): A simple plot is better than a cluttered one.</li>
+</ul>
+<p>Colors are often used to distinguish between classes and encoding of numerical values in charts.
+Different kinds of entities should be colored differently if present in the same plot.
+Use colors that have inherent meaning, if possible, e.g., losses with red, environmental causes with green etc.
+If colors have a numerical meaning, beware of choosing an appropriate color map, as the color maps tend to be non-linear</p>
+<h3 id="type-of-charts">Type of charts</h3>
+<p>There are a lot of different charts that we usually see, let’s cover them.</p>
+<h4 id="line-plots">Line plots</h4>
+<p>Line plot is the familiar plot of $f(x) = y$.
+Line plots are appropriate for showing the change of one variable as a function of another.</p>
+<p>Place the variable that is varied horizontally (on $x$-axis).
+Place the function of that variable on the $y$-axis.</p>
+<p>Connecting the dots implies that there are values between; it may be appropriate to
+highlight the data points with markers (unless there is a very large number of points).</p>
+<p>A <strong>dot plot</strong> is obtained when the points are not connected with lines and can be appropriate to avoid confusion.</p>
+<h4 id="scatter-plots">Scatter plots</h4>
+<p>Scatter plots place all points of the dataset on a Cartesian plane.
+This can readily show the bivariate relationship between, such as correlation</p>
+<p>Use appropriately-sized dots so that the dots don’t mask the data.
+Density can be represented with color as in heatmap, or points can be shifted slightly at random to show where the density is the highest.</p>
+<p><strong>Bubble plots</strong> vary dot sizes to match some third variable, this can be a useful variant in addition to color</p>
+<h4 id="barplot">Barplot</h4>
+<p>Barplots can be used to describe the relative proportions of categorical variables.</p>
+<p>In addition to grouping along an axis (e.g., year on the $x$-axis), different categories can be shown in different colors.</p>
+<h4 id="histograms">Histograms</h4>
+<p>Histograms describe the frequency distribution of a variable.</p>
+<p>Divides the range of the data into equal-sized intervals or <em>bins</em>.
+The surface area of a bar in the histogram is thus proportional to the fraction of elements falling into the bin.</p>
+<p>Choosing the number of bins is important. Too small width makes random noise too pronounced.
+Too large width masks the structure of the data.</p>
+<p>There is no correct choice, there are only better and worse choices.</p>
+<h4 id="ways-to-choose-bin-width">Ways to choose bin width</h4>
+<p>Suppose the data is $x = \{x_1, x_2, \ldots, x_n \}$.
+Bin width $h$ and the number of bins $k$ are related via
+$$
+k = \biggr\lceil\dfrac{x_{max} - x_{min}}{h}\biggr\rceil
+$$</p>
+<p>There are some default choices:</p>
+<ul>
+<li>Square root rule: $k = \lceil\sqrt{n}\rceil$</li>
+<li>Sturges’ formula: $k = \lceil\log_2(n) + 1\rceil$, implicitly assumes normal distribution</li>
+<li>Rice’s formula: $k = \lceil\sqrt[\leftroot{-2}\uproot{2}3]{n}\rceil$</li>
+<li>Doane’s formula: $k = 1 + \log_2(n) + \log_2\left(1 + \frac{|g_1|}{\sigma_{g_1}}\right)$
+<ul>
+<li>Where $g_1 = \frac{1}{n} \sum_{i = 1}{n} \left(\frac{x - \hat{\mu}}{\hat{\sigma}}\right)^3$ is an estimator for sample skewness.</li>
+<li>$\hat{\mu} = \frac{1}{n} \sum_{i = 1}{n} x_i$, is the sample mean.</li>
+<li>$\hat{\sigma} = \sqrt{\frac{1}{n - 1} \sum_{i = 1}{n} (x - \hat{\mu})^2}$, is the sample standard deviation.</li>
+<li>$\sigma_{g_1} = \sqrt{\frac{6(n - 2)}{(n + 1)(n + 3)}}$</li>
+</ul>
+</li>
+<li>Scott’s rule: $h = \frac{3.49\hat{\sigma}}{\sqrt[\leftroot{-2}\uproot{2}3]{n}}$, where $\hat{\sigma}$ is the sample standard deviation, this is optimal for normally distributed data.</li>
+<li>Feedman-Diaconis’ rule: $h = 2 \cdot \frac{IQR(x)}{\sqrt[\leftroot{-2}\uproot{2}3]{n}}$, where $IQR(x) = Q_3 - Q_1$ is the interquartile range.</li>
+</ul>
+<h4 id="boxplot">Boxplot</h4>
+<p>The boxplot, or the box and whiskers plot, is a concise way to represent the different quartiles of the data.
+The box shows the upper and lower quartiles of the data
+(50% of the data lies inside the box, that is, the bottom of the box shows where 25% quartile is, and the top of the box where the 75% quartile is).</p>
+<p>The median of the data is shown with a line.</p>  </div> <nav class="flex flex-col sm:flex-row justify-between mt-8 pt-4 border-t border-border" data-astro-cid-v5ro3oot>   </nav> </article>  </main> </div> </body></html> 

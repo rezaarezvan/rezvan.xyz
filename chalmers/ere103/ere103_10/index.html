@@ -1,0 +1,214 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="Astro v4.11.5"><link rel="icon" type="image" href="/favicon.ico"><title>Part 10 - Design of controllers</title><!-- KaTeX support --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script><!-- inline KaTeX --><link rel="stylesheet" href="/_astro/index.CwgzIfsj.css">
+<link rel="stylesheet" href="/_astro/_slug_.hCvEQTvV.css">
+<style>article[data-astro-cid-v5ro3oot]{max-width:80ch;margin:0 auto}.nav-button[data-astro-cid-v5ro3oot]{display:flex;align-items:center;padding:.5rem;border-radius:.5rem;transition:background-color .3s ease;text-decoration:none;color:var(--text-color);background-color:var(--bg-color);border:1px solid var(--border-color)}.nav-button[data-astro-cid-v5ro3oot]:hover{background-color:var(--hover-color)}.nav-button[data-astro-cid-v5ro3oot] .arrow[data-astro-cid-v5ro3oot]{font-size:1.5rem;line-height:1}.nav-button[data-astro-cid-v5ro3oot] .text[data-astro-cid-v5ro3oot]{display:flex;flex-direction:column;margin:0 .5rem}.nav-button[data-astro-cid-v5ro3oot] .label[data-astro-cid-v5ro3oot]{font-size:.8rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted-color)}.nav-button[data-astro-cid-v5ro3oot] .title[data-astro-cid-v5ro3oot]{font-weight:500}.prev-button[data-astro-cid-v5ro3oot]{justify-content:flex-start}.next-button[data-astro-cid-v5ro3oot]{justify-content:flex-end;text-align:right}@media (max-width: 640px){.nav-button[data-astro-cid-v5ro3oot]{width:100%}.next-button[data-astro-cid-v5ro3oot]{justify-content:flex-start;text-align:left}.next-button[data-astro-cid-v5ro3oot] .text[data-astro-cid-v5ro3oot]{order:2;margin-left:.5rem}.next-button[data-astro-cid-v5ro3oot] .arrow[data-astro-cid-v5ro3oot]{order:1}}
+</style><script type="module">document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]})});
+</script></head> <body> <div class="container mx-auto px-4 flex flex-col md:flex-row min-h-screen"> <aside class="w-full md:w-64 border-b md:border-r md:border-b-0 border-[var(--border-color)] border-dashed pt-8"> <header class="flex flex-col h-full"> <div class="flex items-center mb-4"> <script>
+  function setTheme(mode) {
+    localStorage.setItem("theme-storage", mode);
+    document.documentElement.setAttribute('data-theme', mode);
+  }
+  function toggleTheme() {
+    const currentTheme = localStorage.getItem("theme-storage") || "light";
+    const newTheme = currentTheme === "light" ? "dark" : "light";
+    setTheme(newTheme);
+  }
+  const savedTheme = localStorage.getItem("theme-storage") || "light";
+  setTheme(savedTheme);
+  window.toggleTheme = toggleTheme;
+</script> <button id="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme" class="w-6 h-6 cursor-pointer"> <div class="w-5 h-5 border-2 border-primary rounded-full transition-colors duration-300 ease-in-out hover:bg-primary"></div> </button> <a href="/" class="text-2xl font-semibold ml-3 h-10 pr-3">rezvan.xyz</a> </div> <nav class="flex flex-wrap gap-2 md:flex-col md:gap-2"> <a href="/principles" class="transition-colors">
+[principles]
+</a><a href="/cv" class="transition-colors">
+[cv]
+</a><a href="/posts" class="transition-colors">
+[posts]
+</a><a href="/chalmers" class="transition-colors">
+[chalmers]
+</a><a href="/cityu" class="transition-colors">
+[cityu]
+</a> </nav> </header> </aside> <main class="flex-grow px-4 md:px-8 py-8 overflow-y-auto">  <article class="prose prose-sm sm:prose lg:prose-lg xl:prose-xl max-w-none" data-astro-cid-v5ro3oot> <h1 class="text-3xl sm:text-4xl font-bold mb-4" data-astro-cid-v5ro3oot>Part 10 - Design of controllers</h1> <p class="text-sm text-muted-foreground mb-4" data-astro-cid-v5ro3oot>
+Date: 11/27/2023 </p> <div class="markdown-content" data-astro-cid-v5ro3oot>  <h3 id="introduction">Introduction</h3>
+<p>In this part we’ll see how we can design different type of controllers to make a system behave as wanted.</p>
+<h3 id="pd-controller">PD-controller</h3>
+<p>$$
+G(s) = \dfrac{K}{s(1 + sT)}
+$$</p>
+<p>$$
+F(s) = K_p + K_d s
+$$</p>
+<p>The loop transfer function is:
+$$
+L(s) = F(s)G(s) = \dfrac{K(K_p + K_d s)}{s(1 + sT)} = \dfrac{\frac{K}{T} (K_p + K_d s)}{s^2 + \frac{1}{T} s}
+$$</p>
+<p>$$
+G_{ry}(s) = \dfrac{L(s)}{1 + L(s)} = \dfrac{\dfrac{\frac{K}{T} (K_p + K_d s)}{s^2 + \frac{1}{T} s}}{1 + \dfrac{\frac{K}{T} (K_p + K_d s)}{s^2 + \frac{1}{T} s}} = \dfrac{\frac{K}{T}(K_p + K_d s)}{s^2 + \frac{1}{T} s + \frac{K}{T}(K_p + K_d s)} = \dfrac{K_p \frac{K}{T} + K_d \frac{K}{T} s}{s^2 + (1 + K_d K) s + K_p \frac{K}{T}}
+$$</p>
+<p>Which we can view as a second-order system where:
+$$
+\omega_n = \sqrt{K_p \frac{K}{T}} \newline
+$$</p>
+<p>$$
+\zeta = \dfrac{1 + K_d K}{2 \omega_n} = \dfrac{1 + K_d K}{2\sqrt{K_p \frac{K}{T}}}
+$$</p>
+<p>If $K_d$ increases, $\zeta$ will also increase. This means that the phase margin will increase.</p>
+<p>If $K_d$ decreases, $\zeta$ will also decrease. This means that the phase margin will decrease.</p>
+<h3 id="example">Example</h3>
+<p>In this case we have a simple I-controller.</p>
+<p>$$
+u(t) = K_i \int_0^t e(\tau)\ d\tau \iff F(s) = \dfrac{K_i}{s}
+$$</p>
+<p>Given that our process is:
+$$
+G(s) = \dfrac{b}{s + a}
+$$</p>
+<p>Our loop transfer function is:
+$$
+L(s) = F(s)G(s) = \dfrac{K_i b}{s(s + a)}
+$$</p>
+<p>What should $K_i$ be if we want a phase margin of $45^\circ$, meaning $\phi_m = 45^\circ$.
+$$
+L(j\omega) = \dfrac{K_i b}{j\omega(j\omega + a)}
+$$</p>
+<p>We defined the phase margin as:
+$$
+\phi_m = arg(L(j\omega_c)) + 180^\circ
+$$</p>
+<p>$$
+45^\circ = arg(L(j\omega_c)) + 180^\circ
+$$</p>
+<p>$$
+arg(L(j\omega_c)) = -135^\circ
+$$</p>
+<p>$$
+-90^\circ - arctan(\dfrac{\omega_c}{a}) = -135^\circ
+$$</p>
+<p>$$
+arctan(\dfrac{\omega_c}{a}) = 45^\circ
+$$</p>
+<p>$$
+\dfrac{\omega_c}{a} = 1
+$$</p>
+<p>$$
+\omega_c = a
+$$</p>
+<p>Using the fact that $|L(j\omega_c)| = 1$:
+$$
+|L(j\omega_c)| = 1
+$$</p>
+<p>$$
+\dfrac{K_i b}{\omega_c \sqrt{\omega_c^2 + a^2}} = 1
+$$</p>
+<p>$$
+\dfrac{K_i b}{a \sqrt{a^2 + a^2}} = 1
+$$</p>
+<p>$$
+\dfrac{K_i b}{a \sqrt{2a^2}} = 1
+$$</p>
+<p>$$
+\dfrac{K_i b}{\sqrt{2}\ a^2} = 1
+$$</p>
+<p>$$
+K_i b = \sqrt{2}\ a^2
+$$</p>
+<p>$$
+K_i = \dfrac{\sqrt{2}\ a^2}{b}
+$$</p>
+<p>Let’s put this into $L(s)$
+$$
+L(s) = \dfrac{\sqrt{2}\ a^2}{s(s + a)}
+$$</p>
+<p>Let’s now find $G_{ry}(s)$
+$$
+G_{ry}(s) = \dfrac{L(s)}{1 + L(s)} = \ldots = \dfrac{\sqrt{2}\ a^2}{s(s + a) + \sqrt{2}\ a^2} = \dfrac{\sqrt{2}\ a^2}{s^2 + as + \sqrt{2}\ a^2}
+$$</p>
+<p>Second-order system!
+$$
+\omega_n = \sqrt{\sqrt{2}\ a^2} = 2^{\frac{1}{4}}\ a \newline
+\zeta = \dfrac{a}{2 \omega_n} = \dfrac{a}{2(2^{\frac{1}{4}}\ a)} = \dfrac{1}{2 \cdot 2^{\frac{1}{4}}} = 0.42
+$$</p>
+<h3 id="example-1">Example</h3>
+<p>Let’s now do a PI-controller</p>
+<p>Given the system:
+$$
+G(s) = \dfrac{1}{s(s + 8)^2}
+$$</p>
+<p>Design a PI-controller so that the phase margin is $50^\circ$, given that $\omega_c = 0.3 \omega_{\pi}$</p>
+<p><strong>NB</strong>: This notation, $\omega_c = C \cdot \omega_{\pi}$ means that $|G(j\omega_c)| = 1$ and $arg(G(j\omega_{\pi}) = -180^\circ$, not the loop transfer function. One can also denote it as $\omega_{cG}$</p>
+<p>A general PI-controller is written as:
+$$
+F(s) = K_p + \dfrac{K_i}{s} = K_p(1 + \dfrac{1}{T_i s}) = K_p(\dfrac{1 + T_i s}{T_i s})
+$$</p>
+<p>We know that:
+$$
+arg(G(j\omega_{\pi})) = -180^\circ
+$$</p>
+<p>$$
+G(j\omega) = \dfrac{1}{j\omega(j\omega + 8)^2}
+$$</p>
+<p>Which means:
+$$
+arg(G(j\omega)) = -90^\circ - 2 arctan(\dfrac{\omega}{8})
+$$</p>
+<p>$$
+-90^\circ - 2 arctan(\dfrac{\omega_{\pi}}{8}) = -180^\circ
+$$</p>
+<p>$$
+2 arctan(\dfrac{\omega_{\pi}}{8}) = 90^\circ
+$$</p>
+<p>$$
+arctan(\dfrac{\omega_{\pi}}{8}) = 45^\circ
+$$</p>
+<p>$$
+\dfrac{\omega_{\pi}}{8} = 1
+$$</p>
+<p>$$
+\omega_{\pi} = 8
+$$</p>
+<p>From our initial condition:
+$$
+\omega_c = 0.3 \cdot \omega_{\pi} = 2.4
+$$</p>
+<p>A phase margin of $50^\circ$ means:
+$$
+\phi_m = 50^\circ \iff arg(L(j\omega_c)) + 180^\circ = 50^\circ
+$$</p>
+<p>We actually don’t need to calculate what the loop transfer function is here, we can use the fact that $L(s) = F(s)G(s)$, which means $arg(L(j\omega)) = arg(F(j\omega)) + arg(G(j\omega))$.</p>
+<p>$$
+arg(G(j\omega)) = -90^\circ - 2 arctan(\dfrac{2.4}{8}) = -123.4^\circ
+$$</p>
+<p>$$
+F(j\omega) = K_p(\dfrac{1 + T_i j\omega}{T_i j\omega})
+$$</p>
+<p>$$
+arg(F(j\omega)) = arctan(T_i \omega) - 90^\circ
+$$</p>
+<p>$$
+arg(L(j\omega_c)) + 180^\circ = 50^\circ
+$$</p>
+<p>$$
+arctan(T_i \omega_c) - 90^\circ -123.4^\circ + 180^\circ = 50^\circ
+$$</p>
+<p>$$
+arctan(T_i \omega_c) = 83.4^\circ
+$$</p>
+<p>$$
+2.4 T_i = tan(83.4^\circ)
+$$</p>
+<p>$$
+T_i = \dfrac{tan(83.4^\circ)}{2.4} = 3.6
+$$</p>
+<p>Now, let’s use that $|L(j\omega_c)| = 1$
+$$
+|L(j\omega_c)| = 1
+$$</p>
+<p>$$
+|F(j\omega)G(j\omega)| = 1
+$$</p>
+<p>$$
+|F(j\omega)| |G(j\omega)| = 1
+$$</p>
+<p>$$
+K_p \cdot \dfrac{\sqrt{1^2 + (\omega_c \cdot T_i)^2}}{\omega_c \cdot T_i} \cdot \dfrac{1}{\omega_c \sqrt{\omega_c^2 + 8^2}^2} = 1
+$$</p>
+<p>$$
+K_p = \ldots \approx 166.31
+$$</p>  </div> <nav class="flex flex-col sm:flex-row justify-between mt-8 pt-4 border-t border-border" data-astro-cid-v5ro3oot>   </nav> </article>  </main> </div> </body></html> 

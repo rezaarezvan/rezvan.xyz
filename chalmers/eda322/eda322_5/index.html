@@ -1,0 +1,137 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="Astro v4.11.5"><link rel="icon" type="image" href="/favicon.ico"><title>Part 5 - Arithmetic Units</title><!-- KaTeX support --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script><!-- inline KaTeX --><link rel="stylesheet" href="/_astro/index.CwgzIfsj.css">
+<link rel="stylesheet" href="/_astro/_slug_.hCvEQTvV.css">
+<style>article[data-astro-cid-v5ro3oot]{max-width:80ch;margin:0 auto}.nav-button[data-astro-cid-v5ro3oot]{display:flex;align-items:center;padding:.5rem;border-radius:.5rem;transition:background-color .3s ease;text-decoration:none;color:var(--text-color);background-color:var(--bg-color);border:1px solid var(--border-color)}.nav-button[data-astro-cid-v5ro3oot]:hover{background-color:var(--hover-color)}.nav-button[data-astro-cid-v5ro3oot] .arrow[data-astro-cid-v5ro3oot]{font-size:1.5rem;line-height:1}.nav-button[data-astro-cid-v5ro3oot] .text[data-astro-cid-v5ro3oot]{display:flex;flex-direction:column;margin:0 .5rem}.nav-button[data-astro-cid-v5ro3oot] .label[data-astro-cid-v5ro3oot]{font-size:.8rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted-color)}.nav-button[data-astro-cid-v5ro3oot] .title[data-astro-cid-v5ro3oot]{font-weight:500}.prev-button[data-astro-cid-v5ro3oot]{justify-content:flex-start}.next-button[data-astro-cid-v5ro3oot]{justify-content:flex-end;text-align:right}@media (max-width: 640px){.nav-button[data-astro-cid-v5ro3oot]{width:100%}.next-button[data-astro-cid-v5ro3oot]{justify-content:flex-start;text-align:left}.next-button[data-astro-cid-v5ro3oot] .text[data-astro-cid-v5ro3oot]{order:2;margin-left:.5rem}.next-button[data-astro-cid-v5ro3oot] .arrow[data-astro-cid-v5ro3oot]{order:1}}
+</style><script type="module">document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]})});
+</script></head> <body> <div class="container mx-auto px-4 flex flex-col md:flex-row min-h-screen"> <aside class="w-full md:w-64 border-b md:border-r md:border-b-0 border-[var(--border-color)] border-dashed pt-8"> <header class="flex flex-col h-full"> <div class="flex items-center mb-4"> <script>
+  function setTheme(mode) {
+    localStorage.setItem("theme-storage", mode);
+    document.documentElement.setAttribute('data-theme', mode);
+  }
+  function toggleTheme() {
+    const currentTheme = localStorage.getItem("theme-storage") || "light";
+    const newTheme = currentTheme === "light" ? "dark" : "light";
+    setTheme(newTheme);
+  }
+  const savedTheme = localStorage.getItem("theme-storage") || "light";
+  setTheme(savedTheme);
+  window.toggleTheme = toggleTheme;
+</script> <button id="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme" class="w-6 h-6 cursor-pointer"> <div class="w-5 h-5 border-2 border-primary rounded-full transition-colors duration-300 ease-in-out hover:bg-primary"></div> </button> <a href="/" class="text-2xl font-semibold ml-3 h-10 pr-3">rezvan.xyz</a> </div> <nav class="flex flex-wrap gap-2 md:flex-col md:gap-2"> <a href="/principles" class="transition-colors">
+[principles]
+</a><a href="/cv" class="transition-colors">
+[cv]
+</a><a href="/posts" class="transition-colors">
+[posts]
+</a><a href="/chalmers" class="transition-colors">
+[chalmers]
+</a><a href="/cityu" class="transition-colors">
+[cityu]
+</a> </nav> </header> </aside> <main class="flex-grow px-4 md:px-8 py-8 overflow-y-auto">  <article class="prose prose-sm sm:prose lg:prose-lg xl:prose-xl max-w-none" data-astro-cid-v5ro3oot> <h1 class="text-3xl sm:text-4xl font-bold mb-4" data-astro-cid-v5ro3oot>Part 5 - Arithmetic Units</h1> <p class="text-sm text-muted-foreground mb-4" data-astro-cid-v5ro3oot>
+Date: 2/3/2023 </p> <div class="markdown-content" data-astro-cid-v5ro3oot>  <p>In this part we’ll cover arithmetic units. Specifically multipliers and divers.</p>
+<p>We’ll also cover some number representations.</p>
+<h3 id="arithmetic-units">Arithmetic Units</h3>
+<p>It may be common knowledge that, when we want to perform multiplication and division,
+by powers of 2, we perform so-called shift operations on the bits.</p>
+<p>If we for example want to multiply a number with the binary number <code>100</code>, or 4 in decimal.</p>
+<p>We would just shift all bits two steps to the left. Same logic goes for division, but it is right shifts.</p>
+<p>But we won’t always have powers of 2 when multiplying. If we for example multiplied with <code>101</code> instead, or 5 in decimal</p>
+<p>We can rewrite the multiplication as:
+$$
+5 * X = 4 * X + X
+$$</p>
+<p>So we perform a left shift with 2 bits, and add the initial value to that.</p>
+<h4 id="multiplication-algorithm">Multiplication Algorithm</h4>
+<p>When multiplying two binary numbers with each other, our usual ‘partial products’ algorithm works in base 2 as well.</p>
+<p>So we can write out our algorithm as:</p>
+<p>for i = 1 to n, where n = # of bits of the operands</p>
+<p>If the $i$-th bit of the <em>multiplier</em> is 1:</p>
+<p>Add <em>multiplicand</em> $\cdot\ 2^{i - 1}$ to the final product.</p>
+<p>For any operands of size <code>N</code> bits, the final result will become <code>2N</code> in size.</p>
+<p>If we want to make a multiplier circuit, we would firstly need a register of size <code>2N</code>.</p>
+<p>Secondly, we would need to test the LSB <code>N</code> times of the multiplier, and per bit, we would need to perform 3 operations,
+shift right, shift left and add.</p>
+<p>This is a really slow and expensive circuit.</p>
+<p>To speed up the process, we can share one register for both the result and multiplicand + 1 extra bit (for carry out).</p>
+<p>So we have one single register that is <code>2N + 1</code> in size and our <code>N</code> sized multiplier.</p>
+<p>We still test the LSB <code>N</code> times for the multiplier, but each bit we only perform 2 operations now.
+Shift right and add, since each right shift handles the multiplicand and the result now.</p>
+<h3 id="multiplying-with-signs">Multiplying with signs</h3>
+<p>If we encounter numbers with signs, we convert these numbers to their respective magnitudes.</p>
+<p>Multiply the two magnitudes, if the signs differ of the operands, we negate our result.</p>
+<p>So we can still use our circuit for the multiplication!</p>
+<h3 id="adding-partial-products">Adding partial products</h3>
+<p>If we for example multiply two four bit numbers,
+in the general case, we would need to perform three 4-bit additions due to the carryout(s) that can occur.</p>
+<p>Which is slow! So as we have done before when adding numbers, we can do a so-called carry forward.</p>
+<p>So the carry is added to the next partial product, and an image to illustrate.
+<img src="/images/school/carryforward.png" alt=""></p>
+<p>This means we need to have a FA at each of the ‘transition’ states (the arrows) along the usual AND gates.</p>
+<p>Even though it may seem like having this many FAs can be slow, it’s better than the first solution.</p>
+<h3 id="binary-division">Binary Division</h3>
+<p>When performing binary division, we firstly <strong>always</strong> need to check so that the divisor is not 0.</p>
+<p>Then we have two approaches:</p>
+<ul>
+<li>Long division approach
+<ul>
+<li>If divisor $\leq$ dividend bits:
+<ul>
+<li>1 bit in quotient, subtract</li>
+</ul>
+</li>
+<li>Otherwise:
+<ul>
+<li>0 bit in quotient, bring down next dividend bit.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Restoring division
+<ul>
+<li>Do the subtraction, and if remainder goes $&#x3C;$ 0, add divisor <em>back</em></li>
+</ul>
+</li>
+<li>Signed division
+<ul>
+<li>Divide using absolute values (magnitudes)
+<ul>
+<li>Adjust sign of quotient and remainder as required (if they differ, negate).</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>So we can use the same technique as before, the quotient and the dividend share one register together,
+but now we need an extra remainder register. Then we just implement this algorithm into a sequential circuit.</p>
+<h3 id="fixed-point--floating-point-numbers">Fixed-point &#x26; Floating-point numbers</h3>
+<p>Often we may need to represent rational numbers. Let’s first define integers and rational numbers in binary.</p>
+<p>An integer can be represented as:
+$$
+v = \sum_{i = 0}^{n - 1}\ a_i\ 2^i
+$$</p>
+<p>One way of representing a rational number is using something called a fixed-point number:</p>
+<p>$$
+v = r\ \sum_{i = 0}^{n - 1}\ a_i\ 2^i
+$$</p>
+<p>Where $r$ is called the resolution and is defined as $r = 2^{\text{number of fractional bits}}$</p>
+<p>We represent the fixed point numbers with using the <code>.</code> separator.
+So the <code>1.3</code>format and specifically <code>1.011</code>. Where the <code>.</code> is says what resolution we have.</p>
+<p>So by our definition, <code>1.011</code> has integer value 11. The resolution is 3 bits or, $2^{-3} = \frac{1}{8}$</p>
+<p>Therefore, our final value becomes $\frac{1}{8} \cdot\ 11 = \frac{11}{8}$.</p>
+<p>Now floating-point numbers are a bit harder to grasp by their definition:
+$$
+v = m \cdot\ 2^{e - x} = r\ \sum_{i = 0}^{n - 1}\ m_i\ 2^{i - n} \cdot\ 2^{\sum_{i = 0}^{k - 1} e_i 2^k - x}
+$$</p>
+<p>Now we also have $m$ which is the <em>mantissa</em> or the binary fraction.
+We also have $e$ which is the exponent, or the binary integer.</p>
+<p>The floating-point numbers are derived from scientific notation.</p>
+<p>So an example, say we have:
+$$
+m = 10010, e = 011
+$$</p>
+<p>Therefore, we have:
+$$
+10010E011
+$$</p>
+<p>Which represents:
+$$
+v = \frac{18}{32} \cdot\ 8
+$$</p>  </div> <nav class="flex flex-col sm:flex-row justify-between mt-8 pt-4 border-t border-border" data-astro-cid-v5ro3oot>   </nav> </article>  </main> </div> </body></html> 

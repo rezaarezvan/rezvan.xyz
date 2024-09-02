@@ -1,0 +1,350 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="Astro v4.11.5"><link rel="icon" type="image" href="/favicon.ico"><title>Part 9 - Machine Learning</title><!-- KaTeX support --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script><!-- inline KaTeX --><link rel="stylesheet" href="/_astro/index.CwgzIfsj.css">
+<link rel="stylesheet" href="/_astro/_slug_.hCvEQTvV.css">
+<style>article[data-astro-cid-v5ro3oot]{max-width:80ch;margin:0 auto}.nav-button[data-astro-cid-v5ro3oot]{display:flex;align-items:center;padding:.5rem;border-radius:.5rem;transition:background-color .3s ease;text-decoration:none;color:var(--text-color);background-color:var(--bg-color);border:1px solid var(--border-color)}.nav-button[data-astro-cid-v5ro3oot]:hover{background-color:var(--hover-color)}.nav-button[data-astro-cid-v5ro3oot] .arrow[data-astro-cid-v5ro3oot]{font-size:1.5rem;line-height:1}.nav-button[data-astro-cid-v5ro3oot] .text[data-astro-cid-v5ro3oot]{display:flex;flex-direction:column;margin:0 .5rem}.nav-button[data-astro-cid-v5ro3oot] .label[data-astro-cid-v5ro3oot]{font-size:.8rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted-color)}.nav-button[data-astro-cid-v5ro3oot] .title[data-astro-cid-v5ro3oot]{font-weight:500}.prev-button[data-astro-cid-v5ro3oot]{justify-content:flex-start}.next-button[data-astro-cid-v5ro3oot]{justify-content:flex-end;text-align:right}@media (max-width: 640px){.nav-button[data-astro-cid-v5ro3oot]{width:100%}.next-button[data-astro-cid-v5ro3oot]{justify-content:flex-start;text-align:left}.next-button[data-astro-cid-v5ro3oot] .text[data-astro-cid-v5ro3oot]{order:2;margin-left:.5rem}.next-button[data-astro-cid-v5ro3oot] .arrow[data-astro-cid-v5ro3oot]{order:1}}
+</style><script type="module">document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]})});
+</script></head> <body> <div class="container mx-auto px-4 flex flex-col md:flex-row min-h-screen"> <aside class="w-full md:w-64 border-b md:border-r md:border-b-0 border-[var(--border-color)] border-dashed pt-8"> <header class="flex flex-col h-full"> <div class="flex items-center mb-4"> <script>
+  function setTheme(mode) {
+    localStorage.setItem("theme-storage", mode);
+    document.documentElement.setAttribute('data-theme', mode);
+  }
+  function toggleTheme() {
+    const currentTheme = localStorage.getItem("theme-storage") || "light";
+    const newTheme = currentTheme === "light" ? "dark" : "light";
+    setTheme(newTheme);
+  }
+  const savedTheme = localStorage.getItem("theme-storage") || "light";
+  setTheme(savedTheme);
+  window.toggleTheme = toggleTheme;
+</script> <button id="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme" class="w-6 h-6 cursor-pointer"> <div class="w-5 h-5 border-2 border-primary rounded-full transition-colors duration-300 ease-in-out hover:bg-primary"></div> </button> <a href="/" class="text-2xl font-semibold ml-3 h-10 pr-3">rezvan.xyz</a> </div> <nav class="flex flex-wrap gap-2 md:flex-col md:gap-2"> <a href="/principles" class="transition-colors">
+[principles]
+</a><a href="/cv" class="transition-colors">
+[cv]
+</a><a href="/posts" class="transition-colors">
+[posts]
+</a><a href="/chalmers" class="transition-colors">
+[chalmers]
+</a><a href="/cityu" class="transition-colors">
+[cityu]
+</a> </nav> </header> </aside> <main class="flex-grow px-4 md:px-8 py-8 overflow-y-auto">  <article class="prose prose-sm sm:prose lg:prose-lg xl:prose-xl max-w-none" data-astro-cid-v5ro3oot> <h1 class="text-3xl sm:text-4xl font-bold mb-4" data-astro-cid-v5ro3oot>Part 9 - Machine Learning</h1> <p class="text-sm text-muted-foreground mb-4" data-astro-cid-v5ro3oot>
+Date: 2/20/2024 </p> <div class="markdown-content" data-astro-cid-v5ro3oot>  <h3 id="introduction">Introduction</h3>
+<p>In this part, we will discuss machine learning and neural networks.
+We will start with a brief introduction to machine learning.</p>
+<h3 id="learning-types">Learning types</h3>
+<p>There are three types of learning:</p>
+<ul>
+<li>Supervised learning</li>
+<li>Unsupervised learning</li>
+<li>Semi-supervised learning</li>
+<li>Self-supervised learning</li>
+</ul>
+<h4 id="supervised-learning">Supervised learning</h4>
+<p>In <em>supervised learning</em>, we have for each input $x$ a label $y$, that we want to predict.
+Models are trained to minimize the difference between their prediction and the labels.</p>
+<h4 id="unsupervised-learning">Unsupervised learning</h4>
+<p>In <em>unsupervised learning</em>, we only make use of the inputs $x$.
+Here patterns are found in the inputs, for example using clustering.
+But as we do not have labels to validate the patterns/clusters found we can never be sure how could the model is.</p>
+<h4 id="semi-supervised-learning">Semi-supervised learning</h4>
+<p>In <em>semi-supervised</em> learning, we have a small dataset that has labels, and data that has no labels.
+The model trained on the initially labeled data creates labels for the unlabeled data.
+The final model is trained on the complete data.</p>
+<h4 id="self-supervised-learning">Self-supervised learning</h4>
+<p>In self-supervised learning no true labels exist, however, simple labels can be inferred from the data.
+For example, reconstructing an image (turning an image from RGB to BW), here $x$ and $y$ are identical.</p>
+<h3 id="support-vector-machines">Support Vector Machines</h3>
+<p>Support Vector Machines (SVM) are a type of supervised learning model. They are used for classification and regression analysis.
+SVMs are based on the idea of finding a hyperplane that best divides a dataset into two classes.</p>
+<p>In two dimensions, the hyperplane is a line:
+$$
+y = \frac{1}{1 + e^{-mx + b}}
+$$</p>
+<p>In three dimensions, the hyperplane is a plane:
+$$
+y = \frac{1}{1 + e^{-m_1 x +  -m_2 z + b}}
+$$</p>
+<h4 id="decision-boundary">Decision boundary</h4>
+<p>The decision boundary is the line that separates the classes.
+The distance between the decision boundary and the closest data point is called the margin.
+The best decision boundary is the one that maximizes the margin.</p>
+<h4 id="soft-margin">Soft margin</h4>
+<p>In some cases, the data is not linearly separable. In this case, we can use a soft margin.
+The soft margin allows for some data points to be on the wrong side of the decision boundary.
+The margin is then maximized by minimizing the number of misclassified data points.</p>
+<h3 id="non-linear-classification">Non-linear classification</h3>
+<p>In some cases, the data is not linearly separable. In this case, we can use the kernel trick.
+The kernel trick maps the data to a higher-dimensional space where it is linearly separable.
+This allows us to use a linear decision boundary in the higher-dimensional space.</p>
+<h3 id="scaling">Scaling</h3>
+<p>SVMs want to optimize the distance. Changing the variables with large scales quickly leads to a significant “improvement” in the result.
+But, small-scale variables are ignored.</p>
+<p>So, all variables should be scaled to the same range. This can be done by subtracting the mean and dividing by the standard deviation.
+$$
+x_{\text{scaled}} = \frac{x - \mu}{\sigma}
+$$</p>
+<p>Alternatively, we can use the min-max scaler, which scales the data to the range $[0, 1]$:
+$$
+x_{\text{scaled}} = \frac{x - \min(x)}{\max(x) - \min(x)}
+$$</p>
+<h3 id="random-forest">Random Forest</h3>
+<p>Random Forest is a type of supervised learning model. It is used for classification and regression analysis.
+Unlike SVMs, Random Forests are not dependent on distances, or the scale of the data. They’re instead based on decision trees.</p>
+<h4 id="decision-trees">Decision trees</h4>
+<p>A <em>decision tree</em> is a tree shaped diagram used to determine a course of action.
+It can be used for decision-making, classification.</p>
+<p>Each <em>node</em> represents a question/problem.
+Each <em>branch</em> represents an answer/decision.
+Each <em>leaf</em> represents a class label.</p>
+<h4 id="importance-and-overfitting">Importance and overfitting</h4>
+<p>The importance of a feature is a measure of how much the feature contributes to the decision.
+How do we know if a decision is based on a real pattern or just noise/outliers?
+To prevent this error, we can allow the creation of branches only if there are $n$ data points in a group. This is called <em>pruning</em>.</p>
+<h4 id="impurity">Impurity</h4>
+<p>Impurity is a measure of how often a randomly chosen element from the set would be incorrectly labeled if it was randomly labeled according to the distribution of labels in the subset.
+The most common impurity measures are:</p>
+<ul>
+<li>Gini impurity</li>
+<li>Entropy</li>
+<li>Classification error</li>
+</ul>
+<h5 id="gini-impurity">Gini impurity</h5>
+<p>The Gini impurity is a measure of how often a randomly chosen element from the set would be incorrectly labeled if it was randomly labeled according to the distribution of labels in the subset.
+$$
+\text{Gini impurity} = 1 - (P(\text{yes})^2 + P(\text{no})^2)
+$$</p>
+<h3 id="random-forest-1">Random Forest</h3>
+<p>A Random Forest is a collection of decision trees. This to prevent overfitting.
+A random forest uses several hundred or thousands of decision trees.
+Decision trees are always built from optimal variables, do all trees look the same?</p>
+<h4 id="bagging">Bagging</h4>
+<p>To answer the last question, we use bagging. Each tree is trained with its own data set.
+Outliers are drawn less often because they are less common in the data set.</p>
+<p>Not only does each tree in the random forest have its own data. Each tree also receives only one random subunit of the variable.</p>
+<h4 id="boosting">Boosting</h4>
+<p>Boosting is an alternative ensemble method to bagging, used in random forests.</p>
+<p>In boosting the trees are built sequentially:</p>
+<ul>
+<li>Build a tree</li>
+<li>Evaluate performance on data</li>
+<li>Reweight the samples</li>
+<li>Repeat</li>
+</ul>
+<p>Samples for which the first trees perform bad, are assigned a higher weight.</p>
+<p>Increased consideration when building the next tree.</p>
+<h3 id="rosenblatt-perceptron">Rosenblatt perceptron</h3>
+<p>The Rosenblatt perceptron is the “grandfather” of neural networks. It is based on the idea of biological neurons.
+A perceptron has one or more inputs and a bias. It sums the inputs and applies an activation function to the sum.</p>
+<p>This idea conveys the idea of a threshold. If the sum is above the threshold, the neuron fires. If not, it does not.
+This is how we can determine if some data point is “important” or not.</p>
+<p>But, in order to “learn” something needs to change, this is why every input has a weight. The weight determines the importance of the input.</p>
+<h3 id="neural-networks">Neural networks</h3>
+<p>With the Rosenblatt perceptron in mind, we can now discuss neural networks.
+A neural network is a collection of neurons, connected in so-called layers.
+The first layer is the input layer, the last layer is the output layer, and the layers in between are called hidden layers.</p>
+<p>Let’s take the most famous dataset, the MNIST dataset as an example.</p>
+<p>Given an image of a digit, we want to predict which digit it is. The input layer has 784 neurons, one for each pixel in the image.</p>
+<p>So for every neuron in the hidden layer, we perform:
+$$
+w_1 x_1 + w_2 x_2 + \ldots + w_{784} x_{784} + b
+$$</p>
+<p>If you remember linear algebra, this is a dot product. The weights are the coefficients, the inputs are the vector.</p>
+<p>So that entire sum can be written as:
+$$
+(x \cdot w) + b
+$$</p>
+<p>But we usually have more than one neuron in the hidden layer. So each neuron has its own weight vector and bias.
+$$
+(x \cdot w_1) + b_1 \ | \ \text{neuron 1} \newline
+(x \cdot w_2) + b_2 \ | \ \text{neuron 2} \newline
+\vdots \newline
+(x \cdot w_n) + b_n \ | \ \text{neuron n}
+$$</p>
+<p>We can combine all the weight vectors into a matrix:
+$$
+\mathbf{W} = \begin{bmatrix}
+w_{1} \newline
+w_{2} \newline
+\vdots \newline
+w_{n}
+\end{bmatrix}
+$$</p>
+<p>And all the biases into a vector:
+$$
+\mathbf{b} = \begin{bmatrix}
+b_{1} \newline
+b_{2} \newline
+\vdots \newline
+b_{n}
+\end{bmatrix}
+$$</p>
+<p>This mean we can write every summation every neuron performs as one matrix multiplication:
+$$
+x\mathbf{W}^{T} + \mathbf{b}
+$$</p>
+<p>But one component is missing from the original Rosenblatt perceptron, the activation function.
+After the linear transformation, all values are passed through a non-linear activation function. We can view this as a filter function.</p>
+<p>The non-linear transformation is necessary because it allows the network to “learn” more complex, non-linear patterns.
+Some common activation functions are:</p>
+<ul>
+<li>Step function</li>
+<li>Sigmoid function</li>
+<li>ReLU function</li>
+</ul>
+<p>So from our input layer we receive:
+$$
+a_1 = \sigma(z_1) = \sigma(x\mathbf{W_1}^{T} + \mathbf{b_1})
+$$</p>
+<p>Our output layer then receives (from the hidden layer):
+$$
+z_2 = a_1\mathbf{W_2}^{T} + \mathbf{b_2}
+$$</p>
+<p>Now at the output layer, we need to perform a non-linear transformation so that we can make a statement.
+For example for the MNIST dataset, we want the network to tell us which digit it is. So we use the softmax function to transform the output into probabilities for each class.</p>
+<p>This entire process is called forward propagation. But how does the network learn the correct values for the parameters to perform a correct classification?</p>
+<p>This is what machine learning is all about. The correct values are learned by “training” the network.</p>
+<h3 id="training">Training</h3>
+<p>After each image and prediction, we need to “tell” the network how good it did. From this information, the network can adjust its parameters to perform better next time.
+The <em>loss function</em> is a measure of how good the network did. The loss function quantifies the difference between the predicted and the true values.</p>
+<p>So, the loss function measures the error, the goal is therefore to minimize the loss function. In our case, the loss function is the cross-entropy loss function.
+$$
+L = -\frac{1}{N} \sum_{n=1}^{N} \sum_{i=1}^{I} y_{n,i} \log(\hat{y}_{n,i})
+$$</p>
+<ul>
+<li>For each position of a prediction, we multiply the true value of the position by the log of the prediction.</li>
+<li>For each prediction, the products are summed up.</li>
+<li>The results for all predictions are summed up and divided by the number of all data points.</li>
+<li>The sign is changed, so that the loss function is minimized rather than maximized.</li>
+</ul>
+<p>So far we’ve only sent one input at a time through the network. But we can also send multiple inputs at once. This is called a batch.
+$$
+\mathbf{X} = \begin{bmatrix}
+x_1 \newline
+x_2 \newline
+\vdots \newline
+x_n
+\end{bmatrix}
+$$</p>
+<p>$$
+\mathbf{Z} = \mathbf{X}\mathbf{W}^{T} + \mathbf{b}
+$$</p>
+<p>So training in reality is just:</p>
+<ul>
+<li>Forward propagation
+<ul>
+<li>$A_1 = \sigma(Z_1) = \sigma(XW_1^{T} + b_1)$</li>
+<li>$\hat{Y} = softmax(Z_2) = softmax(A_1W_2^{T} + b_2)$</li>
+</ul>
+</li>
+<li>Calculate the loss
+<ul>
+<li>$ J = -\frac{1}{N} \sum_{n=1}^{N} \sum_{i=1}^{I} y_{n,i} \log(\hat{y}_{n,i})$</li>
+</ul>
+</li>
+<li>Backward propagation
+<ul>
+<li>Goal: Find the matrices $\mathbf{W_1}$, $\mathbf{W_2}$, and the vectors $\mathbf{b_1}$, $\mathbf{b_2}$ that minimize the loss $J(\mathbf{W_1}, \mathbf{W_2}, \mathbf{b_1}, \mathbf{b_2})$.</li>
+</ul>
+</li>
+</ul>
+<p>In backpropagation, the error (loss) is fed back through the network to shift the weights and biases in the right direction.</p>
+<h3 id="gradient-descent">Gradient descent</h3>
+<p>But how do we minimize the loss function? What happens if our loss landscape is non-convex? How do we find the global minimum?</p>
+<p>The answer is gradient descent. Gradient descent is an optimization algorithm used to minimize the loss function.
+It works by iteratively moving in the direction of the negative gradient of the loss function.</p>
+<p>Say we have:
+$$
+L(\phi) = \frac{1}{2} \phi^2 + \phi^{-\frac{1}{2}} - 1
+$$</p>
+<p>The gradient of the loss function is:
+$$
+\frac{dL}{d\phi} = \phi - \frac{1}{2}\phi^{-\frac{3}{2}}
+$$</p>
+<p>Which means:
+$$
+\phi_{t + 1} = \phi_t - \alpha \frac{dL}{d\phi}
+$$</p>
+<h4 id="stochastic-gradient-descent">Stochastic gradient descent</h4>
+<p>Stochastic gradient descent is a variant of gradient descent. It is used to minimize the loss function.
+The difference is that the gradient is calculated for a random subset of the data, rather than the entire dataset.
+This makes the algorithm faster, but also less accurate.</p>
+<h3 id="revisiting-backpropagation-and-the-chain-rule">Revisiting backpropagation and the chain rule</h3>
+<p>From multivariate calculus, we know that the gradient of a function points in the direction of the steepest increase. So the negative gradient points in the direction of the steepest decrease.
+Following the negative gradient, we can find a local minimum of the loss function.</p>
+<p>Since each layer depends on the previous layer, we can use the chain rule to calculate the gradient of the loss function with respect to the weights and biases.
+We can say that we calculate the average per column.</p>
+<p>So in the MNIST example we finally have:</p>
+<ul>
+<li>Forward propagation
+<ul>
+<li>$A_1 = \sigma(Z_1) = \sigma(XW_1^{T} + b_1)$</li>
+<li>$\hat{Y} = softmax(Z_2) = softmax(A_1W_2^{T} + b_2)$</li>
+</ul>
+</li>
+<li>Calculate the loss
+<ul>
+<li>$ J = -\frac{1}{N} \sum_{n=1}^{N} \sum_{i=1}^{I} y_{n,i} \log(\hat{y}_{n,i})$</li>
+</ul>
+</li>
+<li>Backward propagation
+<ul>
+<li>$dZ_1 = dZ_2 W_2 \cdot A_1 \cdot (1 - A_1)$</li>
+<li>$dW_1 = \frac{1}{m} \cdot dZ_1^T X$</li>
+<li>$db_1 = \frac{1}{m} \sum_{j = 1}^{n} dZ_{1_{ij}}$</li>
+<li>$dZ_2 = \hat{Y} - Y$</li>
+<li>$dW_2 = \frac{1}{n} \cdot dZ_2^T A_1$</li>
+<li>$db_2 = \frac{1}{n} \sum_{j = 1}^{n} dZ_{2_{ij}}$</li>
+</ul>
+</li>
+<li>In backpropagation, the error (loss) is returned through the network to shift the weights and biases in the right direction.
+<ul>
+<li>$W_1 = W_{1, t - 1} - \alpha \cdot dW_{1, t - 1}$</li>
+<li>$b_1 = b_{1, t - 1} - \alpha \cdot db_{1, t - 1}$</li>
+<li>$W_2 = W_{2, t - 1} - \alpha \cdot dW_{2, t - 1}$</li>
+<li>$b_2 = b_{2, t - 1} - \alpha \cdot db_{2, t - 1}$</li>
+</ul>
+</li>
+</ul>
+<p>This step can be repeated indefinitely. An ‘epoch’ is a complete pass through the entire dataset.
+During training, we can determine how many epochs we want to train, i.e. how many times we want to pass through the entire dataset.</p>
+<h3 id="hyperparameters">Hyperparameters</h3>
+<p>So far we’ve seen that a neural network adjusts its weights and biases to minimize the loss function.
+But some parameters are not learned by the network, rather they are set by the user. These are called hyperparameters.
+There are many methods to find the best hyperparameters, but we won’t discuss them here.</p>
+<h3 id="deep-learning">Deep learning</h3>
+<p>Deep learning is the study of neural networks with many layers. The idea is that the network can learn more complex patterns with more layers.
+Since deep networks often need fewer parameters to represent the same function as a shallow network, they are more efficient.</p>
+<p>However, with a wide network comes its downsides as well. Wide networks are more likely to memorize the training data, rather than generalize to new data.</p>
+<h3 id="images-to-vectors">Images to vectors</h3>
+<p>In the MNIST example, we used the raw pixel values as input. This works because the pictures are so small and grayscale.
+But in general, pictures are colored and much larger. So we need to transform the images into vectors. Doing this naively, pixel by pixel, would result in a very large vector.</p>
+<p>However, by flattening the image, the spatial coherence is lost. The proximity of pixels are important.
+So instead of flattening the image, maybe we could let the network look at smaller parts of the image at a time.</p>
+<p>So we need a method that takes the original image with multiple dimensions, but only look at a small part of the image at a time.
+Any math nerd will recognize this as a convolution, a mathematical filter.</p>
+<h3 id="convolutional-neural-networks">Convolutional neural networks</h3>
+<p>A convolutional neural network (CNN) is a type of neural network that is well-suited for image recognition.
+CNNs use a mathematical operation called convolution to filter the input image. This allows the network to learn local patterns in the image.
+So even if a image is flipped, rotated, or scaled, the network can still recognize the actual pattern.</p>
+<h4 id="kernel">Kernel</h4>
+<p>The kernel is the filter that is applied to the input image. It is a small matrix that is convolved with the input image.
+The kernel is learned by the network, and it is used to extract features from the input image. For example, edges, corners, and textures.</p>
+<p>Given an input image $I$ and a kernel $K$, the <em>feature map</em> $F$ is calculated by convolving the input image with the kernel:
+$$
+F = I * K
+$$</p>
+<h5 id="rbg-mnist">RBG MNIST</h5>
+<p>Assume we had the MNIST dataset, but with colored images. The input image would then have three dimensions: height, width, and color.
+Therefore, our kernel is 3-dimensional as well.</p>
+<p>So our image has shape $28 \times 28 \times 3$, and our kernel has shape $3 \times 3 \times 3$. The feature map would then have shape $26 \times 26 \times 1$.</p>
+<p>In other words, each channel of the input images contains information about a certain color. Each filter is responsible for detecting a certain feature in the image.
+Each channel in the feature map contains information about a certain feature in the image.</p>
+<h4 id="padding">Padding</h4>
+<p>When we convolve an image with a kernel, the feature map is smaller than the input image. This is because the kernel cannot be applied to the edges of the image.
+To prevent this, we can add a border of zeros around the input image. This is called padding. This can be useful to prevent the loss of information at the edges of the image.</p>
+<h4 id="pooling">Pooling</h4>
+<p>Pooling is a technique used to reduce the size of the feature map. The deeper in the network, the smaller the feature map.
+The deeper in the network, the more channels the image has. As neurons deeper in the network focus on more complex structures, each pixel is no longer as important.</p>
+<p>So we can reduce the size of the feature map by taking the maximum value in a small region of the feature map. This is called max pooling.</p>
+<h4 id="fully-connected-layer">Fully connected layer</h4>
+<p>So, the power of CNNs is that they can learn local patterns in images. We can use CNNs to filter the important information from the image.
+From this new filtered image, if we flatten this new, smaller image, we can feed this into our network just like before.</p>
+<p>This is called a fully connected layer. It is the same as the hidden layer in a regular neural network.</p>  </div> <nav class="flex flex-col sm:flex-row justify-between mt-8 pt-4 border-t border-border" data-astro-cid-v5ro3oot>   </nav> </article>  </main> </div> </body></html> 

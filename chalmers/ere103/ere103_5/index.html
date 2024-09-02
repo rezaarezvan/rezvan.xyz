@@ -1,0 +1,144 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="Astro v4.11.5"><link rel="icon" type="image" href="/favicon.ico"><title>Part 5 - Space-state representation (1)</title><!-- KaTeX support --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script><!-- inline KaTeX --><link rel="stylesheet" href="/_astro/index.CwgzIfsj.css">
+<link rel="stylesheet" href="/_astro/_slug_.hCvEQTvV.css">
+<style>article[data-astro-cid-v5ro3oot]{max-width:80ch;margin:0 auto}.nav-button[data-astro-cid-v5ro3oot]{display:flex;align-items:center;padding:.5rem;border-radius:.5rem;transition:background-color .3s ease;text-decoration:none;color:var(--text-color);background-color:var(--bg-color);border:1px solid var(--border-color)}.nav-button[data-astro-cid-v5ro3oot]:hover{background-color:var(--hover-color)}.nav-button[data-astro-cid-v5ro3oot] .arrow[data-astro-cid-v5ro3oot]{font-size:1.5rem;line-height:1}.nav-button[data-astro-cid-v5ro3oot] .text[data-astro-cid-v5ro3oot]{display:flex;flex-direction:column;margin:0 .5rem}.nav-button[data-astro-cid-v5ro3oot] .label[data-astro-cid-v5ro3oot]{font-size:.8rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted-color)}.nav-button[data-astro-cid-v5ro3oot] .title[data-astro-cid-v5ro3oot]{font-weight:500}.prev-button[data-astro-cid-v5ro3oot]{justify-content:flex-start}.next-button[data-astro-cid-v5ro3oot]{justify-content:flex-end;text-align:right}@media (max-width: 640px){.nav-button[data-astro-cid-v5ro3oot]{width:100%}.next-button[data-astro-cid-v5ro3oot]{justify-content:flex-start;text-align:left}.next-button[data-astro-cid-v5ro3oot] .text[data-astro-cid-v5ro3oot]{order:2;margin-left:.5rem}.next-button[data-astro-cid-v5ro3oot] .arrow[data-astro-cid-v5ro3oot]{order:1}}
+</style><script type="module">document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]})});
+</script></head> <body> <div class="container mx-auto px-4 flex flex-col md:flex-row min-h-screen"> <aside class="w-full md:w-64 border-b md:border-r md:border-b-0 border-[var(--border-color)] border-dashed pt-8"> <header class="flex flex-col h-full"> <div class="flex items-center mb-4"> <script>
+  function setTheme(mode) {
+    localStorage.setItem("theme-storage", mode);
+    document.documentElement.setAttribute('data-theme', mode);
+  }
+  function toggleTheme() {
+    const currentTheme = localStorage.getItem("theme-storage") || "light";
+    const newTheme = currentTheme === "light" ? "dark" : "light";
+    setTheme(newTheme);
+  }
+  const savedTheme = localStorage.getItem("theme-storage") || "light";
+  setTheme(savedTheme);
+  window.toggleTheme = toggleTheme;
+</script> <button id="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme" class="w-6 h-6 cursor-pointer"> <div class="w-5 h-5 border-2 border-primary rounded-full transition-colors duration-300 ease-in-out hover:bg-primary"></div> </button> <a href="/" class="text-2xl font-semibold ml-3 h-10 pr-3">rezvan.xyz</a> </div> <nav class="flex flex-wrap gap-2 md:flex-col md:gap-2"> <a href="/principles" class="transition-colors">
+[principles]
+</a><a href="/cv" class="transition-colors">
+[cv]
+</a><a href="/posts" class="transition-colors">
+[posts]
+</a><a href="/chalmers" class="transition-colors">
+[chalmers]
+</a><a href="/cityu" class="transition-colors">
+[cityu]
+</a> </nav> </header> </aside> <main class="flex-grow px-4 md:px-8 py-8 overflow-y-auto">  <article class="prose prose-sm sm:prose lg:prose-lg xl:prose-xl max-w-none" data-astro-cid-v5ro3oot> <h1 class="text-3xl sm:text-4xl font-bold mb-4" data-astro-cid-v5ro3oot>Part 5 - Space-state representation (1)</h1> <p class="text-sm text-muted-foreground mb-4" data-astro-cid-v5ro3oot>
+Date: 11/7/2023 </p> <div class="markdown-content" data-astro-cid-v5ro3oot>  <h3 id="introduction">Introduction</h3>
+<p>In this part we’ll see how we can represent systems using matrix notation, also called space-state representation. Along with how we linearize non-linear systems.</p>
+<h3 id="state-variables">State variables</h3>
+<p>If we use the spring-mass system from last time, with $F_d$ as input signal and $y$ as output signal.</p>
+<p>We obtained the following differential equation:
+$$
+\ddot{y} = \dfrac{1}{m}(F_d - b\dot{y} - ky)
+$$</p>
+<p>If we want to represent this system using a set of first-order differential equations instead, we can do the following:</p>
+<p>Let $x_1 = y(t)$ and $x_2 = \dot{y}(t)$.</p>
+<p>Then we can write:
+$$
+\begin{cases}
+\dot{x_1} = x_2 \newline
+\dot{x_2} = \dfrac{1}{m}(F_d - b\dot{y} - ky)
+\end{cases}
+$$</p>
+<p>Let’s now call the input signal, $F_d$, for $u$.
+$$
+\begin{cases}
+\dot{x_1} = x_2 \newline
+\dot{x_2} = \dfrac{1}{m}(u - b\dot{y} - ky)
+\end{cases}
+$$</p>
+<p>In matrix notation we can write it as:
+$$
+\begin{bmatrix}
+\dot{x_1} \newline
+\dot{x_2}
+\end{bmatrix} =
+\begin{bmatrix}
+0 &#x26; 1 \newline
+-\dfrac{k}{m} &#x26; -\dfrac{b}{m} \newline
+\end{bmatrix}
+\begin{bmatrix}
+x_1 \newline
+x_2
+\end{bmatrix} +
+\begin{bmatrix}
+0 \newline
+\dfrac{1}{m}
+\end{bmatrix} u
+$$</p>
+<p>We say that $A = \begin{bmatrix} 0 &#x26; 1 \newline -\dfrac{k}{m} &#x26; -\dfrac{b}{m} \newline \end{bmatrix}$ is the <strong>system matrix</strong>.</p>
+<p>Therefore, we can finally write it as:
+$$
+\begin{cases}
+\dot{x} = Ax + Bu \newline
+y = x_1
+\end{cases}
+$$</p>
+<h3 id="linearization">Linearization</h3>
+<p>Is a quite simple concept is the first order Taylor expansion around a point. Let’s take a look for functions of one variable.</p>
+<p>We want to linearize around the point $x = x_0$:
+$$
+f(x) \approx f(x_0) + f^\prime(x_0)(x - x_0)
+$$</p>
+<p>In Control theory, the linearized function is quite often not the interest itself. Rather we want to understand how much this linear approximation deviates from the desired value.</p>
+<p>So we say that:
+$$
+\Delta f = f(x) - f(x_0) = f^\prime(x_0)(x - x_0) = \boxed{f^\prime(x_0)\Delta x}
+$$</p>
+<p>For functions of 2 (or more variables), around point $(x_0, y_0)$:
+$$
+f(x, y) \approx f(x_0, y_0) + \dfrac{\partial f}{\partial x} \biggr\rvert_{(x_0, y_0)} \Delta x + \dfrac{\partial f}{\partial y} \biggr\rvert_{(x_0, y_0)} \Delta y
+$$</p>
+<p>Which means:
+$$
+\Delta f(x, y) = \dfrac{\partial f}{\partial x} \biggr\rvert_{(x_0, y_0)} \Delta x + \dfrac{\partial f}{\partial y} \biggr\rvert_{(x_0, y_0)} \Delta y
+$$</p>
+<h3 id="example-tank-system">Example tank system</h3>
+<p>From the last part, we had a tank system which we described with a differential equation. Say that we have a point of equilibrium, $(q_0, h_0)$ meaning that $h = 0$.</p>
+<p>This gives us that $\dot{h}(q_0, h_0) = f(q_0, h_0) = 0$</p>
+<p>$$
+q_0 = a \sqrt{2g} \cdot \sqrt{h_0}
+$$</p>
+<p>$$
+a \sqrt{2g} = \dfrac{q_0}{\sqrt{h_0}}
+$$</p>
+<p>We’ll use this later on, but let’s first linearize what we had.
+$$
+\dfrac{\partial f}{\partial q_{in}} \biggr\rvert_{(q_0, h_0)} = \dfrac{1}{A}
+$$</p>
+<p>$$
+\dfrac{\partial f}{\partial h_{1}} \biggr\rvert_{(q_0, h_0)} = \ldots = -\dfrac{q_0}{2Ah_0}
+$$</p>
+<p>This means that:
+$$
+\Delta f(q_{in}, h_1) \approx \dfrac{1}{A} \Delta q - \dfrac{q_0}{2Ah_0} \Delta h
+$$</p>
+<p>Which is the same as:
+$$
+\Delta \dot{h} \approx \dfrac{1}{A} \Delta q - \dfrac{q_0}{2Ah_0} \Delta h
+$$</p>
+<p>If we now take the Laplace transform:
+$$
+s \Delta H(s) = \dfrac{1}{A} \Delta Q(s) - \dfrac{q_0}{2Ah_0} \Delta H(s)
+$$</p>
+<p>$$
+(s + \dfrac{q_0}{2Ah_0}) \Delta H(s) = \dfrac{1}{A} \Delta Q(s)
+$$</p>
+<p>Let’s now find the transfer function from $q_{in}\to h_1$
+$$
+G_{qh}(s) = \dfrac{\Delta H(s)}{\Delta Q(s)} = \dfrac{\dfrac{1}{A}}{s + \dfrac{q_0}{2Ah_0}}
+$$</p>
+<p>We can rewrite it as:
+$$
+G_{qh}(s) = \dfrac{2h_0}{s2Ah_0 + q_0} \ | \cdot 2Ah_0
+$$</p>
+<p>$$
+G_{qh}(s) = \dfrac{\dfrac{2h_0}{q_0}}{s\dfrac{2Ah_0}{q_0} + 1} \ | \div q_0
+$$</p>
+<p>Let $K = \dfrac{2h_0}{q_0}$ and $T = \dfrac{2Ah_0}{q_0}$
+$$
+G_{qh}(s) = \dfrac{K}{1 + sT} \ | \div q_0
+$$</p>  </div> <nav class="flex flex-col sm:flex-row justify-between mt-8 pt-4 border-t border-border" data-astro-cid-v5ro3oot>   </nav> </article>  </main> </div> </body></html> 

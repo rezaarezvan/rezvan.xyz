@@ -1,0 +1,377 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="Astro v4.11.5"><link rel="icon" type="image" href="/favicon.ico"><title>Part 4 - Abstract Data Types</title><!-- KaTeX support --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script><!-- inline KaTeX --><link rel="stylesheet" href="/_astro/index.CwgzIfsj.css">
+<link rel="stylesheet" href="/_astro/_slug_.hCvEQTvV.css">
+<style>article[data-astro-cid-v5ro3oot]{max-width:80ch;margin:0 auto}.nav-button[data-astro-cid-v5ro3oot]{display:flex;align-items:center;padding:.5rem;border-radius:.5rem;transition:background-color .3s ease;text-decoration:none;color:var(--text-color);background-color:var(--bg-color);border:1px solid var(--border-color)}.nav-button[data-astro-cid-v5ro3oot]:hover{background-color:var(--hover-color)}.nav-button[data-astro-cid-v5ro3oot] .arrow[data-astro-cid-v5ro3oot]{font-size:1.5rem;line-height:1}.nav-button[data-astro-cid-v5ro3oot] .text[data-astro-cid-v5ro3oot]{display:flex;flex-direction:column;margin:0 .5rem}.nav-button[data-astro-cid-v5ro3oot] .label[data-astro-cid-v5ro3oot]{font-size:.8rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted-color)}.nav-button[data-astro-cid-v5ro3oot] .title[data-astro-cid-v5ro3oot]{font-weight:500}.prev-button[data-astro-cid-v5ro3oot]{justify-content:flex-start}.next-button[data-astro-cid-v5ro3oot]{justify-content:flex-end;text-align:right}@media (max-width: 640px){.nav-button[data-astro-cid-v5ro3oot]{width:100%}.next-button[data-astro-cid-v5ro3oot]{justify-content:flex-start;text-align:left}.next-button[data-astro-cid-v5ro3oot] .text[data-astro-cid-v5ro3oot]{order:2;margin-left:.5rem}.next-button[data-astro-cid-v5ro3oot] .arrow[data-astro-cid-v5ro3oot]{order:1}}
+</style><script type="module">document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]})});
+</script></head> <body> <div class="container mx-auto px-4 flex flex-col md:flex-row min-h-screen"> <aside class="w-full md:w-64 border-b md:border-r md:border-b-0 border-[var(--border-color)] border-dashed pt-8"> <header class="flex flex-col h-full"> <div class="flex items-center mb-4"> <script>
+  function setTheme(mode) {
+    localStorage.setItem("theme-storage", mode);
+    document.documentElement.setAttribute('data-theme', mode);
+  }
+  function toggleTheme() {
+    const currentTheme = localStorage.getItem("theme-storage") || "light";
+    const newTheme = currentTheme === "light" ? "dark" : "light";
+    setTheme(newTheme);
+  }
+  const savedTheme = localStorage.getItem("theme-storage") || "light";
+  setTheme(savedTheme);
+  window.toggleTheme = toggleTheme;
+</script> <button id="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme" class="w-6 h-6 cursor-pointer"> <div class="w-5 h-5 border-2 border-primary rounded-full transition-colors duration-300 ease-in-out hover:bg-primary"></div> </button> <a href="/" class="text-2xl font-semibold ml-3 h-10 pr-3">rezvan.xyz</a> </div> <nav class="flex flex-wrap gap-2 md:flex-col md:gap-2"> <a href="/principles" class="transition-colors">
+[principles]
+</a><a href="/cv" class="transition-colors">
+[cv]
+</a><a href="/posts" class="transition-colors">
+[posts]
+</a><a href="/chalmers" class="transition-colors">
+[chalmers]
+</a><a href="/cityu" class="transition-colors">
+[cityu]
+</a> </nav> </header> </aside> <main class="flex-grow px-4 md:px-8 py-8 overflow-y-auto">  <article class="prose prose-sm sm:prose lg:prose-lg xl:prose-xl max-w-none" data-astro-cid-v5ro3oot> <h1 class="text-3xl sm:text-4xl font-bold mb-4" data-astro-cid-v5ro3oot>Part 4 - Abstract Data Types</h1> <p class="text-sm text-muted-foreground mb-4" data-astro-cid-v5ro3oot>
+Date: 11/29/2022 </p> <div class="markdown-content" data-astro-cid-v5ro3oot>  <h3 id="adt-vs-data-structures">ADT vs Data Structures</h3>
+<p>So, what’s the difference between an <strong>A</strong>bstract <strong>D</strong>ata <strong>T</strong>ype and an actual data structure?</p>
+<p>An ADT is a kind of specification of something - it specifies how we can interact with that <em>object</em>, like an API.</p>
+<p>It consists of methods and constructors but also plain-text specifications (like the complexity for example) and explanations.</p>
+<p>A data structure on the other hand is an <strong>actual</strong> <em>implementation</em> of an ADT. It specifies how the <em>object</em> works <em>internally</em>.
+But an important note is, that it doesn’t need to be in an actual programming language - often it’s just specified in pseudocode.</p>
+<h3 id="method-descriptions">Method Descriptions</h3>
+<p>As explained above - an ADT has methods/functions - but these need to be specified/have a brief plain-text explanation.
+For example, all these ADTs have the same functions, but work differently:</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>Stack&#x3C;Item>:</span></span>
+<span class="line"><span>    void add(Item x)</span></span>
+<span class="line"><span>    Item remove()</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>Queue&#x3C;Item></span></span>
+<span class="line"><span>    void add(Item x)</span></span>
+<span class="line"><span>    Item remove()</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>PrioQueue&#x3C;Item>:</span></span>
+<span class="line"><span>    void add(Item x)</span></span>
+<span class="line"><span>    Item remove()</span></span>
+<span class="line"><span></span></span></code></pre>
+<h3 id="different-kind-of-adts">Different kind of ADTs</h3>
+<p>Now we will cover all ADTs that we will encounter in this course!</p>
+<h3 id="ordered-collections-stacks-queues-etc">Ordered collections: Stacks, Queues, etc</h3>
+<h4 id="stacks">Stacks</h4>
+<p>Since we have covered in depth as well as implemented stacks, let’s just briefly go over them.</p>
+<p>Stacks - LIFO (‘<strong>L</strong>ast <strong>I</strong>n <strong>F</strong>irst <strong>O</strong>ut’)</p>
+<p>Builds on the functions <code>pop()</code> <code>push()</code></p>
+<p>So the ADT would be:</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>Stack&#x3C;Item>:</span></span>
+<span class="line"><span>    // Adds Item X to the top of the stack</span></span>
+<span class="line"><span>    void push(Item x)</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    // Returns and removes the topmost element of the stack</span></span>
+<span class="line"><span>    Item pop()</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    // Returns the topmost element, without removing it</span></span>
+<span class="line"><span>    Item peek()</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    // Returns True if the stack is empty, False otherwise</span></span>
+<span class="line"><span>    boolean is_empty()</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    Returns the current size (length) of the stack</span></span>
+<span class="line"><span>    int size()</span></span>
+<span class="line"><span></span></span></code></pre>
+<h4 id="queues">Queues</h4>
+<p>Same goes for a queue - since we’ve already covered this in depth, we’ll just briefly recover it.</p>
+<p>Queues - FIFO (‘<strong>F</strong>irst <strong>I</strong>n <strong>F</strong>irst <strong>O</strong>ut’)</p>
+<p>Builds on the functions <code>enqueue()</code> <code>dequeue()</code></p>
+<p>So the ADT can be described as:</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>Queue&#x3C;Item>:</span></span>
+<span class="line"><span>    // Adds Item X to the end of the queue</span></span>
+<span class="line"><span>    void enqueue(Item x)</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    // Removes and returns the first item in the queue</span></span>
+<span class="line"><span>    Item dequeue()</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    // Returns True if the queue is empty, False otherwise</span></span>
+<span class="line"><span>    boolean empty()</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    // Returns True if the queue is full, False otherwise</span></span>
+<span class="line"><span>    boolean full()</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    // Returns the current size (length) of the queue</span></span>
+<span class="line"><span>    int qsize()</span></span>
+<span class="line"><span></span></span></code></pre>
+<h4 id="stacks--queues--deques">Stacks + Queues = Deques</h4>
+<p>If we combine these two ADTs that we’ve become so familiar with - we get a so-called double-ended queue!</p>
+<p>Here’s the ADT for it:</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>Deque&#x3C;Item>:</span></span>
+<span class="line"><span>    // Adds Item X to the front of the deque</span></span>
+<span class="line"><span>    void add_first(Item x)</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    // Adds Item X to the end of the deque</span></span>
+<span class="line"><span>    void add_last(Item x)</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    // Removes and returns the frontmost item in the deque</span></span>
+<span class="line"><span>    Item remove_first()</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    // Removes and returns the last item in the deque</span></span>
+<span class="line"><span>    Item remove_last()</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>So why would we want to use a stack or queue - when their combination exists?</p>
+<p>The answer is quite simple - it differs from problem to problem! Sometimes a stack might just be <em>exactly</em> what you want, and sometimes you might feel hindered or blocked by a ADT.</p>
+<p>So you need to do research on what kind of ADT you should use before actually implementing one. Also cost/how hard the implementation will be is also a important factor.</p>
+<h4 id="lists-generalizing-stacks-and-queues">Lists: Generalizing Stacks and Queues</h4>
+<p>Lists is the ADT when we finally don’t restrict ourselves to only add/remove the front/end element - and finally can add/remove wherever we want!</p>
+<p>The ADT looks something like:</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>List&#x3C;Item>:</span></span>
+<span class="line"><span>    // Inserts Item X at position i in the list</span></span>
+<span class="line"><span>    void add(Item x, int i)</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    // Removes and returns the item at position i</span></span>
+<span class="line"><span>    Item remove(int i)</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    // Returns the element on position i</span></span>
+<span class="line"><span>    Item get(int i)</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    // Sets/replaces element i with x</span></span>
+<span class="line"><span>    void set(int i, Item x)</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    // Returns True if the list is currently empty, otherwise False</span></span>
+<span class="line"><span>    boolean is_empty()</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    // Returns the current size (# of elements) in the list</span></span>
+<span class="line"><span>    int size()</span></span>
+<span class="line"><span></span></span></code></pre>
+<h4 id="priority-queues">Priority Queues</h4>
+<p>The only difference between priority queues, stacks and regular queues is which element to remove.
+A stack removes the ‘youngest’ element, a queue removes the ‘oldest’ element, and a priority queue removes the ‘minimum’ element. Minimum here means by some arbitrary ordering.</p>
+<p>These are quite complicated to implement so, we’ll be implementing them a bit later.</p>
+<h4 id="iterating-comparing-and-sorting">Iterating, Comparing and Sorting</h4>
+<p>Iterating, comparing, and sorting are all very important when it comes to ordered collections - we need to be able to iterate through the whole collection,
+comparing items to each other, and of course the most important - sorting the collection!</p>
+<p>These all feel like very ‘low-level’ and natural things - but quite often we ourselves will need to implement these.
+For example, iterating through a queue. Note that some data structures actually doesn’t allow iterating throughout the collection!</p>
+<p>Iteration also works differently, for example in Java it’s called <code>iterator()</code> and in Python <code>__iter__()</code>.
+One thing to note is that iterables and iterators are different. An <em>iterator</em> has a method that returns the next element, and a way of telling when the iteration is exhausted.</p>
+<p>So, an <em>iterator</em> can only be iterated over once, while an <em>iterable</em> can be iterated many times, because it creates new iterators. Quite a mouthful.</p>
+<p>So in Python for example a simple:</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="py"><code><span class="line"><span style="color:#FF79C6">for</span><span style="color:#F8F8F2"> x </span><span style="color:#FF79C6">in</span><span style="color:#F8F8F2"> elements:</span></span>
+<span class="line"><span style="color:#6272A4">    # do something with x</span></span>
+<span class="line"></span></code></pre>
+<p>is translated to:</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="py"><code><span class="line"><span style="color:#F8F8F2">it </span><span style="color:#FF79C6">=</span><span style="color:#F8F8F2"> elements.</span><span style="color:#BD93F9">__iter__</span><span style="color:#F8F8F2">()</span></span>
+<span class="line"><span style="color:#FF79C6">while</span><span style="color:#BD93F9"> True</span><span style="color:#F8F8F2">:</span></span>
+<span class="line"><span style="color:#FF79C6">    try</span><span style="color:#F8F8F2">:</span></span>
+<span class="line"><span style="color:#F8F8F2">        x </span><span style="color:#FF79C6">=</span><span style="color:#F8F8F2"> it.</span><span style="color:#BD93F9">__next__</span><span style="color:#F8F8F2">()</span></span>
+<span class="line"><span style="color:#F8F8F2">    expect </span><span style="color:#8BE9FD;font-style:italic">StopIteration</span><span style="color:#F8F8F2">():</span></span>
+<span class="line"><span style="color:#FF79C6">        break</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6272A4">    # do something  with x</span></span>
+<span class="line"></span></code></pre>
+<p>A same kind of logic is applied when we want to compare items. If something is comparable they implement a <em>comparable</em> interface for example.
+But often we want our own comparisons to something rather than the ‘natural ordering’ the comparable interface provides. In these cases we need to implement different <em>comparators</em>.</p>
+<p>Now sorting becomes quite trivial - the built-in sorting methods either use the ‘natural ordering’ comparator, or can take a comparator as an argument to sort it how we want.</p>
+<h4 id="unordered-collections-maps-sets-and-graphs">Unordered collections: Maps, sets, and graphs</h4>
+<p>These are just like the ordered collections, but without a specific order :)</p>
+<h4 id="sets">Sets</h4>
+<p>You should be quite familiar with sets from a discrete math course - but let’s go over it anyway.</p>
+<p>A set is a collection of objects where:</p>
+<ul>
+<li>It cannot contain duplicates of the same object.</li>
+<li>Basic operations for testing for ‘membership’, and adding/removing an element.</li>
+<li>Methods for size of the set and testing for emptiness.</li>
+<li>Usually a kind of iterator for looping over all elements/members in set.</li>
+</ul>
+<p>So the ADT could look like:</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>Set&#x3C;Item>:</span></span>
+<span class="line"><span>    // Returns True if x is in the set, False otherwise</span></span>
+<span class="line"><span>    boolean contains(Item x)</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    // Adds x to the set, if it's not already in the set</span></span>
+<span class="line"><span>    void add(Item x)</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    // Removes x from the set, if it's present</span></span>
+<span class="line"><span>    void remove(Item x)</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    // Returns True if the set is currently empty, False otherwise</span></span>
+<span class="line"><span>    boolean is_empty()</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    // Returns the current size (# of elements) in the set</span></span>
+<span class="line"><span>    int size()</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    // Iterates over all elements in the set</span></span>
+<span class="line"><span>    Iterator&#x3C;Item> iterator()</span></span>
+<span class="line"><span></span></span></code></pre>
+<h4 id="maps">Maps</h4>
+<p>A map is a ‘mapping’ from a ‘key’ to a ‘value’ with these properties:</p>
+<ul>
+<li>It cannot contain duplicates of the same ‘key’</li>
+<li>The basic operations are <code>getting</code> and <code>setting</code> the ‘value’ for a given ‘key’. Also removing a ‘key’ along with its associated value.</li>
+<li>Helper methods such as, <code>number_of_keys()</code>, <code>is_empty()</code></li>
+<li>(Usually) an iterator to loop over all keys</li>
+</ul>
+<p>So an ADT would look like:</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>Map&#x3C;Key, Value>:</span></span>
+<span class="line"><span>    // Returns True if there's an association for the key, k.</span></span>
+<span class="line"><span>    boolean contains(Key k)</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    // Returns the value associated with key, k.</span></span>
+<span class="line"><span>    Value get(Key k)</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    // Associates the key, k, with the value, v.</span></span>
+<span class="line"><span>    void put(Key k, Value v)</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    // Removes the value associated with the key, k.</span></span>
+<span class="line"><span>    void remove(Key k)</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    // Returns True if the Map is currently empty, False otherwise</span></span>
+<span class="line"><span>    boolean is_empty()</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    // Returns the current size (# of key-value pairs) in the map</span></span>
+<span class="line"><span>    int size()</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    // Iterates over all keys in the map</span></span>
+<span class="line"><span>    Iterator&#x3C;Key> keys()</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>‘Maps’ have a lot of associated names:</p>
+<ul>
+<li>Dictionaries</li>
+<li>Symbol tables</li>
+<li>Associative arrays</li>
+<li>Lookup tables</li>
+<li>finite-domain functions</li>
+<li>$\dots$</li>
+</ul>
+<p>Maps can be seen as a further generalization of list even. The integer position is now replaced by a generic ‘key’ type.</p>
+<p>For actual implementation of maps, these are the following:</p>
+<ul>
+<li>Lists</li>
+<li>Search trees
+<ul>
+<li>Binary search trees
+<ul>
+<li>Unbalanced BSTs</li>
+<li>Balanced BSTs (red-black tree, AVL trees, $\dots$)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Hash tables
+<ul>
+<li>Separate chaining</li>
+<li>Open addressing (Linear probing, quadratic probing, $\dots$)</li>
+</ul>
+</li>
+<li>Randomized data structures
+<ul>
+<li>Skip list, treap, $\dots$</li>
+</ul>
+</li>
+</ul>
+<h4 id="a-set-is-degenerated-map">A Set is Degenerated Map</h4>
+<p>If we have an implementation of a map, it’s actually quite easy to turn it into a set. We just need to create an underlying map,
+whose keys are the set items!</p>
+<p>So an ADT solution would be:</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>Set&#x3C;Item>:</span></span>
+<span class="line"><span>    Map&#x3C;Item, Void> underlying_map</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    boolean contains(Item x)  = underlying_map.contains(x)</span></span>
+<span class="line"><span>    void add(Item x)          = underlying_map.add(x, null)</span></span>
+<span class="line"><span>    void remove(Item x)       = underlying_map.remove(x)</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    boolean is_empty()        = underlying_map.is_empty()</span></span>
+<span class="line"><span>    int size()                = underlying_map.size()</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    Iterator&#x3C;Item> iterator() = underlying_map.keys()</span></span>
+<span class="line"><span></span></span></code></pre>
+<h4 id="multiset-and-multimap">Multiset and multimap</h4>
+<p>Sometimes we want to put several objects into the same ‘slot’ (for example a set with lists).</p>
+<p>A multiset (sometimes called ‘bag’) is just like a set, but can contain duplicates.</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>Multiset&#x3C;Item>:</span></span>
+<span class="line"><span>    // Returns the number of occurrences of Item x in the multiset</span></span>
+<span class="line"><span>    int count(Item x)</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    // Adds Item X to the multiset</span></span>
+<span class="line"><span>    void add(Item x)</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    // Removes one occurrence of Item x, returns the Item</span></span>
+<span class="line"><span>    Item remove(Item x)</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>A multimap (or sometimes called ‘index’) is just like a map, but keys can map to several values.</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>Multimap&#x3C;Key, Value>:</span></span>
+<span class="line"><span>    // Returns the whole collection of values associated with the key, k</span></span>
+<span class="line"><span>    Collection&#x3C;Value> get(Key k)</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    // Adds the value, v, to the key, k</span></span>
+<span class="line"><span>    void add(Key k, Value v)</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    // Removes the value, v, associated with the key, k</span></span>
+<span class="line"><span>    void remove(Key k, Value v)</span></span>
+<span class="line"><span></span></span></code></pre>
+<h4 id="multiset-and-multimap-are-maps">Multiset and Multimap are Maps</h4>
+<p>Now this might sound weird - but yes, maps as well! We can just like how we implemented a set using an underlying map,
+use an underlying map to implement multisets and maps.</p>
+<p>An ADT for this would be:</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>Multimap&#x3C;Key, Value>:</span></span>
+<span class="line"><span>    Map&#x3C;Key, Set&#x3C;Value>> underlying_map</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    Collection&#x3C;Value> get(Key k) = underlying_map.get(k)</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    void add(Key k, Value v)     = underlying_map.put(k, v)</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    void remove(Key k, Value v)  = underlying_map.remove(k)</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>And for Multisets:</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>Mutlisets&#x3C;Item>:</span></span>
+<span class="line"><span>    Map&#x3C;Key, Item> underlying_map</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    int count(Item x) = underlying_map.get(x)</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    void add(Item x) =</span></span>
+<span class="line"><span>        if underlying_map.contains():</span></span>
+<span class="line"><span>            count = underlying_map.get(x)</span></span>
+<span class="line"><span>            count += 1</span></span>
+<span class="line"><span>            underlying_map.put(x, count)</span></span>
+<span class="line"><span>        else:</span></span>
+<span class="line"><span>            underlying_map.put(x, 1)</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    Item remove(Item x) = underlying_map.remove(x)</span></span>
+<span class="line"><span></span></span></code></pre>
+<h3 id="graphs">Graphs</h3>
+<p>Graphs should also be familiar from the discrete mathematics course - but let’s quickly go over it. Graphs consists of <em>nodes</em> (also called vertices, points)</p>
+<ul>
+<li>and <em>edges</em> (also called arcs, links) that connect nodes.</li>
+</ul>
+<p>There are many, many types of graphs - in this course we’ll mainly use so-called directed graphs, so our ADT will look like:</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>DirectedGraph&#x3C;Node>:</span></span>
+<span class="line"><span>    // Adds an edge to the graph</span></span>
+<span class="line"><span>    void add(DirectedEdge&#x3C;Node> e)</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    // Removes an edge from the graph</span></span>
+<span class="line"><span>    void remove(DirectedEdge&#x3C;Node> e)</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    // Returns True if the graph contains the edge, False otherwise</span></span>
+<span class="line"><span>    boolean contains(DirectedEdge&#x3C;Node> e)</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    // Returns all edges that goes out from Node, n</span></span>
+<span class="line"><span>    Collection&#x3C;DirectedEdge&#x3C;Node>></span></span>
+<span class="line"><span>        outgoing_edges(Node n)</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    // Returns the total number of nodes in the graph</span></span>
+<span class="line"><span>    int n_node()</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    // Returns the total number of edges in the graph</span></span>
+<span class="line"><span>    int n_edges()</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>As you can see this ADT relies on a class that specifies how an edge should work:</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>class DirectedEdge&#x3C;Node>:</span></span>
+<span class="line"><span>    // The constructor to create a new edge between two nodes</span></span>
+<span class="line"><span>    __init__(Node from, Node to, float weight)</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    // Returns the 'starting' node</span></span>
+<span class="line"><span>    Node from()</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    // Returns the 'final' node</span></span>
+<span class="line"><span>    Node to()</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    // Returns the weight of the edge</span></span>
+<span class="line"><span>    double weight()</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>As said earlier, graphs come in many different shapes and forms - either they are directed or directed as well as weighted or unweighted.</p>
+<h3 id="summary">Summary</h3>
+<p><em>Phew</em> this was a lot to take in (and write…) - but to summarize - there really isn’t a universal standard/best of what the best ADT/API looks like.</p>
+<p>In my notes there is one way, I wrote it using slightly different syntax/language. But the takeaway is still the ADTs as in a concept -  all these ADTs build on the same basic idea/operations.</p>
+<p>I really liked the picture from the slides in my course so, I’ll put it here to visualize everything we have discussed today.
+<img src="/images/school/Summary.png" alt="Summary"></p>
+<p>In the next part we’ll begin with concept we mentioned today - Hash tables!</p>  </div> <nav class="flex flex-col sm:flex-row justify-between mt-8 pt-4 border-t border-border" data-astro-cid-v5ro3oot>   </nav> </article>  </main> </div> </body></html> 

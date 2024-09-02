@@ -1,0 +1,240 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="Astro v4.11.5"><link rel="icon" type="image" href="/favicon.ico"><title>Part 8 - Graphs</title><!-- KaTeX support --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script><!-- inline KaTeX --><link rel="stylesheet" href="/_astro/index.CwgzIfsj.css">
+<link rel="stylesheet" href="/_astro/_slug_.hCvEQTvV.css">
+<style>article[data-astro-cid-v5ro3oot]{max-width:80ch;margin:0 auto}.nav-button[data-astro-cid-v5ro3oot]{display:flex;align-items:center;padding:.5rem;border-radius:.5rem;transition:background-color .3s ease;text-decoration:none;color:var(--text-color);background-color:var(--bg-color);border:1px solid var(--border-color)}.nav-button[data-astro-cid-v5ro3oot]:hover{background-color:var(--hover-color)}.nav-button[data-astro-cid-v5ro3oot] .arrow[data-astro-cid-v5ro3oot]{font-size:1.5rem;line-height:1}.nav-button[data-astro-cid-v5ro3oot] .text[data-astro-cid-v5ro3oot]{display:flex;flex-direction:column;margin:0 .5rem}.nav-button[data-astro-cid-v5ro3oot] .label[data-astro-cid-v5ro3oot]{font-size:.8rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted-color)}.nav-button[data-astro-cid-v5ro3oot] .title[data-astro-cid-v5ro3oot]{font-weight:500}.prev-button[data-astro-cid-v5ro3oot]{justify-content:flex-start}.next-button[data-astro-cid-v5ro3oot]{justify-content:flex-end;text-align:right}@media (max-width: 640px){.nav-button[data-astro-cid-v5ro3oot]{width:100%}.next-button[data-astro-cid-v5ro3oot]{justify-content:flex-start;text-align:left}.next-button[data-astro-cid-v5ro3oot] .text[data-astro-cid-v5ro3oot]{order:2;margin-left:.5rem}.next-button[data-astro-cid-v5ro3oot] .arrow[data-astro-cid-v5ro3oot]{order:1}}
+</style><script type="module">document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]})});
+</script></head> <body> <div class="container mx-auto px-4 flex flex-col md:flex-row min-h-screen"> <aside class="w-full md:w-64 border-b md:border-r md:border-b-0 border-[var(--border-color)] border-dashed pt-8"> <header class="flex flex-col h-full"> <div class="flex items-center mb-4"> <script>
+  function setTheme(mode) {
+    localStorage.setItem("theme-storage", mode);
+    document.documentElement.setAttribute('data-theme', mode);
+  }
+  function toggleTheme() {
+    const currentTheme = localStorage.getItem("theme-storage") || "light";
+    const newTheme = currentTheme === "light" ? "dark" : "light";
+    setTheme(newTheme);
+  }
+  const savedTheme = localStorage.getItem("theme-storage") || "light";
+  setTheme(savedTheme);
+  window.toggleTheme = toggleTheme;
+</script> <button id="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme" class="w-6 h-6 cursor-pointer"> <div class="w-5 h-5 border-2 border-primary rounded-full transition-colors duration-300 ease-in-out hover:bg-primary"></div> </button> <a href="/" class="text-2xl font-semibold ml-3 h-10 pr-3">rezvan.xyz</a> </div> <nav class="flex flex-wrap gap-2 md:flex-col md:gap-2"> <a href="/principles" class="transition-colors">
+[principles]
+</a><a href="/cv" class="transition-colors">
+[cv]
+</a><a href="/posts" class="transition-colors">
+[posts]
+</a><a href="/chalmers" class="transition-colors">
+[chalmers]
+</a><a href="/cityu" class="transition-colors">
+[cityu]
+</a> </nav> </header> </aside> <main class="flex-grow px-4 md:px-8 py-8 overflow-y-auto">  <article class="prose prose-sm sm:prose lg:prose-lg xl:prose-xl max-w-none" data-astro-cid-v5ro3oot> <h1 class="text-3xl sm:text-4xl font-bold mb-4" data-astro-cid-v5ro3oot>Part 8 - Graphs</h1> <p class="text-sm text-muted-foreground mb-4" data-astro-cid-v5ro3oot>
+Date: 12/6/2022 </p> <div class="markdown-content" data-astro-cid-v5ro3oot>  <p>In this part we’ll so-called graphs and their applications.</p>
+<h3 id="introduction-of-graphs">Introduction of Graphs</h3>
+<p>A graph is a <em>set</em> of <strong>vertices</strong> connected <em>pairwise</em> by <strong>edges</strong>.
+So a very natural thing is that these edged can be either undirected or directed!</p>
+<p>A node can have a so-called <strong>degree</strong> describing how many in/outgoing edges it has.
+In the directed case we split this variable to ‘out degree’ and ‘in degree’.</p>
+<p>Another basic term that we’ll encounter is a <strong>cycle</strong>.
+A cycle is just as it sounds, a <em>cycle</em>, meaning that you start in a certain node and after a <em>walk</em> you end up in the same node again.</p>
+<p>Also, we can see the undirected graphs as directed graphs, but just having edges in both directions.
+We’ll mainly look at the use cases for directed graphs.</p>
+<h3 id="pseudo-code-for-graphs">Pseudo Code for Graphs</h3>
+<p>There are a lot of different ADT/API’s for graphs, we’ll be using this:</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>class Graph&#x3C;Vertices>:</span></span>
+<span class="line"><span>    // Adds an edge to the graph</span></span>
+<span class="line"><span>    add_edge(e: Edge&#x3C;Vertices>)</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    // Removes an edge from the graph</span></span>
+<span class="line"><span>    remove_edge(e: Edge&#x3C;Vertices>)</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    // Returns true if the edge is present in the graph, otherwise false</span></span>
+<span class="line"><span>    contains_edge(e: Edge&#x3C;Vertices>) -> boolean</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    // Returns all the edges which are connected with the vertices</span></span>
+<span class="line"><span>    outgoing_edges(from: Vertices) -> Collection&#x3C;Edge&#x3C;Vertices>></span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    // Returns the number of vertices present in the graph</span></span>
+<span class="line"><span>    n_vertices() -> Int</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    // Returns the number of edges present in the graph</span></span>
+<span class="line"><span>    n_edges() -> Int</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>Now this depends on the <code>Edge</code> class which will be implemented as:</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>class Edge&#x3C;Vertices>:</span></span>
+<span class="line"><span>    from   : Vertices</span></span>
+<span class="line"><span>    to     : Vertices</span></span>
+<span class="line"><span>    weight : float = 1.0</span></span>
+<span class="line"><span></span></span></code></pre>
+<h3 id="graph-representation">Graph Representation</h3>
+<p>We can represent a graph by doing:</p>
+<ul>
+<li>A set of edges</li>
+<li>An adjacency list</li>
+<li>An adjacency matrix</li>
+</ul>
+<h4 id="representation-set-of-edges">Representation: Set of edges</h4>
+<p>We can use set data structure for this. If the graph is undirected we only need to keep one pair of the direction.
+This is a quite good implementation for undirected graphs,
+since the complexity of finding all adjacent neighbors to a vertex v would be $\mathcal{O}(E)$,
+where E is the total number of edges in the graph.</p>
+<p>It can look something like:</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>0 1</span></span>
+<span class="line"><span>0 2</span></span>
+<span class="line"><span>0 5</span></span>
+<span class="line"><span>0 6</span></span>
+<span class="line"><span>3 4</span></span>
+<span class="line"><span>3 5</span></span>
+<span class="line"><span>4 5</span></span>
+<span class="line"><span>4 6</span></span>
+<span class="line"><span>7 8</span></span>
+<span class="line"><span>9 10</span></span>
+<span class="line"><span>9 11</span></span>
+<span class="line"><span>9 12</span></span>
+<span class="line"><span>11 12</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>We can look at these as tuples, where $(v_1, v_2)$ means that $v_1$ has a connecting edge to $v_2$.
+This is directed, but as we said, if we have an undirected graph, then it is enough to store just one of them.</p>
+<h4 id="representation-adjacency-list">Representation: Adjacency list</h4>
+<p>We maintain a <em>map</em> from vertices to collections of edges, we could alternatively also do a collection of vertices.</p>
+<p>If the graph is <strong>undirected</strong>, then we need to include <strong>both</strong> directions.</p>
+<p>The complexity for iterating over all the vertices adjacent to a vertex is $\mathcal{O}(v_a)$,
+we can write this as $\mathcal{O}(degree(V))$.
+So it’s good, note this is if the lookup for the key is $\mathcal{O}(1)$.</p>
+<h4 id="representation-adjacency-matrix">Representation: Adjacency matrix</h4>
+<p>We maintain a 2d $V \times V$ boolean array. Where true represent a connecting edge.</p>
+<p>The complexity of this is quite bad, since we need to loop through one of the dimensions, the complexity becomes $\mathcal{O}(V)$.</p>
+<h4 id="representation">Representation</h4>
+<p>In most real-world cases we use adjacency lists</p>
+<h3 id="implementation">Implementation</h3>
+<p>So let’s try to implement a directed graph using an adjacency list!</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>class Graph&#x3C;V>:</span></span>
+<span class="line"><span>    all_edges    : Map&#x3C;V, Collection&#x3C;Edge&#x3C;V>>></span></span>
+<span class="line"><span>    n_edges      : int</span></span>
+<span class="line"><span>    all_vertices : Set&#x3C;V></span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    outgoing_edges(from: V) -> Collection&#x3C;Edge&#x3C;V>>:</span></span>
+<span class="line"><span>        return all_edges.get(from)</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    contains_edge(e: Edge&#x3C;V>) -> boolean:</span></span>
+<span class="line"><span>        return e in outgoing_edges(edge.from)</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    add(e: Edge&#x3C;V>):</span></span>
+<span class="line"><span>        outgoing = outgoing_edges(e.from)</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        if e not in outgoing:</span></span>
+<span class="line"><span>            outgoing.add(e)</span></span>
+<span class="line"><span>            n_edges += 1</span></span>
+<span class="line"><span>            all_vertices.add(e.from)</span></span>
+<span class="line"><span>            all_vertices.add(e.to)</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    remove(e: Edge&#x3C;V>):</span></span>
+<span class="line"><span>        outgoing = outgoing_edges(e.from)</span></span>
+<span class="line"><span>        if edge in outgoing:</span></span>
+<span class="line"><span>            outgoing.remove(e)</span></span>
+<span class="line"><span>            n_edges -= 1</span></span>
+<span class="line"><span></span></span></code></pre>
+<h3 id="searching-in-graphs">Searching in Graphs</h3>
+<p>In many real-world applications, graphs will represent some sort of maze, or other structure, where we want to find a path.
+Sometimes the path with the least resistance/weight/length. There are two primary search algorithms for graphs.</p>
+<p>So called <strong>D</strong>epth-<strong>F</strong>irst <strong>S</strong>earch or DFS for short. The other called <strong>B</strong>readth-<strong>F</strong>irst <strong>S</strong>earch or BFS for short.</p>
+<p>Let’s begin with DFS.</p>
+<h4 id="depth-first-search">Depth-first search</h4>
+<p>Depth-first search is a way to traverse a graph systematically.</p>
+<p>A short pseudocode of a DFS would be:</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>DFS(to visit a vertex v):</span></span>
+<span class="line"><span>    mark v as visited</span></span>
+<span class="line"><span>    recursively visit all unmarked vertices w adjacent to v</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>We’ve encountered DFS for trees, the difference here as we can see is that we ‘mark’ each vertex we visit.
+Because in a graph, there might be cycles, so we don’t want to be stuck in them.</p>
+<p>Applications of using a DFS are usually,
+finding all vertices connected to a source vertex, or simply, finding a path between two vertices.</p>
+<h4 id="implementation-1">Implementation</h4>
+<p>To implement this we need data structures! To store all marked vertices, we will use a Set.
+To keep track of the path we’ve taken, we’ll use a map which contains vertices tuples.</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>recursiveDFS(v : V):</span></span>
+<span class="line"><span>    add v to visited</span></span>
+<span class="line"><span>    for edge in outgoing_edges(v):</span></span>
+<span class="line"><span>        w = endpoint of edge</span></span>
+<span class="line"><span>        if v not in visited:</span></span>
+<span class="line"><span>            recursiveDFS(w)</span></span>
+<span class="line"><span>            cameFrom[w] = v</span></span>
+<span class="line"><span></span></span></code></pre>
+<h3 id="breadth-first-search">Breadth-First Search</h3>
+<p>For our DFS we used an underlying stack for our recursive calls, the function stack.</p>
+<p>BFS uses a <em>queue</em> instead of stack, so we have to implement this ourselves.</p>
+<p>So a breakdown of what we have to do:</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>BFS(from a starting vertex s):</span></span>
+<span class="line"><span>    put s into FIFO queue, mark as visited</span></span>
+<span class="line"><span>    while queue not empty:</span></span>
+<span class="line"><span>        dequeue a vertex v</span></span>
+<span class="line"><span>        for each unmarked vertex w adjacent to v:</span></span>
+<span class="line"><span>            enqueue w, mark it as visited</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>So really, the only difference for BFS in trees compared to graphs is that we have to keep track of the visited vertices.</p>
+<h4 id="implementation-2">Implementation</h4>
+<p>So a pseudocode implementation would look something like:</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>iterativeBFS(start: V):</span></span>
+<span class="line"><span>    visited = new Set&#x3C;V></span></span>
+<span class="line"><span>    agenda = new Queue&#x3C;V></span></span>
+<span class="line"><span>    agenda.enqueue(start)</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    while agenda is not empty:</span></span>
+<span class="line"><span>        agenda.dequeue(v)</span></span>
+<span class="line"><span>        if v not in visited:</span></span>
+<span class="line"><span>            add v to visited</span></span>
+<span class="line"><span>            for edge in outgoing_edges(v):</span></span>
+<span class="line"><span>                w = endpoint of edge</span></span>
+<span class="line"><span>                if w not in visited:</span></span>
+<span class="line"><span>                    add w to agenda</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>If we want to retrace our steps, we would need a <code>cameFrom</code> Map as in the DFS.</p>
+<p>Also, one thing to note, if we replace the queue, with a stack, we’ll just end up with a <code>iterativeDFS</code> instead!</p>
+<h4 id="bfs-properties">BFS properties</h4>
+<p>In a BFS search, what do we actually get/perform? We get a path yes -
+but it’s always the <strong>shortest</strong> path from <code>s</code> to all other vertices!
+It actually does this in $\mathcal{O}(E + V)$</p>
+<h4 id="implementation-calculating-the-distance">Implementation: Calculating the distance</h4>
+<p>In this implementation we’ll add a map that hold the distances between every vertex.
+(I also added that <code>cameFrom</code> map that I discussed earlier)</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>iterativeBFS(start: V):</span></span>
+<span class="line"><span>    visited = new Set&#x3C;V></span></span>
+<span class="line"><span>    agenda = new Queue&#x3C;V></span></span>
+<span class="line"><span>    cameFrom = new Map&#x3C;V,V></span></span>
+<span class="line"><span>    distTo = new empty Map&#x3C;V, Int></span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    agenda.enqueue(start)</span></span>
+<span class="line"><span>    distTo[start] = 0</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    while agenda is not empty:</span></span>
+<span class="line"><span>        agenda.dequeue(v)</span></span>
+<span class="line"><span>        if v not in visited:</span></span>
+<span class="line"><span>            add v to visited</span></span>
+<span class="line"><span>            for edge in outgoing_edges(v):</span></span>
+<span class="line"><span>                w = endpoint of edge</span></span>
+<span class="line"><span>                if w not in visited:</span></span>
+<span class="line"><span>                    add w to agenda</span></span>
+<span class="line"><span>                    cameFrom[w] = v</span></span>
+<span class="line"><span>                    distTo[w] = 1 + distTo[v]</span></span>
+<span class="line"><span></span></span></code></pre>
+<h3 id="example-problems">Example Problems</h3>
+<p>So now that we’ve seen DFS, BFS and understood graphs - let’s see what we can do with them.</p>
+<p>A very important kind of graph is a <strong>DAG</strong>, or a Directed <strong>acyclic</strong> graph. This means the graph doesn’t contain any cycles.</p>
+<p>This is especially useful for scheduling, for example. But we need to know if a graph contains a cycle - how can we detect a cycle?</p>
+<p>That’s a very common problem that many applications implement into their programs.
+There are multiple ways of detecting a cycle in a graph, for example,
+we can use a DFS, and if we encounter a node that we’ve visited before, we know that we have a cycle.</p>
+<p>Also, a good note here, If we ever want the <em>preorder</em>, <em>post order</em> or <em>reverse post order</em> we just modify our DFS by one line -
+we change where the enqueue/push goes.</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>DFS(v : V):</span></span>
+<span class="line"><span>    visited.add(v)</span></span>
+<span class="line"><span>    preorder.enqueue(v)</span></span>
+<span class="line"><span>    for w in outgoing_edges(v):</span></span>
+<span class="line"><span>        if w not in visited:</span></span>
+<span class="line"><span>            visited.add(w)</span></span>
+<span class="line"><span>    postorder.enqueue(v)</span></span>
+<span class="line"><span>    reversePostorder.push(v)</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>Note that the <code>reversePostorder</code> is a stack, therefore we will get the reverse order.</p>
+<p>There are many finding ‘connected components’ problems, here’s a good picture to illustrate what we can use and not:
+<img src="/images/school/Graphs.png" alt="Graphs"></p>
+<h3 id="conclusion">Conclusion</h3>
+<p>So that’s it for graphs - in the next part we’ll cover <em>minimum spanning trees</em> and <em>shortest path algorithms</em>.</p>  </div> <nav class="flex flex-col sm:flex-row justify-between mt-8 pt-4 border-t border-border" data-astro-cid-v5ro3oot>   </nav> </article>  </main> </div> </body></html> 

@@ -1,0 +1,107 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="Astro v4.11.5"><link rel="icon" type="image" href="/favicon.ico"><title>Part 8 - Distance and network methods</title><!-- KaTeX support --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script><!-- inline KaTeX --><link rel="stylesheet" href="/_astro/index.CwgzIfsj.css">
+<link rel="stylesheet" href="/_astro/_slug_.hCvEQTvV.css">
+<style>article[data-astro-cid-v5ro3oot]{max-width:80ch;margin:0 auto}.nav-button[data-astro-cid-v5ro3oot]{display:flex;align-items:center;padding:.5rem;border-radius:.5rem;transition:background-color .3s ease;text-decoration:none;color:var(--text-color);background-color:var(--bg-color);border:1px solid var(--border-color)}.nav-button[data-astro-cid-v5ro3oot]:hover{background-color:var(--hover-color)}.nav-button[data-astro-cid-v5ro3oot] .arrow[data-astro-cid-v5ro3oot]{font-size:1.5rem;line-height:1}.nav-button[data-astro-cid-v5ro3oot] .text[data-astro-cid-v5ro3oot]{display:flex;flex-direction:column;margin:0 .5rem}.nav-button[data-astro-cid-v5ro3oot] .label[data-astro-cid-v5ro3oot]{font-size:.8rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted-color)}.nav-button[data-astro-cid-v5ro3oot] .title[data-astro-cid-v5ro3oot]{font-weight:500}.prev-button[data-astro-cid-v5ro3oot]{justify-content:flex-start}.next-button[data-astro-cid-v5ro3oot]{justify-content:flex-end;text-align:right}@media (max-width: 640px){.nav-button[data-astro-cid-v5ro3oot]{width:100%}.next-button[data-astro-cid-v5ro3oot]{justify-content:flex-start;text-align:left}.next-button[data-astro-cid-v5ro3oot] .text[data-astro-cid-v5ro3oot]{order:2;margin-left:.5rem}.next-button[data-astro-cid-v5ro3oot] .arrow[data-astro-cid-v5ro3oot]{order:1}}
+</style><script type="module">document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]})});
+</script></head> <body> <div class="container mx-auto px-4 flex flex-col md:flex-row min-h-screen"> <aside class="w-full md:w-64 border-b md:border-r md:border-b-0 border-[var(--border-color)] border-dashed pt-8"> <header class="flex flex-col h-full"> <div class="flex items-center mb-4"> <script>
+  function setTheme(mode) {
+    localStorage.setItem("theme-storage", mode);
+    document.documentElement.setAttribute('data-theme', mode);
+  }
+  function toggleTheme() {
+    const currentTheme = localStorage.getItem("theme-storage") || "light";
+    const newTheme = currentTheme === "light" ? "dark" : "light";
+    setTheme(newTheme);
+  }
+  const savedTheme = localStorage.getItem("theme-storage") || "light";
+  setTheme(savedTheme);
+  window.toggleTheme = toggleTheme;
+</script> <button id="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme" class="w-6 h-6 cursor-pointer"> <div class="w-5 h-5 border-2 border-primary rounded-full transition-colors duration-300 ease-in-out hover:bg-primary"></div> </button> <a href="/" class="text-2xl font-semibold ml-3 h-10 pr-3">rezvan.xyz</a> </div> <nav class="flex flex-wrap gap-2 md:flex-col md:gap-2"> <a href="/principles" class="transition-colors">
+[principles]
+</a><a href="/cv" class="transition-colors">
+[cv]
+</a><a href="/posts" class="transition-colors">
+[posts]
+</a><a href="/chalmers" class="transition-colors">
+[chalmers]
+</a><a href="/cityu" class="transition-colors">
+[cityu]
+</a> </nav> </header> </aside> <main class="flex-grow px-4 md:px-8 py-8 overflow-y-auto">  <article class="prose prose-sm sm:prose lg:prose-lg xl:prose-xl max-w-none" data-astro-cid-v5ro3oot> <h1 class="text-3xl sm:text-4xl font-bold mb-4" data-astro-cid-v5ro3oot>Part 8 - Distance and network methods</h1> <p class="text-sm text-muted-foreground mb-4" data-astro-cid-v5ro3oot>
+Date: 2/13/2024 </p> <div class="markdown-content" data-astro-cid-v5ro3oot>  <h3 id="introduction">Introduction</h3>
+<p>In data science, classification stands out as a fundamental technique.
+It involves the art of categorizing data into distinct classes based on various features and attributes.</p>
+<h3 id="different-type-of-classifiers">Different type of classifiers</h3>
+<p>Within the arsenal of classification algorithms, we encounter a diverse array of tools.
+From the simplicity of Logistic Regression to the complexity of Support Vector Machines, each classifier brings its unique strengths to the table.</p>
+<h3 id="measuring-distances">Measuring Distances</h3>
+<p>The most common metric for distance is euclidean distance:
+$$
+d(p, q) = \sqrt{\sum_{i=1}^{n} |q_i - p_i|^2}
+$$</p>
+<p>Where $p$ and $q$ are two points in the dataset and $n$ is the number of features.</p>
+<p>But let’s define what a distance metric is, a distance metric must satisfy the following properties:</p>
+<ul>
+<li>Positivity: $d(p, q) \geq 0$ for all $p$ and $q$.</li>
+<li>Identity: $d(p, q) = 0$ if and only if $p = q$.</li>
+<li>Symmetry: $d(p, q) = d(q, p)$ for all $p$ and $q$.</li>
+<li>Triangle inequality: $d(p, q) + d(q, r) \geq d(p, r)$ for all $p$, $q$ and $r$.</li>
+</ul>
+<p>The euclidean distance is a special case of a more general family, the $L_k$ distance:
+$$
+d(p, q) = \left(\sum_{i=1}^{n} |q_i - p_i|^k\right)^{1/k}
+$$</p>
+<h3 id="k-nearest-neighbours">$K$-nearest neighbours</h3>
+<p>Among these classifiers we find, the $k$-nearest neighbours algorithm.
+By seeking the consensus among the $k$ closest neighbours, this method navigates the data points to assign each point a class label.</p>
+<h3 id="determining-the-optimal-k">Determining the optimal $k$</h3>
+<p>If there are two classes, choosing an odd value for $k$ ensures no ties.
+If $k$ is small, noise can have a greater influence.
+Compute and compare <em>confusion matrices</em> for different values of $k$.</p>
+<h3 id="data-clustering">Data Clustering</h3>
+<p>Beyond classification lies the realm of data clustering, where patterns and structures emerge from the data’s depths.
+Through clustering, we gain insights into the underlying relationships and groupings that shape our understanding of the data landscape.</p>
+<h3 id="clustering-methods">Clustering methods</h3>
+<p>The $k$-means algorithm partitions the data into $k$ clusters.
+It iteratively assigns each data point to the nearest cluster and recalculates the cluster centroids.</p>
+<p>Hierarchical clustering, on the other hand, builds a tree of clusters.
+It starts with each data point as a cluster and merges the closest clusters until only one cluster remains.</p>
+<h4 id="k-means-clustering">$K$-means clustering</h4>
+<p>The $k$-means algorithm is a simple yet powerful tool for clustering.</p>
+<p>The algorithm works as follows:</p>
+<ul>
+<li>Choose value of $k$.</li>
+<li>Choose initial positions of the $k$ cluster centres.</li>
+<li>Choose a distance metric.</li>
+<li>Assign each data point to the nearest cluster.</li>
+<li>Recalculate the cluster centres as the mean of the data points in the cluster.</li>
+<li>Repeat steps 4 and 5 until convergence.</li>
+</ul>
+<h5 id="the-elbow-method">The elbow method</h5>
+<p>How do we pick the optimal value of $k$?</p>
+<p>Let the diameter of a clustering be the longest intra-cluster distance.
+The elbow method involves plotting the diameter of the clustering as a function of $k$.
+The optimal value of $k$ is the value at the “elbow” of the curve.</p>
+<h5 id="limitations-of-k-means">Limitations of $k$-means</h5>
+<p>The $k$-means algorithm is sensitive to the initial choice of cluster centres.
+It is also sensitive to the choice of $k$.
+The algorithm is not suitable for clusters of different sizes and densities.</p>
+<p>In summary, $k$-means works best for:</p>
+<ul>
+<li>Spherical clusters.</li>
+<li>Equal diameter clusters.</li>
+<li>Equal cluster size.</li>
+</ul>
+<h4 id="hierarchical-clustering">Hierarchical clustering</h4>
+<p>Somtimes called agglomerative clustering, hierarchical clustering builds a tree of clusters.</p>
+<p>The algorithm works as follows:</p>
+<ul>
+<li>Start with each data point as a cluster.</li>
+<li>Merge the two closest clusters.</li>
+<li>Repeat step 2 until only one cluster remains.</li>
+</ul>
+<h3 id="rand-index">Rand index</h3>
+<p>Similarity measure between two clusters by considering all pairs of
+samples and counting pairs that are assigned in the same or different
+clusters in the predicted and true clusterings.</p>
+<p>$$
+RI = \frac{\text{Number of agreeing pairs}}{\text{Total number of pairs}}
+$$</p>  </div> <nav class="flex flex-col sm:flex-row justify-between mt-8 pt-4 border-t border-border" data-astro-cid-v5ro3oot>   </nav> </article>  </main> </div> </body></html> 

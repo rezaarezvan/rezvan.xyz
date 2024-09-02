@@ -1,0 +1,193 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="Astro v4.11.5"><link rel="icon" type="image" href="/favicon.ico"><title>Part 7 - Absolute max and min values</title><!-- KaTeX support --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script><!-- inline KaTeX --><link rel="stylesheet" href="/_astro/index.CwgzIfsj.css">
+<link rel="stylesheet" href="/_astro/_slug_.hCvEQTvV.css">
+<style>article[data-astro-cid-v5ro3oot]{max-width:80ch;margin:0 auto}.nav-button[data-astro-cid-v5ro3oot]{display:flex;align-items:center;padding:.5rem;border-radius:.5rem;transition:background-color .3s ease;text-decoration:none;color:var(--text-color);background-color:var(--bg-color);border:1px solid var(--border-color)}.nav-button[data-astro-cid-v5ro3oot]:hover{background-color:var(--hover-color)}.nav-button[data-astro-cid-v5ro3oot] .arrow[data-astro-cid-v5ro3oot]{font-size:1.5rem;line-height:1}.nav-button[data-astro-cid-v5ro3oot] .text[data-astro-cid-v5ro3oot]{display:flex;flex-direction:column;margin:0 .5rem}.nav-button[data-astro-cid-v5ro3oot] .label[data-astro-cid-v5ro3oot]{font-size:.8rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted-color)}.nav-button[data-astro-cid-v5ro3oot] .title[data-astro-cid-v5ro3oot]{font-weight:500}.prev-button[data-astro-cid-v5ro3oot]{justify-content:flex-start}.next-button[data-astro-cid-v5ro3oot]{justify-content:flex-end;text-align:right}@media (max-width: 640px){.nav-button[data-astro-cid-v5ro3oot]{width:100%}.next-button[data-astro-cid-v5ro3oot]{justify-content:flex-start;text-align:left}.next-button[data-astro-cid-v5ro3oot] .text[data-astro-cid-v5ro3oot]{order:2;margin-left:.5rem}.next-button[data-astro-cid-v5ro3oot] .arrow[data-astro-cid-v5ro3oot]{order:1}}
+</style><script type="module">document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]})});
+</script></head> <body> <div class="container mx-auto px-4 flex flex-col md:flex-row min-h-screen"> <aside class="w-full md:w-64 border-b md:border-r md:border-b-0 border-[var(--border-color)] border-dashed pt-8"> <header class="flex flex-col h-full"> <div class="flex items-center mb-4"> <script>
+  function setTheme(mode) {
+    localStorage.setItem("theme-storage", mode);
+    document.documentElement.setAttribute('data-theme', mode);
+  }
+  function toggleTheme() {
+    const currentTheme = localStorage.getItem("theme-storage") || "light";
+    const newTheme = currentTheme === "light" ? "dark" : "light";
+    setTheme(newTheme);
+  }
+  const savedTheme = localStorage.getItem("theme-storage") || "light";
+  setTheme(savedTheme);
+  window.toggleTheme = toggleTheme;
+</script> <button id="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme" class="w-6 h-6 cursor-pointer"> <div class="w-5 h-5 border-2 border-primary rounded-full transition-colors duration-300 ease-in-out hover:bg-primary"></div> </button> <a href="/" class="text-2xl font-semibold ml-3 h-10 pr-3">rezvan.xyz</a> </div> <nav class="flex flex-wrap gap-2 md:flex-col md:gap-2"> <a href="/principles" class="transition-colors">
+[principles]
+</a><a href="/cv" class="transition-colors">
+[cv]
+</a><a href="/posts" class="transition-colors">
+[posts]
+</a><a href="/chalmers" class="transition-colors">
+[chalmers]
+</a><a href="/cityu" class="transition-colors">
+[cityu]
+</a> </nav> </header> </aside> <main class="flex-grow px-4 md:px-8 py-8 overflow-y-auto">  <article class="prose prose-sm sm:prose lg:prose-lg xl:prose-xl max-w-none" data-astro-cid-v5ro3oot> <h1 class="text-3xl sm:text-4xl font-bold mb-4" data-astro-cid-v5ro3oot>Part 7 - Absolute max and min values</h1> <p class="text-sm text-muted-foreground mb-4" data-astro-cid-v5ro3oot>
+Date: 9/12/2023 </p> <div class="markdown-content" data-astro-cid-v5ro3oot>  <h3 id="introduction">Introduction</h3>
+<p>In this part we’ll cover how we find absolute maximum and minimum values for a function.</p>
+<h3 id="absolute-minimummaximum-values">Absolute minimum/maximum values</h3>
+<p>Let’s start with an example to understand why it’s important to find these values:</p>
+<p>A rectangular box is to be made from $12m^2$ of cardboard. Find the maximum volume of such a box.</p>
+<p>We can describe the volume of the rectangular box as $V = xyz$.</p>
+<p>We also assume we don’t have a top side, therefore the total surface area will be:
+$$
+2zx + 2zy + yx = 12
+$$</p>
+<p>Solving for $z$:
+$$
+z = \dfrac{12 - yx}{2(x + y)}
+$$</p>
+<p>We can now write our volume function, as a function of two variables:
+$$
+V(x, y) = \dfrac{xy (12 - yx)}{2(x + y)}  = \dfrac{12xy - x^2y^2}{2x + 2y} \newline
+$$</p>
+<p>As we covered last time, we need to solve $\nabla f = 0$, let’s first find the partial derivates:
+$$
+\begin{align*}
+V_x(x, y) &#x26; = \dfrac{f’\cdot g - f \cdot g’}{g^2} \newline
+&#x26; = \dfrac{(12y - 2xy^2)(2x + 2y) - (12xy - x^2y^2)(2)}{(2x + 2y)^2} \newline
+&#x26; = \dfrac{(24xy + 24y^2 - 4x^2y^2 - 4xy^3) - (24xy - 2x^2y^2)}{(2x + 2y)^2} \newline
+&#x26; = \dfrac{24xy + 24y^2 - 4x^2y^2 - 4xy^3 - 24xy + 2x^2y^2}{(2x + 2y)^2} \newline
+&#x26; = \dfrac{24y^2 - 2x^2y^2 - 4xy^3}{(2x + 2y)^2} \newline
+&#x26; = \dfrac{12y^2 - x^2y^2 - 2xy^3}{2(x + y)^2} \newline
+&#x26; = \dfrac{y^2(12 - 2xy - x^2)}{2(x + y)^2} \newline
+\end{align*}
+$$</p>
+<p>We can see that this equation is symmetrical for $x$ and $y$, therefore:
+$$
+V_y =  \dfrac{x^2(12 - 2xy - y^2)}{2(x + y)^2} \newline
+$$</p>
+<p>$$
+\begin{cases}
+12 - 2xy - y^2 = 0 \newline
+12 - 2xy - x^2 = 0
+\end{cases}
+$$</p>
+<p>From this we find:
+$$
+y^2 - x^2 = 0 \newline
+y^2 = x^2 \newline
+y = x \ | \ \text{since they are only positive}
+$$</p>
+<p>Which leads us to:
+$$
+12 - 2x^2 - x^2 = 0 \newline
+12 - 3x^2 = 0 \newline
+3x^2 = 12 \newline
+x^2 = 4 \newline
+x = 2 \newline
+y = 2 \newline
+$$</p>
+<p>Since we cannot get an arbitrarily big volume out of $12m^2$ of cardboard. Since there exists a critical point, this must be the absolute maximum.
+$$
+V_max = V(2, 2) = \ldots = 4
+$$</p>
+<h3 id="does-absolute-minimummaximum-always-exist">Does absolute minimum/maximum always exist?</h3>
+<p>Let’s recall for one variable, the so-called extreme variable theorem.</p>
+<blockquote>
+<p>A continuous function on the interval $[a, b]$, always has absolute minimum/maximum.</p>
+</blockquote>
+<p>This is quite intuitive, so let’s not prove it.</p>
+<p>Similarly, for functions of two variables, this holds, but we need to define some terminology first.</p>
+<h3 id="bounded-set">Bounded set</h3>
+<blockquote>
+<p>A bounded set in $\mathbb{R}^2$, is a set that is contained in some disc.</p>
+</blockquote>
+<h3 id="boundary-points">Boundary points</h3>
+<blockquote>
+<p>A boundary point at a set $D \in \mathbb{R}^2$, is a point such that, any disc centered at this point contains both some points from $D$ and some points outside $D$.</p>
+</blockquote>
+<h3 id="closed-set">Closed set</h3>
+<blockquote>
+<p>A closed set in $\mathbb{R}^2$, is a set that is contains all of its <strong>boundary points</strong></p>
+</blockquote>
+<h4 id="examples">Examples</h4>
+<p>$$
+\{(x, y) \in \mathbb{R}^2 | x^2 + y^2 \leq 1 \} \ | \ \text{contains boundary points, closed set}
+$$</p>
+<p>$$
+\{(x, y) \in \mathbb{R}^2 | x^2 + y^2 \le 1 \} \ | \ \text{does not contain boundary points, not closed set}
+$$</p>
+<p>$$
+\{(x, y) \in \mathbb{R}^2 | x^2 + y^2 \leq 1, (x, y) \neq (0, 1) \} \ | \ \text{does not contain boundary point, not closed set}
+$$</p>
+<p>$$
+\{(x, y) \in \mathbb{R}^2 | y \geq 0 \} \ | \ \text{contains boundary points, closed set}
+$$</p>
+<p>Now we can define the extreme value theorem.</p>
+<h3 id="extreme-value-theorem">Extreme value theorem</h3>
+<blockquote>
+<p>If, $f$, is a continuous function, on a bounded closed region. Then $f$ has absolute values.</p>
+</blockquote>
+<h3 id="how-to-find-absolute-values">How to find absolute values</h3>
+<p>Recall, for functions of one variable, absolute values are either critical points inside the interval, or at the boundary.</p>
+<p>So we need to find the critical points inside $D$ and compute the values. Along with the boundary points, from these computations we can decipher which points are minimums and maximums.</p>
+<h4 id="example">Example</h4>
+<p>Find absolute minimum and maximum for $f(x, y) = x^2 - 2xy + 2y$, on the rectangle:
+$$
+R = \{(x, y) |
+\begin{align*}
+0 \leq x \leq 3, 0 \leq y \leq 2
+\end{align*}
+\}
+$$</p>
+<p>Since $f$ is a continuous function, and $R$ is bounded closed set. By the extreme value theorem there exists absolute values.</p>
+<p>Let’s first investigate critical points inside $R$.</p>
+<p>$$
+\nabla f = 0 \newline
+\langle 2x - 2y, -2x + 2 \rangle = 0
+$$</p>
+<p>$$
+\begin{cases}
+2x - 2y = 0 \newline
+-2x + 2 = 0
+\end{cases}
+$$</p>
+<p>$$
+x = 1 \newline
+y = 1
+$$</p>
+<p>Therefore, $(1, 1)$ is a critical point:
+$$
+f(1, 1) = \ldots = \boxed{1}
+$$</p>
+<p>Now we investigate the boundary, points, since this is a rectangle, we can investigate each side. We’ll call these $L_1, L_2, L_3, L_4$:
+$$
+L_1 = \{(x, y) | 0 \leq x \leq 3, y = 0 \} \newline
+L_2 = \{(x, y) | x = 3, 0 \leq y \leq 2 \} \newline
+L_3 = \{(x, y) | 0 \leq x \leq 3, y = 2 \} \newline
+L_4 = \{(x, y) | x = 0, 0 \leq y \leq 2 \} \newline
+$$</p>
+<p>Let’s find the absolute minimum/maximum values on each of these.</p>
+<p>On $L_1$:
+$$
+g(x) = f(x, 0) = x^2 \newline
+g(0) = 0 \ | \ \text{abs. min.} \newline
+g(3) = 9 \ | \ \text{abs. max.}
+$$</p>
+<p>On $L_2$:
+$$
+g(y) = f(3, y) = 9 - 4y \newline
+g(2) = 1 \ | \ \text{abs. min.} \newline
+g(0) = 9 \ | \ \text{abs. max.}
+$$</p>
+<p>On $L_3$:
+$$
+g(x) = f(x, 2) = x^2 - 4x + 4 \newline
+g(2) = 0 \ | \ \text{abs. min.} \newline
+g(0) = 4 \ | \ \text{abs. max.}
+$$</p>
+<p>On $L_4$:
+$$
+g(y) = f(0, y) = 2y \newline
+g(0) = 0 \ | \ \text{abs. min.} \newline
+g(2) = 4 \ | \ \text{abs. max.}
+$$</p>
+<p>From all these computations we find that:
+$$
+f_{min} = 0 \newline
+f_{max} = 9
+$$</p>  </div> <nav class="flex flex-col sm:flex-row justify-between mt-8 pt-4 border-t border-border" data-astro-cid-v5ro3oot>   </nav> </article>  </main> </div> </body></html> 

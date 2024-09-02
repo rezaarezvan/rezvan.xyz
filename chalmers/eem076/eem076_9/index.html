@@ -1,0 +1,220 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="Astro v4.11.5"><link rel="icon" type="image" href="/favicon.ico"><title>Part 9 - Electromagnetic Waves</title><!-- KaTeX support --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script><!-- inline KaTeX --><link rel="stylesheet" href="/_astro/index.CwgzIfsj.css">
+<link rel="stylesheet" href="/_astro/_slug_.hCvEQTvV.css">
+<style>article[data-astro-cid-v5ro3oot]{max-width:80ch;margin:0 auto}.nav-button[data-astro-cid-v5ro3oot]{display:flex;align-items:center;padding:.5rem;border-radius:.5rem;transition:background-color .3s ease;text-decoration:none;color:var(--text-color);background-color:var(--bg-color);border:1px solid var(--border-color)}.nav-button[data-astro-cid-v5ro3oot]:hover{background-color:var(--hover-color)}.nav-button[data-astro-cid-v5ro3oot] .arrow[data-astro-cid-v5ro3oot]{font-size:1.5rem;line-height:1}.nav-button[data-astro-cid-v5ro3oot] .text[data-astro-cid-v5ro3oot]{display:flex;flex-direction:column;margin:0 .5rem}.nav-button[data-astro-cid-v5ro3oot] .label[data-astro-cid-v5ro3oot]{font-size:.8rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted-color)}.nav-button[data-astro-cid-v5ro3oot] .title[data-astro-cid-v5ro3oot]{font-weight:500}.prev-button[data-astro-cid-v5ro3oot]{justify-content:flex-start}.next-button[data-astro-cid-v5ro3oot]{justify-content:flex-end;text-align:right}@media (max-width: 640px){.nav-button[data-astro-cid-v5ro3oot]{width:100%}.next-button[data-astro-cid-v5ro3oot]{justify-content:flex-start;text-align:left}.next-button[data-astro-cid-v5ro3oot] .text[data-astro-cid-v5ro3oot]{order:2;margin-left:.5rem}.next-button[data-astro-cid-v5ro3oot] .arrow[data-astro-cid-v5ro3oot]{order:1}}
+</style><script type="module">document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]})});
+</script></head> <body> <div class="container mx-auto px-4 flex flex-col md:flex-row min-h-screen"> <aside class="w-full md:w-64 border-b md:border-r md:border-b-0 border-[var(--border-color)] border-dashed pt-8"> <header class="flex flex-col h-full"> <div class="flex items-center mb-4"> <script>
+  function setTheme(mode) {
+    localStorage.setItem("theme-storage", mode);
+    document.documentElement.setAttribute('data-theme', mode);
+  }
+  function toggleTheme() {
+    const currentTheme = localStorage.getItem("theme-storage") || "light";
+    const newTheme = currentTheme === "light" ? "dark" : "light";
+    setTheme(newTheme);
+  }
+  const savedTheme = localStorage.getItem("theme-storage") || "light";
+  setTheme(savedTheme);
+  window.toggleTheme = toggleTheme;
+</script> <button id="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme" class="w-6 h-6 cursor-pointer"> <div class="w-5 h-5 border-2 border-primary rounded-full transition-colors duration-300 ease-in-out hover:bg-primary"></div> </button> <a href="/" class="text-2xl font-semibold ml-3 h-10 pr-3">rezvan.xyz</a> </div> <nav class="flex flex-wrap gap-2 md:flex-col md:gap-2"> <a href="/principles" class="transition-colors">
+[principles]
+</a><a href="/cv" class="transition-colors">
+[cv]
+</a><a href="/posts" class="transition-colors">
+[posts]
+</a><a href="/chalmers" class="transition-colors">
+[chalmers]
+</a><a href="/cityu" class="transition-colors">
+[cityu]
+</a> </nav> </header> </aside> <main class="flex-grow px-4 md:px-8 py-8 overflow-y-auto">  <article class="prose prose-sm sm:prose lg:prose-lg xl:prose-xl max-w-none" data-astro-cid-v5ro3oot> <h1 class="text-3xl sm:text-4xl font-bold mb-4" data-astro-cid-v5ro3oot>Part 9 - Electromagnetic Waves</h1> <p class="text-sm text-muted-foreground mb-4" data-astro-cid-v5ro3oot>
+Date: 4/26/2023 </p> <div class="markdown-content" data-astro-cid-v5ro3oot>  <p>In this part we’ll cover electromagnetic waves - we’ll see why electrical and magnetic fields always appear together.</p>
+<h3 id="displacement-current">Displacement current</h3>
+<p>If we recall Faraday’s law:
+$$
+\oint \mathbf{\vec{E}} \cdot d\mathbf{\vec{s}} = -\dfrac{d \Phi_B}{dt}
+$$</p>
+<p>This says that a change in the magnetic field will produce an electrical field. But how about the converse?</p>
+<p>Does a change in an electrical field produce a magnetic field?</p>
+<p>If we consider this example with a capacitor being charged:</p>
+<p><img src="/images/school/CC.png#center" alt=""></p>
+<p>Using Ampere’s law:
+$$
+\oint \mathbf{\vec{B}}  \cdot\ d\mathbf{\vec{s}} = \mu_0 I_{enc}
+$$</p>
+<p>If we look at $S_1$, we see that $I_{enc} = I$ - however, for $S_2$, $I_{enc} = 0$ - but the current does continue?</p>
+<p>So we will need to add an extra term to Ampere’s law:
+$$
+\oint \mathbf{\vec{B}}  \cdot\ d\mathbf{\vec{s}} = \mu_0(I + I_d)
+$$</p>
+<p>Where the <strong>displacement</strong> current, $I_d$:
+$$
+I_d = \varepsilon_0 \dfrac{d \Phi_E}{dt}
+$$</p>
+<p>In practice, $I = I_d$, thus the choice of the Amperian loop is inconsequential!</p>
+<p><img src="/images/school/DC.png#center" alt=""></p>
+<h3 id="gausss-law">Gauss’s Law</h3>
+<p>For electrostatics, Gauss’s law said that:
+$$
+\Phi_E = \oiint \mathbf{\vec{E}} \cdot\ d\mathbf{\vec{A}} = \dfrac{q}{\mu_0}
+$$</p>
+<p>But in the case for magnetism - magnetic <em>monopoles</em> do not exist (meaning that $q = 0$). Therefore:
+$$
+\Phi_B = \oiint \mathbf{\vec{B}} \cdot\ d\mathbf{\vec{A}} = 0
+$$</p>
+<h3 id="maxwells-equations">Maxwell’s Equations</h3>
+<p>With these new tools in mind - we have now learned the four Maxwell equations that form the basis of electromagnetism!</p>
+<p>Let’s write them all down:</p>
+<p><strong>Gauss’s Law for electrostatics</strong>:
+$$
+\Phi_E = \oiint \mathbf{\vec{E}} \cdot\ d\mathbf{\vec{A}} = \dfrac{q}{\mu_0}
+$$</p>
+<p><strong>Gauss’s Law for magnetism</strong>:
+$$
+\Phi_B = \oiint \mathbf{\vec{B}} \cdot\ d\mathbf{\vec{A}} = 0
+$$</p>
+<p><strong>Faraday’s Law</strong>:
+$$
+\varepsilon = \oint \mathbf{\vec{E}} \cdot d\mathbf{\vec{s}} = -\dfrac{d \Phi_B}{dt}
+$$</p>
+<p><strong>Ampere-Maxwell Law</strong>:
+$$
+\varepsilon = \oint \mathbf{\vec{B}} \cdot d\mathbf{\vec{s}} = \mu_0(I + I_d) = \mu_0\left(I + \varepsilon_0 \dfrac{d \Phi_E}{dt}\right)
+$$</p>
+<p>If the absence of sources is present (meaning that q = 0 and I = 0) - all of these become quite compact and tidy:</p>
+<p><strong>Gauss’s Law for electrostatics</strong>:
+$$
+\Phi_E = \oiint \mathbf{\vec{E}} \cdot\ d\mathbf{\vec{A}} = 0
+$$</p>
+<p><strong>Gauss’s Law for magnetism</strong>:
+$$
+\Phi_B = \oiint \mathbf{\vec{B}} \cdot\ d\mathbf{\vec{A}} = 0
+$$</p>
+<p><strong>Faraday’s Law</strong>:
+$$
+\varepsilon = \oint \mathbf{\vec{E}} \cdot d\mathbf{\vec{s}} = -\dfrac{d \Phi_B}{dt}
+$$</p>
+<p><strong>Ampere-Maxwell Law</strong>:
+$$
+\varepsilon = \oint \mathbf{\vec{B}} \cdot d\mathbf{\vec{s}} = \mu_0(I + I_d) = \mu_0 \varepsilon_0 \dfrac{d \Phi_E}{dt}
+$$</p>
+<p>Now we can see, from Faraday’s law and Ampere-Maxwell’s Law that, if we have a change in one field - we’ll see a change in the other!</p>
+<p>We’ll see why this picture will make a lot of sense soon:
+<img src="/images/school/EM.png#center" alt=""></p>
+<h3 id="inductance">Inductance</h3>
+<p>We have seen some aspect of inductances already - the induced current.</p>
+<p>Imagine this scenario:
+<img src="/images/school/MI.png#center" alt=""></p>
+<p>We can see that our $\mathbf{\vec{B_1}}$ passes through the second coil, therefore a flux is generated, $\Phi_{21}$</p>
+<p>As we learned last time, varying $I_1$ will induce an emf!</p>
+<p>Which means:
+$$
+\varepsilon_{21} = -N_{2} \dfrac{d \Phi_{21}}{dt}
+$$</p>
+<p>If we want to write this in terms of $I_1$ we get:
+$$
+\varepsilon_{21} = M_{21} \dfrac{d I_1}{dt}
+$$</p>
+<p>Where $M_{21}$:
+$$
+M_{21} = \dfrac{N_2 \Phi_{21}}{I_1}
+$$</p>
+<p>But let’s say that we vary $I_2$, this will also lead to an EMF, but in the first coil:
+$$
+\varepsilon_{12} = -N_{1} \dfrac{d \Phi_{12}}{dt} = M_{12} \dfrac{d I_2}{dt}
+$$</p>
+<p>Then, if we use the theorem of reciprocity - which states that:</p>
+<blockquote>
+<p>The current at one point in a circuit due to a voltage at a second point is the same as the current at the second point due to the same voltage at the first.</p>
+</blockquote>
+<p>Using this and combining Ampere’s law and the Biot-Savart law - we get:
+$$
+M_{12} = M_{21} = M
+$$</p>
+<p>This means - sending varying current (AC) through coil 1 - will generate an AC current in coil 2 as well!</p>
+<p>We can also connect this to voltage, potential drop:
+$$
+\dfrac{V_2}{V_1} = \dfrac{N_2}{N_1}
+$$</p>
+<h3 id="self-inductance">Self-Inductance</h3>
+<p>Say we only have one coil</p>
+<p><img src="/images/school/SI.png#center" alt=""></p>
+<p>If we vary, $I$, an induced EMF will oppose the change in flux, according to Faraday’s law.</p>
+<p>We denote this self-inducted EMF with, $\varepsilon_L$.</p>
+<p>We can write it as:
+$$
+\varepsilon_L = -N \dfrac{d \Phi_B}{dt}
+$$</p>
+<p>We can relate this self-inductance with self-inductance, $L$:
+$$
+\varepsilon_L = -L \dfrac{dI}{dt}
+$$</p>
+<p>We can also write:
+$$
+L = \dfrac{N \Phi_B}{I} = \dfrac{\mu_0 N^2 A}{l}
+$$</p>
+<p>Therefore, the inductance, is a measure of an inductor’s resistance to change of the current!</p>
+<p>In even simpler terms - inductors oppose change in the current!</p>
+<p>So, since inductors oppose changes to the current - work must be done to establish a current in the inductor.
+Thus, energy must be stored in the magnetic field in an inductor! Similar to electrical fields in a capacitor.</p>
+<p>The power, or the rate at an external EMF, $\varepsilon_{ext}$, <em>works</em> to overcome the self-induced EMF, $\varepsilon_L$, to pass the current $I$:
+$$
+P_L = \dfrac{d W_{ext}}{dt} = I \varepsilon_{ext} = -I \varepsilon_L = IL \dfrac{dI}{dt}
+$$</p>
+<p>This assumes that only $\varepsilon_{ext}$ and the inductor is present.</p>
+<p>The total work done by an external source to increase the current from 0 to $I$ is:
+$$
+W_{ext} = \int dW_{ext} = \int_0^I IL\ dI = \boxed{\dfrac{1}{2}LI^2}
+$$</p>
+<h3 id="electromagnetic-waves">Electromagnetic waves</h3>
+<p>We’ll now cover a very cool phenomena - we’ll cover why electromagnetic waves travel at light speed!</p>
+<p>To prove this we’ll need to rewrite our definition for $\mathbf{\vec{E}}$ and $\mathbf{\vec{B}}$:
+$$
+\mathbf{\vec{E}} = E_y(x, t)\mathbf{\vec{J}} = E\ cos(kx - \omega t)\mathbf{\vec{J}}
+$$</p>
+<p>$$
+\mathbf{\vec{B}} = B_z(x, t)\mathbf{\vec{K}} = B\ cos(kx - \omega t)\mathbf{\vec{K}}
+$$</p>
+<p>Using Faraday’s law:
+$$
+\oint \mathbf{\vec{E}} \cdot\ d\mathbf{\vec{s}} = - \dfrac{d}{dt} \iint \mathbf{\vec{B}} \cdot\ d\mathbf{\vec{A}}
+$$</p>
+<p>If we take our ring integral inside a arbitrary rectangle - on the xy-plane:</p>
+<p><img src="/images/school/xy.png#center" alt=""></p>
+<p>$$
+E_y(x + \Delta x) - E_y(x) = - \dfrac{d}{dt} \iint \mathbf{\vec{B}} \cdot dxdy
+$$</p>
+<p>We get that:
+$$
+\dfrac{\partial E_y}{\partial x} = - \dfrac{\partial B_z}{\partial t}
+$$</p>
+<p>Let’s calculate both:
+$$
+\dfrac{\partial E_y}{\partial x} = -kE\ sin(kx - \omega t)
+$$</p>
+<p>$$
+\dfrac{\partial B_z}{\partial t} = \omega B\ sin(kx - \omega t)
+$$</p>
+<p>Which, finally, means:
+$$
+\boxed{\dfrac{E}{B} = \dfrac{\omega}{k} = c}
+$$</p>
+<h3 id="emfs-in-circuits">EMFs in circuits</h3>
+<p>Now that we have learned this beauty of electromagnetic waves - let’s tie it back to our electrical circuits.</p>
+<p>As we learned with electrical fields and capacitor:</p>
+<blockquote>
+<p>Electrical field opposes change in voltage
+$$
+C = \varepsilon_0 \dfrac{A}{d} \newline
+U = \dfrac{1}{2} C|V^2| \newline
+I(t) = C \dfrac{dV}{dt}
+$$</p>
+</blockquote>
+<p>We have now seen that, magnetic fields and inductors:</p>
+<blockquote>
+<p>Magnetic field opposes change in the current
+$$
+L = \mu_0 N^2 \dfrac{A}{l} \newline
+U = \dfrac{1}{2} LI^2 \newline
+V(t) = L \dfrac{dI}{dt}
+$$</p>
+</blockquote>
+<p>We can now use this knowledge to understand LC and RLC circuits - and see how and why the energy oscillates between the electrical and magnetic field!</p>  </div> <nav class="flex flex-col sm:flex-row justify-between mt-8 pt-4 border-t border-border" data-astro-cid-v5ro3oot>   </nav> </article>  </main> </div> </body></html> 

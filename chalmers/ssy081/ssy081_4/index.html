@@ -1,0 +1,116 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="Astro v4.11.5"><link rel="icon" type="image" href="/favicon.ico"><title>Part 4 - Differential equation models</title><!-- KaTeX support --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script><!-- inline KaTeX --><link rel="stylesheet" href="/_astro/index.CwgzIfsj.css">
+<link rel="stylesheet" href="/_astro/_slug_.hCvEQTvV.css">
+<style>article[data-astro-cid-v5ro3oot]{max-width:80ch;margin:0 auto}.nav-button[data-astro-cid-v5ro3oot]{display:flex;align-items:center;padding:.5rem;border-radius:.5rem;transition:background-color .3s ease;text-decoration:none;color:var(--text-color);background-color:var(--bg-color);border:1px solid var(--border-color)}.nav-button[data-astro-cid-v5ro3oot]:hover{background-color:var(--hover-color)}.nav-button[data-astro-cid-v5ro3oot] .arrow[data-astro-cid-v5ro3oot]{font-size:1.5rem;line-height:1}.nav-button[data-astro-cid-v5ro3oot] .text[data-astro-cid-v5ro3oot]{display:flex;flex-direction:column;margin:0 .5rem}.nav-button[data-astro-cid-v5ro3oot] .label[data-astro-cid-v5ro3oot]{font-size:.8rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted-color)}.nav-button[data-astro-cid-v5ro3oot] .title[data-astro-cid-v5ro3oot]{font-weight:500}.prev-button[data-astro-cid-v5ro3oot]{justify-content:flex-start}.next-button[data-astro-cid-v5ro3oot]{justify-content:flex-end;text-align:right}@media (max-width: 640px){.nav-button[data-astro-cid-v5ro3oot]{width:100%}.next-button[data-astro-cid-v5ro3oot]{justify-content:flex-start;text-align:left}.next-button[data-astro-cid-v5ro3oot] .text[data-astro-cid-v5ro3oot]{order:2;margin-left:.5rem}.next-button[data-astro-cid-v5ro3oot] .arrow[data-astro-cid-v5ro3oot]{order:1}}
+</style><script type="module">document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]})});
+</script></head> <body> <div class="container mx-auto px-4 flex flex-col md:flex-row min-h-screen"> <aside class="w-full md:w-64 border-b md:border-r md:border-b-0 border-[var(--border-color)] border-dashed pt-8"> <header class="flex flex-col h-full"> <div class="flex items-center mb-4"> <script>
+  function setTheme(mode) {
+    localStorage.setItem("theme-storage", mode);
+    document.documentElement.setAttribute('data-theme', mode);
+  }
+  function toggleTheme() {
+    const currentTheme = localStorage.getItem("theme-storage") || "light";
+    const newTheme = currentTheme === "light" ? "dark" : "light";
+    setTheme(newTheme);
+  }
+  const savedTheme = localStorage.getItem("theme-storage") || "light";
+  setTheme(savedTheme);
+  window.toggleTheme = toggleTheme;
+</script> <button id="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme" class="w-6 h-6 cursor-pointer"> <div class="w-5 h-5 border-2 border-primary rounded-full transition-colors duration-300 ease-in-out hover:bg-primary"></div> </button> <a href="/" class="text-2xl font-semibold ml-3 h-10 pr-3">rezvan.xyz</a> </div> <nav class="flex flex-wrap gap-2 md:flex-col md:gap-2"> <a href="/principles" class="transition-colors">
+[principles]
+</a><a href="/cv" class="transition-colors">
+[cv]
+</a><a href="/posts" class="transition-colors">
+[posts]
+</a><a href="/chalmers" class="transition-colors">
+[chalmers]
+</a><a href="/cityu" class="transition-colors">
+[cityu]
+</a> </nav> </header> </aside> <main class="flex-grow px-4 md:px-8 py-8 overflow-y-auto">  <article class="prose prose-sm sm:prose lg:prose-lg xl:prose-xl max-w-none" data-astro-cid-v5ro3oot> <h1 class="text-3xl sm:text-4xl font-bold mb-4" data-astro-cid-v5ro3oot>Part 4 - Differential equation models</h1> <p class="text-sm text-muted-foreground mb-4" data-astro-cid-v5ro3oot>
+Date: 9/14/2023 </p> <div class="markdown-content" data-astro-cid-v5ro3oot>  <h3 id="introduction">Introduction</h3>
+<p>In this part we will learn about systems that can be modeled with differential equations.</p>
+<h3 id="definition">Definition</h3>
+<p>Some systems whose input, $f(t)$, and output, $y(t)$, are related by linear differential equations, often have the form:
+$$
+\dfrac{d^n y}{dt^n} + a_{n - 1} \dfrac{d^{n - 1}y}{dt^{n - 1}} + \ldots + a_1 \dfrac{dy}{dt} + a_0 y(t) =
+$$</p>
+<p>$$
+b_m + \dfrac{d^m f}{dt^m} + b_{m - 1} + \dfrac{d^{m - 1} f}{dt^{m - 1}} + \ldots + b_1 \dfrac{df}{dt} + b_0 f(t)
+$$</p>
+<p>This notation can be quite long and tedious, so let’s say that $D = \dfrac{d}{dt}$
+$$
+(D^n + a_{n - 1}D^{n - 1} + \ldots + a_1 D + a_0)y(t) =
+$$</p>
+<p>$$
+(D^m + b_{m - 1}D^{m - 1} + \ldots + b_1 D + b_0)f(t) =
+$$</p>
+<p>Let’s call these $Q(D)$ and $P(D)$ respectively:
+$$
+Q(D)y(t) = P(D)f(t)
+$$</p>
+<p>A general rule of thumb is that $m \leq n$, this to limit noise.</p>
+<h3 id="data-needed-to-compute-system-response">Data needed to compute system response</h3>
+<p>For $t \geq 0$, a systems <strong>output</strong> is the <em>result</em> of two independent causes.</p>
+<p>Therefore, we need to know:</p>
+<ol>
+<li>The <strong>initial conditions</strong> of the system (also called <strong>system state</strong>) at $t = 0$.</li>
+<li>The <strong>input</strong>, $f(t)$, for $t \geq 0$.</li>
+<li>If the system is <strong>linear</strong></li>
+</ol>
+<p>Let’s also quickly refresh on if a system is linear.</p>
+<h4 id="linearity-example">Linearity example</h4>
+<p>Determine if the system described by the equation:
+$$
+\dfrac{d y(t)}{dt} + 4y(t) = f(t)
+$$</p>
+<p>with, $f(t)$, as input and, $y(t)$, as output of the system, is linear.</p>
+<p>So let’s check if the superposition principle holds!</p>
+<p>$$
+\dfrac{d\ \alpha y_1(t)}{dt} + 4 \alpha y_1(t) = f_1(t)
+$$</p>
+<p>$$
+\dfrac{d\ \beta y_2(t)}{dt} + 4 \beta y_2(t) = f_2(t)
+$$</p>
+<p>$$
+f_1(t) + f_2(t) =  \dfrac{d(\ \alpha y_1(t) + \beta y_2(t))}{dt} + 4(\alpha y_1(t) + \beta y_2(t))
+$$</p>
+<p>Now let’s try with $y(t) = \alpha y_1(t) + \beta y_2(t)$:
+$$
+\dfrac{d(\ \alpha y_1(t) + \beta y_2(t))}{dt} + 4(\alpha y_1(t) + \beta y_2(t))
+$$</p>
+<p>We can see that $f(t) = f_1(t) + f_2(t)$.</p>
+<h3 id="solving-these-systems">Solving these systems</h3>
+<p>As we defined, the output of these systems are the result of two independent cases.</p>
+<p>So for the zero-input response:
+$$
+Q(D)y_0(t) = 0
+$$</p>
+<p>The solution for $y_0(t)$ will be:
+$$
+y_0(t) = c_1 e^{\lambda_1 t} + c_2 e^{\lambda_2 t} + \ldots + c_n e^{\lambda_n t}
+$$</p>
+<p>This is if we have no repeated roots, in that case:
+$$
+y_0(t) = (c_1 + c_2t + \ldots + c_r t^{r - 1})e^{\lambda_1 t} + c_{r +1}e^{\lambda_{r + 1} t} + \ldots + c_n e^{\lambda_n t}
+$$</p>
+<p>Also in the case we have complex roots, $\alpha \pm j \beta$.
+$$
+y_0(t) = \dfrac{c}{2} e^{j \theta} e^{(\alpha + j \beta)t} + \dfrac{c}{2} e^{-j \theta} e^{(\alpha - j \beta)t} = \dfrac{c}{2} e^{\alpha t} \left[ e^{j(\beta t + \theta)} + e^{-j(\beta t + \theta)}\right]
+$$</p>
+<p>Using Euler’s formula:
+$$
+y_0(t) = c e^{\alpha t} cos(\beta t + \theta)
+$$</p>
+<h4 id="example">Example</h4>
+<p>$$
+(D^2 + 3D + 2)y_0(t) = 0
+$$</p>
+<p>$$
+\lambda^2 + 3\lambda + 2 = (\lambda + 1)(\lambda + 2) = 0
+$$</p>
+<p>$$
+\lambda_1 = -1 \newline
+\lambda_2 = -2
+$$</p>
+<p>$$
+y_0(t) = c_1 e^-t + c_2 e^{-2t}
+$$</p>  </div> <nav class="flex flex-col sm:flex-row justify-between mt-8 pt-4 border-t border-border" data-astro-cid-v5ro3oot>   </nav> </article>  </main> </div> </body></html> 

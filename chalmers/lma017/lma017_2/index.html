@@ -1,0 +1,186 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="Astro v4.11.5"><link rel="icon" type="image" href="/favicon.ico"><title>Part 2 - Continuity &amp; partial derivatives.</title><!-- KaTeX support --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script><!-- inline KaTeX --><link rel="stylesheet" href="/_astro/index.CwgzIfsj.css">
+<link rel="stylesheet" href="/_astro/_slug_.hCvEQTvV.css">
+<style>article[data-astro-cid-v5ro3oot]{max-width:80ch;margin:0 auto}.nav-button[data-astro-cid-v5ro3oot]{display:flex;align-items:center;padding:.5rem;border-radius:.5rem;transition:background-color .3s ease;text-decoration:none;color:var(--text-color);background-color:var(--bg-color);border:1px solid var(--border-color)}.nav-button[data-astro-cid-v5ro3oot]:hover{background-color:var(--hover-color)}.nav-button[data-astro-cid-v5ro3oot] .arrow[data-astro-cid-v5ro3oot]{font-size:1.5rem;line-height:1}.nav-button[data-astro-cid-v5ro3oot] .text[data-astro-cid-v5ro3oot]{display:flex;flex-direction:column;margin:0 .5rem}.nav-button[data-astro-cid-v5ro3oot] .label[data-astro-cid-v5ro3oot]{font-size:.8rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted-color)}.nav-button[data-astro-cid-v5ro3oot] .title[data-astro-cid-v5ro3oot]{font-weight:500}.prev-button[data-astro-cid-v5ro3oot]{justify-content:flex-start}.next-button[data-astro-cid-v5ro3oot]{justify-content:flex-end;text-align:right}@media (max-width: 640px){.nav-button[data-astro-cid-v5ro3oot]{width:100%}.next-button[data-astro-cid-v5ro3oot]{justify-content:flex-start;text-align:left}.next-button[data-astro-cid-v5ro3oot] .text[data-astro-cid-v5ro3oot]{order:2;margin-left:.5rem}.next-button[data-astro-cid-v5ro3oot] .arrow[data-astro-cid-v5ro3oot]{order:1}}
+</style><script type="module">document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]})});
+</script></head> <body> <div class="container mx-auto px-4 flex flex-col md:flex-row min-h-screen"> <aside class="w-full md:w-64 border-b md:border-r md:border-b-0 border-[var(--border-color)] border-dashed pt-8"> <header class="flex flex-col h-full"> <div class="flex items-center mb-4"> <script>
+  function setTheme(mode) {
+    localStorage.setItem("theme-storage", mode);
+    document.documentElement.setAttribute('data-theme', mode);
+  }
+  function toggleTheme() {
+    const currentTheme = localStorage.getItem("theme-storage") || "light";
+    const newTheme = currentTheme === "light" ? "dark" : "light";
+    setTheme(newTheme);
+  }
+  const savedTheme = localStorage.getItem("theme-storage") || "light";
+  setTheme(savedTheme);
+  window.toggleTheme = toggleTheme;
+</script> <button id="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme" class="w-6 h-6 cursor-pointer"> <div class="w-5 h-5 border-2 border-primary rounded-full transition-colors duration-300 ease-in-out hover:bg-primary"></div> </button> <a href="/" class="text-2xl font-semibold ml-3 h-10 pr-3">rezvan.xyz</a> </div> <nav class="flex flex-wrap gap-2 md:flex-col md:gap-2"> <a href="/principles" class="transition-colors">
+[principles]
+</a><a href="/cv" class="transition-colors">
+[cv]
+</a><a href="/posts" class="transition-colors">
+[posts]
+</a><a href="/chalmers" class="transition-colors">
+[chalmers]
+</a><a href="/cityu" class="transition-colors">
+[cityu]
+</a> </nav> </header> </aside> <main class="flex-grow px-4 md:px-8 py-8 overflow-y-auto">  <article class="prose prose-sm sm:prose lg:prose-lg xl:prose-xl max-w-none" data-astro-cid-v5ro3oot> <h1 class="text-3xl sm:text-4xl font-bold mb-4" data-astro-cid-v5ro3oot>Part 2 - Continuity &amp; partial derivatives.</h1> <p class="text-sm text-muted-foreground mb-4" data-astro-cid-v5ro3oot>
+Date: 8/30/2023 </p> <div class="markdown-content" data-astro-cid-v5ro3oot>  <h3 id="introduction">Introduction</h3>
+<p>In this part we’ll define continuity when dealing with functions with several variables. We’ll also start looking at derivatives of functions of several variables.</p>
+<h3 id="continuity">Continuity</h3>
+<p>Let’s recall what continuity of a function with one variable is defined:</p>
+<blockquote>
+<p>A function of one variable is <em>continuous</em> at a point, $a \in D$ if:</p>
+</blockquote>
+<p>$$
+\lim_{x \to a} f(x) = f(a)
+$$</p>
+<p>In functions with several variables, it’s the same:
+$$
+\lim_{(x, y) \to (a, b)} f(x, y) = f(a, b)
+$$</p>
+<p>We say $f$ is continuous on <em>its domain</em>, if $f$ is continuous at each point, $(a, b) \in D$</p>
+<h3 id="continuity-laws">Continuity laws</h3>
+<p>Suppose $f and g$ are functions of two variables. $h$, is a function of one variable. Which are continuous in their respective domains, then:</p>
+<p>$$
+f \pm g
+$$</p>
+<p>$$
+f \cdot g
+$$</p>
+<p>$$
+\left(\dfrac{f}{g}\right)
+$$</p>
+<p>$$
+h(f(x, y))
+$$</p>
+<p>All of the above, are continuous on their domains.</p>
+<h4 id="example">Example</h4>
+<p>$$
+f(x, y) = x  \ | \ \text{ is continuous at $\mathbb{R}^2$}
+$$</p>
+<p>Proof:
+$$
+\lim_{(x, y) \to (a, b)} f(x, y) = f(a, b) = a
+$$</p>
+<p>$$
+\text{Using the limit law: } \lim_{(x, y) \to (a, b)} x = a
+$$</p>
+<p>Similarly $f(x, y) = y$ is continuous at $\mathbb{R}^2$.</p>
+<p>$$
+f(x, y) = x^3y - y^2 + x \ | \ \text{ is continuous at $\mathbb{R}^2$}
+$$</p>
+<p>Proof:
+Since polynomials are combinations of $f(x, y) = x$ and $f(x, y) = y$, using continuity laws (or limit laws), we can easily prove this.</p>
+<p>$$
+f(x, y) = \dfrac{x^3 y^3 - x^4y}{y - x} \ | \ \text{ is continuous \textbf{on its domain}}
+$$</p>
+<p>The domain of $f$ is:
+$$
+\{(x, y) \ | \ y - x \neq 0 \}
+$$</p>
+<p>$$
+f(x, y) = e^{x^2 - y} \ | \ \text{ is continuous at $\mathbb{R}^2$}
+$$</p>
+<p>Using the composition law of continuity, we easily prove that this function is a continuous function, <strong>on its domain</strong>. In this case it’s still $\mathbb{R}^2$.</p>
+<p>Knowing whether a function is continuous or not is very powerful, knowing that the above function is continuous makes:</p>
+<p>$$
+\lim_{(x, y) \to (a, b)} e^{x^2 - y} = e^{1^2 - 3} = \boxed{e^{-2}}
+$$</p>
+<p>Trivial.</p>
+<p>Determine if this function is continuous:
+$$
+f(x, y) =
+\begin{cases}
+\dfrac{xy^2}{x^2 + 3y^4} &#x26; (x, y) \neq (0,0) \newline
+0  &#x26; (x, y) = (0, 0)
+\end{cases}
+$$</p>
+<p>Solution:
+If the function is continuous, using the definition, then:
+$$
+\lim_{(x, y) \to (a, b)} f(x, y) = f(a, b)
+$$</p>
+<p>which means:
+$$
+\lim_{(x, y) \to (0, 0)} f(x, y) = f(0, 0) = 0
+$$</p>
+<p>$$
+\lim_{(x, y) \to (0, 0)} \dfrac{xy^2}{x^2 + 3y^4} = 0
+$$</p>
+<p>Using the law of limits and the definition, we find that this limit does not exist since:</p>
+<p>Along $x = 0$
+$$
+\dfrac{xy^2}{x^2 + 3y^4} = \dfrac{0}{3y^4} = 0
+$$</p>
+<p>Along $x = y^2$
+$$
+\dfrac{xy^2}{x^2 + 3y^4} = \dfrac{y^4}{y^4 + 3y^4} = \dfrac{1}{4}
+$$</p>
+<p>Which tells us that $f(x, y)$ is not continuous at $(0, 0)$.</p>
+<p>Last example:
+$$
+f(x, y) =
+\begin{cases}
+\dfrac{x^4 - y^4}{x^2 + y^2} &#x26; (x, y) \neq (0,0) \newline
+0  &#x26; (x, y) = (0, 0)
+\end{cases}
+$$</p>
+<p>$$
+\lim_{(x, y) \to (0, 0)} \dfrac{x^4 - y^4}{x^2 + y^2} = 0
+$$</p>
+<p>$$
+\begin{align*}
+\lim_{(x, y) \to (0, 0)} \dfrac{x^4 - y^4}{x^2 + y^2} &#x26; = \newline
+\lim_{(x, y) \to (0, 0)} \dfrac{(x^2 + y^2)(x^2 - y^2)}{x^2 + y^2} &#x26; = \newline
+\lim_{(x, y) \to (0, 0)} (x^2 - y^2) &#x26; = \newline
+\boxed{0}
+\end{align*}
+$$</p>
+<p>Which means it is continuous at $(0, 0)$.</p>
+<h3 id="partial-derivatives">Partial derivatives</h3>
+<p>Let’s first start with recalling the definition of derivative for functions with one variable:
+$$
+\lim_{h \to 0} \dfrac{f(x + h) - f(x)}{h}
+$$</p>
+<p>Since we’re dealing with several variables, we need to choose <em>what variable to respect</em>, meaning what variable has a small increase.</p>
+<h4 id="definition">Definition</h4>
+<blockquote>
+<p>The <em>partial</em> derivate of a function of two variables <strong>with respect to</strong> x, denoted by $f_x$, is the function of two variables given by:
+$$
+f_x(x, y) = \lim_{h \to 0} \dfrac{f(x + h, y) - f(x, y)}{h}
+$$</p>
+</blockquote>
+<p>Similarly for $y$:
+$$
+f_y(x, y) = \lim_{h \to 0} \dfrac{f(x, y + h) - f(x, y)}{h}
+$$</p>
+<p>In other words what this means, the partial derivate with respect to a variable, we treat all other variables as they were constants.</p>
+<h4 id="examples">Examples</h4>
+<p>$$
+f(x, y) = x^2y + y^3
+$$</p>
+<p>$$
+f_x(x, y) = 2xy
+$$</p>
+<p>$$
+f_y(x, y) = x^2 + 3y^2
+$$</p>
+<p>$$
+f(x, y) = sin(x^2y - 3x)
+$$</p>
+<p>$$
+f_x(x, y) = cos(x^2y - 3x) \cdot (2xy - 3) \ | \ \text{chain rule}
+$$</p>
+<p>$$
+f_y(x, y) = cos(x^2y - 3x) \cdot x^2 \ | \ \text{chain rule}
+$$</p>
+<p>$$
+f(x, y, z) = x^2z + xy - 7yz^5
+$$</p>
+<p>$$
+f_z(x, y, z) = x^2 - 35yz^4
+$$</p>
+<h3 id="summary">Summary</h3>
+<p>As we have seen continuity is quite similar when dealing with functions of several variables. The <em>partial</em> derivate of functions of several variables are also quite trivial since we treat the other variables as constants!</p>  </div> <nav class="flex flex-col sm:flex-row justify-between mt-8 pt-4 border-t border-border" data-astro-cid-v5ro3oot>   </nav> </article>  </main> </div> </body></html> 

@@ -1,0 +1,87 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="Astro v4.11.5"><link rel="icon" type="image" href="/favicon.ico"><title>Part 14 - Filters</title><!-- KaTeX support --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script><!-- inline KaTeX --><link rel="stylesheet" href="/_astro/index.CwgzIfsj.css">
+<link rel="stylesheet" href="/_astro/_slug_.hCvEQTvV.css">
+<style>article[data-astro-cid-v5ro3oot]{max-width:80ch;margin:0 auto}.nav-button[data-astro-cid-v5ro3oot]{display:flex;align-items:center;padding:.5rem;border-radius:.5rem;transition:background-color .3s ease;text-decoration:none;color:var(--text-color);background-color:var(--bg-color);border:1px solid var(--border-color)}.nav-button[data-astro-cid-v5ro3oot]:hover{background-color:var(--hover-color)}.nav-button[data-astro-cid-v5ro3oot] .arrow[data-astro-cid-v5ro3oot]{font-size:1.5rem;line-height:1}.nav-button[data-astro-cid-v5ro3oot] .text[data-astro-cid-v5ro3oot]{display:flex;flex-direction:column;margin:0 .5rem}.nav-button[data-astro-cid-v5ro3oot] .label[data-astro-cid-v5ro3oot]{font-size:.8rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted-color)}.nav-button[data-astro-cid-v5ro3oot] .title[data-astro-cid-v5ro3oot]{font-weight:500}.prev-button[data-astro-cid-v5ro3oot]{justify-content:flex-start}.next-button[data-astro-cid-v5ro3oot]{justify-content:flex-end;text-align:right}@media (max-width: 640px){.nav-button[data-astro-cid-v5ro3oot]{width:100%}.next-button[data-astro-cid-v5ro3oot]{justify-content:flex-start;text-align:left}.next-button[data-astro-cid-v5ro3oot] .text[data-astro-cid-v5ro3oot]{order:2;margin-left:.5rem}.next-button[data-astro-cid-v5ro3oot] .arrow[data-astro-cid-v5ro3oot]{order:1}}
+</style><script type="module">document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]})});
+</script></head> <body> <div class="container mx-auto px-4 flex flex-col md:flex-row min-h-screen"> <aside class="w-full md:w-64 border-b md:border-r md:border-b-0 border-[var(--border-color)] border-dashed pt-8"> <header class="flex flex-col h-full"> <div class="flex items-center mb-4"> <script>
+  function setTheme(mode) {
+    localStorage.setItem("theme-storage", mode);
+    document.documentElement.setAttribute('data-theme', mode);
+  }
+  function toggleTheme() {
+    const currentTheme = localStorage.getItem("theme-storage") || "light";
+    const newTheme = currentTheme === "light" ? "dark" : "light";
+    setTheme(newTheme);
+  }
+  const savedTheme = localStorage.getItem("theme-storage") || "light";
+  setTheme(savedTheme);
+  window.toggleTheme = toggleTheme;
+</script> <button id="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme" class="w-6 h-6 cursor-pointer"> <div class="w-5 h-5 border-2 border-primary rounded-full transition-colors duration-300 ease-in-out hover:bg-primary"></div> </button> <a href="/" class="text-2xl font-semibold ml-3 h-10 pr-3">rezvan.xyz</a> </div> <nav class="flex flex-wrap gap-2 md:flex-col md:gap-2"> <a href="/principles" class="transition-colors">
+[principles]
+</a><a href="/cv" class="transition-colors">
+[cv]
+</a><a href="/posts" class="transition-colors">
+[posts]
+</a><a href="/chalmers" class="transition-colors">
+[chalmers]
+</a><a href="/cityu" class="transition-colors">
+[cityu]
+</a> </nav> </header> </aside> <main class="flex-grow px-4 md:px-8 py-8 overflow-y-auto">  <article class="prose prose-sm sm:prose lg:prose-lg xl:prose-xl max-w-none" data-astro-cid-v5ro3oot> <h1 class="text-3xl sm:text-4xl font-bold mb-4" data-astro-cid-v5ro3oot>Part 14 - Filters</h1> <p class="text-sm text-muted-foreground mb-4" data-astro-cid-v5ro3oot>
+Date: 12/7/2023 </p> <div class="markdown-content" data-astro-cid-v5ro3oot>  <h3 id="introduction">Introduction</h3>
+<p>In this part we’ll understand the concept of filters.</p>
+<h3 id="filters">Filters</h3>
+<p>We usually use filters for two different purposes:</p>
+<ul>
+<li>Frequency elimination</li>
+<li>Frequency detection</li>
+</ul>
+<h3 id="example">Example</h3>
+<p>Say we have the following system:
+$$
+G(s) = \dfrac{a}{s + a}
+$$</p>
+<p>What type of filter is this? Let’s find out. Plotting the bode plot will help us.</p>
+<p><img src="/images/school/lowpass.png#center" alt="">
+Note: This is for $a = 1$</p>
+<p>We can see that this is a low-pass filter! We will call the part that lets through the frequency for passband.
+The range that gets eliminated/attenuated is the stopband.</p>
+<p>For a high-pass filter, the general form is:
+$$
+G(s) = \dfrac{s}{s + b} = \dfrac{\frac{s}{b}}{1 + \frac{s}{b}}
+$$</p>
+<p><img src="/images/school/highpass.png#center" alt="">
+Note: This is for $b = 1$</p>
+<h3 id="filter-types">Filter types</h3>
+<p>So far we’ve seen low-pass and high-pass filters. Let’s list all the filters that we’ll work with:</p>
+<ul>
+<li>Low-pass (LP - low pass, high gets filtered out)</li>
+<li>High-pass (HP - high pass, low gets filtered out)</li>
+<li>Band-stop filter (BS - frequencies within a specific range gets attenuated, rest are unfiltered)</li>
+<li>Band-pass filter (BP - frequencies within a specific range pass, rest are attenuated)</li>
+<li>Notch filter (Filters exactly one frequency)</li>
+</ul>
+<h3 id="butterworth-filters">Butterworth filters</h3>
+<p>When we need to perform filter realization, we usually will restort to Butterworth:</p>
+<p>$$
+\text{Order 1: } G(s) = \dfrac{\omega_1}{s + \omega_1} \newline
+\text{Order 2: } G(s) = \dfrac{\omega_1^2}{s^2 + 2 \zeta \omega_1 s + \omega_1^2} \ | \ \zeta = \frac{1}{\sqrt{2}}
+$$</p>
+<h3 id="filter-transformation">Filter transformation</h3>
+<p>Say we have this filter:
+$$
+G(s) = \dfrac{1}{s + 1}
+$$</p>
+<p>This is a low-pass filter. Say we want another type of filter from this - what should we do?</p>
+<ol>
+<li>Switch of break-frequency point to $\omega_c$ (cut-off)</li>
+</ol>
+<p>Say we want to go from LP $\to$ HP, then we need to set:
+$$
+s \to \frac{s}{\omega_c}
+$$</p>
+<p>$$
+G(s) = \dfrac{1}{\frac{s}{\omega_c} + 1} = \dfrac{\omega_c}{s + \omega_c}
+$$</p>
+<p>In the case we had a second order filter:
+$$
+G(s) = \dfrac{1}{\frac{s^2}{\omega_c^2} + \sqrt{2} \frac{s}{\omega_c} + 1} = \dfrac{\omega_c^2}{s^2 + \sqrt{2}\omega_c s + \omega_c^2}
+$$</p>  </div> <nav class="flex flex-col sm:flex-row justify-between mt-8 pt-4 border-t border-border" data-astro-cid-v5ro3oot>   </nav> </article>  </main> </div> </body></html> 

@@ -1,0 +1,300 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="Astro v4.11.5"><link rel="icon" type="image" href="/favicon.ico"><title>Part 3 - Models of concurrency</title><!-- KaTeX support --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script><!-- inline KaTeX --><link rel="stylesheet" href="/_astro/index.CwgzIfsj.css">
+<link rel="stylesheet" href="/_astro/_slug_.hCvEQTvV.css">
+<style>article[data-astro-cid-v5ro3oot]{max-width:80ch;margin:0 auto}.nav-button[data-astro-cid-v5ro3oot]{display:flex;align-items:center;padding:.5rem;border-radius:.5rem;transition:background-color .3s ease;text-decoration:none;color:var(--text-color);background-color:var(--bg-color);border:1px solid var(--border-color)}.nav-button[data-astro-cid-v5ro3oot]:hover{background-color:var(--hover-color)}.nav-button[data-astro-cid-v5ro3oot] .arrow[data-astro-cid-v5ro3oot]{font-size:1.5rem;line-height:1}.nav-button[data-astro-cid-v5ro3oot] .text[data-astro-cid-v5ro3oot]{display:flex;flex-direction:column;margin:0 .5rem}.nav-button[data-astro-cid-v5ro3oot] .label[data-astro-cid-v5ro3oot]{font-size:.8rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted-color)}.nav-button[data-astro-cid-v5ro3oot] .title[data-astro-cid-v5ro3oot]{font-weight:500}.prev-button[data-astro-cid-v5ro3oot]{justify-content:flex-start}.next-button[data-astro-cid-v5ro3oot]{justify-content:flex-end;text-align:right}@media (max-width: 640px){.nav-button[data-astro-cid-v5ro3oot]{width:100%}.next-button[data-astro-cid-v5ro3oot]{justify-content:flex-start;text-align:left}.next-button[data-astro-cid-v5ro3oot] .text[data-astro-cid-v5ro3oot]{order:2;margin-left:.5rem}.next-button[data-astro-cid-v5ro3oot] .arrow[data-astro-cid-v5ro3oot]{order:1}}
+</style><script type="module">document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]})});
+</script></head> <body> <div class="container mx-auto px-4 flex flex-col md:flex-row min-h-screen"> <aside class="w-full md:w-64 border-b md:border-r md:border-b-0 border-[var(--border-color)] border-dashed pt-8"> <header class="flex flex-col h-full"> <div class="flex items-center mb-4"> <script>
+  function setTheme(mode) {
+    localStorage.setItem("theme-storage", mode);
+    document.documentElement.setAttribute('data-theme', mode);
+  }
+  function toggleTheme() {
+    const currentTheme = localStorage.getItem("theme-storage") || "light";
+    const newTheme = currentTheme === "light" ? "dark" : "light";
+    setTheme(newTheme);
+  }
+  const savedTheme = localStorage.getItem("theme-storage") || "light";
+  setTheme(savedTheme);
+  window.toggleTheme = toggleTheme;
+</script> <button id="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme" class="w-6 h-6 cursor-pointer"> <div class="w-5 h-5 border-2 border-primary rounded-full transition-colors duration-300 ease-in-out hover:bg-primary"></div> </button> <a href="/" class="text-2xl font-semibold ml-3 h-10 pr-3">rezvan.xyz</a> </div> <nav class="flex flex-wrap gap-2 md:flex-col md:gap-2"> <a href="/principles" class="transition-colors">
+[principles]
+</a><a href="/cv" class="transition-colors">
+[cv]
+</a><a href="/posts" class="transition-colors">
+[posts]
+</a><a href="/chalmers" class="transition-colors">
+[chalmers]
+</a><a href="/cityu" class="transition-colors">
+[cityu]
+</a> </nav> </header> </aside> <main class="flex-grow px-4 md:px-8 py-8 overflow-y-auto">  <article class="prose prose-sm sm:prose lg:prose-lg xl:prose-xl max-w-none" data-astro-cid-v5ro3oot> <h1 class="text-3xl sm:text-4xl font-bold mb-4" data-astro-cid-v5ro3oot>Part 3 - Models of concurrency</h1> <p class="text-sm text-muted-foreground mb-4" data-astro-cid-v5ro3oot>
+Date: 1/31/2023 </p> <div class="markdown-content" data-astro-cid-v5ro3oot>  <p>In this part we’ll cover how we can achieve mutual exclusion in a program using
+only atomic read and writes.</p>
+<h3 id="analyzing-concurrency">Analyzing Concurrency</h3>
+<p>When analyzing concurrent programs we often look at <em>states</em> and <em>transitions</em>.</p>
+<p>A <em>state</em> in these diagrams are <em>possible program states</em>.
+<em>Transitions</em> on the other hand, <em>connects</em> these states to an execution order.</p>
+<p>One to thing to note is that, the structural properties in these diagrams,
+captures the semantics properties of the corresponding program.</p>
+<h4 id="states">States</h4>
+<p>A <em>state</em>, as we defined it, captures a possible state in a program.
+Meaning it captures both shared and local variables and states in a concurrent program.</p>
+<p>The initial state (starting point) is usually marked with an incoming arrow to indicate the start.
+While, the final state of a program are usually marked with double-line edges.</p>
+<h4 id="transitions">Transitions</h4>
+<p>Transitions, as we defined them, connects these states. So it’s natural that,
+a transition is an arrow that connects two states.</p>
+<p>Usually locking and unlocking are considered atomic operations, so each
+lock and unlock will have their own visible transition.</p>
+<h4 id="structural-properties">Structural properties</h4>
+<p>As we said earlier, the structural properties of a transition diagrams tells
+the semantics properties about the program.</p>
+<p>This means for example that:</p>
+<ul>
+<li>Mutual Exclusion:
+<ul>
+<li>If there are no states where two (or more) threads are in their critical section</li>
+</ul>
+</li>
+<li>Deadlock Freedom:
+<ul>
+<li>For every (non-final) state, there is at least one outgoing transition to another state.</li>
+</ul>
+</li>
+<li>Starvation Freedom:
+<ul>
+<li>There is (looping) path such that a thread never enters its critical section while trying to do so.</li>
+</ul>
+</li>
+<li>No Race Conditions:
+<ul>
+<li>All the final states have the same correct result.</li>
+</ul>
+</li>
+</ul>
+<p>So we can see that it is very powerful to have these diagrams to analyze
+programs and see what we achieve.</p>
+<h3 id="mutual-exclusion-with-only-atomic-read-and-writes">Mutual exclusion with only atomic read and writes</h3>
+<p>We know that we can achieve mutual exclusion using (good) locks and semaphores.
+But can we achieve mutual exclusion in programs using only atomic read and writes?</p>
+<p>It is in fact possible - but it’s tricky however - but let’s try to implement it.</p>
+<h4 id="problem-description">Problem description</h4>
+<p>Lets quickly go over what our problem is, so we have an easier time solving it.</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>while(true) {</span></span>
+<span class="line"><span>    entry protocol</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    critical section {</span></span>
+<span class="line"><span>        .</span></span>
+<span class="line"><span>        .</span></span>
+<span class="line"><span>        .</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    exit protocol</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>We want to design a (concurrent) program were we achieve, mutual exclusion,
+freedom from deadlocks and freedom from starvation, in the following program.</p>
+<h4 id="busy-waiting">Busy-waiting</h4>
+<p>In the following attempts, we’ll use something called busy-waiting.</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>while(!condition) {</span></span>
+<span class="line"><span>    // Do nothing</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>We will use the keyword <code>await(c)</code> which is not an actual keyword.
+But we will use it as a synonym to the busy wait loop.</p>
+<p>Note, we don’t really want to use this in actual programs since there are better ways of waiting.
+But for now this will do.</p>
+<h3 id="naive-attempt">Naive attempt</h3>
+<p>One of the most naive attempts one might try is to use a boolean list, called
+<code>enter</code>.</p>
+<p>So when thread $t_k$ wants to enter it sets <code>enter[k]</code> to true.</p>
+<p>For example, if we use <code>k = 2</code> a program could look like:</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>while(true) {</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    await(!enter[1]);</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    enter[0] = true;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    critical section { ... }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    enter[0] = false;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>In this, $t_0$ will wait until <code>enter[1]</code> becomes false.</p>
+<p>While it seems like it <em>should</em> work, in reality it doesn’t.
+This does not guarantee mutual exclusion.</p>
+<p>For example, this diagram illustrates well how:
+<img src="/images/school/naive.png" alt="naive"></p>
+<p>So $t_0$ enters into the line where it sets <code>enter[0]</code> to <code>true</code>.
+But then $t_1$ does the same, before <code>enter[0]</code> actually becomes <code>true</code>.</p>
+<p>So they will, in sequence set their respective flag to entered, and both enter the critical section.</p>
+<p>So the problem seems to be that we have <code>await</code>.</p>
+<h3 id="second-naive-attempt">Second naive attempt</h3>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>while(true) {</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    enter[0] = true;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    await(!enter[1]);</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    critical section { ... }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    enter[0] = false;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>So, if we make the change we noticed.</p>
+<p>This solution actually achieves mutual exclusion! However, we still have a problem.
+It does not guarantee freedom from deadlock.</p>
+<p>It’s quite easy to see a scenario where that happens, if $t_0$ first sets <code>enter[0]</code>to <code>true</code>,
+then in turn $t_1$ sets <code>enter[1]</code> to <code>true</code>. They both now will wait on the other thread, a simple deadlock.</p>
+<p>So it seems using independent variables will not work.</p>
+<h3 id="third-naive-attempt">Third naive attempt</h3>
+<p>By introducing a variable <code>yield</code> we can make sure that $t_k$ waits for its turn
+while <code>yield</code> is <code>k</code>.</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>while(true) {</span></span>
+<span class="line"><span>    await(yield != 0);</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    critical section { ... }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    yield = 0;</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>It’s important now that <code>await(condition)</code> was short for <code>while(!condition) { }</code>.
+This means we will keep waiting until <code>yield</code>is something other than 0.</p>
+<p>This means we either make the starting value of yield random, or just choose a default.</p>
+<p>Thus, this solution does guarantee mutual exclusion, and freedom from deadlock.
+But however, not from starvation.</p>
+<p>Why? If a thread stops executing in its <strong>non-critical</strong> section, the other thread will starve.</p>
+<h3 id="final-solution---petersons-algorithm">Final solution - Peterson’s algorithm</h3>
+<p>Our final solution will be a combination of our second and third attempt.</p>
+<p>This means:</p>
+<p>$t_k$ <em>first</em> sets <code>enter[k]</code> to <code>true</code>, but then <em>lets other threads go first</em>, by setting <code>yield</code>.</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>while(true) {</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    enter[0] = true;</span></span>
+<span class="line"><span>    yield = 0;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    await(!enter[1] || yield != 0);</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    /* Eqv. to</span></span>
+<span class="line"><span>        while(enter[1] = true &#x26;&#x26; yield 0) { }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        Which means only enter when:</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        enter[1] = false OR yield = 1</span></span>
+<span class="line"><span>    */</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    critical section { ... }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    enter[0] = false;</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>Peterson’s algorithm ensure all three points that we want to achieve.</p>
+<p>We can prove this but really isn’t that interesting :P. However, we can use Peterson’s algorithm
+for <code>N</code>threads as well. It’s a bit tricker to implement, but the idea is that we use a kind of “filtering”.
+At each “level” we “remove” (yield) 1 thread and keep doing this until we have one singular thread left who “won”.</p>
+<p>This thread will be allowed to enter the critical section.</p>
+<h3 id="fairness">Fairness</h3>
+<p>Although Peterson’s algorithm ensure all three properties we listed,
+but threads may access the critical section again before “older” threads.</p>
+<p>There are several methods to make sure the algorithm is fair:</p>
+<ul>
+<li>Finite waiting:
+<ul>
+<li>When a thread, $t$, is waiting to enter its critical section,
+it will <em>eventually</em> enter it</li>
+</ul>
+</li>
+<li>Bounded waiting:
+<ul>
+<li>When a thread, $t$ is waiting to enter its critical section, the maximum
+number of times <em>others</em> arriving threads are allowed to enter their critical section
+before $t$, is <strong>bounded</strong> by a function of the number of contending threads.</li>
+</ul>
+</li>
+<li>$r$-Bounded waiting:
+<ul>
+<li>when a thread $t$ is waiting to enter its critical section, the
+maximum number of times other arriving threads are allowed to enter their critical
+section before $t$ is less than $r + 1$</li>
+</ul>
+</li>
+<li>First-come-first-served:
+<ul>
+<li>0-bounded waiting</li>
+</ul>
+</li>
+</ul>
+<p>Lamport’s Bakery Algorithm is one algorithm which uses the First-come-first-served.</p>
+<h3 id="implementation">Implementation</h3>
+<p>Now that we know the theory behind it - we would want to implement it right?
+Well, no, there are great implementations already out there,
+but sometimes we can’t always rely on existing libraries.</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>class PetersonLock implements Lock {</span></span>
+<span class="line"><span>    private volatile boolean enter0 = false, enter1 = false;</span></span>
+<span class="line"><span>    private volatile int yield;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    public void lock() {</span></span>
+<span class="line"><span>        int myID = getThreadId();</span></span>
+<span class="line"><span>        if (myID == 0) {</span></span>
+<span class="line"><span>            enter0 = true;</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        else {</span></span>
+<span class="line"><span>            enter1 = true;</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        yield = myID;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        while ((myID == 0) ? (enter1 &#x26;&#x26; yield == 0)</span></span>
+<span class="line"><span>            : (enter0 &#x26;&#x26; yield == 1)) {</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>            // Do nothing</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    public void unlock() {</span></span>
+<span class="line"><span>        int myID = getThreadId();</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        if (me == 0) {</span></span>
+<span class="line"><span>            enter0 = false;</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        else {</span></span>
+<span class="line"><span>            enter1 = false;</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    private volatile long id0 = 0;</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>Now the thing is that we humans assume that the program will execute in the same order we wrote it.</p>
+<p>This isn’t always the case, especially not with concurrent programs. The compiler likes to do a lot of optimizations,
+that we may find odd, but it thinks it’s better.</p>
+<p>This is where we need to use the <code>volatile</code> keyword, which says to the compiler to not optimize this variable at all.</p>
+<p>In Java however we can’t have volatile arrays, but there is so called <code>AtomicArrays</code> we can use.</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>class PetersonAtomicLock implements Lock {</span></span>
+<span class="line"><span>    private AtomicIntegerArray</span></span>
+<span class="line"><span>        enter = new AtomicIntegerArray(2);</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    private volatile int yield;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    public void lock() {</span></span>
+<span class="line"><span>        int myID = getThreadId();</span></span>
+<span class="line"><span>        int otherID = 1 - myID;</span></span>
+<span class="line"><span>        enter.set(myID, 1);</span></span>
+<span class="line"><span>        yield = myID;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        while (enter.get(otherID) == 1 &#x26;&#x26; yield == myID) {</span></span>
+<span class="line"><span>            // Do nothing</span></span>
+<span class="line"><span>        }</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    public void unlock() {</span></span>
+<span class="line"><span>        int myID = getThreadId();</span></span>
+<span class="line"><span>        enter.set(myID, 0);</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span></span></span></code></pre>
+<h3 id="summary">Summary</h3>
+<p>This concludes this part, there was a lot of info in this one - but writing and implementing
+good concurrent programs from scratch is a pain. I even left out how to implement a semaphore from scratch.</p>
+<p>I’ll maybe update and put it in later :).</p>  </div> <nav class="flex flex-col sm:flex-row justify-between mt-8 pt-4 border-t border-border" data-astro-cid-v5ro3oot>   </nav> </article>  </main> </div> </body></html> 

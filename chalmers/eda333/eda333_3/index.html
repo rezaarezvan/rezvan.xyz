@@ -1,0 +1,298 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="Astro v4.11.5"><link rel="icon" type="image" href="/favicon.ico"><title>Part 3 - Pipelining</title><!-- KaTeX support --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script><!-- inline KaTeX --><link rel="stylesheet" href="/_astro/index.CwgzIfsj.css">
+<link rel="stylesheet" href="/_astro/_slug_.hCvEQTvV.css">
+<style>article[data-astro-cid-v5ro3oot]{max-width:80ch;margin:0 auto}.nav-button[data-astro-cid-v5ro3oot]{display:flex;align-items:center;padding:.5rem;border-radius:.5rem;transition:background-color .3s ease;text-decoration:none;color:var(--text-color);background-color:var(--bg-color);border:1px solid var(--border-color)}.nav-button[data-astro-cid-v5ro3oot]:hover{background-color:var(--hover-color)}.nav-button[data-astro-cid-v5ro3oot] .arrow[data-astro-cid-v5ro3oot]{font-size:1.5rem;line-height:1}.nav-button[data-astro-cid-v5ro3oot] .text[data-astro-cid-v5ro3oot]{display:flex;flex-direction:column;margin:0 .5rem}.nav-button[data-astro-cid-v5ro3oot] .label[data-astro-cid-v5ro3oot]{font-size:.8rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted-color)}.nav-button[data-astro-cid-v5ro3oot] .title[data-astro-cid-v5ro3oot]{font-weight:500}.prev-button[data-astro-cid-v5ro3oot]{justify-content:flex-start}.next-button[data-astro-cid-v5ro3oot]{justify-content:flex-end;text-align:right}@media (max-width: 640px){.nav-button[data-astro-cid-v5ro3oot]{width:100%}.next-button[data-astro-cid-v5ro3oot]{justify-content:flex-start;text-align:left}.next-button[data-astro-cid-v5ro3oot] .text[data-astro-cid-v5ro3oot]{order:2;margin-left:.5rem}.next-button[data-astro-cid-v5ro3oot] .arrow[data-astro-cid-v5ro3oot]{order:1}}
+</style><script type="module">document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]})});
+</script></head> <body> <div class="container mx-auto px-4 flex flex-col md:flex-row min-h-screen"> <aside class="w-full md:w-64 border-b md:border-r md:border-b-0 border-[var(--border-color)] border-dashed pt-8"> <header class="flex flex-col h-full"> <div class="flex items-center mb-4"> <script>
+  function setTheme(mode) {
+    localStorage.setItem("theme-storage", mode);
+    document.documentElement.setAttribute('data-theme', mode);
+  }
+  function toggleTheme() {
+    const currentTheme = localStorage.getItem("theme-storage") || "light";
+    const newTheme = currentTheme === "light" ? "dark" : "light";
+    setTheme(newTheme);
+  }
+  const savedTheme = localStorage.getItem("theme-storage") || "light";
+  setTheme(savedTheme);
+  window.toggleTheme = toggleTheme;
+</script> <button id="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme" class="w-6 h-6 cursor-pointer"> <div class="w-5 h-5 border-2 border-primary rounded-full transition-colors duration-300 ease-in-out hover:bg-primary"></div> </button> <a href="/" class="text-2xl font-semibold ml-3 h-10 pr-3">rezvan.xyz</a> </div> <nav class="flex flex-wrap gap-2 md:flex-col md:gap-2"> <a href="/principles" class="transition-colors">
+[principles]
+</a><a href="/cv" class="transition-colors">
+[cv]
+</a><a href="/posts" class="transition-colors">
+[posts]
+</a><a href="/chalmers" class="transition-colors">
+[chalmers]
+</a><a href="/cityu" class="transition-colors">
+[cityu]
+</a> </nav> </header> </aside> <main class="flex-grow px-4 md:px-8 py-8 overflow-y-auto">  <article class="prose prose-sm sm:prose lg:prose-lg xl:prose-xl max-w-none" data-astro-cid-v5ro3oot> <h1 class="text-3xl sm:text-4xl font-bold mb-4" data-astro-cid-v5ro3oot>Part 3 - Pipelining</h1> <p class="text-sm text-muted-foreground mb-4" data-astro-cid-v5ro3oot>
+Date: 3/27/2023 </p> <div class="markdown-content" data-astro-cid-v5ro3oot>  <p>In this part we’ll cover the idea of pipelining - and it’s performance effects it has on computer systems.</p>
+<p>Let’s first cover what every computer does to perform complex tasks.</p>
+<h3 id="instruction-execution">Instruction execution</h3>
+<p>Every computer does these five stages:</p>
+<ol>
+<li>
+<p><strong>Fetch</strong> Instruction. PC → Instruction memory.</p>
+</li>
+<li>
+<p><strong>Decode</strong> the instruction and read from registers.</p>
+</li>
+<li>
+<p><strong>Execute</strong> the instruction.</p>
+<ul>
+<li>
+<p>Arithmetic/logical computation.</p>
+</li>
+<li>
+<p>Computation of effective memory address.</p>
+</li>
+<li>
+<p>Computation of jump address/conditional address.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Read / Write from / to memory</strong> for load/store instructions.</p>
+</li>
+<li>
+<p><strong>Write back</strong> the result into the result register (RF).</p>
+</li>
+</ol>
+<p>Let’s take a look how this logic is implemented:
+<img src="/images/school/SL.png#center" alt=""></p>
+<p>A good refresher that we’ll need to remember is that:</p>
+<blockquote>
+<p>The longest critical path determines our clock frequency.</p>
+</blockquote>
+<p>Let’s now look into each stage, so we understand them properly.</p>
+<h4 id="instruction-fetch-if">Instruction Fetch (IF)</h4>
+<p>Let’s begin by dissecting the <strong>fetch</strong> stage:</p>
+<p><img src="/images/school/IF.png#center" alt=""></p>
+<p>We see that everything starts in PC, we read our current address (PC Value), we have this black box of a decoder which outputs the instruction (32-bits).</p>
+<p>Notice that we also take our current PC value and add <code>4</code> to it, why <code>4</code>?, because each instruction is 32-bits, or 4 bytes.</p>
+<h4 id="r-format-instructions">R-Format Instructions</h4>
+<p>For instructions with the R-format, we have the following:
+<img src="/images/school/RF.png#center" alt=""></p>
+<p>We take in our two register operands, compute the arithmetic/logical computation and store the result to the result register.</p>
+<h4 id="loadstore-instructions">Load/Store Instructions</h4>
+<p>For instructions that we either load/store to memory:</p>
+<p><img src="/images/school/LS.png#center" alt=""></p>
+<p>Here we have two important parts, we need to read our register operands but also compute our offset.</p>
+<p>Since the offset is 16-bits and the register operands 32-bits, we need to sign extend our 16-bit offset to 32-bits.</p>
+<h4 id="conditional-jump-instructions">Conditional jump instructions</h4>
+<p>For these type of instructions, we need to compare our registers, we do this by doing a subtraction and looking at the “zero” output from our ALU.</p>
+<p>But we also need to compute our jump address, to do this we do:</p>
+<ul>
+<li>
+<p>Sign extend our offset</p>
+</li>
+<li>
+<p>Left shift by 2 bits, due to word displacement</p>
+</li>
+<li>
+<p>Now add this offset to PC.</p>
+</li>
+</ul>
+<h3 id="in-depth-overview">In-depth overview</h3>
+<p>Now let’s take a look at the first picture, but with some more details:</p>
+<p><img src="/images/school/TP.png#center" alt=""></p>
+<p>If we try to deduce what our critical path is, we quickly find that load instructions are really slow.</p>
+<p>Since they go through:</p>
+<blockquote>
+<p>Instruction memory → Registers → ALU → Data memory → Registers</p>
+</blockquote>
+<p>Now, let’s pipeline this processor to increase the <em>speed</em>.</p>
+<h3 id="pipelined-version">Pipelined version</h3>
+<p>Naturally, since we have five stages, let’s pipeline it into 5 separate stages as well!</p>
+<p><img src="/images/school/PL.png#center" alt="">
+Note: The dotted lines represents registers that separate each stage</p>
+<p>As we can see now, we can handle 5 separate instructions at once!</p>
+<p>If our pipelining is “balanced”, meaning each stage takes the same amount of time, then we can see a resulting speed up of:
+$$
+\textbf{Speedup} = \frac{T_{c \quad | \quad \text{Non-pipelined version}}}{T_{c \quad | \quad \text{Pipelined version}}} \approx \text{Number of pipeline stages}
+$$</p>
+<p>If our pipelining is unbalanced, we’ll see a smaller increase.</p>
+<p>However, doing 5 instructions at once comes with a cost, we no longer have a perfect CPU. We have several hazards that we need to consider now.</p>
+<h3 id="hazards">Hazards</h3>
+<p>There are three different types of hazards that we’ll need to take care off:</p>
+<ul>
+<li>
+<p>Structural hazards</p>
+<ul>
+<li>A stage is currently busy doing an operation</li>
+</ul>
+</li>
+<li>
+<p>Data hazards</p>
+<ul>
+<li>An instruction that depends on a earlier instruction.</li>
+</ul>
+</li>
+<li>
+<p>Control hazards</p>
+<ul>
+<li>The condition and potential address of a jump has not yet by the instruction fetch.</li>
+</ul>
+</li>
+</ul>
+<p>Let’s look into how to solve each of these.</p>
+<h4 id="structural-hazards">Structural hazards</h4>
+<p>As we defined earlier, it is when two or more instruction need to access the same stage simultaneously.</p>
+<p>There are two main examples of this:</p>
+<ul>
+<li>
+<p>Registers: Reading and writing to the same register:</p>
+<ul>
+<li>Solution: Write and read in separate half cycles.</li>
+</ul>
+</li>
+<li>
+<p>If the pipeline only has one (1) shared memory:</p>
+<ul>
+<li>Solution: Don’t. All pipeline models use separate memory for instructions and data memory.</li>
+</ul>
+</li>
+</ul>
+<h4 id="data-hazards">Data hazards</h4>
+<p>If we have the following MIPS:</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>add    $s0, $t0, $t1</span></span>
+<span class="line"><span>add    $t2, $s0, $t3</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>Notice that both instructions either write or read <code>$s0</code>.</p>
+<p>A data hazard occurs specifically after a RAW (<strong>R</strong>ead <strong>A</strong>fter <strong>W</strong>rite)</p>
+<p>There are two solutions:</p>
+<ul>
+<li>
+<p>If the case is like above we can do:</p>
+<ul>
+<li>
+<p>Forwarding (Bypassing)</p>
+<ul>
+<li>
+<p>Use the result instantly when computed from the ALU</p>
+</li>
+<li>
+<p>Do not wait to store it until the Write Back phase.</p>
+</li>
+<li>
+<p>But, does require more logic and path in our data path.</p>
+</li>
+<li>
+<p>But, no stalling!</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Forwarding doesn’t solve all cases, for example, load instructions.</p>
+<ul>
+<li>
+<p>We cannot do a forwarding, “back in time”</p>
+</li>
+<li>
+<p>Therefore, requires a stalling cycle.</p>
+</li>
+</ul>
+</li>
+</ul>
+<p>But consider this following example:</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>lw  $t1, 0($t0)</span></span>
+<span class="line"><span>lw  $t2, 4($t0)</span></span>
+<span class="line"><span>add $t3, $t1, $t2</span></span>
+<span class="line"><span>sw  $t3, 12($t0)</span></span>
+<span class="line"><span>lw  $t4, 8($t0)</span></span>
+<span class="line"><span>add $t5, $t1, $t4</span></span>
+<span class="line"><span>sw  $t5, 16($t0)</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>In this we’ll have two stalling cycles, but with some smart thinking (or a smart compiler) we can instead do:</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>lw  $t1, 0($t0)</span></span>
+<span class="line"><span>lw  $t2, 4($t0)</span></span>
+<span class="line"><span>lw  $t4, 8($t0)</span></span>
+<span class="line"><span>add $t3, $t1, $t2</span></span>
+<span class="line"><span>sw  $t3, 12($t0)</span></span>
+<span class="line"><span>add $t5, $t1, $t4</span></span>
+<span class="line"><span>sw  $t5, 16($t0)</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>Just by changing one line we reduced our clock cycle count from 9 to 7!</p>
+<h4 id="control-hazards">Control hazards</h4>
+<ul>
+<li>
+<p>Problem: We want to compare registers and compute the jump address earlier in the program</p>
+<ul>
+<li>
+<p>Solution: Move/Add more logic to the instruction decode stage.</p>
+</li>
+<li>
+<p>This will result that we only need to wait (stall) for one cycle!</p>
+</li>
+</ul>
+</li>
+</ul>
+<p>But, often longer pipelines cannot do this approach, since it will still result in a lot of stalling cycles.</p>
+<p>The solution in modern CPUs is, predict the jump! If we fail to predict, then we stall to restore our failed prediction.</p>
+<p>There are two different types:</p>
+<ul>
+<li>
+<p>At compile time/Static jump-predictions:</p>
+<ul>
+<li>
+<p>Based on typical jump-behavior</p>
+</li>
+<li>
+<p>Examples: loops and if-conditions:</p>
+<ul>
+<li>
+<p>Predict backwards jump as “taken”</p>
+</li>
+<li>
+<p>Predict forward jump as “not taken”</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>At run time/Dynamic jump-predictions:</p>
+<ul>
+<li>
+<p>Hardware keeps track/notes the current jump-behavior</p>
+<ul>
+<li>Keeps statistics of jumps</li>
+</ul>
+</li>
+<li>
+<p>From the statistics tries to predict, can be as simple as, do as the last time.</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="summary">Summary</h3>
+<p>Okay, so we’ve seen the power and beauty of pipelining.</p>
+<p>So let’s make a little summary:</p>
+<ul>
+<li>
+<p>Pipelining boosts the performance, by increasing the total instruction-flow to the CPU.</p>
+<ul>
+<li>Multiple instructions execute in parallel.</li>
+</ul>
+</li>
+<li>
+<p>Although great, it comes with some hazards:</p>
+<ul>
+<li>
+<p>Structural hazards, data hazards (RAW), and control hazards.</p>
+</li>
+<li>
+<p>Can both be solved with hardware and software.</p>
+</li>
+</ul>
+</li>
+<li>
+<p>There is a strong correlation between the ISA and the complexity of the pipeline.</p>
+</li>
+</ul>
+<p>That last one might not be so clear from the start, but if we had very complex functions like</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>add M[$t0], M[$t1], M[$t2]</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>This would be a headache, since then we are in the execute stage and read/write to memory simultaneously.</p>  </div> <nav class="flex flex-col sm:flex-row justify-between mt-8 pt-4 border-t border-border" data-astro-cid-v5ro3oot>   </nav> </article>  </main> </div> </body></html> 

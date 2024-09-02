@@ -1,0 +1,190 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="Astro v4.11.5"><link rel="icon" type="image" href="/favicon.ico"><title>Part 6 - Work, Voltage and Capacitance</title><!-- KaTeX support --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script><!-- inline KaTeX --><link rel="stylesheet" href="/_astro/index.CwgzIfsj.css">
+<link rel="stylesheet" href="/_astro/_slug_.hCvEQTvV.css">
+<style>article[data-astro-cid-v5ro3oot]{max-width:80ch;margin:0 auto}.nav-button[data-astro-cid-v5ro3oot]{display:flex;align-items:center;padding:.5rem;border-radius:.5rem;transition:background-color .3s ease;text-decoration:none;color:var(--text-color);background-color:var(--bg-color);border:1px solid var(--border-color)}.nav-button[data-astro-cid-v5ro3oot]:hover{background-color:var(--hover-color)}.nav-button[data-astro-cid-v5ro3oot] .arrow[data-astro-cid-v5ro3oot]{font-size:1.5rem;line-height:1}.nav-button[data-astro-cid-v5ro3oot] .text[data-astro-cid-v5ro3oot]{display:flex;flex-direction:column;margin:0 .5rem}.nav-button[data-astro-cid-v5ro3oot] .label[data-astro-cid-v5ro3oot]{font-size:.8rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted-color)}.nav-button[data-astro-cid-v5ro3oot] .title[data-astro-cid-v5ro3oot]{font-weight:500}.prev-button[data-astro-cid-v5ro3oot]{justify-content:flex-start}.next-button[data-astro-cid-v5ro3oot]{justify-content:flex-end;text-align:right}@media (max-width: 640px){.nav-button[data-astro-cid-v5ro3oot]{width:100%}.next-button[data-astro-cid-v5ro3oot]{justify-content:flex-start;text-align:left}.next-button[data-astro-cid-v5ro3oot] .text[data-astro-cid-v5ro3oot]{order:2;margin-left:.5rem}.next-button[data-astro-cid-v5ro3oot] .arrow[data-astro-cid-v5ro3oot]{order:1}}
+</style><script type="module">document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]})});
+</script></head> <body> <div class="container mx-auto px-4 flex flex-col md:flex-row min-h-screen"> <aside class="w-full md:w-64 border-b md:border-r md:border-b-0 border-[var(--border-color)] border-dashed pt-8"> <header class="flex flex-col h-full"> <div class="flex items-center mb-4"> <script>
+  function setTheme(mode) {
+    localStorage.setItem("theme-storage", mode);
+    document.documentElement.setAttribute('data-theme', mode);
+  }
+  function toggleTheme() {
+    const currentTheme = localStorage.getItem("theme-storage") || "light";
+    const newTheme = currentTheme === "light" ? "dark" : "light";
+    setTheme(newTheme);
+  }
+  const savedTheme = localStorage.getItem("theme-storage") || "light";
+  setTheme(savedTheme);
+  window.toggleTheme = toggleTheme;
+</script> <button id="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme" class="w-6 h-6 cursor-pointer"> <div class="w-5 h-5 border-2 border-primary rounded-full transition-colors duration-300 ease-in-out hover:bg-primary"></div> </button> <a href="/" class="text-2xl font-semibold ml-3 h-10 pr-3">rezvan.xyz</a> </div> <nav class="flex flex-wrap gap-2 md:flex-col md:gap-2"> <a href="/principles" class="transition-colors">
+[principles]
+</a><a href="/cv" class="transition-colors">
+[cv]
+</a><a href="/posts" class="transition-colors">
+[posts]
+</a><a href="/chalmers" class="transition-colors">
+[chalmers]
+</a><a href="/cityu" class="transition-colors">
+[cityu]
+</a> </nav> </header> </aside> <main class="flex-grow px-4 md:px-8 py-8 overflow-y-auto">  <article class="prose prose-sm sm:prose lg:prose-lg xl:prose-xl max-w-none" data-astro-cid-v5ro3oot> <h1 class="text-3xl sm:text-4xl font-bold mb-4" data-astro-cid-v5ro3oot>Part 6 - Work, Voltage and Capacitance</h1> <p class="text-sm text-muted-foreground mb-4" data-astro-cid-v5ro3oot>
+Date: 4/18/2023 </p> <div class="markdown-content" data-astro-cid-v5ro3oot>  <p>In this part we’ll work in electrical fields, the connection between electrical fields and voltages as well as how we can use electrical fields with capacitors.</p>
+<h3 id="work">Work</h3>
+<p>We’ve briefly went over work before in this series - but let’s consider the work required to <em>move</em> charges apart from eachother.</p>
+<p>For example:
+<img src="/images/school/W.png#center" alt="">
+$$
+W = F \cdot\ d\mathbf{\vec{r}} \newline
+$$</p>
+<p>$$
+\mathbf{\vec{F_{12}}} = k_{e}\ \dfrac{q_1 q_2}{r^2} \mathbf{\vec{r_{12}}}
+$$</p>
+<p>$$
+\begin{align*}
+W &#x26; = \int_{R}^{\infty} \mathbf{\vec{F}} \cdot\ d\mathbf{\vec{r}} \newline
+&#x26; = -k_e q_1 q_2 \int_{R}^{\infty} \dfrac{d\mathbf{\vec{r}}}{r^2} \newline
+&#x26; = k_e q_1 q_2 \cdot\ \dfrac{-1}{r} \Big|_R^{\infty} \newline
+&#x26; = \boxed{\dfrac{k_e q_1 q_2}{R}}
+\end{align*}
+$$</p>
+<h3 id="work-in-an-electrical-field">Work in an electrical field</h3>
+<p>Now, if we consider a charge moving inside an electrical field:</p>
+<p><img src="/images/school/WE.png#center" alt="">
+Let’s calculate the work to move from A to B.
+$$
+W = \mathbf{\vec{F}} \cdot\ d\mathbf{\vec{r}}
+$$</p>
+<p>$$
+\mathbf{\vec{F}_E} = q \mathbf{\vec{E}}
+$$</p>
+<p>$$
+\begin{align*}
+W &#x26; = - \int_A^B \mathbf{\vec{F}} \cdot\ d\mathbf{\vec{r}} \newline
+&#x26; = - \int_A^B q\mathbf{\vec{E}} \cdot\ d\mathbf{\vec{r}} \newline
+&#x26; = -qE_0 \int_A^B d\mathbf{\vec{r}} \newline
+&#x26; = -qE_0d
+\end{align*}
+$$</p>
+<p>Note, in the case when we move perpendicular to the field, the work is <strong>0</strong>.</p>
+<p>Another way we can write work is:
+$$
+\begin{align*}
+W &#x26; = \Delta U \newline
+&#x26; = - \int_A^B \mathbf{\vec{F}} \cdot\ d\mathbf{\vec{r}}
+\end{align*}
+$$</p>
+<p>This means that the potential is proportional to the charge:
+$$
+\mathbf{\vec{F}_E} = q\mathbf{\vec{E}}
+$$</p>
+<p>If we normalize the work with the charge we’ll see a very interesting result:
+$$
+\begin{align*}
+\dfrac{W}{q} &#x26; = - \int_A^B \mathbf{\vec{E}} \cdot\ d\mathbf{\vec{r}}
+\end{align*}
+$$</p>
+<p>If we just interpret this integral, we move a charged particle a distance.</p>
+<p>Let’s go back to our definition of voltage from the first part - this is precisely the difference in voltage!
+$$
+[\Delta V] = \dfrac{Joules}{Coulumb}
+$$</p>
+<p>Just as <strong>Kirchoff’s voltage law</strong> tells us that, within a closed loop, the sum of the voltages are 0.</p>
+<p>This means that the work done within a closed path:
+$$
+W = - \oint \mathbf{\vec{F}} \cdot\ d\mathbf{\vec{r}} = 0
+$$</p>
+<p>With all these new formulas, here is a little cheat sheet so that we remember:
+<img src="/images/school/CS.png#center" alt=""></p>
+<h3 id="electrical-fields">Electrical fields</h3>
+<p>If we work backwards from a known voltage - we can find the electrical field!
+$$
+\Delta V = - \int_A^B \mathbf{\vec{E}} \cdot\ d\mathbf{\vec{r}}
+$$</p>
+<p>$$
+dV = -\mathbf{\vec{E}} \cdot d\mathbf{\vec{r}}
+$$</p>
+<p>$$
+\mathbf{\vec{E}} = - \dfrac{dV}{d\mathbf{\vec{r}}}
+$$</p>
+<p>We can define this as the gradient of the voltage:
+$$
+\mathbf{\vec{E}} = - \nabla V
+$$</p>
+<h3 id="equipotential-curves">Equipotential curves</h3>
+<p>As we just discovered - the electrical field is equal to the gradient of the voltage.
+Equipotential curves are way of visualizing the electric potential in a region of space.
+They are just like geographical maps!</p>
+<p><img src="/images/school/EC.png#center" alt=""></p>
+<p>Now the interesting part is that these curves are always perpendicular to the electrical field lines!</p>
+<h3 id="capacitance">Capacitance</h3>
+<p>Capacitance is the ability for an electrical potential to <em>hold a charge</em></p>
+<p>We define capacitance as:
+$$
+C = \dfrac{q}{|\Delta V|}
+$$</p>
+<h4 id="capacitors">Capacitors</h4>
+<p>Capacitors are two isolated plates with <strong>equal</strong> and <strong>opposite</strong> charges: $\pm q$</p>
+<p>When they are charged, they create a voltage diffrence between the plates, naturally.</p>
+<p>How can we calculate this voltage?</p>
+<p>Assume we have a surface area of $A$, a <em>surface charge density</em> of $\sigma$.</p>
+<p>We can define charge as:
+$$
+q = \sigma A
+$$</p>
+<p>Let’s recall our Gaussian pillbox:
+$$
+\begin{align*}
+\Phi &#x26; = \oiint \mathbf{\vec{E}} \cdot\ d\mathbf{\vec{A}} \newline
+&#x26; = \dfrac{q_{enc}}{\varepsilon_0}
+\end{align*}
+$$</p>
+<p>For a given area, say, $A_1$, we can write:
+$$
+\begin{align*}
+EA_1 &#x26; = \dfrac{q}{\varepsilon_0} \newline
+&#x26; = \dfrac{\sigma A_1}{\varepsilon_0}
+\end{align*}
+$$</p>
+<p>Which means:
+$$
+\begin{align*}
+E &#x26; = \dfrac{\sigma}{\varepsilon_0} \newline
+&#x26; = \boxed{\dfrac{q}{\varepsilon_0 A}}
+\end{align*}
+$$</p>
+<p>Let’s apply this on capacitors:
+$$
+\Delta V = - \int_+^- \mathbf{\vec{E}} \cdot\ d\mathbf{\vec{r}} = -Ed
+$$</p>
+<p>$$
+Ed = \dfrac{q}{\varepsilon_0 A} d
+$$</p>
+<p>$$
+\begin{align*}
+C &#x26; = \dfrac{q}{|\Delta V|} \newline
+&#x26; = \dfrac{q}{\dfrac{q}{\varepsilon_0 A} d} \newline
+&#x26; = \boxed{\varepsilon_0 \dfrac{A}{d}}
+\end{align*}
+$$</p>
+<p>This means, the capacitance is <strong>solely</strong> dependent of the geometry of the capacitor!</p>
+<h3 id="energy-stored-in-capacitors">Energy stored in capacitors</h3>
+<p>Recall from earlier that we deduced that:
+$$
+\dfrac{W}{q} = - \int_A^B \mathbf{\vec{E}} \cdot\ d\mathbf{\vec{s}} = \Delta V
+$$</p>
+<p>This means:
+$$
+dW = dq \Delta V = dq \dfrac{q}{C}
+$$</p>
+<p>$$
+W = \int dW = \dfrac{1}{C} \int_0^Q q\ dq = \boxed{\dfrac{1}{C}\ \dfrac{Q^2}{2}}
+$$</p>
+<p>How is the (potential) energy stored?</p>
+<p>$$
+U = \dfrac{1}{C}\ \dfrac{Q^2}{2} = \dfrac{1}{2} Q |\Delta V| = \dfrac{1}{2} C |\Delta V|^2 \newline
+$$</p>
+<p>$$
+\dfrac{1}{2} C |\Delta V|^2 = \dfrac{1}{2}\ \dfrac{\varepsilon_0 A}{d} (Ed)^2 = \dfrac{1}{2} \varepsilon_0 E^2 Ad = u\ \times volume
+$$</p>
+<p>Where, $u$, is called the electrical field density:
+$$
+u = \dfrac{\varepsilon_0 E^2}{2}
+$$</p>  </div> <nav class="flex flex-col sm:flex-row justify-between mt-8 pt-4 border-t border-border" data-astro-cid-v5ro3oot>   </nav> </article>  </main> </div> </body></html> 

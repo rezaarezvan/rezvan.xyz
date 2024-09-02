@@ -1,0 +1,231 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="Astro v4.11.5"><link rel="icon" type="image" href="/favicon.ico"><title>Part 4 - Chain rule</title><!-- KaTeX support --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script><!-- inline KaTeX --><link rel="stylesheet" href="/_astro/index.CwgzIfsj.css">
+<link rel="stylesheet" href="/_astro/_slug_.hCvEQTvV.css">
+<style>article[data-astro-cid-v5ro3oot]{max-width:80ch;margin:0 auto}.nav-button[data-astro-cid-v5ro3oot]{display:flex;align-items:center;padding:.5rem;border-radius:.5rem;transition:background-color .3s ease;text-decoration:none;color:var(--text-color);background-color:var(--bg-color);border:1px solid var(--border-color)}.nav-button[data-astro-cid-v5ro3oot]:hover{background-color:var(--hover-color)}.nav-button[data-astro-cid-v5ro3oot] .arrow[data-astro-cid-v5ro3oot]{font-size:1.5rem;line-height:1}.nav-button[data-astro-cid-v5ro3oot] .text[data-astro-cid-v5ro3oot]{display:flex;flex-direction:column;margin:0 .5rem}.nav-button[data-astro-cid-v5ro3oot] .label[data-astro-cid-v5ro3oot]{font-size:.8rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted-color)}.nav-button[data-astro-cid-v5ro3oot] .title[data-astro-cid-v5ro3oot]{font-weight:500}.prev-button[data-astro-cid-v5ro3oot]{justify-content:flex-start}.next-button[data-astro-cid-v5ro3oot]{justify-content:flex-end;text-align:right}@media (max-width: 640px){.nav-button[data-astro-cid-v5ro3oot]{width:100%}.next-button[data-astro-cid-v5ro3oot]{justify-content:flex-start;text-align:left}.next-button[data-astro-cid-v5ro3oot] .text[data-astro-cid-v5ro3oot]{order:2;margin-left:.5rem}.next-button[data-astro-cid-v5ro3oot] .arrow[data-astro-cid-v5ro3oot]{order:1}}
+</style><script type="module">document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]})});
+</script></head> <body> <div class="container mx-auto px-4 flex flex-col md:flex-row min-h-screen"> <aside class="w-full md:w-64 border-b md:border-r md:border-b-0 border-[var(--border-color)] border-dashed pt-8"> <header class="flex flex-col h-full"> <div class="flex items-center mb-4"> <script>
+  function setTheme(mode) {
+    localStorage.setItem("theme-storage", mode);
+    document.documentElement.setAttribute('data-theme', mode);
+  }
+  function toggleTheme() {
+    const currentTheme = localStorage.getItem("theme-storage") || "light";
+    const newTheme = currentTheme === "light" ? "dark" : "light";
+    setTheme(newTheme);
+  }
+  const savedTheme = localStorage.getItem("theme-storage") || "light";
+  setTheme(savedTheme);
+  window.toggleTheme = toggleTheme;
+</script> <button id="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme" class="w-6 h-6 cursor-pointer"> <div class="w-5 h-5 border-2 border-primary rounded-full transition-colors duration-300 ease-in-out hover:bg-primary"></div> </button> <a href="/" class="text-2xl font-semibold ml-3 h-10 pr-3">rezvan.xyz</a> </div> <nav class="flex flex-wrap gap-2 md:flex-col md:gap-2"> <a href="/principles" class="transition-colors">
+[principles]
+</a><a href="/cv" class="transition-colors">
+[cv]
+</a><a href="/posts" class="transition-colors">
+[posts]
+</a><a href="/chalmers" class="transition-colors">
+[chalmers]
+</a><a href="/cityu" class="transition-colors">
+[cityu]
+</a> </nav> </header> </aside> <main class="flex-grow px-4 md:px-8 py-8 overflow-y-auto">  <article class="prose prose-sm sm:prose lg:prose-lg xl:prose-xl max-w-none" data-astro-cid-v5ro3oot> <h1 class="text-3xl sm:text-4xl font-bold mb-4" data-astro-cid-v5ro3oot>Part 4 - Chain rule</h1> <p class="text-sm text-muted-foreground mb-4" data-astro-cid-v5ro3oot>
+Date: 9/5/2023 </p> <div class="markdown-content" data-astro-cid-v5ro3oot>  <h3 id="introduction">Introduction</h3>
+<p>In this part we’ll define the chain rule for functions with several variables. We will also cover something called implicit differentiation.</p>
+<h3 id="chain-rule">Chain rule</h3>
+<p>Let’s recall the chain rule for functions with one variable.
+$$
+f(x) = h(g(x)) \newline
+f’(x) = h’(g(x)) \cdot g’(x)
+$$</p>
+<p>Alternative notation:
+$$
+y = f(x) \newline
+x = g(t)
+$$</p>
+<p>$$
+\dfrac{dy}{dt} = \dfrac{dy}{dx} \cdot \dfrac{dx}{dt}
+$$</p>
+<p>For functions with two variables.
+$$
+z = f(x, y),\ x = g(t),\ y = h(t)
+$$</p>
+<p>$$
+\dfrac{dz}{dt} = ?
+$$</p>
+<p>Let’s first assume $f, g \text{ and } h$ are all differentiable. Using the definition:
+$$
+\dfrac{dz}{dt} = \lim_{\Delta t \to 0} \dfrac{\Delta z}{\Delta t}
+$$</p>
+<p>As we defined last time, $\Delta t$ is the <em>increment</em> in t. Increment in $\Delta t$ produces increment in:
+$$
+\Delta x = g(t + \Delta t) - g(t)
+\Delta y = h(t + \Delta t) - h(t)
+$$</p>
+<p>Since, $f$, is differentiable, this must mean:
+$$
+\Delta z = \dfrac{\partial z}{\partial x} \Delta x + \dfrac{\partial z}{\partial y} \Delta y + \varepsilon_1 \Delta x + \varepsilon_2 \Delta y
+$$</p>
+<p>Where $\varepsilon_1$, $\varepsilon_2 \to 0$ as $(\Delta x, \Delta y) \to (0, 0)$.</p>
+<p>As we defined earlier:
+$$
+\dfrac{dz}{dt} = \lim_{\Delta t \to 0} \dfrac{\Delta z}{\Delta t}
+$$</p>
+<p>We then get:
+$$
+\dfrac{\Delta z}{\Delta t} = \dfrac{\partial z}{\partial x} \dfrac{\Delta x}{\Delta t} + \dfrac{\partial z}{\partial y} \dfrac{\Delta y}{\Delta t} + \varepsilon_1 \dfrac{\Delta x}{\Delta t} + \varepsilon_2 \dfrac{\Delta y}{\Delta t}
+$$</p>
+<p>$$
+\lim_{\Delta t \to 0} \dfrac{\Delta z}{\Delta t} = \dfrac{\partial z}{\partial x} \dfrac{dx}{dt} + \dfrac{\partial z}{\partial y} \dfrac{dy}{dt} + \varepsilon_1 \dfrac{dx}{dt} + \varepsilon_2 \dfrac{dy}{dt}
+$$</p>
+<p>If $\Delta t \to 0$, then:
+$$
+\lim_{\Delta t \to 0} \Delta x = \lim_{\Delta t \to 0} g(t + \Delta t) - g(t) \newline
+\lim_{\Delta t \to 0} \Delta x = \lim_{\Delta t \to 0} g(t) - g(t) \newline
+\lim_{\Delta t \to 0} \Delta x = 0
+$$</p>
+<p>$$
+\lim_{\Delta t \to 0} \Delta y = \lim_{\Delta t \to 0} h(t + \Delta t) - g(t) \newline
+\lim_{\Delta t \to 0} \Delta y = \lim_{\Delta t \to 0} h(t) - g(t) \newline
+\lim_{\Delta t \to 0} \Delta y = 0
+$$</p>
+<p>So, $(\Delta x, \Delta y) \to (0, 0)$, which finally leads us to:</p>
+<p>$$
+\boxed{\dfrac{dz}{dt} = \dfrac{\partial z}{\partial x} \dfrac{dx}{dt} + \dfrac{\partial z}{\partial y} \dfrac{dy}{dt}}
+$$</p>
+<p>Let’s write and define properly now.</p>
+<h4 id="definition">Definition</h4>
+<p>Suppose $z = f(x, y)$ is differentiable function of $x, y$. Where $x = g(t)$ and $y = h(t)$. Which both are differentiable functions of $t$. Then:
+$$
+\boxed{\dfrac{dz}{dt} = \dfrac{\partial z}{\partial x} \dfrac{dx}{dt} + \dfrac{\partial z}{\partial y} \dfrac{dy}{dt}}
+$$</p>
+<h4 id="example">Example</h4>
+<p>Find $\dfrac{dz}{dt}$ at $t = 0$.</p>
+<p>For:</p>
+<p>$$
+z = x^2y + 3xy^4 \newline
+x = sin(2t) \newline
+y = cos(t)
+$$</p>
+<p>$$
+\dfrac{dz}{dt} = \dfrac{\partial z}{\partial x} \dfrac{dx}{dt} + \dfrac{\partial z}{\partial y} \dfrac{dy}{dt}
+$$</p>
+<p>$$
+\dfrac{dz}{dt} = (2yx + 3y^4) \cdot (2cos(2t)) + (x^2 + 12xy^3) \cdot (-sin(t))
+$$</p>
+<p>Since we need to evaluate at $t = 0$, we evaluate what $x$ and $y$ are at this point.</p>
+<p>$$
+x = sin(2 \cdot 0) = 0 \newline
+y = cos(0) = 1
+$$</p>
+<p>Now we substitute these values.
+$$
+\dfrac{dz}{dt} = (2 \cdot 1 \cdot 0 + 3 \cdot 1^4) \cdot (2cos(2 \cdot 0)) + (0^2 + 12 \cdot 0 \cdot 1^3) \cdot (-sin(0))
+$$</p>
+<p>$$
+\dfrac{dz}{dt} \bigg\rvert_{t = 0} = \ldots = \boxed{6}
+$$</p>
+<h3 id="chain-rule-for-functions-with-two-variables">Chain Rule for functions with two variables</h3>
+<p>We’ve defined the chain rule only if our functions depend on two variables when they depend on a single variable. But often this is not the case.</p>
+<p>$z = f(x, y),\ x = g(t, s),\ y = h(t, s)$.</p>
+<p>How do we find $\dfrac{\partial z}{\partial t} = ?$ $\dfrac{\partial z}{\partial s} = ?$</p>
+<p>Let’s think about this, when we say we want to find $\dfrac{\partial z}{\partial t}$ this means $s$ is a constant, we can now view the functions as a function of one variable!</p>
+<p>This means:
+$$
+\dfrac{dz}{dt} = \dfrac{\partial z}{\partial x} \dfrac{dx}{dt} + \dfrac{\partial z}{\partial y} \dfrac{dy}{dt}
+$$</p>
+<p>$$
+\dfrac{dz}{ds} = \dfrac{\partial z}{\partial x} \dfrac{dx}{ds} + \dfrac{\partial z}{\partial y} \dfrac{dy}{ds}
+$$</p>
+<p>We now can generalize the chain rule.</p>
+<h3 id="general-chain-rule">General chain rule</h3>
+<p>Let $z$ be a differentiable function of $n$ variables, $x_1, \ldots, x_n$, where each $x_i$ is differentiable function of $m$ variables, $t_1, \ldots, t_m$.</p>
+<p>Then:
+$$
+\dfrac{\partial z}{\partial t_i} = \dfrac{\partial z}{\partial x_1} \dfrac{\partial x_1}{\partial t_i} + \dfrac{\partial z}{\partial x_2} \dfrac{\partial x_2}{\partial t_i} + \ldots + \dfrac{\partial z}{\partial x_n} \dfrac{\partial x_n}{\partial t_i}
+$$</p>
+<h4 id="example-1">Example</h4>
+<p>Let</p>
+<p>$$
+u = x^4y + y^2 z^3 \newline
+x = rs \cdot e^t \newline
+y = rs^2 \cdot e^{-t} \newline
+z = r^2s \cdot sin(t)
+$$</p>
+<p>Find the value of $\dfrac{\partial u}{\partial s}$ when $r = 1, s = 1, t = 0$.</p>
+<p>$$
+\dfrac{\partial u}{\partial s} \bigg\rvert_{r = 1, s = 1, t = 0} = \dfrac{\partial u}{\partial x} \dfrac{\partial x}{\partial s} + \dfrac{\partial u}{\partial y} \dfrac{\partial y}{\partial s} +  \dfrac{\partial u}{\partial z} \dfrac{\partial z}{\partial s}
+$$</p>
+<p>$$
+\dfrac{\partial u}{\partial s} \bigg\rvert_{r = 1, s = 1, t = 0} = \ldots = (4yx^3) \cdot (re^t) + (x^4 + 2z^3y) \cdot (2rse^{-t}) + (3y^2z^2) \cdot (r^2 sin(t))
+$$</p>
+<p>Evaluate $x, y, z$ at $r = 1, s = 1, t = 0$:
+$$
+x = 1 \cdot 1 \cdot e^0 = 1 \newline
+y = 1 \cdot 1 \cdot e^{-0} = 1 \newline
+z = 1 \cdot 1 \cdot sin(0) = 0 \newline
+$$</p>
+<p>Substitute all variables:
+$$
+\dfrac{\partial u}{\partial s} \bigg\rvert_{r = 1, s = 1, t = 0} = \ldots = \boxed{}
+$$</p>
+<h3 id="implicit-differentiation">Implicit differentiation</h3>
+<p>Sometimes the function is not given explicitly, rather implicitly. For example:</p>
+<p>Let y(x) be a function that satisfies:
+$$
+x^3 + 3xy - y^5 + 1 = 0
+$$</p>
+<p>How can we find $\dfrac{dy}{dx}$?</p>
+<p>The first logical answer would be to explicitly find $y(x)$, but that can be really tedious. We can instead view this equation as a function of two variables.</p>
+<p>Let’s introduce a new function, $F(x, y)$. This means:
+$$
+F(x, y) = x^3 + 3xy - y^5 + 1 = 0
+$$</p>
+<p>We want to find a $y(x)$ such that this equation is satisfied. Since $y(x)$ depends on $x$, and $x$ in itself depends on $x$. We can apply the chain rule!
+$$
+\dfrac{dF(x, y)}{dx} = \dfrac{\partial F}{\partial x} \dfrac{dx}{dx} + \dfrac{\partial F}{\partial y} \dfrac{dy}{dx}
+$$</p>
+<p>We want to find $y(x)$ such that:
+$$
+\dfrac{\partial F}{\partial x} \dfrac{dx}{dx} + \dfrac{\partial F}{\partial y} \dfrac{dy}{dx} = 0
+$$</p>
+<p>Which means:
+$$
+\dfrac{dy}{dx} = - \dfrac{\dfrac{\partial F}{\partial x}}{\dfrac{\partial F}{\partial y}} = \boxed{-\dfrac{F_x}{F_y}}
+$$</p>
+<p>Here we need to assume $F_y$ isn’t zero. But this means in our case that:
+$$
+\dfrac{dy}{dx} = - \dfrac{3x^2 + 3y}{3x - 5y^4}
+$$</p>
+<h4 id="definition-1">Definition</h4>
+<p>Suppose a function $y = y(x)$ is given implicitly by equation of the form $F(x, y) = 0$ where $F$ is a differentiable function of two variables and $F_y \neq 0$. Then:
+$$
+\boxed{\dfrac{dy}{dx} = -\dfrac{F_x}{F_y}}
+$$</p>
+<h4 id="example-2">Example</h4>
+<p>Let $y(x)$ be given implicitly by equation:
+$$
+x^3 + 3xy - y^5 + 1 = 0
+$$</p>
+<p>Evaluate $\dfrac{dy}{dx}$ at $x = 0$.</p>
+<p>$$
+\dfrac{dy}{dx} \bigg\rvert_{x = 0} = -\dfrac{F_x}{F_y} = - \dfrac{3x^2 + 3y}{3x - 5y^4}
+$$</p>
+<p>Evaluate $y$ at $x = 0$:
+$$
+x^3 + 3xy - y^5 + 1 = 0 \newline
+0^3 + 3 \cdot 0 \cdot y - y^5 + 1 = 0 \newline
+y = 1
+$$</p>
+<p>Which means:
+$$
+\dfrac{dy}{dx} \bigg\rvert_{x = 0} = \ldots = \boxed{\dfrac{3}{5}}
+$$</p>
+<h3 id="implicit-differentiation-of-several-variables">Implicit differentiation of several variables</h3>
+<p>The proof for this is exactly the same so…
+Let $z(x, y)$ be given implicitly, by equation of form $F(x, y, z) = 0$ where $F$ is differentiable and $F_z \neq 0$, then:
+$$
+\dfrac{\partial z}{\partial x} = -\dfrac{F_x}{F_z} \newline
+\dfrac{\partial z}{\partial y} = -\dfrac{F_y}{F_z} \newline
+$$</p>
+<h4 id="example-3">Example</h4>
+<p>Find $\dfrac{\partial z}{\partial y}$, given $x^3 + y^3 + z^3 + 6xyz - 1 = 0$
+$$
+\dfrac{\partial z}{\partial y} = -\dfrac{F_y}{F_z} = - \dfrac{3y^2 + 6xz}{3z^2 + 6xy} = - \dfrac{y^2 + 2xz}{z^2 + 2xy}
+$$</p>  </div> <nav class="flex flex-col sm:flex-row justify-between mt-8 pt-4 border-t border-border" data-astro-cid-v5ro3oot>   </nav> </article>  </main> </div> </body></html> 

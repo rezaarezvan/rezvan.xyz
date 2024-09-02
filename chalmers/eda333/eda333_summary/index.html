@@ -1,0 +1,196 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="Astro v4.11.5"><link rel="icon" type="image" href="/favicon.ico"><title>Part 9 - Summary</title><!-- KaTeX support --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script><!-- inline KaTeX --><link rel="stylesheet" href="/_astro/index.CwgzIfsj.css">
+<link rel="stylesheet" href="/_astro/_slug_.hCvEQTvV.css">
+<style>article[data-astro-cid-v5ro3oot]{max-width:80ch;margin:0 auto}.nav-button[data-astro-cid-v5ro3oot]{display:flex;align-items:center;padding:.5rem;border-radius:.5rem;transition:background-color .3s ease;text-decoration:none;color:var(--text-color);background-color:var(--bg-color);border:1px solid var(--border-color)}.nav-button[data-astro-cid-v5ro3oot]:hover{background-color:var(--hover-color)}.nav-button[data-astro-cid-v5ro3oot] .arrow[data-astro-cid-v5ro3oot]{font-size:1.5rem;line-height:1}.nav-button[data-astro-cid-v5ro3oot] .text[data-astro-cid-v5ro3oot]{display:flex;flex-direction:column;margin:0 .5rem}.nav-button[data-astro-cid-v5ro3oot] .label[data-astro-cid-v5ro3oot]{font-size:.8rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted-color)}.nav-button[data-astro-cid-v5ro3oot] .title[data-astro-cid-v5ro3oot]{font-weight:500}.prev-button[data-astro-cid-v5ro3oot]{justify-content:flex-start}.next-button[data-astro-cid-v5ro3oot]{justify-content:flex-end;text-align:right}@media (max-width: 640px){.nav-button[data-astro-cid-v5ro3oot]{width:100%}.next-button[data-astro-cid-v5ro3oot]{justify-content:flex-start;text-align:left}.next-button[data-astro-cid-v5ro3oot] .text[data-astro-cid-v5ro3oot]{order:2;margin-left:.5rem}.next-button[data-astro-cid-v5ro3oot] .arrow[data-astro-cid-v5ro3oot]{order:1}}
+</style><script type="module">document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]})});
+</script></head> <body> <div class="container mx-auto px-4 flex flex-col md:flex-row min-h-screen"> <aside class="w-full md:w-64 border-b md:border-r md:border-b-0 border-[var(--border-color)] border-dashed pt-8"> <header class="flex flex-col h-full"> <div class="flex items-center mb-4"> <script>
+  function setTheme(mode) {
+    localStorage.setItem("theme-storage", mode);
+    document.documentElement.setAttribute('data-theme', mode);
+  }
+  function toggleTheme() {
+    const currentTheme = localStorage.getItem("theme-storage") || "light";
+    const newTheme = currentTheme === "light" ? "dark" : "light";
+    setTheme(newTheme);
+  }
+  const savedTheme = localStorage.getItem("theme-storage") || "light";
+  setTheme(savedTheme);
+  window.toggleTheme = toggleTheme;
+</script> <button id="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme" class="w-6 h-6 cursor-pointer"> <div class="w-5 h-5 border-2 border-primary rounded-full transition-colors duration-300 ease-in-out hover:bg-primary"></div> </button> <a href="/" class="text-2xl font-semibold ml-3 h-10 pr-3">rezvan.xyz</a> </div> <nav class="flex flex-wrap gap-2 md:flex-col md:gap-2"> <a href="/principles" class="transition-colors">
+[principles]
+</a><a href="/cv" class="transition-colors">
+[cv]
+</a><a href="/posts" class="transition-colors">
+[posts]
+</a><a href="/chalmers" class="transition-colors">
+[chalmers]
+</a><a href="/cityu" class="transition-colors">
+[cityu]
+</a> </nav> </header> </aside> <main class="flex-grow px-4 md:px-8 py-8 overflow-y-auto">  <article class="prose prose-sm sm:prose lg:prose-lg xl:prose-xl max-w-none" data-astro-cid-v5ro3oot> <h1 class="text-3xl sm:text-4xl font-bold mb-4" data-astro-cid-v5ro3oot>Part 9 - Summary</h1> <p class="text-sm text-muted-foreground mb-4" data-astro-cid-v5ro3oot>
+Date: 5/25/2023 </p> <div class="markdown-content" data-astro-cid-v5ro3oot>  <h3 id="performance-and-mips">Performance and MIPS</h3>
+<p>CPU Time for a program:
+$$
+\text{CPU Time} = \frac{\text{Instructions}}{\text{Program}} \cdot\ \frac{\text{Clock cycles}}{\text{Instruction}} \cdot\ \frac{\text{Seconds}}{\text{Clock cycle}}
+$$</p>
+<p>$$
+\text{CPU Time} = IC \cdot\ CPI \cdot\ T_c
+$$</p>
+<p>Geometric mean:
+$$
+\sqrt[n]{\prod_{i = 1}^{n} \text{Execution time ratio}_i}
+$$</p>
+<p>MIPS Cheat Sheet:</p>
+<p>Register convention:</p>
+<p><code>$zero</code> - Always 0</p>
+<p><code>$v0-1</code> - Result registers</p>
+<p><code>$a0-3</code> - Argument registers</p>
+<p><code>$t0-7</code> - Temporary registers</p>
+<p><code>$s0-7</code> - Content registers, save for later use</p>
+<p><code>$sp</code> - Stack pointer</p>
+<p><code>$ra</code> - Return address</p>
+<p>Arithmetic:</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>add     $t0, $t0, $t1   #t0 = t0 + t1</span></span>
+<span class="line"><span>addi    $t0, $t0, 5     #t0 = t0 + 5</span></span>
+<span class="line"><span>addu    $t0, $t0, $t1   #t0 = t0 + t1 (unsigned)</span></span>
+<span class="line"><span>addiu   $t0, $t0, 5     #t0 = t0 + 5  (unsigned)</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>sub     $t0, $t0, $t1   #t0 = t0 - t1</span></span>
+<span class="line"><span>subi    $t0, $t0, 5     #t0 = t0 - 5</span></span>
+<span class="line"><span>subu    $t0, $t0, $t1   #t0 = t0 - t1 (unsigned)</span></span>
+<span class="line"><span>subiu   $t0, $t0, 5     #t0 = t0 - 5  (unsigned)</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>Memory:</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>lw $s0, 0($a0)  # s0 = MEM[a0] (word)</span></span>
+<span class="line"><span>sw $s0, 0($a0)  # MEM[a0] = $s0 (word)</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>l.d $s0, 0($a0)  # s0, s1 = MEM[a0] (Double word)</span></span>
+<span class="line"><span>s.d $s0, 0($a0)  # MEM[a0] = $s0, $s1 (Double word)</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>Logical:</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>sll $t0, $t1, 2     # t0 := t1 * 4</span></span>
+<span class="line"><span>srl $t0, $t1, 2     # t0 := t1 / 4</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>and $t0, $t1, $t2   # t0 := t1 &#x26; t2</span></span>
+<span class="line"><span>andi $t0, $t1, 2   # t0 := t1 &#x26; 2</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>or $t0, $t1, $t2   # t0 := t1 | t2</span></span>
+<span class="line"><span>ori $t0, $t1, 2   # t0 := t1 | 2</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>nor $t0, $t1, $zero # := ~(t1)</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>Conditionals:</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>beq rs, rt, L1 # if(rs == rt); Jump to L1</span></span>
+<span class="line"><span>bne rs, rt, L1 # if(rs != rt); Jump to L1</span></span>
+<span class="line"><span>j L1           # Jump to L1</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>Remember:</p>
+<ul>
+<li>Incrementing with 1 and not 4!</li>
+<li>MIPS uses byte addressing</li>
+</ul>
+<h3 id="pipeline">Pipeline</h3>
+<ol>
+<li>
+<p><strong>Fetch</strong> Instruction. PC → Instruction memory.</p>
+</li>
+<li>
+<p><strong>Decode</strong> the instruction and read from registers.</p>
+</li>
+<li>
+<p><strong>Execute</strong> the instruction.</p>
+<ul>
+<li>Arithmetic/logical computation.</li>
+<li>Computation of effective memory address.</li>
+<li>Computation of jump address/conditional address.</li>
+</ul>
+</li>
+<li>
+<p><strong>Read / Write from / to memory</strong> for load/store instructions.</p>
+</li>
+<li>
+<p><strong>Write back</strong> the result into the result register (RF).</p>
+</li>
+</ol>
+<p>$$
+\textbf{Speedup} = \frac{T_{c \quad | \quad \text{Non-pipelined version}}}{T_{c \quad | \quad \text{Pipelined version}}} \approx \text{Number of pipeline stages}
+$$</p>
+<ul>
+<li>Structural hazards
+<ul>
+<li>A stage is currently busy doing an operation</li>
+</ul>
+</li>
+<li>Data hazards
+<ul>
+<li>An instruction that depends on a earlier instruction.</li>
+</ul>
+</li>
+<li>Control hazards
+<ul>
+<li>The condition and potential address of a jump has not yet by the instruction fetch.</li>
+</ul>
+</li>
+</ul>
+<h3 id="caches">Caches</h3>
+<p>$$
+h_x = \textbf{Hit rate} = \text{Percentage of hits in memory x} \newline
+(1 - h_x) = m_x = \textbf{Miss rate} = \text{Percentage of misses in memory x}
+$$</p>
+<p>$$
+T_x = \textbf{Hit time} = \text{Acces time for memory x} \newline
+(T_2 - T_1) = \textbf{Miss penalty} = \text{Miss penalty for a miss in memory 1}
+$$</p>
+<p><em>Average Memory Access Time</em> (AMAT):
+$$
+\text{AMAT} = h_1\ T_1 + m_1\ T_2 = h_1\ T_1 + (1 - h_1)T_2
+$$</p>
+<p>$$
+\frac{\text{Memory size}}{\text{Cache size}} = N \newline
+$$</p>
+<p>$$
+\text{Tag bits} = log_2(N)
+$$</p>
+<h3 id="prep-for-exam">Prep for exam</h3>
+<ul>
+<li>MIPS
+<ul>
+<li>Calculate the amount of access calls to data cache (read and writes) and instruction cache.</li>
+</ul>
+</li>
+<li>Pipleline
+<ul>
+<li>TODO: Understand each stage in depth</li>
+<li>Learn how to do a pipeline diagram</li>
+<li>Iterate and go over optimizations and how to avoid stalls.</li>
+</ul>
+</li>
+<li>Performance calculations
+<ul>
+<li>$CPI = CPI_{base} + CPI_{miss}$</li>
+<li>$CPI_{miss} = CPI_{D\ miss} + CPI_{I\ miss}$</li>
+</ul>
+</li>
+<li>Memory and cache
+<ul>
+<li>Iterate and go over all the different types, and how to calculate size/amount of bits.</li>
+<li>Go over how to calculate how long time/amount of time it takes for certain misses, with certain sizes etc.</li>
+</ul>
+</li>
+</ul>
+<h3 id="notes">Notes</h3>
+<p>Page table size = Number of virtual pages $\times$ Size of each page table entry</p>
+<p>Number of virtual pages = Total virtual address space / Page size
+Number of virtual pages = (Number of processes $\times$ Size of each virtual address space) / Page size</p>
+<p>Cache Offset: If block size is B bytes, offset = log2(B).</p>
+<p>Cache Index: Given by how many blocks/sets there are.</p>
+<p>If direct mapped, meaning 1 block per set:</p>
+<p>Number of blocks = Total Cache Size / Sizer per block</p>
+<p>Number of sets = (Total Cache Size / Sizer per block) / Associativity level</p>
+<p>Cache Index = log2(Number of blocks/sets)</p>
+<p>Cache Tag: If A is the total amount of address bits, tag = A - offset - index.</p>
+<p>A = tag + offset + index</p>
+<p>TLB Index: If there are E pages, index = log2(E).</p>
+<p>TLB Tag: Tag is the rest of bits. So, if we have V virtual address bits, tag = V - index.</p>
+<p>Calculate the size of each <strong>block entry</strong>. = Number of status bits (valid, dirt etc). + Tag bits + Data bits (Usually block size (in bytes) * 8).</p>
+<p>Calculate the size of the cache. = Number of status bits (valid, dirt etc). + Tag bits + Data bits (Usually block size (in bytes) * 8).</p>  </div> <nav class="flex flex-col sm:flex-row justify-between mt-8 pt-4 border-t border-border" data-astro-cid-v5ro3oot>   </nav> </article>  </main> </div> </body></html> 

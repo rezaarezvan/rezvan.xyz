@@ -1,0 +1,229 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="Astro v4.11.5"><link rel="icon" type="image" href="/favicon.ico"><title>Part 1 - Mechanical Waves</title><!-- KaTeX support --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script><!-- inline KaTeX --><link rel="stylesheet" href="/_astro/index.CwgzIfsj.css">
+<link rel="stylesheet" href="/_astro/_slug_.hCvEQTvV.css">
+<style>article[data-astro-cid-v5ro3oot]{max-width:80ch;margin:0 auto}.nav-button[data-astro-cid-v5ro3oot]{display:flex;align-items:center;padding:.5rem;border-radius:.5rem;transition:background-color .3s ease;text-decoration:none;color:var(--text-color);background-color:var(--bg-color);border:1px solid var(--border-color)}.nav-button[data-astro-cid-v5ro3oot]:hover{background-color:var(--hover-color)}.nav-button[data-astro-cid-v5ro3oot] .arrow[data-astro-cid-v5ro3oot]{font-size:1.5rem;line-height:1}.nav-button[data-astro-cid-v5ro3oot] .text[data-astro-cid-v5ro3oot]{display:flex;flex-direction:column;margin:0 .5rem}.nav-button[data-astro-cid-v5ro3oot] .label[data-astro-cid-v5ro3oot]{font-size:.8rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted-color)}.nav-button[data-astro-cid-v5ro3oot] .title[data-astro-cid-v5ro3oot]{font-weight:500}.prev-button[data-astro-cid-v5ro3oot]{justify-content:flex-start}.next-button[data-astro-cid-v5ro3oot]{justify-content:flex-end;text-align:right}@media (max-width: 640px){.nav-button[data-astro-cid-v5ro3oot]{width:100%}.next-button[data-astro-cid-v5ro3oot]{justify-content:flex-start;text-align:left}.next-button[data-astro-cid-v5ro3oot] .text[data-astro-cid-v5ro3oot]{order:2;margin-left:.5rem}.next-button[data-astro-cid-v5ro3oot] .arrow[data-astro-cid-v5ro3oot]{order:1}}
+</style><script type="module">document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]})});
+</script></head> <body> <div class="container mx-auto px-4 flex flex-col md:flex-row min-h-screen"> <aside class="w-full md:w-64 border-b md:border-r md:border-b-0 border-[var(--border-color)] border-dashed pt-8"> <header class="flex flex-col h-full"> <div class="flex items-center mb-4"> <script>
+  function setTheme(mode) {
+    localStorage.setItem("theme-storage", mode);
+    document.documentElement.setAttribute('data-theme', mode);
+  }
+  function toggleTheme() {
+    const currentTheme = localStorage.getItem("theme-storage") || "light";
+    const newTheme = currentTheme === "light" ? "dark" : "light";
+    setTheme(newTheme);
+  }
+  const savedTheme = localStorage.getItem("theme-storage") || "light";
+  setTheme(savedTheme);
+  window.toggleTheme = toggleTheme;
+</script> <button id="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme" class="w-6 h-6 cursor-pointer"> <div class="w-5 h-5 border-2 border-primary rounded-full transition-colors duration-300 ease-in-out hover:bg-primary"></div> </button> <a href="/" class="text-2xl font-semibold ml-3 h-10 pr-3">rezvan.xyz</a> </div> <nav class="flex flex-wrap gap-2 md:flex-col md:gap-2"> <a href="/principles" class="transition-colors">
+[principles]
+</a><a href="/cv" class="transition-colors">
+[cv]
+</a><a href="/posts" class="transition-colors">
+[posts]
+</a><a href="/chalmers" class="transition-colors">
+[chalmers]
+</a><a href="/cityu" class="transition-colors">
+[cityu]
+</a> </nav> </header> </aside> <main class="flex-grow px-4 md:px-8 py-8 overflow-y-auto">  <article class="prose prose-sm sm:prose lg:prose-lg xl:prose-xl max-w-none" data-astro-cid-v5ro3oot> <h1 class="text-3xl sm:text-4xl font-bold mb-4" data-astro-cid-v5ro3oot>Part 1 - Mechanical Waves</h1> <p class="text-sm text-muted-foreground mb-4" data-astro-cid-v5ro3oot>
+Date: 12/5/2022 </p> <div class="markdown-content" data-astro-cid-v5ro3oot>  <p>The next chapter in our physics course is about waves, especially mechanical waves.</p>
+<h3 id="general-about-waves">General about Waves</h3>
+<p>In this chapter we’ll cover <strong>mechanical</strong> waves but also <strong>electromagnetic</strong> waves, in this case only (visible) light.</p>
+<p>There’s two types of waves we’ll be covering:</p>
+<ul>
+<li>Transverse waves
+<ul>
+<li>They have ‘noise’ orthogonal against the wave’s propagation speed.</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>Longitudinal waves
+<ul>
+<li>They have ‘noise’ parallel with the waves’ propagation speed.</li>
+</ul>
+</li>
+</ul>
+<p>We can describe this noise with the function $y(x, t) = f(x + vt)$.</p>
+<h3 id="harmonic-waves">Harmonic Waves</h3>
+<p>Harmonic waves are ‘idealized waves’ where the <em>frequency</em> is a positive integer <em>multiple</em> of the <strong>fundamental frequency</strong>.</p>
+<p>This just means we can describe our waves in terms of sine and cosine functions.</p>
+<p>A general formula for harmonic waves is:
+$$
+y(x, t) = A\ sin[2\pi(\frac{x}{\lambda} - \frac{\lambda}{\lambda\ T}t)]
+$$</p>
+<p>Let’s cover each term here and see what they mean:
+$$
+A - \text{ Amplitude } [m]
+\newline
+\lambda - \text{ Wave-length } [m]
+\newline
+f - \text{ Frequency } [Hz] [\frac{1}{s}]
+\newline
+v - \text{ Propagation velocity } [\frac{m}{s}]
+\newline
+\omega - \text{ Angular velocity } [\frac{rad}{s}]
+\newline
+T - \text{ Period } [s]
+\newline
+$$</p>
+<p>And now let’s write up some relationships between these variables:
+$$
+f = \frac{1}{T}
+\newline
+\omega = 2\pi\ f = \frac{2\pi}{T}
+\newline
+v = \lambda\ f
+\newline
+\lambda = v\ T
+\newline
+v = \lambda \frac{1}{T}
+$$</p>
+<p>Now we can rewrite our general formula to something even more general:
+$$
+y(x, t) = A\ sin(kx - \omega t + \phi) \text{, where}
+\newline
+k = \frac{2\pi}{\lambda} [\frac{rad}{m}]
+\newline
+\phi = \text{ Describes our ‘starting’ position.}
+$$</p>
+<h3 id="different-kind-of-velocities">Different Kind of Velocities</h3>
+<p>There’s two different kinds of velocities that we need to differentiate.
+We can view the entire waves velocity as $V_f$, but at the same time we could view a singular particles speed.
+This is noted by $V_p$</p>
+<p>We can write $V_p$ as:
+$$
+V_p = \frac{dy}{dt} = -\omega A cos(kx - \omega t + \phi)
+$$</p>
+<h3 id="velocities-in-a-string">Velocities in a String</h3>
+<p>Strings, when flicked, will behave like waves - If we fixate a string on each ends, for example in a guitar.</p>
+<p>We can calculate the propagation velocity as:
+$$
+V_f = \sqrt\frac{T}{\mu} \text{, where }
+\newline
+T - \text{ Tension force }  [N]
+\newline
+\mu - \text{ mass per length-unit } [\frac{kg}{m}]
+$$</p>
+<h3 id="intensity">Intensity</h3>
+<p>The ‘intensity’ of a wave describes it’s energy flux. But we can also describe it as:
+$$
+I\ \propto\ A^2
+$$</p>
+<p>So the intensity is <strong>proportional</strong> to the amplitude squared. This will become important once we begin to cover light waves.</p>
+<h3 id="wave-interference">Wave interference</h3>
+<p>Interference is the phenomena that occurs when two waves collide. It can either result in destructive interference where the waves ‘take each other out’, or
+in constructive interference, which means we ‘add’ the waves together. It’s quite a natural thing as we can see from the equations:</p>
+<p>$$
+y_1 = A\ sin(kx - \omega t)
+\newline
+y_2 = A\ sin(kx - \omega t + \phi)
+$$</p>
+<p>$$
+y_{total} = A\ [sin(kx - \omega t) + sin(kx - wt + \phi)]
+$$</p>
+<p>Using the sine addition formula:
+$$
+y_{total} = 2A\ cos(\frac{\phi}{2}) \times sin(kx - \omega t + \frac{\phi}{2})
+$$</p>
+<p>The important term is the $\frac{\phi}{2}$ if this is:
+$$
+\frac{\phi}{2} = m\pi, \text{, where }
+\newline
+m = \text{ positive integer }
+$$</p>
+<p>Then we have so called <strong>constructive</strong> interference - visually this means we have highs and lows ‘aligned’.</p>
+<p>If instead this term is:
+$$
+\frac{\phi}{2} = (2m + 1)\ \frac{\pi}{2}, \text{, where }
+\newline
+m = \text{ positive integer }
+$$</p>
+<p>Then we have <strong>destructive</strong> interference, or visually, opposites will be aligned (highs with lows, and lows with higs of the other).</p>
+<h3 id="more-ways-to-write-wave-equation">More Ways to Write Wave Equation</h3>
+<p>One we can rewrite our original wave equation is:
+$$
+A\ sin(\omega(t - \frac{x}{v}))
+$$</p>
+<p>Which can be useful sometimes!</p>
+<h3 id="reflection-and-transmission-of-waves">Reflection and Transmission of Waves</h3>
+<p>If we have a wave that propagates from one medium to another, we will have so called reflection and transmission of the wave.</p>
+<p>If we just visualize what will happen is that - the <em>reflection</em> of the wave will go in the <em>other</em> direction - whilst the transmission will have the <em>same</em> direction as the wave before.</p>
+<p>By doing some math we get:
+$$
+A_i + A_r = A_t
+$$</p>
+<p>Which seems logical, the initial wave added with the reflection wave should have the same <strong>amplitude</strong> as the new transmission wave.</p>
+<p>We can also get the following:
+$$
+\frac{d}{dx}\ (y_i + y_r) = \frac{d}{dx}\ y_t
+$$</p>
+<p>$$
+\frac{1}{V_1}\ (A_i - A_r) = \frac{1}{V_2}\ A_t
+$$</p>
+<p>Which finally gives us the relation:
+$$
+A_t = \frac{2\ V_2}{V_2 + V_1}\ A_i
+$$</p>
+<p>$$
+A_r = \frac{V_2 - V_1}{V_2 + V_1} A_i
+$$</p>
+<h3 id="standing-waves">Standing Waves</h3>
+<p>Standing waves is the phenomena when interference occurs but the waves have opposite direction.
+$$
+y_1 = A\ sin(kx - \omega t)
+\newline
+y_2 = A\ sin(kx + \omega t)
+\newline
+y_{total} = \dots = 2A\ sin(kx)\ cos(\omega t)
+$$</p>
+<p>From this we can see that in some points, we will <strong>always</strong> have some points that are 0. We call these points ‘nodes’. The peaks are therefore called antinodes.</p>
+<h3 id="fixated-wave">Fixated Wave</h3>
+<p>Let’s apply our knowledge about standing waves to this example - we have a string which is fixated at both ends. So therefore:
+$$
+y(0, t) = 0
+\newline
+y(L, t) = 0
+$$</p>
+<p>So at x = 0 (the start of the string) and x = L (the end of the string).</p>
+<p>We get:
+$$
+y = 2A\ sin(0)\ cos(\omega t) = 0
+$$</p>
+<p>Which is what we wanted, now for $x = L$:
+$$
+y = 2A\ sin(kL)\ cos(omega t) = 0
+$$</p>
+<p>For this to be equal to 0 - $sin(kL)$ needs to be 0. So:
+$$
+sin(kL) = 0
+\newline
+k = \frac{2\pi}{\lambda}
+\newline
+kL = m\pi
+\newline
+\lambda = \frac{2L}{m}
+$$</p>
+<p>This means we only have a subset of all possible Wave-lengths that we can use so that our initial conditions are fullfilled.
+$$
+\lambda = 2L, L, \frac{2}{3}\ L, \dots
+$$</p>
+<h3 id="beats">Beats</h3>
+<p>This phenomena occurs when we have two frequencies which are <em>really</em> close, there isn’t really that much to say, we can look at the formula and derive what happens from there:
+$$
+y = y_1 + y_2 = 2A\ cos[2\pi\ (\frac{f_1 - f_2}{2})\ t] \times cos[2\pi\ (\frac{f_1 + f_2}{2})\ t]
+$$
+So from this we can see that if $f_1, f_2$ are really close, we will have a really low frequency and a high frequency that is close to $f_1$.</p>
+<h3 id="the-doppler-effect">The Doppler Effect</h3>
+<p>Is the effect that happens when we have a sound source which moves, or both the listener and sound source move.</p>
+<h4 id="if-only-the-listener-moves">If only the listener moves</h4>
+<p>If the listener moves then we can write the frequency which the listener hears as:
+$$
+f_L = \frac{V + V_L}{\lambda} = \frac{V + V_L}{\frac{V}{f_S}} = (1 + \frac{V_L}{V})\ f_S
+$$</p>
+<h4 id="if-both-are-moving">If both are moving</h4>
+<p>$$
+f_L = \frac{V + V_L}{V + V_S}\ f_S
+$$</p>
+<h3 id="conclusion">Conclusion</h3>
+<p>This was it for this part - quite short, waves are a quite natural phenomena so a lot of things comes from intuition. In the next part we’ll begin to cover light waves!</p>  </div> <nav class="flex flex-col sm:flex-row justify-between mt-8 pt-4 border-t border-border" data-astro-cid-v5ro3oot>   </nav> </article>  </main> </div> </body></html> 

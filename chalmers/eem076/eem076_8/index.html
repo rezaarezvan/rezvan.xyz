@@ -1,0 +1,169 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="Astro v4.11.5"><link rel="icon" type="image" href="/favicon.ico"><title>Part 8 - Magnetic fields</title><!-- KaTeX support --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script><!-- inline KaTeX --><link rel="stylesheet" href="/_astro/index.CwgzIfsj.css">
+<link rel="stylesheet" href="/_astro/_slug_.hCvEQTvV.css">
+<style>article[data-astro-cid-v5ro3oot]{max-width:80ch;margin:0 auto}.nav-button[data-astro-cid-v5ro3oot]{display:flex;align-items:center;padding:.5rem;border-radius:.5rem;transition:background-color .3s ease;text-decoration:none;color:var(--text-color);background-color:var(--bg-color);border:1px solid var(--border-color)}.nav-button[data-astro-cid-v5ro3oot]:hover{background-color:var(--hover-color)}.nav-button[data-astro-cid-v5ro3oot] .arrow[data-astro-cid-v5ro3oot]{font-size:1.5rem;line-height:1}.nav-button[data-astro-cid-v5ro3oot] .text[data-astro-cid-v5ro3oot]{display:flex;flex-direction:column;margin:0 .5rem}.nav-button[data-astro-cid-v5ro3oot] .label[data-astro-cid-v5ro3oot]{font-size:.8rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted-color)}.nav-button[data-astro-cid-v5ro3oot] .title[data-astro-cid-v5ro3oot]{font-weight:500}.prev-button[data-astro-cid-v5ro3oot]{justify-content:flex-start}.next-button[data-astro-cid-v5ro3oot]{justify-content:flex-end;text-align:right}@media (max-width: 640px){.nav-button[data-astro-cid-v5ro3oot]{width:100%}.next-button[data-astro-cid-v5ro3oot]{justify-content:flex-start;text-align:left}.next-button[data-astro-cid-v5ro3oot] .text[data-astro-cid-v5ro3oot]{order:2;margin-left:.5rem}.next-button[data-astro-cid-v5ro3oot] .arrow[data-astro-cid-v5ro3oot]{order:1}}
+</style><script type="module">document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]})});
+</script></head> <body> <div class="container mx-auto px-4 flex flex-col md:flex-row min-h-screen"> <aside class="w-full md:w-64 border-b md:border-r md:border-b-0 border-[var(--border-color)] border-dashed pt-8"> <header class="flex flex-col h-full"> <div class="flex items-center mb-4"> <script>
+  function setTheme(mode) {
+    localStorage.setItem("theme-storage", mode);
+    document.documentElement.setAttribute('data-theme', mode);
+  }
+  function toggleTheme() {
+    const currentTheme = localStorage.getItem("theme-storage") || "light";
+    const newTheme = currentTheme === "light" ? "dark" : "light";
+    setTheme(newTheme);
+  }
+  const savedTheme = localStorage.getItem("theme-storage") || "light";
+  setTheme(savedTheme);
+  window.toggleTheme = toggleTheme;
+</script> <button id="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme" class="w-6 h-6 cursor-pointer"> <div class="w-5 h-5 border-2 border-primary rounded-full transition-colors duration-300 ease-in-out hover:bg-primary"></div> </button> <a href="/" class="text-2xl font-semibold ml-3 h-10 pr-3">rezvan.xyz</a> </div> <nav class="flex flex-wrap gap-2 md:flex-col md:gap-2"> <a href="/principles" class="transition-colors">
+[principles]
+</a><a href="/cv" class="transition-colors">
+[cv]
+</a><a href="/posts" class="transition-colors">
+[posts]
+</a><a href="/chalmers" class="transition-colors">
+[chalmers]
+</a><a href="/cityu" class="transition-colors">
+[cityu]
+</a> </nav> </header> </aside> <main class="flex-grow px-4 md:px-8 py-8 overflow-y-auto">  <article class="prose prose-sm sm:prose lg:prose-lg xl:prose-xl max-w-none" data-astro-cid-v5ro3oot> <h1 class="text-3xl sm:text-4xl font-bold mb-4" data-astro-cid-v5ro3oot>Part 8 - Magnetic fields</h1> <p class="text-sm text-muted-foreground mb-4" data-astro-cid-v5ro3oot>
+Date: 4/24/2023 </p> <div class="markdown-content" data-astro-cid-v5ro3oot>  <p>In this part we’ll cover more in-depth about magnetic fields and their interactions.</p>
+<p>Recall Biot-Savart’s Law:
+$$
+\mathbf{\vec{B}} = \int d\mathbf{\vec{B}} = \dfrac{\mu_0 I}{4\pi}\ \int \dfrac{d\mathbf{\vec{s}} \times \mathbf{\vec{r}}}{r^2}
+$$</p>
+<p>This means that, the magnetic field strength, $B$, at any given is:
+$$
+B = \dfrac{\mu_0 I}{2\pi r}
+$$</p>
+<p>The direction, $\mathbf{\vec{B}}$, is given by the (lazy) right-hand rule.</p>
+<h3 id="magnetic-field-from-a-solenoid">Magnetic field from a solenoid</h3>
+<p>First, let’s draw how the field lines would look like:</p>
+<p><img src="/images/school/SN.png#center" alt=""></p>
+<p>If we zoom in, and look at the magnetic field on a square:
+<img src="/images/school/ISN.png#center" alt=""></p>
+<p>If we write this as an integral:
+$$
+\oint \mathbf{\vec{B}} \cdot\ d\mathbf{\vec{s}} = \int_1 \mathbf{\vec{B}} \cdot\ d\mathbf{\vec{s}} + \int_2 \mathbf{\vec{B}} \cdot\ d\mathbf{\vec{s}} + \int_3 \mathbf{\vec{B}} \cdot\ d\mathbf{\vec{s}} + \int_4 \mathbf{\vec{B}} \cdot\ d\mathbf{\vec{s}}
+$$</p>
+<p>But we can see that only, $3$, will contribute to our magnetic field, since it’s parallel with it.</p>
+<p>Which means:
+$$
+\oint \mathbf{\vec{B}} \cdot\ d\mathbf{\vec{s}} = Bl = \mu_0 I_{enc}
+$$</p>
+<p>One thing we’ll need to remember is that, we can make our solenoid more densely coiled. This will, naturally, increase our magnetic field strength.</p>
+<p>$$
+I_{enc} = NI
+$$</p>
+<p>$$
+\oint \mathbf{\vec{B}} \cdot\ d\mathbf{\vec{s}} = Bl = \mu_0 NI
+$$</p>
+<p>Which means:
+$$
+B = \dfrac{\mu_0 NI}{l} = \mu_0 nl
+$$</p>
+<p>Where, $n$, are the number of turns <em>per length unit</em>.</p>
+<h3 id="lorentz-force">Lorentz Force</h3>
+<p>If we have a charged particle, in presence of both an electrical field, $\mathbf{\vec{E}}$, and a magnetic field, $\mathbf{\vec{B}}$.</p>
+<p>The total force on the charged particle, is naturally, the sum of the two forces:
+$$
+\mathbf{\vec{F}_E} = q\mathbf{\vec{E}}
+$$</p>
+<p>$$
+\mathbf{\vec{F}_B} = q\mathbf{\vec{v}} \times \mathbf{\vec{B}}
+$$</p>
+<p>$$
+\boxed{\mathbf{\vec{F}} = q(\mathbf{\vec{E}} + \mathbf{\vec{v}} \times \mathbf{\vec{B}})}
+$$</p>
+<h3 id="magnetic-materials">Magnetic materials</h3>
+<p>As we have seen earlier, introduction of materials in electrical fields - <em>always</em> reduced the electrical field strength, $E$.</p>
+<p>However, we’ll see that, introduction of materials in a magnetic may decrease <em>or</em> increase the magnetic field strength, $B$.</p>
+<p>To understand this - let’s begin with looking at this:</p>
+<p><img src="/images/school/MM.png#center" alt=""></p>
+<p>Here we have a cylinder with uniformly distributed magnetic dipoles.</p>
+<p>The net dipole moment is:
+$$
+\mathbf{\vec{M}} = \dfrac{1}{LA}\sum \mathbf{\vec{u}_i}
+$$</p>
+<p>Therefore, the magnetic field strength is just:
+$$
+\mathbf{\vec{B}_M} = \mu_0 \mathbf{\vec{M}}
+$$</p>
+<p>However, these dipoles will probably not be uniformly distributed, rather quite chaotic and random. Thus, there is no net dipole moment</p>
+<p>If we however, exert an external magnetic field, $\mathbf{\vec{B}_0}$, these dipoles will begin to align and <em>enhance</em> the field.a</p>
+<p>$$
+\mathbf{\vec{M}} = \chi_m \dfrac{\mathbf{\vec{B}_0}}{\mu_0}
+$$</p>
+<p>$$
+\mathbf{\vec{B}} = (1 + \chi_m) \mathbf{\vec{B}_0} = \kappa_m \mathbf{\vec{B}_0}
+$$</p>
+<p>Where, $\kappa_m$, is the <em>relative permeability</em> of the material.</p>
+<p>As we discussed earlier, materials that <strong>greatly</strong> <em>enhance</em> the magnetic field, is called <strong>ferromagnetic materials</strong>.</p>
+<p>The very cool and interesting thing is that, ferromagnetic materials induce the dipoles so strongly that, the dipoles themselves begin to strongly influence neighboring dipoles!</p>
+<p>I find that very fascinating.</p>
+<h3 id="faradays-law">Faraday’s Law</h3>
+<p>From what we have assumed and used - our fields have been produced by stationary and moving <em>charges</em>.</p>
+<p>Now, let’s do this opposite: varying a magnetic field with time to produce an electrical field.</p>
+<p>To understand this we’ll first have to define <em>magnetic</em> flux.</p>
+<h4 id="magnetic-flux">Magnetic flux</h4>
+<p>Just as electrical flux, we can define how much magnetic field passes through as surface.</p>
+<p><img src="/images/school/MF.png#center" alt=""></p>
+<p>We can define this as:
+$$
+\Phi_B = \int \int \mathbf{\vec{B}} \cdot\ d\mathbf{\vec{A}} = BA\ cos(\theta)
+$$</p>
+<p>The unit for magnetic flux is weber:
+$$
+1 Wb = 1T \cdot\ m^2
+$$</p>
+<p>Now, back to Faraday’s law. The <strong>induced</strong> <em>electromagnetic field</em>, $\varepsilon$, in a coil is <strong>proportional</strong> to the negative rate of change of the magnetic flux.</p>
+<p>Or, in symbols:
+$$
+\varepsilon = -N \dfrac{d \Phi_B}{dt}
+$$</p>
+<p>Where, $N$, is the number of loops in the coil.</p>
+<p>This also means that:
+$$
+\varepsilon \propto - \dfrac{d}{dt} (BA\ cos(\theta))
+$$</p>
+<p>We can also write this as:
+$$
+-\left(\dfrac{dB}{dt}\right) A cos(\theta) - \left(\dfrac{dA}{dt}\right) B cos(\theta) + \left(\dfrac{d\theta}{dt}\right) BA\ sin(\theta)
+$$</p>
+<p>Here, we can clearly see that the induced electromagnetic field, depends on, the magnetic field, the area and the angle!</p>
+<h3 id="lenzs-law">Lenz’s law</h3>
+<p>The direction of the induced current is determined by Lenz’s law, which says the following:</p>
+<blockquote>
+<p>The induced current produces a magnetic field, which oppose the change in magnetic flux that induces such currents.</p>
+</blockquote>
+<h3 id="generators-and-motors">Generators and motors</h3>
+<p>As the magnetic flux changes with time, an induced current begins to flow!</p>
+<p>This, naturally, suggest that a potential different is at play:
+$$
+\varepsilon = \Delta V = \oint \mathbf{\vec{E}} \cdot\ d\mathbf{\vec{s}}
+$$</p>
+<p>$$
+\oint \mathbf{\vec{E}} = - \dfrac{d \Phi_B}{dt}
+$$</p>
+<p>Now, by using Faraday’s law - we can design <em>generators</em>, to convert mechanical energy into electrical energy and vice versa!</p>
+<p>$$
+\Phi_B = \int \int \mathbf{\vec{B}} \cdot d\mathbf{\vec{A}} = BA\ cos(\theta) = BA\ cos(\omega t)
+$$</p>
+<p><img src="/images/school/G.png#center" alt=""></p>
+<p>If we take the derivate:
+$$
+\dfrac{d \Phi_B}{dt} = -BA \omega sin(\omega t)
+$$</p>
+<p>Therefore:
+$$
+\varepsilon = -N \dfrac{d \Phi_B}{dt} = NBA \omega sin(\omega t)
+$$</p>
+<p>And also:
+$$
+I = \dfrac{ | \varepsilon |}{R} = \dfrac{NBA \omega}{R} sin(\omega t)
+$$</p>
+<p>Finally, we have defined, <em>alternating current</em>. We’ll start to dive into this world into the future parts.</p>
+<p>One last interesting formula that we’re going to look at:
+$$
+P = I |\varepsilon| = \dfrac{(NBA \omega)^2}{R} sin^2 (\omega t)
+$$</p>
+<p>We can see that, it’s just the absolute value of the alternating current!</p>  </div> <nav class="flex flex-col sm:flex-row justify-between mt-8 pt-4 border-t border-border" data-astro-cid-v5ro3oot>   </nav> </article>  </main> </div> </body></html> 

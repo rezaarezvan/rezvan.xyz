@@ -1,0 +1,178 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="Astro v4.11.5"><link rel="icon" type="image" href="/favicon.ico"><title>Part 1 - Introduction</title><!-- KaTeX support --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script><!-- inline KaTeX --><link rel="stylesheet" href="/_astro/index.CwgzIfsj.css">
+<link rel="stylesheet" href="/_astro/_slug_.hCvEQTvV.css">
+<style>article[data-astro-cid-v5ro3oot]{max-width:80ch;margin:0 auto}.nav-button[data-astro-cid-v5ro3oot]{display:flex;align-items:center;padding:.5rem;border-radius:.5rem;transition:background-color .3s ease;text-decoration:none;color:var(--text-color);background-color:var(--bg-color);border:1px solid var(--border-color)}.nav-button[data-astro-cid-v5ro3oot]:hover{background-color:var(--hover-color)}.nav-button[data-astro-cid-v5ro3oot] .arrow[data-astro-cid-v5ro3oot]{font-size:1.5rem;line-height:1}.nav-button[data-astro-cid-v5ro3oot] .text[data-astro-cid-v5ro3oot]{display:flex;flex-direction:column;margin:0 .5rem}.nav-button[data-astro-cid-v5ro3oot] .label[data-astro-cid-v5ro3oot]{font-size:.8rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted-color)}.nav-button[data-astro-cid-v5ro3oot] .title[data-astro-cid-v5ro3oot]{font-weight:500}.prev-button[data-astro-cid-v5ro3oot]{justify-content:flex-start}.next-button[data-astro-cid-v5ro3oot]{justify-content:flex-end;text-align:right}@media (max-width: 640px){.nav-button[data-astro-cid-v5ro3oot]{width:100%}.next-button[data-astro-cid-v5ro3oot]{justify-content:flex-start;text-align:left}.next-button[data-astro-cid-v5ro3oot] .text[data-astro-cid-v5ro3oot]{order:2;margin-left:.5rem}.next-button[data-astro-cid-v5ro3oot] .arrow[data-astro-cid-v5ro3oot]{order:1}}
+</style><script type="module">document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]})});
+</script></head> <body> <div class="container mx-auto px-4 flex flex-col md:flex-row min-h-screen"> <aside class="w-full md:w-64 border-b md:border-r md:border-b-0 border-[var(--border-color)] border-dashed pt-8"> <header class="flex flex-col h-full"> <div class="flex items-center mb-4"> <script>
+  function setTheme(mode) {
+    localStorage.setItem("theme-storage", mode);
+    document.documentElement.setAttribute('data-theme', mode);
+  }
+  function toggleTheme() {
+    const currentTheme = localStorage.getItem("theme-storage") || "light";
+    const newTheme = currentTheme === "light" ? "dark" : "light";
+    setTheme(newTheme);
+  }
+  const savedTheme = localStorage.getItem("theme-storage") || "light";
+  setTheme(savedTheme);
+  window.toggleTheme = toggleTheme;
+</script> <button id="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme" class="w-6 h-6 cursor-pointer"> <div class="w-5 h-5 border-2 border-primary rounded-full transition-colors duration-300 ease-in-out hover:bg-primary"></div> </button> <a href="/" class="text-2xl font-semibold ml-3 h-10 pr-3">rezvan.xyz</a> </div> <nav class="flex flex-wrap gap-2 md:flex-col md:gap-2"> <a href="/principles" class="transition-colors">
+[principles]
+</a><a href="/cv" class="transition-colors">
+[cv]
+</a><a href="/posts" class="transition-colors">
+[posts]
+</a><a href="/chalmers" class="transition-colors">
+[chalmers]
+</a><a href="/cityu" class="transition-colors">
+[cityu]
+</a> </nav> </header> </aside> <main class="flex-grow px-4 md:px-8 py-8 overflow-y-auto">  <article class="prose prose-sm sm:prose lg:prose-lg xl:prose-xl max-w-none" data-astro-cid-v5ro3oot> <h1 class="text-3xl sm:text-4xl font-bold mb-4" data-astro-cid-v5ro3oot>Part 1 - Introduction</h1> <p class="text-sm text-muted-foreground mb-4" data-astro-cid-v5ro3oot>
+Date: 3/21/2023 </p> <div class="markdown-content" data-astro-cid-v5ro3oot>  <p>In this series we’ll understand and learn how to compute, quantify and, measure the performance of different systems and programs.</p>
+<p>To compute, quantify and, measure performance let’s start by first defining what performance depends on.</p>
+<h3 id="performance-dependencies">Performance dependencies</h3>
+<p>When we’re making a system or a program a lot of different factors will weigh in the total performance:</p>
+<ul>
+<li>
+<p>The underlying algorithm</p>
+<ul>
+<li>Determines number of operations required, which directly impacts the performance.</li>
+</ul>
+</li>
+<li>
+<p>Programming language, compile, and, architecture of choice.</p>
+<ul>
+<li>Determines number of instructions.</li>
+</ul>
+</li>
+<li>
+<p>Processor and memory</p>
+<ul>
+<li>Determines how quickly each instruction executes</li>
+</ul>
+</li>
+<li>
+<p>I/O System (Includes the OS)</p>
+<ul>
+<li>Determines how quickly each I/O operation executes</li>
+</ul>
+</li>
+</ul>
+<h3 id="cpu-time">CPU Time</h3>
+<p>We can define CPU time by a very nice equation:
+$$
+\text{CPU Time} = \frac{\text{Instructions}}{\text{Program}} \cdot\ \frac{\text{Clock cycles}}{\text{Instruction}} \cdot\ \frac{\text{Seconds}}{\text{Clock cycle}}
+$$</p>
+<p>We will call these as the following:
+$$
+\text{CPU Time} = IC \cdot\ CPI \cdot\ T_c
+$$</p>
+<p>One way to actually then measure computers or programs is using SPEC.</p>
+<p>SPEC, or <strong>S</strong>tandard <strong>P</strong>erformance <strong>E</strong>valuation <strong>C</strong>orp, is a company which specialize in measuring.</p>
+<p>The idea is to normalize compared to a reference computer using geometric means.</p>
+<p>This is called the SPECvalue.</p>
+<p>Geometric mean:
+$$
+\sqrt[n]{\prod_{i = 1}^{n} \text{Execution time ratio}_i}
+$$</p>
+<h3 id="risccisc-architecture">RISC/CISC Architecture</h3>
+<p>In the early days, it was thought that, if we made the machine instructions closer to real (higher-level) programming functions,
+it would be faster for the computer.</p>
+<p>We now know this is not true, and machine instructions are therefore as small and atomic as possible.
+These two approaches are known as RISC and CISC.</p>
+<ul>
+<li>RISC (<strong>R</strong>educed <strong>I</strong>nstruction <strong>S</strong>et <strong>C</strong>omputers)</li>
+<li>CISC (<strong>C</strong>omplex <strong>I</strong>nstruction <strong>S</strong>et <strong>C</strong>omputers)</li>
+</ul>
+<h3 id="mips">MIPS</h3>
+<p>In this series we will use a MIPS instruction set, MIPS is still used widely in the real world, but it’s slowly fading away to due RISC V’s popularity.</p>
+<p>Let’s see some MIPS operations:</p>
+<h4 id="arithmetic-operations">Arithmetic operations</h4>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>add a, b, c # a := b + c</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>All arithmetic operations have this form, two source register and one destination registers.</p>
+<p>We also see that comments are denoted by a <code>#</code> in MIPS programs.</p>
+<h4 id="register-operations">Register operations</h4>
+<p>All operations in assembly languages utilize <em>registers</em>.</p>
+<p>MIPS has a 32 x 32 bit <strong>register file</strong> (RF)</p>
+<p>They are numbered 0 to 31 and, just a refresher, 32-bit data is called a “word”.</p>
+<p>Example:</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>f = (g + h) - (i + j);</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>Given that $f, \ldots, j$ are in registers $s_0, \ldots, s_4$, in MIPS this will become:</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>add $t0, $s1, $s2 # temp0 := g + h</span></span>
+<span class="line"><span>add $t1, $s3, $s4 # temp1 := i + j</span></span>
+<span class="line"><span>sub $s0, $t0, $t1 # f := t0 - t1</span></span>
+<span class="line"><span></span></span></code></pre>
+<h4 id="memory-operations">Memory operations</h4>
+<p>Since MIPS is byte addressable, it means that each “word” has 4 bytes.
+Also good to note here is that MIPS uses <strong>big endian</strong></p>
+<p>Example:</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>g = h + A[8];</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>Given that g is in $s_1$, h in $s_2$ and, the starting address for A is at $s_3$</p>
+<p>We will get the following MIPS code:</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>lw $t0, 32($s3)     # load word</span></span>
+<span class="line"><span>add $s1, $s2, $t0</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>Example 2:</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>A[12] = h + A[8];</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>Given that h is in $s_2$, and, the starting address for A is at $s_3$</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>lw $t0, 32($s3)     # load word</span></span>
+<span class="line"><span>add $t0, $s2, $t0</span></span>
+<span class="line"><span>sw $t0, 48($s3)     # store word</span></span>
+<span class="line"><span></span></span></code></pre>
+<h4 id="immediate-operations">Immediate operations</h4>
+<p>Instead of, for example, adding two registers, we may just want to add a constant, this can be done via:</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>addi $s3, $s3, 4</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>For subtracting we just do:</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>addi $s2, $s1, -1</span></span>
+<span class="line"><span></span></span></code></pre>
+<h4 id="zero-register">Zero register</h4>
+<p>In MIPS there is a hard-coded zero register, that always contains the value zero, this can be used to quickly move values between registers:</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>add $t2, $s1, $zero     # t2 := s1</span></span>
+<span class="line"><span></span></span></code></pre>
+<h4 id="logical-operations">Logical operations</h4>
+<p>In MIPS there are of course logical operations:</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span># Logical Shifts</span></span>
+<span class="line"><span>sll $t0, $t1, 2     # t0 := t1 * 4</span></span>
+<span class="line"><span>srl $t0, $t1, 2     # t0 := t1 / 4</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span># Logical AND</span></span>
+<span class="line"><span>and $t0, $t1, $t2   # t0 := t1 &#x26; t2</span></span>
+<span class="line"><span>andi $t0, $t1, 2   # t0 := t1 &#x26; 2</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span># Logical OR</span></span>
+<span class="line"><span>or $t0, $t1, $t2   # t0 := t1 | t2</span></span>
+<span class="line"><span>ori $t0, $t1, 2   # t0 := t1 | 2</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span># Logical NOT</span></span>
+<span class="line"><span>nor $t0, $t1, $zero # := NOT(t1)</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>Notice there isn’t an explicit <code>not</code> operation, but rather we use a <code>nor</code> operation with the zero register.</p>
+<h4 id="conditional-jumps">Conditional jumps</h4>
+<p>In MIPS there is only two conditional jumps, <code>beq</code> and <code>bne</code>:</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>beq rs, rt, L1 # if(rs == rt); Jump to L1</span></span>
+<span class="line"><span>bne rs, rt, L1 # if(rs != rt); Jump to L1</span></span>
+<span class="line"><span>j L1           # Jump to L1</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>So for example the following C-code:</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>if(i == j) {</span></span>
+<span class="line"><span>    f = g + h;</span></span>
+<span class="line"><span>} else {</span></span>
+<span class="line"><span>    f = g - h;</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>Given that $f, g, \ldots$ is in $s_0, s_1, \ldots$</p>
+<p>MIPS:</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>bne $s3, $s4, Else # if(i == j) jump to Else</span></span>
+<span class="line"><span>add $s0, $s1, $s2  # f = g + h</span></span>
+<span class="line"><span>j Exit             # Jump to exit</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>Else: sub $s0, $s1, $s2 # f = g - h</span></span>
+<span class="line"><span>Exit: ...</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>Notice how there isn’t any usual <code>blt, bge</code>, since MIPS is of RISC architecture, we don’t need those.</p>
+<p>Instead, what we can do is using <code>slt</code>. Which stands for set less than, we can now use this to replicate a <code>blt</code> or <code>bge</code>.</p>
+<p>However, <code>blt, bge</code> are still pseudo-keywords in MIPS. The assembler will still be able to interpret these.</p>
+<p>On the topic of pseudo-keywords, things like <code>move</code> and <code>li</code> are also pseudo-keywords.</p>  </div> <nav class="flex flex-col sm:flex-row justify-between mt-8 pt-4 border-t border-border" data-astro-cid-v5ro3oot>   </nav> </article>  </main> </div> </body></html> 

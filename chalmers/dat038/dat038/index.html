@@ -1,0 +1,183 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="Astro v4.11.5"><link rel="icon" type="image" href="/favicon.ico"><title>Part 1 - Sorting</title><!-- KaTeX support --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script><!-- inline KaTeX --><link rel="stylesheet" href="/_astro/index.CwgzIfsj.css">
+<link rel="stylesheet" href="/_astro/_slug_.hCvEQTvV.css">
+<style>article[data-astro-cid-v5ro3oot]{max-width:80ch;margin:0 auto}.nav-button[data-astro-cid-v5ro3oot]{display:flex;align-items:center;padding:.5rem;border-radius:.5rem;transition:background-color .3s ease;text-decoration:none;color:var(--text-color);background-color:var(--bg-color);border:1px solid var(--border-color)}.nav-button[data-astro-cid-v5ro3oot]:hover{background-color:var(--hover-color)}.nav-button[data-astro-cid-v5ro3oot] .arrow[data-astro-cid-v5ro3oot]{font-size:1.5rem;line-height:1}.nav-button[data-astro-cid-v5ro3oot] .text[data-astro-cid-v5ro3oot]{display:flex;flex-direction:column;margin:0 .5rem}.nav-button[data-astro-cid-v5ro3oot] .label[data-astro-cid-v5ro3oot]{font-size:.8rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted-color)}.nav-button[data-astro-cid-v5ro3oot] .title[data-astro-cid-v5ro3oot]{font-weight:500}.prev-button[data-astro-cid-v5ro3oot]{justify-content:flex-start}.next-button[data-astro-cid-v5ro3oot]{justify-content:flex-end;text-align:right}@media (max-width: 640px){.nav-button[data-astro-cid-v5ro3oot]{width:100%}.next-button[data-astro-cid-v5ro3oot]{justify-content:flex-start;text-align:left}.next-button[data-astro-cid-v5ro3oot] .text[data-astro-cid-v5ro3oot]{order:2;margin-left:.5rem}.next-button[data-astro-cid-v5ro3oot] .arrow[data-astro-cid-v5ro3oot]{order:1}}
+</style><script type="module">document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]})});
+</script></head> <body> <div class="container mx-auto px-4 flex flex-col md:flex-row min-h-screen"> <aside class="w-full md:w-64 border-b md:border-r md:border-b-0 border-[var(--border-color)] border-dashed pt-8"> <header class="flex flex-col h-full"> <div class="flex items-center mb-4"> <script>
+  function setTheme(mode) {
+    localStorage.setItem("theme-storage", mode);
+    document.documentElement.setAttribute('data-theme', mode);
+  }
+  function toggleTheme() {
+    const currentTheme = localStorage.getItem("theme-storage") || "light";
+    const newTheme = currentTheme === "light" ? "dark" : "light";
+    setTheme(newTheme);
+  }
+  const savedTheme = localStorage.getItem("theme-storage") || "light";
+  setTheme(savedTheme);
+  window.toggleTheme = toggleTheme;
+</script> <button id="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme" class="w-6 h-6 cursor-pointer"> <div class="w-5 h-5 border-2 border-primary rounded-full transition-colors duration-300 ease-in-out hover:bg-primary"></div> </button> <a href="/" class="text-2xl font-semibold ml-3 h-10 pr-3">rezvan.xyz</a> </div> <nav class="flex flex-wrap gap-2 md:flex-col md:gap-2"> <a href="/principles" class="transition-colors">
+[principles]
+</a><a href="/cv" class="transition-colors">
+[cv]
+</a><a href="/posts" class="transition-colors">
+[posts]
+</a><a href="/chalmers" class="transition-colors">
+[chalmers]
+</a><a href="/cityu" class="transition-colors">
+[cityu]
+</a> </nav> </header> </aside> <main class="flex-grow px-4 md:px-8 py-8 overflow-y-auto">  <article class="prose prose-sm sm:prose lg:prose-lg xl:prose-xl max-w-none" data-astro-cid-v5ro3oot> <h1 class="text-3xl sm:text-4xl font-bold mb-4" data-astro-cid-v5ro3oot>Part 1 - Sorting</h1> <p class="text-sm text-muted-foreground mb-4" data-astro-cid-v5ro3oot>
+Date: 11/25/2022 </p> <div class="markdown-content" data-astro-cid-v5ro3oot>  <p>My other course for this study period is a course in Data Structures &#x26; Algorithms.</p>
+<h3 id="sorting--searching">Sorting &#x26; Searching</h3>
+<p>We began this course with sorting and why it’s an important topic for a computer scientist.
+Sorting data comes up in all fields of computer science, everything from low-level, simple, array sorting -
+to sort millions of data gathered by an AI.</p>
+<p>With this we began with simple sorting and searching algorithms. Firstly we began with binary search.
+Binary search is a simple yet powerful search algorithm for finding a value in a <strong>sorted</strong> array.</p>
+<p>Pseudo Code for a Binary Search:</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>func binary_search(array, search_value):</span></span>
+<span class="line"><span>    low  = first index of array</span></span>
+<span class="line"><span>    high = last index of array</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    # If our low and high pointers ever cross, we know that the element is not in the array</span></span>
+<span class="line"><span>    while low &#x3C;= high:</span></span>
+<span class="line"><span>        mid  = mid index of array; (low + high) / 2</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        if(search_value is to the left of mid value):</span></span>
+<span class="line"><span>            continue search to the left of the array</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        else if(search_value is to the right of mid value):</span></span>
+<span class="line"><span>            continue search to the right of the array</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>        else:</span></span>
+<span class="line"><span>            return mid</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    return Not in array</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>And an actual Python implementation:</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="py"><code><span class="line"><span style="color:#FF79C6">def</span><span style="color:#50FA7B"> binary_search</span><span style="color:#F8F8F2">(</span><span style="color:#FFB86C;font-style:italic">arr</span><span style="color:#F8F8F2">, </span><span style="color:#FFB86C;font-style:italic">val</span><span style="color:#F8F8F2">):</span></span>
+<span class="line"><span style="color:#F8F8F2">    low  </span><span style="color:#FF79C6">=</span><span style="color:#BD93F9"> 0</span></span>
+<span class="line"><span style="color:#F8F8F2">    high </span><span style="color:#FF79C6">=</span><span style="color:#8BE9FD"> len</span><span style="color:#F8F8F2">(arr) </span><span style="color:#FF79C6">-</span><span style="color:#BD93F9"> 1</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#FF79C6">    while</span><span style="color:#F8F8F2"> low </span><span style="color:#FF79C6">&#x3C;=</span><span style="color:#F8F8F2"> high:</span></span>
+<span class="line"><span style="color:#F8F8F2">        mid </span><span style="color:#FF79C6">=</span><span style="color:#F8F8F2"> (low </span><span style="color:#FF79C6">+</span><span style="color:#F8F8F2"> high) </span><span style="color:#FF79C6">//</span><span style="color:#BD93F9"> 2</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#FF79C6">        if</span><span style="color:#F8F8F2">(val </span><span style="color:#FF79C6">&#x3C;</span><span style="color:#F8F8F2"> arr[mid]):</span></span>
+<span class="line"><span style="color:#F8F8F2">            high </span><span style="color:#FF79C6">=</span><span style="color:#F8F8F2"> mid </span><span style="color:#FF79C6">-</span><span style="color:#BD93F9"> 1</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#FF79C6">        elif</span><span style="color:#F8F8F2">(val </span><span style="color:#FF79C6">></span><span style="color:#F8F8F2"> arr[mid]):</span></span>
+<span class="line"><span style="color:#F8F8F2">            low </span><span style="color:#FF79C6">=</span><span style="color:#F8F8F2"> mid </span><span style="color:#FF79C6">+</span><span style="color:#BD93F9"> 1</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#FF79C6">        else</span><span style="color:#F8F8F2">:</span></span>
+<span class="line"><span style="color:#FF79C6">            return</span><span style="color:#F8F8F2"> mid</span></span>
+<span class="line"><span style="color:#FF79C6">    return</span><span style="color:#FF79C6"> -</span><span style="color:#BD93F9">1</span></span>
+<span class="line"></span></code></pre>
+<p>The next step was Selection and Insertion sort, simple naive sorting algorithms.</p>
+<p>The selection sort algorithm is: Find the smallest element in the list and swap it to the first index, then continue for the next-smallest etc.</p>
+<p>An implementation:</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="py"><code><span class="line"><span style="color:#FF79C6">def</span><span style="color:#50FA7B"> selection_sort</span><span style="color:#F8F8F2">(</span><span style="color:#FFB86C;font-style:italic">arr</span><span style="color:#F8F8F2">):</span></span>
+<span class="line"><span style="color:#F8F8F2">    size </span><span style="color:#FF79C6">=</span><span style="color:#8BE9FD"> len</span><span style="color:#F8F8F2">(arr)</span></span>
+<span class="line"><span style="color:#FF79C6">    for</span><span style="color:#F8F8F2"> index </span><span style="color:#FF79C6">in</span><span style="color:#8BE9FD"> range</span><span style="color:#F8F8F2">(size):</span></span>
+<span class="line"><span style="color:#F8F8F2">        min_index </span><span style="color:#FF79C6">=</span><span style="color:#F8F8F2"> index</span></span>
+<span class="line"><span style="color:#FF79C6">        for</span><span style="color:#F8F8F2"> j </span><span style="color:#FF79C6">in</span><span style="color:#8BE9FD"> range</span><span style="color:#F8F8F2">(index </span><span style="color:#FF79C6">+</span><span style="color:#BD93F9"> 1</span><span style="color:#F8F8F2">, size):</span></span>
+<span class="line"><span style="color:#FF79C6">            if</span><span style="color:#F8F8F2">(arr[j] </span><span style="color:#FF79C6">&#x3C;</span><span style="color:#F8F8F2"> arr[min_index]):</span></span>
+<span class="line"><span style="color:#F8F8F2">                min_index </span><span style="color:#FF79C6">=</span><span style="color:#F8F8F2"> j</span></span>
+<span class="line"><span style="color:#F8F8F2">        (arr[index], arr[min_index]) </span><span style="color:#FF79C6">=</span><span style="color:#F8F8F2"> (arr[min_index], arr[index])</span></span>
+<span class="line"></span></code></pre>
+<p>After that it was time for insertion sort, which builds on the idea of inserting a value in an array.
+The idea is that we start by saying that the first element is the ‘sorted’ part. Then we begin looking at the ‘unsorted’ part,
+at seeing where it should be inserted into the sorted array. A simple, yet, powerful algorithm. We will see how important the idea of inserting will be later on.</p>
+<p>An implementation:</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="py"><code><span class="line"><span style="color:#FF79C6">def</span><span style="color:#50FA7B"> insertion_sort</span><span style="color:#F8F8F2">(</span><span style="color:#FFB86C;font-style:italic">arr</span><span style="color:#F8F8F2">):</span></span>
+<span class="line"><span style="color:#6272A4">    # Begin by saying the first element is sorted</span></span>
+<span class="line"><span style="color:#6272A4">    # We call the</span></span>
+<span class="line"><span style="color:#FF79C6">    for</span><span style="color:#F8F8F2"> i </span><span style="color:#FF79C6">in</span><span style="color:#8BE9FD"> range</span><span style="color:#F8F8F2">(</span><span style="color:#BD93F9">1</span><span style="color:#F8F8F2">, </span><span style="color:#8BE9FD">len</span><span style="color:#F8F8F2">(arr)):</span></span>
+<span class="line"><span style="color:#F8F8F2">        val </span><span style="color:#FF79C6">=</span><span style="color:#F8F8F2"> arr[i]</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F8F8F2">        j </span><span style="color:#FF79C6">=</span><span style="color:#F8F8F2"> i </span><span style="color:#FF79C6">-</span><span style="color:#BD93F9"> 1</span></span>
+<span class="line"><span style="color:#FF79C6">        while</span><span style="color:#F8F8F2"> j </span><span style="color:#FF79C6">>=</span><span style="color:#BD93F9"> 0</span><span style="color:#FF79C6"> and</span><span style="color:#F8F8F2"> val </span><span style="color:#FF79C6">&#x3C;</span><span style="color:#F8F8F2"> arr[j]:</span></span>
+<span class="line"><span style="color:#F8F8F2">            arr[j </span><span style="color:#FF79C6">+</span><span style="color:#BD93F9"> 1</span><span style="color:#F8F8F2">] </span><span style="color:#FF79C6">=</span><span style="color:#F8F8F2"> arr[j]</span></span>
+<span class="line"><span style="color:#F8F8F2">            j </span><span style="color:#FF79C6">-=</span><span style="color:#BD93F9"> 1</span></span>
+<span class="line"><span style="color:#F8F8F2">        arr[j</span><span style="color:#FF79C6">+</span><span style="color:#BD93F9"> 1</span><span style="color:#F8F8F2">] </span><span style="color:#FF79C6">=</span><span style="color:#F8F8F2"> val</span></span>
+<span class="line"></span></code></pre>
+<p>Although these algorithms are simple, they are unfortunately really slow, when the array becomes larges.
+For now, we can just say that why this is because: The number of operations needed to check and sort grows quadratic with the array size.</p>
+<p>Imagine we have two sorted lists, and we want to merge them - what’s the algorithm for this?
+Quite simple actually, we use two pointers for knowing where we are in both arrays, starting at the first index and both and compare which value we insert into the new (bigger) array).
+Then we move the pointers accordingly, until we reach the end. Reaching the end here means we either hit the end of the array of both arrays simultaneously,
+or reaching the end of one array - if we do that we know there’s nothing left to compare to, therefore we can just put the rest of the elements in.</p>
+<p>An implementation of a merge function:</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="py"><code><span class="line"><span style="color:#FF79C6">def</span><span style="color:#50FA7B"> merge</span><span style="color:#F8F8F2">(</span><span style="color:#FFB86C;font-style:italic">arr1</span><span style="color:#F8F8F2">, </span><span style="color:#FFB86C;font-style:italic">arr2</span><span style="color:#F8F8F2">):</span></span>
+<span class="line"><span style="color:#6272A4">    # We can cheat a little bit using python - but the idea is still the same</span></span>
+<span class="line"><span style="color:#F8F8F2">    output </span><span style="color:#FF79C6">=</span><span style="color:#F8F8F2"> []</span></span>
+<span class="line"><span style="color:#F8F8F2">    p1     </span><span style="color:#FF79C6">=</span><span style="color:#BD93F9"> 0</span></span>
+<span class="line"><span style="color:#F8F8F2">    p2     </span><span style="color:#FF79C6">=</span><span style="color:#BD93F9"> 0</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#FF79C6">    while</span><span style="color:#F8F8F2"> p1 </span><span style="color:#FF79C6">&#x3C;</span><span style="color:#8BE9FD"> len</span><span style="color:#F8F8F2">(arr1) </span><span style="color:#FF79C6">and</span><span style="color:#F8F8F2"> p2 </span><span style="color:#FF79C6">&#x3C;</span><span style="color:#8BE9FD"> len</span><span style="color:#F8F8F2">(arr2):</span></span>
+<span class="line"><span style="color:#FF79C6">        if</span><span style="color:#F8F8F2">(arr1[p1] </span><span style="color:#FF79C6">&#x3C;=</span><span style="color:#F8F8F2"> arr2[p2]):</span></span>
+<span class="line"><span style="color:#F8F8F2">            output.append(arr1[p1])</span></span>
+<span class="line"><span style="color:#F8F8F2">            p1 </span><span style="color:#FF79C6">+=</span><span style="color:#BD93F9"> 1</span></span>
+<span class="line"><span style="color:#FF79C6">        else</span><span style="color:#F8F8F2">:</span></span>
+<span class="line"><span style="color:#F8F8F2">            output.append(arr2[p2])</span></span>
+<span class="line"><span style="color:#F8F8F2">            p2 </span><span style="color:#FF79C6">+=</span><span style="color:#BD93F9"> 1</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#FF79C6">    while</span><span style="color:#F8F8F2"> p1 </span><span style="color:#FF79C6">&#x3C;</span><span style="color:#8BE9FD"> len</span><span style="color:#F8F8F2">(arr1):</span></span>
+<span class="line"><span style="color:#F8F8F2">        output.append(arr1[p1])</span></span>
+<span class="line"><span style="color:#F8F8F2">        p1 </span><span style="color:#FF79C6">+=</span><span style="color:#BD93F9"> 1</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#FF79C6">    while</span><span style="color:#F8F8F2"> p2 </span><span style="color:#FF79C6">&#x3C;</span><span style="color:#8BE9FD"> len</span><span style="color:#F8F8F2">(arr2):</span></span>
+<span class="line"><span style="color:#F8F8F2">        output.append(arr2[p2])</span></span>
+<span class="line"><span style="color:#F8F8F2">        p2 </span><span style="color:#FF79C6">+=</span><span style="color:#BD93F9"> 1</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#FF79C6">    return</span><span style="color:#F8F8F2"> output</span></span>
+<span class="line"></span></code></pre>
+<p>Now that we’re familiar with this algorithm - we can use this by divide and conquering an unsorted array with a bit of modifications.
+We can imagine that we divide the unsorted array into a left and right part and <strong>recursively</strong> <code>mergesort()</code> them as well.</p>
+<p>In practice, it means that we get a sorted left array and a sorted right array, then we finally merge them for the final result.</p>
+<p>An implementation of merge sort:</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="py"><code><span class="line"><span style="color:#FF79C6">def</span><span style="color:#50FA7B"> merge_sort</span><span style="color:#F8F8F2">(</span><span style="color:#FFB86C;font-style:italic">arr</span><span style="color:#FF79C6">:</span><span style="color:#8BE9FD;font-style:italic"> list</span><span style="color:#F8F8F2">) </span><span style="color:#FF79C6">-></span><span style="color:#8BE9FD;font-style:italic"> list</span><span style="color:#F8F8F2">:</span></span>
+<span class="line"><span style="color:#FF79C6">    if</span><span style="color:#8BE9FD"> len</span><span style="color:#F8F8F2">(arr) </span><span style="color:#FF79C6">&#x3C;</span><span style="color:#BD93F9"> 2</span><span style="color:#F8F8F2">:</span></span>
+<span class="line"><span style="color:#FF79C6">        return</span><span style="color:#F8F8F2"> arr[</span><span style="color:#FF79C6">:</span><span style="color:#F8F8F2">]</span></span>
+<span class="line"><span style="color:#FF79C6">    else</span><span style="color:#F8F8F2">:</span></span>
+<span class="line"><span style="color:#F8F8F2">        mid </span><span style="color:#FF79C6">=</span><span style="color:#8BE9FD"> len</span><span style="color:#F8F8F2">(arr) </span><span style="color:#FF79C6">//</span><span style="color:#BD93F9"> 2</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F8F8F2">        L </span><span style="color:#FF79C6">=</span><span style="color:#F8F8F2"> merge_sort(arr[</span><span style="color:#FF79C6">:</span><span style="color:#F8F8F2">mid])</span></span>
+<span class="line"><span style="color:#F8F8F2">        R </span><span style="color:#FF79C6">=</span><span style="color:#F8F8F2"> merge_sort(arr[mid</span><span style="color:#FF79C6">:</span><span style="color:#F8F8F2">])</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F8F8F2">	result </span><span style="color:#FF79C6">=</span><span style="color:#F8F8F2"> merge(L, R)</span></span>
+<span class="line"><span style="color:#FF79C6">        return</span><span style="color:#F8F8F2"> result</span></span>
+<span class="line"></span></code></pre>
+<p>Merge sort is great, but sometimes, if the list is <em>almost</em> sorted or worse, already sorted and, you call this function sort it - it will be incredibly slow, this is due to merge sort not being a so called in place algorithm.
+An algorithm which has the same divide and conquer strategy but is in-place is Quicksort!</p>
+<p>Quicksort builds on the idea that you <em>partition</em> your array into one part which is lower than the <em>pivot</em> element and one part which is higher.</p>
+<p>In practice this means you sort it by recursively partitioning the sub-arrays.</p>
+<p>So partitioning, sounds quite easy right? Choose a pivot element and just put larger numbers to the right and lower to the left. But choosing the pivot is the tricky part.
+If we choose a good pivot our algorithm becomes much faster. A common (and good) strategy is either choosing a random pivot, or the median of three.</p>
+<p>In this example I will choose the pivot element as the last element of the list.
+An implementation of Quicksort:</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="py"><code><span class="line"><span style="color:#FF79C6">def</span><span style="color:#50FA7B"> partition</span><span style="color:#F8F8F2">(</span><span style="color:#FFB86C;font-style:italic">arr</span><span style="color:#F8F8F2">, </span><span style="color:#FFB86C;font-style:italic">low</span><span style="color:#F8F8F2">, </span><span style="color:#FFB86C;font-style:italic">high</span><span style="color:#F8F8F2">):</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#FF79C6">    def</span><span style="color:#50FA7B"> swap</span><span style="color:#F8F8F2">(</span><span style="color:#FFB86C;font-style:italic">i</span><span style="color:#F8F8F2">, </span><span style="color:#FFB86C;font-style:italic">j</span><span style="color:#F8F8F2">):</span></span>
+<span class="line"><span style="color:#F8F8F2">        arr[i], arr[j] </span><span style="color:#FF79C6">=</span><span style="color:#F8F8F2"> arr[j], arr[i]</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F8F8F2">    pivot </span><span style="color:#FF79C6">=</span><span style="color:#F8F8F2"> arr[high]</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F8F8F2">    i </span><span style="color:#FF79C6">=</span><span style="color:#F8F8F2"> low </span><span style="color:#FF79C6">-</span><span style="color:#BD93F9"> 1</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#FF79C6">    for</span><span style="color:#F8F8F2"> j </span><span style="color:#FF79C6">in</span><span style="color:#8BE9FD"> range</span><span style="color:#F8F8F2">(low, high):</span></span>
+<span class="line"><span style="color:#FF79C6">        if</span><span style="color:#F8F8F2"> arr[j] </span><span style="color:#FF79C6">&#x3C;=</span><span style="color:#F8F8F2"> pivot:</span></span>
+<span class="line"><span style="color:#F8F8F2">            i </span><span style="color:#FF79C6">+=</span><span style="color:#BD93F9"> 1</span></span>
+<span class="line"><span style="color:#F8F8F2">            swap(i, j)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F8F8F2">    swap(i </span><span style="color:#FF79C6">+</span><span style="color:#BD93F9"> 1</span><span style="color:#F8F8F2">, high)</span></span>
+<span class="line"><span style="color:#FF79C6">    return</span><span style="color:#F8F8F2"> i </span><span style="color:#FF79C6">+</span><span style="color:#BD93F9"> 1</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#FF79C6">def</span><span style="color:#50FA7B"> quick_sort</span><span style="color:#F8F8F2">(</span><span style="color:#FFB86C;font-style:italic">arr</span><span style="color:#F8F8F2">, </span><span style="color:#FFB86C;font-style:italic">low</span><span style="color:#F8F8F2">, </span><span style="color:#FFB86C;font-style:italic">high</span><span style="color:#F8F8F2">):</span></span>
+<span class="line"><span style="color:#FF79C6">    if</span><span style="color:#F8F8F2"> low </span><span style="color:#FF79C6">&#x3C;</span><span style="color:#F8F8F2"> high:</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F8F8F2">        p </span><span style="color:#FF79C6">=</span><span style="color:#F8F8F2"> partition(arr, low, high)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F8F8F2">        quick_sort(arr, low, p </span><span style="color:#FF79C6">-</span><span style="color:#BD93F9"> 1</span><span style="color:#F8F8F2">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F8F8F2">        quick_sort(arr, p </span><span style="color:#FF79C6">+</span><span style="color:#BD93F9"> 1</span><span style="color:#F8F8F2">, high)</span></span>
+<span class="line"></span></code></pre>
+<p>This concludes this part, next time I’ll write about (short) about Complexity - after that the major part of this course, actual data structures and how we use them as well as implement them.</p>  </div> <nav class="flex flex-col sm:flex-row justify-between mt-8 pt-4 border-t border-border" data-astro-cid-v5ro3oot>   </nav> </article>  </main> </div> </body></html> 
