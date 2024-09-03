@@ -1,0 +1,109 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="Astro v4.11.5"><link rel="icon" type="image" href="/favicon.ico"><title>Part 1 - Evolution of Data Management</title><!-- KaTeX support --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script><!-- inline KaTeX --><link rel="stylesheet" href="/_astro/index.CwgzIfsj.css">
+<link rel="stylesheet" href="/_astro/_slug_.hCvEQTvV.css">
+<style>article[data-astro-cid-mnl7e2ne]{max-width:80ch;margin:0 auto}.nav-button[data-astro-cid-mnl7e2ne]{display:flex;align-items:center;padding:.5rem;border-radius:.5rem;transition:background-color .3s ease;text-decoration:none;color:var(--text-color);background-color:var(--bg-color);border:1px solid var(--border-color)}.nav-button[data-astro-cid-mnl7e2ne]:hover{background-color:var(--hover-color)}.nav-button[data-astro-cid-mnl7e2ne] .arrow[data-astro-cid-mnl7e2ne]{font-size:1.5rem;line-height:1}.nav-button[data-astro-cid-mnl7e2ne] .text[data-astro-cid-mnl7e2ne]{display:flex;flex-direction:column;margin:0 .5rem}.nav-button[data-astro-cid-mnl7e2ne] .label[data-astro-cid-mnl7e2ne]{font-size:.8rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted-color)}.nav-button[data-astro-cid-mnl7e2ne] .title[data-astro-cid-mnl7e2ne]{font-weight:500}.prev-button[data-astro-cid-mnl7e2ne]{justify-content:flex-start}.next-button[data-astro-cid-mnl7e2ne]{justify-content:flex-end;text-align:right}@media (max-width: 640px){.nav-button[data-astro-cid-mnl7e2ne]{width:100%}.next-button[data-astro-cid-mnl7e2ne]{justify-content:flex-start;text-align:left}.next-button[data-astro-cid-mnl7e2ne] .text[data-astro-cid-mnl7e2ne]{order:2;margin-left:.5rem}.next-button[data-astro-cid-mnl7e2ne] .arrow[data-astro-cid-mnl7e2ne]{order:1}}
+</style><script type="module">document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]})});
+</script></head> <body> <div class="container mx-auto px-4 flex flex-col md:flex-row min-h-screen"> <aside class="w-full md:w-64 border-b md:border-r md:border-b-0 border-[var(--border-color)] border-dashed pt-8"> <header class="flex flex-col h-full"> <div class="flex items-center mb-4"> <script>
+  function setTheme(mode) {
+    localStorage.setItem("theme-storage", mode);
+    document.documentElement.setAttribute('data-theme', mode);
+  }
+  function toggleTheme() {
+    const currentTheme = localStorage.getItem("theme-storage") || "light";
+    const newTheme = currentTheme === "light" ? "dark" : "light";
+    setTheme(newTheme);
+  }
+  const savedTheme = localStorage.getItem("theme-storage") || "light";
+  setTheme(savedTheme);
+  window.toggleTheme = toggleTheme;
+</script> <button id="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme" class="w-6 h-6 cursor-pointer"> <div class="w-5 h-5 border-2 border-primary rounded-full transition-colors duration-300 ease-in-out hover:bg-primary"></div> </button> <a href="/" class="text-2xl font-semibold ml-3 h-10 pr-3">rezvan.xyz</a> </div> <nav class="flex flex-wrap gap-2 md:flex-col md:gap-2"> <a href="/principles" class="transition-colors">
+[principles]
+</a><a href="/cv" class="transition-colors">
+[cv]
+</a><a href="/posts" class="transition-colors">
+[posts]
+</a><a href="/chalmers" class="transition-colors">
+[chalmers]
+</a><a href="/cityu" class="transition-colors">
+[cityu]
+</a> </nav> </header> </aside> <main class="flex-grow px-4 md:px-8 py-8 overflow-y-auto">  <article class="prose prose-sm sm:prose lg:prose-lg xl:prose-xl max-w-none" data-astro-cid-mnl7e2ne> <h1 class="text-3xl sm:text-4xl font-bold mb-4" data-astro-cid-mnl7e2ne>Part 1 - Evolution of Data Management</h1> <p class="text-sm text-muted-foreground mb-4" data-astro-cid-mnl7e2ne>
+Date: 9/3/2024 </p> <div class="markdown-content" data-astro-cid-mnl7e2ne>  <h3 id="waves-of-data-management">Waves of Data Management</h3>
+<p>We will look into what we mean by data management, but before that, let’s define and explain the different waves or phases of data.</p>
+<p>Logically, each of these waves were born out of the necessity to try and solve a specific type of data management problem.</p>
+<p>There are three waves of data management:
+– Wave 1: Creating manageable data structures
+– Wave 2: Web and content management
+– Wave 3: Big Data Management</p>
+<h4 id="wave-1-creating-manageable-data-structures">Wave 1: Creating manageable data structures</h4>
+<p>As computing moved into the commercial market in the late 60s, data was stored in flat files that imposed no structure.</p>
+<p>The need to understand the data grew larger and the previous unstructured format didn’t work anymore.
+New methods had to be applied, including very detailed programming models to gain insight.</p>
+<p>Later in the 70s, things changed with the invention of the <strong>R</strong>elational <strong>D</strong>ata <strong>M</strong>odel (RDM),
+and the <strong>R</strong>elational <strong>D</strong>atabase <strong>M</strong>anagement <strong>S</strong>ystem (RDBMS) that imposed structure and a method for improving performance.</p>
+<h5 id="database-management-system">Database Management System</h5>
+<p>A software system that is used to create, maintain, and provide controlled access to user databases.</p>
+<p><img src="/images/cityu/IS2021/DBMS.jpg" alt=""></p>
+<p>Note: DBMS manages data resources, almost like how an OS manages hardware resources</p>
+<p>These relational models offered an ecosystem of tools.
+It filled a growing need to better organize their data and be able to compare and contrast data from different sources.</p>
+<p>In addition, it helped those who wanted to be able to examine information for decision-making purposes.</p>
+<p>The <strong>E</strong>ntity <strong>R</strong>elationship (ER) model later emerged.
+It added additional abstraction to increase the usability for users.</p>
+<p>In the ER model, each item is defined independently of its use.
+Therefore, developers can create new relationships between data sources without complex programming.</p>
+<p>With these technologies, the need for even more data grew.
+When the volume of data grew out of control, the <strong>data warehouse</strong> was born.</p>
+<h5 id="data-warehouse-and-data-marts">Data Warehouse and Data marts</h5>
+<p>The data warehouse enabled developers to select a <em>subset</em> of the data so that it would be easier to gain insights.</p>
+<p><img src="/images/cityu/IS2021/DWDM.png" alt="">
+<img src="/images/cityu/IS2021/DW.jpg" alt=""></p>
+<p>Although the move from unstructured data to structured data was a big step forward, it was still limited.</p>
+<p><em>BLOB</em>s, or <strong>B</strong>inary <strong>L</strong>arge <strong>Ob</strong>jects are an unstructured data element stored in a relational database.
+It is stored as one contiguous chunk of data.
+This object could be <em>labeled</em> but you couldn’t see what was inside that object.</p>
+<h4 id="wave-2-web-and-content-management">Wave 2: Web and content management</h4>
+<p>In the 90s with the rise of the web,
+organizations wanted to move beyond just documents and store more complex web content, such as images, audio, and video.</p>
+<p>A new generation of requirements had begun to emerge that drove us into the next wave.
+The wave of web and content management.</p>
+<p>These new requirements were driven by a convergence of factors including:</p>
+<ul>
+<li>The web</li>
+<li>Virtualization of application</li>
+<li>Cloud computing</li>
+</ul>
+<p>In this new wave, organizations began to understand that they needed to manage a completely new generation of data.
+The new data had an unprecedented <em>volume</em> and <em>variety</em> that needed to be processed at an unheard-of <em>speed</em>.</p>
+<p>Which leads us into the third and current wave of data management.</p>
+<h4 id="wave-3-big-data-management">Wave 3: Big Data Management</h4>
+<p>With <em>big data</em>, it is now possible to virtualize data so that it can be stored efficiently.
+For example utilizing <em>cloud based storage</em>, it will become even more cost-effective.</p>
+<p>In addition, improvements in the network infrastructure (speed and reliability) have removed many physical limitations.
+It is possible to manage massive amounts of data at a reasonable pace.
+Also, the incredible improvements to hardware have made it possible to store and process data at a much lower cost.</p>
+<p>So the main reasons for the evolution of data are:</p>
+<ul>
+<li>Rapid growth of new and advanced information technologies.</li>
+<li>Widespread use of ICT (especially IoT).</li>
+<li>Fierce competition in business world.</li>
+</ul>
+<p>But what is big data <em>actually</em>?</p>
+<h4 id="big-data">Big Data</h4>
+<blockquote>
+<p>Big data is high-<strong>volume</strong>, high-<strong>velocity</strong> and high-<strong>variety</strong> data,
+that demand <em>cost-effective</em> and <em>innovative</em> forms of information processing,
+for enhanced <em>insight</em> and <em>decision-making</em>.</p>
+</blockquote>
+<p>It is fundamentally about applying innovative and
+cost-effective techniques for solving existing and
+future problems whose resource
+requirements exceed the capabilities of traditional
+computing environments as currently configured.</p>
+<p>New definition of big data is the <del>three</del> five Vs:</p>
+<ul>
+<li>Volume</li>
+<li>Velocity</li>
+<li>Variety</li>
+<li>Veracity</li>
+<li>Value</li>
+</ul>
+<p><img src="/images/cityu/IS2021/BD.jpg" alt=""></p>  </div> <nav class="flex flex-col sm:flex-row justify-between mt-8 pt-4 border-t border-border" data-astro-cid-mnl7e2ne>   </nav> </article>  </main> </div> </body></html> 
