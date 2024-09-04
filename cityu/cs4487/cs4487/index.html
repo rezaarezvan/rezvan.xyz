@@ -1,0 +1,377 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="Astro v4.11.5"><link rel="icon" type="image" href="/favicon.ico"><title>Part 1 - Introduction</title><!-- KaTeX support --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script><!-- inline KaTeX --><link rel="stylesheet" href="/_astro/index.CwgzIfsj.css">
+<link rel="stylesheet" href="/_astro/_slug_.hCvEQTvV.css">
+<style>article[data-astro-cid-mnl7e2ne]{max-width:80ch;margin:0 auto}.nav-button[data-astro-cid-mnl7e2ne]{display:flex;align-items:center;padding:.5rem;border-radius:.5rem;transition:background-color .3s ease;text-decoration:none;color:var(--text-color);background-color:var(--bg-color);border:1px solid var(--border-color)}.nav-button[data-astro-cid-mnl7e2ne]:hover{background-color:var(--hover-color)}.nav-button[data-astro-cid-mnl7e2ne] .arrow[data-astro-cid-mnl7e2ne]{font-size:1.5rem;line-height:1}.nav-button[data-astro-cid-mnl7e2ne] .text[data-astro-cid-mnl7e2ne]{display:flex;flex-direction:column;margin:0 .5rem}.nav-button[data-astro-cid-mnl7e2ne] .label[data-astro-cid-mnl7e2ne]{font-size:.8rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted-color)}.nav-button[data-astro-cid-mnl7e2ne] .title[data-astro-cid-mnl7e2ne]{font-weight:500}.prev-button[data-astro-cid-mnl7e2ne]{justify-content:flex-start}.next-button[data-astro-cid-mnl7e2ne]{justify-content:flex-end;text-align:right}@media (max-width: 640px){.nav-button[data-astro-cid-mnl7e2ne]{width:100%}.next-button[data-astro-cid-mnl7e2ne]{justify-content:flex-start;text-align:left}.next-button[data-astro-cid-mnl7e2ne] .text[data-astro-cid-mnl7e2ne]{order:2;margin-left:.5rem}.next-button[data-astro-cid-mnl7e2ne] .arrow[data-astro-cid-mnl7e2ne]{order:1}}
+</style><script type="module">document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]})});
+</script></head> <body> <div class="container mx-auto px-4 flex flex-col md:flex-row min-h-screen"> <aside class="w-full md:w-64 border-b md:border-r md:border-b-0 border-[var(--border-color)] border-dashed pt-8"> <header class="flex flex-col h-full"> <div class="flex items-center mb-4"> <script>
+  function setTheme(mode) {
+    localStorage.setItem("theme-storage", mode);
+    document.documentElement.setAttribute('data-theme', mode);
+  }
+  function toggleTheme() {
+    const currentTheme = localStorage.getItem("theme-storage") || "light";
+    const newTheme = currentTheme === "light" ? "dark" : "light";
+    setTheme(newTheme);
+  }
+  const savedTheme = localStorage.getItem("theme-storage") || "light";
+  setTheme(savedTheme);
+  window.toggleTheme = toggleTheme;
+</script> <button id="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme" class="w-6 h-6 cursor-pointer"> <div class="w-5 h-5 border-2 border-primary rounded-full transition-colors duration-300 ease-in-out hover:bg-primary"></div> </button> <a href="/" class="text-2xl font-semibold ml-3 h-10 pr-3">rezvan.xyz</a> </div> <nav class="flex flex-wrap gap-2 md:flex-col md:gap-2"> <a href="/principles" class="transition-colors">
+[principles]
+</a><a href="/cv" class="transition-colors">
+[cv]
+</a><a href="/posts" class="transition-colors">
+[posts]
+</a><a href="/chalmers" class="transition-colors">
+[chalmers]
+</a><a href="/cityu" class="transition-colors">
+[cityu]
+</a> </nav> </header> </aside> <main class="flex-grow px-4 md:px-8 py-8 overflow-y-auto">  <article class="prose prose-sm sm:prose lg:prose-lg xl:prose-xl max-w-none" data-astro-cid-mnl7e2ne> <h1 class="text-3xl sm:text-4xl font-bold mb-4" data-astro-cid-mnl7e2ne>Part 1 - Introduction</h1> <p class="text-sm text-muted-foreground mb-4" data-astro-cid-mnl7e2ne>
+Date: 9/3/2024 </p> <div class="markdown-content" data-astro-cid-mnl7e2ne>  <h3 id="what-is-learning">What is learning?</h3>
+<p>Defining <em>learning</em> is a task many people have tried to do during our time. Some examples:</p>
+<ul>
+<li>
+<p><strong>Behaviorism</strong> (Skinner, 1900-1950)</p>
+<ul>
+<li>Learning is a long-term change in behavior due to experience.</li>
+</ul>
+</li>
+<li>
+<p><strong>Cognitivism</strong> (Gestalt School, 1920-):</p>
+<ul>
+<li>Learning is an internal mental process that integrates new information into established mental frameworks and updates those frameworks over time.</li>
+</ul>
+</li>
+<li>
+<p><strong>Connectionism</strong> (Hebb, 1949):</p>
+<ul>
+<li>Learning is a physical process in which neurons join by developing the synapses between them.</li>
+</ul>
+</li>
+</ul>
+<p>This also applies to the definition of <em>machine learning</em>:</p>
+<ul>
+<li>
+<p><strong>Samuel</strong> (1959):</p>
+<ul>
+<li>Machine learning is a field of study that gives computers the ability to learn without being explicitly programmed.</li>
+</ul>
+</li>
+<li>
+<p><strong>Mitchell</strong> (1997):</p>
+<ul>
+<li>A computer program is said to learn from experience $E$ with respect to some class of tasks $T$ and performance measure $P$, if its performance at tasks in $T$, as measured by $P$, improves with experience $E$.</li>
+</ul>
+</li>
+<li>
+<p><strong>Jordan</strong> (2015):</p>
+<ul>
+<li>It is one of today’s rapidly growing technical fields, lying at the intersection of computer science and statistics, and at the core of artificial intelligence and data science</li>
+</ul>
+</li>
+</ul>
+<h3 id="topics-in-machine-learning">Topics in Machine Learning</h3>
+<p>So we’ve seen that we can define learning in many different ways, and as such, there are several ways we can approach machine learning.
+Here are some of the topics we will cover:</p>
+<ul>
+<li>Supervised Learning</li>
+<li>Unsupervised Learning</li>
+<li>Reinforcement Learning</li>
+<li>Learning Theory</li>
+</ul>
+<h3 id="supervised-learning">Supervised Learning</h3>
+<p>We have some sort of task, be it classification or regression, but we have training data that has both the input and the corresponding output.</p>
+<p>We try to find the function(s) that best map the input to the output.</p>
+<p>Simply, mathematically we can define it as:
+$$
+f: X \mapsto Y
+$$</p>
+<p>Where $X$ is the input space and $Y$ is the output space, and we want to find the <em>best</em> function $f$ that maps $X$ to $Y$.</p>
+<h3 id="unsupervised-learning">Unsupervised Learning</h3>
+<p>In the case that we do not have data that has both the input and the output, we can use unsupervised learning.
+The problem itself does not have to differ from a supervised learning problem, but the data we have does not have the output.</p>
+<p>In this case, we try to find the structure in the data, and we can do this in several ways:</p>
+<ul>
+<li>Density estimation:
+<ul>
+<li>Construct a probability model over the input space.</li>
+</ul>
+</li>
+<li>Clustering:
+<ul>
+<li>Discover groups of similar examples in the data.</li>
+</ul>
+</li>
+<li>Dimensionality reduction:
+<ul>
+<li>Project high-dim data to 2 or 3-dimensions (for visualization purposes).</li>
+</ul>
+</li>
+</ul>
+<h3 id="reinforcement-learning">Reinforcement Learning</h3>
+<p>This approach differs a bit from supervised and unsupervised learning.
+In this case, we have an <em>agent</em> that interacts with an <em>environment</em>, and the agent receives rewards or punishments based on its actions.</p>
+<p>We make a sequence of actions, given the current states.
+E.g. a robot interacting with its environment.
+We aim to maximize the reward function over time.
+At some point, receive a reward or a punishment, actions may also affect future reward!</p>
+<h3 id="learning-theory">Learning Theory</h3>
+<p>But, why does machine learning even work in the first place?</p>
+<p>From traditional learning theory we know that we have a so-called <em>performance guarantee</em>.
+The performance guarantee is a bound on the generalization error, which is the difference between the training error and the test error.</p>
+<p>So, the question is not if it will work, it is how well will it work. So the questions we need to figure out are:</p>
+<ul>
+<li>Which functions can be learned/represented?</li>
+<li>How much data do we need?</li>
+</ul>
+<h3 id="math-revision">Math Revision</h3>
+<p>Let’s quickly revise some math concepts that we will need in this course.</p>
+<h4 id="linear-algebra">Linear Algebra</h4>
+<p>The definition of a vector space can be defined as:</p>
+<blockquote>
+<p>The real vector space $\mathbb{R}^N$ is a set with elements $\mathbf{x} = [x_1, x_2, \ldots, x_N]^T$ where each $x_j \in \mathbb{R}$.
+The elements $\mathbf{x}$ are called vectors.
+Which must satisfy the following properties:</p>
+</blockquote>
+<ul>
+<li>
+<p><strong>Addition</strong>: If $\mathbf{x} \in \mathbb{R}^N$ and $\mathbf{y} \in \mathbb{R}^N$, then $\mathbf{x} + \mathbf{y} = [x_1 + y_1, x_2 + y_2, \ldots, x_N + y_N]^T \in \mathbb{R}^N$.</p>
+</li>
+<li>
+<p><strong>Scalar Product</strong>: If $\mathbf{x} \in \mathbb{R}^N$ and $a \in \mathbb{R}$, then $a\mathbf{x} = [ax_1, ax_2, \ldots, ax_N]^T \in \mathbb{R}^N$.</p>
+</li>
+<li>
+<p><strong>Inner Product</strong>: If $\mathbf{x} \in \mathbb{R}^N$ and $\mathbf{y} \in \mathbb{R}^N$, then $\mathbf{x}^T\mathbf{y} = \sum_{j=1}^{N} x_jy_j$.</p>
+</li>
+</ul>
+<p>The definition of a matrix can be defined as:</p>
+<blockquote>
+<p>A matrix $\mathbf{X} \in \mathbb{R}^{M \times N}$ is rectangular array of elements $x_{ij} \in \mathbb{R}$, $1 \leq i \leq M$, $1 \leq j \leq N$.
+$$
+\mathbf{X} = \begin{bmatrix}
+x_{11} &#x26; x_{12} &#x26; \ldots &#x26; x_{1N} \newline
+x_{21} &#x26; x_{22} &#x26; \ldots &#x26; x_{2N} \newline
+\vdots &#x26; \vdots &#x26; \ddots &#x26; \vdots \newline
+x_{M1} &#x26; x_{M2} &#x26; \ldots &#x26; x_{MN}
+\end{bmatrix}
+$$</p>
+</blockquote>
+<p>A matrix $\mathbf{X} \in \mathbb{R}^{M \times N}$ supports the following operations:</p>
+<ul>
+<li><strong>Addition</strong>: If $\mathbf{X} \in \mathbb{R}^{M \times N}$ and $\mathbf{Y} \in \mathbb{R}^{M \times N}$, then $\mathbf{Z} = \mathbf{X} + \mathbf{Y} \in \mathbb{R}^{M \times N}$ where $z_{ij} = x_{ij} + y_{ij}$.</li>
+<li><strong>Scalar Product</strong>: If $\mathbf{X} \in \mathbb{R}^{M \times N}$ and $a \in \mathbb{R}$, then $\mathbf{Y} = a\mathbf{X} \in \mathbb{R}^{M \times N}$ where $y_{ij} = ax_{ij}$.</li>
+<li><strong>Matrix Product</strong>: If $\mathbf{X} \in \mathbb{R}^{M \times N}$ and $\mathbf{Y} \in \mathbb{R}^{N \times P}$, then $\mathbf{Z} = \mathbf{X}\mathbf{Y} \in \mathbb{R}^{M \times P}$ where $z_{ij} = \sum_{k=1}^{N} x_{ik}y_{kj}$.</li>
+</ul>
+<h3 id="probability-theory">Probability Theory</h3>
+<p>Let’s start with the definition of a probability distribution:</p>
+<blockquote>
+<p>A probability distribution $p$ over a sample space $\Omega$ is a <strong>function</strong> from elements/subsets of $\Omega$ to the real numbers, that satisfies the following conditions:</p>
+</blockquote>
+<ul>
+<li><strong>Non-negativity</strong>: $p(\omega) \geq 0$ for all $\omega \subseteq \Omega$.</li>
+<li><strong>Normalization</strong>: $\sum_{\omega \in \Omega} p(\omega) = 1$.</li>
+<li><strong>Additivity</strong>: For all $\omega$, $\omega^\prime \subseteq \Omega$ that are <strong>disjoint</strong> sets, $p(\omega \bigcup \omega^\prime) = p(\omega) + p(\omega^\prime)$.</li>
+</ul>
+<p>Let’s define a random variable now:</p>
+<blockquote>
+<p>A random variable $X$ is defined by a <strong>function</strong> $f_x$ that maps each element $\omega$ of the sample space $\Omega$ to a value $x = f_x(\omega)$ in a set $\chi$ (called the range of the random variable). <br> <br>
+For each $x \in \chi$, the <strong>event</strong> $\{X = x\}$ refers to the subset of the sample space $\{\omega | \omega \in \Omega, f_x(\omega) = x\}$. <br> <br>
+For each $x \in \chi$, the probability $p(X = x) = p({\omega | \omega \in \Omega, f_x(\omega) = x})$.</p>
+</blockquote>
+<p>We can also specify a probability distribution for a random variable $X$ with range $\chi$ directly instead of via an underlying sample space $\Omega$.</p>
+<p>The following conditions must hold:</p>
+<ul>
+<li><strong>Discrete probability mass function</strong>:
+<ul>
+<li>$p(X = x) \geq 0 \quad \forall x \in \chi$ and $\sum_{x \in \chi} p(X = x) = 1$.</li>
+</ul>
+</li>
+<li><strong>Continuous probability density function</strong>:
+<ul>
+<li>$p(X = x) \geq 0 \quad \forall x \in \chi$ and $\int_{\chi} p(X = x)dx = 1$.</li>
+</ul>
+</li>
+</ul>
+<p>Let’s now look at classification from a mathematical perspective.</p>
+<h3 id="the-classification-task">The Classification Task</h3>
+<p>The definition of a classification task can be defined as:</p>
+<blockquote>
+<p>Given a feature vector $\mathbf{x} \in \mathbb{R}^N$ that describes an object that belongs to one of $C$ classes from the set $\mathcal{Y}$,
+predict which class the object belongs to.</p>
+</blockquote>
+<p>A classical example is iris classification, where we have 3 classes of iris flowers.
+We’re given two features, the petal length and the sepal width, and we want to predict the class of the iris.
+$$
+\mathbf{x} = \begin{bmatrix}
+\text{petal length} \newline
+\text{sepel width}
+\end{bmatrix}
+= \begin{bmatrix}
+x_1 \newline
+x_2
+\end{bmatrix}
+\in \mathbb{R}^2
+$$</p>
+<p>$$
+\mathcal{Y} = \{ \text{“versicolor”}, \text{“setosa”}, \text{“virginica”} \}, \text{where } |\mathcal{Y}| = C = 3
+$$</p>
+<p>or with numbers:
+$$
+\mathcal{Y} = \{ 0, 1, 2 \}
+$$</p>
+<h3 id="the-classifier-learning-problem">The Classifier Learning Problem</h3>
+<p>The definition of the classifier learning problem can be defined as:</p>
+<blockquote>
+<p>Given a data set of example pairs $\mathcal{D} = \{ (\mathbf{x}^{(i)}, y^{(i)}), i = 1, \ldots, M \}$
+where $\mathbf{x}^{(i)} \in \mathbb{R}^N$ is a feature vector and $y^{(i)} \in \mathcal{Y} = \{1, \ldots, C\}$ is the class label,
+learn a function $f: \mathbb{R}^N \mapsto \mathcal{Y}$ that accurately predicts the class label $y$ for any feature vector $\mathbf{x}$.</p>
+</blockquote>
+<p>Let’s define the indicator function:
+$$
+\mathbb{I}[A] = \begin{cases}
+1 &#x26; \text{if } A \text{ is true} \newline
+0 &#x26; \text{otherwise}
+\end{cases}
+$$</p>
+<h3 id="classification-error-and-accuracy">Classification Error and Accuracy</h3>
+<p>Let’s define the classification error:</p>
+<blockquote>
+<p>Given a data set of example pairs $\mathcal{D} = \{ (\mathbf{x}^{(i)}, y^{(i)}), i = 1, \ldots, M \}$ and a function $f: \mathbb{R}^N \mapsto \mathcal{Y}$,
+the classification error rate of $f$ on $\mathcal{D}$ is defined as:
+$$
+Err(f, \mathcal{D}) = \frac{1}{M} \sum_{i=1}^{M} \mathbb{I}[y^{(i)} \neq f(\mathbf{x}^{(i)})]
+$$</p>
+</blockquote>
+<p>The classification accuracy is then defined as:</p>
+<blockquote>
+<p>Given a data set of example pairs $\mathcal{D} = \{ (\mathbf{x}^{(i)}, y^{(i)}), i = 1, \ldots, M \}$ and a function $f: \mathbb{R}^N \rightarrow \mathcal{Y}$,
+the classification accuracy of $f$ on $\mathcal{D}$ is defined as:
+$$
+Acc(f, \mathcal{D}) = \frac{1}{M} \sum_{i=1}^{M} \mathbb{I}[y^{(i)} = f(\mathbf{x}^{(i)})] = 1 - Err(f, \mathcal{D})
+$$</p>
+</blockquote>
+<h3 id="k-nearest-neighbors-knn-classifier">K-Nearest Neighbors (KNN) Classifier</h3>
+<p>The KNN classifier is a simple classifier that classifies a new example based on the majority class of its $k$ nearest neighbors.</p>
+<p>It stores the training set $\mathcal{D}$ and classifies each <strong>new</strong> instance $\mathbf{x}$ using a majority vote of its $K$ nearest neighbors.
+$$
+\mathcal{N}_K(\mathbf{x}) \subset \{1, \ldots, M\}
+$$</p>
+<p>Use of the KNN requires choosing the distance function $d : \mathbb{R}^N \times \mathbb{R}^N \mapsto \mathbb{R}$ and the number of neighbors $K$.</p>
+<h3 id="max-vs-arg-max">Max vs. Arg Max</h3>
+<p>The max operator of a function $f(\mathbf{x})$ defined over $\mathbf{x} \in \mathcal{D}$ returns the maximum value of the function:
+$$
+\max_{\mathbf{x}} f(\mathbf{x}) = \{f(\mathbf{x}) | \mathbf{x} \in \mathcal{D} \land \forall \mathbf{y} \in \mathcal{D}, f(\mathbf{y}) \leq f(\mathbf{x})\}
+$$</p>
+<p>The arg max operator of a function $f(\mathbf{x})$ defined over $\mathbf{x} \in \mathcal{D}$ gives the set of points which $f(\mathbf{x})$ reaches the maximum value:
+$$
+\underset{\mathbf{x}}{\arg\max} f(\mathbf{x}) = \{\mathbf{x} | \mathbf{x} \in \mathcal{D} \land \forall \mathbf{y} \in \mathcal{D}, f(\mathbf{y}) \leq f(\mathbf{x})\}
+$$</p>
+<h3 id="knn-classification">KNN Classification</h3>
+<p>$$
+f_{KNN}(\mathbf{x}) = \underset{c \in {1, \ldots, C}}{\arg\max} \sum_{i \in \mathcal{N}_K(\mathbf{x})} \mathbb{I}[y^{(i)} = c]
+$$</p>
+<p>In general, KNN can work with any distance function $d$ satisfying non-negativity $d(\mathbf{x}, \mathbf{x}^\prime) \geq 0$ and identity of indiscernibles $d(\mathbf{x}, \mathbf{x}) = 0$.</p>
+<p>Genrally, the more structure the distance function has (symmetry, triangle inequality, etc.), the more strucutre you can exploit when designing algorithms.</p>
+<p>The Minowski distance ($\ell_p$ norm) is defined as:</p>
+<blockquote>
+<p>Given two data vectors $\mathbf{x}, \mathbf{x}^\prime \in \mathbb{R}^N$, the Minowski distance with parameter $p$ (the $\ell_p$ norm) is a proper metric defined as:
+$$
+d_p(\mathbf{x}, \mathbf{x}^\prime) = \lVert \mathbf{x} - \mathbf{x}^\prime \rVert_p \newline
+= \left( \sum_{j=1}^{N} |x_j - x^{\prime}_j|^p \right)^{\frac{1}{p}}
+$$</p>
+</blockquote>
+<p>Special cases include, Euclidean distance ($p = 2$), Manhattan distance ($p = 1$), and Chebyshev distance ($p = \infty$).</p>
+<h3 id="brute-force-knn">Brute Force KNN</h3>
+<p>Given any distance function $d$, brute force KNN works by computing the distance $d_i = d(\mathbf{x}^{(i)}, \mathbf{x})$ from a target point $\mathbf{x}$ to all of the training points $\mathbf{x}^{(i)}$.</p>
+<p>Sort the distances $\{d_i, i = 1, \ldots, M\}$ and choose the data cases with the $K$ smallest distances to form the neighbor <strong>index</strong> set $\mathcal{N}_K(\mathbf{x})$.</p>
+<p>Once the $K$ neighbors are selected, applying the classification rule is easy.</p>
+<h3 id="knn-variants">KNN Variants</h3>
+<p>Instead of giving all of the $K$ neighbors equal weight in the majority vote, a distance-weighted majority can be used:
+$$
+f_{KNN}(\mathbf{x}) = \underset{c \in {1, \ldots, C}}{\arg\max} \frac{\sum  w_i \mathbb{I}[y^{(i)} = c]}{\sum w_i} \newline
+w_i = exp(-\alpha d_i)
+$$</p>
+<p>Instead of a brute force nearest neighbor search, data structures like $K$-d trees can be constructed over the training data that support nearest neighbor search with lower computational complexity.</p>
+<h3 id="knn-trade-offs">KNN Trade-offs</h3>
+<ul>
+<li>Advantages:
+<ul>
+<li>No training period is involved (i.e., lazy learning), and new data can be added seamlessly without re-training the model</li>
+<li>Converges to the correct decision surface as data goes to infinity</li>
+</ul>
+</li>
+<li>Disadvantages:
+<ul>
+<li>Does not work well with large datasets. Since KNN needs to store all training data, performing neighbor search requires a lot of memory and takes a lot of time</li>
+<li>Does not work well with high dimensions. It becomes difficult for KNN to calculate the distance in each dimension. Moreover, everything is far from everything else in high dimensions (the so-called “curse of dimensionality”)</li>
+</ul>
+</li>
+</ul>
+<h3 id="probabilistic-classifiers">Probabilistic Classifiers</h3>
+<p>Probabilistic classifiers are classifiers that output a probability distribution over the classes.</p>
+<p>For example, <strong>generative</strong> models are probabilistic classifiers.</p>
+<p>Each object/pattern has a particular (and possibly unique) probability distribution over the classes.</p>
+<h3 id="class-model">Class Model</h3>
+<p>As we’ve defined it before, possible classes are $\mathcal{Y}$.
+In the real world, the frequency that class $y$ occurs is given by the probabalistic distribution $p(y)$.</p>
+<p>$p(y)$ is called the <strong>prior distribution</strong>.</p>
+<h3 id="observation-model">Observation Model</h3>
+<p>We measure/observe feature vector $\mathbf{x}$. The value of the features <strong>depends</strong> on the class.</p>
+<p>The observation is drawn according to the distribution $p(\mathbf{x} | y)$.</p>
+<p>$p(\mathbf{x} | y)$ is called the <strong>class conditional distribution</strong>.
+It indicates the probability of observing a particular feature vector $\mathbf{x}$ given that the class is $y$.</p>
+<h3 id="gaussian-distribution">Gaussian Distribution</h3>
+<p>Each class is modeled as a separate Gaussian distribution of the feature value.</p>
+<p>$$
+p(x | y = c; \mu_c, \sigma_{c}^2) = \frac{1}{\sqrt{2\pi\sigma_c^2}} \exp \left( -\frac{(x - \mu_c)^2}{2\sigma_c^2} \right)
+$$</p>
+<p>Each class has its own mean $\mu_c$ and variance $\sigma_c^2$.</p>
+<h3 id="learn-the-parameters-from-data">Learn the Parameters from Data</h3>
+<p>Maximum likelihood estimation (MLE) is used to estimate the parameters of the Gaussian distribution.</p>
+<p>Set the parameters $(\mu_c, \sigma_c^2)$ to maximize the likelihood (probability) of the samples for class $c$.</p>
+<p>Let $\mathcal{D}_c = \{x^{(i)} | y^{(i)}\}$ for $i = 1, \ldots, M_c$ be the data for class $c$.</p>
+<p>The likelihood of the data is:
+$$
+(\hat{\mu}_c, \hat{\sigma}_c^2) = \underset{\mu_c, \sigma_c^2}{\arg\max} \sum \log p(x^{(i)} | y^{(i)}; \mu_c, \sigma_c^2)
+$$</p>
+<p>When we view the above objective as a function of the parameters $\{\mu_c, \sigma_c^2\}$, we instead call it the likelihood function of the data.</p>
+<p>Sample mean:
+$$
+\hat{\mu}_c = \frac{1}{M} \sum x^{(i)}
+$$</p>
+<p>Sample variance:
+$$
+\hat{\sigma}_c^2 = \frac{1}{M_c} \sum (x^{(i)} - \hat{\mu}_c)^2
+$$</p>
+<h3 id="bayesian-decision-rule">Bayesian Decision Rule</h3>
+<p>The Bayesian decision rule (BDR) makes the <strong>optimal</strong> decisions on problems involving probability (uncertainty).
+It minimizes the probability of making a prediction error.</p>
+<p>We call this the <strong>Bayes Optimal Classifier</strong>.</p>
+<p>Given observation $\mathbf{x}$, pick the class $c$ with the <strong>largest posterior probability</strong> $p(y = c | \mathbf{x})$.
+$$
+f_{B}(\mathbf{x}) = \underset{c \in \{1, \ldots, C\}}{\arg\max} p(y = c | \mathbf{x})
+$$</p>
+<p>But there is a problem, we don’t have $p(y | \mathbf{x})$, we only have $p(y)$ and $p(\mathbf{x} | y)$.</p>
+<h3 id="bayes-rule">Bayes Rule</h3>
+<p>The posterior probability can be calculated using Bayes rule:
+$$
+p(y | \mathbf{x}) = \frac{p(\mathbf{x} | y) p(y)}{p(\mathbf{x})}
+$$</p>
+<p>The denominator is the probability of $\mathbf(x)$,
+$$
+p(\mathbf{x}) = \sum_{y in \mathcal{Y}} p(\mathbf{x}, y) = \sum_{y \in \mathcal{Y}} p(\mathbf{x} | y) p(y)
+$$</p>
+<p>The denominator makes $p(y | \mathbf{x})$ sum to 1.</p>
+<p>So, we can write it as:
+$$
+p(y | \mathbf{x}) = \frac{p(\mathbf{x} | y) p(y)}{\sum_{y \in \mathcal{Y}} p(\mathbf{x} | y) p(y)}
+$$</p>
+<h3 id="bayes-classifier-summary">Bayes Classifier Summary</h3>
+<p>For training, we collect training data from each class. For each class $c$, we estimate the class conditional densities $p(x | y = c)$:</p>
+<ol>
+<li>Select a form of the distribution (e.g., Gaussian)</li>
+<li>Estimate its parameters with MLE</li>
+<li>Estimate the class priors $p(y)$ using MLE</li>
+</ol>
+<p>For classification, given a new sample $\mathbf{x}^\star$, calculate the likelihood $p(\mathbf{x}^\star | y = c)$ for each class $c$.
+Pick the class $c$ with the largest posterior probability $p(y = c | \mathbf{x}^\star)$.</p>
+<p>Equivalently, use $p(\mathbf{x}^\star | y = c)p(y = c)$ or $\log p(\mathbf{x}^\star | y = c) + \log p(y = c)$.</p>  </div> <nav class="flex flex-col sm:flex-row justify-between mt-8 pt-4 border-t border-border" data-astro-cid-mnl7e2ne>   </nav> </article>  </main> </div> </body></html> 
