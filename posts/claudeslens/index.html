@@ -32,6 +32,7 @@ The tile of our thesis is:</p>
 <blockquote>
 <p>ClaudesLens: Uncertainty Quantification in Computer Vision Models</p>
 </blockquote>
+<p>Which you can read <a href="https://arxiv.org/abs/2406.13008">here</a></p>
 <p>However, before I dive into the project and what we actually did, let me tell you what we <em>wanted</em> to do.</p>
 <h1 id="bayeslens">BayesLens</h1>
 <p>Originally, we wanted to create “Uncertainty-Aware Attention Mechanisms”.
@@ -77,5 +78,61 @@ $$</p>
 <p>A <em>layer</em> is a collection of neurons, stacked on top of each other.
 Very often when we are referring to a layer, are we referring to a <em>fully connected layer</em>, where each neuron in the layer is connected to all the neurons in the previous layer.</p>
 <p>In the case of a network, we can now talk about the input layer and the output layer.</p>
-<p>&#x3C;TODO, need to think deeply about how to explain this properly, let’s continue tomorrow:]></p>
-<p><img src="/images/posts/nn.png" alt="nn"></p>  </div> </article>  </main> </div> </body></html> 
+<p><img src="/images/posts/nn.png" alt="nn">
+<strong>Figure 2:</strong> A simple neural network with one hidden layer.</p>
+<p>As we see in the picture, we now have multiple neurons with numerous inter-neuron connections, along with multiple outputs.</p>
+<p>The matrix-vector equation,
+$$
+\mathbf{a} = \mathbf{W_1} \mathbf{x} + \mathbf{b_1} = [a_1, a_2, \ldots, a_m],
+$$</p>
+<p>yields each output of each neuron in the hidden layer.</p>
+<p>$\mathbf{W_1}$ is the <em>weight matrix</em> with rows $\mathbf{w_i} = [w_{i, 1}, w_{i, 2}, \ldots, w_{i, n}]$ corresponding to the weights of the $i$-th neuron in the hidden layer.
+The bias values are represented by $\mathbf{b_1} = [b_1, b_2, \ldots, b_m]$.</p>
+<p>In the case of several layers, we work with multiple weight matrices and bias vectors, which we index as $\mathbf{W_j}$ and $\mathbf{b_j}$, respectively.</p>
+<p>So, given an input $\mathbf{x}$, the output of the hidden layer (i.e figure 2) is given by,
+$$
+\mathbf{a} = f.(\mathbf{W_1} \mathbf{x} + \mathbf{b_1}),
+$$</p>
+<p>where the dot indicates that the activation function $f$ is applied element-wise.</p>
+<p>So the final output is therefore,
+$$
+\mathbf{y} = f.(\mathbf{W_2} \mathbf{a} + \mathbf{b_2}).
+$$</p>
+<p>This is the basic structure of a neural network, for the sake of brevity I will not go into more detail about the <em>training</em> process, but I will mention that these weights and biases are learned through an optimization process called <em>backpropagation</em>.</p>
+<p>There are a ton of resources to understand these concepts, even we tried to explain these concepts in our thesis.</p>
+<h3 id="computer-vision">Computer Vision</h3>
+<p>Now that we have a basic understanding of neural networks, we can move on to computer vision.</p>
+<p>Computer vision is a field of computer science that focuses on replicating parts of the complexity of the human vision system and enabling computers to identify and process objects in images and videos in the same way that humans do.</p>
+<p>The most important thing that we will cover here is how we represent images, which is crucial for understanding how we can apply neural networks to images.</p>
+<h3 id="images">Images</h3>
+<p>Images are represented as a grid of pixels, where each pixel needs to be represented in a numerical way.</p>
+<p>For most images, we represent each pixel as a 3-dimensional vector, where each element corresponds to the intensity of the color channels red, green, and blue (RGB). This is called a <em>channel</em>.</p>
+<p>So, a single pixel in an image is represented as a vector, therefore a whole image can be represented as a 3-dimensional tensor.</p>
+<p>Remember this.</p>
+<h3 id="entropy-based-uncertainty-quantification-framework">Entropy-based Uncertainty Quantification Framework</h3>
+<p>I’ll try to keep this quite short and sweet, again, in our paper we go into more detail, but from what we have seen, we can view a neural network as a function.</p>
+<p>In our case, our model, since we’re dealing with classification, will spit out a probablity vector, and we always choose the class with the highest probability, ergo,
+$$
+\hat{y} = \arg\max(\mathcal{F}(\mathbf{x}, \mathbf{W})),
+$$</p>
+<p>where $\mathcal{F}$ is our <strong>trained</strong> neural network, $\mathbf{x}$ is our input, and $\mathbf{W}$ are the <strong>trained</strong> weights of the network.</p>
+<p>But this is deterministic, there is no uncertainty here, so how can we quantify this?</p>
+<p>We make it stochastic.</p>
+<p>By adding <em>noise</em> to the function, random noise, it makes the function stochastic.
+If we do this multiple times, we can get a distribution of outputs, and from this distribution, we can calculate the entropy.</p>
+<h3 id="entropy-and-uncertainty">Entropy and Uncertainty</h3>
+<p>Now, when we are talking about entropy, we are talking about the information kind of entropy.
+Thanks to the great work of Claude Shannon, we have a way to quantify the uncertainty of a random variable.</p>
+<p>The entropy of a random variable $X$ is defined as,
+$$
+H(X) = -\sum_{x \in \chi} p(x) \log p(x),
+$$</p>
+<p>where $p(x) = P(X = x)$.</p>
+<h3 id="entropy-in-neural-networks">Entropy in Neural Networks</h3>
+<p>So, if we have a neural network that outputs a probability distribution, we can calculate the entropy of this distribution.
+The entropy of a distribution is a measure of the uncertainty of the distribution, the higher the entropy, the more uncertain we are about the output.
+So, by adding noise to the function, we can calculate the entropy of the distribution of outputs, and this can give us a measure of the uncertainty of the model!</p>
+<h3 id="conclusion">Conclusion</h3>
+<p>This is a very brief overview of what we did in our thesis, and I hope that I have motivated why we did what we did.
+I thought it was a very challenging but fun project, and I learned a lot from it.</p>
+<p>Read the paper as well, we basically died writing it.</p>  </div> </article>  </main> </div> </body></html> 
