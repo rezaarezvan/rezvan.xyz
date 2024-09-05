@@ -1,0 +1,331 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="Astro v4.11.5"><link rel="icon" type="image" href="/favicon.ico"><title>Part 1 - Introduction to R</title><!-- KaTeX support --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script><!-- inline KaTeX --><link rel="stylesheet" href="/_astro/index.CwgzIfsj.css">
+<link rel="stylesheet" href="/_astro/_slug_.hCvEQTvV.css">
+<style>article[data-astro-cid-mnl7e2ne]{max-width:80ch;margin:0 auto}.nav-button[data-astro-cid-mnl7e2ne]{display:flex;align-items:center;padding:.5rem;border-radius:.5rem;transition:background-color .3s ease;text-decoration:none;color:var(--text-color);background-color:var(--bg-color);border:1px solid var(--border-color)}.nav-button[data-astro-cid-mnl7e2ne]:hover{background-color:var(--hover-color)}.nav-button[data-astro-cid-mnl7e2ne] .arrow[data-astro-cid-mnl7e2ne]{font-size:1.5rem;line-height:1}.nav-button[data-astro-cid-mnl7e2ne] .text[data-astro-cid-mnl7e2ne]{display:flex;flex-direction:column;margin:0 .5rem}.nav-button[data-astro-cid-mnl7e2ne] .label[data-astro-cid-mnl7e2ne]{font-size:.8rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted-color)}.nav-button[data-astro-cid-mnl7e2ne] .title[data-astro-cid-mnl7e2ne]{font-weight:500}.prev-button[data-astro-cid-mnl7e2ne]{justify-content:flex-start}.next-button[data-astro-cid-mnl7e2ne]{justify-content:flex-end;text-align:right}@media (max-width: 640px){.nav-button[data-astro-cid-mnl7e2ne]{width:100%}.next-button[data-astro-cid-mnl7e2ne]{justify-content:flex-start;text-align:left}.next-button[data-astro-cid-mnl7e2ne] .text[data-astro-cid-mnl7e2ne]{order:2;margin-left:.5rem}.next-button[data-astro-cid-mnl7e2ne] .arrow[data-astro-cid-mnl7e2ne]{order:1}}
+</style><script type="module">document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]})});
+</script></head> <body> <div class="container mx-auto px-4 flex flex-col md:flex-row min-h-screen"> <aside class="w-full md:w-64 border-b md:border-r md:border-b-0 border-[var(--border-color)] border-dashed pt-8"> <header class="flex flex-col h-full"> <div class="flex items-center mb-4"> <script>
+  function setTheme(mode) {
+    localStorage.setItem("theme-storage", mode);
+    document.documentElement.setAttribute('data-theme', mode);
+  }
+  function toggleTheme() {
+    const currentTheme = localStorage.getItem("theme-storage") || "light";
+    const newTheme = currentTheme === "light" ? "dark" : "light";
+    setTheme(newTheme);
+  }
+  const savedTheme = localStorage.getItem("theme-storage") || "light";
+  setTheme(savedTheme);
+  window.toggleTheme = toggleTheme;
+</script> <button id="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme" class="w-6 h-6 cursor-pointer"> <div class="w-5 h-5 border-2 border-primary rounded-full transition-colors duration-300 ease-in-out hover:bg-primary"></div> </button> <a href="/" class="text-2xl font-semibold ml-3 h-10 pr-3">rezvan.xyz</a> </div> <nav class="flex flex-wrap gap-2 md:flex-col md:gap-2"> <a href="/principles" class="transition-colors">
+[principles]
+</a><a href="/cv" class="transition-colors">
+[cv]
+</a><a href="/posts" class="transition-colors">
+[posts]
+</a><a href="/chalmers" class="transition-colors">
+[chalmers]
+</a><a href="/cityu" class="transition-colors">
+[cityu]
+</a> </nav> </header> </aside> <main class="flex-grow px-4 md:px-8 py-8 overflow-y-auto">  <article class="prose prose-sm sm:prose lg:prose-lg xl:prose-xl max-w-none" data-astro-cid-mnl7e2ne> <h1 class="text-3xl sm:text-4xl font-bold mb-4" data-astro-cid-mnl7e2ne>Part 1 - Introduction to R</h1> <p class="text-sm text-muted-foreground mb-4" data-astro-cid-mnl7e2ne>
+Date: 9/3/2024 </p> <div class="markdown-content" data-astro-cid-mnl7e2ne>  <h3 id="introduction-to-r">Introduction to R</h3>
+<p>R is a free software package that is suitable for data analysis and graphical visualization.
+Although R is good, it is not particularly efficient in handling large data sets.
+In those cases C/C++ or Python with GPU support are more suitable.</p>
+<h3 id="basic-data-types">Basic Data Types</h3>
+<p>R has several basic data types including numeric, character, and logical.
+To assign a value to a variable, use the assignment operator <code>&#x3C;-</code> (Note that <code>=</code> can also be used, but is discouraged).</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="r"><code><span class="line"><span style="color:#F8F8F2">a </span><span style="color:#FF79C6">&#x3C;-</span><span style="color:#BD93F9"> 3</span></span>
+<span class="line"><span style="color:#F8F8F2">b </span><span style="color:#FF79C6">&#x3C;-</span><span style="color:#8BE9FD"> sqrt</span><span style="color:#F8F8F2">(a</span><span style="color:#FF79C6">*</span><span style="color:#F8F8F2">a </span><span style="color:#FF79C6">+</span><span style="color:#BD93F9"> 3</span><span style="color:#F8F8F2">)</span></span>
+<span class="line"><span style="color:#FF79C6">></span><span style="color:#F8F8F2"> b</span></span>
+<span class="line"><span style="color:#F8F8F2">[</span><span style="color:#BD93F9">1</span><span style="color:#F8F8F2">] </span><span style="color:#BD93F9">3.464102</span></span>
+<span class="line"></span></code></pre>
+<p>To make a list we can use the <code>c</code> (combine) function.</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="r"><code><span class="line"><span style="color:#F8F8F2">a </span><span style="color:#FF79C6">&#x3C;-</span><span style="color:#8BE9FD"> c</span><span style="color:#F8F8F2">(</span><span style="color:#BD93F9">1</span><span style="color:#F8F8F2">, </span><span style="color:#BD93F9">2</span><span style="color:#F8F8F2">, </span><span style="color:#BD93F9">3</span><span style="color:#F8F8F2">, </span><span style="color:#BD93F9">4</span><span style="color:#F8F8F2">, </span><span style="color:#BD93F9">5</span><span style="color:#F8F8F2">)</span></span>
+<span class="line"><span style="color:#FF79C6">></span><span style="color:#F8F8F2"> a[</span><span style="color:#BD93F9">1</span><span style="color:#F8F8F2">]</span></span>
+<span class="line"><span style="color:#F8F8F2">[</span><span style="color:#BD93F9">1</span><span style="color:#F8F8F2">] </span><span style="color:#BD93F9">1</span></span>
+<span class="line"><span style="color:#FF79C6">></span><span style="color:#F8F8F2"> a[</span><span style="color:#BD93F9">5</span><span style="color:#F8F8F2">]</span></span>
+<span class="line"><span style="color:#F8F8F2">[</span><span style="color:#BD93F9">1</span><span style="color:#F8F8F2">] </span><span style="color:#BD93F9">5</span></span>
+<span class="line"><span style="color:#FF79C6">></span><span style="color:#F8F8F2"> a[</span><span style="color:#BD93F9">0</span><span style="color:#F8F8F2">]</span></span>
+<span class="line"><span style="color:#FF79C6">numeric</span><span style="color:#F8F8F2">(</span><span style="color:#BD93F9">0</span><span style="color:#F8F8F2">)</span></span>
+<span class="line"></span></code></pre>
+<p>We also have some special numbers,</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="r"><code><span class="line"><span style="color:#FF79C6">></span><span style="color:#F8F8F2"> a[</span><span style="color:#BD93F9">6</span><span style="color:#F8F8F2">]</span></span>
+<span class="line"><span style="color:#F8F8F2">[</span><span style="color:#BD93F9">1</span><span style="color:#F8F8F2">] </span><span style="color:#BD93F9">NA</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F8F8F2">a[</span><span style="color:#BD93F9">2</span><span style="color:#F8F8F2">] </span><span style="color:#FF79C6">&#x3C;-</span><span style="color:#BD93F9"> NA</span></span>
+<span class="line"><span style="color:#FF79C6">></span><span style="color:#F8F8F2"> a</span></span>
+<span class="line"><span style="color:#F8F8F2">[</span><span style="color:#BD93F9">1</span><span style="color:#F8F8F2">]  </span><span style="color:#BD93F9">1</span><span style="color:#BD93F9"> NA</span><span style="color:#BD93F9">  3</span><span style="color:#BD93F9">  4</span><span style="color:#BD93F9">  5</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#FF79C6">></span><span style="color:#BD93F9"> 1</span><span style="color:#FF79C6">/</span><span style="color:#BD93F9">0</span></span>
+<span class="line"><span style="color:#F8F8F2">[</span><span style="color:#BD93F9">1</span><span style="color:#F8F8F2">] </span><span style="color:#BD93F9">Inf</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#FF79C6">></span><span style="color:#BD93F9"> 0</span><span style="color:#FF79C6">/</span><span style="color:#BD93F9">0</span></span>
+<span class="line"><span style="color:#F8F8F2">[</span><span style="color:#BD93F9">1</span><span style="color:#F8F8F2">] </span><span style="color:#BD93F9">NaN</span></span>
+<span class="line"></span></code></pre>
+<p>For logical values we have <code>TRUE</code> and <code>FALSE</code>.</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="r"><code><span class="line"><span style="color:#F8F8F2">a </span><span style="color:#FF79C6">&#x3C;-</span><span style="color:#8BE9FD"> c</span><span style="color:#F8F8F2">(</span><span style="color:#BD93F9">1</span><span style="color:#F8F8F2">, </span><span style="color:#BD93F9">2</span><span style="color:#F8F8F2">, </span><span style="color:#BD93F9">3</span><span style="color:#F8F8F2">, </span><span style="color:#BD93F9">4</span><span style="color:#F8F8F2">, </span><span style="color:#BD93F9">5</span><span style="color:#F8F8F2">)</span></span>
+<span class="line"><span style="color:#FF79C6">></span><span style="color:#F8F8F2"> a </span><span style="color:#FF79C6">></span><span style="color:#BD93F9"> 3</span></span>
+<span class="line"><span style="color:#F8F8F2">[</span><span style="color:#BD93F9">1</span><span style="color:#F8F8F2">] </span><span style="color:#BD93F9">FALSE</span><span style="color:#BD93F9"> FALSE</span><span style="color:#BD93F9"> FALSE</span><span style="color:#BD93F9">  TRUE</span><span style="color:#BD93F9">  TRUE</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#FF79C6">></span><span style="color:#8BE9FD"> sum</span><span style="color:#F8F8F2">(a </span><span style="color:#FF79C6">></span><span style="color:#BD93F9"> 3</span><span style="color:#F8F8F2">)</span></span>
+<span class="line"><span style="color:#F8F8F2">[</span><span style="color:#BD93F9">1</span><span style="color:#F8F8F2">] </span><span style="color:#BD93F9">2</span></span>
+<span class="line"></span></code></pre>
+<p>Characters and strings are also supported,</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="r"><code><span class="line"><span style="color:#F8F8F2">a </span><span style="color:#FF79C6">&#x3C;-</span><span style="color:#E9F284"> "</span><span style="color:#F1FA8C">Hello</span><span style="color:#E9F284">"</span></span>
+<span class="line"><span style="color:#FF79C6">></span><span style="color:#F8F8F2"> a</span></span>
+<span class="line"><span style="color:#F8F8F2">[</span><span style="color:#BD93F9">1</span><span style="color:#F8F8F2">] </span><span style="color:#E9F284">"</span><span style="color:#F1FA8C">Hello</span><span style="color:#E9F284">"</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F8F8F2">b </span><span style="color:#FF79C6">&#x3C;-</span><span style="color:#8BE9FD"> c</span><span style="color:#F8F8F2">(</span><span style="color:#E9F284">"</span><span style="color:#F1FA8C">Hello</span><span style="color:#E9F284">"</span><span style="color:#F8F8F2">, </span><span style="color:#E9F284">"</span><span style="color:#F1FA8C">World</span><span style="color:#E9F284">"</span><span style="color:#F8F8F2">)</span></span>
+<span class="line"><span style="color:#FF79C6">></span><span style="color:#F8F8F2"> b[</span><span style="color:#BD93F9">1</span><span style="color:#F8F8F2">]</span></span>
+<span class="line"><span style="color:#F8F8F2">[</span><span style="color:#BD93F9">1</span><span style="color:#F8F8F2">] </span><span style="color:#E9F284">"</span><span style="color:#F1FA8C">Hello</span><span style="color:#E9F284">"</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#FF79C6">></span><span style="color:#F8F8F2"> b[</span><span style="color:#BD93F9">2</span><span style="color:#F8F8F2">]</span></span>
+<span class="line"><span style="color:#F8F8F2">[</span><span style="color:#BD93F9">1</span><span style="color:#F8F8F2">] </span><span style="color:#E9F284">"</span><span style="color:#F1FA8C">World</span><span style="color:#E9F284">"</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#FF79C6">></span><span style="color:#F8F8F2"> b</span></span>
+<span class="line"><span style="color:#F8F8F2">[</span><span style="color:#BD93F9">1</span><span style="color:#F8F8F2">] </span><span style="color:#E9F284">"</span><span style="color:#F1FA8C">Hello</span><span style="color:#E9F284">"</span><span style="color:#E9F284"> "</span><span style="color:#F1FA8C">World</span><span style="color:#E9F284">"</span></span>
+<span class="line"></span></code></pre>
+<h3 id="basic-operations-and-functions">Basic Operations and Functions</h3>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="r"><code><span class="line"><span style="color:#F8F8F2">a </span><span style="color:#FF79C6">&#x3C;-</span><span style="color:#8BE9FD"> c</span><span style="color:#F8F8F2">(</span><span style="color:#BD93F9">1</span><span style="color:#F8F8F2">, </span><span style="color:#BD93F9">2</span><span style="color:#F8F8F2">, </span><span style="color:#BD93F9">3</span><span style="color:#F8F8F2">, </span><span style="color:#BD93F9">4</span><span style="color:#F8F8F2">, </span><span style="color:#BD93F9">5</span><span style="color:#F8F8F2">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#FF79C6">></span><span style="color:#F8F8F2"> a</span></span>
+<span class="line"><span style="color:#F8F8F2">[</span><span style="color:#BD93F9">1</span><span style="color:#F8F8F2">] </span><span style="color:#BD93F9">1</span><span style="color:#BD93F9"> 2</span><span style="color:#BD93F9"> 3</span><span style="color:#BD93F9"> 4</span><span style="color:#BD93F9"> 5</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#FF79C6">></span><span style="color:#F8F8F2"> a </span><span style="color:#FF79C6">+</span><span style="color:#BD93F9"> 5</span></span>
+<span class="line"><span style="color:#F8F8F2">[</span><span style="color:#BD93F9">1</span><span style="color:#F8F8F2">] </span><span style="color:#BD93F9">6</span><span style="color:#BD93F9"> 7</span><span style="color:#BD93F9"> 8</span><span style="color:#BD93F9"> 9</span><span style="color:#BD93F9"> 10</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#FF79C6">></span><span style="color:#F8F8F2"> a </span><span style="color:#FF79C6">*</span><span style="color:#BD93F9"> 4</span></span>
+<span class="line"><span style="color:#F8F8F2">[</span><span style="color:#BD93F9">1</span><span style="color:#F8F8F2">]  </span><span style="color:#BD93F9">4</span><span style="color:#BD93F9">  8</span><span style="color:#BD93F9"> 12</span><span style="color:#BD93F9"> 16</span><span style="color:#BD93F9"> 20</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#FF79C6">></span><span style="color:#F8F8F2"> a </span><span style="color:#FF79C6">/</span><span style="color:#BD93F9"> 5</span></span>
+<span class="line"><span style="color:#F8F8F2">[</span><span style="color:#BD93F9">1</span><span style="color:#F8F8F2">] </span><span style="color:#BD93F9">0.2</span><span style="color:#BD93F9"> 0.4</span><span style="color:#BD93F9"> 0.6</span><span style="color:#BD93F9"> 0.8</span><span style="color:#BD93F9"> 1.0</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#FF79C6">></span><span style="color:#F8F8F2"> a</span><span style="color:#FF79C6">^</span><span style="color:#BD93F9">2</span></span>
+<span class="line"><span style="color:#F8F8F2">[</span><span style="color:#BD93F9">1</span><span style="color:#F8F8F2">]  </span><span style="color:#BD93F9">1</span><span style="color:#BD93F9">  4</span><span style="color:#BD93F9">  9</span><span style="color:#BD93F9"> 16</span><span style="color:#BD93F9"> 25</span></span>
+<span class="line"></span></code></pre>
+<p>In R we have something called the recyle rule.</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="r"><code><span class="line"><span style="color:#FF79C6">></span><span style="color:#F8F8F2"> b </span><span style="color:#FF79C6">&#x3C;-</span><span style="color:#8BE9FD"> c</span><span style="color:#F8F8F2">(</span><span style="color:#BD93F9">1</span><span style="color:#F8F8F2">, </span><span style="color:#BD93F9">2</span><span style="color:#F8F8F2">)</span></span>
+<span class="line"><span style="color:#FF79C6">></span><span style="color:#F8F8F2"> a </span><span style="color:#FF79C6">+</span><span style="color:#F8F8F2"> b</span></span>
+<span class="line"><span style="color:#F8F8F2">[</span><span style="color:#BD93F9">1</span><span style="color:#F8F8F2">] </span><span style="color:#BD93F9">2</span><span style="color:#BD93F9"> 4</span><span style="color:#BD93F9"> 4</span><span style="color:#BD93F9"> 6</span><span style="color:#BD93F9"> 6</span></span>
+<span class="line"></span></code></pre>
+<p>We of course have basic mathemetical functions,</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="r"><code><span class="line"><span style="color:#FF79C6">></span><span style="color:#8BE9FD"> sqrt</span><span style="color:#F8F8F2">(a)</span></span>
+<span class="line"><span style="color:#F8F8F2">[</span><span style="color:#BD93F9">1</span><span style="color:#F8F8F2">] </span><span style="color:#BD93F9">1.000000</span><span style="color:#BD93F9"> 1.414214</span><span style="color:#BD93F9"> 1.732051</span><span style="color:#BD93F9"> 2.000000</span><span style="color:#BD93F9"> 2.236068</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#FF79C6">></span><span style="color:#8BE9FD"> exp</span><span style="color:#F8F8F2">(a)</span></span>
+<span class="line"><span style="color:#F8F8F2">[</span><span style="color:#BD93F9">1</span><span style="color:#F8F8F2">]   </span><span style="color:#BD93F9">2.718282</span><span style="color:#BD93F9">   7.389056</span><span style="color:#BD93F9">  20.085537</span><span style="color:#BD93F9">  54.598150</span><span style="color:#BD93F9"> 148.413159</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#FF79C6">></span><span style="color:#8BE9FD"> log</span><span style="color:#F8F8F2">(a)</span></span>
+<span class="line"><span style="color:#F8F8F2">[</span><span style="color:#BD93F9">1</span><span style="color:#F8F8F2">] </span><span style="color:#BD93F9">0.0000000</span><span style="color:#BD93F9"> 0.6931472</span><span style="color:#BD93F9"> 1.0986123</span><span style="color:#BD93F9"> 1.3862944</span><span style="color:#BD93F9"> 1.6094379</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#FF79C6">></span><span style="color:#8BE9FD"> exp</span><span style="color:#F8F8F2">(</span><span style="color:#8BE9FD">log</span><span style="color:#F8F8F2">(a))</span></span>
+<span class="line"><span style="color:#F8F8F2">[</span><span style="color:#BD93F9">1</span><span style="color:#F8F8F2">] </span><span style="color:#BD93F9">1</span><span style="color:#BD93F9"> 2</span><span style="color:#BD93F9"> 3</span><span style="color:#BD93F9"> 4</span><span style="color:#BD93F9"> 5</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F8F8F2">a </span><span style="color:#FF79C6">&#x3C;-</span><span style="color:#8BE9FD"> c</span><span style="color:#F8F8F2">(</span><span style="color:#BD93F9">1</span><span style="color:#F8F8F2">, </span><span style="color:#FF79C6">-</span><span style="color:#BD93F9">2</span><span style="color:#F8F8F2">, </span><span style="color:#BD93F9">3</span><span style="color:#F8F8F2">, </span><span style="color:#FF79C6">-</span><span style="color:#BD93F9">4</span><span style="color:#F8F8F2">)</span></span>
+<span class="line"><span style="color:#F8F8F2">b </span><span style="color:#FF79C6">&#x3C;-</span><span style="color:#8BE9FD"> c</span><span style="color:#F8F8F2">(</span><span style="color:#FF79C6">-</span><span style="color:#BD93F9">1</span><span style="color:#F8F8F2">, </span><span style="color:#BD93F9">2</span><span style="color:#F8F8F2">, </span><span style="color:#FF79C6">-</span><span style="color:#BD93F9">3</span><span style="color:#F8F8F2">, </span><span style="color:#BD93F9">4</span><span style="color:#F8F8F2">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#FF79C6">></span><span style="color:#8BE9FD"> min</span><span style="color:#F8F8F2">(a)</span></span>
+<span class="line"><span style="color:#F8F8F2">[</span><span style="color:#BD93F9">1</span><span style="color:#F8F8F2">] </span><span style="color:#FF79C6">-</span><span style="color:#BD93F9">4</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#FF79C6">></span><span style="color:#8BE9FD"> min</span><span style="color:#F8F8F2">(a, b)</span></span>
+<span class="line"><span style="color:#F8F8F2">[</span><span style="color:#BD93F9">1</span><span style="color:#F8F8F2">] </span><span style="color:#FF79C6">-</span><span style="color:#BD93F9">4</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#FF79C6">></span><span style="color:#8BE9FD"> pmin</span><span style="color:#F8F8F2">(a, b)</span></span>
+<span class="line"><span style="color:#F8F8F2">[</span><span style="color:#BD93F9">1</span><span style="color:#F8F8F2">] </span><span style="color:#FF79C6">-</span><span style="color:#BD93F9">1</span><span style="color:#FF79C6"> -</span><span style="color:#BD93F9">2</span><span style="color:#FF79C6"> -</span><span style="color:#BD93F9">3</span><span style="color:#FF79C6"> -</span><span style="color:#BD93F9">4</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F8F8F2">x </span><span style="color:#FF79C6">&#x3C;-</span><span style="color:#8BE9FD"> c</span><span style="color:#F8F8F2">(</span><span style="color:#BD93F9">1</span><span style="color:#F8F8F2">, </span><span style="color:#BD93F9">3</span><span style="color:#F8F8F2">, </span><span style="color:#BD93F9">2</span><span style="color:#F8F8F2">, </span><span style="color:#BD93F9">10</span><span style="color:#F8F8F2">, </span><span style="color:#BD93F9">5</span><span style="color:#F8F8F2">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#FF79C6">></span><span style="color:#8BE9FD"> sum</span><span style="color:#F8F8F2">(x)</span></span>
+<span class="line"><span style="color:#F8F8F2">[</span><span style="color:#BD93F9">1</span><span style="color:#F8F8F2">] </span><span style="color:#BD93F9">21</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#FF79C6">></span><span style="color:#8BE9FD"> cumsum</span><span style="color:#F8F8F2">(x)</span></span>
+<span class="line"><span style="color:#F8F8F2">[</span><span style="color:#BD93F9">1</span><span style="color:#F8F8F2">]  </span><span style="color:#BD93F9">1</span><span style="color:#BD93F9">  4</span><span style="color:#BD93F9">  6</span><span style="color:#BD93F9"> 16</span><span style="color:#BD93F9"> 21</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#FF79C6">></span><span style="color:#8BE9FD"> diff</span><span style="color:#F8F8F2">(x)</span></span>
+<span class="line"><span style="color:#F8F8F2">[</span><span style="color:#BD93F9">1</span><span style="color:#F8F8F2">]  </span><span style="color:#BD93F9">2</span><span style="color:#FF79C6"> -</span><span style="color:#BD93F9">1</span><span style="color:#BD93F9">  8</span><span style="color:#FF79C6"> -</span><span style="color:#BD93F9">5</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#FF79C6">></span><span style="color:#F8F8F2"> x</span></span>
+<span class="line"><span style="color:#F8F8F2">[</span><span style="color:#BD93F9">1</span><span style="color:#F8F8F2">]  </span><span style="color:#BD93F9">1</span><span style="color:#BD93F9">  3</span><span style="color:#BD93F9">  2</span><span style="color:#BD93F9"> 10</span><span style="color:#BD93F9">  5</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#FF79C6">></span><span style="color:#8BE9FD"> sort</span><span style="color:#F8F8F2">(x)</span></span>
+<span class="line"><span style="color:#F8F8F2">[</span><span style="color:#BD93F9">1</span><span style="color:#F8F8F2">]  </span><span style="color:#BD93F9">1</span><span style="color:#BD93F9">  2</span><span style="color:#BD93F9">  3</span><span style="color:#BD93F9">  5</span><span style="color:#BD93F9"> 10</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#FF79C6">></span><span style="color:#8BE9FD"> sort</span><span style="color:#F8F8F2">(x, </span><span style="color:#FFB86C;font-style:italic">decreasing</span><span style="color:#FF79C6"> =</span><span style="color:#BD93F9"> TRUE</span><span style="color:#F8F8F2">)</span></span>
+<span class="line"><span style="color:#F8F8F2">[</span><span style="color:#BD93F9">1</span><span style="color:#F8F8F2">] </span><span style="color:#BD93F9">10</span><span style="color:#BD93F9">  5</span><span style="color:#BD93F9">  3</span><span style="color:#BD93F9">  2</span><span style="color:#BD93F9">  1</span></span>
+<span class="line"></span></code></pre>
+<h3 id="matrices">Matrices</h3>
+<p>The easiest way to create a matrix is to combine vectors of equal length using <code>cbind()</code>,</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="r"><code><span class="line"><span style="color:#F8F8F2">x </span><span style="color:#FF79C6">&#x3C;-</span><span style="color:#8BE9FD"> c</span><span style="color:#F8F8F2">(</span><span style="color:#BD93F9">1</span><span style="color:#F8F8F2">, </span><span style="color:#BD93F9">3</span><span style="color:#F8F8F2">, </span><span style="color:#BD93F9">2</span><span style="color:#F8F8F2">, </span><span style="color:#BD93F9">10</span><span style="color:#F8F8F2">, </span><span style="color:#BD93F9">5</span><span style="color:#F8F8F2">)</span></span>
+<span class="line"><span style="color:#F8F8F2">y </span><span style="color:#FF79C6">&#x3C;-</span><span style="color:#BD93F9"> 1</span><span style="color:#FF79C6">:</span><span style="color:#BD93F9">5</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F8F8F2">m1 </span><span style="color:#FF79C6">&#x3C;-</span><span style="color:#8BE9FD"> cbind</span><span style="color:#F8F8F2">(x, y)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#FF79C6">></span><span style="color:#F8F8F2"> m1</span></span>
+<span class="line"><span style="color:#F8F8F2">     x y</span></span>
+<span class="line"><span style="color:#F8F8F2">[</span><span style="color:#BD93F9">1</span><span style="color:#F8F8F2">,] </span><span style="color:#BD93F9">1</span><span style="color:#BD93F9"> 1</span></span>
+<span class="line"><span style="color:#F8F8F2">[</span><span style="color:#BD93F9">2</span><span style="color:#F8F8F2">,] </span><span style="color:#BD93F9">3</span><span style="color:#BD93F9"> 2</span></span>
+<span class="line"><span style="color:#F8F8F2">[</span><span style="color:#BD93F9">3</span><span style="color:#F8F8F2">,] </span><span style="color:#BD93F9">2</span><span style="color:#BD93F9"> 3</span></span>
+<span class="line"><span style="color:#F8F8F2">[</span><span style="color:#BD93F9">4</span><span style="color:#F8F8F2">,] </span><span style="color:#BD93F9">10</span><span style="color:#BD93F9"> 4</span></span>
+<span class="line"><span style="color:#F8F8F2">[</span><span style="color:#BD93F9">5</span><span style="color:#F8F8F2">,] </span><span style="color:#BD93F9">5</span><span style="color:#BD93F9"> 5</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#FF79C6">></span><span style="color:#8BE9FD"> t</span><span style="color:#F8F8F2">(m1)</span></span>
+<span class="line"><span style="color:#F8F8F2">     [,</span><span style="color:#BD93F9">1</span><span style="color:#F8F8F2">] [,</span><span style="color:#BD93F9">2</span><span style="color:#F8F8F2">] [,</span><span style="color:#BD93F9">3</span><span style="color:#F8F8F2">] [,</span><span style="color:#BD93F9">4</span><span style="color:#F8F8F2">] [,</span><span style="color:#BD93F9">5</span><span style="color:#F8F8F2">]</span></span>
+<span class="line"><span style="color:#F8F8F2">x     </span><span style="color:#BD93F9">1</span><span style="color:#BD93F9">    3</span><span style="color:#BD93F9">    2</span><span style="color:#BD93F9">   10</span><span style="color:#BD93F9">    5</span></span>
+<span class="line"><span style="color:#F8F8F2">y     </span><span style="color:#BD93F9">1</span><span style="color:#BD93F9">    2</span><span style="color:#BD93F9">    3</span><span style="color:#BD93F9">    4</span><span style="color:#BD93F9">    5</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#FF79C6">></span><span style="color:#8BE9FD"> dim</span><span style="color:#F8F8F2">(m1)</span></span>
+<span class="line"><span style="color:#F8F8F2">[</span><span style="color:#BD93F9">1</span><span style="color:#F8F8F2">] </span><span style="color:#BD93F9">5</span><span style="color:#BD93F9"> 2</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F8F8F2">m2</span><span style="color:#FF79C6">&#x3C;-</span><span style="color:#8BE9FD">matrix</span><span style="color:#F8F8F2">(</span><span style="color:#8BE9FD">c</span><span style="color:#F8F8F2">(</span><span style="color:#BD93F9">1</span><span style="color:#F8F8F2">,</span><span style="color:#BD93F9">3</span><span style="color:#F8F8F2">,</span><span style="color:#BD93F9">2</span><span style="color:#F8F8F2">,</span><span style="color:#BD93F9">5</span><span style="color:#F8F8F2">,</span><span style="color:#FF79C6">-</span><span style="color:#BD93F9">1</span><span style="color:#F8F8F2">,</span><span style="color:#BD93F9">2</span><span style="color:#F8F8F2">,</span><span style="color:#BD93F9">2</span><span style="color:#F8F8F2">,</span><span style="color:#BD93F9">3</span><span style="color:#F8F8F2">,</span><span style="color:#BD93F9">9</span><span style="color:#F8F8F2">), </span><span style="color:#FFB86C;font-style:italic">ncol</span><span style="color:#FF79C6">=</span><span style="color:#BD93F9">3</span><span style="color:#F8F8F2">, </span><span style="color:#FFB86C;font-style:italic">byrow</span><span style="color:#FF79C6">=</span><span style="color:#F8F8F2">T)</span></span>
+<span class="line"><span style="color:#FF79C6">></span><span style="color:#F8F8F2"> m2</span></span>
+<span class="line"><span style="color:#F8F8F2">     [,</span><span style="color:#BD93F9">1</span><span style="color:#F8F8F2">] [,</span><span style="color:#BD93F9">2</span><span style="color:#F8F8F2">] [,</span><span style="color:#BD93F9">3</span><span style="color:#F8F8F2">]</span></span>
+<span class="line"><span style="color:#F8F8F2">[</span><span style="color:#BD93F9">1</span><span style="color:#F8F8F2">,]    </span><span style="color:#BD93F9">1</span><span style="color:#BD93F9">    3</span><span style="color:#BD93F9">    2</span></span>
+<span class="line"><span style="color:#F8F8F2">[</span><span style="color:#BD93F9">2</span><span style="color:#F8F8F2">,]    </span><span style="color:#BD93F9">5</span><span style="color:#FF79C6">   -</span><span style="color:#BD93F9">1</span><span style="color:#BD93F9">    2</span></span>
+<span class="line"><span style="color:#F8F8F2">[</span><span style="color:#BD93F9">3</span><span style="color:#F8F8F2">,]    </span><span style="color:#BD93F9">2</span><span style="color:#BD93F9">    3</span><span style="color:#BD93F9">    9</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#FF79C6">></span><span style="color:#F8F8F2"> m2[</span><span style="color:#BD93F9">2</span><span style="color:#F8F8F2">,</span><span style="color:#BD93F9">3</span><span style="color:#F8F8F2">]</span></span>
+<span class="line"><span style="color:#F8F8F2">[</span><span style="color:#BD93F9">1</span><span style="color:#F8F8F2">] </span><span style="color:#BD93F9">2</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#FF79C6">></span><span style="color:#F8F8F2"> m2[</span><span style="color:#BD93F9">2</span><span style="color:#F8F8F2">, ]</span></span>
+<span class="line"><span style="color:#F8F8F2">[</span><span style="color:#BD93F9">1</span><span style="color:#F8F8F2">]  </span><span style="color:#BD93F9">5</span><span style="color:#FF79C6"> -</span><span style="color:#BD93F9">1</span><span style="color:#BD93F9">  2</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#FF79C6">></span><span style="color:#F8F8F2"> m2[, </span><span style="color:#BD93F9">3</span><span style="color:#F8F8F2">]</span></span>
+<span class="line"><span style="color:#F8F8F2">[</span><span style="color:#BD93F9">1</span><span style="color:#F8F8F2">] </span><span style="color:#BD93F9">2</span><span style="color:#BD93F9"> 2</span><span style="color:#BD93F9"> 9</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#FF79C6">></span><span style="color:#F8F8F2"> m2[, </span><span style="color:#FF79C6">-</span><span style="color:#BD93F9">1</span><span style="color:#F8F8F2">]</span></span>
+<span class="line"><span style="color:#F8F8F2">     [,</span><span style="color:#BD93F9">1</span><span style="color:#F8F8F2">] [,</span><span style="color:#BD93F9">2</span><span style="color:#F8F8F2">]</span></span>
+<span class="line"><span style="color:#F8F8F2">[</span><span style="color:#BD93F9">1</span><span style="color:#F8F8F2">,]    </span><span style="color:#BD93F9">3</span><span style="color:#BD93F9">    2</span></span>
+<span class="line"><span style="color:#F8F8F2">[</span><span style="color:#BD93F9">2</span><span style="color:#F8F8F2">,]   </span><span style="color:#FF79C6">-</span><span style="color:#BD93F9">1</span><span style="color:#BD93F9">    2</span></span>
+<span class="line"><span style="color:#F8F8F2">[</span><span style="color:#BD93F9">3</span><span style="color:#F8F8F2">,]    </span><span style="color:#BD93F9">3</span><span style="color:#BD93F9">    9</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#FF79C6">></span><span style="color:#F8F8F2"> m2[</span><span style="color:#FF79C6">-</span><span style="color:#BD93F9">1</span><span style="color:#F8F8F2">, </span><span style="color:#BD93F9">2</span><span style="color:#FF79C6">:</span><span style="color:#BD93F9">3</span><span style="color:#F8F8F2">]</span></span>
+<span class="line"><span style="color:#F8F8F2">     [,</span><span style="color:#BD93F9">1</span><span style="color:#F8F8F2">] [,</span><span style="color:#BD93F9">2</span><span style="color:#F8F8F2">]</span></span>
+<span class="line"><span style="color:#F8F8F2">[</span><span style="color:#BD93F9">1</span><span style="color:#F8F8F2">,]   </span><span style="color:#FF79C6">-</span><span style="color:#BD93F9">1</span><span style="color:#BD93F9">    2</span></span>
+<span class="line"><span style="color:#F8F8F2">[</span><span style="color:#BD93F9">2</span><span style="color:#F8F8F2">,]    </span><span style="color:#BD93F9">3</span><span style="color:#BD93F9">    9</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#FF79C6">></span><span style="color:#8BE9FD"> sum</span><span style="color:#F8F8F2">(m2)</span></span>
+<span class="line"><span style="color:#F8F8F2">[</span><span style="color:#BD93F9">1</span><span style="color:#F8F8F2">] </span><span style="color:#BD93F9">26</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#FF79C6">></span><span style="color:#8BE9FD"> apply</span><span style="color:#F8F8F2">(m2, </span><span style="color:#BD93F9">2</span><span style="color:#F8F8F2">, sum)</span></span>
+<span class="line"><span style="color:#F8F8F2">[</span><span style="color:#BD93F9">1</span><span style="color:#F8F8F2">]  </span><span style="color:#BD93F9">8</span><span style="color:#BD93F9">  5</span><span style="color:#BD93F9"> 13</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#FF79C6">></span><span style="color:#8BE9FD"> apply</span><span style="color:#F8F8F2">(m2, </span><span style="color:#BD93F9">1</span><span style="color:#F8F8F2">, mean)</span></span>
+<span class="line"><span style="color:#F8F8F2">[</span><span style="color:#BD93F9">1</span><span style="color:#F8F8F2">] </span><span style="color:#BD93F9">2.000000</span><span style="color:#BD93F9"> 2.000000</span><span style="color:#BD93F9"> 4.666667</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F8F8F2">m1</span><span style="color:#FF79C6">&#x3C;-</span><span style="color:#8BE9FD">matrix</span><span style="color:#F8F8F2">(</span><span style="color:#BD93F9">1</span><span style="color:#FF79C6">:</span><span style="color:#BD93F9">4</span><span style="color:#F8F8F2">, </span><span style="color:#FFB86C;font-style:italic">ncol</span><span style="color:#FF79C6">=</span><span style="color:#BD93F9">2</span><span style="color:#F8F8F2">)</span></span>
+<span class="line"><span style="color:#F8F8F2">m2</span><span style="color:#FF79C6">&#x3C;-</span><span style="color:#8BE9FD">matrix</span><span style="color:#F8F8F2">(</span><span style="color:#8BE9FD">c</span><span style="color:#F8F8F2">(</span><span style="color:#BD93F9">10</span><span style="color:#F8F8F2">,</span><span style="color:#BD93F9">20</span><span style="color:#F8F8F2">,</span><span style="color:#BD93F9">30</span><span style="color:#F8F8F2">,</span><span style="color:#BD93F9">40</span><span style="color:#F8F8F2">),</span><span style="color:#FFB86C;font-style:italic">ncol</span><span style="color:#FF79C6">=</span><span style="color:#BD93F9">2</span><span style="color:#F8F8F2">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#FF79C6">></span><span style="color:#BD93F9"> 2</span><span style="color:#FF79C6">*</span><span style="color:#F8F8F2">m1</span></span>
+<span class="line"><span style="color:#F8F8F2">     [,</span><span style="color:#BD93F9">1</span><span style="color:#F8F8F2">] [,</span><span style="color:#BD93F9">2</span><span style="color:#F8F8F2">]</span></span>
+<span class="line"><span style="color:#F8F8F2">[</span><span style="color:#BD93F9">1</span><span style="color:#F8F8F2">,]    </span><span style="color:#BD93F9">2</span><span style="color:#BD93F9">    6</span></span>
+<span class="line"><span style="color:#F8F8F2">[</span><span style="color:#BD93F9">2</span><span style="color:#F8F8F2">,]    </span><span style="color:#BD93F9">4</span><span style="color:#BD93F9">    8</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#FF79C6">></span><span style="color:#F8F8F2"> m1</span><span style="color:#FF79C6">+</span><span style="color:#F8F8F2">m2</span></span>
+<span class="line"><span style="color:#F8F8F2">     [,</span><span style="color:#BD93F9">1</span><span style="color:#F8F8F2">] [,</span><span style="color:#BD93F9">2</span><span style="color:#F8F8F2">]</span></span>
+<span class="line"><span style="color:#F8F8F2">[</span><span style="color:#BD93F9">1</span><span style="color:#F8F8F2">,]   </span><span style="color:#BD93F9">11</span><span style="color:#BD93F9">   21</span></span>
+<span class="line"><span style="color:#F8F8F2">[</span><span style="color:#BD93F9">2</span><span style="color:#F8F8F2">,]   </span><span style="color:#BD93F9">32</span><span style="color:#BD93F9">   42</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#FF79C6">></span><span style="color:#F8F8F2"> m1</span><span style="color:#FF79C6">*</span><span style="color:#F8F8F2">m2</span></span>
+<span class="line"><span style="color:#F8F8F2">     [,</span><span style="color:#BD93F9">1</span><span style="color:#F8F8F2">] [,</span><span style="color:#BD93F9">2</span><span style="color:#F8F8F2">]</span></span>
+<span class="line"><span style="color:#F8F8F2">[</span><span style="color:#BD93F9">1</span><span style="color:#F8F8F2">,]   </span><span style="color:#BD93F9">10</span><span style="color:#BD93F9">   60</span></span>
+<span class="line"><span style="color:#F8F8F2">[</span><span style="color:#BD93F9">2</span><span style="color:#F8F8F2">,]   </span><span style="color:#BD93F9">90</span><span style="color:#BD93F9">  160</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6272A4"># Note that this is not usual matrix multiplication, for that we use %*%</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#FF79C6">></span><span style="color:#F8F8F2"> m1 </span><span style="color:#FF79C6">%*%</span><span style="color:#8BE9FD"> t</span><span style="color:#F8F8F2">(m2)</span></span>
+<span class="line"><span style="color:#F8F8F2">     [,</span><span style="color:#BD93F9">1</span><span style="color:#F8F8F2">] [,</span><span style="color:#BD93F9">2</span><span style="color:#F8F8F2">]</span></span>
+<span class="line"><span style="color:#F8F8F2">[</span><span style="color:#BD93F9">1</span><span style="color:#F8F8F2">,]   </span><span style="color:#BD93F9">50</span><span style="color:#BD93F9">  110</span></span>
+<span class="line"><span style="color:#F8F8F2">[</span><span style="color:#BD93F9">2</span><span style="color:#F8F8F2">,]   </span><span style="color:#BD93F9">70</span><span style="color:#BD93F9">  150</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#FF79C6">></span><span style="color:#8BE9FD"> solve</span><span style="color:#F8F8F2">(m1) </span><span style="color:#6272A4"># Inverse of m1</span></span>
+<span class="line"><span style="color:#F8F8F2">     [,</span><span style="color:#BD93F9">1</span><span style="color:#F8F8F2">] [,</span><span style="color:#BD93F9">2</span><span style="color:#F8F8F2">]</span></span>
+<span class="line"><span style="color:#F8F8F2">[</span><span style="color:#BD93F9">1</span><span style="color:#F8F8F2">,] </span><span style="color:#FF79C6">-</span><span style="color:#BD93F9">2.0</span><span style="color:#BD93F9">  1.0</span></span>
+<span class="line"><span style="color:#F8F8F2">[</span><span style="color:#BD93F9">2</span><span style="color:#F8F8F2">,]  </span><span style="color:#BD93F9">1.5</span><span style="color:#FF79C6"> -</span><span style="color:#BD93F9">0.5</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#FF79C6">></span><span style="color:#8BE9FD"> solve</span><span style="color:#F8F8F2">(m1)</span><span style="color:#FF79C6">%*%</span><span style="color:#F8F8F2"> m1 </span><span style="color:#6272A4"># Check if the inverse is correct</span></span>
+<span class="line"><span style="color:#F8F8F2">     [,</span><span style="color:#BD93F9">1</span><span style="color:#F8F8F2">] [,</span><span style="color:#BD93F9">2</span><span style="color:#F8F8F2">]</span></span>
+<span class="line"><span style="color:#F8F8F2">[</span><span style="color:#BD93F9">1</span><span style="color:#F8F8F2">,]    </span><span style="color:#BD93F9">1</span><span style="color:#BD93F9">    0</span></span>
+<span class="line"><span style="color:#F8F8F2">[</span><span style="color:#BD93F9">2</span><span style="color:#F8F8F2">,]    </span><span style="color:#BD93F9">0</span><span style="color:#BD93F9">    1</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#FF79C6">></span><span style="color:#8BE9FD"> diag</span><span style="color:#F8F8F2">(</span><span style="color:#BD93F9">3</span><span style="color:#F8F8F2">)</span></span>
+<span class="line"><span style="color:#F8F8F2">     [,</span><span style="color:#BD93F9">1</span><span style="color:#F8F8F2">] [,</span><span style="color:#BD93F9">2</span><span style="color:#F8F8F2">] [,</span><span style="color:#BD93F9">3</span><span style="color:#F8F8F2">]</span></span>
+<span class="line"><span style="color:#F8F8F2">[</span><span style="color:#BD93F9">1</span><span style="color:#F8F8F2">,]    </span><span style="color:#BD93F9">1</span><span style="color:#BD93F9">    0</span><span style="color:#BD93F9">    0</span></span>
+<span class="line"><span style="color:#F8F8F2">[</span><span style="color:#BD93F9">2</span><span style="color:#F8F8F2">,]    </span><span style="color:#BD93F9">0</span><span style="color:#BD93F9">    1</span><span style="color:#BD93F9">    0</span></span>
+<span class="line"><span style="color:#F8F8F2">[</span><span style="color:#BD93F9">3</span><span style="color:#F8F8F2">,]    </span><span style="color:#BD93F9">0</span><span style="color:#BD93F9">    0</span><span style="color:#BD93F9">    1</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#FF79C6">></span><span style="color:#8BE9FD"> diag</span><span style="color:#F8F8F2">(</span><span style="color:#8BE9FD">c</span><span style="color:#F8F8F2">(</span><span style="color:#BD93F9">2</span><span style="color:#F8F8F2">,</span><span style="color:#BD93F9">2</span><span style="color:#F8F8F2">,</span><span style="color:#BD93F9">3</span><span style="color:#F8F8F2">))</span></span>
+<span class="line"><span style="color:#F8F8F2">     [,</span><span style="color:#BD93F9">1</span><span style="color:#F8F8F2">] [,</span><span style="color:#BD93F9">2</span><span style="color:#F8F8F2">] [,</span><span style="color:#BD93F9">3</span><span style="color:#F8F8F2">]</span></span>
+<span class="line"><span style="color:#F8F8F2">[</span><span style="color:#BD93F9">1</span><span style="color:#F8F8F2">,]    </span><span style="color:#BD93F9">2</span><span style="color:#BD93F9">    0</span><span style="color:#BD93F9">    0</span></span>
+<span class="line"><span style="color:#F8F8F2">[</span><span style="color:#BD93F9">2</span><span style="color:#F8F8F2">,]    </span><span style="color:#BD93F9">0</span><span style="color:#BD93F9">    2</span><span style="color:#BD93F9">    0</span></span>
+<span class="line"><span style="color:#F8F8F2">[</span><span style="color:#BD93F9">3</span><span style="color:#F8F8F2">,]    </span><span style="color:#BD93F9">0</span><span style="color:#BD93F9">    0</span><span style="color:#BD93F9">    3</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#FF79C6">></span><span style="color:#8BE9FD"> diag</span><span style="color:#F8F8F2">(m1)</span></span>
+<span class="line"><span style="color:#F8F8F2">[</span><span style="color:#BD93F9">1</span><span style="color:#F8F8F2">] </span><span style="color:#BD93F9">1</span><span style="color:#BD93F9"> 4</span></span>
+<span class="line"></span></code></pre>
+<h3 id="basic-probability">Basic Probability</h3>
+<p>In R we have many built in distributions, such as the normal distribution.</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="r"><code><span class="line"><span style="color:#FF79C6">></span><span style="color:#8BE9FD"> dnorm</span><span style="color:#F8F8F2">(</span><span style="color:#BD93F9">0</span><span style="color:#F8F8F2">)</span></span>
+<span class="line"><span style="color:#F8F8F2">[</span><span style="color:#BD93F9">1</span><span style="color:#F8F8F2">] </span><span style="color:#BD93F9">0.3989423</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#FF79C6">></span><span style="color:#8BE9FD"> dnorm</span><span style="color:#F8F8F2">(</span><span style="color:#BD93F9">0</span><span style="color:#F8F8F2">)</span><span style="color:#FF79C6">*</span><span style="color:#8BE9FD">sqrt</span><span style="color:#F8F8F2">(</span><span style="color:#BD93F9">2</span><span style="color:#FF79C6">*</span><span style="color:#BD93F9">pi</span><span style="color:#F8F8F2">)</span></span>
+<span class="line"><span style="color:#F8F8F2">[</span><span style="color:#BD93F9">1</span><span style="color:#F8F8F2">] </span><span style="color:#BD93F9">1</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#FF79C6">></span><span style="color:#8BE9FD"> dnorm</span><span style="color:#F8F8F2">(</span><span style="color:#BD93F9">0</span><span style="color:#F8F8F2">, </span><span style="color:#FFB86C;font-style:italic">mean</span><span style="color:#FF79C6">=</span><span style="color:#BD93F9">4</span><span style="color:#F8F8F2">)</span></span>
+<span class="line"><span style="color:#F8F8F2">[</span><span style="color:#BD93F9">1</span><span style="color:#F8F8F2">] </span><span style="color:#BD93F9">0.0001338302</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#FF79C6">></span><span style="color:#8BE9FD"> dnorm</span><span style="color:#F8F8F2">(</span><span style="color:#BD93F9">0</span><span style="color:#F8F8F2">, </span><span style="color:#FFB86C;font-style:italic">mean</span><span style="color:#FF79C6">=</span><span style="color:#BD93F9">4</span><span style="color:#F8F8F2">, </span><span style="color:#FFB86C;font-style:italic">sd</span><span style="color:#FF79C6">=</span><span style="color:#BD93F9">10</span><span style="color:#F8F8F2">)</span></span>
+<span class="line"><span style="color:#F8F8F2">[</span><span style="color:#BD93F9">1</span><span style="color:#F8F8F2">] </span><span style="color:#BD93F9">0.03682701</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F8F8F2">v </span><span style="color:#FF79C6">&#x3C;-</span><span style="color:#8BE9FD"> c</span><span style="color:#F8F8F2">(</span><span style="color:#BD93F9">0</span><span style="color:#F8F8F2">, </span><span style="color:#BD93F9">1</span><span style="color:#F8F8F2">, </span><span style="color:#BD93F9">2</span><span style="color:#F8F8F2">)</span></span>
+<span class="line"><span style="color:#FF79C6">></span><span style="color:#8BE9FD"> dnorm</span><span style="color:#F8F8F2">(v)</span></span>
+<span class="line"><span style="color:#F8F8F2">[</span><span style="color:#BD93F9">1</span><span style="color:#F8F8F2">] </span><span style="color:#BD93F9">0.3989423</span><span style="color:#BD93F9"> 0.2419707</span><span style="color:#BD93F9"> 0.05399097</span></span>
+<span class="line"></span></code></pre>
+<p>We can also use the CDF,</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="r"><code><span class="line"><span style="color:#FF79C6">></span><span style="color:#8BE9FD"> pnorm</span><span style="color:#F8F8F2">(</span><span style="color:#BD93F9">0</span><span style="color:#F8F8F2">)</span></span>
+<span class="line"><span style="color:#F8F8F2">[</span><span style="color:#BD93F9">1</span><span style="color:#F8F8F2">] </span><span style="color:#BD93F9">0.5</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#FF79C6">></span><span style="color:#8BE9FD"> pnorm</span><span style="color:#F8F8F2">(</span><span style="color:#BD93F9">1</span><span style="color:#F8F8F2">)</span></span>
+<span class="line"><span style="color:#F8F8F2">[</span><span style="color:#BD93F9">1</span><span style="color:#F8F8F2">] </span><span style="color:#BD93F9">0.8413447</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#FF79C6">></span><span style="color:#8BE9FD"> pnorm</span><span style="color:#F8F8F2">(</span><span style="color:#BD93F9">0</span><span style="color:#F8F8F2">, </span><span style="color:#FFB86C;font-style:italic">mean</span><span style="color:#FF79C6">=</span><span style="color:#BD93F9">2</span><span style="color:#F8F8F2">)</span></span>
+<span class="line"><span style="color:#F8F8F2">[</span><span style="color:#BD93F9">1</span><span style="color:#F8F8F2">] </span><span style="color:#BD93F9">0.02275013</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#FF79C6">></span><span style="color:#8BE9FD"> pnorm</span><span style="color:#F8F8F2">(</span><span style="color:#BD93F9">0</span><span style="color:#F8F8F2">, </span><span style="color:#FFB86C;font-style:italic">mean</span><span style="color:#FF79C6">=</span><span style="color:#BD93F9">2</span><span style="color:#F8F8F2">, </span><span style="color:#FFB86C;font-style:italic">sd</span><span style="color:#FF79C6">=</span><span style="color:#BD93F9">3</span><span style="color:#F8F8F2">)</span></span>
+<span class="line"><span style="color:#F8F8F2">[</span><span style="color:#BD93F9">1</span><span style="color:#F8F8F2">] </span><span style="color:#BD93F9">0.2524925</span></span>
+<span class="line"></span></code></pre>
+<p>And the quantile function,</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="r"><code><span class="line"><span style="color:#FF79C6">></span><span style="color:#8BE9FD"> qnorm</span><span style="color:#F8F8F2">(</span><span style="color:#BD93F9">0.5</span><span style="color:#F8F8F2">)</span></span>
+<span class="line"><span style="color:#F8F8F2">[</span><span style="color:#BD93F9">1</span><span style="color:#F8F8F2">] </span><span style="color:#BD93F9">0</span></span>
+<span class="line"></span></code></pre>
+<p>We can also sample,</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="r"><code><span class="line"><span style="color:#FF79C6">></span><span style="color:#8BE9FD"> rnorm</span><span style="color:#F8F8F2">(</span><span style="color:#BD93F9">4</span><span style="color:#F8F8F2">)</span></span>
+<span class="line"><span style="color:#F8F8F2">[</span><span style="color:#BD93F9">1</span><span style="color:#F8F8F2">] </span><span style="color:#BD93F9">1.2387271</span><span style="color:#FF79C6"> -</span><span style="color:#BD93F9">0.2323259</span><span style="color:#FF79C6"> -</span><span style="color:#BD93F9">1.2003081</span><span style="color:#FF79C6"> -</span><span style="color:#BD93F9">1.6718483</span></span>
+<span class="line"></span></code></pre>
+<p>And some basic statistics,</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="r"><code><span class="line"><span style="color:#FF79C6">></span><span style="color:#F8F8F2"> x </span><span style="color:#FF79C6">&#x3C;-</span><span style="color:#8BE9FD"> rnorm</span><span style="color:#F8F8F2">(</span><span style="color:#BD93F9">100</span><span style="color:#F8F8F2">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#FF79C6">></span><span style="color:#8BE9FD"> mean</span><span style="color:#F8F8F2">(x)</span></span>
+<span class="line"><span style="color:#F8F8F2">[</span><span style="color:#BD93F9">1</span><span style="color:#F8F8F2">] </span><span style="color:#BD93F9">0.07336607</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#FF79C6">></span><span style="color:#8BE9FD"> median</span><span style="color:#F8F8F2">(x)</span></span>
+<span class="line"><span style="color:#F8F8F2">[</span><span style="color:#BD93F9">1</span><span style="color:#F8F8F2">] </span><span style="color:#BD93F9">0.07336607</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#FF79C6">></span><span style="color:#8BE9FD"> var</span><span style="color:#F8F8F2">(x)</span></span>
+<span class="line"><span style="color:#F8F8F2">[</span><span style="color:#BD93F9">1</span><span style="color:#F8F8F2">] </span><span style="color:#BD93F9">0.978366</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#FF79C6">></span><span style="color:#8BE9FD"> sd</span><span style="color:#F8F8F2">(x)</span></span>
+<span class="line"><span style="color:#F8F8F2">[</span><span style="color:#BD93F9">1</span><span style="color:#F8F8F2">] </span><span style="color:#BD93F9">0.9891386</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#FF79C6">></span><span style="color:#8BE9FD"> quantile</span><span style="color:#F8F8F2">(x)</span></span>
+<span class="line"><span style="color:#BD93F9">       0</span><span style="color:#F8F8F2">%       </span><span style="color:#BD93F9">25</span><span style="color:#F8F8F2">%       </span><span style="color:#BD93F9">50</span><span style="color:#F8F8F2">%       </span><span style="color:#BD93F9">75</span><span style="color:#F8F8F2">%      </span><span style="color:#BD93F9">100</span><span style="color:#F8F8F2">%</span></span>
+<span class="line"><span style="color:#FF79C6">-</span><span style="color:#BD93F9">2.603073</span><span style="color:#FF79C6"> -</span><span style="color:#BD93F9">0.573073</span><span style="color:#BD93F9">  0.073366</span><span style="color:#BD93F9">  0.678927</span><span style="color:#BD93F9">  2.496073</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#FF79C6">></span><span style="color:#8BE9FD"> summary</span><span style="color:#F8F8F2">(x)</span></span>
+<span class="line"><span style="color:#F8F8F2">   Min. </span><span style="color:#FF5555;font-style:italic;text-decoration:underline">1st</span><span style="color:#F8F8F2"> Qu.  Median    Mean </span><span style="color:#FF5555;font-style:italic;text-decoration:underline">3rd</span><span style="color:#F8F8F2"> Qu.    Max.</span></span>
+<span class="line"><span style="color:#FF79C6">-</span><span style="color:#BD93F9">2.6031</span><span style="color:#FF79C6"> -</span><span style="color:#BD93F9">0.5731</span><span style="color:#BD93F9">  0.0734</span><span style="color:#BD93F9">  0.0734</span><span style="color:#BD93F9">  0.6789</span><span style="color:#BD93F9">  2.4961</span></span>
+<span class="line"></span>
+<span class="line"></span></code></pre>
+<p>And for other distributions, for example the Binomial distribution,</p>
+<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="r"><code><span class="line"><span style="color:#FF79C6">></span><span style="color:#8BE9FD"> dbinom</span><span style="color:#F8F8F2">(</span><span style="color:#BD93F9">0</span><span style="color:#FF79C6">:</span><span style="color:#BD93F9">5</span><span style="color:#F8F8F2">, </span><span style="color:#FFB86C;font-style:italic">size</span><span style="color:#FF79C6">=</span><span style="color:#BD93F9">5</span><span style="color:#F8F8F2">, </span><span style="color:#FFB86C;font-style:italic">prob</span><span style="color:#FF79C6">=</span><span style="color:#BD93F9">0.5</span><span style="color:#F8F8F2">)</span></span>
+<span class="line"><span style="color:#F8F8F2">[</span><span style="color:#BD93F9">1</span><span style="color:#F8F8F2">] </span><span style="color:#BD93F9">0.03125</span><span style="color:#BD93F9"> 0.15625</span><span style="color:#BD93F9"> 0.31250</span><span style="color:#BD93F9"> 0.31250</span><span style="color:#BD93F9"> 0.15625</span><span style="color:#BD93F9"> 0.03125</span></span>
+<span class="line"></span></code></pre>
+<p>Okay, that’s it for now, go and actually do something to learn.</p>  </div> <nav class="flex flex-col sm:flex-row justify-between mt-8 pt-4 border-t border-border" data-astro-cid-mnl7e2ne>   </nav> </article>  </main> </div> </body></html> 
