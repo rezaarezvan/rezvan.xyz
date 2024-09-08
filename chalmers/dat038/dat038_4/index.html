@@ -1,32 +1,231 @@
-<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="Astro v4.11.5"><link rel="icon" type="image" href="/favicon.ico"><title>Part 4 - Abstract Data Types</title><!-- KaTeX support --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script><!-- inline KaTeX --><link rel="stylesheet" href="/_astro/index.CwgzIfsj.css">
-<link rel="stylesheet" href="/_astro/_slug_.hCvEQTvV.css">
-<style>article[data-astro-cid-v5ro3oot]{max-width:80ch;margin:0 auto}.nav-button[data-astro-cid-v5ro3oot]{display:flex;align-items:center;padding:.5rem;border-radius:.5rem;transition:background-color .3s ease;text-decoration:none;color:var(--text-color);background-color:var(--bg-color);border:1px solid var(--border-color)}.nav-button[data-astro-cid-v5ro3oot]:hover{background-color:var(--hover-color)}.nav-button[data-astro-cid-v5ro3oot] .arrow[data-astro-cid-v5ro3oot]{font-size:1.5rem;line-height:1}.nav-button[data-astro-cid-v5ro3oot] .text[data-astro-cid-v5ro3oot]{display:flex;flex-direction:column;margin:0 .5rem}.nav-button[data-astro-cid-v5ro3oot] .label[data-astro-cid-v5ro3oot]{font-size:.8rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted-color)}.nav-button[data-astro-cid-v5ro3oot] .title[data-astro-cid-v5ro3oot]{font-weight:500}.prev-button[data-astro-cid-v5ro3oot]{justify-content:flex-start}.next-button[data-astro-cid-v5ro3oot]{justify-content:flex-end;text-align:right}@media (max-width: 640px){.nav-button[data-astro-cid-v5ro3oot]{width:100%}.next-button[data-astro-cid-v5ro3oot]{justify-content:flex-start;text-align:left}.next-button[data-astro-cid-v5ro3oot] .text[data-astro-cid-v5ro3oot]{order:2;margin-left:.5rem}.next-button[data-astro-cid-v5ro3oot] .arrow[data-astro-cid-v5ro3oot]{order:1}}
-</style><script type="module">document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]})});
-</script></head> <body> <div class="container mx-auto px-4 flex flex-col md:flex-row min-h-screen"> <aside class="w-full md:w-64 border-b md:border-r md:border-b-0 border-[var(--border-color)] border-dashed pt-8"> <header class="flex flex-col h-full"> <div class="flex items-center mb-4"> <script>
-  function setTheme(mode) {
-    localStorage.setItem("theme-storage", mode);
-    document.documentElement.setAttribute('data-theme', mode);
-  }
-  function toggleTheme() {
-    const currentTheme = localStorage.getItem("theme-storage") || "light";
-    const newTheme = currentTheme === "light" ? "dark" : "light";
-    setTheme(newTheme);
-  }
-  const savedTheme = localStorage.getItem("theme-storage") || "light";
-  setTheme(savedTheme);
-  window.toggleTheme = toggleTheme;
-</script> <button id="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme" class="w-6 h-6 cursor-pointer"> <div class="w-5 h-5 border-2 border-primary rounded-full transition-colors duration-300 ease-in-out hover:bg-primary"></div> </button> <a href="/" class="text-2xl font-semibold ml-3 h-10 pr-3">rezvan.xyz</a> </div> <nav class="flex flex-wrap gap-2 md:flex-col md:gap-2"> <a href="/principles" class="transition-colors">
-[principles]
-</a><a href="/cv" class="transition-colors">
-[cv]
-</a><a href="/posts" class="transition-colors">
-[posts]
-</a><a href="/chalmers" class="transition-colors">
-[chalmers]
-</a><a href="/cityu" class="transition-colors">
-[cityu]
-</a> </nav> </header> </aside> <main class="flex-grow px-4 md:px-8 py-8 overflow-y-auto">  <article class="prose prose-sm sm:prose lg:prose-lg xl:prose-xl max-w-none" data-astro-cid-v5ro3oot> <h1 class="text-3xl sm:text-4xl font-bold mb-4" data-astro-cid-v5ro3oot>Part 4 - Abstract Data Types</h1> <p class="text-sm text-muted-foreground mb-4" data-astro-cid-v5ro3oot>
-Date: 11/29/2022 </p> <div class="markdown-content" data-astro-cid-v5ro3oot>  <h3 id="adt-vs-data-structures">ADT vs Data Structures</h3>
+<!DOCTYPE html><html lang="en"> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" type="image/icon" href="/favicon.ico"><meta name="generator" content="Astro v4.11.5"><!-- Canonical URL --><link rel="canonical" href="https://rezvan.xyz/chalmers/dat038/dat038_4/"><!-- Primary Meta Tags --><title>Part 4 - Abstract Data Types | data structures algorithms | rezvan.xyz</title><meta name="title" content="Part 4 - Abstract Data Types | data structures algorithms | rezvan.xyz"><meta name="description"><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://rezvan.xyz/chalmers/dat038/dat038_4/"><meta property="og:title" content="Part 4 - Abstract Data Types | data structures algorithms | rezvan.xyz"><meta property="og:description"><meta property="og:image" content="https://rezvan.xyz/favicon.ico"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://rezvan.xyz/chalmers/dat038/dat038_4/"><meta property="twitter:title" content="Part 4 - Abstract Data Types | data structures algorithms | rezvan.xyz"><meta property="twitter:description"><meta property="twitter:image" content="https://rezvan.xyz/favicon.ico"><!-- PageFind --><link href="/pagefind/pagefind-ui.css" rel="stylesheet"><script src="/pagefind/pagefind-ui.js"></script><!-- KaTeX support --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script><!-- inline KaTeX --><script>
+    function renderKaTeX() {
+        if (typeof renderMathInElement !== "undefined") {
+            renderMathInElement(document.body, {
+                delimiters: [
+                    { left: "$$", right: "$$", display: true },
+                    { left: "$", right: "$", display: false },
+                ],
+            });
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", renderKaTeX);
+    document.addEventListener("astro:after-swap", renderKaTeX);
+</script><meta name="astro-view-transitions-enabled" content="true"><meta name="astro-view-transitions-fallback" content="animate"><script>
+    function init() {
+        preloadTheme();
+        onScroll();
+        animate();
+        updateThemeButtons();
+        addCopyCodeButtons();
+        setGiscusTheme();
+
+        const backToTop = document.getElementById("back-to-top");
+        backToTop?.addEventListener("click", (event) => scrollToTop(event));
+
+        const backToPrev = document.getElementById("back-to-prev");
+        backToPrev?.addEventListener("click", () => window.history.back());
+
+        const lightThemeButton = document.getElementById("light-theme-button");
+        lightThemeButton?.addEventListener("click", () => {
+            localStorage.setItem("theme", "light");
+            toggleTheme(false);
+            updateThemeButtons();
+        });
+
+        const darkThemeButton = document.getElementById("dark-theme-button");
+        darkThemeButton?.addEventListener("click", () => {
+            localStorage.setItem("theme", "dark");
+            toggleTheme(true);
+            updateThemeButtons();
+        });
+
+        const systemThemeButton = document.getElementById(
+            "system-theme-button",
+        );
+        systemThemeButton?.addEventListener("click", () => {
+            localStorage.setItem("theme", "system");
+            toggleTheme(
+                window.matchMedia("(prefers-color-scheme: dark)").matches,
+            );
+            updateThemeButtons();
+        });
+
+        window
+            .matchMedia("(prefers-color-scheme: dark)")
+            .addEventListener("change", (event) => {
+                if (localStorage.theme === "system") {
+                    toggleTheme(event.matches);
+                }
+            });
+
+        document.addEventListener("scroll", onScroll);
+    }
+
+    function updateThemeButtons() {
+        const theme = localStorage.getItem("theme");
+        const lightThemeButton = document.getElementById("light-theme-button");
+        const darkThemeButton = document.getElementById("dark-theme-button");
+        const systemThemeButton = document.getElementById(
+            "system-theme-button",
+        );
+
+        function removeActiveButtonTheme(button) {
+            button?.classList.remove("bg-black/5");
+            button?.classList.remove("dark:bg-white/5");
+        }
+
+        function addActiveButtonTheme(button) {
+            button?.classList.add("bg-black/5");
+            button?.classList.add("dark:bg-white/5");
+        }
+
+        removeActiveButtonTheme(lightThemeButton);
+        removeActiveButtonTheme(darkThemeButton);
+        removeActiveButtonTheme(systemThemeButton);
+
+        if (theme === "light") {
+            addActiveButtonTheme(lightThemeButton);
+        } else if (theme === "dark") {
+            addActiveButtonTheme(darkThemeButton);
+        } else {
+            addActiveButtonTheme(systemThemeButton);
+        }
+    }
+
+    function animate() {
+        const animateElements = document.querySelectorAll(".animate");
+
+        animateElements.forEach((element, index) => {
+            setTimeout(() => {
+                element.classList.add("show");
+            }, index * 100);
+        });
+    }
+
+    function onScroll() {
+        if (window.scrollY > 0) {
+            document.documentElement.classList.add("scrolled");
+        } else {
+            document.documentElement.classList.remove("scrolled");
+        }
+    }
+
+    function scrollToTop(event) {
+        event.preventDefault();
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth",
+        });
+    }
+
+    function toggleTheme(dark) {
+        const css = document.createElement("style");
+
+        css.appendChild(
+            document.createTextNode(
+                `* {
+             -webkit-transition: none !important;
+             -moz-transition: none !important;
+             -o-transition: none !important;
+             -ms-transition: none !important;
+             transition: none !important;
+          }
+        `,
+            ),
+        );
+
+        document.head.appendChild(css);
+
+        if (dark) {
+            document.documentElement.classList.add("dark");
+        } else {
+            document.documentElement.classList.remove("dark");
+        }
+
+        window.getComputedStyle(css).opacity;
+        document.head.removeChild(css);
+
+        setGiscusTheme();
+    }
+
+    function preloadTheme() {
+        const userTheme = localStorage.theme;
+
+        if (userTheme === "light" || userTheme === "dark") {
+            toggleTheme(userTheme === "dark");
+        } else {
+            toggleTheme(
+                window.matchMedia("(prefers-color-scheme: dark)").matches,
+            );
+        }
+    }
+
+    function addCopyCodeButtons() {
+        let copyButtonLabel = "📋";
+        let codeBlocks = Array.from(document.querySelectorAll("pre"));
+
+        async function copyCode(codeBlock, copyButton) {
+            const codeText = codeBlock.innerText;
+            const buttonText = copyButton.innerText;
+            const textToCopy = codeText.replace(buttonText, "");
+
+            await navigator.clipboard.writeText(textToCopy);
+            copyButton.innerText = "✅";
+
+            setTimeout(() => {
+                copyButton.innerText = copyButtonLabel;
+            }, 2000);
+        }
+
+        for (let codeBlock of codeBlocks) {
+            const wrapper = document.createElement("div");
+            wrapper.style.position = "relative";
+
+            const copyButton = document.createElement("button");
+            copyButton.innerText = copyButtonLabel;
+            copyButton.classList = "copy-code";
+
+            codeBlock.setAttribute("tabindex", "0");
+            codeBlock.appendChild(copyButton);
+
+            codeBlock.parentNode.insertBefore(wrapper, codeBlock);
+            wrapper.appendChild(codeBlock);
+
+            copyButton?.addEventListener("click", async () => {
+                await copyCode(codeBlock, copyButton);
+            });
+        }
+    }
+
+    const setGiscusTheme = () => {
+        const giscus = document.querySelector(".giscus-frame");
+
+        const isDark = document.documentElement.classList.contains("dark");
+
+        if (giscus) {
+            const url = new URL(giscus.src);
+            url.searchParams.set("theme", isDark ? "dark" : "light");
+            giscus.src = url.toString();
+        }
+    };
+
+    document.addEventListener("DOMContentLoaded", () => init());
+    document.addEventListener("astro:after-swap", () => init());
+    preloadTheme();
+</script><link rel="stylesheet" href="/_astro/_subject_.CmU_Tg_r.css">
+<style>summary[data-astro-cid-xvrfupwn]{cursor:pointer;border-top-left-radius:.5rem;border-top-right-radius:.5rem;padding:.375rem .75rem;font-weight:500;transition-property:color,background-color,border-color,text-decoration-color,fill,stroke;transition-timing-function:cubic-bezier(.4,0,.2,1);transition-duration:.15s}summary[data-astro-cid-xvrfupwn]:hover{background-color:#0000000d}summary[data-astro-cid-xvrfupwn]:hover:is(.dark *){background-color:#ffffff0d}details[data-astro-cid-xvrfupwn][open] summary[data-astro-cid-xvrfupwn]{background-color:#0000000d}details[data-astro-cid-xvrfupwn][open] summary[data-astro-cid-xvrfupwn]:is(.dark *){background-color:#ffffff0d}
+</style><script type="module" src="/_astro/hoisted.DzxSAGjc.js"></script></head> <body> <header data-astro-transition-persist="astro-l7r54iwe-1"> <div class="mx-auto max-w-screen-sm px-3"> <div class="flex flex-wrap justify-between gap-y-2"> <a href="/" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out">  <div class="font-semibold"> rezvan.xyz </div>  </a> <nav class="flex items-center gap-1 text-sm"> <a href="/posts" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> posts </a> <span> / </span> <a href="/chalmers" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> chalmers </a> <span> / </span> <a href="/cityu" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> cityu </a> <span> / </span> <button id="magnifying-glass" aria-label="Search" class="flex items-center rounded border border-black/15 bg-neutral-100 px-2 py-1 text-xs transition-colors duration-300 ease-in-out hover:bg-black/5 hover:text-black focus-visible:bg-black/5 focus-visible:text-black dark:border-white/20 dark:bg-neutral-900 dark:hover:bg-white/5 dark:hover:text-white dark:focus-visible:bg-white/5 dark:focus-visible:text-white"> <svg height="16" stroke-linejoin="round" viewBox="0 0 16 16" width="16" style="color: currentcolor;"><path fill-rule="evenodd" clip-rule="evenodd" d="M3.5 7C3.5 5.067 5.067 3.5 7 3.5C8.933 3.5 10.5 5.067 10.5 7C10.5 7.88461 10.1718 8.69256 9.63058 9.30876L9.30876 9.63058C8.69256 10.1718 7.88461 10.5 7 10.5C5.067 10.5 3.5 8.933 3.5 7ZM9.96544 11.0261C9.13578 11.6382 8.11014 12 7 12C4.23858 12 2 9.76142 2 7C2 4.23858 4.23858 2 7 2C9.76142 2 12 4.23858 12 7C12 8.11014 11.6382 9.13578 11.0261 9.96544L14.0303 12.9697L14.5607 13.5L13.5 14.5607L12.9697 14.0303L9.96544 11.0261Z" fill="currentColor"></path></svg>
+&nbsp;Search
+</button> </nav> </div> </div> </header> <main>  <div class="mx-auto max-w-screen-sm px-3"> <div class="animate"> <a href="/chalmers/dat038" class="not-prose group relative flex w-fit flex-nowrap rounded border border-black/15 py-1.5 pl-7 pr-3 transition-colors duration-300 ease-in-out hover:bg-black/5 hover:text-black focus-visible:bg-black/5 focus-visible:text-black dark:border-white/20 dark:hover:bg-white/5 dark:hover:text-white dark:focus-visible:bg-white/5 dark:focus-visible:text-white"> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="absolute left-2 top-1/2 size-4 -translate-y-1/2 fill-none stroke-current stroke-2"> <line x1="5" y1="12" x2="19" y2="12" class="translate-x-2 scale-x-0 transition-transform duration-300 ease-in-out group-hover:translate-x-0 group-hover:scale-x-100 group-focus-visible:translate-x-0 group-focus-visible:scale-x-100"></line> <polyline points="12 5 5 12 12 19" class="translate-x-1 transition-transform duration-300 ease-in-out group-hover:translate-x-0 group-focus-visible:translate-x-0"></polyline> </svg> <div class="text-sm"> Back to data structures algorithms </div> </a> </div> <div class="my-10 space-y-1"> <div class="animate flex items-center gap-1.5"> <div class="font-base text-sm"> DAT038 </div>
+&bull;
+<div class="font-base text-sm"> <time datetime="2022-11-28T19:30:47.000Z"> November 29, 2022 </time> </div> 
+&bull;
+<div class="font-base text-sm">
+Last modified:  <time datetime="2024-09-02T11:21:25.000Z"> September 02, 2024 </time> </div> 
+&bull;
+<div class="font-base text-sm"> 11 min read </div> </div> <h1 class="animate text-3xl font-semibold text-black dark:text-white"> Part 4 - Abstract Data Types </h1> </div> <details open class="animate rounded-lg border border-black/15 dark:border-white/20" data-astro-cid-xvrfupwn> <summary data-astro-cid-xvrfupwn>Table of Contents</summary> <nav class="" data-astro-cid-xvrfupwn> <ul class="py-3" data-astro-cid-xvrfupwn> <li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#adt-vs-data-structures" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> ADT vs Data Structures </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#method-descriptions" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Method Descriptions </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#different-kind-of-adts" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Different kind of ADTs </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#ordered-collections-stacks-queues-etc" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Ordered collections: Stacks, Queues, etc </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#stacks" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Stacks </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#queues" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Queues </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#stacks--queues--deques" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Stacks + Queues = Deques </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#lists-generalizing-stacks-and-queues" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Lists: Generalizing Stacks and Queues </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#priority-queues" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Priority Queues </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#iterating-comparing-and-sorting" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Iterating, Comparing and Sorting </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#unordered-collections-maps-sets-and-graphs" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Unordered collections: Maps, sets, and graphs </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#sets" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Sets </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#maps" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Maps </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#a-set-is-degenerated-map" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> A Set is Degenerated Map </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#multiset-and-multimap" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Multiset and multimap </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#multiset-and-multimap-are-maps" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Multiset and Multimap are Maps </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#graphs" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Graphs </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#summary" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Summary </a>  </li> </ul> </nav> </details> <article class="animate"> <h3 id="adt-vs-data-structures">ADT vs Data Structures</h3>
 <p>So, what’s the difference between an <strong>A</strong>bstract <strong>D</strong>ata <strong>T</strong>ype and an actual data structure?</p>
 <p>An ADT is a kind of specification of something - it specifies how we can interact with that <em>object</em>, like an API.</p>
 <p>It consists of methods and constructors but also plain-text specifications (like the complexity for example) and explanations.</p>
@@ -35,7 +234,7 @@ But an important note is, that it doesn’t need to be in an actual programming 
 <h3 id="method-descriptions">Method Descriptions</h3>
 <p>As explained above - an ADT has methods/functions - but these need to be specified/have a brief plain-text explanation.
 For example, all these ADTs have the same functions, but work differently:</p>
-<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>Stack&#x3C;Item>:</span></span>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-color-background);color:var(--astro-code-color-text); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>Stack&#x3C;Item>:</span></span>
 <span class="line"><span>    void add(Item x)</span></span>
 <span class="line"><span>    Item remove()</span></span>
 <span class="line"><span></span></span>
@@ -55,7 +254,7 @@ For example, all these ADTs have the same functions, but work differently:</p>
 <p>Stacks - LIFO (‘<strong>L</strong>ast <strong>I</strong>n <strong>F</strong>irst <strong>O</strong>ut’)</p>
 <p>Builds on the functions <code>pop()</code> <code>push()</code></p>
 <p>So the ADT would be:</p>
-<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>Stack&#x3C;Item>:</span></span>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-color-background);color:var(--astro-code-color-text); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>Stack&#x3C;Item>:</span></span>
 <span class="line"><span>    // Adds Item X to the top of the stack</span></span>
 <span class="line"><span>    void push(Item x)</span></span>
 <span class="line"><span></span></span>
@@ -76,7 +275,7 @@ For example, all these ADTs have the same functions, but work differently:</p>
 <p>Queues - FIFO (‘<strong>F</strong>irst <strong>I</strong>n <strong>F</strong>irst <strong>O</strong>ut’)</p>
 <p>Builds on the functions <code>enqueue()</code> <code>dequeue()</code></p>
 <p>So the ADT can be described as:</p>
-<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>Queue&#x3C;Item>:</span></span>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-color-background);color:var(--astro-code-color-text); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>Queue&#x3C;Item>:</span></span>
 <span class="line"><span>    // Adds Item X to the end of the queue</span></span>
 <span class="line"><span>    void enqueue(Item x)</span></span>
 <span class="line"><span></span></span>
@@ -95,7 +294,7 @@ For example, all these ADTs have the same functions, but work differently:</p>
 <h4 id="stacks--queues--deques">Stacks + Queues = Deques</h4>
 <p>If we combine these two ADTs that we’ve become so familiar with - we get a so-called double-ended queue!</p>
 <p>Here’s the ADT for it:</p>
-<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>Deque&#x3C;Item>:</span></span>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-color-background);color:var(--astro-code-color-text); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>Deque&#x3C;Item>:</span></span>
 <span class="line"><span>    // Adds Item X to the front of the deque</span></span>
 <span class="line"><span>    void add_first(Item x)</span></span>
 <span class="line"><span></span></span>
@@ -114,7 +313,7 @@ For example, all these ADTs have the same functions, but work differently:</p>
 <h4 id="lists-generalizing-stacks-and-queues">Lists: Generalizing Stacks and Queues</h4>
 <p>Lists is the ADT when we finally don’t restrict ourselves to only add/remove the front/end element - and finally can add/remove wherever we want!</p>
 <p>The ADT looks something like:</p>
-<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>List&#x3C;Item>:</span></span>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-color-background);color:var(--astro-code-color-text); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>List&#x3C;Item>:</span></span>
 <span class="line"><span>    // Inserts Item X at position i in the list</span></span>
 <span class="line"><span>    void add(Item x, int i)</span></span>
 <span class="line"><span></span></span>
@@ -146,18 +345,18 @@ For example, iterating through a queue. Note that some data structures actually 
 One thing to note is that iterables and iterators are different. An <em>iterator</em> has a method that returns the next element, and a way of telling when the iteration is exhausted.</p>
 <p>So, an <em>iterator</em> can only be iterated over once, while an <em>iterable</em> can be iterated many times, because it creates new iterators. Quite a mouthful.</p>
 <p>So in Python for example a simple:</p>
-<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="py"><code><span class="line"><span style="color:#FF79C6">for</span><span style="color:#F8F8F2"> x </span><span style="color:#FF79C6">in</span><span style="color:#F8F8F2"> elements:</span></span>
-<span class="line"><span style="color:#6272A4">    # do something with x</span></span>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-color-background);color:var(--astro-code-color-text); overflow-x: auto;" tabindex="0" data-language="py"><code><span class="line"><span style="color:var(--astro-code-token-keyword)">for</span><span style="color:var(--astro-code-color-text)"> x </span><span style="color:var(--astro-code-token-keyword)">in</span><span style="color:var(--astro-code-color-text)"> elements</span><span style="color:var(--astro-code-token-punctuation)">:</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">    # do something with x</span></span>
 <span class="line"></span></code></pre>
 <p>is translated to:</p>
-<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="py"><code><span class="line"><span style="color:#F8F8F2">it </span><span style="color:#FF79C6">=</span><span style="color:#F8F8F2"> elements.</span><span style="color:#BD93F9">__iter__</span><span style="color:#F8F8F2">()</span></span>
-<span class="line"><span style="color:#FF79C6">while</span><span style="color:#BD93F9"> True</span><span style="color:#F8F8F2">:</span></span>
-<span class="line"><span style="color:#FF79C6">    try</span><span style="color:#F8F8F2">:</span></span>
-<span class="line"><span style="color:#F8F8F2">        x </span><span style="color:#FF79C6">=</span><span style="color:#F8F8F2"> it.</span><span style="color:#BD93F9">__next__</span><span style="color:#F8F8F2">()</span></span>
-<span class="line"><span style="color:#F8F8F2">    expect </span><span style="color:#8BE9FD;font-style:italic">StopIteration</span><span style="color:#F8F8F2">():</span></span>
-<span class="line"><span style="color:#FF79C6">        break</span></span>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-color-background);color:var(--astro-code-color-text); overflow-x: auto;" tabindex="0" data-language="py"><code><span class="line"><span style="color:var(--astro-code-color-text)">it </span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-color-text)"> elements</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">__iter__</span><span style="color:var(--astro-code-token-punctuation)">()</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">while</span><span style="color:var(--astro-code-token-constant)"> True</span><span style="color:var(--astro-code-token-punctuation)">:</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">    try</span><span style="color:var(--astro-code-token-punctuation)">:</span></span>
+<span class="line"><span style="color:var(--astro-code-color-text)">        x </span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-color-text)"> it</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">__next__</span><span style="color:var(--astro-code-token-punctuation)">()</span></span>
+<span class="line"><span style="color:var(--astro-code-color-text)">    expect </span><span style="color:var(--astro-code-token-constant)">StopIteration</span><span style="color:var(--astro-code-token-punctuation)">():</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">        break</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:#6272A4">    # do something  with x</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">    # do something  with x</span></span>
 <span class="line"></span></code></pre>
 <p>A same kind of logic is applied when we want to compare items. If something is comparable they implement a <em>comparable</em> interface for example.
 But often we want our own comparisons to something rather than the ‘natural ordering’ the comparable interface provides. In these cases we need to implement different <em>comparators</em>.</p>
@@ -174,7 +373,7 @@ But often we want our own comparisons to something rather than the ‘natural or
 <li>Usually a kind of iterator for looping over all elements/members in set.</li>
 </ul>
 <p>So the ADT could look like:</p>
-<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>Set&#x3C;Item>:</span></span>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-color-background);color:var(--astro-code-color-text); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>Set&#x3C;Item>:</span></span>
 <span class="line"><span>    // Returns True if x is in the set, False otherwise</span></span>
 <span class="line"><span>    boolean contains(Item x)</span></span>
 <span class="line"><span></span></span>
@@ -202,7 +401,7 @@ But often we want our own comparisons to something rather than the ‘natural or
 <li>(Usually) an iterator to loop over all keys</li>
 </ul>
 <p>So an ADT would look like:</p>
-<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>Map&#x3C;Key, Value>:</span></span>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-color-background);color:var(--astro-code-color-text); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>Map&#x3C;Key, Value>:</span></span>
 <span class="line"><span>    // Returns True if there's an association for the key, k.</span></span>
 <span class="line"><span>    boolean contains(Key k)</span></span>
 <span class="line"><span></span></span>
@@ -263,7 +462,7 @@ But often we want our own comparisons to something rather than the ‘natural or
 <p>If we have an implementation of a map, it’s actually quite easy to turn it into a set. We just need to create an underlying map,
 whose keys are the set items!</p>
 <p>So an ADT solution would be:</p>
-<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>Set&#x3C;Item>:</span></span>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-color-background);color:var(--astro-code-color-text); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>Set&#x3C;Item>:</span></span>
 <span class="line"><span>    Map&#x3C;Item, Void> underlying_map</span></span>
 <span class="line"><span></span></span>
 <span class="line"><span>    boolean contains(Item x)  = underlying_map.contains(x)</span></span>
@@ -278,7 +477,7 @@ whose keys are the set items!</p>
 <h4 id="multiset-and-multimap">Multiset and multimap</h4>
 <p>Sometimes we want to put several objects into the same ‘slot’ (for example a set with lists).</p>
 <p>A multiset (sometimes called ‘bag’) is just like a set, but can contain duplicates.</p>
-<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>Multiset&#x3C;Item>:</span></span>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-color-background);color:var(--astro-code-color-text); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>Multiset&#x3C;Item>:</span></span>
 <span class="line"><span>    // Returns the number of occurrences of Item x in the multiset</span></span>
 <span class="line"><span>    int count(Item x)</span></span>
 <span class="line"><span></span></span>
@@ -289,7 +488,7 @@ whose keys are the set items!</p>
 <span class="line"><span>    Item remove(Item x)</span></span>
 <span class="line"><span></span></span></code></pre>
 <p>A multimap (or sometimes called ‘index’) is just like a map, but keys can map to several values.</p>
-<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>Multimap&#x3C;Key, Value>:</span></span>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-color-background);color:var(--astro-code-color-text); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>Multimap&#x3C;Key, Value>:</span></span>
 <span class="line"><span>    // Returns the whole collection of values associated with the key, k</span></span>
 <span class="line"><span>    Collection&#x3C;Value> get(Key k)</span></span>
 <span class="line"><span></span></span>
@@ -303,7 +502,7 @@ whose keys are the set items!</p>
 <p>Now this might sound weird - but yes, maps as well! We can just like how we implemented a set using an underlying map,
 use an underlying map to implement multisets and maps.</p>
 <p>An ADT for this would be:</p>
-<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>Multimap&#x3C;Key, Value>:</span></span>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-color-background);color:var(--astro-code-color-text); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>Multimap&#x3C;Key, Value>:</span></span>
 <span class="line"><span>    Map&#x3C;Key, Set&#x3C;Value>> underlying_map</span></span>
 <span class="line"><span></span></span>
 <span class="line"><span>    Collection&#x3C;Value> get(Key k) = underlying_map.get(k)</span></span>
@@ -313,7 +512,7 @@ use an underlying map to implement multisets and maps.</p>
 <span class="line"><span>    void remove(Key k, Value v)  = underlying_map.remove(k)</span></span>
 <span class="line"><span></span></span></code></pre>
 <p>And for Multisets:</p>
-<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>Mutlisets&#x3C;Item>:</span></span>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-color-background);color:var(--astro-code-color-text); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>Mutlisets&#x3C;Item>:</span></span>
 <span class="line"><span>    Map&#x3C;Key, Item> underlying_map</span></span>
 <span class="line"><span></span></span>
 <span class="line"><span>    int count(Item x) = underlying_map.get(x)</span></span>
@@ -334,7 +533,7 @@ use an underlying map to implement multisets and maps.</p>
 <li>and <em>edges</em> (also called arcs, links) that connect nodes.</li>
 </ul>
 <p>There are many, many types of graphs - in this course we’ll mainly use so-called directed graphs, so our ADT will look like:</p>
-<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>DirectedGraph&#x3C;Node>:</span></span>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-color-background);color:var(--astro-code-color-text); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>DirectedGraph&#x3C;Node>:</span></span>
 <span class="line"><span>    // Adds an edge to the graph</span></span>
 <span class="line"><span>    void add(DirectedEdge&#x3C;Node> e)</span></span>
 <span class="line"><span></span></span>
@@ -355,7 +554,7 @@ use an underlying map to implement multisets and maps.</p>
 <span class="line"><span>    int n_edges()</span></span>
 <span class="line"><span></span></span></code></pre>
 <p>As you can see this ADT relies on a class that specifies how an edge should work:</p>
-<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>class DirectedEdge&#x3C;Node>:</span></span>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-color-background);color:var(--astro-code-color-text); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>class DirectedEdge&#x3C;Node>:</span></span>
 <span class="line"><span>    // The constructor to create a new edge between two nodes</span></span>
 <span class="line"><span>    __init__(Node from, Node to, float weight)</span></span>
 <span class="line"><span></span></span>
@@ -374,4 +573,67 @@ use an underlying map to implement multisets and maps.</p>
 <p>In my notes there is one way, I wrote it using slightly different syntax/language. But the takeaway is still the ADTs as in a concept -  all these ADTs build on the same basic idea/operations.</p>
 <p>I really liked the picture from the slides in my course so, I’ll put it here to visualize everything we have discussed today.
 <img src="/images/school/Summary.png" alt="Summary"></p>
-<p>In the next part we’ll begin with concept we mentioned today - Hash tables!</p>  </div> <nav class="flex flex-col sm:flex-row justify-between mt-8 pt-4 border-t border-border" data-astro-cid-v5ro3oot> <a href="/chalmers/dat038/dat038_3" class="nav-button prev-button mb-4 sm:mb-0" data-astro-cid-v5ro3oot> <span class="arrow" data-astro-cid-v5ro3oot>←</span> <span class="text" data-astro-cid-v5ro3oot> <span class="label" data-astro-cid-v5ro3oot>Previous</span> <span class="title" data-astro-cid-v5ro3oot>Part 3 - Dynamic Arrays</span> </span> </a> <a href="/chalmers/dat038/dat038_5" class="nav-button next-button" data-astro-cid-v5ro3oot> <span class="text" data-astro-cid-v5ro3oot> <span class="label" data-astro-cid-v5ro3oot>Next</span> <span class="title" data-astro-cid-v5ro3oot>Part 5 - Hash Tables</span> </span> <span class="arrow" data-astro-cid-v5ro3oot>→</span> </a> </nav> </article>  </main> </div> </body></html> 
+<p>In the next part we’ll begin with concept we mentioned today - Hash tables!</p> <div class="mt-24"> <div class="grid grid-cols-2 gap-1.5 sm:gap-3"> <a href="/chalmers/dat038/dat038_3" class="group relative flex flex-nowrap rounded-lg border border-black/15 px-4 py-3 pl-10 no-underline transition-colors duration-300 ease-in-out hover:bg-black/5 hover:text-black focus-visible:bg-black/5 focus-visible:text-black dark:border-white/20 dark:hover:bg-white/5 dark:hover:text-white dark:focus-visible:bg-white/5 dark:focus-visible:text-white"> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="absolute left-2 top-1/2 size-5 -translate-y-1/2 fill-none stroke-current stroke-2"> <line x1="5" y1="12" x2="19" y2="12" class="translate-x-3 scale-x-0 transition-transform duration-300 ease-in-out group-hover:translate-x-0 group-hover:scale-x-100 group-focus-visible:translate-x-0 group-focus-visible:scale-x-100"></line> <polyline points="12 5 5 12 12 19" class="translate-x-1 transition-transform duration-300 ease-in-out group-hover:translate-x-0 group-focus-visible:translate-x-0"></polyline> </svg> <div class="flex items-center text-sm"> Part 3 - Dynamic Arrays </div> </a> <a href="/chalmers/dat038/dat038_5" class="group relative flex flex-grow flex-row-reverse flex-nowrap rounded-lg border border-black/15 px-4 py-4 pr-10 no-underline transition-colors duration-300 ease-in-out hover:bg-black/5 hover:text-black focus-visible:bg-black/5 focus-visible:text-black dark:border-white/20 dark:hover:bg-white/5 dark:hover:text-white dark:focus-visible:bg-white/5 dark:focus-visible:text-white"> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="absolute right-2 top-1/2 size-5 -translate-y-1/2 fill-none stroke-current stroke-2"> <line x1="5" y1="12" x2="19" y2="12" class="translate-x-3 scale-x-0 transition-transform duration-300 ease-in-out group-hover:translate-x-0 group-hover:scale-x-100 group-focus-visible:translate-x-0 group-focus-visible:scale-x-100"></line> <polyline points="12 5 19 12 12 19" class="-translate-x-1 transition-transform duration-300 ease-in-out group-hover:translate-x-0 group-focus-visible:translate-x-0"></polyline> </svg> <div class="flex items-center text-sm"> Part 5 - Hash Tables </div> </a> </div> </div> <div class="mt-24"> <div class="giscus"></div> <script data-astro-rerun src="https://giscus.app/client.js" data-repo="rezaarezvan/rezvan.xyz" data-repo-id="R_kgDOL_6l9Q" data-category="Announcements" data-category-id="DIC_kwDOL_6l9c4Cfk55" data-mapping="pathname" data-strict="0" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="preferred_color_scheme" data-lang="en" data-loading="lazy" crossorigin="anonymous" async></script> </div> </article> </div>  </main> <footer class="animate"> <div class="mx-auto max-w-screen-sm px-3"> <div class="relative"> <div class="absolute -top-12 right-0"> <button id="back-to-top" class="group relative flex w-fit flex-nowrap rounded border border-black/15 py-1.5 pl-8 pr-3 transition-colors duration-300 ease-in-out hover:bg-black/5 hover:text-black focus-visible:bg-black/5 focus-visible:text-black dark:border-white/20 dark:hover:bg-white/5 dark:hover:text-white dark:focus-visible:bg-white/5 dark:focus-visible:text-white"> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="absolute left-2 top-1/2 size-4 -translate-y-1/2 rotate-90 fill-none stroke-current stroke-2"> <line x1="5" y1="12" x2="19" y2="12" class="translate-x-2 scale-x-0 transition-transform duration-300 ease-in-out group-hover:translate-x-0 group-hover:scale-x-100 group-focus-visible:translate-x-0 group-focus-visible:scale-x-100"></line> <polyline points="12 5 5 12 12 19" class="translate-x-1 transition-transform duration-300 ease-in-out group-hover:translate-x-0 group-focus-visible:translate-x-0"></polyline> </svg> <div class="text-sm">Back to top</div> </button> </div> </div> <div class="flex items-center justify-between"> <div>&copy; 2024 • rezvan.xyz </div> <div class="flex flex-wrap items-center gap-1.5"> <button id="light-theme-button" aria-label="Light theme" class="group flex size-9 items-center justify-center rounded border border-black/15 hover:bg-black/5 focus-visible:bg-black/5 dark:border-white/20 dark:hover:bg-white/5 dark:focus-visible:bg-white/5"> <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="transition-colors duration-300 ease-in-out group-hover:animate-pulse group-hover:stroke-black group-focus-visible:animate-pulse group-focus-visible:stroke-black group-hover:dark:stroke-white dark:group-focus-visible:stroke-white"> <circle cx="12" cy="12" r="5"></circle> <line x1="12" y1="1" x2="12" y2="3"></line> <line x1="12" y1="21" x2="12" y2="23"></line> <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line> <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line> <line x1="1" y1="12" x2="3" y2="12"></line> <line x1="21" y1="12" x2="23" y2="12"></line> <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line> <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line> </svg> </button> <button id="dark-theme-button" aria-label="Dark theme" class="group flex size-9 items-center justify-center rounded border border-black/15 hover:bg-black/5 focus-visible:bg-black/5 dark:border-white/20 dark:hover:bg-white/5 dark:focus-visible:bg-white/5"> <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="transition-colors duration-300 ease-in-out group-hover:animate-pulse group-hover:stroke-black group-focus-visible:animate-pulse group-focus-visible:stroke-black group-hover:dark:stroke-white dark:group-focus-visible:stroke-white"> <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path> </svg> </button> <button id="system-theme-button" aria-label="System theme" class="group flex size-9 items-center justify-center rounded border border-black/15 hover:bg-black/5 focus-visible:bg-black/5 dark:border-white/20 dark:hover:bg-white/5 dark:focus-visible:bg-white/5"> <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="transition-colors duration-300 ease-in-out group-hover:animate-pulse group-hover:stroke-black group-focus-visible:animate-pulse group-focus-visible:stroke-black group-hover:dark:stroke-white dark:group-focus-visible:stroke-white"> <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect> <line x1="8" y1="21" x2="16" y2="21"></line> <line x1="12" y1="17" x2="12" y2="21"></line> </svg> </button> </div> </div> </div> </footer> <aside data-pagefind-ignore> <div id="backdrop" class="bg-[rgba(0, 0, 0, 0.5] invisible fixed left-0 top-0 z-50 flex h-screen w-full justify-center p-6 backdrop-blur-sm" data-astro-transition-persist="astro-3snakcvo-2"> <div id="pagefind-container" class="m-0 flex h-fit max-h-[80%] w-full max-w-screen-sm flex-col overflow-auto rounded border border-black/15 bg-neutral-100 p-2 px-4 py-3 shadow-lg dark:border-white/20 dark:bg-neutral-900"> <div id="search" class="pagefind-ui pagefind-init" data-pagefind-ui data-bundle-path="/pagefind/" data-ui-options="{&#34;showImages&#34;:false,&#34;excerptLength&#34;:15,&#34;resetStyles&#34;:false}"></div>  <div class="mr-2 pb-1 pt-4 text-right text-xs dark:prose-invert">
+Press <span class="prose text-xs dark:prose-invert"><kbd class="">Esc</kbd></span> or click anywhere to close
+</div> </div> </div> </aside> <script>
+  const magnifyingGlass = document.getElementById("magnifying-glass");
+  const backdrop = document.getElementById("backdrop");
+
+  function openPagefind() {
+    const searchDiv = document.getElementById("search");
+    const search = searchDiv.querySelector("input");
+    setTimeout(() => {
+      search.focus();
+    }, 0);
+    backdrop?.classList.remove("invisible");
+    backdrop?.classList.add("visible");
+  }
+
+  function closePagefind() {
+    const search = document.getElementById("search");
+    search.value = "";
+    backdrop?.classList.remove("visible");
+    backdrop?.classList.add("invisible");
+  }
+
+  // open pagefind
+  magnifyingGlass?.addEventListener("click", () => {
+    openPagefind();
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "/") {
+      e.preventDefault();
+      openPagefind();
+    } else if ((e.metaKey || e.ctrlKey) && e.key === "k") {
+      e.preventDefault();
+      openPagefind();
+    }
+  });
+
+  // close pagefind
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" || e.keyCode === 27) {
+      closePagefind();
+    }
+  });
+
+  // close pagefind when searched result(link) clicked
+  document.addEventListener("click", (event) => {
+    if (event.target.classList.contains("pagefind-ui__result-link")) {
+      closePagefind();
+    }
+  });
+
+  backdrop?.addEventListener("click", (event) => {
+    if (!event.target.closest("#pagefind-container")) {
+      closePagefind();
+    }
+  });
+
+  // prevent form submission
+  const form = document.getElementById("form");
+  form?.addEventListener("submit", (event) => {
+    event.preventDefault();
+  });
+</script>  </body></html>

@@ -1,42 +1,241 @@
-<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="Astro v4.11.5"><link rel="icon" type="image" href="/favicon.ico"><title>Part 2 - Python tools for data science</title><!-- KaTeX support --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script><!-- inline KaTeX --><link rel="stylesheet" href="/_astro/index.CwgzIfsj.css">
-<link rel="stylesheet" href="/_astro/_slug_.hCvEQTvV.css">
-<style>article[data-astro-cid-v5ro3oot]{max-width:80ch;margin:0 auto}.nav-button[data-astro-cid-v5ro3oot]{display:flex;align-items:center;padding:.5rem;border-radius:.5rem;transition:background-color .3s ease;text-decoration:none;color:var(--text-color);background-color:var(--bg-color);border:1px solid var(--border-color)}.nav-button[data-astro-cid-v5ro3oot]:hover{background-color:var(--hover-color)}.nav-button[data-astro-cid-v5ro3oot] .arrow[data-astro-cid-v5ro3oot]{font-size:1.5rem;line-height:1}.nav-button[data-astro-cid-v5ro3oot] .text[data-astro-cid-v5ro3oot]{display:flex;flex-direction:column;margin:0 .5rem}.nav-button[data-astro-cid-v5ro3oot] .label[data-astro-cid-v5ro3oot]{font-size:.8rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted-color)}.nav-button[data-astro-cid-v5ro3oot] .title[data-astro-cid-v5ro3oot]{font-weight:500}.prev-button[data-astro-cid-v5ro3oot]{justify-content:flex-start}.next-button[data-astro-cid-v5ro3oot]{justify-content:flex-end;text-align:right}@media (max-width: 640px){.nav-button[data-astro-cid-v5ro3oot]{width:100%}.next-button[data-astro-cid-v5ro3oot]{justify-content:flex-start;text-align:left}.next-button[data-astro-cid-v5ro3oot] .text[data-astro-cid-v5ro3oot]{order:2;margin-left:.5rem}.next-button[data-astro-cid-v5ro3oot] .arrow[data-astro-cid-v5ro3oot]{order:1}}
-</style><script type="module">document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]})});
-</script></head> <body> <div class="container mx-auto px-4 flex flex-col md:flex-row min-h-screen"> <aside class="w-full md:w-64 border-b md:border-r md:border-b-0 border-[var(--border-color)] border-dashed pt-8"> <header class="flex flex-col h-full"> <div class="flex items-center mb-4"> <script>
-  function setTheme(mode) {
-    localStorage.setItem("theme-storage", mode);
-    document.documentElement.setAttribute('data-theme', mode);
-  }
-  function toggleTheme() {
-    const currentTheme = localStorage.getItem("theme-storage") || "light";
-    const newTheme = currentTheme === "light" ? "dark" : "light";
-    setTheme(newTheme);
-  }
-  const savedTheme = localStorage.getItem("theme-storage") || "light";
-  setTheme(savedTheme);
-  window.toggleTheme = toggleTheme;
-</script> <button id="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme" class="w-6 h-6 cursor-pointer"> <div class="w-5 h-5 border-2 border-primary rounded-full transition-colors duration-300 ease-in-out hover:bg-primary"></div> </button> <a href="/" class="text-2xl font-semibold ml-3 h-10 pr-3">rezvan.xyz</a> </div> <nav class="flex flex-wrap gap-2 md:flex-col md:gap-2"> <a href="/principles" class="transition-colors">
-[principles]
-</a><a href="/cv" class="transition-colors">
-[cv]
-</a><a href="/posts" class="transition-colors">
-[posts]
-</a><a href="/chalmers" class="transition-colors">
-[chalmers]
-</a><a href="/cityu" class="transition-colors">
-[cityu]
-</a> </nav> </header> </aside> <main class="flex-grow px-4 md:px-8 py-8 overflow-y-auto">  <article class="prose prose-sm sm:prose lg:prose-lg xl:prose-xl max-w-none" data-astro-cid-v5ro3oot> <h1 class="text-3xl sm:text-4xl font-bold mb-4" data-astro-cid-v5ro3oot>Part 2 - Python tools for data science</h1> <p class="text-sm text-muted-foreground mb-4" data-astro-cid-v5ro3oot>
-Date: 1/19/2024 </p> <div class="markdown-content" data-astro-cid-v5ro3oot>  <h3 id="introduction">Introduction</h3>
+<!DOCTYPE html><html lang="en"> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" type="image/icon" href="/favicon.ico"><meta name="generator" content="Astro v4.11.5"><!-- Canonical URL --><link rel="canonical" href="https://rezvan.xyz/chalmers/dat565/dat565_2/"><!-- Primary Meta Tags --><title>Part 2 - Python tools for data science | introduction to data science and ai | rezvan.xyz</title><meta name="title" content="Part 2 - Python tools for data science | introduction to data science and ai | rezvan.xyz"><meta name="description"><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://rezvan.xyz/chalmers/dat565/dat565_2/"><meta property="og:title" content="Part 2 - Python tools for data science | introduction to data science and ai | rezvan.xyz"><meta property="og:description"><meta property="og:image" content="https://rezvan.xyz/favicon.ico"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://rezvan.xyz/chalmers/dat565/dat565_2/"><meta property="twitter:title" content="Part 2 - Python tools for data science | introduction to data science and ai | rezvan.xyz"><meta property="twitter:description"><meta property="twitter:image" content="https://rezvan.xyz/favicon.ico"><!-- PageFind --><link href="/pagefind/pagefind-ui.css" rel="stylesheet"><script src="/pagefind/pagefind-ui.js"></script><!-- KaTeX support --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script><!-- inline KaTeX --><script>
+    function renderKaTeX() {
+        if (typeof renderMathInElement !== "undefined") {
+            renderMathInElement(document.body, {
+                delimiters: [
+                    { left: "$$", right: "$$", display: true },
+                    { left: "$", right: "$", display: false },
+                ],
+            });
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", renderKaTeX);
+    document.addEventListener("astro:after-swap", renderKaTeX);
+</script><meta name="astro-view-transitions-enabled" content="true"><meta name="astro-view-transitions-fallback" content="animate"><script>
+    function init() {
+        preloadTheme();
+        onScroll();
+        animate();
+        updateThemeButtons();
+        addCopyCodeButtons();
+        setGiscusTheme();
+
+        const backToTop = document.getElementById("back-to-top");
+        backToTop?.addEventListener("click", (event) => scrollToTop(event));
+
+        const backToPrev = document.getElementById("back-to-prev");
+        backToPrev?.addEventListener("click", () => window.history.back());
+
+        const lightThemeButton = document.getElementById("light-theme-button");
+        lightThemeButton?.addEventListener("click", () => {
+            localStorage.setItem("theme", "light");
+            toggleTheme(false);
+            updateThemeButtons();
+        });
+
+        const darkThemeButton = document.getElementById("dark-theme-button");
+        darkThemeButton?.addEventListener("click", () => {
+            localStorage.setItem("theme", "dark");
+            toggleTheme(true);
+            updateThemeButtons();
+        });
+
+        const systemThemeButton = document.getElementById(
+            "system-theme-button",
+        );
+        systemThemeButton?.addEventListener("click", () => {
+            localStorage.setItem("theme", "system");
+            toggleTheme(
+                window.matchMedia("(prefers-color-scheme: dark)").matches,
+            );
+            updateThemeButtons();
+        });
+
+        window
+            .matchMedia("(prefers-color-scheme: dark)")
+            .addEventListener("change", (event) => {
+                if (localStorage.theme === "system") {
+                    toggleTheme(event.matches);
+                }
+            });
+
+        document.addEventListener("scroll", onScroll);
+    }
+
+    function updateThemeButtons() {
+        const theme = localStorage.getItem("theme");
+        const lightThemeButton = document.getElementById("light-theme-button");
+        const darkThemeButton = document.getElementById("dark-theme-button");
+        const systemThemeButton = document.getElementById(
+            "system-theme-button",
+        );
+
+        function removeActiveButtonTheme(button) {
+            button?.classList.remove("bg-black/5");
+            button?.classList.remove("dark:bg-white/5");
+        }
+
+        function addActiveButtonTheme(button) {
+            button?.classList.add("bg-black/5");
+            button?.classList.add("dark:bg-white/5");
+        }
+
+        removeActiveButtonTheme(lightThemeButton);
+        removeActiveButtonTheme(darkThemeButton);
+        removeActiveButtonTheme(systemThemeButton);
+
+        if (theme === "light") {
+            addActiveButtonTheme(lightThemeButton);
+        } else if (theme === "dark") {
+            addActiveButtonTheme(darkThemeButton);
+        } else {
+            addActiveButtonTheme(systemThemeButton);
+        }
+    }
+
+    function animate() {
+        const animateElements = document.querySelectorAll(".animate");
+
+        animateElements.forEach((element, index) => {
+            setTimeout(() => {
+                element.classList.add("show");
+            }, index * 100);
+        });
+    }
+
+    function onScroll() {
+        if (window.scrollY > 0) {
+            document.documentElement.classList.add("scrolled");
+        } else {
+            document.documentElement.classList.remove("scrolled");
+        }
+    }
+
+    function scrollToTop(event) {
+        event.preventDefault();
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth",
+        });
+    }
+
+    function toggleTheme(dark) {
+        const css = document.createElement("style");
+
+        css.appendChild(
+            document.createTextNode(
+                `* {
+             -webkit-transition: none !important;
+             -moz-transition: none !important;
+             -o-transition: none !important;
+             -ms-transition: none !important;
+             transition: none !important;
+          }
+        `,
+            ),
+        );
+
+        document.head.appendChild(css);
+
+        if (dark) {
+            document.documentElement.classList.add("dark");
+        } else {
+            document.documentElement.classList.remove("dark");
+        }
+
+        window.getComputedStyle(css).opacity;
+        document.head.removeChild(css);
+
+        setGiscusTheme();
+    }
+
+    function preloadTheme() {
+        const userTheme = localStorage.theme;
+
+        if (userTheme === "light" || userTheme === "dark") {
+            toggleTheme(userTheme === "dark");
+        } else {
+            toggleTheme(
+                window.matchMedia("(prefers-color-scheme: dark)").matches,
+            );
+        }
+    }
+
+    function addCopyCodeButtons() {
+        let copyButtonLabel = "📋";
+        let codeBlocks = Array.from(document.querySelectorAll("pre"));
+
+        async function copyCode(codeBlock, copyButton) {
+            const codeText = codeBlock.innerText;
+            const buttonText = copyButton.innerText;
+            const textToCopy = codeText.replace(buttonText, "");
+
+            await navigator.clipboard.writeText(textToCopy);
+            copyButton.innerText = "✅";
+
+            setTimeout(() => {
+                copyButton.innerText = copyButtonLabel;
+            }, 2000);
+        }
+
+        for (let codeBlock of codeBlocks) {
+            const wrapper = document.createElement("div");
+            wrapper.style.position = "relative";
+
+            const copyButton = document.createElement("button");
+            copyButton.innerText = copyButtonLabel;
+            copyButton.classList = "copy-code";
+
+            codeBlock.setAttribute("tabindex", "0");
+            codeBlock.appendChild(copyButton);
+
+            codeBlock.parentNode.insertBefore(wrapper, codeBlock);
+            wrapper.appendChild(codeBlock);
+
+            copyButton?.addEventListener("click", async () => {
+                await copyCode(codeBlock, copyButton);
+            });
+        }
+    }
+
+    const setGiscusTheme = () => {
+        const giscus = document.querySelector(".giscus-frame");
+
+        const isDark = document.documentElement.classList.contains("dark");
+
+        if (giscus) {
+            const url = new URL(giscus.src);
+            url.searchParams.set("theme", isDark ? "dark" : "light");
+            giscus.src = url.toString();
+        }
+    };
+
+    document.addEventListener("DOMContentLoaded", () => init());
+    document.addEventListener("astro:after-swap", () => init());
+    preloadTheme();
+</script><link rel="stylesheet" href="/_astro/_subject_.CmU_Tg_r.css">
+<style>summary[data-astro-cid-xvrfupwn]{cursor:pointer;border-top-left-radius:.5rem;border-top-right-radius:.5rem;padding:.375rem .75rem;font-weight:500;transition-property:color,background-color,border-color,text-decoration-color,fill,stroke;transition-timing-function:cubic-bezier(.4,0,.2,1);transition-duration:.15s}summary[data-astro-cid-xvrfupwn]:hover{background-color:#0000000d}summary[data-astro-cid-xvrfupwn]:hover:is(.dark *){background-color:#ffffff0d}details[data-astro-cid-xvrfupwn][open] summary[data-astro-cid-xvrfupwn]{background-color:#0000000d}details[data-astro-cid-xvrfupwn][open] summary[data-astro-cid-xvrfupwn]:is(.dark *){background-color:#ffffff0d}
+</style><script type="module" src="/_astro/hoisted.DzxSAGjc.js"></script></head> <body> <header data-astro-transition-persist="astro-l7r54iwe-1"> <div class="mx-auto max-w-screen-sm px-3"> <div class="flex flex-wrap justify-between gap-y-2"> <a href="/" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out">  <div class="font-semibold"> rezvan.xyz </div>  </a> <nav class="flex items-center gap-1 text-sm"> <a href="/posts" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> posts </a> <span> / </span> <a href="/chalmers" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> chalmers </a> <span> / </span> <a href="/cityu" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> cityu </a> <span> / </span> <button id="magnifying-glass" aria-label="Search" class="flex items-center rounded border border-black/15 bg-neutral-100 px-2 py-1 text-xs transition-colors duration-300 ease-in-out hover:bg-black/5 hover:text-black focus-visible:bg-black/5 focus-visible:text-black dark:border-white/20 dark:bg-neutral-900 dark:hover:bg-white/5 dark:hover:text-white dark:focus-visible:bg-white/5 dark:focus-visible:text-white"> <svg height="16" stroke-linejoin="round" viewBox="0 0 16 16" width="16" style="color: currentcolor;"><path fill-rule="evenodd" clip-rule="evenodd" d="M3.5 7C3.5 5.067 5.067 3.5 7 3.5C8.933 3.5 10.5 5.067 10.5 7C10.5 7.88461 10.1718 8.69256 9.63058 9.30876L9.30876 9.63058C8.69256 10.1718 7.88461 10.5 7 10.5C5.067 10.5 3.5 8.933 3.5 7ZM9.96544 11.0261C9.13578 11.6382 8.11014 12 7 12C4.23858 12 2 9.76142 2 7C2 4.23858 4.23858 2 7 2C9.76142 2 12 4.23858 12 7C12 8.11014 11.6382 9.13578 11.0261 9.96544L14.0303 12.9697L14.5607 13.5L13.5 14.5607L12.9697 14.0303L9.96544 11.0261Z" fill="currentColor"></path></svg>
+&nbsp;Search
+</button> </nav> </div> </div> </header> <main>  <div class="mx-auto max-w-screen-sm px-3"> <div class="animate"> <a href="/chalmers/dat565" class="not-prose group relative flex w-fit flex-nowrap rounded border border-black/15 py-1.5 pl-7 pr-3 transition-colors duration-300 ease-in-out hover:bg-black/5 hover:text-black focus-visible:bg-black/5 focus-visible:text-black dark:border-white/20 dark:hover:bg-white/5 dark:hover:text-white dark:focus-visible:bg-white/5 dark:focus-visible:text-white"> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="absolute left-2 top-1/2 size-4 -translate-y-1/2 fill-none stroke-current stroke-2"> <line x1="5" y1="12" x2="19" y2="12" class="translate-x-2 scale-x-0 transition-transform duration-300 ease-in-out group-hover:translate-x-0 group-hover:scale-x-100 group-focus-visible:translate-x-0 group-focus-visible:scale-x-100"></line> <polyline points="12 5 5 12 12 19" class="translate-x-1 transition-transform duration-300 ease-in-out group-hover:translate-x-0 group-focus-visible:translate-x-0"></polyline> </svg> <div class="text-sm"> Back to introduction to data science and ai </div> </a> </div> <div class="my-10 space-y-1"> <div class="animate flex items-center gap-1.5"> <div class="font-base text-sm"> DAT565 </div>
+&bull;
+<div class="font-base text-sm"> <time datetime="2024-01-19T00:00:00.000Z"> January 19, 2024 </time> </div> 
+&bull;
+<div class="font-base text-sm">
+Last modified:  <time datetime="2024-09-02T11:21:25.000Z"> September 02, 2024 </time> </div> 
+&bull;
+<div class="font-base text-sm"> 11 min read </div> </div> <h1 class="animate text-3xl font-semibold text-black dark:text-white"> Part 2 - Python tools for data science </h1> </div> <details open class="animate rounded-lg border border-black/15 dark:border-white/20" data-astro-cid-xvrfupwn> <summary data-astro-cid-xvrfupwn>Table of Contents</summary> <nav class="" data-astro-cid-xvrfupwn> <ul class="py-3" data-astro-cid-xvrfupwn> <li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#introduction" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Introduction </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#numpy" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> NumPy </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#basic-operations-in-numpy" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Basic operations in NumPy </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#matplotlib" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Matplotlib </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#anscombes-quartet" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Anscombe’s quartet </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#pandas" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Pandas </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#wide-and-long-format" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Wide and long format </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#palmer-penguins" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Palmer penguins </a>  </li> </ul> </nav> </details> <article class="animate"> <h3 id="introduction">Introduction</h3>
 <p>In this part we’re going to explore some popular Python tools for data science.</p>
 <h4 id="numpy">NumPy</h4>
 <p><strong>Num</strong>erical <strong>Py</strong>thon, is the standard package for computation and array operations.</p>
 <p>Low-level functions are written in C, therefore, very fast.</p>
 <h3 id="basic-operations-in-numpy">Basic operations in NumPy</h3>
 <p>We usually import as:</p>
-<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="py"><code><span class="line"><span style="color:#FF79C6">import</span><span style="color:#F8F8F2"> numpy </span><span style="color:#FF79C6">as</span><span style="color:#F8F8F2"> np</span></span>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-color-background);color:var(--astro-code-color-text); overflow-x: auto;" tabindex="0" data-language="py"><code><span class="line"><span style="color:var(--astro-code-token-keyword)">import</span><span style="color:var(--astro-code-color-text)"> numpy </span><span style="color:var(--astro-code-token-keyword)">as</span><span style="color:var(--astro-code-color-text)"> np</span></span>
 <span class="line"></span></code></pre>
 <p>NumPy arrays can be constructed with the following:</p>
-<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="py"><code><span class="line"><span style="color:#F8F8F2">A </span><span style="color:#FF79C6">=</span><span style="color:#F8F8F2"> np.array([</span><span style="color:#BD93F9">69</span><span style="color:#F8F8F2">, </span><span style="color:#BD93F9">420</span><span style="color:#F8F8F2">, </span><span style="color:#BD93F9">1337</span><span style="color:#F8F8F2">, </span><span style="color:#BD93F9">42</span><span style="color:#F8F8F2">])</span></span>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-color-background);color:var(--astro-code-color-text); overflow-x: auto;" tabindex="0" data-language="py"><code><span class="line"><span style="color:var(--astro-code-color-text)">A </span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-color-text)"> np</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">array</span><span style="color:var(--astro-code-token-punctuation)">([</span><span style="color:var(--astro-code-token-constant)">69</span><span style="color:var(--astro-code-token-punctuation)">, </span><span style="color:var(--astro-code-token-constant)">420</span><span style="color:var(--astro-code-token-punctuation)">, </span><span style="color:var(--astro-code-token-constant)">1337</span><span style="color:var(--astro-code-token-punctuation)">, </span><span style="color:var(--astro-code-token-constant)">42</span><span style="color:var(--astro-code-token-punctuation)">])</span></span>
 <span class="line"></span></code></pre>
 <p>A NumPy array is defined by:</p>
 <ul>
@@ -45,11 +244,11 @@ Date: 1/19/2024 </p> <div class="markdown-content" data-astro-cid-v5ro3oot>  <h3
 <li>Its <code>shape</code> (number of elements along an axis)</li>
 <li>Its <code>dtype</code></li>
 </ul>
-<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="py"><code><span class="line"><span style="color:#F8F8F2">A </span><span style="color:#FF79C6">=</span><span style="color:#F8F8F2"> np.array([</span><span style="color:#BD93F9">69</span><span style="color:#F8F8F2">, </span><span style="color:#BD93F9">420</span><span style="color:#F8F8F2">, </span><span style="color:#BD93F9">1337</span><span style="color:#F8F8F2">, </span><span style="color:#BD93F9">42</span><span style="color:#F8F8F2">])</span></span>
-<span class="line"><span style="color:#6272A4"># A.ndim = 1</span></span>
-<span class="line"><span style="color:#6272A4"># A.size = 4</span></span>
-<span class="line"><span style="color:#6272A4"># A.shape = (4, )</span></span>
-<span class="line"><span style="color:#6272A4"># A.dtype = int64</span></span>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-color-background);color:var(--astro-code-color-text); overflow-x: auto;" tabindex="0" data-language="py"><code><span class="line"><span style="color:var(--astro-code-color-text)">A </span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-color-text)"> np</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">array</span><span style="color:var(--astro-code-token-punctuation)">([</span><span style="color:var(--astro-code-token-constant)">69</span><span style="color:var(--astro-code-token-punctuation)">, </span><span style="color:var(--astro-code-token-constant)">420</span><span style="color:var(--astro-code-token-punctuation)">, </span><span style="color:var(--astro-code-token-constant)">1337</span><span style="color:var(--astro-code-token-punctuation)">, </span><span style="color:var(--astro-code-token-constant)">42</span><span style="color:var(--astro-code-token-punctuation)">])</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># A.ndim = 1</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># A.size = 4</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># A.shape = (4, )</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># A.dtype = int64</span></span>
 <span class="line"></span></code></pre>
 <p>We can either specify the <code>dtype</code> or let NumPy automatically assign it.</p>
 <p>Different ways to create NumPy arrays that we usually use:</p>
@@ -61,44 +260,44 @@ Date: 1/19/2024 </p> <div class="markdown-content" data-astro-cid-v5ro3oot>  <h3
 <li><code>full</code> creates an array filled with a specific element/array.</li>
 </ul>
 <p>We can <code>reshape</code> our arrays and matrix, the new shape must have equal size (product of the shape).</p>
-<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="py"><code><span class="line"><span style="color:#F8F8F2">A </span><span style="color:#FF79C6">=</span><span style="color:#F8F8F2"> np.array([</span><span style="color:#BD93F9">69</span><span style="color:#F8F8F2">, </span><span style="color:#BD93F9">420</span><span style="color:#F8F8F2">, </span><span style="color:#BD93F9">1337</span><span style="color:#F8F8F2">, </span><span style="color:#BD93F9">42</span><span style="color:#F8F8F2">])</span></span>
-<span class="line"><span style="color:#F8F8F2">A.reshape(</span><span style="color:#BD93F9">2</span><span style="color:#F8F8F2">, </span><span style="color:#BD93F9">2</span><span style="color:#F8F8F2">)</span></span>
-<span class="line"><span style="color:#6272A4">'''</span></span>
-<span class="line"><span style="color:#6272A4">[[69, 420],</span></span>
-<span class="line"><span style="color:#6272A4"> [1337, 42]]</span></span>
-<span class="line"><span style="color:#6272A4">'''</span></span>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-color-background);color:var(--astro-code-color-text); overflow-x: auto;" tabindex="0" data-language="py"><code><span class="line"><span style="color:var(--astro-code-color-text)">A </span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-color-text)"> np</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">array</span><span style="color:var(--astro-code-token-punctuation)">([</span><span style="color:var(--astro-code-token-constant)">69</span><span style="color:var(--astro-code-token-punctuation)">, </span><span style="color:var(--astro-code-token-constant)">420</span><span style="color:var(--astro-code-token-punctuation)">, </span><span style="color:var(--astro-code-token-constant)">1337</span><span style="color:var(--astro-code-token-punctuation)">, </span><span style="color:var(--astro-code-token-constant)">42</span><span style="color:var(--astro-code-token-punctuation)">])</span></span>
+<span class="line"><span style="color:var(--astro-code-color-text)">A</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">reshape</span><span style="color:var(--astro-code-token-punctuation)">(</span><span style="color:var(--astro-code-token-constant)">2</span><span style="color:var(--astro-code-token-punctuation)">, </span><span style="color:var(--astro-code-token-constant)">2</span><span style="color:var(--astro-code-token-punctuation)">)</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">'''</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">[[69, 420],</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"> [1337, 42]]</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">'''</span></span>
 <span class="line"></span></code></pre>
 <p>This does not make a copy, this returns a <em>view</em> (basically a pointer).</p>
 <p>We can <em>transpose</em> our arrays and matrix as well:</p>
-<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="py"><code><span class="line"><span style="color:#F8F8F2">A </span><span style="color:#FF79C6">=</span><span style="color:#F8F8F2"> np.array([</span><span style="color:#BD93F9">69</span><span style="color:#F8F8F2">, </span><span style="color:#BD93F9">420</span><span style="color:#F8F8F2">, </span><span style="color:#BD93F9">1337</span><span style="color:#F8F8F2">, </span><span style="color:#BD93F9">42</span><span style="color:#F8F8F2">])</span></span>
-<span class="line"><span style="color:#F8F8F2">A.reshape(</span><span style="color:#BD93F9">2</span><span style="color:#F8F8F2">, </span><span style="color:#BD93F9">2</span><span style="color:#F8F8F2">).T</span></span>
-<span class="line"><span style="color:#6272A4">'''</span></span>
-<span class="line"><span style="color:#6272A4">[[69, 1337],</span></span>
-<span class="line"><span style="color:#6272A4"> [420, 42]]</span></span>
-<span class="line"><span style="color:#6272A4">'''</span></span>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-color-background);color:var(--astro-code-color-text); overflow-x: auto;" tabindex="0" data-language="py"><code><span class="line"><span style="color:var(--astro-code-color-text)">A </span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-color-text)"> np</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">array</span><span style="color:var(--astro-code-token-punctuation)">([</span><span style="color:var(--astro-code-token-constant)">69</span><span style="color:var(--astro-code-token-punctuation)">, </span><span style="color:var(--astro-code-token-constant)">420</span><span style="color:var(--astro-code-token-punctuation)">, </span><span style="color:var(--astro-code-token-constant)">1337</span><span style="color:var(--astro-code-token-punctuation)">, </span><span style="color:var(--astro-code-token-constant)">42</span><span style="color:var(--astro-code-token-punctuation)">])</span></span>
+<span class="line"><span style="color:var(--astro-code-color-text)">A</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">reshape</span><span style="color:var(--astro-code-token-punctuation)">(</span><span style="color:var(--astro-code-token-constant)">2</span><span style="color:var(--astro-code-token-punctuation)">, </span><span style="color:var(--astro-code-token-constant)">2</span><span style="color:var(--astro-code-token-punctuation)">).</span><span style="color:var(--astro-code-color-text)">T</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">'''</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">[[69, 1337],</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"> [420, 42]]</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">'''</span></span>
 <span class="line"></span></code></pre>
 <p>We can change the dtype with the <code>.astype()</code> function:</p>
-<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="py"><code><span class="line"><span style="color:#F8F8F2">A </span><span style="color:#FF79C6">=</span><span style="color:#F8F8F2"> np.array([</span><span style="color:#BD93F9">69</span><span style="color:#F8F8F2">, </span><span style="color:#BD93F9">420</span><span style="color:#F8F8F2">, </span><span style="color:#BD93F9">1337</span><span style="color:#F8F8F2">, </span><span style="color:#BD93F9">42</span><span style="color:#F8F8F2">])</span></span>
-<span class="line"><span style="color:#F8F8F2">A.astype(np.float32)</span></span>
-<span class="line"><span style="color:#6272A4">'''</span></span>
-<span class="line"><span style="color:#6272A4">[69.0, 420.0, 1337.0, 42.0]</span></span>
-<span class="line"><span style="color:#6272A4">'''</span></span>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-color-background);color:var(--astro-code-color-text); overflow-x: auto;" tabindex="0" data-language="py"><code><span class="line"><span style="color:var(--astro-code-color-text)">A </span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-color-text)"> np</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">array</span><span style="color:var(--astro-code-token-punctuation)">([</span><span style="color:var(--astro-code-token-constant)">69</span><span style="color:var(--astro-code-token-punctuation)">, </span><span style="color:var(--astro-code-token-constant)">420</span><span style="color:var(--astro-code-token-punctuation)">, </span><span style="color:var(--astro-code-token-constant)">1337</span><span style="color:var(--astro-code-token-punctuation)">, </span><span style="color:var(--astro-code-token-constant)">42</span><span style="color:var(--astro-code-token-punctuation)">])</span></span>
+<span class="line"><span style="color:var(--astro-code-color-text)">A</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">astype</span><span style="color:var(--astro-code-token-punctuation)">(np.float32)</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">'''</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">[69.0, 420.0, 1337.0, 42.0]</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">'''</span></span>
 <span class="line"></span></code></pre>
 <p>We access elements in NumPy arrays with usual bracket notation:</p>
-<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="py"><code><span class="line"><span style="color:#F8F8F2">A </span><span style="color:#FF79C6">=</span><span style="color:#F8F8F2"> np.array([</span><span style="color:#BD93F9">69</span><span style="color:#F8F8F2">, </span><span style="color:#BD93F9">420</span><span style="color:#F8F8F2">, </span><span style="color:#BD93F9">1337</span><span style="color:#F8F8F2">, </span><span style="color:#BD93F9">42</span><span style="color:#F8F8F2">])</span></span>
-<span class="line"><span style="color:#F8F8F2">A[</span><span style="color:#BD93F9">0</span><span style="color:#F8F8F2">]</span></span>
-<span class="line"><span style="color:#6272A4">'''</span></span>
-<span class="line"><span style="color:#6272A4">69</span></span>
-<span class="line"><span style="color:#6272A4">'''</span></span>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-color-background);color:var(--astro-code-color-text); overflow-x: auto;" tabindex="0" data-language="py"><code><span class="line"><span style="color:var(--astro-code-color-text)">A </span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-color-text)"> np</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">array</span><span style="color:var(--astro-code-token-punctuation)">([</span><span style="color:var(--astro-code-token-constant)">69</span><span style="color:var(--astro-code-token-punctuation)">, </span><span style="color:var(--astro-code-token-constant)">420</span><span style="color:var(--astro-code-token-punctuation)">, </span><span style="color:var(--astro-code-token-constant)">1337</span><span style="color:var(--astro-code-token-punctuation)">, </span><span style="color:var(--astro-code-token-constant)">42</span><span style="color:var(--astro-code-token-punctuation)">])</span></span>
+<span class="line"><span style="color:var(--astro-code-color-text)">A</span><span style="color:var(--astro-code-token-punctuation)">[</span><span style="color:var(--astro-code-token-constant)">0</span><span style="color:var(--astro-code-token-punctuation)">]</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">'''</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">69</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">'''</span></span>
 <span class="line"></span></code></pre>
 <p>NumPy supports Python style slicing:</p>
-<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="py"><code><span class="line"><span style="color:#F8F8F2">A </span><span style="color:#FF79C6">=</span><span style="color:#F8F8F2"> np.array([</span><span style="color:#BD93F9">69</span><span style="color:#F8F8F2">, </span><span style="color:#BD93F9">420</span><span style="color:#F8F8F2">, </span><span style="color:#BD93F9">1337</span><span style="color:#F8F8F2">, </span><span style="color:#BD93F9">42</span><span style="color:#F8F8F2">])</span></span>
-<span class="line"><span style="color:#6272A4"># A[1:-1] = [420, 1337]</span></span>
-<span class="line"><span style="color:#6272A4"># A[::2] = [69, 1337]</span></span>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-color-background);color:var(--astro-code-color-text); overflow-x: auto;" tabindex="0" data-language="py"><code><span class="line"><span style="color:var(--astro-code-color-text)">A </span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-color-text)"> np</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">array</span><span style="color:var(--astro-code-token-punctuation)">([</span><span style="color:var(--astro-code-token-constant)">69</span><span style="color:var(--astro-code-token-punctuation)">, </span><span style="color:var(--astro-code-token-constant)">420</span><span style="color:var(--astro-code-token-punctuation)">, </span><span style="color:var(--astro-code-token-constant)">1337</span><span style="color:var(--astro-code-token-punctuation)">, </span><span style="color:var(--astro-code-token-constant)">42</span><span style="color:var(--astro-code-token-punctuation)">])</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># A[1:-1] = [420, 1337]</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># A[::2] = [69, 1337]</span></span>
 <span class="line"></span></code></pre>
 <p>NumPy supports all basic math operations:</p>
-<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="py"><code><span class="line"><span style="color:#F8F8F2">A </span><span style="color:#FF79C6">=</span><span style="color:#F8F8F2"> np.array([</span><span style="color:#BD93F9">69</span><span style="color:#F8F8F2">, </span><span style="color:#BD93F9">420</span><span style="color:#F8F8F2">, </span><span style="color:#BD93F9">1337</span><span style="color:#F8F8F2">, </span><span style="color:#BD93F9">42</span><span style="color:#F8F8F2">])</span></span>
-<span class="line"><span style="color:#6272A4"># A + 1 = [70, 421, 1338, 43]</span></span>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-color-background);color:var(--astro-code-color-text); overflow-x: auto;" tabindex="0" data-language="py"><code><span class="line"><span style="color:var(--astro-code-color-text)">A </span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-color-text)"> np</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">array</span><span style="color:var(--astro-code-token-punctuation)">([</span><span style="color:var(--astro-code-token-constant)">69</span><span style="color:var(--astro-code-token-punctuation)">, </span><span style="color:var(--astro-code-token-constant)">420</span><span style="color:var(--astro-code-token-punctuation)">, </span><span style="color:var(--astro-code-token-constant)">1337</span><span style="color:var(--astro-code-token-punctuation)">, </span><span style="color:var(--astro-code-token-constant)">42</span><span style="color:var(--astro-code-token-punctuation)">])</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"># A + 1 = [70, 421, 1338, 43]</span></span>
 <span class="line"></span></code></pre>
 <p>There are a lot more functions to <a href="https://numpy.org/doc/">explore</a> :)</p>
 <h3 id="matplotlib">Matplotlib</h3>
@@ -108,135 +307,135 @@ Used for ploting any kind of plot you can think of, scatter plots, line plots, c
 <h4 id="anscombes-quartet">Anscombe’s quartet</h4>
 <p><a href="https://en.wikipedia.org/wiki/Anscombe%27s_quartet">Anscombe’s quartet</a> is a small dataset that shows the importance of graphing your data when dealing with statistics.</p>
 <p>To understand we’ll graph this dataset for ourselves:</p>
-<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="py"><code><span class="line"><span style="color:#FF79C6">import</span><span style="color:#F8F8F2"> numpy </span><span style="color:#FF79C6">as</span><span style="color:#F8F8F2"> np</span></span>
-<span class="line"><span style="color:#FF79C6">import</span><span style="color:#F8F8F2"> matplotlib.pyplot </span><span style="color:#FF79C6">as</span><span style="color:#F8F8F2"> plt</span></span>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-color-background);color:var(--astro-code-color-text); overflow-x: auto;" tabindex="0" data-language="py"><code><span class="line"><span style="color:var(--astro-code-token-keyword)">import</span><span style="color:var(--astro-code-color-text)"> numpy </span><span style="color:var(--astro-code-token-keyword)">as</span><span style="color:var(--astro-code-color-text)"> np</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">import</span><span style="color:var(--astro-code-color-text)"> matplotlib</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-color-text)">pyplot </span><span style="color:var(--astro-code-token-keyword)">as</span><span style="color:var(--astro-code-color-text)"> plt</span></span>
 <span class="line"></span></code></pre>
 <p>Firstly, let’s import numpy for the data processing and matplot for the plotting.</p>
-<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="py"><code><span class="line"><span style="color:#F8F8F2">anscombe_data </span><span style="color:#FF79C6">=</span><span style="color:#F8F8F2"> np.array([</span><span style="color:#BD93F9">10.0</span><span style="color:#F8F8F2">, </span><span style="color:#BD93F9">8.04</span><span style="color:#F8F8F2">, </span><span style="color:#BD93F9">10.0</span><span style="color:#F8F8F2">, </span><span style="color:#BD93F9">9.14</span><span style="color:#F8F8F2">, </span><span style="color:#BD93F9">10.0</span><span style="color:#F8F8F2">, </span><span style="color:#BD93F9">7.46</span><span style="color:#F8F8F2">, </span><span style="color:#BD93F9">8.0</span><span style="color:#F8F8F2">, </span><span style="color:#BD93F9">6.58</span><span style="color:#F8F8F2">,</span></span>
-<span class="line"><span style="color:#BD93F9">8.0</span><span style="color:#F8F8F2">, </span><span style="color:#BD93F9">6.95</span><span style="color:#F8F8F2">, </span><span style="color:#BD93F9">8.0</span><span style="color:#F8F8F2">, </span><span style="color:#BD93F9">8.14</span><span style="color:#F8F8F2">, </span><span style="color:#BD93F9">8.0</span><span style="color:#F8F8F2">, </span><span style="color:#BD93F9">6.77</span><span style="color:#F8F8F2">, </span><span style="color:#BD93F9">8.0</span><span style="color:#F8F8F2">, </span><span style="color:#BD93F9">5.76</span><span style="color:#F8F8F2">,</span></span>
-<span class="line"><span style="color:#BD93F9">13.0</span><span style="color:#F8F8F2">, </span><span style="color:#BD93F9">7.58</span><span style="color:#F8F8F2">, </span><span style="color:#BD93F9">13.0</span><span style="color:#F8F8F2">, </span><span style="color:#BD93F9">8.74</span><span style="color:#F8F8F2">, </span><span style="color:#BD93F9">13.0</span><span style="color:#F8F8F2">, </span><span style="color:#BD93F9">12.74</span><span style="color:#F8F8F2">, </span><span style="color:#BD93F9">8.0</span><span style="color:#F8F8F2">, </span><span style="color:#BD93F9">7.71</span><span style="color:#F8F8F2">,</span></span>
-<span class="line"><span style="color:#BD93F9">9.0</span><span style="color:#F8F8F2">, </span><span style="color:#BD93F9">8.81</span><span style="color:#F8F8F2">, </span><span style="color:#BD93F9">9.0</span><span style="color:#F8F8F2">, </span><span style="color:#BD93F9">8.77</span><span style="color:#F8F8F2">, </span><span style="color:#BD93F9">9.0</span><span style="color:#F8F8F2">, </span><span style="color:#BD93F9">7.11</span><span style="color:#F8F8F2">, </span><span style="color:#BD93F9">8.0</span><span style="color:#F8F8F2">, </span><span style="color:#BD93F9">8.84</span><span style="color:#F8F8F2">,</span></span>
-<span class="line"><span style="color:#BD93F9">11.0</span><span style="color:#F8F8F2">, </span><span style="color:#BD93F9">8.33</span><span style="color:#F8F8F2">, </span><span style="color:#BD93F9">11.0</span><span style="color:#F8F8F2">, </span><span style="color:#BD93F9">9.26</span><span style="color:#F8F8F2">, </span><span style="color:#BD93F9">11.0</span><span style="color:#F8F8F2">, </span><span style="color:#BD93F9">7.81</span><span style="color:#F8F8F2">, </span><span style="color:#BD93F9">8.0</span><span style="color:#F8F8F2">, </span><span style="color:#BD93F9">8.47</span><span style="color:#F8F8F2">,</span></span>
-<span class="line"><span style="color:#BD93F9">14.0</span><span style="color:#F8F8F2">, </span><span style="color:#BD93F9">9.96</span><span style="color:#F8F8F2">, </span><span style="color:#BD93F9">14.0</span><span style="color:#F8F8F2">, </span><span style="color:#BD93F9">8.10</span><span style="color:#F8F8F2">, </span><span style="color:#BD93F9">14.0</span><span style="color:#F8F8F2">, </span><span style="color:#BD93F9">8.84</span><span style="color:#F8F8F2">, </span><span style="color:#BD93F9">8.0</span><span style="color:#F8F8F2">, </span><span style="color:#BD93F9">7.04</span><span style="color:#F8F8F2">,</span></span>
-<span class="line"><span style="color:#BD93F9">6.0</span><span style="color:#F8F8F2">, </span><span style="color:#BD93F9">7.24</span><span style="color:#F8F8F2">, </span><span style="color:#BD93F9">6.0</span><span style="color:#F8F8F2">, </span><span style="color:#BD93F9">6.13</span><span style="color:#F8F8F2">, </span><span style="color:#BD93F9">6.0</span><span style="color:#F8F8F2">, </span><span style="color:#BD93F9">6.08</span><span style="color:#F8F8F2">, </span><span style="color:#BD93F9">8.0</span><span style="color:#F8F8F2">, </span><span style="color:#BD93F9">5.25</span><span style="color:#F8F8F2">,</span></span>
-<span class="line"><span style="color:#BD93F9">4.0</span><span style="color:#F8F8F2">, </span><span style="color:#BD93F9">4.26</span><span style="color:#F8F8F2">, </span><span style="color:#BD93F9">4.0</span><span style="color:#F8F8F2">, </span><span style="color:#BD93F9">3.10</span><span style="color:#F8F8F2">, </span><span style="color:#BD93F9">4.0</span><span style="color:#F8F8F2">, </span><span style="color:#BD93F9">5.39</span><span style="color:#F8F8F2">, </span><span style="color:#BD93F9">19.0</span><span style="color:#F8F8F2">, </span><span style="color:#BD93F9">12.50</span><span style="color:#F8F8F2">,</span></span>
-<span class="line"><span style="color:#BD93F9">12.0</span><span style="color:#F8F8F2">, </span><span style="color:#BD93F9">10.84</span><span style="color:#F8F8F2">, </span><span style="color:#BD93F9">12.0</span><span style="color:#F8F8F2">, </span><span style="color:#BD93F9">9.13</span><span style="color:#F8F8F2">, </span><span style="color:#BD93F9">12.0</span><span style="color:#F8F8F2">, </span><span style="color:#BD93F9">8.15</span><span style="color:#F8F8F2">, </span><span style="color:#BD93F9">8.0</span><span style="color:#F8F8F2">, </span><span style="color:#BD93F9">5.56</span><span style="color:#F8F8F2">,</span></span>
-<span class="line"><span style="color:#BD93F9">7.0</span><span style="color:#F8F8F2">, </span><span style="color:#BD93F9">4.82</span><span style="color:#F8F8F2">, </span><span style="color:#BD93F9">7.0</span><span style="color:#F8F8F2">, </span><span style="color:#BD93F9">7.26</span><span style="color:#F8F8F2">, </span><span style="color:#BD93F9">7.0</span><span style="color:#F8F8F2">, </span><span style="color:#BD93F9">6.42</span><span style="color:#F8F8F2">, </span><span style="color:#BD93F9">8.0</span><span style="color:#F8F8F2">, </span><span style="color:#BD93F9">7.91</span><span style="color:#F8F8F2">,</span></span>
-<span class="line"><span style="color:#BD93F9">5.0</span><span style="color:#F8F8F2">, </span><span style="color:#BD93F9">5.68</span><span style="color:#F8F8F2">, </span><span style="color:#BD93F9">5.0</span><span style="color:#F8F8F2">, </span><span style="color:#BD93F9">4.74</span><span style="color:#F8F8F2">, </span><span style="color:#BD93F9">5.0</span><span style="color:#F8F8F2">, </span><span style="color:#BD93F9">5.73</span><span style="color:#F8F8F2">, </span><span style="color:#BD93F9">8.0</span><span style="color:#F8F8F2">, </span><span style="color:#BD93F9">6.89</span><span style="color:#F8F8F2">])</span></span>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-color-background);color:var(--astro-code-color-text); overflow-x: auto;" tabindex="0" data-language="py"><code><span class="line"><span style="color:var(--astro-code-color-text)">anscombe_data </span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-color-text)"> np</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">array</span><span style="color:var(--astro-code-token-punctuation)">([</span><span style="color:var(--astro-code-token-constant)">10.0</span><span style="color:var(--astro-code-token-punctuation)">, </span><span style="color:var(--astro-code-token-constant)">8.04</span><span style="color:var(--astro-code-token-punctuation)">, </span><span style="color:var(--astro-code-token-constant)">10.0</span><span style="color:var(--astro-code-token-punctuation)">, </span><span style="color:var(--astro-code-token-constant)">9.14</span><span style="color:var(--astro-code-token-punctuation)">, </span><span style="color:var(--astro-code-token-constant)">10.0</span><span style="color:var(--astro-code-token-punctuation)">, </span><span style="color:var(--astro-code-token-constant)">7.46</span><span style="color:var(--astro-code-token-punctuation)">, </span><span style="color:var(--astro-code-token-constant)">8.0</span><span style="color:var(--astro-code-token-punctuation)">, </span><span style="color:var(--astro-code-token-constant)">6.58</span><span style="color:var(--astro-code-token-punctuation)">,</span></span>
+<span class="line"><span style="color:var(--astro-code-token-constant)">8.0</span><span style="color:var(--astro-code-token-punctuation)">, </span><span style="color:var(--astro-code-token-constant)">6.95</span><span style="color:var(--astro-code-token-punctuation)">, </span><span style="color:var(--astro-code-token-constant)">8.0</span><span style="color:var(--astro-code-token-punctuation)">, </span><span style="color:var(--astro-code-token-constant)">8.14</span><span style="color:var(--astro-code-token-punctuation)">, </span><span style="color:var(--astro-code-token-constant)">8.0</span><span style="color:var(--astro-code-token-punctuation)">, </span><span style="color:var(--astro-code-token-constant)">6.77</span><span style="color:var(--astro-code-token-punctuation)">, </span><span style="color:var(--astro-code-token-constant)">8.0</span><span style="color:var(--astro-code-token-punctuation)">, </span><span style="color:var(--astro-code-token-constant)">5.76</span><span style="color:var(--astro-code-token-punctuation)">,</span></span>
+<span class="line"><span style="color:var(--astro-code-token-constant)">13.0</span><span style="color:var(--astro-code-token-punctuation)">, </span><span style="color:var(--astro-code-token-constant)">7.58</span><span style="color:var(--astro-code-token-punctuation)">, </span><span style="color:var(--astro-code-token-constant)">13.0</span><span style="color:var(--astro-code-token-punctuation)">, </span><span style="color:var(--astro-code-token-constant)">8.74</span><span style="color:var(--astro-code-token-punctuation)">, </span><span style="color:var(--astro-code-token-constant)">13.0</span><span style="color:var(--astro-code-token-punctuation)">, </span><span style="color:var(--astro-code-token-constant)">12.74</span><span style="color:var(--astro-code-token-punctuation)">, </span><span style="color:var(--astro-code-token-constant)">8.0</span><span style="color:var(--astro-code-token-punctuation)">, </span><span style="color:var(--astro-code-token-constant)">7.71</span><span style="color:var(--astro-code-token-punctuation)">,</span></span>
+<span class="line"><span style="color:var(--astro-code-token-constant)">9.0</span><span style="color:var(--astro-code-token-punctuation)">, </span><span style="color:var(--astro-code-token-constant)">8.81</span><span style="color:var(--astro-code-token-punctuation)">, </span><span style="color:var(--astro-code-token-constant)">9.0</span><span style="color:var(--astro-code-token-punctuation)">, </span><span style="color:var(--astro-code-token-constant)">8.77</span><span style="color:var(--astro-code-token-punctuation)">, </span><span style="color:var(--astro-code-token-constant)">9.0</span><span style="color:var(--astro-code-token-punctuation)">, </span><span style="color:var(--astro-code-token-constant)">7.11</span><span style="color:var(--astro-code-token-punctuation)">, </span><span style="color:var(--astro-code-token-constant)">8.0</span><span style="color:var(--astro-code-token-punctuation)">, </span><span style="color:var(--astro-code-token-constant)">8.84</span><span style="color:var(--astro-code-token-punctuation)">,</span></span>
+<span class="line"><span style="color:var(--astro-code-token-constant)">11.0</span><span style="color:var(--astro-code-token-punctuation)">, </span><span style="color:var(--astro-code-token-constant)">8.33</span><span style="color:var(--astro-code-token-punctuation)">, </span><span style="color:var(--astro-code-token-constant)">11.0</span><span style="color:var(--astro-code-token-punctuation)">, </span><span style="color:var(--astro-code-token-constant)">9.26</span><span style="color:var(--astro-code-token-punctuation)">, </span><span style="color:var(--astro-code-token-constant)">11.0</span><span style="color:var(--astro-code-token-punctuation)">, </span><span style="color:var(--astro-code-token-constant)">7.81</span><span style="color:var(--astro-code-token-punctuation)">, </span><span style="color:var(--astro-code-token-constant)">8.0</span><span style="color:var(--astro-code-token-punctuation)">, </span><span style="color:var(--astro-code-token-constant)">8.47</span><span style="color:var(--astro-code-token-punctuation)">,</span></span>
+<span class="line"><span style="color:var(--astro-code-token-constant)">14.0</span><span style="color:var(--astro-code-token-punctuation)">, </span><span style="color:var(--astro-code-token-constant)">9.96</span><span style="color:var(--astro-code-token-punctuation)">, </span><span style="color:var(--astro-code-token-constant)">14.0</span><span style="color:var(--astro-code-token-punctuation)">, </span><span style="color:var(--astro-code-token-constant)">8.10</span><span style="color:var(--astro-code-token-punctuation)">, </span><span style="color:var(--astro-code-token-constant)">14.0</span><span style="color:var(--astro-code-token-punctuation)">, </span><span style="color:var(--astro-code-token-constant)">8.84</span><span style="color:var(--astro-code-token-punctuation)">, </span><span style="color:var(--astro-code-token-constant)">8.0</span><span style="color:var(--astro-code-token-punctuation)">, </span><span style="color:var(--astro-code-token-constant)">7.04</span><span style="color:var(--astro-code-token-punctuation)">,</span></span>
+<span class="line"><span style="color:var(--astro-code-token-constant)">6.0</span><span style="color:var(--astro-code-token-punctuation)">, </span><span style="color:var(--astro-code-token-constant)">7.24</span><span style="color:var(--astro-code-token-punctuation)">, </span><span style="color:var(--astro-code-token-constant)">6.0</span><span style="color:var(--astro-code-token-punctuation)">, </span><span style="color:var(--astro-code-token-constant)">6.13</span><span style="color:var(--astro-code-token-punctuation)">, </span><span style="color:var(--astro-code-token-constant)">6.0</span><span style="color:var(--astro-code-token-punctuation)">, </span><span style="color:var(--astro-code-token-constant)">6.08</span><span style="color:var(--astro-code-token-punctuation)">, </span><span style="color:var(--astro-code-token-constant)">8.0</span><span style="color:var(--astro-code-token-punctuation)">, </span><span style="color:var(--astro-code-token-constant)">5.25</span><span style="color:var(--astro-code-token-punctuation)">,</span></span>
+<span class="line"><span style="color:var(--astro-code-token-constant)">4.0</span><span style="color:var(--astro-code-token-punctuation)">, </span><span style="color:var(--astro-code-token-constant)">4.26</span><span style="color:var(--astro-code-token-punctuation)">, </span><span style="color:var(--astro-code-token-constant)">4.0</span><span style="color:var(--astro-code-token-punctuation)">, </span><span style="color:var(--astro-code-token-constant)">3.10</span><span style="color:var(--astro-code-token-punctuation)">, </span><span style="color:var(--astro-code-token-constant)">4.0</span><span style="color:var(--astro-code-token-punctuation)">, </span><span style="color:var(--astro-code-token-constant)">5.39</span><span style="color:var(--astro-code-token-punctuation)">, </span><span style="color:var(--astro-code-token-constant)">19.0</span><span style="color:var(--astro-code-token-punctuation)">, </span><span style="color:var(--astro-code-token-constant)">12.50</span><span style="color:var(--astro-code-token-punctuation)">,</span></span>
+<span class="line"><span style="color:var(--astro-code-token-constant)">12.0</span><span style="color:var(--astro-code-token-punctuation)">, </span><span style="color:var(--astro-code-token-constant)">10.84</span><span style="color:var(--astro-code-token-punctuation)">, </span><span style="color:var(--astro-code-token-constant)">12.0</span><span style="color:var(--astro-code-token-punctuation)">, </span><span style="color:var(--astro-code-token-constant)">9.13</span><span style="color:var(--astro-code-token-punctuation)">, </span><span style="color:var(--astro-code-token-constant)">12.0</span><span style="color:var(--astro-code-token-punctuation)">, </span><span style="color:var(--astro-code-token-constant)">8.15</span><span style="color:var(--astro-code-token-punctuation)">, </span><span style="color:var(--astro-code-token-constant)">8.0</span><span style="color:var(--astro-code-token-punctuation)">, </span><span style="color:var(--astro-code-token-constant)">5.56</span><span style="color:var(--astro-code-token-punctuation)">,</span></span>
+<span class="line"><span style="color:var(--astro-code-token-constant)">7.0</span><span style="color:var(--astro-code-token-punctuation)">, </span><span style="color:var(--astro-code-token-constant)">4.82</span><span style="color:var(--astro-code-token-punctuation)">, </span><span style="color:var(--astro-code-token-constant)">7.0</span><span style="color:var(--astro-code-token-punctuation)">, </span><span style="color:var(--astro-code-token-constant)">7.26</span><span style="color:var(--astro-code-token-punctuation)">, </span><span style="color:var(--astro-code-token-constant)">7.0</span><span style="color:var(--astro-code-token-punctuation)">, </span><span style="color:var(--astro-code-token-constant)">6.42</span><span style="color:var(--astro-code-token-punctuation)">, </span><span style="color:var(--astro-code-token-constant)">8.0</span><span style="color:var(--astro-code-token-punctuation)">, </span><span style="color:var(--astro-code-token-constant)">7.91</span><span style="color:var(--astro-code-token-punctuation)">,</span></span>
+<span class="line"><span style="color:var(--astro-code-token-constant)">5.0</span><span style="color:var(--astro-code-token-punctuation)">, </span><span style="color:var(--astro-code-token-constant)">5.68</span><span style="color:var(--astro-code-token-punctuation)">, </span><span style="color:var(--astro-code-token-constant)">5.0</span><span style="color:var(--astro-code-token-punctuation)">, </span><span style="color:var(--astro-code-token-constant)">4.74</span><span style="color:var(--astro-code-token-punctuation)">, </span><span style="color:var(--astro-code-token-constant)">5.0</span><span style="color:var(--astro-code-token-punctuation)">, </span><span style="color:var(--astro-code-token-constant)">5.73</span><span style="color:var(--astro-code-token-punctuation)">, </span><span style="color:var(--astro-code-token-constant)">8.0</span><span style="color:var(--astro-code-token-punctuation)">, </span><span style="color:var(--astro-code-token-constant)">6.89</span><span style="color:var(--astro-code-token-punctuation)">])</span></span>
 <span class="line"></span></code></pre>
 <p>Let’s reshape our NumPy array so it is a bit more readble and how it looks in Wikipedia.</p>
-<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="py"><code><span class="line"><span style="color:#F8F8F2">anscombe_data </span><span style="color:#FF79C6">=</span><span style="color:#F8F8F2"> anscombe_data.reshape(</span><span style="color:#BD93F9">11</span><span style="color:#F8F8F2">, </span><span style="color:#BD93F9">4</span><span style="color:#F8F8F2">, </span><span style="color:#BD93F9">2</span><span style="color:#F8F8F2">).transpose(</span><span style="color:#BD93F9">1</span><span style="color:#F8F8F2">, </span><span style="color:#BD93F9">0</span><span style="color:#F8F8F2">, </span><span style="color:#BD93F9">2</span><span style="color:#F8F8F2">)</span></span>
-<span class="line"><span style="color:#6272A4">'''</span></span>
-<span class="line"><span style="color:#6272A4">[[[10.    8.04]</span></span>
-<span class="line"><span style="color:#6272A4">  [ 8.    6.95]</span></span>
-<span class="line"><span style="color:#6272A4">  [13.    7.58]</span></span>
-<span class="line"><span style="color:#6272A4">  [ 9.    8.81]</span></span>
-<span class="line"><span style="color:#6272A4">  [11.    8.33]</span></span>
-<span class="line"><span style="color:#6272A4">  [14.    9.96]</span></span>
-<span class="line"><span style="color:#6272A4">  [ 6.    7.24]</span></span>
-<span class="line"><span style="color:#6272A4">  [ 4.    4.26]</span></span>
-<span class="line"><span style="color:#6272A4">  [12.   10.84]</span></span>
-<span class="line"><span style="color:#6272A4">  [ 7.    4.82]</span></span>
-<span class="line"><span style="color:#6272A4">  [ 5.    5.68]]</span></span>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-color-background);color:var(--astro-code-color-text); overflow-x: auto;" tabindex="0" data-language="py"><code><span class="line"><span style="color:var(--astro-code-color-text)">anscombe_data </span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-color-text)"> anscombe_data</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">reshape</span><span style="color:var(--astro-code-token-punctuation)">(</span><span style="color:var(--astro-code-token-constant)">11</span><span style="color:var(--astro-code-token-punctuation)">, </span><span style="color:var(--astro-code-token-constant)">4</span><span style="color:var(--astro-code-token-punctuation)">, </span><span style="color:var(--astro-code-token-constant)">2</span><span style="color:var(--astro-code-token-punctuation)">).</span><span style="color:var(--astro-code-token-function)">transpose</span><span style="color:var(--astro-code-token-punctuation)">(</span><span style="color:var(--astro-code-token-constant)">1</span><span style="color:var(--astro-code-token-punctuation)">, </span><span style="color:var(--astro-code-token-constant)">0</span><span style="color:var(--astro-code-token-punctuation)">, </span><span style="color:var(--astro-code-token-constant)">2</span><span style="color:var(--astro-code-token-punctuation)">)</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">'''</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">[[[10.    8.04]</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">  [ 8.    6.95]</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">  [13.    7.58]</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">  [ 9.    8.81]</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">  [11.    8.33]</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">  [14.    9.96]</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">  [ 6.    7.24]</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">  [ 4.    4.26]</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">  [12.   10.84]</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">  [ 7.    4.82]</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">  [ 5.    5.68]]</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:#6272A4"> [[10.    9.14]</span></span>
-<span class="line"><span style="color:#6272A4">  [ 8.    8.14]</span></span>
-<span class="line"><span style="color:#6272A4">  [13.    8.74]</span></span>
-<span class="line"><span style="color:#6272A4">  [ 9.    8.77]</span></span>
-<span class="line"><span style="color:#6272A4">  [11.    9.26]</span></span>
-<span class="line"><span style="color:#6272A4">  [14.    8.1 ]</span></span>
-<span class="line"><span style="color:#6272A4">  [ 6.    6.13]</span></span>
-<span class="line"><span style="color:#6272A4">  [ 4.    3.1 ]</span></span>
-<span class="line"><span style="color:#6272A4">  [12.    9.13]</span></span>
-<span class="line"><span style="color:#6272A4">  [ 7.    7.26]</span></span>
-<span class="line"><span style="color:#6272A4">  [ 5.    4.74]]</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"> [[10.    9.14]</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">  [ 8.    8.14]</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">  [13.    8.74]</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">  [ 9.    8.77]</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">  [11.    9.26]</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">  [14.    8.1 ]</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">  [ 6.    6.13]</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">  [ 4.    3.1 ]</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">  [12.    9.13]</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">  [ 7.    7.26]</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">  [ 5.    4.74]]</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:#6272A4"> [[10.    7.46]</span></span>
-<span class="line"><span style="color:#6272A4">  [ 8.    6.77]</span></span>
-<span class="line"><span style="color:#6272A4">  [13.   12.74]</span></span>
-<span class="line"><span style="color:#6272A4">  [ 9.    7.11]</span></span>
-<span class="line"><span style="color:#6272A4">  [11.    7.81]</span></span>
-<span class="line"><span style="color:#6272A4">  [14.    8.84]</span></span>
-<span class="line"><span style="color:#6272A4">  [ 6.    6.08]</span></span>
-<span class="line"><span style="color:#6272A4">  [ 4.    5.39]</span></span>
-<span class="line"><span style="color:#6272A4">  [12.    8.15]</span></span>
-<span class="line"><span style="color:#6272A4">  [ 7.    6.42]</span></span>
-<span class="line"><span style="color:#6272A4">  [ 5.    5.73]]</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"> [[10.    7.46]</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">  [ 8.    6.77]</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">  [13.   12.74]</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">  [ 9.    7.11]</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">  [11.    7.81]</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">  [14.    8.84]</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">  [ 6.    6.08]</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">  [ 4.    5.39]</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">  [12.    8.15]</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">  [ 7.    6.42]</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">  [ 5.    5.73]]</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:#6272A4"> [[ 8.    6.58]</span></span>
-<span class="line"><span style="color:#6272A4">  [ 8.    5.76]</span></span>
-<span class="line"><span style="color:#6272A4">  [ 8.    7.71]</span></span>
-<span class="line"><span style="color:#6272A4">  [ 8.    8.84]</span></span>
-<span class="line"><span style="color:#6272A4">  [ 8.    8.47]</span></span>
-<span class="line"><span style="color:#6272A4">  [ 8.    7.04]</span></span>
-<span class="line"><span style="color:#6272A4">  [ 8.    5.25]</span></span>
-<span class="line"><span style="color:#6272A4">  [19.   12.5 ]</span></span>
-<span class="line"><span style="color:#6272A4">  [ 8.    5.56]</span></span>
-<span class="line"><span style="color:#6272A4">  [ 8.    7.91]</span></span>
-<span class="line"><span style="color:#6272A4">  [ 8.    6.89]]]</span></span>
-<span class="line"><span style="color:#6272A4">'''</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)"> [[ 8.    6.58]</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">  [ 8.    5.76]</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">  [ 8.    7.71]</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">  [ 8.    8.84]</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">  [ 8.    8.47]</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">  [ 8.    7.04]</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">  [ 8.    5.25]</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">  [19.   12.5 ]</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">  [ 8.    5.56]</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">  [ 8.    7.91]</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">  [ 8.    6.89]]]</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">'''</span></span>
 <span class="line"></span></code></pre>
 <p>Let’s break it up into the four indviual datasets:</p>
-<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="py"><code><span class="line"><span style="color:#F8F8F2">anscombe </span><span style="color:#FF79C6">=</span><span style="color:#F8F8F2"> {</span><span style="color:#E9F284">'</span><span style="color:#F1FA8C">I</span><span style="color:#E9F284">'</span><span style="color:#F8F8F2">: anscombe_data[</span><span style="color:#BD93F9">0</span><span style="color:#F8F8F2">, </span><span style="color:#FF79C6">:</span><span style="color:#F8F8F2">, </span><span style="color:#FF79C6">:</span><span style="color:#F8F8F2">],</span></span>
-<span class="line"><span style="color:#E9F284">            '</span><span style="color:#F1FA8C">II</span><span style="color:#E9F284">'</span><span style="color:#F8F8F2">: anscombe_data[</span><span style="color:#BD93F9">1</span><span style="color:#F8F8F2">, </span><span style="color:#FF79C6">:</span><span style="color:#F8F8F2">, </span><span style="color:#FF79C6">:</span><span style="color:#F8F8F2">],</span></span>
-<span class="line"><span style="color:#E9F284">            '</span><span style="color:#F1FA8C">III</span><span style="color:#E9F284">'</span><span style="color:#F8F8F2">: anscombe_data[</span><span style="color:#BD93F9">2</span><span style="color:#F8F8F2">, </span><span style="color:#FF79C6">:</span><span style="color:#F8F8F2">, </span><span style="color:#FF79C6">:</span><span style="color:#F8F8F2">],</span></span>
-<span class="line"><span style="color:#E9F284">            '</span><span style="color:#F1FA8C">IV</span><span style="color:#E9F284">'</span><span style="color:#F8F8F2">: anscombe_data[</span><span style="color:#BD93F9">3</span><span style="color:#F8F8F2">, </span><span style="color:#FF79C6">:</span><span style="color:#F8F8F2">, </span><span style="color:#FF79C6">:</span><span style="color:#F8F8F2">]}</span></span>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-color-background);color:var(--astro-code-color-text); overflow-x: auto;" tabindex="0" data-language="py"><code><span class="line"><span style="color:var(--astro-code-color-text)">anscombe </span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-token-punctuation)"> {</span><span style="color:var(--astro-code-token-string-expression)">'I'</span><span style="color:var(--astro-code-token-punctuation)">:</span><span style="color:var(--astro-code-color-text)"> anscombe_data</span><span style="color:var(--astro-code-token-punctuation)">[</span><span style="color:var(--astro-code-token-constant)">0</span><span style="color:var(--astro-code-token-punctuation)">,</span><span style="color:var(--astro-code-token-punctuation)"> :,</span><span style="color:var(--astro-code-token-punctuation)"> :],</span></span>
+<span class="line"><span style="color:var(--astro-code-token-string-expression)">            'II'</span><span style="color:var(--astro-code-token-punctuation)">:</span><span style="color:var(--astro-code-color-text)"> anscombe_data</span><span style="color:var(--astro-code-token-punctuation)">[</span><span style="color:var(--astro-code-token-constant)">1</span><span style="color:var(--astro-code-token-punctuation)">,</span><span style="color:var(--astro-code-token-punctuation)"> :,</span><span style="color:var(--astro-code-token-punctuation)"> :],</span></span>
+<span class="line"><span style="color:var(--astro-code-token-string-expression)">            'III'</span><span style="color:var(--astro-code-token-punctuation)">:</span><span style="color:var(--astro-code-color-text)"> anscombe_data</span><span style="color:var(--astro-code-token-punctuation)">[</span><span style="color:var(--astro-code-token-constant)">2</span><span style="color:var(--astro-code-token-punctuation)">,</span><span style="color:var(--astro-code-token-punctuation)"> :,</span><span style="color:var(--astro-code-token-punctuation)"> :],</span></span>
+<span class="line"><span style="color:var(--astro-code-token-string-expression)">            'IV'</span><span style="color:var(--astro-code-token-punctuation)">:</span><span style="color:var(--astro-code-color-text)"> anscombe_data</span><span style="color:var(--astro-code-token-punctuation)">[</span><span style="color:var(--astro-code-token-constant)">3</span><span style="color:var(--astro-code-token-punctuation)">,</span><span style="color:var(--astro-code-token-punctuation)"> :,</span><span style="color:var(--astro-code-token-punctuation)"> :]}</span></span>
 <span class="line"></span></code></pre>
 <p>Before we plot the actual graphs, let’s take a loook at the mean, standard devation and variance for all four of the datasets.</p>
-<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="py"><code><span class="line"><span style="color:#FF79C6">for</span><span style="color:#F8F8F2"> key, value </span><span style="color:#FF79C6">in</span><span style="color:#F8F8F2"> anscombe.items():</span></span>
-<span class="line"><span style="color:#8BE9FD">    print</span><span style="color:#F8F8F2">(key)</span></span>
-<span class="line"><span style="color:#8BE9FD">    print</span><span style="color:#F8F8F2">(</span><span style="color:#E9F284">'</span><span style="color:#F1FA8C">Mean: </span><span style="color:#E9F284">'</span><span style="color:#F8F8F2">, np.mean(value, </span><span style="color:#FFB86C;font-style:italic">axis</span><span style="color:#FF79C6">=</span><span style="color:#BD93F9">0</span><span style="color:#F8F8F2">))</span></span>
-<span class="line"><span style="color:#8BE9FD">    print</span><span style="color:#F8F8F2">(</span><span style="color:#E9F284">'</span><span style="color:#F1FA8C">Standard deviation: </span><span style="color:#E9F284">'</span><span style="color:#F8F8F2">, np.std(value, </span><span style="color:#FFB86C;font-style:italic">ddof</span><span style="color:#FF79C6">=</span><span style="color:#BD93F9">1</span><span style="color:#F8F8F2">, </span><span style="color:#FFB86C;font-style:italic">axis</span><span style="color:#FF79C6">=</span><span style="color:#BD93F9">0</span><span style="color:#F8F8F2">))</span></span>
-<span class="line"><span style="color:#8BE9FD">    print</span><span style="color:#F8F8F2">(</span><span style="color:#E9F284">'</span><span style="color:#F1FA8C">Variance: </span><span style="color:#E9F284">'</span><span style="color:#F8F8F2">, np.var(value, </span><span style="color:#FFB86C;font-style:italic">axis</span><span style="color:#FF79C6">=</span><span style="color:#BD93F9">0</span><span style="color:#F8F8F2">))</span></span>
-<span class="line"><span style="color:#8BE9FD">    print</span><span style="color:#F8F8F2">(</span><span style="color:#E9F284">'</span><span style="color:#F1FA8C">Correlation coefficient: </span><span style="color:#E9F284">'</span><span style="color:#F8F8F2">, np.corrcoef(</span></span>
-<span class="line"><span style="color:#F8F8F2">        value[</span><span style="color:#FF79C6">:</span><span style="color:#F8F8F2">, </span><span style="color:#BD93F9">0</span><span style="color:#F8F8F2">], value[</span><span style="color:#FF79C6">:</span><span style="color:#F8F8F2">, </span><span style="color:#BD93F9">1</span><span style="color:#F8F8F2">])[</span><span style="color:#BD93F9">0</span><span style="color:#F8F8F2">, </span><span style="color:#BD93F9">1</span><span style="color:#F8F8F2">])</span></span>
-<span class="line"><span style="color:#8BE9FD">    print</span><span style="color:#F8F8F2">()</span></span>
-<span class="line"><span style="color:#6272A4">'''</span></span>
-<span class="line"><span style="color:#6272A4">I</span></span>
-<span class="line"><span style="color:#6272A4">Mean:  [9.         7.50090909]</span></span>
-<span class="line"><span style="color:#6272A4">Standard deviation:  [3.31662479 2.03156814]</span></span>
-<span class="line"><span style="color:#6272A4">Variance:  [10.          3.75206281]</span></span>
-<span class="line"><span style="color:#6272A4">Correlation coefficient:  0.81642051634484</span></span>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-color-background);color:var(--astro-code-color-text); overflow-x: auto;" tabindex="0" data-language="py"><code><span class="line"><span style="color:var(--astro-code-token-keyword)">for</span><span style="color:var(--astro-code-color-text)"> key</span><span style="color:var(--astro-code-token-punctuation)">,</span><span style="color:var(--astro-code-color-text)"> value </span><span style="color:var(--astro-code-token-keyword)">in</span><span style="color:var(--astro-code-color-text)"> anscombe</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">items</span><span style="color:var(--astro-code-token-punctuation)">():</span></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">    print</span><span style="color:var(--astro-code-token-punctuation)">(key)</span></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">    print</span><span style="color:var(--astro-code-token-punctuation)">(</span><span style="color:var(--astro-code-token-string-expression)">'Mean: '</span><span style="color:var(--astro-code-token-punctuation)">, np.</span><span style="color:var(--astro-code-token-function)">mean</span><span style="color:var(--astro-code-token-punctuation)">(value, axis</span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-token-constant)">0</span><span style="color:var(--astro-code-token-punctuation)">))</span></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">    print</span><span style="color:var(--astro-code-token-punctuation)">(</span><span style="color:var(--astro-code-token-string-expression)">'Standard deviation: '</span><span style="color:var(--astro-code-token-punctuation)">, np.</span><span style="color:var(--astro-code-token-function)">std</span><span style="color:var(--astro-code-token-punctuation)">(value, ddof</span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-token-constant)">1</span><span style="color:var(--astro-code-token-punctuation)">, axis</span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-token-constant)">0</span><span style="color:var(--astro-code-token-punctuation)">))</span></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">    print</span><span style="color:var(--astro-code-token-punctuation)">(</span><span style="color:var(--astro-code-token-string-expression)">'Variance: '</span><span style="color:var(--astro-code-token-punctuation)">, np.</span><span style="color:var(--astro-code-token-function)">var</span><span style="color:var(--astro-code-token-punctuation)">(value, axis</span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-token-constant)">0</span><span style="color:var(--astro-code-token-punctuation)">))</span></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">    print</span><span style="color:var(--astro-code-token-punctuation)">(</span><span style="color:var(--astro-code-token-string-expression)">'Correlation coefficient: '</span><span style="color:var(--astro-code-token-punctuation)">, np.</span><span style="color:var(--astro-code-token-function)">corrcoef</span><span style="color:var(--astro-code-token-punctuation)">(</span></span>
+<span class="line"><span style="color:var(--astro-code-token-punctuation)">        value[:, </span><span style="color:var(--astro-code-token-constant)">0</span><span style="color:var(--astro-code-token-punctuation)">], value[:, </span><span style="color:var(--astro-code-token-constant)">1</span><span style="color:var(--astro-code-token-punctuation)">])[</span><span style="color:var(--astro-code-token-constant)">0</span><span style="color:var(--astro-code-token-punctuation)">, </span><span style="color:var(--astro-code-token-constant)">1</span><span style="color:var(--astro-code-token-punctuation)">])</span></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">    print</span><span style="color:var(--astro-code-token-punctuation)">()</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">'''</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">I</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">Mean:  [9.         7.50090909]</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">Standard deviation:  [3.31662479 2.03156814]</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">Variance:  [10.          3.75206281]</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">Correlation coefficient:  0.81642051634484</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:#6272A4">II</span></span>
-<span class="line"><span style="color:#6272A4">Mean:  [9.         7.50090909]</span></span>
-<span class="line"><span style="color:#6272A4">Standard deviation:  [3.31662479 2.03165674]</span></span>
-<span class="line"><span style="color:#6272A4">Variance:  [10.          3.75239008]</span></span>
-<span class="line"><span style="color:#6272A4">Correlation coefficient:  0.8162365060002428</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">II</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">Mean:  [9.         7.50090909]</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">Standard deviation:  [3.31662479 2.03165674]</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">Variance:  [10.          3.75239008]</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">Correlation coefficient:  0.8162365060002428</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:#6272A4">III</span></span>
-<span class="line"><span style="color:#6272A4">Mean:  [9.  7.5]</span></span>
-<span class="line"><span style="color:#6272A4">Standard deviation:  [3.31662479 2.0304236 ]</span></span>
-<span class="line"><span style="color:#6272A4">Variance:  [10.          3.74783636]</span></span>
-<span class="line"><span style="color:#6272A4">Correlation coefficient:  0.8162867394895984</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">III</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">Mean:  [9.  7.5]</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">Standard deviation:  [3.31662479 2.0304236 ]</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">Variance:  [10.          3.74783636]</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">Correlation coefficient:  0.8162867394895984</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:#6272A4">IV</span></span>
-<span class="line"><span style="color:#6272A4">Mean:  [9.         7.50090909]</span></span>
-<span class="line"><span style="color:#6272A4">Standard deviation:  [3.31662479 2.03057851]</span></span>
-<span class="line"><span style="color:#6272A4">Variance:  [10.          3.74840826]</span></span>
-<span class="line"><span style="color:#6272A4">Correlation coefficient:  0.8165214368885028</span></span>
-<span class="line"><span style="color:#6272A4">'''</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">IV</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">Mean:  [9.         7.50090909]</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">Standard deviation:  [3.31662479 2.03057851]</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">Variance:  [10.          3.74840826]</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">Correlation coefficient:  0.8165214368885028</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">'''</span></span>
 <span class="line"></span></code></pre>
 <p>So, from a purerly statistical view, we would think that all these datasets should look <em>somewhat</em> similar, right?</p>
 <p>Let’s plot them and see. Let’s plot them as scatter plots:</p>
-<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="py"><code><span class="line"><span style="color:#FF79C6">for</span><span style="color:#F8F8F2"> key, value </span><span style="color:#FF79C6">in</span><span style="color:#F8F8F2"> anscombe.items():</span></span>
-<span class="line"><span style="color:#F8F8F2">    plt.scatter(value[</span><span style="color:#FF79C6">:</span><span style="color:#F8F8F2">, </span><span style="color:#BD93F9">0</span><span style="color:#F8F8F2">], value[</span><span style="color:#FF79C6">:</span><span style="color:#F8F8F2">, </span><span style="color:#BD93F9">1</span><span style="color:#F8F8F2">])</span></span>
-<span class="line"><span style="color:#F8F8F2">    plt.show()</span></span>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-color-background);color:var(--astro-code-color-text); overflow-x: auto;" tabindex="0" data-language="py"><code><span class="line"><span style="color:var(--astro-code-token-keyword)">for</span><span style="color:var(--astro-code-color-text)"> key</span><span style="color:var(--astro-code-token-punctuation)">,</span><span style="color:var(--astro-code-color-text)"> value </span><span style="color:var(--astro-code-token-keyword)">in</span><span style="color:var(--astro-code-color-text)"> anscombe</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">items</span><span style="color:var(--astro-code-token-punctuation)">():</span></span>
+<span class="line"><span style="color:var(--astro-code-color-text)">    plt</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">scatter</span><span style="color:var(--astro-code-token-punctuation)">(value[:, </span><span style="color:var(--astro-code-token-constant)">0</span><span style="color:var(--astro-code-token-punctuation)">], value[:, </span><span style="color:var(--astro-code-token-constant)">1</span><span style="color:var(--astro-code-token-punctuation)">])</span></span>
+<span class="line"><span style="color:var(--astro-code-color-text)">    plt</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">show</span><span style="color:var(--astro-code-token-punctuation)">()</span></span>
 <span class="line"></span></code></pre>
 <p><img src="/images/school/viv.png#center" alt="">
 <img src="/images/school/ii.png#center" alt="">
 <img src="/images/school/ii.png#center" alt="">
 <img src="/images/school/iv.png#center" alt=""></p>
 <p>Let’s plot them all together:</p>
-<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="py"><code><span class="line"><span style="color:#F8F8F2">fig, axs </span><span style="color:#FF79C6">=</span><span style="color:#F8F8F2"> plt.subplots(</span><span style="color:#BD93F9">2</span><span style="color:#F8F8F2">, </span><span style="color:#BD93F9">2</span><span style="color:#F8F8F2">)</span></span>
-<span class="line"><span style="color:#FF79C6">for</span><span style="color:#F8F8F2"> (ax, (key, value)) </span><span style="color:#FF79C6">in</span><span style="color:#8BE9FD"> zip</span><span style="color:#F8F8F2">(axs.ravel(), anscombe.items()):</span></span>
-<span class="line"><span style="color:#F8F8F2">    ax.scatter(value[</span><span style="color:#FF79C6">:</span><span style="color:#F8F8F2">, </span><span style="color:#BD93F9">0</span><span style="color:#F8F8F2">], value[</span><span style="color:#FF79C6">:</span><span style="color:#F8F8F2">, </span><span style="color:#BD93F9">1</span><span style="color:#F8F8F2">])</span></span>
-<span class="line"><span style="color:#F8F8F2">    ax.set_xlabel(</span><span style="color:#E9F284">'</span><span style="color:#F1FA8C">$x$</span><span style="color:#E9F284">'</span><span style="color:#F8F8F2">)</span></span>
-<span class="line"><span style="color:#F8F8F2">    ax.set_ylabel(</span><span style="color:#E9F284">'</span><span style="color:#F1FA8C">$y$</span><span style="color:#E9F284">'</span><span style="color:#F8F8F2">)</span></span>
-<span class="line"><span style="color:#F8F8F2">    ax.set_title(key)</span></span>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-color-background);color:var(--astro-code-color-text); overflow-x: auto;" tabindex="0" data-language="py"><code><span class="line"><span style="color:var(--astro-code-color-text)">fig</span><span style="color:var(--astro-code-token-punctuation)">,</span><span style="color:var(--astro-code-color-text)"> axs </span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-color-text)"> plt</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">subplots</span><span style="color:var(--astro-code-token-punctuation)">(</span><span style="color:var(--astro-code-token-constant)">2</span><span style="color:var(--astro-code-token-punctuation)">, </span><span style="color:var(--astro-code-token-constant)">2</span><span style="color:var(--astro-code-token-punctuation)">)</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">for</span><span style="color:var(--astro-code-color-text)"> (ax</span><span style="color:var(--astro-code-token-punctuation)">,</span><span style="color:var(--astro-code-color-text)"> (key</span><span style="color:var(--astro-code-token-punctuation)">,</span><span style="color:var(--astro-code-color-text)"> value)) </span><span style="color:var(--astro-code-token-keyword)">in</span><span style="color:var(--astro-code-token-function)"> zip</span><span style="color:var(--astro-code-token-punctuation)">(axs.</span><span style="color:var(--astro-code-token-function)">ravel</span><span style="color:var(--astro-code-token-punctuation)">(), anscombe.</span><span style="color:var(--astro-code-token-function)">items</span><span style="color:var(--astro-code-token-punctuation)">()):</span></span>
+<span class="line"><span style="color:var(--astro-code-color-text)">    ax</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">scatter</span><span style="color:var(--astro-code-token-punctuation)">(value[:, </span><span style="color:var(--astro-code-token-constant)">0</span><span style="color:var(--astro-code-token-punctuation)">], value[:, </span><span style="color:var(--astro-code-token-constant)">1</span><span style="color:var(--astro-code-token-punctuation)">])</span></span>
+<span class="line"><span style="color:var(--astro-code-color-text)">    ax</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">set_xlabel</span><span style="color:var(--astro-code-token-punctuation)">(</span><span style="color:var(--astro-code-token-string-expression)">'$x$'</span><span style="color:var(--astro-code-token-punctuation)">)</span></span>
+<span class="line"><span style="color:var(--astro-code-color-text)">    ax</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">set_ylabel</span><span style="color:var(--astro-code-token-punctuation)">(</span><span style="color:var(--astro-code-token-string-expression)">'$y$'</span><span style="color:var(--astro-code-token-punctuation)">)</span></span>
+<span class="line"><span style="color:var(--astro-code-color-text)">    ax</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">set_title</span><span style="color:var(--astro-code-token-punctuation)">(key)</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:#F8F8F2">fig.tight_layout()</span></span>
-<span class="line"><span style="color:#F8F8F2">plt.show()</span></span>
+<span class="line"><span style="color:var(--astro-code-color-text)">fig</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">tight_layout</span><span style="color:var(--astro-code-token-punctuation)">()</span></span>
+<span class="line"><span style="color:var(--astro-code-color-text)">plt</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">show</span><span style="color:var(--astro-code-token-punctuation)">()</span></span>
 <span class="line"></span></code></pre>
 <p><img src="/images/school/anscombe.png#center" alt=""></p>
 <p>So, we can see that these datasets, in reality, differ a lot from each other, but seem to have equivalent statistical properties.
@@ -258,175 +457,238 @@ When dealing with large datasets, we’ll usually want to use common convient fu
 </ul>
 <p>Converting data to wide format is called <strong>pivoting</strong>.</p>
 <p>Converting data to long format is <strong>unpivoting</strong> or <strong>melting</strong>.</p>
-<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="py"><code><span class="line"><span style="color:#6272A4">'''</span></span>
-<span class="line"><span style="color:#6272A4">Wide format</span></span>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-color-background);color:var(--astro-code-color-text); overflow-x: auto;" tabindex="0" data-language="py"><code><span class="line"><span style="color:var(--astro-code-token-comment)">'''</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">Wide format</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:#6272A4">  Person  Age  Weight  Height</span></span>
-<span class="line"><span style="color:#6272A4">0    Bob   32     168     180</span></span>
-<span class="line"><span style="color:#6272A4">1  Alice   24     150     175</span></span>
-<span class="line"><span style="color:#6272A4">2  Steve   64     144     165</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">  Person  Age  Weight  Height</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">0    Bob   32     168     180</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">1  Alice   24     150     175</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">2  Steve   64     144     165</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:#6272A4">Long format</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">Long format</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:#6272A4">  Person Attribute  Value</span></span>
-<span class="line"><span style="color:#6272A4">0    Bob       Age     32</span></span>
-<span class="line"><span style="color:#6272A4">1    Bob    Weight    168</span></span>
-<span class="line"><span style="color:#6272A4">2  Alice       Age     24</span></span>
-<span class="line"><span style="color:#6272A4">3  Alice    Weight    150</span></span>
-<span class="line"><span style="color:#6272A4">4  Steve       Age     64</span></span>
-<span class="line"><span style="color:#6272A4">5  Steve    Weight    144</span></span>
-<span class="line"><span style="color:#6272A4">'''</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">  Person Attribute  Value</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">0    Bob       Age     32</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">1    Bob    Weight    168</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">2  Alice       Age     24</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">3  Alice    Weight    150</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">4  Steve       Age     64</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">5  Steve    Weight    144</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">'''</span></span>
 <span class="line"></span></code></pre>
 <h3 id="palmer-penguins">Palmer penguins</h3>
 <p>We’ll use the <a href="https://www.kaggle.com/datasets/parulpandey/palmer-archipelago-antarctica-penguin-data">palmer penguins</a> data set.</p>
 <p>Let’s import Pandas, note that we don’t import NumPy here!</p>
-<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="py"><code><span class="line"><span style="color:#FF79C6">import</span><span style="color:#F8F8F2"> pandas </span><span style="color:#FF79C6">as</span><span style="color:#F8F8F2"> pd</span></span>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-color-background);color:var(--astro-code-color-text); overflow-x: auto;" tabindex="0" data-language="py"><code><span class="line"><span style="color:var(--astro-code-token-keyword)">import</span><span style="color:var(--astro-code-color-text)"> pandas </span><span style="color:var(--astro-code-token-keyword)">as</span><span style="color:var(--astro-code-color-text)"> pd</span></span>
 <span class="line"></span></code></pre>
 <p>Pandas offers a great selection of reading methods for different file formats.</p>
-<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="py"><code><span class="line"><span style="color:#F8F8F2">df </span><span style="color:#FF79C6">=</span><span style="color:#F8F8F2"> pd.read_csv(</span><span style="color:#E9F284">'</span><span style="color:#F1FA8C">penguins_size.csv</span><span style="color:#E9F284">'</span><span style="color:#F8F8F2">)</span></span>
-<span class="line"><span style="color:#8BE9FD">print</span><span style="color:#F8F8F2">(df)</span></span>
-<span class="line"><span style="color:#6272A4">'''</span></span>
-<span class="line"><span style="color:#6272A4">    species     island  culmen_length_mm  culmen_depth_mm  flipper_length_mm  body_mass_g     sex</span></span>
-<span class="line"><span style="color:#6272A4">0    Adelie  Torgersen              39.1             18.7              181.0       3750.0    MALE</span></span>
-<span class="line"><span style="color:#6272A4">1    Adelie  Torgersen              39.5             17.4              186.0       3800.0  FEMALE</span></span>
-<span class="line"><span style="color:#6272A4">2    Adelie  Torgersen              40.3             18.0              195.0       3250.0  FEMALE</span></span>
-<span class="line"><span style="color:#6272A4">3    Adelie  Torgersen               NaN              NaN                NaN          NaN     NaN</span></span>
-<span class="line"><span style="color:#6272A4">4    Adelie  Torgersen              36.7             19.3              193.0       3450.0  FEMALE</span></span>
-<span class="line"><span style="color:#6272A4">..      ...        ...               ...              ...                ...          ...     ...</span></span>
-<span class="line"><span style="color:#6272A4">339  Gentoo     Biscoe               NaN              NaN                NaN          NaN     NaN</span></span>
-<span class="line"><span style="color:#6272A4">340  Gentoo     Biscoe              46.8             14.3              215.0       4850.0  FEMALE</span></span>
-<span class="line"><span style="color:#6272A4">341  Gentoo     Biscoe              50.4             15.7              222.0       5750.0    MALE</span></span>
-<span class="line"><span style="color:#6272A4">342  Gentoo     Biscoe              45.2             14.8              212.0       5200.0  FEMALE</span></span>
-<span class="line"><span style="color:#6272A4">343  Gentoo     Biscoe              49.9             16.1              213.0       5400.0    MALE</span></span>
-<span class="line"><span style="color:#6272A4">'''</span></span>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-color-background);color:var(--astro-code-color-text); overflow-x: auto;" tabindex="0" data-language="py"><code><span class="line"><span style="color:var(--astro-code-color-text)">df </span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-color-text)"> pd</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">read_csv</span><span style="color:var(--astro-code-token-punctuation)">(</span><span style="color:var(--astro-code-token-string-expression)">'penguins_size.csv'</span><span style="color:var(--astro-code-token-punctuation)">)</span></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">print</span><span style="color:var(--astro-code-token-punctuation)">(df)</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">'''</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">    species     island  culmen_length_mm  culmen_depth_mm  flipper_length_mm  body_mass_g     sex</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">0    Adelie  Torgersen              39.1             18.7              181.0       3750.0    MALE</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">1    Adelie  Torgersen              39.5             17.4              186.0       3800.0  FEMALE</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">2    Adelie  Torgersen              40.3             18.0              195.0       3250.0  FEMALE</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">3    Adelie  Torgersen               NaN              NaN                NaN          NaN     NaN</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">4    Adelie  Torgersen              36.7             19.3              193.0       3450.0  FEMALE</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">..      ...        ...               ...              ...                ...          ...     ...</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">339  Gentoo     Biscoe               NaN              NaN                NaN          NaN     NaN</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">340  Gentoo     Biscoe              46.8             14.3              215.0       4850.0  FEMALE</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">341  Gentoo     Biscoe              50.4             15.7              222.0       5750.0    MALE</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">342  Gentoo     Biscoe              45.2             14.8              212.0       5200.0  FEMALE</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">343  Gentoo     Biscoe              49.9             16.1              213.0       5400.0    MALE</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">'''</span></span>
 <span class="line"></span></code></pre>
 <p>To get an overview we can use the <code>.describe()</code> function.</p>
-<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="py"><code><span class="line"><span style="color:#8BE9FD">print</span><span style="color:#F8F8F2">(df.describe())</span></span>
-<span class="line"><span style="color:#6272A4">'''</span></span>
-<span class="line"><span style="color:#6272A4">       culmen_length_mm  culmen_depth_mm  flipper_length_mm  body_mass_g</span></span>
-<span class="line"><span style="color:#6272A4">count        342.000000       342.000000         342.000000   342.000000</span></span>
-<span class="line"><span style="color:#6272A4">mean          43.921930        17.151170         200.915205  4201.754386</span></span>
-<span class="line"><span style="color:#6272A4">std            5.459584         1.974793          14.061714   801.954536</span></span>
-<span class="line"><span style="color:#6272A4">min           32.100000        13.100000         172.000000  2700.000000</span></span>
-<span class="line"><span style="color:#6272A4">25%           39.225000        15.600000         190.000000  3550.000000</span></span>
-<span class="line"><span style="color:#6272A4">50%           44.450000        17.300000         197.000000  4050.000000</span></span>
-<span class="line"><span style="color:#6272A4">75%           48.500000        18.700000         213.000000  4750.000000</span></span>
-<span class="line"><span style="color:#6272A4">max           59.600000        21.500000         231.000000  6300.00000</span></span>
-<span class="line"><span style="color:#6272A4">'''</span></span>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-color-background);color:var(--astro-code-color-text); overflow-x: auto;" tabindex="0" data-language="py"><code><span class="line"><span style="color:var(--astro-code-token-function)">print</span><span style="color:var(--astro-code-token-punctuation)">(df.</span><span style="color:var(--astro-code-token-function)">describe</span><span style="color:var(--astro-code-token-punctuation)">())</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">'''</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">       culmen_length_mm  culmen_depth_mm  flipper_length_mm  body_mass_g</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">count        342.000000       342.000000         342.000000   342.000000</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">mean          43.921930        17.151170         200.915205  4201.754386</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">std            5.459584         1.974793          14.061714   801.954536</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">min           32.100000        13.100000         172.000000  2700.000000</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">25%           39.225000        15.600000         190.000000  3550.000000</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">50%           44.450000        17.300000         197.000000  4050.000000</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">75%           48.500000        18.700000         213.000000  4750.000000</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">max           59.600000        21.500000         231.000000  6300.00000</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">'''</span></span>
 <span class="line"></span></code></pre>
 <p>To select a column we can do:</p>
-<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="py"><code><span class="line"><span style="color:#8BE9FD">print</span><span style="color:#F8F8F2">(df[</span><span style="color:#E9F284">'</span><span style="color:#F1FA8C">species</span><span style="color:#E9F284">'</span><span style="color:#F8F8F2">])</span></span>
-<span class="line"><span style="color:#6272A4">'''</span></span>
-<span class="line"><span style="color:#6272A4">0      Adelie</span></span>
-<span class="line"><span style="color:#6272A4">1      Adelie</span></span>
-<span class="line"><span style="color:#6272A4">2      Adelie</span></span>
-<span class="line"><span style="color:#6272A4">3      Adelie</span></span>
-<span class="line"><span style="color:#6272A4">4      Adelie</span></span>
-<span class="line"><span style="color:#6272A4">        ...</span></span>
-<span class="line"><span style="color:#6272A4">339    Gentoo</span></span>
-<span class="line"><span style="color:#6272A4">340    Gentoo</span></span>
-<span class="line"><span style="color:#6272A4">341    Gentoo</span></span>
-<span class="line"><span style="color:#6272A4">342    Gentoo</span></span>
-<span class="line"><span style="color:#6272A4">343    Gentoo</span></span>
-<span class="line"><span style="color:#6272A4">Name: species, Length: 344, dtype: object</span></span>
-<span class="line"><span style="color:#6272A4">'''</span></span>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-color-background);color:var(--astro-code-color-text); overflow-x: auto;" tabindex="0" data-language="py"><code><span class="line"><span style="color:var(--astro-code-token-function)">print</span><span style="color:var(--astro-code-token-punctuation)">(df[</span><span style="color:var(--astro-code-token-string-expression)">'species'</span><span style="color:var(--astro-code-token-punctuation)">])</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">'''</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">0      Adelie</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">1      Adelie</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">2      Adelie</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">3      Adelie</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">4      Adelie</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">        ...</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">339    Gentoo</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">340    Gentoo</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">341    Gentoo</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">342    Gentoo</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">343    Gentoo</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">Name: species, Length: 344, dtype: object</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">'''</span></span>
 <span class="line"></span></code></pre>
 <p>We can also select data with <code>.iloc</code> and <code>.loc</code>. <code>iloc</code> is index based.</p>
-<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="py"><code><span class="line"><span style="color:#8BE9FD">print</span><span style="color:#F8F8F2">(df.iloc[</span><span style="color:#BD93F9">0</span><span style="color:#F8F8F2">])</span></span>
-<span class="line"><span style="color:#6272A4">'''</span></span>
-<span class="line"><span style="color:#6272A4">species                 Adelie</span></span>
-<span class="line"><span style="color:#6272A4">island               Torgersen</span></span>
-<span class="line"><span style="color:#6272A4">culmen_length_mm          39.1</span></span>
-<span class="line"><span style="color:#6272A4">culmen_depth_mm           18.7</span></span>
-<span class="line"><span style="color:#6272A4">flipper_length_mm        181.0</span></span>
-<span class="line"><span style="color:#6272A4">body_mass_g             3750.0</span></span>
-<span class="line"><span style="color:#6272A4">sex                       MALE</span></span>
-<span class="line"><span style="color:#6272A4">Name: 0, dtype: object</span></span>
-<span class="line"><span style="color:#6272A4">'''</span></span>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-color-background);color:var(--astro-code-color-text); overflow-x: auto;" tabindex="0" data-language="py"><code><span class="line"><span style="color:var(--astro-code-token-function)">print</span><span style="color:var(--astro-code-token-punctuation)">(df.iloc[</span><span style="color:var(--astro-code-token-constant)">0</span><span style="color:var(--astro-code-token-punctuation)">])</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">'''</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">species                 Adelie</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">island               Torgersen</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">culmen_length_mm          39.1</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">culmen_depth_mm           18.7</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">flipper_length_mm        181.0</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">body_mass_g             3750.0</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">sex                       MALE</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">Name: 0, dtype: object</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">'''</span></span>
 <span class="line"></span></code></pre>
 <p>Where as <code>.loc</code> is string based, in this case both <code>iloc</code> and <code>loc</code> yields the same answer since we group the data with index.
 In other datasets we could have a string based index.</p>
 <p>We can easily filter and choose the right data with:</p>
-<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="py"><code><span class="line"><span style="color:#8BE9FD">print</span><span style="color:#F8F8F2">(df.loc[df[</span><span style="color:#E9F284">'</span><span style="color:#F1FA8C">culmen_length_mm</span><span style="color:#E9F284">'</span><span style="color:#F8F8F2">] </span><span style="color:#FF79C6">&#x3C;</span><span style="color:#BD93F9"> 40</span><span style="color:#F8F8F2">])</span></span>
-<span class="line"><span style="color:#6272A4">'''</span></span>
-<span class="line"><span style="color:#6272A4">    species     island  culmen_length_mm  culmen_depth_mm  flipper_length_mm  body_mass_g     sex</span></span>
-<span class="line"><span style="color:#6272A4">0    Adelie  Torgersen              39.1             18.7              181.0       3750.0    MALE</span></span>
-<span class="line"><span style="color:#6272A4">1    Adelie  Torgersen              39.5             17.4              186.0       3800.0  FEMALE</span></span>
-<span class="line"><span style="color:#6272A4">4    Adelie  Torgersen              36.7             19.3              193.0       3450.0  FEMALE</span></span>
-<span class="line"><span style="color:#6272A4">5    Adelie  Torgersen              39.3             20.6              190.0       3650.0    MALE</span></span>
-<span class="line"><span style="color:#6272A4">6    Adelie  Torgersen              38.9             17.8              181.0       3625.0  FEMALE</span></span>
-<span class="line"><span style="color:#6272A4">..      ...        ...               ...              ...                ...          ...     ...</span></span>
-<span class="line"><span style="color:#6272A4">146  Adelie      Dream              39.2             18.6              190.0       4250.0    MALE</span></span>
-<span class="line"><span style="color:#6272A4">147  Adelie      Dream              36.6             18.4              184.0       3475.0  FEMALE</span></span>
-<span class="line"><span style="color:#6272A4">148  Adelie      Dream              36.0             17.8              195.0       3450.0  FEMALE</span></span>
-<span class="line"><span style="color:#6272A4">149  Adelie      Dream              37.8             18.1              193.0       3750.0    MALE</span></span>
-<span class="line"><span style="color:#6272A4">150  Adelie      Dream              36.0             17.1              187.0       3700.0  FEMALE</span></span>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-color-background);color:var(--astro-code-color-text); overflow-x: auto;" tabindex="0" data-language="py"><code><span class="line"><span style="color:var(--astro-code-token-function)">print</span><span style="color:var(--astro-code-token-punctuation)">(df.loc[df[</span><span style="color:var(--astro-code-token-string-expression)">'culmen_length_mm'</span><span style="color:var(--astro-code-token-punctuation)">] </span><span style="color:var(--astro-code-token-keyword)">&#x3C;</span><span style="color:var(--astro-code-token-constant)"> 40</span><span style="color:var(--astro-code-token-punctuation)">])</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">'''</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">    species     island  culmen_length_mm  culmen_depth_mm  flipper_length_mm  body_mass_g     sex</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">0    Adelie  Torgersen              39.1             18.7              181.0       3750.0    MALE</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">1    Adelie  Torgersen              39.5             17.4              186.0       3800.0  FEMALE</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">4    Adelie  Torgersen              36.7             19.3              193.0       3450.0  FEMALE</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">5    Adelie  Torgersen              39.3             20.6              190.0       3650.0    MALE</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">6    Adelie  Torgersen              38.9             17.8              181.0       3625.0  FEMALE</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">..      ...        ...               ...              ...                ...          ...     ...</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">146  Adelie      Dream              39.2             18.6              190.0       4250.0    MALE</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">147  Adelie      Dream              36.6             18.4              184.0       3475.0  FEMALE</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">148  Adelie      Dream              36.0             17.8              195.0       3450.0  FEMALE</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">149  Adelie      Dream              37.8             18.1              193.0       3750.0    MALE</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">150  Adelie      Dream              36.0             17.1              187.0       3700.0  FEMALE</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:#6272A4">[100 rows x 7 columns]</span></span>
-<span class="line"><span style="color:#6272A4">'''</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">[100 rows x 7 columns]</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">'''</span></span>
 <span class="line"></span></code></pre>
 <p>We can have chained boolean expressions with <code>&#x26;</code> for AND, <code>|</code> for OR, and <code>~</code> for NOT.</p>
-<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="py"><code><span class="line"><span style="color:#8BE9FD">print</span><span style="color:#F8F8F2">(df.loc[(df[</span><span style="color:#E9F284">'</span><span style="color:#F1FA8C">culmen_length_mm</span><span style="color:#E9F284">'</span><span style="color:#F8F8F2">] </span><span style="color:#FF79C6">&#x3C;</span><span style="color:#BD93F9"> 60</span><span style="color:#F8F8F2">) </span><span style="color:#FF79C6">&#x26;</span><span style="color:#F8F8F2"> (df[</span><span style="color:#E9F284">'</span><span style="color:#F1FA8C">species</span><span style="color:#E9F284">'</span><span style="color:#F8F8F2">] </span><span style="color:#FF79C6">==</span><span style="color:#E9F284"> '</span><span style="color:#F1FA8C">Gentoo</span><span style="color:#E9F284">'</span><span style="color:#F8F8F2">)])</span></span>
-<span class="line"><span style="color:#6272A4">'''</span></span>
-<span class="line"><span style="color:#6272A4">    species  island  culmen_length_mm  culmen_depth_mm  flipper_length_mm  body_mass_g     sex</span></span>
-<span class="line"><span style="color:#6272A4">220  Gentoo  Biscoe              46.1             13.2              211.0       4500.0  FEMALE</span></span>
-<span class="line"><span style="color:#6272A4">221  Gentoo  Biscoe              50.0             16.3              230.0       5700.0    MALE</span></span>
-<span class="line"><span style="color:#6272A4">222  Gentoo  Biscoe              48.7             14.1              210.0       4450.0  FEMALE</span></span>
-<span class="line"><span style="color:#6272A4">223  Gentoo  Biscoe              50.0             15.2              218.0       5700.0    MALE</span></span>
-<span class="line"><span style="color:#6272A4">224  Gentoo  Biscoe              47.6             14.5              215.0       5400.0    MALE</span></span>
-<span class="line"><span style="color:#6272A4">..      ...     ...               ...              ...                ...          ...     ...</span></span>
-<span class="line"><span style="color:#6272A4">338  Gentoo  Biscoe              47.2             13.7              214.0       4925.0  FEMALE</span></span>
-<span class="line"><span style="color:#6272A4">340  Gentoo  Biscoe              46.8             14.3              215.0       4850.0  FEMALE</span></span>
-<span class="line"><span style="color:#6272A4">341  Gentoo  Biscoe              50.4             15.7              222.0       5750.0    MALE</span></span>
-<span class="line"><span style="color:#6272A4">342  Gentoo  Biscoe              45.2             14.8              212.0       5200.0  FEMALE</span></span>
-<span class="line"><span style="color:#6272A4">343  Gentoo  Biscoe              49.9             16.1              213.0       5400.0    MALE</span></span>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-color-background);color:var(--astro-code-color-text); overflow-x: auto;" tabindex="0" data-language="py"><code><span class="line"><span style="color:var(--astro-code-token-function)">print</span><span style="color:var(--astro-code-token-punctuation)">(df.loc[(df[</span><span style="color:var(--astro-code-token-string-expression)">'culmen_length_mm'</span><span style="color:var(--astro-code-token-punctuation)">] </span><span style="color:var(--astro-code-token-keyword)">&#x3C;</span><span style="color:var(--astro-code-token-constant)"> 60</span><span style="color:var(--astro-code-token-punctuation)">) </span><span style="color:var(--astro-code-token-keyword)">&#x26;</span><span style="color:var(--astro-code-token-punctuation)"> (df[</span><span style="color:var(--astro-code-token-string-expression)">'species'</span><span style="color:var(--astro-code-token-punctuation)">] </span><span style="color:var(--astro-code-token-keyword)">==</span><span style="color:var(--astro-code-token-string-expression)"> 'Gentoo'</span><span style="color:var(--astro-code-token-punctuation)">)])</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">'''</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">    species  island  culmen_length_mm  culmen_depth_mm  flipper_length_mm  body_mass_g     sex</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">220  Gentoo  Biscoe              46.1             13.2              211.0       4500.0  FEMALE</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">221  Gentoo  Biscoe              50.0             16.3              230.0       5700.0    MALE</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">222  Gentoo  Biscoe              48.7             14.1              210.0       4450.0  FEMALE</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">223  Gentoo  Biscoe              50.0             15.2              218.0       5700.0    MALE</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">224  Gentoo  Biscoe              47.6             14.5              215.0       5400.0    MALE</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">..      ...     ...               ...              ...                ...          ...     ...</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">338  Gentoo  Biscoe              47.2             13.7              214.0       4925.0  FEMALE</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">340  Gentoo  Biscoe              46.8             14.3              215.0       4850.0  FEMALE</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">341  Gentoo  Biscoe              50.4             15.7              222.0       5750.0    MALE</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">342  Gentoo  Biscoe              45.2             14.8              212.0       5200.0  FEMALE</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">343  Gentoo  Biscoe              49.9             16.1              213.0       5400.0    MALE</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:#6272A4">[123 rows x 7 columns]</span></span>
-<span class="line"><span style="color:#6272A4">'''</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">[123 rows x 7 columns]</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">'''</span></span>
 <span class="line"></span></code></pre>
 <p>Very often it is useful to sort/index the raw data based on some metric, let’s group the numerical data by the species and take the mean:</p>
-<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="py"><code><span class="line"><span style="color:#8BE9FD">print</span><span style="color:#F8F8F2">(df.groupby(</span><span style="color:#E9F284">'</span><span style="color:#F1FA8C">species</span><span style="color:#E9F284">'</span><span style="color:#F8F8F2">)[[</span><span style="color:#E9F284">'</span><span style="color:#F1FA8C">culmen_length_mm</span><span style="color:#E9F284">'</span><span style="color:#F8F8F2">, </span><span style="color:#E9F284">'</span><span style="color:#F1FA8C">culmen_depth_mm</span><span style="color:#E9F284">'</span><span style="color:#F8F8F2">, </span><span style="color:#E9F284">'</span><span style="color:#F1FA8C">flipper_length_mm</span><span style="color:#E9F284">'</span><span style="color:#F8F8F2">, </span><span style="color:#E9F284">'</span><span style="color:#F1FA8C">body_mass_g</span><span style="color:#E9F284">'</span><span style="color:#F8F8F2">]].mean())</span></span>
-<span class="line"><span style="color:#6272A4">'''</span></span>
-<span class="line"><span style="color:#6272A4">           culmen_length_mm  culmen_depth_mm  flipper_length_mm  body_mass_g</span></span>
-<span class="line"><span style="color:#6272A4">species</span></span>
-<span class="line"><span style="color:#6272A4">Adelie            38.791391        18.346358         189.953642  3700.662252</span></span>
-<span class="line"><span style="color:#6272A4">Chinstrap         48.833824        18.420588         195.823529  3733.088235</span></span>
-<span class="line"><span style="color:#6272A4">Gentoo            47.504878        14.982114         217.186992  5076.016260</span></span>
-<span class="line"><span style="color:#6272A4">'''</span></span>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-color-background);color:var(--astro-code-color-text); overflow-x: auto;" tabindex="0" data-language="py"><code><span class="line"><span style="color:var(--astro-code-token-function)">print</span><span style="color:var(--astro-code-token-punctuation)">(df.</span><span style="color:var(--astro-code-token-function)">groupby</span><span style="color:var(--astro-code-token-punctuation)">(</span><span style="color:var(--astro-code-token-string-expression)">'species'</span><span style="color:var(--astro-code-token-punctuation)">)[[</span><span style="color:var(--astro-code-token-string-expression)">'culmen_length_mm'</span><span style="color:var(--astro-code-token-punctuation)">, </span><span style="color:var(--astro-code-token-string-expression)">'culmen_depth_mm'</span><span style="color:var(--astro-code-token-punctuation)">, </span><span style="color:var(--astro-code-token-string-expression)">'flipper_length_mm'</span><span style="color:var(--astro-code-token-punctuation)">, </span><span style="color:var(--astro-code-token-string-expression)">'body_mass_g'</span><span style="color:var(--astro-code-token-punctuation)">]].</span><span style="color:var(--astro-code-token-function)">mean</span><span style="color:var(--astro-code-token-punctuation)">())</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">'''</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">           culmen_length_mm  culmen_depth_mm  flipper_length_mm  body_mass_g</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">species</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">Adelie            38.791391        18.346358         189.953642  3700.662252</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">Chinstrap         48.833824        18.420588         195.823529  3733.088235</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">Gentoo            47.504878        14.982114         217.186992  5076.016260</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">'''</span></span>
 <span class="line"></span></code></pre>
 <p>Let’s format this into long format:</p>
-<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="py"><code><span class="line"><span style="color:#F8F8F2">df2 </span><span style="color:#FF79C6">=</span><span style="color:#F8F8F2"> df.groupby(</span><span style="color:#E9F284">'</span><span style="color:#F1FA8C">species</span><span style="color:#E9F284">'</span><span style="color:#F8F8F2">)[[</span><span style="color:#E9F284">'</span><span style="color:#F1FA8C">culmen_length_mm</span><span style="color:#E9F284">'</span><span style="color:#F8F8F2">, </span><span style="color:#E9F284">'</span><span style="color:#F1FA8C">culmen_depth_mm</span><span style="color:#E9F284">'</span><span style="color:#F8F8F2">, </span><span style="color:#E9F284">'</span><span style="color:#F1FA8C">flipper_length_mm</span><span style="color:#E9F284">'</span><span style="color:#F8F8F2">, </span><span style="color:#E9F284">'</span><span style="color:#F1FA8C">body_mass_g</span><span style="color:#E9F284">'</span><span style="color:#F8F8F2">]].mean()</span></span>
-<span class="line"><span style="color:#8BE9FD">print</span><span style="color:#F8F8F2">(df2.reset_index().melt(</span><span style="color:#FFB86C;font-style:italic">id_vars</span><span style="color:#FF79C6">=</span><span style="color:#F8F8F2">[</span><span style="color:#E9F284">'</span><span style="color:#F1FA8C">species</span><span style="color:#E9F284">'</span><span style="color:#F8F8F2">], </span><span style="color:#FFB86C;font-style:italic">var_name</span><span style="color:#FF79C6">=</span><span style="color:#E9F284">'</span><span style="color:#F1FA8C">measurement</span><span style="color:#E9F284">'</span><span style="color:#F8F8F2">, </span><span style="color:#FFB86C;font-style:italic">value_name</span><span style="color:#FF79C6">=</span><span style="color:#E9F284">'</span><span style="color:#F1FA8C">value</span><span style="color:#E9F284">'</span><span style="color:#F8F8F2">))</span></span>
-<span class="line"><span style="color:#6272A4">'''</span></span>
-<span class="line"><span style="color:#6272A4">      species        measurement        value</span></span>
-<span class="line"><span style="color:#6272A4">0      Adelie   culmen_length_mm    38.791391</span></span>
-<span class="line"><span style="color:#6272A4">1   Chinstrap   culmen_length_mm    48.833824</span></span>
-<span class="line"><span style="color:#6272A4">2      Gentoo   culmen_length_mm    47.504878</span></span>
-<span class="line"><span style="color:#6272A4">3      Adelie    culmen_depth_mm    18.346358</span></span>
-<span class="line"><span style="color:#6272A4">4   Chinstrap    culmen_depth_mm    18.420588</span></span>
-<span class="line"><span style="color:#6272A4">5      Gentoo    culmen_depth_mm    14.982114</span></span>
-<span class="line"><span style="color:#6272A4">6      Adelie  flipper_length_mm   189.953642</span></span>
-<span class="line"><span style="color:#6272A4">7   Chinstrap  flipper_length_mm   195.823529</span></span>
-<span class="line"><span style="color:#6272A4">8      Gentoo  flipper_length_mm   217.186992</span></span>
-<span class="line"><span style="color:#6272A4">9      Adelie        body_mass_g  3700.662252</span></span>
-<span class="line"><span style="color:#6272A4">10  Chinstrap        body_mass_g  3733.088235</span></span>
-<span class="line"><span style="color:#6272A4">11     Gentoo        body_mass_g  5076.016260</span></span>
-<span class="line"><span style="color:#6272A4">'''</span></span>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-color-background);color:var(--astro-code-color-text); overflow-x: auto;" tabindex="0" data-language="py"><code><span class="line"><span style="color:var(--astro-code-color-text)">df2 </span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-color-text)"> df</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">groupby</span><span style="color:var(--astro-code-token-punctuation)">(</span><span style="color:var(--astro-code-token-string-expression)">'species'</span><span style="color:var(--astro-code-token-punctuation)">)</span><span style="color:var(--astro-code-color-text)">[[</span><span style="color:var(--astro-code-token-string-expression)">'culmen_length_mm'</span><span style="color:var(--astro-code-token-punctuation)">,</span><span style="color:var(--astro-code-token-string-expression)"> 'culmen_depth_mm'</span><span style="color:var(--astro-code-token-punctuation)">,</span><span style="color:var(--astro-code-token-string-expression)"> 'flipper_length_mm'</span><span style="color:var(--astro-code-token-punctuation)">,</span><span style="color:var(--astro-code-token-string-expression)"> 'body_mass_g'</span><span style="color:var(--astro-code-color-text)">]]</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">mean</span><span style="color:var(--astro-code-token-punctuation)">()</span></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">print</span><span style="color:var(--astro-code-token-punctuation)">(df2.</span><span style="color:var(--astro-code-token-function)">reset_index</span><span style="color:var(--astro-code-token-punctuation)">().</span><span style="color:var(--astro-code-token-function)">melt</span><span style="color:var(--astro-code-token-punctuation)">(id_vars</span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-token-punctuation)">[</span><span style="color:var(--astro-code-token-string-expression)">'species'</span><span style="color:var(--astro-code-token-punctuation)">], var_name</span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-token-string-expression)">'measurement'</span><span style="color:var(--astro-code-token-punctuation)">, value_name</span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-token-string-expression)">'value'</span><span style="color:var(--astro-code-token-punctuation)">))</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">'''</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">      species        measurement        value</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">0      Adelie   culmen_length_mm    38.791391</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">1   Chinstrap   culmen_length_mm    48.833824</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">2      Gentoo   culmen_length_mm    47.504878</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">3      Adelie    culmen_depth_mm    18.346358</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">4   Chinstrap    culmen_depth_mm    18.420588</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">5      Gentoo    culmen_depth_mm    14.982114</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">6      Adelie  flipper_length_mm   189.953642</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">7   Chinstrap  flipper_length_mm   195.823529</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">8      Gentoo  flipper_length_mm   217.186992</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">9      Adelie        body_mass_g  3700.662252</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">10  Chinstrap        body_mass_g  3733.088235</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">11     Gentoo        body_mass_g  5076.016260</span></span>
+<span class="line"><span style="color:var(--astro-code-token-comment)">'''</span></span>
 <span class="line"></span></code></pre>
 <p>Lastly, let’s make a simple plot that shows the culmen depth vs culmen length for all the species in one scatter plot.</p>
-<pre class="astro-code dracula" style="background-color:#282A36;color:#F8F8F2; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="py"><code><span class="line"><span style="color:#FF79C6">import</span><span style="color:#F8F8F2"> matplotlib.pyplot </span><span style="color:#FF79C6">as</span><span style="color:#F8F8F2"> plt</span></span>
-<span class="line"><span style="color:#FF79C6">import</span><span style="color:#F8F8F2"> numpy </span><span style="color:#FF79C6">as</span><span style="color:#F8F8F2"> np</span></span>
-<span class="line"><span style="color:#F8F8F2">colors </span><span style="color:#FF79C6">=</span><span style="color:#F8F8F2"> [</span><span style="color:#E9F284">'</span><span style="color:#F1FA8C">red</span><span style="color:#E9F284">'</span><span style="color:#F8F8F2">, </span><span style="color:#E9F284">'</span><span style="color:#F1FA8C">green</span><span style="color:#E9F284">'</span><span style="color:#F8F8F2">, </span><span style="color:#E9F284">'</span><span style="color:#F1FA8C">blue</span><span style="color:#E9F284">'</span><span style="color:#F8F8F2">]</span></span>
-<span class="line"><span style="color:#F8F8F2">species_to_num </span><span style="color:#FF79C6">=</span><span style="color:#F8F8F2"> {v: k </span><span style="color:#FF79C6">for</span><span style="color:#F8F8F2"> (k, v) </span><span style="color:#FF79C6">in</span><span style="color:#8BE9FD"> enumerate</span><span style="color:#F8F8F2">(df[</span><span style="color:#E9F284">'</span><span style="color:#F1FA8C">species</span><span style="color:#E9F284">'</span><span style="color:#F8F8F2">].unique())}</span></span>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-color-background);color:var(--astro-code-color-text); overflow-x: auto;" tabindex="0" data-language="py"><code><span class="line"><span style="color:var(--astro-code-token-keyword)">import</span><span style="color:var(--astro-code-color-text)"> matplotlib</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-color-text)">pyplot </span><span style="color:var(--astro-code-token-keyword)">as</span><span style="color:var(--astro-code-color-text)"> plt</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">import</span><span style="color:var(--astro-code-color-text)"> numpy </span><span style="color:var(--astro-code-token-keyword)">as</span><span style="color:var(--astro-code-color-text)"> np</span></span>
+<span class="line"><span style="color:var(--astro-code-color-text)">colors </span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-color-text)"> [</span><span style="color:var(--astro-code-token-string-expression)">'red'</span><span style="color:var(--astro-code-token-punctuation)">,</span><span style="color:var(--astro-code-token-string-expression)"> 'green'</span><span style="color:var(--astro-code-token-punctuation)">,</span><span style="color:var(--astro-code-token-string-expression)"> 'blue'</span><span style="color:var(--astro-code-color-text)">]</span></span>
+<span class="line"><span style="color:var(--astro-code-color-text)">species_to_num </span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-token-punctuation)"> {</span><span style="color:var(--astro-code-color-text)">v</span><span style="color:var(--astro-code-token-punctuation)">:</span><span style="color:var(--astro-code-color-text)"> k </span><span style="color:var(--astro-code-token-keyword)">for</span><span style="color:var(--astro-code-color-text)"> (k</span><span style="color:var(--astro-code-token-punctuation)">,</span><span style="color:var(--astro-code-color-text)"> v) </span><span style="color:var(--astro-code-token-keyword)">in</span><span style="color:var(--astro-code-token-function)"> enumerate</span><span style="color:var(--astro-code-token-punctuation)">(df[</span><span style="color:var(--astro-code-token-string-expression)">'species'</span><span style="color:var(--astro-code-token-punctuation)">].</span><span style="color:var(--astro-code-token-function)">unique</span><span style="color:var(--astro-code-token-punctuation)">())}</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:#FF79C6">for</span><span style="color:#F8F8F2"> species, group </span><span style="color:#FF79C6">in</span><span style="color:#F8F8F2"> df.groupby(</span><span style="color:#E9F284">'</span><span style="color:#F1FA8C">species</span><span style="color:#E9F284">'</span><span style="color:#F8F8F2">):</span></span>
-<span class="line"><span style="color:#F8F8F2">    plt.scatter(group[</span><span style="color:#E9F284">'</span><span style="color:#F1FA8C">culmen_length_mm</span><span style="color:#E9F284">'</span><span style="color:#F8F8F2">], group[</span><span style="color:#E9F284">'</span><span style="color:#F1FA8C">culmen_depth_mm</span><span style="color:#E9F284">'</span><span style="color:#F8F8F2">],</span></span>
-<span class="line"><span style="color:#FFB86C;font-style:italic">                color</span><span style="color:#FF79C6">=</span><span style="color:#F8F8F2">colors[species_to_num[species]], </span><span style="color:#FFB86C;font-style:italic">label</span><span style="color:#FF79C6">=</span><span style="color:#F8F8F2">species)</span></span>
-<span class="line"><span style="color:#F8F8F2">    plt.xlabel(</span><span style="color:#E9F284">'</span><span style="color:#F1FA8C">Culmen Length (mm)</span><span style="color:#E9F284">'</span><span style="color:#F8F8F2">)</span></span>
-<span class="line"><span style="color:#F8F8F2">    plt.ylabel(</span><span style="color:#E9F284">'</span><span style="color:#F1FA8C">Culmen Depth (mm)</span><span style="color:#E9F284">'</span><span style="color:#F8F8F2">)</span></span>
-<span class="line"><span style="color:#F8F8F2">    plt.title(</span><span style="color:#E9F284">'</span><span style="color:#F1FA8C">Culmen Depth vs Culmen Length by pengiun species</span><span style="color:#E9F284">'</span><span style="color:#F8F8F2">)</span></span>
-<span class="line"><span style="color:#F8F8F2">    plt.legend()</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">for</span><span style="color:var(--astro-code-color-text)"> species</span><span style="color:var(--astro-code-token-punctuation)">,</span><span style="color:var(--astro-code-color-text)"> group </span><span style="color:var(--astro-code-token-keyword)">in</span><span style="color:var(--astro-code-color-text)"> df</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">groupby</span><span style="color:var(--astro-code-token-punctuation)">(</span><span style="color:var(--astro-code-token-string-expression)">'species'</span><span style="color:var(--astro-code-token-punctuation)">):</span></span>
+<span class="line"><span style="color:var(--astro-code-color-text)">    plt</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">scatter</span><span style="color:var(--astro-code-token-punctuation)">(group[</span><span style="color:var(--astro-code-token-string-expression)">'culmen_length_mm'</span><span style="color:var(--astro-code-token-punctuation)">], group[</span><span style="color:var(--astro-code-token-string-expression)">'culmen_depth_mm'</span><span style="color:var(--astro-code-token-punctuation)">],</span></span>
+<span class="line"><span style="color:var(--astro-code-token-punctuation)">                color</span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-token-punctuation)">colors[species_to_num[species]], label</span><span style="color:var(--astro-code-token-keyword)">=</span><span style="color:var(--astro-code-token-punctuation)">species)</span></span>
+<span class="line"><span style="color:var(--astro-code-color-text)">    plt</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">xlabel</span><span style="color:var(--astro-code-token-punctuation)">(</span><span style="color:var(--astro-code-token-string-expression)">'Culmen Length (mm)'</span><span style="color:var(--astro-code-token-punctuation)">)</span></span>
+<span class="line"><span style="color:var(--astro-code-color-text)">    plt</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">ylabel</span><span style="color:var(--astro-code-token-punctuation)">(</span><span style="color:var(--astro-code-token-string-expression)">'Culmen Depth (mm)'</span><span style="color:var(--astro-code-token-punctuation)">)</span></span>
+<span class="line"><span style="color:var(--astro-code-color-text)">    plt</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">title</span><span style="color:var(--astro-code-token-punctuation)">(</span><span style="color:var(--astro-code-token-string-expression)">'Culmen Depth vs Culmen Length by pengiun species'</span><span style="color:var(--astro-code-token-punctuation)">)</span></span>
+<span class="line"><span style="color:var(--astro-code-color-text)">    plt</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">legend</span><span style="color:var(--astro-code-token-punctuation)">()</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:#F8F8F2">plt.show()</span></span>
+<span class="line"><span style="color:var(--astro-code-color-text)">plt</span><span style="color:var(--astro-code-token-punctuation)">.</span><span style="color:var(--astro-code-token-function)">show</span><span style="color:var(--astro-code-token-punctuation)">()</span></span>
 <span class="line"></span></code></pre>
-<p><img src="/images/school/palmer.png#center" alt=""></p>  </div> <nav class="flex flex-col sm:flex-row justify-between mt-8 pt-4 border-t border-border" data-astro-cid-v5ro3oot> <a href="/chalmers/dat565/dat565" class="nav-button prev-button mb-4 sm:mb-0" data-astro-cid-v5ro3oot> <span class="arrow" data-astro-cid-v5ro3oot>←</span> <span class="text" data-astro-cid-v5ro3oot> <span class="label" data-astro-cid-v5ro3oot>Previous</span> <span class="title" data-astro-cid-v5ro3oot>Part 1 - Introduction</span> </span> </a> <a href="/chalmers/dat565/dat565_3" class="nav-button next-button" data-astro-cid-v5ro3oot> <span class="text" data-astro-cid-v5ro3oot> <span class="label" data-astro-cid-v5ro3oot>Next</span> <span class="title" data-astro-cid-v5ro3oot>Part 3 - Data munging</span> </span> <span class="arrow" data-astro-cid-v5ro3oot>→</span> </a> </nav> </article>  </main> </div> </body></html> 
+<p><img src="/images/school/palmer.png#center" alt=""></p> <div class="mt-24"> <div class="grid grid-cols-2 gap-1.5 sm:gap-3"> <a href="/chalmers/dat565/dat565" class="group relative flex flex-nowrap rounded-lg border border-black/15 px-4 py-3 pl-10 no-underline transition-colors duration-300 ease-in-out hover:bg-black/5 hover:text-black focus-visible:bg-black/5 focus-visible:text-black dark:border-white/20 dark:hover:bg-white/5 dark:hover:text-white dark:focus-visible:bg-white/5 dark:focus-visible:text-white"> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="absolute left-2 top-1/2 size-5 -translate-y-1/2 fill-none stroke-current stroke-2"> <line x1="5" y1="12" x2="19" y2="12" class="translate-x-3 scale-x-0 transition-transform duration-300 ease-in-out group-hover:translate-x-0 group-hover:scale-x-100 group-focus-visible:translate-x-0 group-focus-visible:scale-x-100"></line> <polyline points="12 5 5 12 12 19" class="translate-x-1 transition-transform duration-300 ease-in-out group-hover:translate-x-0 group-focus-visible:translate-x-0"></polyline> </svg> <div class="flex items-center text-sm"> Part 1 - Introduction </div> </a> <a href="/chalmers/dat565/dat565_3" class="group relative flex flex-grow flex-row-reverse flex-nowrap rounded-lg border border-black/15 px-4 py-4 pr-10 no-underline transition-colors duration-300 ease-in-out hover:bg-black/5 hover:text-black focus-visible:bg-black/5 focus-visible:text-black dark:border-white/20 dark:hover:bg-white/5 dark:hover:text-white dark:focus-visible:bg-white/5 dark:focus-visible:text-white"> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="absolute right-2 top-1/2 size-5 -translate-y-1/2 fill-none stroke-current stroke-2"> <line x1="5" y1="12" x2="19" y2="12" class="translate-x-3 scale-x-0 transition-transform duration-300 ease-in-out group-hover:translate-x-0 group-hover:scale-x-100 group-focus-visible:translate-x-0 group-focus-visible:scale-x-100"></line> <polyline points="12 5 19 12 12 19" class="-translate-x-1 transition-transform duration-300 ease-in-out group-hover:translate-x-0 group-focus-visible:translate-x-0"></polyline> </svg> <div class="flex items-center text-sm"> Part 3 - Data munging </div> </a> </div> </div> <div class="mt-24"> <div class="giscus"></div> <script data-astro-rerun src="https://giscus.app/client.js" data-repo="rezaarezvan/rezvan.xyz" data-repo-id="R_kgDOL_6l9Q" data-category="Announcements" data-category-id="DIC_kwDOL_6l9c4Cfk55" data-mapping="pathname" data-strict="0" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="preferred_color_scheme" data-lang="en" data-loading="lazy" crossorigin="anonymous" async></script> </div> </article> </div>  </main> <footer class="animate"> <div class="mx-auto max-w-screen-sm px-3"> <div class="relative"> <div class="absolute -top-12 right-0"> <button id="back-to-top" class="group relative flex w-fit flex-nowrap rounded border border-black/15 py-1.5 pl-8 pr-3 transition-colors duration-300 ease-in-out hover:bg-black/5 hover:text-black focus-visible:bg-black/5 focus-visible:text-black dark:border-white/20 dark:hover:bg-white/5 dark:hover:text-white dark:focus-visible:bg-white/5 dark:focus-visible:text-white"> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="absolute left-2 top-1/2 size-4 -translate-y-1/2 rotate-90 fill-none stroke-current stroke-2"> <line x1="5" y1="12" x2="19" y2="12" class="translate-x-2 scale-x-0 transition-transform duration-300 ease-in-out group-hover:translate-x-0 group-hover:scale-x-100 group-focus-visible:translate-x-0 group-focus-visible:scale-x-100"></line> <polyline points="12 5 5 12 12 19" class="translate-x-1 transition-transform duration-300 ease-in-out group-hover:translate-x-0 group-focus-visible:translate-x-0"></polyline> </svg> <div class="text-sm">Back to top</div> </button> </div> </div> <div class="flex items-center justify-between"> <div>&copy; 2024 • rezvan.xyz </div> <div class="flex flex-wrap items-center gap-1.5"> <button id="light-theme-button" aria-label="Light theme" class="group flex size-9 items-center justify-center rounded border border-black/15 hover:bg-black/5 focus-visible:bg-black/5 dark:border-white/20 dark:hover:bg-white/5 dark:focus-visible:bg-white/5"> <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="transition-colors duration-300 ease-in-out group-hover:animate-pulse group-hover:stroke-black group-focus-visible:animate-pulse group-focus-visible:stroke-black group-hover:dark:stroke-white dark:group-focus-visible:stroke-white"> <circle cx="12" cy="12" r="5"></circle> <line x1="12" y1="1" x2="12" y2="3"></line> <line x1="12" y1="21" x2="12" y2="23"></line> <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line> <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line> <line x1="1" y1="12" x2="3" y2="12"></line> <line x1="21" y1="12" x2="23" y2="12"></line> <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line> <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line> </svg> </button> <button id="dark-theme-button" aria-label="Dark theme" class="group flex size-9 items-center justify-center rounded border border-black/15 hover:bg-black/5 focus-visible:bg-black/5 dark:border-white/20 dark:hover:bg-white/5 dark:focus-visible:bg-white/5"> <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="transition-colors duration-300 ease-in-out group-hover:animate-pulse group-hover:stroke-black group-focus-visible:animate-pulse group-focus-visible:stroke-black group-hover:dark:stroke-white dark:group-focus-visible:stroke-white"> <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path> </svg> </button> <button id="system-theme-button" aria-label="System theme" class="group flex size-9 items-center justify-center rounded border border-black/15 hover:bg-black/5 focus-visible:bg-black/5 dark:border-white/20 dark:hover:bg-white/5 dark:focus-visible:bg-white/5"> <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="transition-colors duration-300 ease-in-out group-hover:animate-pulse group-hover:stroke-black group-focus-visible:animate-pulse group-focus-visible:stroke-black group-hover:dark:stroke-white dark:group-focus-visible:stroke-white"> <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect> <line x1="8" y1="21" x2="16" y2="21"></line> <line x1="12" y1="17" x2="12" y2="21"></line> </svg> </button> </div> </div> </div> </footer> <aside data-pagefind-ignore> <div id="backdrop" class="bg-[rgba(0, 0, 0, 0.5] invisible fixed left-0 top-0 z-50 flex h-screen w-full justify-center p-6 backdrop-blur-sm" data-astro-transition-persist="astro-3snakcvo-2"> <div id="pagefind-container" class="m-0 flex h-fit max-h-[80%] w-full max-w-screen-sm flex-col overflow-auto rounded border border-black/15 bg-neutral-100 p-2 px-4 py-3 shadow-lg dark:border-white/20 dark:bg-neutral-900"> <div id="search" class="pagefind-ui pagefind-init" data-pagefind-ui data-bundle-path="/pagefind/" data-ui-options="{&#34;showImages&#34;:false,&#34;excerptLength&#34;:15,&#34;resetStyles&#34;:false}"></div>  <div class="mr-2 pb-1 pt-4 text-right text-xs dark:prose-invert">
+Press <span class="prose text-xs dark:prose-invert"><kbd class="">Esc</kbd></span> or click anywhere to close
+</div> </div> </div> </aside> <script>
+  const magnifyingGlass = document.getElementById("magnifying-glass");
+  const backdrop = document.getElementById("backdrop");
+
+  function openPagefind() {
+    const searchDiv = document.getElementById("search");
+    const search = searchDiv.querySelector("input");
+    setTimeout(() => {
+      search.focus();
+    }, 0);
+    backdrop?.classList.remove("invisible");
+    backdrop?.classList.add("visible");
+  }
+
+  function closePagefind() {
+    const search = document.getElementById("search");
+    search.value = "";
+    backdrop?.classList.remove("visible");
+    backdrop?.classList.add("invisible");
+  }
+
+  // open pagefind
+  magnifyingGlass?.addEventListener("click", () => {
+    openPagefind();
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "/") {
+      e.preventDefault();
+      openPagefind();
+    } else if ((e.metaKey || e.ctrlKey) && e.key === "k") {
+      e.preventDefault();
+      openPagefind();
+    }
+  });
+
+  // close pagefind
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" || e.keyCode === 27) {
+      closePagefind();
+    }
+  });
+
+  // close pagefind when searched result(link) clicked
+  document.addEventListener("click", (event) => {
+    if (event.target.classList.contains("pagefind-ui__result-link")) {
+      closePagefind();
+    }
+  });
+
+  backdrop?.addEventListener("click", (event) => {
+    if (!event.target.closest("#pagefind-container")) {
+      closePagefind();
+    }
+  });
+
+  // prevent form submission
+  const form = document.getElementById("form");
+  form?.addEventListener("submit", (event) => {
+    event.preventDefault();
+  });
+</script>  </body></html>
