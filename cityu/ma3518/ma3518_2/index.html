@@ -1,0 +1,498 @@
+<!DOCTYPE html><html lang="en"> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" type="image/icon" href="/favicon.ico"><meta name="generator" content="Astro v4.11.5"><!-- Canonical URL --><link rel="canonical" href="https://rezvan.xyz/cityu/ma3518/ma3518_2/"><!-- Primary Meta Tags --><title>Part 2 - Basic Statistical Concepts and Tools | applied statistics | rezvan.xyz</title><meta name="title" content="Part 2 - Basic Statistical Concepts and Tools | applied statistics | rezvan.xyz"><meta name="description"><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://rezvan.xyz/cityu/ma3518/ma3518_2/"><meta property="og:title" content="Part 2 - Basic Statistical Concepts and Tools | applied statistics | rezvan.xyz"><meta property="og:description"><meta property="og:image" content="https://rezvan.xyz/favicon.ico"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://rezvan.xyz/cityu/ma3518/ma3518_2/"><meta property="twitter:title" content="Part 2 - Basic Statistical Concepts and Tools | applied statistics | rezvan.xyz"><meta property="twitter:description"><meta property="twitter:image" content="https://rezvan.xyz/favicon.ico"><!-- PageFind --><link href="/pagefind/pagefind-ui.css" rel="stylesheet"><script src="/pagefind/pagefind-ui.js"></script><!-- KaTeX support --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script><!-- inline KaTeX --><script>
+    function renderKaTeX() {
+        if (typeof renderMathInElement !== "undefined") {
+            renderMathInElement(document.body, {
+                delimiters: [
+                    { left: "$$", right: "$$", display: true },
+                    { left: "$", right: "$", display: false },
+                ],
+            });
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", renderKaTeX);
+    document.addEventListener("astro:after-swap", renderKaTeX);
+</script><meta name="astro-view-transitions-enabled" content="true"><meta name="astro-view-transitions-fallback" content="animate"><script>
+    function init() {
+        preloadTheme();
+        onScroll();
+        animate();
+        updateThemeButtons();
+        addCopyCodeButtons();
+        setGiscusTheme();
+
+        const backToTop = document.getElementById("back-to-top");
+        backToTop?.addEventListener("click", (event) => scrollToTop(event));
+
+        const backToPrev = document.getElementById("back-to-prev");
+        backToPrev?.addEventListener("click", () => window.history.back());
+
+        const lightThemeButton = document.getElementById("light-theme-button");
+        lightThemeButton?.addEventListener("click", () => {
+            localStorage.setItem("theme", "light");
+            toggleTheme(false);
+            updateThemeButtons();
+        });
+
+        const darkThemeButton = document.getElementById("dark-theme-button");
+        darkThemeButton?.addEventListener("click", () => {
+            localStorage.setItem("theme", "dark");
+            toggleTheme(true);
+            updateThemeButtons();
+        });
+
+        const systemThemeButton = document.getElementById(
+            "system-theme-button",
+        );
+        systemThemeButton?.addEventListener("click", () => {
+            localStorage.setItem("theme", "system");
+            toggleTheme(
+                window.matchMedia("(prefers-color-scheme: dark)").matches,
+            );
+            updateThemeButtons();
+        });
+
+        window
+            .matchMedia("(prefers-color-scheme: dark)")
+            .addEventListener("change", (event) => {
+                if (localStorage.theme === "system") {
+                    toggleTheme(event.matches);
+                }
+            });
+
+        document.addEventListener("scroll", onScroll);
+    }
+
+    function updateThemeButtons() {
+        const theme = localStorage.getItem("theme");
+        const lightThemeButton = document.getElementById("light-theme-button");
+        const darkThemeButton = document.getElementById("dark-theme-button");
+        const systemThemeButton = document.getElementById(
+            "system-theme-button",
+        );
+
+        function removeActiveButtonTheme(button) {
+            button?.classList.remove("bg-black/5");
+            button?.classList.remove("dark:bg-white/5");
+        }
+
+        function addActiveButtonTheme(button) {
+            button?.classList.add("bg-black/5");
+            button?.classList.add("dark:bg-white/5");
+        }
+
+        removeActiveButtonTheme(lightThemeButton);
+        removeActiveButtonTheme(darkThemeButton);
+        removeActiveButtonTheme(systemThemeButton);
+
+        if (theme === "light") {
+            addActiveButtonTheme(lightThemeButton);
+        } else if (theme === "dark") {
+            addActiveButtonTheme(darkThemeButton);
+        } else {
+            addActiveButtonTheme(systemThemeButton);
+        }
+    }
+
+    function animate() {
+        const animateElements = document.querySelectorAll(".animate");
+
+        animateElements.forEach((element, index) => {
+            setTimeout(() => {
+                element.classList.add("show");
+            }, index * 100);
+        });
+    }
+
+    function onScroll() {
+        if (window.scrollY > 0) {
+            document.documentElement.classList.add("scrolled");
+        } else {
+            document.documentElement.classList.remove("scrolled");
+        }
+    }
+
+    function scrollToTop(event) {
+        event.preventDefault();
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth",
+        });
+    }
+
+    function toggleTheme(dark) {
+        const css = document.createElement("style");
+
+        css.appendChild(
+            document.createTextNode(
+                `* {
+             -webkit-transition: none !important;
+             -moz-transition: none !important;
+             -o-transition: none !important;
+             -ms-transition: none !important;
+             transition: none !important;
+          }
+        `,
+            ),
+        );
+
+        document.head.appendChild(css);
+
+        if (dark) {
+            document.documentElement.classList.add("dark");
+        } else {
+            document.documentElement.classList.remove("dark");
+        }
+
+        window.getComputedStyle(css).opacity;
+        document.head.removeChild(css);
+
+        setGiscusTheme();
+    }
+
+    function preloadTheme() {
+        const userTheme = localStorage.theme;
+
+        if (userTheme === "light" || userTheme === "dark") {
+            toggleTheme(userTheme === "dark");
+        } else {
+            toggleTheme(
+                window.matchMedia("(prefers-color-scheme: dark)").matches,
+            );
+        }
+    }
+
+    function addCopyCodeButtons() {
+        let copyButtonLabel = "📋";
+        let codeBlocks = Array.from(document.querySelectorAll("pre"));
+
+        async function copyCode(codeBlock, copyButton) {
+            const codeText = codeBlock.innerText;
+            const buttonText = copyButton.innerText;
+            const textToCopy = codeText.replace(buttonText, "");
+
+            await navigator.clipboard.writeText(textToCopy);
+            copyButton.innerText = "✅";
+
+            setTimeout(() => {
+                copyButton.innerText = copyButtonLabel;
+            }, 2000);
+        }
+
+        for (let codeBlock of codeBlocks) {
+            const wrapper = document.createElement("div");
+            wrapper.style.position = "relative";
+
+            const copyButton = document.createElement("button");
+            copyButton.innerText = copyButtonLabel;
+            copyButton.classList = "copy-code";
+
+            codeBlock.setAttribute("tabindex", "0");
+            codeBlock.appendChild(copyButton);
+
+            codeBlock.parentNode.insertBefore(wrapper, codeBlock);
+            wrapper.appendChild(codeBlock);
+
+            copyButton?.addEventListener("click", async () => {
+                await copyCode(codeBlock, copyButton);
+            });
+        }
+    }
+
+    const setGiscusTheme = () => {
+        const giscus = document.querySelector(".giscus-frame");
+
+        const isDark = document.documentElement.classList.contains("dark");
+
+        if (giscus) {
+            const url = new URL(giscus.src);
+            url.searchParams.set("theme", isDark ? "dark" : "light");
+            giscus.src = url.toString();
+        }
+    };
+
+    document.addEventListener("DOMContentLoaded", () => init());
+    document.addEventListener("astro:after-swap", () => init());
+    preloadTheme();
+</script><link rel="stylesheet" href="/_astro/_subject_.CmU_Tg_r.css">
+<style>summary[data-astro-cid-xvrfupwn]{cursor:pointer;border-top-left-radius:.5rem;border-top-right-radius:.5rem;padding:.375rem .75rem;font-weight:500;transition-property:color,background-color,border-color,text-decoration-color,fill,stroke;transition-timing-function:cubic-bezier(.4,0,.2,1);transition-duration:.15s}summary[data-astro-cid-xvrfupwn]:hover{background-color:#0000000d}summary[data-astro-cid-xvrfupwn]:hover:is(.dark *){background-color:#ffffff0d}details[data-astro-cid-xvrfupwn][open] summary[data-astro-cid-xvrfupwn]{background-color:#0000000d}details[data-astro-cid-xvrfupwn][open] summary[data-astro-cid-xvrfupwn]:is(.dark *){background-color:#ffffff0d}
+</style><script type="module" src="/_astro/hoisted.DEn2kOLu.js"></script></head> <body> <header data-astro-transition-persist="astro-l7r54iwe-1"> <div class="mx-auto max-w-screen-sm px-3"> <div class="flex flex-wrap justify-between gap-y-2"> <a href="/" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out">  <div class="font-semibold"> rezvan.xyz </div>  </a> <nav class="flex items-center gap-1 text-sm"> <a href="/posts" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> posts </a> <span> / </span> <a href="/chalmers" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> chalmers </a> <span> / </span> <a href="/cityu" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> cityu </a> <span> / </span> <button id="magnifying-glass" aria-label="Search" class="flex items-center rounded border border-black/15 bg-neutral-100 px-2 py-1 text-xs transition-colors duration-300 ease-in-out hover:bg-black/5 hover:text-black focus-visible:bg-black/5 focus-visible:text-black dark:border-white/20 dark:bg-neutral-900 dark:hover:bg-white/5 dark:hover:text-white dark:focus-visible:bg-white/5 dark:focus-visible:text-white"> <svg height="16" stroke-linejoin="round" viewBox="0 0 16 16" width="16" style="color: currentcolor;"><path fill-rule="evenodd" clip-rule="evenodd" d="M3.5 7C3.5 5.067 5.067 3.5 7 3.5C8.933 3.5 10.5 5.067 10.5 7C10.5 7.88461 10.1718 8.69256 9.63058 9.30876L9.30876 9.63058C8.69256 10.1718 7.88461 10.5 7 10.5C5.067 10.5 3.5 8.933 3.5 7ZM9.96544 11.0261C9.13578 11.6382 8.11014 12 7 12C4.23858 12 2 9.76142 2 7C2 4.23858 4.23858 2 7 2C9.76142 2 12 4.23858 12 7C12 8.11014 11.6382 9.13578 11.0261 9.96544L14.0303 12.9697L14.5607 13.5L13.5 14.5607L12.9697 14.0303L9.96544 11.0261Z" fill="currentColor"></path></svg>
+&nbsp;Search
+</button> </nav> </div> </div> </header> <main>  <div class="mx-auto max-w-screen-sm px-3"> <div class="animate"> <a href="/cityu/ma3518" class="not-prose group relative flex w-fit flex-nowrap rounded border border-black/15 py-1.5 pl-7 pr-3 transition-colors duration-300 ease-in-out hover:bg-black/5 hover:text-black focus-visible:bg-black/5 focus-visible:text-black dark:border-white/20 dark:hover:bg-white/5 dark:hover:text-white dark:focus-visible:bg-white/5 dark:focus-visible:text-white"> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="absolute left-2 top-1/2 size-4 -translate-y-1/2 fill-none stroke-current stroke-2"> <line x1="5" y1="12" x2="19" y2="12" class="translate-x-2 scale-x-0 transition-transform duration-300 ease-in-out group-hover:translate-x-0 group-hover:scale-x-100 group-focus-visible:translate-x-0 group-focus-visible:scale-x-100"></line> <polyline points="12 5 5 12 12 19" class="translate-x-1 transition-transform duration-300 ease-in-out group-hover:translate-x-0 group-focus-visible:translate-x-0"></polyline> </svg> <div class="text-sm"> Back to applied statistics </div> </a> </div> <div class="my-10 space-y-1"> <div class="animate flex items-center gap-1.5"> <div class="font-base text-sm"> MA3518 </div>
+&bull;
+<div class="font-base text-sm"> <time datetime="2024-09-12T00:00:00.000Z"> September 12, 2024 </time> </div> 
+&bull;
+<div class="font-base text-sm"> 8 min read </div> </div> <h1 class="animate text-3xl font-semibold text-black dark:text-white"> Part 2 - Basic Statistical Concepts and Tools </h1> </div> <details open class="animate rounded-lg border border-black/15 dark:border-white/20" data-astro-cid-xvrfupwn> <summary data-astro-cid-xvrfupwn>Table of Contents</summary> <nav class="" data-astro-cid-xvrfupwn> <ul class="py-3" data-astro-cid-xvrfupwn> <li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#basic-statistics" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Basic Statistics </a> <ul class="translate-x-3"> <li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#sample-mean" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Sample Mean </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#sample-median" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Sample Median </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#sample-variance" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Sample Variance </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#sample-standard-deviation" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Sample Standard Deviation </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#sample-quantile" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Sample Quantile </a> <ul class="translate-x-3"> <li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#quantiles-vs-proportions" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Quantiles VS. Proportions </a> <ul class="translate-x-3"> <li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#properties-of-the-correlation-coefficient" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Properties of the Correlation Coefficient </a>  </li> </ul> </li> </ul> </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#the-inter-quantile-range-iqr" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> The inter-quantile range (IQR) </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#detecting-outliers" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Detecting Outliers </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#correlation" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Correlation </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#modes-and-skew" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Modes and Skew </a>  </li> </ul> </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#distributions" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Distributions </a> <ul class="translate-x-3"> <li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#gamma-distribution" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Gamma Distribution </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#beta-distribution" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Beta Distribution </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#chi-squared-distribution" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Chi-Squared Distribution </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#students-t-distribution" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Student’s t-Distribution </a>  </li> </ul> </li> </ul> </nav> </details> <article class="animate"> <h3 id="basic-statistics">Basic Statistics</h3>
+<p>Let’s review some basic statistical concepts and tools.</p>
+<h4 id="sample-mean">Sample Mean</h4>
+<p>The sample mean is defined as,
+$$
+\bar{x} = \frac{1}{n} \sum_{i=1}^{n} x_i
+$$
+where $x_i$ is the $i$-th observation in the sample.</p>
+<p>If we’re drawing from a population, the population mean is denoted by $\mathbb{E}(X)$.</p>
+<p>In R, we can calculate the sample mean using the <code>mean()</code> function.</p>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-color-background);color:var(--astro-code-color-text); overflow-x: auto;" tabindex="0" data-language="r"><code><span class="line"><span style="color:var(--astro-code-color-text)">x </span><span style="color:var(--astro-code-token-keyword)">&#x3C;-</span><span style="color:var(--astro-code-token-constant)"> 1</span><span style="color:var(--astro-code-token-keyword)">:</span><span style="color:var(--astro-code-token-constant)">10</span></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">></span><span style="color:var(--astro-code-token-function)"> mean</span><span style="color:var(--astro-code-color-text)">(x)</span></span>
+<span class="line"><span style="color:var(--astro-code-color-text)">[</span><span style="color:var(--astro-code-token-constant)">1</span><span style="color:var(--astro-code-color-text)">] </span><span style="color:var(--astro-code-token-constant)">5.5</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--astro-code-token-keyword)">></span><span style="color:var(--astro-code-token-function)"> sum</span><span style="color:var(--astro-code-color-text)">(x)</span><span style="color:var(--astro-code-token-keyword)">/</span><span style="color:var(--astro-code-token-function)">lengt(</span><span style="color:var(--astro-code-token-punctuation)">x</span><span style="color:var(--astro-code-token-function)">)</span></span>
+<span class="line"><span style="color:var(--astro-code-color-text)">[</span><span style="color:var(--astro-code-token-constant)">1</span><span style="color:var(--astro-code-color-text)">] </span><span style="color:var(--astro-code-token-constant)">5.5</span></span>
+<span class="line"></span></code></pre>
+<p>If we assume the components of the data vector are independent and identically distributed, the sample mean is an unbiased estimator of the population mean.</p>
+<h4 id="sample-median">Sample Median</h4>
+<p>The sample median $m$ of $x_1, x_2, \ldots, x_n$ is the middle value of the ordered data set.</p>
+<p>Let the sorted data be denoted by $x_{(1)} \leq x_{(2)} \leq \ldots \leq x_{(n)}$. Then,
+$$
+m = \begin{cases}
+x_{k+1} &#x26; n = 2k + 1 \text{ (odd)} \newline
+\frac{1}{2} (x_{k} + x_{k+1}) &#x26; n = 2k \text{ (even)}
+\end{cases}
+$$</p>
+<p>The sample median is simply <code>median()</code> in R.
+The median is a special kind of <strong>quantile</strong>, which we will talk about later.
+Important to note is that the median and mean can differ significantly, especially when the data is <em>skewed</em>.</p>
+<p>The median is insensitive to a few unusually large or unusually small observations, this is called <strong>robustness</strong>.</p>
+<h4 id="sample-variance">Sample Variance</h4>
+<p>The sample variance is defined as,
+$$
+s^2 = \frac{1}{n-1} \sum_{i=1}^{n} (x_i - \bar{x})^2
+$$
+where $\bar{x}$ is the sample mean.</p>
+<p>The sample variance is an unbiased estimator of the population variance.</p>
+<p>This will give us an overall sense of the variation in the data, as the name suggests.
+NB: Remember that, the unit of the variance is squared, so it’s not directly interpretable.</p>
+<p>In R, we can calculate the sample variance using the <code>var()</code> function.</p>
+<h4 id="sample-standard-deviation">Sample Standard Deviation</h4>
+<p>The sample standard deviation is the square root of the sample variance,
+$$
+s = \sqrt{s^2} = \sqrt{\frac{1}{n-1} \sum_{i=1}^{n} (x_i - \bar{x})^2}
+$$</p>
+<p>Unlike the variance, the standard deviation is in the same unit as the data, so it’s more interpretable.</p>
+<p>In R, we can calculate the sample standard deviation using the <code>sd()</code> function.</p>
+<p>If we’re drawing from a population, the population standard deviation is defined as,
+$$
+Var(X) = \mathbb{E}[(X - \mathbb{E}(X))^2]
+$$</p>
+<h4 id="sample-quantile">Sample Quantile</h4>
+<p>For $0 \leq p \leq 1$, the $p$-th quantile for the sample is the data at position $\approx pn$ in the sorted data.</p>
+<p>Wehn this is not an integer, a weighted average is used.</p>
+<p>This value essentially splits the data so that (roughly) $100p%$ is smaller and $100(1-p)%$ is larger.
+The median is the $0.5$ quantile.</p>
+<p>The $p$-th quantile is also called the $100p$-th percentile.</p>
+<p>For a population, the $p$-th quantile for a distribution is defined as $F^{-1}(p)$, if $F$ is strictly increasing so that the inverse exists. Otherwise the definition is a little bit more complicated.</p>
+<p>In R, we can calculate the quantiles using the <code>quantile()</code> function.</p>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-color-background);color:var(--astro-code-color-text); overflow-x: auto;" tabindex="0" data-language="r"><code><span class="line"><span style="color:var(--astro-code-token-function)">quantile</span><span style="color:var(--astro-code-color-text)">(x, </span><span style="color:var(--astro-code-token-constant)">0.25</span><span style="color:var(--astro-code-color-text)">) </span><span style="color:var(--astro-code-token-comment)"># 25th percentile</span></span>
+<span class="line"><span style="color:var(--astro-code-token-function)">quantile</span><span style="color:var(--astro-code-color-text)">(x, (</span><span style="color:var(--astro-code-token-constant)">0.25</span><span style="color:var(--astro-code-color-text)">, </span><span style="color:var(--astro-code-token-constant)">0.75</span><span style="color:var(--astro-code-color-text)">)) </span><span style="color:var(--astro-code-token-comment)"># 25th and 75th percentiles</span></span>
+<span class="line"></span></code></pre>
+<h5 id="quantiles-vs-proportions">Quantiles VS. Proportions</h5>
+<p>For a data vector $x$ we can ask two related but inverse questions.</p>
+<p>What proportion of the data is less than or equal to a specified value? Or for a specified proporation, what value has this proportion of the data less than or equal?</p>
+<p>The latter question is answered by the quantile function.</p>
+<h4 id="the-inter-quantile-range-iqr">The inter-quantile range (IQR)</h4>
+<p>We are interested in the range of the middle 50% of the data, this would be the distance between the 75 percentile and the 25 percentile.
+Thus, the IQR is a single number.</p>
+<p>In R we can calculate the IQR using the <code>IQR()</code> function.</p>
+<h4 id="detecting-outliers">Detecting Outliers</h4>
+<p>An outlier is an observation that is significantly different from other observations in the data set.</p>
+<p>A rule of thumb is:</p>
+<blockquote>
+<p>An observation is an outlier if it is more than $1.5 \times IQR$ from the closest quartile.</p>
+</blockquote>
+<p>Also a good rule to remember is:</p>
+<blockquote>
+<p>An outlier is said to be <em>extreme</em> if it is more than $3 \times IQR$ from the closest quartile.</p>
+</blockquote>
+<h4 id="correlation">Correlation</h4>
+<p>The <em>pearson correlation coefficient</em> $r$ of two data vectors $x$ and $y$ is defined as,
+$$
+r = cor(x, y) = \frac{\sum_{i=1}^{n} (x_i - \bar{x})(y_i - \bar{y})}{\sqrt{\sum_{i=1}^{n} (x_i - \bar{x})^2 \sum_{i=1}^{n} (y_i - \bar{y})^2}}
+$$</p>
+<p>The value of $r$ is between -1 and 1, where 1 indicates a perfect positive linear relationship, -1 indicates a perfect negative linear relationship, and 0 indicates no linear relationship.</p>
+<p>For a population, when $(x_i, y_i) \overset{iid}{\sim} F_{XY}$, the population correlation coefficient is defined as,
+$$
+r = \frac{\mathbb{E}[(X - \mathbb{E}(X))(Y - \mathbb{E}(Y))]}{\sqrt{Var(X)Var(Y)}}
+$$</p>
+<p>In R, we can calculate the correlation coefficient using the <code>cor()</code> function.
+NB: This is the <em>pearson</em> correlation coefficient, there are other types of correlation coefficients.</p>
+<h6 id="properties-of-the-correlation-coefficient">Properties of the Correlation Coefficient</h6>
+<ul>
+<li>The vale of $r$ does not depend on the unit of measurement for each variable.</li>
+<li>The value of $r$ does not depend on which of the two variables are labeled $x$, i.e. it is symmetric.</li>
+<li>The value of $r$ is between -1 and 1.</li>
+<li>The correlation coefficient is:
+<ul>
+<li>-1 only when all the points lie on a line with a negative slope.</li>
+<li>1 only when all the points lie on a line with a positive slope.</li>
+</ul>
+</li>
+<li>The value of $r$ is a measure of the extent to which $x$ and $y$ are <strong>linearly</strong> related.</li>
+</ul>
+<h4 id="modes-and-skew">Modes and Skew</h4>
+<p>A <strong>mode</strong> of a distribution is a peak, or a local maximum, in its density.</p>
+<p>It is a visual effect and has no rigorous mathematical definition.</p>
+<p>A data set can be characterized by its number of modes. A <em>unimodal distribution</em> has a single mode (e.g Normal distribution), a <em>bimodal distribution</em> has two modes, and so on.</p>
+<p>The <strong>tail</strong> of a distribution are the very large and very small values of the distribution (NB: This is not the best definition, but it will do for now).</p>
+<p>A distribution is called <strong>long-tailed (or heavy-tailed)</strong> if the data set contains values far from the main body of the distribution.</p>
+<p>A distribution is <strong>skewed</strong> if one tail is significantly heavier or longer than the other. Good to remember is that the antonym (opposite) of skew is <strong>symmetry</strong>.</p>
+<p>A distribution with longer left tail is called <strong>left-skewed</strong> or <strong>negatively skewed</strong>.</p>
+<p>Some good rules of thumb:</p>
+<ol>
+<li>
+<p>When a distribution is skewed positively (to the right) the mean is larger than the median.</p>
+</li>
+<li>
+<p>When a distribution is skewed negatively (to the left) the mean is smaller than the median.</p>
+</li>
+<li>
+<p>When a distribution is symmetric, the mean and median are equal.</p>
+</li>
+</ol>
+<h3 id="distributions">Distributions</h3>
+<p>Let’s review some basic distributions.</p>
+<h4 id="gamma-distribution">Gamma Distribution</h4>
+<p>Definition:</p>
+<blockquote>
+<p>A random variable $X$ is said to be gamma distributed with parameters $(\alpha, \beta)$, denoted as $X \sim Gamma(\alpha, \beta)$, if its PDF is given by,
+$$
+f(x) = \begin{cases}
+\frac{\beta^{\alpha} e^{-\beta x} x^{\alpha - 1}}{\Gamma(\alpha)} &#x26; x \geq 0 \newline
+0 &#x26; x &#x3C; 0
+\end{cases}
+$$</p>
+</blockquote>
+<p>The gamma function $\Gamma$ is given by,
+$$
+\Gamma(\alpha) = \int_{0}^{\infty} t^{\alpha - 1} e^{-t} dt.
+$$</p>
+<p>One important property of $\Gamma$ is that $\Gamma(\alpha) = (\alpha - 1) \Gamma(\alpha - 1)$.</p>
+<p>For integer values of $\alpha = n$, $\Gamma(n) = (n-1)!$.</p>
+<p>When $\alpha = 1$, the density becomes,
+$$
+f(x) = \beta e^{-\beta x} \quad x \geq 0
+$$</p>
+<p>we get the exponential distribution. Thus, $Gamma(1, \beta) = Exp(\beta)$.</p>
+<p>With this, if $\alpha = n$ is an integer, $X$ can be written as sum of $n$ i.i.d $Exp(\beta)$ random variables.</p>
+<p>$\alpha$ is called the <em>shape</em> parameter and $\beta$ is called the <em>rate</em> parameter.</p>
+<p>The mean and variance of a gamma distribution are given by,
+$$
+\mathbb{E}(X) = \frac{\alpha}{\beta} \newline
+Var(X) = \frac{\alpha}{\beta^2}
+$$</p>
+<p>In R, we can generate random variables from a gamma distribution using the <code>rgamma()</code> function.</p>
+<h4 id="beta-distribution">Beta Distribution</h4>
+<p>Definition:</p>
+<blockquote>
+<p>A random variable $X$ is said to have a beta distribution if its density is given by,
+$$
+f(x) = \begin{cases}
+\frac{1}{B(\alpha, \beta)} x^{\alpha - 1} (1 - x)^{\beta - 1} &#x26; 0 &#x3C; x &#x3C; 1 \newline
+0 &#x26; \text{otherwise}
+\end{cases}
+$$</p>
+</blockquote>
+<p>Where $B(\alpha, \beta)$ is the beta function,
+$$
+B(\alpha, \beta) = \int_{0}^{1} t^{\alpha - 1} (1 - t)^{\beta - 1} dt
+$$</p>
+<p>so that $f(x)$ integrates to 1.</p>
+<p>The mean and variance of a beta distribution are given by,
+$$
+\mathbb{E}(X) = \frac{\alpha}{\alpha + \beta} \newline
+Var(X) = \frac{\alpha \beta}{(\alpha + \beta)^2 (\alpha + \beta + 1)}
+$$</p>
+<p>In R, we can generate random variables from a beta distribution using the <code>rbeta()</code> function.</p>
+<h4 id="chi-squared-distribution">Chi-Squared Distribution</h4>
+<p>The $\Chi^2(n)$ or $\Chi^2_n$ distribution is a special case of the gamma distribution, with $\alpha = n/2$ and $\beta = 1/2$.</p>
+<p>The integer $n$ is the parameter of the distribution and sometimes called the <em>degree of freedom</em> of the distribution.
+If $X \sim \Chi^2(n)$, then $\mathbb{E}(X) = n$ and $Var(X) = 2n$.</p>
+<p>If $Z_i \overset{iid}{\sim} N(0, 1)$, then $Z_1^2 + Z_2^2 + \ldots + Z_n^2 \sim \Chi^2(n)$.</p>
+<p>Property:</p>
+<blockquote>
+<p>If $X$ and $Y$ are independent with $\Chi^2_n$ and $\Chi^2_m$ distributions, then $X + Y \sim \Chi^2_{n+m}$.</p>
+</blockquote>
+<p>In R, we can generate random variables from a chi-squared distribution using the <code>rchisq()</code> function.</p>
+<h4 id="students-t-distribution">Student’s t-Distribution</h4>
+<p>We use this t-distribution for CI (confidence intervals) and hypothesis testing. Which we will cover in the next part.</p>
+<p>Densitity,
+$$
+f(x) = \frac{\Gamma(\frac{n+1}{2})}{\Gamma(\frac{n}{2}) \sqrt{n\pi}} \left(1 + \frac{x^2}{n}\right)^{-\frac{n+1}{2}}
+$$</p>
+<p>Mean and variance,
+$$
+\mathbb{E}(X) = 0 \newline
+Var(X) = \frac{n}{n-2} \quad n > 2
+$$</p>
+<p>If $Z \sim N(0, 1)$, $X \sim \Chi^2_n$, and $X$ and $Z$ are independant, then $\sqrt{n}Z / \sqrt{X/n} \sim t_n$.</p>
+<p>$n$ is the parameter of the t-distribution and is called the <em>degree of freedom</em>.</p>
+<p>A special case is the $t(1)$, it is also called cauchy distribution.</p>
+<p>Density for Cauchy,
+$$
+f(x) = \frac{1}{\pi(1 + x^2)}
+$$</p>
+<p>In R, we can generate random variables from a t-distribution using the <code>rt()</code> function.
+For cauchy, we can use the <code>rcauchy()</code> function.</p>
+<todo></todo> <div class="mt-24"> <div class="grid grid-cols-2 gap-1.5 sm:gap-3"> <a href="/cityu/ma3518/ma3518" class="group relative flex flex-nowrap rounded-lg border border-black/15 px-4 py-3 pl-10 no-underline transition-colors duration-300 ease-in-out hover:bg-black/5 hover:text-black focus-visible:bg-black/5 focus-visible:text-black dark:border-white/20 dark:hover:bg-white/5 dark:hover:text-white dark:focus-visible:bg-white/5 dark:focus-visible:text-white"> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="absolute left-2 top-1/2 size-5 -translate-y-1/2 fill-none stroke-current stroke-2"> <line x1="5" y1="12" x2="19" y2="12" class="translate-x-3 scale-x-0 transition-transform duration-300 ease-in-out group-hover:translate-x-0 group-hover:scale-x-100 group-focus-visible:translate-x-0 group-focus-visible:scale-x-100"></line> <polyline points="12 5 5 12 12 19" class="translate-x-1 transition-transform duration-300 ease-in-out group-hover:translate-x-0 group-focus-visible:translate-x-0"></polyline> </svg> <div class="flex items-center text-sm"> Part 1 - Introduction to R </div> </a> <div class="invisible"></div> </div> </div> <div class="mt-24"> <div class="giscus"></div> <script data-astro-rerun src="https://giscus.app/client.js" data-repo="rezaarezvan/rezvan.xyz" data-repo-id="R_kgDOHvQr3w" data-category="General" data-category-id="DIC_kwDOHvQr384CiWVC" data-mapping="pathname" data-strict="0" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="bottom" data-theme="preferred_color_scheme" data-lang="en" data-loading="lazy" crossorigin="anonymous" async></script> </div> </article> </div>  </main> <footer class="animate"> <div class="mx-auto max-w-screen-sm px-3"> <div class="relative"> <div class="absolute -top-12 right-0"> <button id="back-to-top" class="group relative flex w-fit flex-nowrap rounded border border-black/15 py-1.5 pl-8 pr-3 transition-colors duration-300 ease-in-out hover:bg-black/5 hover:text-black focus-visible:bg-black/5 focus-visible:text-black dark:border-white/20 dark:hover:bg-white/5 dark:hover:text-white dark:focus-visible:bg-white/5 dark:focus-visible:text-white"> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="absolute left-2 top-1/2 size-4 -translate-y-1/2 rotate-90 fill-none stroke-current stroke-2"> <line x1="5" y1="12" x2="19" y2="12" class="translate-x-2 scale-x-0 transition-transform duration-300 ease-in-out group-hover:translate-x-0 group-hover:scale-x-100 group-focus-visible:translate-x-0 group-focus-visible:scale-x-100"></line> <polyline points="12 5 5 12 12 19" class="translate-x-1 transition-transform duration-300 ease-in-out group-hover:translate-x-0 group-focus-visible:translate-x-0"></polyline> </svg> <div class="text-sm">Back to top</div> </button> </div> </div> <div class="flex items-center justify-between"> <div>&copy; 2024 • rezvan.xyz </div> <div class="flex flex-wrap items-center gap-1.5"> <button id="light-theme-button" aria-label="Light theme" class="group flex size-9 items-center justify-center rounded border border-black/15 hover:bg-black/5 focus-visible:bg-black/5 dark:border-white/20 dark:hover:bg-white/5 dark:focus-visible:bg-white/5"> <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="transition-colors duration-300 ease-in-out group-hover:animate-pulse group-hover:stroke-black group-focus-visible:animate-pulse group-focus-visible:stroke-black group-hover:dark:stroke-white dark:group-focus-visible:stroke-white"> <circle cx="12" cy="12" r="5"></circle> <line x1="12" y1="1" x2="12" y2="3"></line> <line x1="12" y1="21" x2="12" y2="23"></line> <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line> <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line> <line x1="1" y1="12" x2="3" y2="12"></line> <line x1="21" y1="12" x2="23" y2="12"></line> <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line> <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line> </svg> </button> <button id="dark-theme-button" aria-label="Dark theme" class="group flex size-9 items-center justify-center rounded border border-black/15 hover:bg-black/5 focus-visible:bg-black/5 dark:border-white/20 dark:hover:bg-white/5 dark:focus-visible:bg-white/5"> <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="transition-colors duration-300 ease-in-out group-hover:animate-pulse group-hover:stroke-black group-focus-visible:animate-pulse group-focus-visible:stroke-black group-hover:dark:stroke-white dark:group-focus-visible:stroke-white"> <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path> </svg> </button> <button id="system-theme-button" aria-label="System theme" class="group flex size-9 items-center justify-center rounded border border-black/15 hover:bg-black/5 focus-visible:bg-black/5 dark:border-white/20 dark:hover:bg-white/5 dark:focus-visible:bg-white/5"> <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="transition-colors duration-300 ease-in-out group-hover:animate-pulse group-hover:stroke-black group-focus-visible:animate-pulse group-focus-visible:stroke-black group-hover:dark:stroke-white dark:group-focus-visible:stroke-white"> <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect> <line x1="8" y1="21" x2="16" y2="21"></line> <line x1="12" y1="17" x2="12" y2="21"></line> </svg> </button> </div> </div> </div> </footer> <aside data-pagefind-ignore> <div id="backdrop" class="bg-[rgba(0, 0, 0, 0.5] invisible fixed left-0 top-0 z-50 flex h-screen w-full justify-center p-6 backdrop-blur-sm" data-astro-transition-persist="astro-3snakcvo-2"> <div id="pagefind-container" class="m-0 flex h-fit max-h-[80%] w-full max-w-screen-sm flex-col overflow-auto rounded border border-black/15 bg-neutral-100 p-2 px-4 py-3 shadow-lg dark:border-white/20 dark:bg-neutral-900"> <div id="search" class="pagefind-ui pagefind-init" data-pagefind-ui data-bundle-path="/pagefind/" data-ui-options="{&#34;showImages&#34;:false,&#34;excerptLength&#34;:15,&#34;resetStyles&#34;:false}"></div>  <div class="mr-2 pb-1 pt-4 text-right text-xs dark:prose-invert">
+Press <span class="prose text-xs dark:prose-invert"><kbd class="">Esc</kbd></span> or click anywhere to close
+</div> </div> </div> </aside> <script>
+  const magnifyingGlass = document.getElementById("magnifying-glass");
+  const backdrop = document.getElementById("backdrop");
+
+  function openPagefind() {
+    const searchDiv = document.getElementById("search");
+    const search = searchDiv.querySelector("input");
+    setTimeout(() => {
+      search.focus();
+    }, 0);
+    backdrop?.classList.remove("invisible");
+    backdrop?.classList.add("visible");
+  }
+
+  function closePagefind() {
+    const search = document.getElementById("search");
+    search.value = "";
+    backdrop?.classList.remove("visible");
+    backdrop?.classList.add("invisible");
+  }
+
+  // open pagefind
+  magnifyingGlass?.addEventListener("click", () => {
+    openPagefind();
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "/") {
+      e.preventDefault();
+      openPagefind();
+    } else if ((e.metaKey || e.ctrlKey) && e.key === "k") {
+      e.preventDefault();
+      openPagefind();
+    }
+  });
+
+  // close pagefind
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" || e.keyCode === 27) {
+      closePagefind();
+    }
+  });
+
+  // close pagefind when searched result(link) clicked
+  document.addEventListener("click", (event) => {
+    if (event.target.classList.contains("pagefind-ui__result-link")) {
+      closePagefind();
+    }
+  });
+
+  backdrop?.addEventListener("click", (event) => {
+    if (!event.target.closest("#pagefind-container")) {
+      closePagefind();
+    }
+  });
+
+  // prevent form submission
+  const form = document.getElementById("form");
+  form?.addEventListener("submit", (event) => {
+    event.preventDefault();
+  });
+</script>  </body></html>
