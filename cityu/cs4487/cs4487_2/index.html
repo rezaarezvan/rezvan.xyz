@@ -252,6 +252,9 @@ $$
 \begin{align*}
 f_{NB}(\mathbf{x}) &#x26;= \underset{c \in \{1, 2\}}{\arg\max} p(y = c) \prod_{j = 1}^{2} p(x_j | y = c) \newline
 &#x26;= \underset{c \in \{1, 2\}}{\arg\max} \log p(y = c) + \sum_{j = 1}^{2} \log p(x_j | y = c) \newline
+&#x26;= \underset{c \in \{1, 2\}}{\arg\max} \log p(y = c) + \sum_{j = 1}^{2} \log \mathcal{N}(x_j; \mu_{j | c}, \sigma_{j | c}^2) \newline
+&#x26;= \underset{c \in \{1, 2\}}{\arg\max} \log p(y = c) + \sum_{j = 1}^{2} \log \left[ \frac{1}{\sqrt{2\pi\sigma_{j | c}^2}} \exp\left(-\frac{(x_j - \mu_{j | c})^2}{2\sigma_{j | c}^2}\right) \right] \newline
+&#x26;= \underset{c \in \{1, 2\}}{\arg\max} \log p(y = c) + \sum_{j = 1}^{2} \log \left[\left(2\pi\sigma_{j | c}^2\right)^{-\frac{1}{2}} \exp\left(-\frac{(x_j - \mu_{j | c})^2}{2\sigma_{j | c}^2}\right) \right] \newline
 &#x26;= \underset{c \in \{1, 2\}}{\arg\max} \log p(y = c) + \sum_{j = 1}^{2} \left( -\frac{1}{2} \log(2\pi\sigma_{j | c}^2) - \frac{(x_j - \mu_{j | c})^2}{2\sigma_{j | c}^2} \right)
 \end{align*}
 $$</p>
@@ -278,13 +281,13 @@ $$</p>
 $$
 p(x_j = 0 | y = c) = 1 - \varphi_{j | c}
 $$</p>
-<p>Therefore, the MLE parameters are $\varphi{j | c} = M_{j | c} / M_c$, where,
+<p>Therefore, the MLE parameters are $\varphi_{j | c} = M_{j | c} / M_c$, where,
 $M_{j | c}$ is the number of training examples in class $c$ that contain feature $x_j$.
 $M_c$ is the number of training examples in class $c$.</p>
 <p>We therefore get class-conditional distributions,
 $$
-p(x_1, \ldots, x_N | y = c) = \prod_{j = 1}^{N} p(x_j | y = c) = \prod_{j = 1}^{N} p(x_j | y = c) \newline
-\log p(x_1, \ldots, x_N | y = c) = \sum_{j = 1}^{N} \log p(x_j | y = c) = \sum_{j = 1}^{N} \log p(x_j | y = c)
+p(x_1, \ldots, x_N | y = c) = \prod_{j = 1}^{N} p(x_j | y = c) \newline
+\log p(x_1, \ldots, x_N | y = c) = \sum_{j = 1}^{N} \log p(x_j | y = c)
 $$</p>
 <p>So, for an input example $\mathbf{x}$, the log-probabilities of features present given $y = c$ adds.</p>
 <h4 id="smoothing">Smoothing</h4>
@@ -305,7 +308,7 @@ $$</p>
 <p>Then we need to use a multinomial (or categorical) distribution as class-conditional,
 $$
 p(x_j = k | y = c) = \varphi_{x, j | c} \newline
-\sum_{x in \chi_j} \varphi_{x, j | c} = 1
+\sum_{x \in \chi_j} \varphi_{x, j | c} = 1
 $$</p>
 <p>Our MLE parameter, $\varphi_{x, j | c} = M_{x, j | c} / M_{j | c}$, where,
 $M_{x, j | c}$ is the number of training examples in class $c$ that have feature $x_j = x$.
@@ -346,7 +349,7 @@ $$
 $$</p>
 <p>By cancelling out the common terms, we get,
 $$
-\log \frac{p(y = 1)}{p(y = 2)} - \frac{1}{2} \mathbf{mu}_1^T \mathbf{\Sigma}^{-1} \mathbf{\mu}_1 + \frac{1}{2} \mathbf{mu}_2^T \mathbf{\Sigma}^{-1} \mathbf{\mu}_2 + (\mathbf{\mu}_1 - \mathbf{\mu}_2)^T \mathbf{\Sigma}^{-1} \mathbf{x} = 0
+\log \frac{p(y = 1)}{p(y = 2)} - \frac{1}{2} \mathbf{\mu}_1^T \mathbf{\Sigma}^{-1} \mathbf{\mu}_1 + \frac{1}{2} \mathbf{\mu}_2^T \mathbf{\Sigma}^{-1} \mathbf{\mu}_2 + (\mathbf{\mu}_1 - \mathbf{\mu}_2)^T \mathbf{\Sigma}^{-1} \mathbf{x} = 0
 $$</p>
 <p>This shows that the decision boundary is linear in $\mathbf{x}$.</p>
 <h3 id="naive-bayes-vs-lda">Naive Bayes vs LDA</h3>
