@@ -1,0 +1,897 @@
+<!DOCTYPE html><html lang="en"> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" type="image/icon" href="/favicon.ico"><meta name="generator" content="Astro v4.11.5"><!-- Canonical URL --><link rel="canonical" href="https://rezvan.xyz/cityu/ma3518/ma3518_3/"><!-- Primary Meta Tags --><title>Part 3 - Confidence Interval and Hypothesis Testing | applied statistics | rezvan.xyz</title><meta name="title" content="Part 3 - Confidence Interval and Hypothesis Testing | applied statistics | rezvan.xyz"><meta name="description"><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://rezvan.xyz/cityu/ma3518/ma3518_3/"><meta property="og:title" content="Part 3 - Confidence Interval and Hypothesis Testing | applied statistics | rezvan.xyz"><meta property="og:description"><meta property="og:image" content="https://rezvan.xyz/favicon.ico"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://rezvan.xyz/cityu/ma3518/ma3518_3/"><meta property="twitter:title" content="Part 3 - Confidence Interval and Hypothesis Testing | applied statistics | rezvan.xyz"><meta property="twitter:description"><meta property="twitter:image" content="https://rezvan.xyz/favicon.ico"><!-- PageFind --><link href="/pagefind/pagefind-ui.css" rel="stylesheet"><script src="/pagefind/pagefind-ui.js"></script><!-- KaTeX support --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script><!-- inline KaTeX --><script>
+    function renderKaTeX() {
+        if (typeof renderMathInElement !== "undefined") {
+            renderMathInElement(document.body, {
+                delimiters: [
+                    { left: "$$", right: "$$", display: true },
+                    { left: "$", right: "$", display: false },
+                ],
+            });
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", renderKaTeX);
+    document.addEventListener("astro:after-swap", renderKaTeX);
+</script><meta name="astro-view-transitions-enabled" content="true"><meta name="astro-view-transitions-fallback" content="animate"><script>
+    function init() {
+        preloadTheme();
+        onScroll();
+        animate();
+        updateThemeButtons();
+        addCopyCodeButtons();
+        setGiscusTheme();
+
+        const backToTop = document.getElementById("back-to-top");
+        backToTop?.addEventListener("click", (event) => scrollToTop(event));
+
+        const backToPrev = document.getElementById("back-to-prev");
+        backToPrev?.addEventListener("click", () => window.history.back());
+
+        const lightThemeButton = document.getElementById("light-theme-button");
+        lightThemeButton?.addEventListener("click", () => {
+            localStorage.setItem("theme", "light");
+            toggleTheme(false);
+            updateThemeButtons();
+        });
+
+        const darkThemeButton = document.getElementById("dark-theme-button");
+        darkThemeButton?.addEventListener("click", () => {
+            localStorage.setItem("theme", "dark");
+            toggleTheme(true);
+            updateThemeButtons();
+        });
+
+        const systemThemeButton = document.getElementById(
+            "system-theme-button",
+        );
+        systemThemeButton?.addEventListener("click", () => {
+            localStorage.setItem("theme", "system");
+            toggleTheme(
+                window.matchMedia("(prefers-color-scheme: dark)").matches,
+            );
+            updateThemeButtons();
+        });
+
+        window
+            .matchMedia("(prefers-color-scheme: dark)")
+            .addEventListener("change", (event) => {
+                if (localStorage.theme === "system") {
+                    toggleTheme(event.matches);
+                }
+            });
+
+        document.addEventListener("scroll", onScroll);
+    }
+
+    function updateThemeButtons() {
+        const theme = localStorage.getItem("theme");
+        const lightThemeButton = document.getElementById("light-theme-button");
+        const darkThemeButton = document.getElementById("dark-theme-button");
+        const systemThemeButton = document.getElementById(
+            "system-theme-button",
+        );
+
+        function removeActiveButtonTheme(button) {
+            button?.classList.remove("bg-black/5");
+            button?.classList.remove("dark:bg-white/5");
+        }
+
+        function addActiveButtonTheme(button) {
+            button?.classList.add("bg-black/5");
+            button?.classList.add("dark:bg-white/5");
+        }
+
+        removeActiveButtonTheme(lightThemeButton);
+        removeActiveButtonTheme(darkThemeButton);
+        removeActiveButtonTheme(systemThemeButton);
+
+        if (theme === "light") {
+            addActiveButtonTheme(lightThemeButton);
+        } else if (theme === "dark") {
+            addActiveButtonTheme(darkThemeButton);
+        } else {
+            addActiveButtonTheme(systemThemeButton);
+        }
+    }
+
+    function animate() {
+        const animateElements = document.querySelectorAll(".animate");
+
+        animateElements.forEach((element, index) => {
+            setTimeout(() => {
+                element.classList.add("show");
+            }, index * 100);
+        });
+    }
+
+    function onScroll() {
+        if (window.scrollY > 0) {
+            document.documentElement.classList.add("scrolled");
+        } else {
+            document.documentElement.classList.remove("scrolled");
+        }
+    }
+
+    function scrollToTop(event) {
+        event.preventDefault();
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth",
+        });
+    }
+
+    function toggleTheme(dark) {
+        const css = document.createElement("style");
+
+        css.appendChild(
+            document.createTextNode(
+                `* {
+             -webkit-transition: none !important;
+             -moz-transition: none !important;
+             -o-transition: none !important;
+             -ms-transition: none !important;
+             transition: none !important;
+          }
+        `,
+            ),
+        );
+
+        document.head.appendChild(css);
+
+        if (dark) {
+            document.documentElement.classList.add("dark");
+        } else {
+            document.documentElement.classList.remove("dark");
+        }
+
+        window.getComputedStyle(css).opacity;
+        document.head.removeChild(css);
+
+        setGiscusTheme();
+    }
+
+    function preloadTheme() {
+        const userTheme = localStorage.theme;
+
+        if (userTheme === "light" || userTheme === "dark") {
+            toggleTheme(userTheme === "dark");
+        } else {
+            toggleTheme(
+                window.matchMedia("(prefers-color-scheme: dark)").matches,
+            );
+        }
+    }
+
+    function addCopyCodeButtons() {
+        let copyButtonLabel = "📋";
+        let codeBlocks = Array.from(document.querySelectorAll("pre"));
+
+        async function copyCode(codeBlock, copyButton) {
+            const codeText = codeBlock.innerText;
+            const buttonText = copyButton.innerText;
+            const textToCopy = codeText.replace(buttonText, "");
+
+            await navigator.clipboard.writeText(textToCopy);
+            copyButton.innerText = "✅";
+
+            setTimeout(() => {
+                copyButton.innerText = copyButtonLabel;
+            }, 2000);
+        }
+
+        for (let codeBlock of codeBlocks) {
+            const wrapper = document.createElement("div");
+            wrapper.style.position = "relative";
+
+            const copyButton = document.createElement("button");
+            copyButton.innerText = copyButtonLabel;
+            copyButton.classList = "copy-code";
+
+            codeBlock.setAttribute("tabindex", "0");
+            codeBlock.appendChild(copyButton);
+
+            codeBlock.parentNode.insertBefore(wrapper, codeBlock);
+            wrapper.appendChild(codeBlock);
+
+            copyButton?.addEventListener("click", async () => {
+                await copyCode(codeBlock, copyButton);
+            });
+        }
+    }
+
+    const setGiscusTheme = () => {
+        const giscus = document.querySelector(".giscus-frame");
+
+        const isDark = document.documentElement.classList.contains("dark");
+
+        if (giscus) {
+            const url = new URL(giscus.src);
+            url.searchParams.set("theme", isDark ? "dark" : "light");
+            giscus.src = url.toString();
+        }
+    };
+
+    document.addEventListener("DOMContentLoaded", () => init());
+    document.addEventListener("astro:after-swap", () => init());
+    preloadTheme();
+</script><link rel="stylesheet" href="/_astro/_subject_.CmU_Tg_r.css">
+<style>summary[data-astro-cid-xvrfupwn]{cursor:pointer;border-top-left-radius:.5rem;border-top-right-radius:.5rem;padding:.375rem .75rem;font-weight:500;transition-property:color,background-color,border-color,text-decoration-color,fill,stroke;transition-timing-function:cubic-bezier(.4,0,.2,1);transition-duration:.15s}summary[data-astro-cid-xvrfupwn]:hover{background-color:#0000000d}summary[data-astro-cid-xvrfupwn]:hover:is(.dark *){background-color:#ffffff0d}details[data-astro-cid-xvrfupwn][open] summary[data-astro-cid-xvrfupwn]{background-color:#0000000d}details[data-astro-cid-xvrfupwn][open] summary[data-astro-cid-xvrfupwn]:is(.dark *){background-color:#ffffff0d}
+</style><script type="module" src="/_astro/hoisted.DzxSAGjc.js"></script></head> <body> <header data-astro-transition-persist="astro-l7r54iwe-1"> <div class="mx-auto max-w-screen-sm px-3"> <div class="flex flex-wrap justify-between gap-y-2"> <a href="/" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out">  <div class="font-semibold"> rezvan.xyz </div>  </a> <nav class="flex items-center gap-1 text-sm"> <a href="/posts" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> posts </a> <span> / </span> <a href="/chalmers" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> chalmers </a> <span> / </span> <a href="/cityu" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> cityu </a> <span> / </span> <a href="/pdf/cv/cv.pdf" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> cv </a> <span> / </span> <button id="magnifying-glass" aria-label="Search" class="flex items-center rounded border border-black/15 bg-neutral-100 px-2 py-1 text-xs transition-colors duration-300 ease-in-out hover:bg-black/5 hover:text-black focus-visible:bg-black/5 focus-visible:text-black dark:border-white/20 dark:bg-neutral-900 dark:hover:bg-white/5 dark:hover:text-white dark:focus-visible:bg-white/5 dark:focus-visible:text-white"> <svg height="16" stroke-linejoin="round" viewBox="0 0 16 16" width="16" style="color: currentcolor;"><path fill-rule="evenodd" clip-rule="evenodd" d="M3.5 7C3.5 5.067 5.067 3.5 7 3.5C8.933 3.5 10.5 5.067 10.5 7C10.5 7.88461 10.1718 8.69256 9.63058 9.30876L9.30876 9.63058C8.69256 10.1718 7.88461 10.5 7 10.5C5.067 10.5 3.5 8.933 3.5 7ZM9.96544 11.0261C9.13578 11.6382 8.11014 12 7 12C4.23858 12 2 9.76142 2 7C2 4.23858 4.23858 2 7 2C9.76142 2 12 4.23858 12 7C12 8.11014 11.6382 9.13578 11.0261 9.96544L14.0303 12.9697L14.5607 13.5L13.5 14.5607L12.9697 14.0303L9.96544 11.0261Z" fill="currentColor"></path></svg>
+&nbsp;Search
+</button> </nav> </div> </div> </header> <main>  <div class="mx-auto max-w-screen-sm px-3"> <div class="animate"> <a href="/cityu/ma3518" class="not-prose group relative flex w-fit flex-nowrap rounded border border-black/15 py-1.5 pl-7 pr-3 transition-colors duration-300 ease-in-out hover:bg-black/5 hover:text-black focus-visible:bg-black/5 focus-visible:text-black dark:border-white/20 dark:hover:bg-white/5 dark:hover:text-white dark:focus-visible:bg-white/5 dark:focus-visible:text-white"> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="absolute left-2 top-1/2 size-4 -translate-y-1/2 fill-none stroke-current stroke-2"> <line x1="5" y1="12" x2="19" y2="12" class="translate-x-2 scale-x-0 transition-transform duration-300 ease-in-out group-hover:translate-x-0 group-hover:scale-x-100 group-focus-visible:translate-x-0 group-focus-visible:scale-x-100"></line> <polyline points="12 5 5 12 12 19" class="translate-x-1 transition-transform duration-300 ease-in-out group-hover:translate-x-0 group-focus-visible:translate-x-0"></polyline> </svg> <div class="text-sm"> Back to applied statistics </div> </a> </div> <div class="my-10 space-y-1"> <div class="animate flex items-center gap-1.5"> <div class="font-base text-sm"> MA3518 </div>
+&bull;
+<div class="font-base text-sm"> <time datetime="2024-09-19T00:00:00.000Z"> September 19, 2024 </time> </div> 
+&bull;
+<div class="font-base text-sm"> 13 min read </div> </div> <h1 class="animate text-3xl font-semibold text-black dark:text-white"> Part 3 - Confidence Interval and Hypothesis Testing </h1> </div> <details open class="animate rounded-lg border border-black/15 dark:border-white/20" data-astro-cid-xvrfupwn> <summary data-astro-cid-xvrfupwn>Table of Contents</summary> <nav class="" data-astro-cid-xvrfupwn> <ul class="py-3" data-astro-cid-xvrfupwn> <li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#inferences-for-meanproportion" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Inferences for mean/proportion </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#confidence-interval-on-the-mean-of-a-normal-distribution-variance-known" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Confidence Interval on the mean of a Normal Distribution, variance known </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#confidence-interval-on-the-mean-of-an-arbitrary-distribution-variance-known" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Confidence Interval on the mean of an arbitrary distribution, variance known </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#confidence-interval-on-the-mean-of-a-normal-distribution-variance-unknown" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Confidence interval on the mean of a normal distribution, variance unknown </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#confidence-interval-on-the-mean-summary" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Confidence Interval on the mean: Summary </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#confidence-interval-on-the-proportion" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Confidence Interval on the proportion </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#hypotheses-testing-for-the-mean" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Hypotheses testing for the mean </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#hypotheses-testing-for-the-mean-p-value" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Hypotheses testing for the mean: $p$-value </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#hypotheses-testing-for-the-mean-one-sided" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Hypotheses testing for the mean: one-sided </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#hypotheses-testing-for-the-mean-other-cases" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Hypotheses testing for the mean: other cases </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#hypotheses-testing-for-the-proportion" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Hypotheses testing for the proportion </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#r-code-for-finding-z_1---alpha2" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> R code for finding $z_${1 - \alpha/2}$ </a> <ul class="translate-x-3"> <li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#example" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Example </a>  </li> </ul> </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#built-in-functions-in-r-for-finding-the-ci-of-proportion-estimate" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Built-in functions in R for finding the CI of proportion estimate </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#built-in-functions-in-r-for-finding-the-ci-of-mean-estimate" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Built-in functions in R for finding the CI of mean estimate </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#inferences-for-difference-of-means" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Inferences for difference of means </a> <ul class="translate-x-3"> <li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#two-sample-test" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Two-sample test </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#two-sample-test-known-variances" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Two-sample test: known variances </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#two-sample-test-unknown-equal-variances" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Two-sample test: unknown equal variances </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#two-sample-test-unknown-unequal-variances" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Two-sample test: unknown unequal variances </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#example-1" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Example </a>  </li> </ul> </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#paired-data-for-difference-of-means" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Paired data for difference of means </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#inferences-for-variance" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Inferences for variance </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#inferences-for-ratio-of-variancestest-of-equality-of-variances" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Inferences for ratio of variances/test of equality of variances </a>  </li> </ul> </nav> </details> <article class="animate"> <h3 id="inferences-for-meanproportion">Inferences for mean/proportion</h3>
+<p>Let’s recap what a confidence interval is,</p>
+<blockquote>
+<p>A confidence interval of level $100(1 - \alpha)%$ means that we are $100(1 - \alpha)%$ confident that the <em>true</em> value of the parameter is included into the interval.</p>
+</blockquote>
+<p>When dealing with confidence intervals, we will often encounter different “types” of situations. Let’s review these.</p>
+<h3 id="confidence-interval-on-the-mean-of-a-normal-distribution-variance-known">Confidence Interval on the mean of a Normal Distribution, variance known</h3>
+<p>Suppose we have a <strong>normal distribution</strong> with unknown mean $\mu$ and known variance $\sigma^2$.</p>
+<p>We have thus a random sample $X_1, X_2, \ldots, X_n$, such that, for all $i$,
+$$
+X_i \sim N(\mu, \sigma^2)
+$$</p>
+<p>with $\mu$ unknown and $\sigma$ a known constant.</p>
+<p>We would like a confidence interval for $\mu$.</p>
+<p>We know that,
+$$
+\bar{X} = \frac{1}{n} \sum_{i = 1}^n X_i \sim N\left(\mu, \frac{\sigma^2}{n}\right)
+$$</p>
+<p>we can <em>standardize</em> this to,
+$$
+Z = \frac{\bar{X} - \mu}{\sigma/\sqrt{n}} = \sqrt{n} \frac{\bar{X} - \mu}{\sigma} \sim N(0, 1)
+$$</p>
+<p>So, because $Z \sim N(0, 1)$,
+$$
+P(-z_{1 - \alpha/2} \leq Z \leq z_{1 - \alpha/2}) = 1 - \alpha
+$$</p>
+<p>Thus,
+$$
+P\left(-z_{1 - \alpha/2} \leq \sqrt{n} \frac{\bar{X} - \mu}{\sigma} \leq z_{1 - \alpha/2}\right) = 1 - \alpha
+$$</p>
+<p>Re-arranging this, we get,
+$$
+P\left(\bar{X} - z_{1 - \alpha/2} \frac{\sigma}{\sqrt{n}} \leq \mu \leq \bar{X} + z_{1 - \alpha/2} \frac{\sigma}{\sqrt{n}}\right) = 1 - \alpha
+$$</p>
+<p>Let’s call them $L$ and $U$ for lower and upper, finally, the interval is,
+$$
+[L, U] = \left[\bar{x} - z_{1 - \alpha/2} \frac{\sigma}{\sqrt{n}}, \bar{x} + z_{1 - \alpha/2} \frac{\sigma}{\sqrt{n}}\right]
+$$</p>
+<h3 id="confidence-interval-on-the-mean-of-an-arbitrary-distribution-variance-known">Confidence Interval on the mean of an arbitrary distribution, variance known</h3>
+<p>Let us recap the central limit theorem.</p>
+<p>The Central Limit (CLT) implies if $n$ is large enough,
+$$
+Z = \sqrt{n} \frac{\bar{X} - \mu}{\sigma} \sim N(0, 1)
+$$</p>
+<p>Thus,
+$$
+P\left(-z_{1 - \alpha/2} \leq \sqrt{n} \frac{\bar{X} - \mu}{\sigma} \leq z_{1 - \alpha/2}\right) \simeq 1 - \alpha
+$$</p>
+<p>Which yields the (same) interval,
+$$
+[L, U] = \left[\bar{x} - z_{1 - \alpha/2} \frac{\sigma}{\sqrt{n}}, \bar{x} + z_{1 - \alpha/2} \frac{\sigma}{\sqrt{n}}\right]
+$$</p>
+<h3 id="confidence-interval-on-the-mean-of-a-normal-distribution-variance-unknown">Confidence interval on the mean of a normal distribution, variance unknown</h3>
+<p>In the case we do not have the variance, we need to sample it!</p>
+<p>Recall the <em>sample variance</em>,
+$$
+S^2 = \frac{1}{n - 1} \sum_{i = 1}^n (X_i - \bar{X})^2
+$$</p>
+<p>A natural procedure is thus to,
+$$
+T = \sqrt{n} \frac{\bar{X} - \mu}{S}
+$$</p>
+<p><em>In a normal population</em>, the <strong>exact</strong> distribution of $T$ is $T \sim t_{n - 1}$.</p>
+<p>We can write,
+$$
+P(-t_{n - 1;1 - \alpha/2} \leq \sqrt{n} \frac{\bar{X} - \mu}{S} \leq t_{n - 1;1 - \alpha/2}) = 1 - \alpha
+$$</p>
+<p>or,
+$$
+P\left(\bar{X} - t_{n - 1;1 - \alpha/2} \frac{S}{\sqrt{n}} \leq \mu \leq \bar{X} + t_{n - 1;1 - \alpha/2} \frac{S}{\sqrt{n}}\right) = 1 - \alpha
+$$</p>
+<p>Which yields us the interval,
+$$
+[L, U] = \left[\bar{x} - t_{n - 1;1 - \alpha/2} \frac{s}{\sqrt{n}}, \bar{x} + t_{n - 1;1 - \alpha/2} \frac{s}{\sqrt{n}}\right]
+$$</p>
+<p><em>In large samples</em>,
+$$
+T \simeq N(0, 1)
+$$</p>
+<p>Consequently, an <strong>approximate</strong> confidence interval of level $100(1 - \alpha)%$ for $\mu$ is,
+$$
+[L, U] = \left[\bar{x} - z_{1 - \alpha/2} \frac{s}{\sqrt{n}}, \bar{x} + z_{1 - \alpha/2} \frac{s}{\sqrt{n}}\right]
+$$</p>
+<h3 id="confidence-interval-on-the-mean-summary">Confidence Interval on the mean: Summary</h3>
+<p><em>Is the population normal?</em></p>
+<ul>
+<li>If yes, is $\sigma$ known?
+<ul>
+<li>If yes, use an **exact $z$-confidence interval:
+<ul>
+<li>$[L, U] = \left[\bar{x} - z_{1 - \alpha/2} \frac{\sigma}{\sqrt{n}}, \bar{x} + z_{1 - \alpha/2} \frac{\sigma}{\sqrt{n}}\right]$</li>
+</ul>
+</li>
+<li>If no, use an **exact $t$-confidence interval:
+<ul>
+<li>$[L, U] = \left[\bar{x} - t_{n - 1;1 - \alpha/2} \frac{s}{\sqrt{n}}, \bar{x} + t_{n - 1;1 - \alpha/2} \frac{s}{\sqrt{n}}\right]$</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>If no, use an <strong>approximate large sample confidence interval</strong>:
+<ul>
+<li>$[L, U] = \left[\bar{x} - z_{1 - \alpha/2} \frac{\sigma}{\sqrt{n}}, \bar{x} + z_{1 - \alpha/2} \frac{\sigma}{\sqrt{n}}\right]$</li>
+<li>or</li>
+<li>$[L, U] = \left[\bar{x} - z_{1 - \alpha/2} \frac{s}{\sqrt{n}}, \bar{x} + z_{1 - \alpha/2} \frac{s}{\sqrt{n}}\right]$</li>
+</ul>
+</li>
+</ul>
+<h3 id="confidence-interval-on-the-proportion">Confidence Interval on the proportion</h3>
+<p>The random variable to study is,
+$$
+X =
+\begin{cases}
+1 &#x26; \text{If the individual has the characteristic of interest} \newline
+0 &#x26; \text{If not}
+\end{cases}
+$$</p>
+<p>$X_1, X_2, \ldots, X_n$ is a set of $n$ independent Bern($p$) random variables.</p>
+<p>Thus,
+$$
+Y = \sum_{i = 1}^n X_i \sim B(n, p)
+$$</p>
+<p>and the <em>sample proportion</em> is,
+$$
+\hat{P} = \frac{Y}{n}
+$$</p>
+<p>We also know that,
+$$
+\sqrt{n} \frac{\hat{P} - p}{\sqrt{p(1 - p)}} \sim N(0, 1)
+$$</p>
+<p>if $n$ is large.</p>
+<p>Approximate two-sided confidence interval of level $100(1 - \alpha)%$ for $p$ is given by,
+$$
+\left[\hat{p} - z_{1 - \alpha/2} \sqrt{\frac{\hat{p}(1 - \hat{p})}{n}}, \hat{p} + z_{1 - \alpha/2} \sqrt{\frac{\hat{p}(1 - \hat{p})}{n}}\right]
+$$</p>
+<h3 id="hypotheses-testing-for-the-mean">Hypotheses testing for the mean</h3>
+<p>Let’s recall hypothesis testing. The <strong>null hypothesis</strong> is usually of the form,
+$$
+H_0 : \mu = \mu_0
+$$</p>
+<p>The alternative hypothesis can be a <em>two-sided alternative</em>,
+$$
+H_a : \mu \neq \mu_0
+$$</p>
+<p>or <em>one-sided alternatives</em>,
+$$
+H_a : \mu > \mu_0 \quad \text{or} \quad H_a : \mu &#x3C; \mu_0
+$$</p>
+<p>Remember, we have two important cases</p>
+<ol>
+<li>Rejecting $H_0$ when it is true: <strong>type I error</strong>.</li>
+<li>Failing to reject H_0 when it is false: <strong>type II error</strong>.</li>
+</ol>
+<p>$$
+P(\text{Type I error}) = P(\text{reject } H_0 | H_0 \text{ is true }) = \alpha \newline
+P(\text{Type II error}) = P(\text{fail to reject } H_0 | H_0 \text{ is false }) = \beta
+$$</p>
+<p>Note that $\beta$ depends on the (unknown) value of $\mu$ under the alternative.</p>
+<p>Assume for the moment that <em>the population is normal with known</em> $\sigma$.
+$$
+\bar{X} \sim N(\mu, \frac{\sigma^2}{n})
+$$</p>
+<p><em>At significance level</em> $\alpha$, we are after two constants $\ell$ and $u$ such that,
+$$
+\alpha = P(\bar{X} \notin [\ell, u] \text{ when } \mu = \mu_0) = P\left(Z \notin \left[\sqrt{n} \frac{\ell - \mu_0}{\sigma}, \sqrt{n} \frac{u - \mu_0}{\sigma}\right]\right)
+$$</p>
+<p>Thus,
+$$
+\sqrt{n} \frac{\ell - \mu_0}{\sigma} = z_{\alpha/2} = -z_{1 - \alpha/2}
+$$</p>
+<p>and,
+$$
+\sqrt{n} \frac{u - \mu_0}{\sigma} = z_{1 - \alpha/2}
+$$</p>
+<p>This yields,
+$$
+\ell = \mu_0 - z_{1 - \alpha/2} \frac{\sigma}{\sqrt{n}} \newline
+u = \mu_0 + z_{1 - \alpha/2} \frac{\sigma}{\sqrt{n}}.
+$$</p>
+<p>The decision rule is then,
+$$
+\text{Reject } H_0 \text{ if } \bar{x} \notin [\mu_0 - z_{1 - \alpha/2} \frac{\sigma}{\sqrt{n}}, \mu_0 + z_{1 - \alpha/2} \frac{\sigma}{\sqrt{n}}]
+$$</p>
+<h3 id="hypotheses-testing-for-the-mean-p-value">Hypotheses testing for the mean: $p$-value</h3>
+<p>The $p$-value is the probability that the test statistic will take on a value that is at least <strong>as extreme as</strong> the observed value when $H_0$ is true. (extreme is to be understood in the direction of the alternative).</p>
+<p>When testing $H_0 : \mu = \mu_0$ against $H_a : \mu \neq \mu_0$, the $p$-value will be the probability of finding the random variable $\bar{X}$ more different to $\mu_0$ than the <em>observed</em> $\bar{x}$, that is,
+$$
+\begin{align*}
+p &#x26; = P(\bar{X} \notin [\mu_0 \pm |\bar{x} - \mu_0|] \text{ when } \mu = \mu_0) \newline
+&#x26; = 1 - P(\bar{X} \in [\mu_0 \pm |\bar{x} - \mu_0|] \text{ when } \mu = \mu_0)
+\end{align*}
+$$</p>
+<p>Let us define,
+$$
+z_0 = \sqrt{n} \frac{\bar{x} - \mu_0}{\sigma}
+$$</p>
+<p>as the “observed value of the test statistic”.</p>
+<p>As we know that $Z = \sqrt{n} \frac{\bar{X} - \mu_0}{\sigma} \sim N(0, 1)$, we can write,
+$$
+\begin{align*}
+p &#x26; = 1 - P(\sqrt{n} \frac{\bar{X} - \mu_0}{\sigma} \in \left[\sqrt{n} \frac{\mu_0 \pm |\bar{x} - \mu_0| - \mu_0}{\sigma}\right]) \newline
+&#x26; = 1 - P(Z \in [-|z_0|, |z_0|]) = 2(1 - \phi(|z_0|))
+\end{align*}
+$$</p>
+<p>Operationally, since a $p$-value is computed, we typically compare it to a predefined significance level $\alpha$ to make a decision:
+$$
+\begin{cases}
+\text{if } p &#x3C; \alpha, \text{ reject } H_0 \newline
+\text{if } p \geq \alpha, \text{ do not reject } H_0
+\end{cases}
+$$</p>
+<h3 id="hypotheses-testing-for-the-mean-one-sided">Hypotheses testing for the mean: one-sided</h3>
+<p>With $H_a : \mu > \mu_0$ we are after a constant $u$ such that,
+$$
+P(\bar{X} > u \text{ when } \mu = \mu_0) = \alpha
+$$</p>
+<p>As we know that $Z = \sqrt{n} \frac{\bar{X} - \mu_0}{\sigma} \sim N(0, 1)$, the decision rule is <strong>reject $H_0$ if $\bar{x} > \mu_0 + z_{1 - \alpha} \frac{\sigma}{\sqrt{n}}$</strong>.</p>
+<p>Again with $z_0 = \sqrt{n} \frac{\bar{x} - \mu_0}{\sigma}$, the $p$-value is,
+$$
+p = P(\bar{X} > \bar{x} \text{ when } \mu = \mu_0) = P(Z > \sqrt{n} \frac{\bar{x} - \mu_0}{\sigma}) = 1 - \phi(z_0)
+$$</p>
+<p>With $H_a : \mu &#x3C; \mu_0$, we are after a constant $\ell$ such that,
+$$
+P(\bar{X} &#x3C; \ell \text{ when } \mu = \mu_0) = \alpha
+$$</p>
+<p>The decision rule is <strong>reject $H_0$ if $\bar{x} &#x3C; \mu_0 - z_{1 - \alpha} \frac{\sigma}{\sqrt{n}}$</strong>.</p>
+<p>The $p$-value is,
+$$
+p = P(\bar{X} &#x3C; \bar{x} \text{ when } \mu = \mu_0) = P(Z &#x3C; \sqrt{n} \frac{\bar{x} - \mu_0}{\sigma}) = \phi(z_0)
+$$</p>
+<h3 id="hypotheses-testing-for-the-mean-other-cases">Hypotheses testing for the mean: other cases</h3>
+<p>Say we have a normal population with unknown standard deviation.</p>
+<p>Specifically, for the two-sided test $H_0 : \mu = \mu_0$ against $H_a : \mu \neq \mu_0$, the decision rule is,
+$$
+\text{reject } H_0 \text{ if } \bar{x} \notin [\mu_0 - t_{n - 1;1 - \alpha/2} \frac{s}{\sqrt{n}}, \mu_0 + t_{n - 1;1 - \alpha/2} \frac{s}{\sqrt{n}}]
+$$</p>
+<p>and from the observed value of the test statistic,
+$$
+t_0 = \sqrt{n} \frac{\bar{x} - \mu_0}{s}
+$$</p>
+<p>we can compute the $p$-value,
+$$
+p = 1 - P(T \in [-|t_0|, |t_0|]) = 2P(T > |t_0|) \text{ where } T \sim t_{n - 1}
+$$</p>
+<p>If we have non-normal populations with known or unknown standard deviation,
+$$
+\text{reject } H_0 \text{ if } \bar{x} \notin \left[\mu_0 - z_{1 - \alpha/2} \frac{\sigma}{\sqrt{n}}, \mu_0 + z_{1 - \alpha/2} \frac{\sigma}{\sqrt{n}}\right]
+$$</p>
+<p>or,
+$$
+\text{reject } H_0 \text{ if } \bar{x} \notin \left[\mu_0 - z_{1 - \alpha/2} \frac{s}{\sqrt{n}}, \mu_0 + z_{1 - \alpha/2} \frac{s}{\sqrt{n}}\right]
+$$</p>
+<p>The associated <strong>approximate $p$-value</strong> will be given by,
+$$
+p = 2(1 - \phi(|z_0|)),
+$$</p>
+<p>with $z_0 = \sqrt{n} \frac{\bar{x} - \mu_0}{\sigma}$ or $z_0 = \sqrt{n} \frac{\bar{x} - \mu_0}{s}$.</p>
+<h3 id="hypotheses-testing-for-the-proportion">Hypotheses testing for the proportion</h3>
+<p>Large-sample confidence interval for $p$,
+$$
+\left[\hat{p} - z_{1 - \alpha/2} \sqrt{\frac{\hat{p}(1 - \hat{p})}{n}}, \hat{p} + z_{1 - \alpha/2} \sqrt{\frac{\hat{p}(1 - \hat{p})}{n}}\right]
+$$</p>
+<p>The decision rule at (approximate) level $\alpha$ is,
+$$
+\text{reject } H_0 \text{ if } \hat{p} \notin \left[p_0 - z_{1 - \alpha/2} \sqrt{\frac{p_0(1 - p_0)}{n}}, p_0 + z_{1 - \alpha/2} \sqrt{\frac{p_0(1 - p_0)}{n}}\right]
+$$</p>
+<p>The (approximate) $p$-value for this test is,
+$$
+p = 2(1 - \phi(|z_0|))
+$$</p>
+<p>where $z_0 = \sqrt{n} \frac{\hat{p} - p_0}{\sqrt{p_0(1 - p_0)}}$.</p>
+<h3 id="r-code-for-finding-z_1---alpha2">R code for finding $z_{1 - \alpha/2}$</h3>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-color-background);color:var(--astro-code-color-text); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>alpha&#x3C;-0.05</span></span>
+<span class="line"><span>zstar&#x3C;-qnorm(alpha/2)</span></span>
+<span class="line"><span># or</span></span>
+<span class="line"><span>zstar&#x3C;-qnorm(1-alpha/2)</span></span>
+<span class="line"><span></span></span></code></pre>
+<h4 id="example">Example</h4>
+<blockquote>
+<p>Suppose 53 people among 100 surveyed is for the proposition, find the 95% confidence interval for the proportion of people in favor of the proposition.</p>
+</blockquote>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-color-background);color:var(--astro-code-color-text); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>n&#x3C;-100</span></span>
+<span class="line"><span>phat&#x3C;-53/n</span></span>
+<span class="line"><span>SE&#x3C;-sqrt(phat*(1-phat)/n)</span></span>
+<span class="line"><span>alpha&#x3C;-0.05</span></span>
+<span class="line"><span>zstar&#x3C;-qnorm(alpha/2)</span></span>
+<span class="line"><span>> c(phat-zstar*SE, phat+zstar*SE)</span></span>
+<span class="line"><span>[1] 0.432178 0.6278216</span></span>
+<span class="line"><span></span></span></code></pre>
+<h3 id="built-in-functions-in-r-for-finding-the-ci-of-proportion-estimate">Built-in functions in R for finding the CI of proportion estimate</h3>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-color-background);color:var(--astro-code-color-text); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>prop.test(x=53, n=100, conf.level=0.95)</span></span>
+<span class="line"><span>>   1-sample proportions test with continuity correction</span></span>
+<span class="line"><span>></span></span>
+<span class="line"><span>> data:  53 out of 100, null probability 0.5</span></span>
+<span class="line"><span>> X-squared = 0.25, df = 1, p-value = 0.6171</span></span>
+<span class="line"><span>> alternative hypothesis: true p is not equal to 0.5</span></span>
+<span class="line"><span>> 95 percent confidence interval:</span></span>
+<span class="line"><span>>   0.4280225 0.6296465</span></span>
+<span class="line"><span>> sample estimates:</span></span>
+<span class="line"><span>>   p</span></span>
+<span class="line"><span>> 0.53</span></span>
+<span class="line"><span></span></span></code></pre>
+<h3 id="built-in-functions-in-r-for-finding-the-ci-of-mean-estimate">Built-in functions in R for finding the CI of mean estimate</h3>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-color-background);color:var(--astro-code-color-text); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>x&#x3C;-c(175, 185, 170, 184, 175)</span></span>
+<span class="line"><span>t.test(x, conf.level=0.90)</span></span>
+<span class="line"><span>> 	One Sample t-test</span></span>
+<span class="line"><span>></span></span>
+<span class="line"><span>> data:  x</span></span>
+<span class="line"><span>> t = 61.567, df = 4, p-value = 4.169e-07</span></span>
+<span class="line"><span>> alternative hypothesis: true mean is not equal to 0</span></span>
+<span class="line"><span>> 90 percent confidence interval:</span></span>
+<span class="line"><span>>   171.6434 183.9566</span></span>
+<span class="line"><span>> sample estimates:</span></span>
+<span class="line"><span>> mean of x</span></span>
+<span class="line"><span>>  177.8</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>t.test(x, conf.level=0.90, alt="less")</span></span>
+<span class="line"><span>>   One Sample t-test</span></span>
+<span class="line"><span>></span></span>
+<span class="line"><span>> data:  x</span></span>
+<span class="line"><span>> t = 61.567, df = 4, p-value = 1</span></span>
+<span class="line"><span>> alternative hypothesis: true mean is less than 0</span></span>
+<span class="line"><span>> 90 percent confidence interval:</span></span>
+<span class="line"><span>>   -Inf 182.2278</span></span>
+<span class="line"><span>> sample estimates:</span></span>
+<span class="line"><span>> mean of x</span></span>
+<span class="line"><span>>  177.8</span></span>
+<span class="line"><span></span></span></code></pre>
+<h3 id="inferences-for-difference-of-means">Inferences for difference of means</h3>
+<p>In many situations it is quite common to be interested in *comparing two ‘populations’ in regard to a parameter of interest.</p>
+<p>The two ‘populations’ may be:</p>
+<ul>
+<li>Produced items using an existing and a new technique.</li>
+<li>Success rates in two groups of individuals.</li>
+<li>Health test results for patients who received a drug and for patients who received a placebo.</li>
+</ul>
+<h4 id="two-sample-test">Two-sample test</h4>
+<p>$X_{11}, X_{12}, \ldots, X_{1n_1}$ is a sample from population 1.
+$X_{21}, X_{22}, \ldots, X_{2n_2}$ is a sample from population 2.</p>
+<p>The samples are <strong>independent</strong> (i.e., observations in sample 1 are by no means linked to the observations in sample 2, they concern different individuals).</p>
+<p>What we would like to know is whether $\mu_1 = \mu_2$ or not.</p>
+<p>So,
+$$
+H_0 : \mu_1 = \mu_2
+$$</p>
+<p>We compute the sample means $\bar{x}_1 and $\bar{x}_2$.</p>
+<ul>
+<li>If $\bar{x}_1 \simeq \bar{x}_2$, then H_0 is probably acceptable.</li>
+<li>If $\bar{x}_1$ is considerably different to $\bar{x}_2$, that is evidence that $H_0$ is not true and we are tempted to reject it.</li>
+</ul>
+<p>Note that the alternative hypothesis can be,
+$$
+H_1 : \mu_1 \neq \mu_2 \ | \ \text{two-sided alternative}
+$$</p>
+<p>or,
+$$
+H_1 : \mu_1 > \mu_2 \quad \text{or} \quad H_1 : \mu_1 &#x3C; \mu_2 \ | \ \text{one-sided alternative}
+$$</p>
+<p>We know that,
+$$
+\bar{X_1} = \frac{1}{n_1} \sum_{i = 1}^{n_1} X_{1i} \sim N\left(\mu_1, \frac{\sigma_1^2}{n_1}\right)
+$$</p>
+<p>and,
+$$
+\bar{X_2} = \frac{1}{n_2} \sum_{i = 1}^{n_2} X_{2i} \sim N\left(\mu_2, \frac{\sigma_2^2}{n_2}\right)
+$$</p>
+<p>we deduce the <em>sampling distribution</em> of $\bar{X_1} - \bar{X_2}$,
+$$
+\bar{X_1} - \bar{X_2} \sim N\left(\mu_1 - \mu_2, \frac{\sigma_1^2}{n_1} + \frac{\sigma_2^2}{n_2}\right)
+$$</p>
+<p>Now, testing for $H_0 : \mu_1 = \mu_2$ exactly amounts to for $H_0 : \mu_1 - \mu_2 = 0$, with $\bar{X_1} - \bar{X_2}$ as an estimator for $\mu_1 - \mu_2$.</p>
+<h4 id="two-sample-test-known-variances">Two-sample test: known variances</h4>
+<p>Suppose that $\sigma_1$ and $\sigma_2$ are known.</p>
+<p>For the two-sided test (with $H_a : \mu_1 - \mu_2 \neq 0$), at significance level $\alpha$, the decision rule is,
+$$
+\text{Reject } H_0 \text{ if } \bar{x_1} - \bar{x_2} \notin \left[-z_{1 - \alpha/2} \sqrt{\frac{\sigma_1^2}{n_1} + \frac{\sigma_2^2}{n_2}}, z_{1 - \alpha/2} \sqrt{\frac{\sigma_1^2}{n_1} + \frac{\sigma_2^2}{n_2}}\right]
+$$</p>
+<p>$p$-value is,
+$$
+p = 2(1 - \phi(|z_0|)),
+$$</p>
+<p>where $z_0 = \frac{\bar{x}_1 - \bar{x}_2}{\sqrt{\frac{\sigma_1^2}{n_1} + \frac{\sigma_2^2}{n_2}}}$.</p>
+<p>Similarly, for the one-sided test $H_A : \mu_1 > \mu_2$, the decision rule is,
+$$
+\text{reject } H_0 \text{ if } \bar{x_1} - \bar{x_2} > z_{1 - \alpha} \sqrt{\frac{\sigma_1^2}{n_1} + \frac{\sigma_2^2}{n_2}}
+$$</p>
+<p>and the $p$-value is,
+$$
+p = 1 - \phi(z_0)
+$$</p>
+<p>while for the one-sided test $H_A : \mu_1 &#x3C; \mu_2$, the decision rule is,
+$$
+\text{reject } H_0 \text{ if } \bar{x_1} - \bar{x_2} &#x3C; -z_{1 - \alpha} \sqrt{\frac{\sigma_1^2}{n_1} + \frac{\sigma_2^2}{n_2}}
+$$</p>
+<p>and the $p$-value is,
+$$
+p = \phi(z_0)
+$$</p>
+<p>$100(1 - \alpha)%$ two-sided confidence interval for $\mu_1 - \mu_2$ is,
+$$
+\left[(\bar{x_1} - \bar{x_2}) - z_{1 - \alpha/2} \sqrt{\frac{\sigma_1^2}{n_1} + \frac{\sigma_2^2}{n_2}}, (\bar{x_1} - \bar{x_2}) + z_{1 - \alpha/2} \sqrt{\frac{\sigma_1^2}{n_1} + \frac{\sigma_2^2}{n_2}}\right]
+$$</p>
+<p>$100(1 - \alpha)%$ one-sided confidence intervals for $\mu_1 - \mu_2$ are,
+$$
+\left(-\infty, (\bar{x_1} - \bar{x_2}) + z_{1 - \alpha} \sqrt{\frac{\sigma_1^2}{n_1} + \frac{\sigma_2^2}{n_2}}\right]
+$$</p>
+<p>and,
+$$
+\left[(\bar{x_1} - \bar{x_2}) - z_{1 - \alpha} \sqrt{\frac{\sigma_1^2}{n_1} + \frac{\sigma_2^2}{n_2}}, +\infty\right]
+$$</p>
+<h4 id="two-sample-test-unknown-equal-variances">Two-sample test: unknown equal variances</h4>
+<p>Assume now $\sigma_1 = \sigma_2 = \sigma$, but $\sigma$ is unknown.</p>
+<p>We can estimate $\sigma^2$ by the <strong>pooled variance estimator</strong>,
+$$
+S_{p}^2 = \frac{\sum_{i = 1}^{n_1} \left(X_{1i} - \bar{X_1}\right)^2 + \sum_{i = 1}^{n_2} \left(X_{2i} - \bar{X_2}\right)^2}{n_1 + n_2 - 2}
+$$</p>
+<p>Where $S_1^2$ and $S_2^2$ are the sample variances of the two samples,
+$$
+S_1^2 = \frac{1}{n_1 - 1} \sum_{i = 1}^{n_1} (X_{1i} - \bar{X_1})^2
+$$</p>
+<p>and,
+$$
+S_2^2 = \frac{1}{n_2 - 1} \sum_{i = 1}^{n_2} (X_{2i} - \bar{X_2})^2
+$$</p>
+<p>For the two-sided test (with $H_a : \mu_1 - \mu_2 \neq 0$), at significance level $\alpha$, at significance level $\alpha$, the decision rule is,
+$$
+\text{reject } H_0 \text{ if } \bar{x_1} - \bar{x_2} \notin \left[-t_{n_1 + n_2 - 2;1 - \alpha/2} s_p \sqrt{\frac{1}{n_1} + \frac{1}{n_2}}, t_{n_1 + n_2 - 2;1 - \alpha/2} s_p \sqrt{\frac{1}{n_1} + \frac{1}{n_2}}\right]
+$$</p>
+<p>The $p$-value is given by,
+$$
+p = 2P(T > |t_0|)
+$$</p>
+<p>with $T \sim t_{n_1 + n_2 - 2}$, and where $t_0$ is the observed value of the test statistic,
+$$
+t_0 = \frac{\bar{x}_1 - \bar{x}_2}{s_p \sqrt{\frac{1}{n_1} + \frac{1}{n_2}}}
+$$</p>
+<p>This test is known as the <strong>two-sample $t$-test</strong>.</p>
+<p>A $100(1 - \alpha)%$ two-sided confidence interval for $\mu_1 - \mu_2$ is,
+$$
+\left[(\bar{x_1} - \bar{x_2}) - t_{n_1 + n_2 - 2;1 - \alpha/2} s_p \sqrt{\frac{1}{n_1} + \frac{1}{n_2}}, (\bar{x_1} - \bar{x_2}) + t_{n_1 + n_2 - 2;1 - \alpha/2} s_p \sqrt{\frac{1}{n_1} + \frac{1}{n_2}}\right]
+$$</p>
+<h4 id="two-sample-test-unknown-unequal-variances">Two-sample test: unknown unequal variances</h4>
+<p><strong>There is no exact result available.</strong> An approximate result can be applied,
+$$
+\frac{(\bar{X_1} - \bar{X_2}) - (\mu_1 - \mu_2)}{\sqrt{\frac{S_1^2}{n_1} + \frac{S_2^2}{n_2}}} \sim t_{\nu}
+$$</p>
+<p>where the number of degrees of freedom is,
+$$
+\nu = \frac{\left(\frac{S_1^2}{n_1} + \frac{S_2^2}{n_2}\right)^2}{\frac{\left(\frac{S_1^2}{n_1}\right)^2}{n_1 - 1} + \frac{\left(\frac{S_2^2}{n_2}\right)^2}{n_2 - 1}}
+$$</p>
+<p>(rounded down to the nearest integer).</p>
+<p>This is called <strong>Welch’s two sample $t$-test</strong>.</p>
+<h4 id="example-1">Example</h4>
+<blockquote>
+<p>6 subjects were given a drug (treatment group, $\mu_2$) and an additional 6 subjects a placebo (control group, $\mu_1$). Their reaction time to a stimulus was measured (in ms). Perform a two sample $t$-test for comparing the means of the treatment and control groups</p>
+</blockquote>
+<p>Let’s use a one-sided test.
+$$
+H_0 : \mu_1 = \mu_2 \quad \text{vs} \quad H_1 : \mu_1 &#x3C; \mu_2
+$$</p>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-color-background);color:var(--astro-code-color-text); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>control&#x3C;-c(91, 87, 99, 77, 88, 91)</span></span>
+<span class="line"><span>treat&#x3C;-c(101, 110, 103, 93, 99, 104)</span></span>
+<span class="line"><span>t.test(control, treat, alternative="less", var.equal=TRUE)</span></span>
+<span class="line"><span>>  Two Sample t-test</span></span>
+<span class="line"><span>></span></span>
+<span class="line"><span>> data:  control and treat</span></span>
+<span class="line"><span>> t = -3.4456, df = 10, p-value = 0.003136</span></span>
+<span class="line"><span>> alternative hypothesis: true difference in means is less than 0</span></span>
+<span class="line"><span>> 95 percent confidence interval:</span></span>
+<span class="line"><span>>   -Inf -6.082744</span></span>
+<span class="line"><span>> sample estimates:</span></span>
+<span class="line"><span>> mean of x mean of y</span></span>
+<span class="line"><span>> 88.83333 101.66667</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>We can also do a Welch test,</p>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-color-background);color:var(--astro-code-color-text); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>t.test(control, treat, alternative="less")</span></span>
+<span class="line"><span>>  Welch Two Sample t-test</span></span>
+<span class="line"><span>></span></span>
+<span class="line"><span>> data:  control and treat</span></span>
+<span class="line"><span>> t = -3.4456, df = 9.4797, p-value = 0.003391</span></span>
+<span class="line"><span>> alternative hypothesis: true difference in means is less than 0</span></span>
+<span class="line"><span>> 95 percent confidence interval:</span></span>
+<span class="line"><span>>   -Inf -6.044949</span></span>
+<span class="line"><span>> sample estimates:</span></span>
+<span class="line"><span>> mean of x mean of y</span></span>
+<span class="line"><span>> 88.83333 101.66667</span></span>
+<span class="line"><span></span></span></code></pre>
+<h3 id="paired-data-for-difference-of-means">Paired data for difference of means</h3>
+<p>Two sample $t$-test cannot be used when we deal with “before and after” data, and numerous situations where the data are naturally paired (and thus, not independent).</p>
+<p>Let $(X_{11}, X_{21}), (X_{12}, X_{22}), \ldots, (X_{1n}, X_{2n})$ be a random sample of $n$ pairs of observations drawn from two subpopulations $X_1$ and $X_2$, with respective means $\mu_1$ and $\mu_2$.</p>
+<p>An easy way is just to consider the <strong>diffrences</strong>.
+$$
+D_i = X_{i1} - X_{i2}
+$$</p>
+<p>We have just a sample $D_1, D_2, \ldots, D_n$ from a distribution with mean,
+$$
+\mu_D = \mu_1 - \mu_2
+$$</p>
+<p>Testing for $H_0 : \mu_1 = \mu_2$ is just $H_0 : \mu_D = 0$.
+This can be accomplished by performing the usual one sample test for mean.</p>
+<p>So, in R we can,</p>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-color-background);color:var(--astro-code-color-text); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>t.test(x,y, paired=TRUE)</span></span>
+<span class="line"><span># or</span></span>
+<span class="line"><span>t.test(x-y)</span></span>
+<span class="line"><span></span></span></code></pre>
+<h3 id="inferences-for-variance">Inferences for variance</h3>
+<p>We know that,
+$$
+S^2 = \frac{1}{n - 1} \sum_{i = 1}^n (X_i - \bar{X})^2
+$$</p>
+<p>and is a natural estimator for the population variance $\sigma^2$.</p>
+<p>In general, little can be said about the distribution of $S^2$. However, <strong>when the population is normal</strong>, that is $X \sim N(\mu, \sigma^2)$, then,
+$$
+\frac{(n - 1)S^2}{\sigma^2} \sim \chi^2_{n - 1}
+$$</p>
+<p>Let $\chi^2_{\nu; \alpha} be the value such that,
+$$
+P(X > \chi^2_{\nu; \alpha}) = \alpha
+$$</p>
+<p>for $X \sim \chi^2_{\nu}$.</p>
+<p>As we know that,
+$$
+\frac{(n - 1)S^2}{\sigma^2} \sim \chi^2_{n - 1}
+$$</p>
+<p>we can write,
+$$
+P(\chi^2_{n - 1;1 - \alpha/2} \leq \frac{(n - 1)S^2}{\sigma^2} \leq \chi^2_{n - 1;\alpha/2}) = 1 - \alpha
+$$</p>
+<p>which can be re-arranged to,
+$$
+P\left(\frac{(n - 1)S^2}{\chi^2_{n - 1;\alpha/2}} \leq \sigma^2 \leq \frac{(n - 1)S^2}{\chi^2_{n - 1;1 - \alpha/2}}\right) = 1 - \alpha
+$$</p>
+<p>Which gives us the interval,
+$$
+\left[\frac{(n - 1)S^2}{\chi^2_{n - 1;\alpha/2}}, \frac{(n - 1)S^2}{\chi^2_{n - 1;1 - \alpha/2}}\right]
+$$</p>
+<p>Now, $H_0 : \sigma^2 = \sigma_0^2$ against $H_a : \sigma^2 \neq \sigma_0^2$.
+It is natural to reject $H_0$ whenever $s^2$ is too distant from $\sigma_0^2$.</p>
+<p>We are after two constants $\ell$ and $u$ such that,
+$$
+\alpha = P(S^2 \notin [\ell, u] \text{ when } \sigma^2 = \sigma_0^2) = P\left(\frac{(n - 1)S^2}{\sigma_0^2} \notin \left[\frac{(n - 1)S^2}{u}, \frac{(n - 1)S^2}{\ell}\right]\right)
+$$</p>
+<p>This yields,
+$$
+\ell = \frac{\chi^2_{n - 1;\alpha/2} \sigma_0^2}{n - 1} \newline
+u = \frac{\chi^2_{n - 1;1 - \alpha/2} \sigma_0^2}{n - 1}
+$$</p>
+<p>The decision rule is then,
+$$
+\text{Reject } H_0 \text{ if } s^2 \notin \left[\frac{\chi^2_{n - 1;\alpha/2} \sigma_0^2}{n - 1}, \frac{\chi^2_{n - 1;1 - \alpha/2} \sigma_0^2}{n - 1}\right]
+$$</p>
+<p>One-sided CI,
+$$
+\left[0, \frac{(n - 1)S^2}{\chi^2_{n - 1;\alpha}}\right] \newline
+\left[\frac{(n - 1)S^2}{\chi^2_{n - 1;1 - \alpha}}, +\infty\right]
+$$</p>
+<p>One-sided test,
+$$
+\text{For } H_a : \sigma^2 > \sigma_0^2, \text{ reject } H_0 \text{ if } s^2 > \frac{\chi^2_{n - 1;\alpha} \sigma_0^2}{n - 1} \newline
+\text{For } H_a : \sigma^2 &#x3C; \sigma_0^2, \text{ reject } H_0 \text{ if } s^2 &#x3C; \frac{\chi^2_{n - 1;1 - \alpha} \sigma_0^2}{n - 1}
+$$</p>
+<p>The $p$-value is,
+$$
+P(S^2 > s^2) = 1 - P\left(\frac{(n - 1) S^2}{\sigma^2_0} \leq \frac{(n - 1) s^2}{\sigma^2_0}\right) = 1 - P\left(\chi^2_{n - 1} \leq \frac{(n - 1) s^2}{\sigma^2_0}\right) \newline
+P(S^2 &#x3C; s^2 = P\left(\frac{(n - 1) S^2}{\sigma^2_0} \leq \frac{(n - 1) s^2}{\sigma^2_0}\right) = P\left(\chi^2_{n - 1} \leq \frac{(n - 1) s^2}{\sigma^2_0}\right)
+$$</p>
+<h3 id="inferences-for-ratio-of-variancestest-of-equality-of-variances">Inferences for ratio of variances/test of equality of variances</h3>
+<p>Let $X_{11}, X_{12}, \ldots, X_{1n}$ is a sample from population 1.
+Let $X_{21}, X_{22}, \ldots, X_{2n}$ is a sample from population 2.</p>
+<p>The samples are <strong>independent</strong>, and we would like to whether $\sigma_1^2 = \sigma_2^2$ or not.</p>
+<p>Define the sample variances,
+$$
+S_1^2 = \frac{1}{n_1 - 1} \sum_{i = 1}^{n_1} (X_{1i} - \bar{X_1})^2 \newline
+S_2^2 = \frac{1}{n_2 - 1} \sum_{i = 1}^{n_2} (X_{2i} - \bar{X_2})^2
+$$</p>
+<p>We can use the test statistic,
+$$
+F = \frac{S_1^2}{S_2^2}
+$$</p>
+<p>In general, there is no known exact distribution for F. Fortunately, if $X_{1i} \sim N(\mu_1, \sigma_1^2)$ and $X_{2i} \sim N(\mu_2, \sigma_2^2)$, F has an F(n_1 - 1, n_2 - 1) distribution if the null ($\sigma_1^2 = \sigma_2^2$) is true.</p>
+<p>$H_0 : \sigma_1^2 = \sigma_2^2$ against $H_a : \sigma_1^2 \neq \sigma_2^2$.</p>
+<p>It is natural to reject $H_0$ whenever $F$ is too big or too small,</p>
+<p>The decision rule is,
+$$
+\text{Reject } H_0 \text{ if } F \notin \left[\frac{1}{F_{n_1 - 1, n_2 - 1;1 - \alpha/2}}, F_{n_1 - 1, n_2 - 1;\alpha/2}\right]
+$$</p>
+<p>Two-sided CI for $\frac{\sigma_1^2}{\sigma_2^2}$,
+$$
+P(F_{n_1 - 1, n_2 - 1;1 - \alpha/2} \leq \frac{\sigma_1^2}{\sigma_2^2} \leq F_{n_1 - 1, n_2 - 1;\alpha/2}) = 1 - \alpha
+$$</p>
+<p>Which yields us the interval,
+$$
+\left[\frac{S_1^2}{S_2^2 F_{n_1 - 1, n_2 - 1;\alpha/2}}, \frac{S_1^2}{S_2^2 F_{n_1 - 1, n_2 - 1;1 - \alpha/2}}\right]
+$$</p>
+<p>One-sided CI,
+$$
+\left[0, \frac{S_1^2}{S_2^2 F_{n_1 - 1, n_2 - 1;\alpha}}\right] \newline
+\left[\frac{S_1^2}{S_2^2 F_{n_1 - 1, n_2 - 1;1 - \alpha}}, +\infty\right]
+$$</p>
+<p>One-sided test,
+$$
+\text{For } H_a : \sigma_1^2 > \sigma_2^2, \text{ reject } H_0 \text{ if } F > F_{n_1 - 1, n_2 - 1;1 - \alpha} \newline
+\text{For } H_a : \sigma_1^2 &#x3C; \sigma_2^2, \text{ reject } H_0 \text{ if } F &#x3C; F_{n_1 - 1, n_2 - 1;\alpha}
+$$</p>
+<p>The $p$-value is,
+$$
+P(F > f) = 1 - P(F(n_1 - 1, n_2 - 1) \leq f) \newline
+P(F &#x3C; f) = P(F(n_1 - 1, n_2 - 1) \leq f)
+$$</p> <div class="mt-24"> <div class="grid grid-cols-2 gap-1.5 sm:gap-3"> <a href="/cityu/ma3518/ma3518_2" class="group relative flex flex-nowrap rounded-lg border border-black/15 px-4 py-3 pl-10 no-underline transition-colors duration-300 ease-in-out hover:bg-black/5 hover:text-black focus-visible:bg-black/5 focus-visible:text-black dark:border-white/20 dark:hover:bg-white/5 dark:hover:text-white dark:focus-visible:bg-white/5 dark:focus-visible:text-white"> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="absolute left-2 top-1/2 size-5 -translate-y-1/2 fill-none stroke-current stroke-2"> <line x1="5" y1="12" x2="19" y2="12" class="translate-x-3 scale-x-0 transition-transform duration-300 ease-in-out group-hover:translate-x-0 group-hover:scale-x-100 group-focus-visible:translate-x-0 group-focus-visible:scale-x-100"></line> <polyline points="12 5 5 12 12 19" class="translate-x-1 transition-transform duration-300 ease-in-out group-hover:translate-x-0 group-focus-visible:translate-x-0"></polyline> </svg> <div class="flex items-center text-sm"> Part 2 - Basic Statistical Concepts and Tools </div> </a> <div class="invisible"></div> </div> </div> <div class="mt-24"> <div class="giscus"></div> <script data-astro-rerun src="https://giscus.app/client.js" data-repo="rezaarezvan/rezvan.xyz" data-repo-id="R_kgDOHvQr3w" data-category="General" data-category-id="DIC_kwDOHvQr384CiWVC" data-mapping="pathname" data-strict="0" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="bottom" data-theme="preferred_color_scheme" data-lang="en" data-loading="lazy" crossorigin="anonymous" async></script> </div> </article> </div>  </main> <footer class="animate"> <div class="mx-auto max-w-screen-sm px-3"> <div class="relative"> <div class="absolute -top-12 right-0"> <button id="back-to-top" class="group relative flex w-fit flex-nowrap rounded border border-black/15 py-1.5 pl-8 pr-3 transition-colors duration-300 ease-in-out hover:bg-black/5 hover:text-black focus-visible:bg-black/5 focus-visible:text-black dark:border-white/20 dark:hover:bg-white/5 dark:hover:text-white dark:focus-visible:bg-white/5 dark:focus-visible:text-white"> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="absolute left-2 top-1/2 size-4 -translate-y-1/2 rotate-90 fill-none stroke-current stroke-2"> <line x1="5" y1="12" x2="19" y2="12" class="translate-x-2 scale-x-0 transition-transform duration-300 ease-in-out group-hover:translate-x-0 group-hover:scale-x-100 group-focus-visible:translate-x-0 group-focus-visible:scale-x-100"></line> <polyline points="12 5 5 12 12 19" class="translate-x-1 transition-transform duration-300 ease-in-out group-hover:translate-x-0 group-focus-visible:translate-x-0"></polyline> </svg> <div class="text-sm">Back to top</div> </button> </div> </div> <div class="flex items-center justify-between"> <div>&copy; 2024 • rezvan.xyz </div> <div class="flex flex-wrap items-center gap-1.5"> <button id="light-theme-button" aria-label="Light theme" class="group flex size-9 items-center justify-center rounded border border-black/15 hover:bg-black/5 focus-visible:bg-black/5 dark:border-white/20 dark:hover:bg-white/5 dark:focus-visible:bg-white/5"> <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="transition-colors duration-300 ease-in-out group-hover:animate-pulse group-hover:stroke-black group-focus-visible:animate-pulse group-focus-visible:stroke-black group-hover:dark:stroke-white dark:group-focus-visible:stroke-white"> <circle cx="12" cy="12" r="5"></circle> <line x1="12" y1="1" x2="12" y2="3"></line> <line x1="12" y1="21" x2="12" y2="23"></line> <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line> <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line> <line x1="1" y1="12" x2="3" y2="12"></line> <line x1="21" y1="12" x2="23" y2="12"></line> <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line> <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line> </svg> </button> <button id="dark-theme-button" aria-label="Dark theme" class="group flex size-9 items-center justify-center rounded border border-black/15 hover:bg-black/5 focus-visible:bg-black/5 dark:border-white/20 dark:hover:bg-white/5 dark:focus-visible:bg-white/5"> <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="transition-colors duration-300 ease-in-out group-hover:animate-pulse group-hover:stroke-black group-focus-visible:animate-pulse group-focus-visible:stroke-black group-hover:dark:stroke-white dark:group-focus-visible:stroke-white"> <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path> </svg> </button> <button id="system-theme-button" aria-label="System theme" class="group flex size-9 items-center justify-center rounded border border-black/15 hover:bg-black/5 focus-visible:bg-black/5 dark:border-white/20 dark:hover:bg-white/5 dark:focus-visible:bg-white/5"> <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="transition-colors duration-300 ease-in-out group-hover:animate-pulse group-hover:stroke-black group-focus-visible:animate-pulse group-focus-visible:stroke-black group-hover:dark:stroke-white dark:group-focus-visible:stroke-white"> <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect> <line x1="8" y1="21" x2="16" y2="21"></line> <line x1="12" y1="17" x2="12" y2="21"></line> </svg> </button> </div> </div> </div> </footer> <aside data-pagefind-ignore> <div id="backdrop" class="bg-[rgba(0, 0, 0, 0.5] invisible fixed left-0 top-0 z-50 flex h-screen w-full justify-center p-6 backdrop-blur-sm" data-astro-transition-persist="astro-3snakcvo-2"> <div id="pagefind-container" class="m-0 flex h-fit max-h-[80%] w-full max-w-screen-sm flex-col overflow-auto rounded border border-black/15 bg-neutral-100 p-2 px-4 py-3 shadow-lg dark:border-white/20 dark:bg-neutral-900"> <div id="search" class="pagefind-ui pagefind-init" data-pagefind-ui data-bundle-path="/pagefind/" data-ui-options="{&#34;showImages&#34;:false,&#34;excerptLength&#34;:15,&#34;resetStyles&#34;:false}"></div>  <div class="mr-2 pb-1 pt-4 text-right text-xs dark:prose-invert">
+Press <span class="prose text-xs dark:prose-invert"><kbd class="">Esc</kbd></span> or click anywhere to close
+</div> </div> </div> </aside> <script>
+  const magnifyingGlass = document.getElementById("magnifying-glass");
+  const backdrop = document.getElementById("backdrop");
+
+  function openPagefind() {
+    const searchDiv = document.getElementById("search");
+    const search = searchDiv.querySelector("input");
+    setTimeout(() => {
+      search.focus();
+    }, 0);
+    backdrop?.classList.remove("invisible");
+    backdrop?.classList.add("visible");
+  }
+
+  function closePagefind() {
+    const search = document.getElementById("search");
+    search.value = "";
+    backdrop?.classList.remove("visible");
+    backdrop?.classList.add("invisible");
+  }
+
+  // open pagefind
+  magnifyingGlass?.addEventListener("click", () => {
+    openPagefind();
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "/") {
+      e.preventDefault();
+      openPagefind();
+    } else if ((e.metaKey || e.ctrlKey) && e.key === "k") {
+      e.preventDefault();
+      openPagefind();
+    }
+  });
+
+  // close pagefind
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" || e.keyCode === 27) {
+      closePagefind();
+    }
+  });
+
+  // close pagefind when searched result(link) clicked
+  document.addEventListener("click", (event) => {
+    if (event.target.classList.contains("pagefind-ui__result-link")) {
+      closePagefind();
+    }
+  });
+
+  backdrop?.addEventListener("click", (event) => {
+    if (!event.target.closest("#pagefind-container")) {
+      closePagefind();
+    }
+  });
+
+  // prevent form submission
+  const form = document.getElementById("form");
+  form?.addEventListener("submit", (event) => {
+    event.preventDefault();
+  });
+</script>  </body></html>
