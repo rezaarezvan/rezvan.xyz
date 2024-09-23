@@ -1,0 +1,531 @@
+<!DOCTYPE html><html lang="en"> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" type="image/icon" href="/favicon.ico"><meta name="generator" content="Astro v4.11.5"><!-- Canonical URL --><link rel="canonical" href="https://rezvan.xyz/cityu/is2021/is2021_5/"><!-- Primary Meta Tags --><title>Part 5 - Developing Big Data Applications | big data management | rezvan.xyz</title><meta name="title" content="Part 5 - Developing Big Data Applications | big data management | rezvan.xyz"><meta name="description"><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://rezvan.xyz/cityu/is2021/is2021_5/"><meta property="og:title" content="Part 5 - Developing Big Data Applications | big data management | rezvan.xyz"><meta property="og:description"><meta property="og:image" content="https://rezvan.xyz/favicon.ico"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://rezvan.xyz/cityu/is2021/is2021_5/"><meta property="twitter:title" content="Part 5 - Developing Big Data Applications | big data management | rezvan.xyz"><meta property="twitter:description"><meta property="twitter:image" content="https://rezvan.xyz/favicon.ico"><!-- PageFind --><link href="/pagefind/pagefind-ui.css" rel="stylesheet"><script src="/pagefind/pagefind-ui.js"></script><!-- KaTeX support --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script><!-- inline KaTeX --><script>
+    function renderKaTeX() {
+        if (typeof renderMathInElement !== "undefined") {
+            renderMathInElement(document.body, {
+                delimiters: [
+                    { left: "$$", right: "$$", display: true },
+                    { left: "$", right: "$", display: false },
+                ],
+            });
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", renderKaTeX);
+    document.addEventListener("astro:after-swap", renderKaTeX);
+</script><meta name="astro-view-transitions-enabled" content="true"><meta name="astro-view-transitions-fallback" content="animate"><script>
+    function init() {
+        preloadTheme();
+        onScroll();
+        animate();
+        updateThemeButtons();
+        addCopyCodeButtons();
+        setGiscusTheme();
+
+        const backToTop = document.getElementById("back-to-top");
+        backToTop?.addEventListener("click", (event) => scrollToTop(event));
+
+        const backToPrev = document.getElementById("back-to-prev");
+        backToPrev?.addEventListener("click", () => window.history.back());
+
+        const lightThemeButton = document.getElementById("light-theme-button");
+        lightThemeButton?.addEventListener("click", () => {
+            localStorage.setItem("theme", "light");
+            toggleTheme(false);
+            updateThemeButtons();
+        });
+
+        const darkThemeButton = document.getElementById("dark-theme-button");
+        darkThemeButton?.addEventListener("click", () => {
+            localStorage.setItem("theme", "dark");
+            toggleTheme(true);
+            updateThemeButtons();
+        });
+
+        const systemThemeButton = document.getElementById(
+            "system-theme-button",
+        );
+        systemThemeButton?.addEventListener("click", () => {
+            localStorage.setItem("theme", "system");
+            toggleTheme(
+                window.matchMedia("(prefers-color-scheme: dark)").matches,
+            );
+            updateThemeButtons();
+        });
+
+        window
+            .matchMedia("(prefers-color-scheme: dark)")
+            .addEventListener("change", (event) => {
+                if (localStorage.theme === "system") {
+                    toggleTheme(event.matches);
+                }
+            });
+
+        document.addEventListener("scroll", onScroll);
+    }
+
+    function updateThemeButtons() {
+        const theme = localStorage.getItem("theme");
+        const lightThemeButton = document.getElementById("light-theme-button");
+        const darkThemeButton = document.getElementById("dark-theme-button");
+        const systemThemeButton = document.getElementById(
+            "system-theme-button",
+        );
+
+        function removeActiveButtonTheme(button) {
+            button?.classList.remove("bg-black/5");
+            button?.classList.remove("dark:bg-white/5");
+        }
+
+        function addActiveButtonTheme(button) {
+            button?.classList.add("bg-black/5");
+            button?.classList.add("dark:bg-white/5");
+        }
+
+        removeActiveButtonTheme(lightThemeButton);
+        removeActiveButtonTheme(darkThemeButton);
+        removeActiveButtonTheme(systemThemeButton);
+
+        if (theme === "light") {
+            addActiveButtonTheme(lightThemeButton);
+        } else if (theme === "dark") {
+            addActiveButtonTheme(darkThemeButton);
+        } else {
+            addActiveButtonTheme(systemThemeButton);
+        }
+    }
+
+    function animate() {
+        const animateElements = document.querySelectorAll(".animate");
+
+        animateElements.forEach((element, index) => {
+            setTimeout(() => {
+                element.classList.add("show");
+            }, index * 100);
+        });
+    }
+
+    function onScroll() {
+        if (window.scrollY > 0) {
+            document.documentElement.classList.add("scrolled");
+        } else {
+            document.documentElement.classList.remove("scrolled");
+        }
+    }
+
+    function scrollToTop(event) {
+        event.preventDefault();
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth",
+        });
+    }
+
+    function toggleTheme(dark) {
+        const css = document.createElement("style");
+
+        css.appendChild(
+            document.createTextNode(
+                `* {
+             -webkit-transition: none !important;
+             -moz-transition: none !important;
+             -o-transition: none !important;
+             -ms-transition: none !important;
+             transition: none !important;
+          }
+        `,
+            ),
+        );
+
+        document.head.appendChild(css);
+
+        if (dark) {
+            document.documentElement.classList.add("dark");
+        } else {
+            document.documentElement.classList.remove("dark");
+        }
+
+        window.getComputedStyle(css).opacity;
+        document.head.removeChild(css);
+
+        setGiscusTheme();
+    }
+
+    function preloadTheme() {
+        const userTheme = localStorage.theme;
+
+        if (userTheme === "light" || userTheme === "dark") {
+            toggleTheme(userTheme === "dark");
+        } else {
+            toggleTheme(
+                window.matchMedia("(prefers-color-scheme: dark)").matches,
+            );
+        }
+    }
+
+    function addCopyCodeButtons() {
+        let copyButtonLabel = "📋";
+        let codeBlocks = Array.from(document.querySelectorAll("pre"));
+
+        async function copyCode(codeBlock, copyButton) {
+            const codeText = codeBlock.innerText;
+            const buttonText = copyButton.innerText;
+            const textToCopy = codeText.replace(buttonText, "");
+
+            await navigator.clipboard.writeText(textToCopy);
+            copyButton.innerText = "✅";
+
+            setTimeout(() => {
+                copyButton.innerText = copyButtonLabel;
+            }, 2000);
+        }
+
+        for (let codeBlock of codeBlocks) {
+            const wrapper = document.createElement("div");
+            wrapper.style.position = "relative";
+
+            const copyButton = document.createElement("button");
+            copyButton.innerText = copyButtonLabel;
+            copyButton.classList = "copy-code";
+
+            codeBlock.setAttribute("tabindex", "0");
+            codeBlock.appendChild(copyButton);
+
+            codeBlock.parentNode.insertBefore(wrapper, codeBlock);
+            wrapper.appendChild(codeBlock);
+
+            copyButton?.addEventListener("click", async () => {
+                await copyCode(codeBlock, copyButton);
+            });
+        }
+    }
+
+    const setGiscusTheme = () => {
+        const giscus = document.querySelector(".giscus-frame");
+
+        const isDark = document.documentElement.classList.contains("dark");
+
+        if (giscus) {
+            const url = new URL(giscus.src);
+            url.searchParams.set("theme", isDark ? "dark" : "light");
+            giscus.src = url.toString();
+        }
+    };
+
+    document.addEventListener("DOMContentLoaded", () => init());
+    document.addEventListener("astro:after-swap", () => init());
+    preloadTheme();
+</script><link rel="stylesheet" href="/_astro/_subject_.CmU_Tg_r.css">
+<style>summary[data-astro-cid-xvrfupwn]{cursor:pointer;border-top-left-radius:.5rem;border-top-right-radius:.5rem;padding:.375rem .75rem;font-weight:500;transition-property:color,background-color,border-color,text-decoration-color,fill,stroke;transition-timing-function:cubic-bezier(.4,0,.2,1);transition-duration:.15s}summary[data-astro-cid-xvrfupwn]:hover{background-color:#0000000d}summary[data-astro-cid-xvrfupwn]:hover:is(.dark *){background-color:#ffffff0d}details[data-astro-cid-xvrfupwn][open] summary[data-astro-cid-xvrfupwn]{background-color:#0000000d}details[data-astro-cid-xvrfupwn][open] summary[data-astro-cid-xvrfupwn]:is(.dark *){background-color:#ffffff0d}
+</style><script type="module" src="/_astro/hoisted.DzxSAGjc.js"></script></head> <body> <header data-astro-transition-persist="astro-l7r54iwe-1"> <div class="mx-auto max-w-screen-sm px-3"> <div class="flex flex-wrap justify-between gap-y-2"> <a href="/" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out">  <div class="font-semibold"> rezvan.xyz </div>  </a> <nav class="flex items-center gap-1 text-sm"> <a href="/posts" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> posts </a> <span> / </span> <a href="/chalmers" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> chalmers </a> <span> / </span> <a href="/cityu" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> cityu </a> <span> / </span> <a href="/pdf/cv/cv.pdf" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> cv </a> <span> / </span> <button id="magnifying-glass" aria-label="Search" class="flex items-center rounded border border-black/15 bg-neutral-100 px-2 py-1 text-xs transition-colors duration-300 ease-in-out hover:bg-black/5 hover:text-black focus-visible:bg-black/5 focus-visible:text-black dark:border-white/20 dark:bg-neutral-900 dark:hover:bg-white/5 dark:hover:text-white dark:focus-visible:bg-white/5 dark:focus-visible:text-white"> <svg height="16" stroke-linejoin="round" viewBox="0 0 16 16" width="16" style="color: currentcolor;"><path fill-rule="evenodd" clip-rule="evenodd" d="M3.5 7C3.5 5.067 5.067 3.5 7 3.5C8.933 3.5 10.5 5.067 10.5 7C10.5 7.88461 10.1718 8.69256 9.63058 9.30876L9.30876 9.63058C8.69256 10.1718 7.88461 10.5 7 10.5C5.067 10.5 3.5 8.933 3.5 7ZM9.96544 11.0261C9.13578 11.6382 8.11014 12 7 12C4.23858 12 2 9.76142 2 7C2 4.23858 4.23858 2 7 2C9.76142 2 12 4.23858 12 7C12 8.11014 11.6382 9.13578 11.0261 9.96544L14.0303 12.9697L14.5607 13.5L13.5 14.5607L12.9697 14.0303L9.96544 11.0261Z" fill="currentColor"></path></svg>
+&nbsp;Search
+</button> </nav> </div> </div> </header> <main>  <div class="mx-auto max-w-screen-sm px-3"> <div class="animate"> <a href="/cityu/is2021" class="not-prose group relative flex w-fit flex-nowrap rounded border border-black/15 py-1.5 pl-7 pr-3 transition-colors duration-300 ease-in-out hover:bg-black/5 hover:text-black focus-visible:bg-black/5 focus-visible:text-black dark:border-white/20 dark:hover:bg-white/5 dark:hover:text-white dark:focus-visible:bg-white/5 dark:focus-visible:text-white"> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="absolute left-2 top-1/2 size-4 -translate-y-1/2 fill-none stroke-current stroke-2"> <line x1="5" y1="12" x2="19" y2="12" class="translate-x-2 scale-x-0 transition-transform duration-300 ease-in-out group-hover:translate-x-0 group-hover:scale-x-100 group-focus-visible:translate-x-0 group-focus-visible:scale-x-100"></line> <polyline points="12 5 5 12 12 19" class="translate-x-1 transition-transform duration-300 ease-in-out group-hover:translate-x-0 group-focus-visible:translate-x-0"></polyline> </svg> <div class="text-sm"> Back to big data management </div> </a> </div> <div class="my-10 space-y-1"> <div class="animate flex items-center gap-1.5"> <div class="font-base text-sm"> IS2021 </div>
+&bull;
+<div class="font-base text-sm"> <time datetime="2024-09-24T00:00:00.000Z"> September 24, 2024 </time> </div> 
+&bull;
+<div class="font-base text-sm"> 8 min read </div> </div> <h1 class="animate text-3xl font-semibold text-black dark:text-white"> Part 5 - Developing Big Data Applications </h1> </div> <details open class="animate rounded-lg border border-black/15 dark:border-white/20" data-astro-cid-xvrfupwn> <summary data-astro-cid-xvrfupwn>Table of Contents</summary> <nav class="" data-astro-cid-xvrfupwn> <ul class="py-3" data-astro-cid-xvrfupwn> <li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#applications-development-milestones" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Applications Development Milestones </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#systems-analysis" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Systems Analysis </a> <ul class="translate-x-3"> <li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#soft-systems-methodology-ssm" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Soft Systems Methodology (SSM) </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#conceptual-modeling" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Conceptual Modeling </a> <ul class="translate-x-3"> <li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#advantages-and-disadvantages-of-conceptual-modeling" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Advantages and Disadvantages of Conceptual Modeling </a>  </li> </ul> </li> </ul> </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#systems-design" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Systems Design </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#implementation" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Implementation </a> <ul class="translate-x-3"> <li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#mapreduce-programming-model" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> MapReduce Programming Model </a> <ul class="translate-x-3"> <li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#composite-key--multiple-value" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Composite Key &amp; Multiple Value </a>  </li> </ul> </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#mapreduce-cont" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> MapReduce (cont.) </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#other-big-data-development-frameworks" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Other Big Data Development Frameworks </a> <ul class="translate-x-3"> <li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#hpcc" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> HPCC </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#comparison-of-hadoop-and-hpcc" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Comparison of Hadoop and HPCC </a>  </li> </ul> </li> </ul> </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#testing" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Testing </a>  </li> </ul> </nav> </details> <article class="animate"> <h3 id="applications-development-milestones">Applications Development Milestones</h3>
+<ul>
+<li>System Analysis
+<ul>
+<li>Understanding users’ requirements.</li>
+</ul>
+</li>
+<li>System Design
+<ul>
+<li>Designing the systems according to the user’s requirements and problem-solving algorithm.</li>
+</ul>
+</li>
+<li>Implementation
+<ul>
+<li>Coding or packaged methods.</li>
+</ul>
+</li>
+<li>Testing
+<ul>
+<li>Checking the whole completed system.</li>
+</ul>
+</li>
+<li>Review
+<ul>
+<li>Summarizing what have been done and what have been missed.</li>
+</ul>
+</li>
+</ul>
+<h3 id="systems-analysis">Systems Analysis</h3>
+<p>This milestone is crucial to the success of the whole application development project.</p>
+<p>Excellent communication skill is a must. Systematic understanding of users’ existing and future applications requirements is mandatory.</p>
+<p>Conceptual modeling is used throughout the system analysis milestone.</p>
+<h4 id="soft-systems-methodology-ssm">Soft Systems Methodology (SSM)</h4>
+<ol>
+<li>The problem situation: unstructured.</li>
+<li>The problem situation: expressed.</li>
+<li>Root definition of relevant systems.</li>
+<li>Conceptual models.</li>
+<li>Comparison of models to the problem situation.</li>
+<li>Definition of feasible desirable changes.</li>
+<li>Action to solve the problem or improve the situation.</li>
+</ol>
+<p><img src="https://miro.medium.com/v2/resize:fit:1400/format:webp/1*QNz-EEtwTRgG74i8BG83Kw.jpeg" alt="">
+<strong>Figure 1.</strong> Soft Systems Methodology (SSM) Diagram.
+<a href="https://darren-clyde.medium.com/introduction-to-soft-systems-methodology-a-holistic-ci-approach-b1440255a6b8">Source</a></p>
+<h4 id="conceptual-modeling">Conceptual Modeling</h4>
+<p>Conceptual modeling involves capturing various aspects of the real world, and representing them in the form of a model that can be used for communication.</p>
+<p>Focuses on “capturing and representing <em>human perceptions</em> of the <em>real world</em>” in such a manner that they can be included in an information system.
+The outcome of the conceptual modeling activity is usually a diagram or model that can then be translated into a relational or some other logical model.</p>
+<p>The adequacy of a conceptual model is based on how well it is able to promote a <em>common understanding</em> among human users.</p>
+<h5 id="advantages-and-disadvantages-of-conceptual-modeling">Advantages and Disadvantages of Conceptual Modeling</h5>
+<ul>
+<li>Advantages
+<ul>
+<li>Establishes Entities
+<ul>
+<li>Help ensure that there are fewer surprises down the road, where entities or relationships might otherwise have been neglected or forgotten.</li>
+</ul>
+</li>
+<li>Defines Project Scope
+<ul>
+<li>Assists with time management and scheduling.</li>
+</ul>
+</li>
+<li>Base Model for Other Models
+<ul>
+<li>Less abstract models will need to be generated beyond the rough concepts.</li>
+</ul>
+</li>
+<li>High-Level Understanding
+Beneficial for managers and executives, who may not be dealing directly with coding or implementation, but require a solid understanding of the system and the relationships therein.</li>
+</ul>
+</li>
+<li>Disadvantages
+<ul>
+<li>Creation Requires Deep Understanding
+<ul>
+<li>Requires a fundamental and robust understanding of the project, along with all associated entities and relationships.</li>
+</ul>
+</li>
+<li>Potential Time Sink
+<ul>
+<li>Improper modeling of entities or relationships within a conceptual model may lead to massive time waste and potential sunk costs.</li>
+</ul>
+</li>
+<li>Possible System Clashes
+<ul>
+<li>A clash simply indicates that one component may conflict with another component, somewhere down the line.</li>
+</ul>
+</li>
+<li>Implementation Challenge Scales with Size
+<ul>
+<li>Challenging to develop and maintain a proper conceptual model for particularly complex projects, as the number of potential issues, or clashes, will grow exponentially as the system size increases therein.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="systems-design">Systems Design</h3>
+<p>This milestone contains hardware and software design.</p>
+<p>Hardware design refers to hardware systems <em>selection and integration</em>.
+Software design refers to the <em>system logic</em> / interactions and <em>problem-solving algorithm</em> which is one of the critical success factors for big data analytics.</p>
+<h3 id="implementation">Implementation</h3>
+<p>Good development framework will simplify the process of developing, executing, testing and debugging new application code.</p>
+<p>There are many tools for BDA implementation, we need to find the <em>most appropriate</em> one by comparison and analysis before use.</p>
+<h4 id="mapreduce-programming-model">MapReduce Programming Model</h4>
+<p>Two basic operations that are applied to sets or lists of data value pairs.</p>
+<ul>
+<li>Map
+<ul>
+<li>It describes the computation or analysis applied to a set of input key/value pairs to produce a set of intermediate key/value pairs.</li>
+</ul>
+</li>
+<li>Reduce
+<ul>
+<li>In which the set of values associated with the intermediate key/value pairs output by the Map operation are <strong>combined</strong> to provide the results.</li>
+</ul>
+</li>
+</ul>
+<p>A MapReduce application is envisioned as a series of basic operations applied <strong>in a sequence</strong> to small sets of many data items.
+These data items are logically organized in a way that enables MapReduce execution model to allocate tasks that can be <strong>executed in parallel</strong>.</p>
+<p>The data items are indexed using a defined key info <code>&#x3C;key, value></code> pairs, in which the <strong>key</strong> represents some grouping criterion associated with a computed <strong>value</strong>.</p>
+<h5 id="composite-key--multiple-value">Composite Key &#x26; Multiple Value</h5>
+<p><code>Key</code> can be composed of more than one data item, in this case, the key is called <strong>composite key</strong> represented by <code>+</code>, e.g. “Product code + Vendor code”.</p>
+<p><code>Value</code> can be composed of more than one data item, in this case the value is called <strong>multiple value</strong> represented by <code>+</code>.</p>
+<p>Note that the key expression and value expression must be separated by <strong>one</strong> comma.</p>
+<p>4 types of key-value pair:</p>
+<ol>
+<li>Simple key, single value
+<ul>
+<li>E.g. Maximum temperature of each city.</li>
+</ul>
+</li>
+<li>Composite key, single value
+<ul>
+<li>E.g. Minimum temperature of each city in each month.</li>
+</ul>
+</li>
+<li>Simple key, multiple value
+<ul>
+<li>E.g. Average temperature of each city.</li>
+</ul>
+</li>
+<li>Composite key, multiple value
+<ul>
+<li>E.g. average temperature of each city in each month.</li>
+</ul>
+</li>
+</ol>
+<h4 id="mapreduce-cont">MapReduce (cont.)</h4>
+<p>With some applications applied to massive datasets, the theory is that the computations applied during the Map phase to each input key/value pair are independent of one another.</p>
+<p>Combining both <em>data and computational independence</em> means that both data and computations can be <em>distributed across multiple</em> storage and processing units and automatically parallelized.</p>
+<p>This parallelizability allows the programmer to exploit scalable massively parallel processing resources for increased speed and performance.</p>
+<p>MapReduce programming model consists of <strong>five</strong> basic operations:</p>
+<ul>
+<li>Split
+<ul>
+<li>Input data is distributed to the available data nodes <em>equally</em>.</li>
+</ul>
+</li>
+<li>Map
+<ul>
+<li>Distributed data in each data node is transformed into <code>{key, value}</code> pairs. If composite key is required, then <code>+</code> sign is used to concatenate the keys.</li>
+</ul>
+</li>
+<li>Sort/shuffle
+<ul>
+<li>Each <code>{key, value}</code> pair is shuffled to the bin with <strong>same</strong> key.</li>
+</ul>
+</li>
+<li>Reduce
+<ul>
+<li>All <code>{key, value}</code> pairs inside each bin are reduced according to the required mission.</li>
+</ul>
+</li>
+<li>Result
+<ul>
+<li>The target <code>{key, value}</code> pair(s) are taken out as the final results.</li>
+</ul>
+</li>
+</ul>
+<h4 id="other-big-data-development-frameworks">Other Big Data Development Frameworks</h4>
+<p><strong>E</strong>nterprise <strong>C</strong>ontrol <strong>L</strong>anguage (ECL) is a data-centric programming language for a different open source big data platform called, <strong>H</strong>igh <strong>P</strong>erformance <strong>C</strong>omputing <strong>C</strong>luster (HPCC).</p>
+<p>ECL is a <em>declarative</em> programming language that describes <em>what</em> is supposed to happen to the data but does not specify <em>how</em> it is done.</p>
+<h5 id="hpcc">HPCC</h5>
+<p>Born from the deep data analytics history of LexisNexis Risk Solutions, HPPC Systems provides high-performance, parallel processing and delivery for applications using big data.</p>
+<p>The open-source platform incorporates a software architecture implemented on commodity computing clusters for reslience and scalability.
+It is configurable to support both parallel batch data processing and high-performance data delivery applications using indexed data files.</p>
+<p>The platform includes a high-level, implicitly parallel data-centric <em>declarative programming language</em> that adds to its flexibility and efficiency.</p>
+<h5 id="comparison-of-hadoop-and-hpcc">Comparison of Hadoop and HPCC</h5>
+<p>Dimensions Hadoop HPPC - table</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Dimension</th><th>Hadoop</th><th>HPCC</th></tr></thead><tbody><tr><td>Data Storage</td><td>Data distributed across nodes</td><td>Centralized storage</td></tr><tr><td>Data Processing</td><td>Compute moves to data</td><td>Data moved to compute (like traditional computing systems)</td></tr><tr><td>Hardware Infrastructure</td><td>Commodity hardware (relatively cheaper)</td><td>Presence of InfiniBand network connectivity, is required for high throughput and low latency</td></tr><tr><td>File System Storage</td><td>HDFS file system (open source)</td><td>Lustre file system (open source)</td></tr><tr><td>Cluster Resource Management</td><td>YARN</td><td>SLURM</td></tr><tr><td>Programming Languages</td><td>Java, Scala, Python</td><td>C, C++, Fortran</td></tr><tr><td>Business applications</td><td>Focused on analytics use cases and commercial</td><td>Primarily used for scientific research applications, e.g. life sciences, healthcare and mining sectors</td></tr></tbody></table>
+<p>The declarative approach presumes the programmer has the expectation that the compiler and execution scheme automate the parallelization of the declarative statements, thus simplifying programming process.</p>
+<p>ECL provides a collection of primitive capabilities that are typical for data analysis, such as sorting, aggregation, deduplication.</p>
+<p>With ECL, the declarative model is the source of task parallelism in which discrete and small units of work can be farmed out to waiting processing units in a cluster and executed in parallel.</p>
+<p>In fact, each of the ECL programming constructs can be executed in parallel.</p>
+<h3 id="testing">Testing</h3>
+<p>This milestone is a must for the whole application development project because there may have some unfound errors in systems analysis, design and implementation milestones.</p>
+<p>Reasonable amount of test data must be designed to <em>walk through</em> part of or whole project, thus the design must be <em>random</em> with the <em>widest coverage</em>, to try to reflect reality.</p> <div class="mt-24"> <div class="grid grid-cols-2 gap-1.5 sm:gap-3"> <a href="/cityu/is2021/is2021_4" class="group relative flex flex-nowrap rounded-lg border border-black/15 px-4 py-3 pl-10 no-underline transition-colors duration-300 ease-in-out hover:bg-black/5 hover:text-black focus-visible:bg-black/5 focus-visible:text-black dark:border-white/20 dark:hover:bg-white/5 dark:hover:text-white dark:focus-visible:bg-white/5 dark:focus-visible:text-white"> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="absolute left-2 top-1/2 size-5 -translate-y-1/2 fill-none stroke-current stroke-2"> <line x1="5" y1="12" x2="19" y2="12" class="translate-x-3 scale-x-0 transition-transform duration-300 ease-in-out group-hover:translate-x-0 group-hover:scale-x-100 group-focus-visible:translate-x-0 group-focus-visible:scale-x-100"></line> <polyline points="12 5 5 12 12 19" class="translate-x-1 transition-transform duration-300 ease-in-out group-hover:translate-x-0 group-focus-visible:translate-x-0"></polyline> </svg> <div class="flex items-center text-sm"> Part 4 - Big Data Tools and Techniques </div> </a> <div class="invisible"></div> </div> </div> <div class="mt-24"> <div class="giscus"></div> <script data-astro-rerun src="https://giscus.app/client.js" data-repo="rezaarezvan/rezvan.xyz" data-repo-id="R_kgDOHvQr3w" data-category="General" data-category-id="DIC_kwDOHvQr384CiWVC" data-mapping="pathname" data-strict="0" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="bottom" data-theme="preferred_color_scheme" data-lang="en" data-loading="lazy" crossorigin="anonymous" async></script> </div> </article> </div>  </main> <footer class="animate"> <div class="mx-auto max-w-screen-sm px-3"> <div class="relative"> <div class="absolute -top-12 right-0"> <button id="back-to-top" class="group relative flex w-fit flex-nowrap rounded border border-black/15 py-1.5 pl-8 pr-3 transition-colors duration-300 ease-in-out hover:bg-black/5 hover:text-black focus-visible:bg-black/5 focus-visible:text-black dark:border-white/20 dark:hover:bg-white/5 dark:hover:text-white dark:focus-visible:bg-white/5 dark:focus-visible:text-white"> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="absolute left-2 top-1/2 size-4 -translate-y-1/2 rotate-90 fill-none stroke-current stroke-2"> <line x1="5" y1="12" x2="19" y2="12" class="translate-x-2 scale-x-0 transition-transform duration-300 ease-in-out group-hover:translate-x-0 group-hover:scale-x-100 group-focus-visible:translate-x-0 group-focus-visible:scale-x-100"></line> <polyline points="12 5 5 12 12 19" class="translate-x-1 transition-transform duration-300 ease-in-out group-hover:translate-x-0 group-focus-visible:translate-x-0"></polyline> </svg> <div class="text-sm">Back to top</div> </button> </div> </div> <div class="flex items-center justify-between"> <div>&copy; 2024 • rezvan.xyz </div> <div class="flex flex-wrap items-center gap-1.5"> <button id="light-theme-button" aria-label="Light theme" class="group flex size-9 items-center justify-center rounded border border-black/15 hover:bg-black/5 focus-visible:bg-black/5 dark:border-white/20 dark:hover:bg-white/5 dark:focus-visible:bg-white/5"> <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="transition-colors duration-300 ease-in-out group-hover:animate-pulse group-hover:stroke-black group-focus-visible:animate-pulse group-focus-visible:stroke-black group-hover:dark:stroke-white dark:group-focus-visible:stroke-white"> <circle cx="12" cy="12" r="5"></circle> <line x1="12" y1="1" x2="12" y2="3"></line> <line x1="12" y1="21" x2="12" y2="23"></line> <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line> <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line> <line x1="1" y1="12" x2="3" y2="12"></line> <line x1="21" y1="12" x2="23" y2="12"></line> <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line> <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line> </svg> </button> <button id="dark-theme-button" aria-label="Dark theme" class="group flex size-9 items-center justify-center rounded border border-black/15 hover:bg-black/5 focus-visible:bg-black/5 dark:border-white/20 dark:hover:bg-white/5 dark:focus-visible:bg-white/5"> <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="transition-colors duration-300 ease-in-out group-hover:animate-pulse group-hover:stroke-black group-focus-visible:animate-pulse group-focus-visible:stroke-black group-hover:dark:stroke-white dark:group-focus-visible:stroke-white"> <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path> </svg> </button> <button id="system-theme-button" aria-label="System theme" class="group flex size-9 items-center justify-center rounded border border-black/15 hover:bg-black/5 focus-visible:bg-black/5 dark:border-white/20 dark:hover:bg-white/5 dark:focus-visible:bg-white/5"> <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="transition-colors duration-300 ease-in-out group-hover:animate-pulse group-hover:stroke-black group-focus-visible:animate-pulse group-focus-visible:stroke-black group-hover:dark:stroke-white dark:group-focus-visible:stroke-white"> <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect> <line x1="8" y1="21" x2="16" y2="21"></line> <line x1="12" y1="17" x2="12" y2="21"></line> </svg> </button> </div> </div> </div> </footer> <aside data-pagefind-ignore> <div id="backdrop" class="bg-[rgba(0, 0, 0, 0.5] invisible fixed left-0 top-0 z-50 flex h-screen w-full justify-center p-6 backdrop-blur-sm" data-astro-transition-persist="astro-3snakcvo-2"> <div id="pagefind-container" class="m-0 flex h-fit max-h-[80%] w-full max-w-screen-sm flex-col overflow-auto rounded border border-black/15 bg-neutral-100 p-2 px-4 py-3 shadow-lg dark:border-white/20 dark:bg-neutral-900"> <div id="search" class="pagefind-ui pagefind-init" data-pagefind-ui data-bundle-path="/pagefind/" data-ui-options="{&#34;showImages&#34;:false,&#34;excerptLength&#34;:15,&#34;resetStyles&#34;:false}"></div>  <div class="mr-2 pb-1 pt-4 text-right text-xs dark:prose-invert">
+Press <span class="prose text-xs dark:prose-invert"><kbd class="">Esc</kbd></span> or click anywhere to close
+</div> </div> </div> </aside> <script>
+  const magnifyingGlass = document.getElementById("magnifying-glass");
+  const backdrop = document.getElementById("backdrop");
+
+  function openPagefind() {
+    const searchDiv = document.getElementById("search");
+    const search = searchDiv.querySelector("input");
+    setTimeout(() => {
+      search.focus();
+    }, 0);
+    backdrop?.classList.remove("invisible");
+    backdrop?.classList.add("visible");
+  }
+
+  function closePagefind() {
+    const search = document.getElementById("search");
+    search.value = "";
+    backdrop?.classList.remove("visible");
+    backdrop?.classList.add("invisible");
+  }
+
+  // open pagefind
+  magnifyingGlass?.addEventListener("click", () => {
+    openPagefind();
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "/") {
+      e.preventDefault();
+      openPagefind();
+    } else if ((e.metaKey || e.ctrlKey) && e.key === "k") {
+      e.preventDefault();
+      openPagefind();
+    }
+  });
+
+  // close pagefind
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" || e.keyCode === 27) {
+      closePagefind();
+    }
+  });
+
+  // close pagefind when searched result(link) clicked
+  document.addEventListener("click", (event) => {
+    if (event.target.classList.contains("pagefind-ui__result-link")) {
+      closePagefind();
+    }
+  });
+
+  backdrop?.addEventListener("click", (event) => {
+    if (!event.target.closest("#pagefind-container")) {
+      closePagefind();
+    }
+  });
+
+  // prevent form submission
+  const form = document.getElementById("form");
+  form?.addEventListener("submit", (event) => {
+    event.preventDefault();
+  });
+</script>  </body></html>
