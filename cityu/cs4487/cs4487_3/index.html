@@ -1,0 +1,801 @@
+<!DOCTYPE html><html lang="en"> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" type="image/icon" href="/favicon.ico"><meta name="generator" content="Astro v4.11.5"><!-- Canonical URL --><link rel="canonical" href="https://rezvan.xyz/cityu/cs4487/cs4487_3/"><!-- Primary Meta Tags --><title>Part 3 - Optimization and Convexity | machine learning | rezvan.xyz</title><meta name="title" content="Part 3 - Optimization and Convexity | machine learning | rezvan.xyz"><meta name="description"><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://rezvan.xyz/cityu/cs4487/cs4487_3/"><meta property="og:title" content="Part 3 - Optimization and Convexity | machine learning | rezvan.xyz"><meta property="og:description"><meta property="og:image" content="https://rezvan.xyz/favicon.ico"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://rezvan.xyz/cityu/cs4487/cs4487_3/"><meta property="twitter:title" content="Part 3 - Optimization and Convexity | machine learning | rezvan.xyz"><meta property="twitter:description"><meta property="twitter:image" content="https://rezvan.xyz/favicon.ico"><!-- PageFind --><link href="/pagefind/pagefind-ui.css" rel="stylesheet"><script src="/pagefind/pagefind-ui.js"></script><!-- KaTeX support --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script><!-- inline KaTeX --><script>
+    function renderKaTeX() {
+        if (typeof renderMathInElement !== "undefined") {
+            renderMathInElement(document.body, {
+                delimiters: [
+                    { left: "$$", right: "$$", display: true },
+                    { left: "$", right: "$", display: false },
+                ],
+            });
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", renderKaTeX);
+    document.addEventListener("astro:after-swap", renderKaTeX);
+</script><meta name="astro-view-transitions-enabled" content="true"><meta name="astro-view-transitions-fallback" content="animate"><script>
+    function init() {
+        preloadTheme();
+        onScroll();
+        animate();
+        updateThemeButtons();
+        addCopyCodeButtons();
+        setGiscusTheme();
+
+        const backToTop = document.getElementById("back-to-top");
+        backToTop?.addEventListener("click", (event) => scrollToTop(event));
+
+        const backToPrev = document.getElementById("back-to-prev");
+        backToPrev?.addEventListener("click", () => window.history.back());
+
+        const lightThemeButton = document.getElementById("light-theme-button");
+        lightThemeButton?.addEventListener("click", () => {
+            localStorage.setItem("theme", "light");
+            toggleTheme(false);
+            updateThemeButtons();
+        });
+
+        const darkThemeButton = document.getElementById("dark-theme-button");
+        darkThemeButton?.addEventListener("click", () => {
+            localStorage.setItem("theme", "dark");
+            toggleTheme(true);
+            updateThemeButtons();
+        });
+
+        const systemThemeButton = document.getElementById(
+            "system-theme-button",
+        );
+        systemThemeButton?.addEventListener("click", () => {
+            localStorage.setItem("theme", "system");
+            toggleTheme(
+                window.matchMedia("(prefers-color-scheme: dark)").matches,
+            );
+            updateThemeButtons();
+        });
+
+        window
+            .matchMedia("(prefers-color-scheme: dark)")
+            .addEventListener("change", (event) => {
+                if (localStorage.theme === "system") {
+                    toggleTheme(event.matches);
+                }
+            });
+
+        document.addEventListener("scroll", onScroll);
+    }
+
+    function updateThemeButtons() {
+        const theme = localStorage.getItem("theme");
+        const lightThemeButton = document.getElementById("light-theme-button");
+        const darkThemeButton = document.getElementById("dark-theme-button");
+        const systemThemeButton = document.getElementById(
+            "system-theme-button",
+        );
+
+        function removeActiveButtonTheme(button) {
+            button?.classList.remove("bg-black/5");
+            button?.classList.remove("dark:bg-white/5");
+        }
+
+        function addActiveButtonTheme(button) {
+            button?.classList.add("bg-black/5");
+            button?.classList.add("dark:bg-white/5");
+        }
+
+        removeActiveButtonTheme(lightThemeButton);
+        removeActiveButtonTheme(darkThemeButton);
+        removeActiveButtonTheme(systemThemeButton);
+
+        if (theme === "light") {
+            addActiveButtonTheme(lightThemeButton);
+        } else if (theme === "dark") {
+            addActiveButtonTheme(darkThemeButton);
+        } else {
+            addActiveButtonTheme(systemThemeButton);
+        }
+    }
+
+    function animate() {
+        const animateElements = document.querySelectorAll(".animate");
+
+        animateElements.forEach((element, index) => {
+            setTimeout(() => {
+                element.classList.add("show");
+            }, index * 100);
+        });
+    }
+
+    function onScroll() {
+        if (window.scrollY > 0) {
+            document.documentElement.classList.add("scrolled");
+        } else {
+            document.documentElement.classList.remove("scrolled");
+        }
+    }
+
+    function scrollToTop(event) {
+        event.preventDefault();
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth",
+        });
+    }
+
+    function toggleTheme(dark) {
+        const css = document.createElement("style");
+
+        css.appendChild(
+            document.createTextNode(
+                `* {
+             -webkit-transition: none !important;
+             -moz-transition: none !important;
+             -o-transition: none !important;
+             -ms-transition: none !important;
+             transition: none !important;
+          }
+        `,
+            ),
+        );
+
+        document.head.appendChild(css);
+
+        if (dark) {
+            document.documentElement.classList.add("dark");
+        } else {
+            document.documentElement.classList.remove("dark");
+        }
+
+        window.getComputedStyle(css).opacity;
+        document.head.removeChild(css);
+
+        setGiscusTheme();
+    }
+
+    function preloadTheme() {
+        const userTheme = localStorage.theme;
+
+        if (userTheme === "light" || userTheme === "dark") {
+            toggleTheme(userTheme === "dark");
+        } else {
+            toggleTheme(
+                window.matchMedia("(prefers-color-scheme: dark)").matches,
+            );
+        }
+    }
+
+    function addCopyCodeButtons() {
+        let copyButtonLabel = "📋";
+        let codeBlocks = Array.from(document.querySelectorAll("pre"));
+
+        async function copyCode(codeBlock, copyButton) {
+            const codeText = codeBlock.innerText;
+            const buttonText = copyButton.innerText;
+            const textToCopy = codeText.replace(buttonText, "");
+
+            await navigator.clipboard.writeText(textToCopy);
+            copyButton.innerText = "✅";
+
+            setTimeout(() => {
+                copyButton.innerText = copyButtonLabel;
+            }, 2000);
+        }
+
+        for (let codeBlock of codeBlocks) {
+            const wrapper = document.createElement("div");
+            wrapper.style.position = "relative";
+
+            const copyButton = document.createElement("button");
+            copyButton.innerText = copyButtonLabel;
+            copyButton.classList = "copy-code";
+
+            codeBlock.setAttribute("tabindex", "0");
+            codeBlock.appendChild(copyButton);
+
+            codeBlock.parentNode.insertBefore(wrapper, codeBlock);
+            wrapper.appendChild(codeBlock);
+
+            copyButton?.addEventListener("click", async () => {
+                await copyCode(codeBlock, copyButton);
+            });
+        }
+    }
+
+    const setGiscusTheme = () => {
+        const giscus = document.querySelector(".giscus-frame");
+
+        const isDark = document.documentElement.classList.contains("dark");
+
+        if (giscus) {
+            const url = new URL(giscus.src);
+            url.searchParams.set("theme", isDark ? "dark" : "light");
+            giscus.src = url.toString();
+        }
+    };
+
+    document.addEventListener("DOMContentLoaded", () => init());
+    document.addEventListener("astro:after-swap", () => init());
+    preloadTheme();
+</script><link rel="stylesheet" href="/_astro/_subject_.CmU_Tg_r.css">
+<style>summary[data-astro-cid-xvrfupwn]{cursor:pointer;border-top-left-radius:.5rem;border-top-right-radius:.5rem;padding:.375rem .75rem;font-weight:500;transition-property:color,background-color,border-color,text-decoration-color,fill,stroke;transition-timing-function:cubic-bezier(.4,0,.2,1);transition-duration:.15s}summary[data-astro-cid-xvrfupwn]:hover{background-color:#0000000d}summary[data-astro-cid-xvrfupwn]:hover:is(.dark *){background-color:#ffffff0d}details[data-astro-cid-xvrfupwn][open] summary[data-astro-cid-xvrfupwn]{background-color:#0000000d}details[data-astro-cid-xvrfupwn][open] summary[data-astro-cid-xvrfupwn]:is(.dark *){background-color:#ffffff0d}
+</style><script type="module" src="/_astro/hoisted.DzxSAGjc.js"></script></head> <body> <header data-astro-transition-persist="astro-l7r54iwe-1"> <div class="mx-auto max-w-screen-sm px-3"> <div class="flex flex-wrap justify-between gap-y-2"> <a href="/" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out">  <div class="font-semibold"> rezvan.xyz </div>  </a> <nav class="flex items-center gap-1 text-sm"> <a href="/posts" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> posts </a> <span> / </span> <a href="/chalmers" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> chalmers </a> <span> / </span> <a href="/cityu" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> cityu </a> <span> / </span> <a href="/pdf/cv/cv.pdf" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> cv </a> <span> / </span> <button id="magnifying-glass" aria-label="Search" class="flex items-center rounded border border-black/15 bg-neutral-100 px-2 py-1 text-xs transition-colors duration-300 ease-in-out hover:bg-black/5 hover:text-black focus-visible:bg-black/5 focus-visible:text-black dark:border-white/20 dark:bg-neutral-900 dark:hover:bg-white/5 dark:hover:text-white dark:focus-visible:bg-white/5 dark:focus-visible:text-white"> <svg height="16" stroke-linejoin="round" viewBox="0 0 16 16" width="16" style="color: currentcolor;"><path fill-rule="evenodd" clip-rule="evenodd" d="M3.5 7C3.5 5.067 5.067 3.5 7 3.5C8.933 3.5 10.5 5.067 10.5 7C10.5 7.88461 10.1718 8.69256 9.63058 9.30876L9.30876 9.63058C8.69256 10.1718 7.88461 10.5 7 10.5C5.067 10.5 3.5 8.933 3.5 7ZM9.96544 11.0261C9.13578 11.6382 8.11014 12 7 12C4.23858 12 2 9.76142 2 7C2 4.23858 4.23858 2 7 2C9.76142 2 12 4.23858 12 7C12 8.11014 11.6382 9.13578 11.0261 9.96544L14.0303 12.9697L14.5607 13.5L13.5 14.5607L12.9697 14.0303L9.96544 11.0261Z" fill="currentColor"></path></svg>
+&nbsp;Search
+</button> </nav> </div> </div> </header> <main>  <div class="mx-auto max-w-screen-sm px-3"> <div class="animate"> <a href="/cityu/cs4487" class="not-prose group relative flex w-fit flex-nowrap rounded border border-black/15 py-1.5 pl-7 pr-3 transition-colors duration-300 ease-in-out hover:bg-black/5 hover:text-black focus-visible:bg-black/5 focus-visible:text-black dark:border-white/20 dark:hover:bg-white/5 dark:hover:text-white dark:focus-visible:bg-white/5 dark:focus-visible:text-white"> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="absolute left-2 top-1/2 size-4 -translate-y-1/2 fill-none stroke-current stroke-2"> <line x1="5" y1="12" x2="19" y2="12" class="translate-x-2 scale-x-0 transition-transform duration-300 ease-in-out group-hover:translate-x-0 group-hover:scale-x-100 group-focus-visible:translate-x-0 group-focus-visible:scale-x-100"></line> <polyline points="12 5 5 12 12 19" class="translate-x-1 transition-transform duration-300 ease-in-out group-hover:translate-x-0 group-focus-visible:translate-x-0"></polyline> </svg> <div class="text-sm"> Back to machine learning </div> </a> </div> <div class="my-10 space-y-1"> <div class="animate flex items-center gap-1.5"> <div class="font-base text-sm"> CS4487 </div>
+&bull;
+<div class="font-base text-sm"> <time datetime="2024-09-25T00:00:00.000Z"> September 25, 2024 </time> </div> 
+&bull;
+<div class="font-base text-sm"> 10 min read </div> </div> <h1 class="animate text-3xl font-semibold text-black dark:text-white"> Part 3 - Optimization and Convexity </h1> </div> <details open class="animate rounded-lg border border-black/15 dark:border-white/20" data-astro-cid-xvrfupwn> <summary data-astro-cid-xvrfupwn>Table of Contents</summary> <nav class="" data-astro-cid-xvrfupwn> <ul class="py-3" data-astro-cid-xvrfupwn> <li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#generative-vs-discriminative-classifiers" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Generative VS. Discriminative Classifiers </a> <ul class="translate-x-3"> <li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#logistic-regression" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Logistic Regression </a>  </li> </ul> </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#optimization" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Optimization </a> <ul class="translate-x-3"> <li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#types-of-optimization" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Types of Optimization </a>  </li> </ul> </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#convex-set" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Convex Set </a> <ul class="translate-x-3"> <li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#hyperplanes-and-halfspaces" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Hyperplanes and Halfspaces </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#operations-that-preserve-convexity" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Operations that Preserve Convexity </a>  </li> </ul> </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#convex-function" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Convex Function </a> <ul class="translate-x-3"> <li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#examples-on-mathbbr" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Examples on $\mathbb${R}$ </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#examples-on-mathbbrn-and-mathbbrm-times-n" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Examples on $\mathbb${R}^N$ and $\mathbb${R}^${M \times N}$ </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#example-quadratic-function" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Example: Quadratic Function </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#properties-of-convex-functions" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Properties of Convex Functions </a>  </li> </ul> </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#first-order-condition" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> First-Order Condition </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#second-order-condition" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Second-Order Condition </a> <ul class="translate-x-3"> <li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#example-quadratic" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Example: Quadratic </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#example-exponential" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Example: Exponential </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#example-logistic-loss" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Example: Logistic Loss </a>  </li> </ul> </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#parameter-estimation" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Parameter Estimation </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#gradient-descent" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Gradient Descent </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#stochastic-gradient-descent" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Stochastic Gradient Descent </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#mini-batch-gradient-descent-a-compromise" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Mini-Batch Gradient Descent: A Compromise </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#summary-convex-optimization-and-numerical-methods" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Summary: Convex Optimization and Numerical Methods </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#support-vector-machines" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Support Vector Machines </a> <ul class="translate-x-3"> <li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#linearly-separable-data" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Linearly Separable Data </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#maximum-margin-principle" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Maximum Margin Principle </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#computing-the-margin" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Computing the Margin </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#maximizing-the-margin" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Maximizing the Margin </a>  </li> </ul> </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#svm-primal-form-hard-margin" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> SVM (Primal Form, Hard-Margin) </a> <ul class="translate-x-3"> <li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#why-is-maximizing-the-margin-good" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Why is Maximizing the Margin Good? </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#is-hard-margin-enough" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Is Hard-Margin Enough? </a>  </li> </ul> </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#svm-primal-form-soft-margin" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> SVM (Primal Form, Soft-Margin) </a> <ul class="translate-x-3"> <li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#loss-function" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Loss Function </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#zero-one-loss" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Zero-One Loss </a>  </li> </ul> </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#multiclass-svm" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Multiclass SVM </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#summary-svm" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Summary: SVM </a>  </li> </ul> </nav> </details> <article class="animate"> <h3 id="generative-vs-discriminative-classifiers">Generative VS. Discriminative Classifiers</h3>
+<p>The Bayes optimal classifier, Naive Bayes and Linear Discriminant Analysis are said to be <em>generative</em> classifiers because they all explicitly model the joint distribution $p(\mathbf{x}, y)$ of the feature vectors $\mathbf{x}$ and the labels y.</p>
+<p>To build a probabilistic classifier, all we really need to model is $p(y | \mathbf{x})$.
+However, classifiers based on directly estimating $p(y | \mathbf{x})$ are called <em>discriminative</em> classifiers because they do not care about the class conditional distribution $p(\mathbf{x} | y)$.</p>
+<h4 id="logistic-regression">Logistic Regression</h4>
+<p>Recall that logistic regression is a <strong>probabilistic discriminative classifier</strong>.
+It directly models the decision boundary using a linear function (binary-classification case),
+$$
+p(y = +1 | \mathbf{x}) = \frac{1}{1 + \exp(-(\mathbf{w}^T \mathbf{x} + b))} \newline
+\log\left(\frac{p(y = +1 | \mathbf{x})}{p(y = -1 | \mathbf{x})}\right) = \mathbf{w}^T \mathbf{x} + b
+$$</p>
+<p>Which has the classification function,
+$$
+f_{LR}(\mathbf{x}) = \underset{c \in \{1, \ldots, C\}}{\arg\max} p(y = c | \mathbf{x}).
+$$</p>
+<p>However, the one draw back with logistic regression compared the previous models that we have covered is learning the parameters.
+In the case for the generative models, we could use MLE to learn the parameters.
+Learning the parameters for logistic regression cannot be performed analytically, and we have to resort to numerical optimization.</p>
+<h3 id="optimization">Optimization</h3>
+<p>In fact, much of machine learning can be written as an optimization problem,
+$$
+\underset{\mathbf{\theta}}{\min} \ \ell(\mathcal{D}; \mathbf{\theta}) = \underset{\mathbf{\theta}}{\min} \frac{1}{M} \sum_{i=1}^M \ell(\mathbf{x}^{(i)}, y^{(i)}; \mathbf{\theta}) + r(\mathbf{\theta}),
+$$</p>
+<p>where $\mathbf{\theta}$ is a parameter vector to be optimized.</p>
+<p>$\mathcal{D} = \{(\mathbf{x}^{(i)}, y^{(i)}), i = 1, \ldots, M\}$ is a finite training set.</p>
+<p>$r(\cdot)$ is a regularizer to prevent overfitting to $\mathcal{D}$.</p>
+<p>In simple terms, we want to find the parameter vector $\mathbf{\theta}$ that minimizes the loss function $\ell(\cdot)$.</p>
+<p>In logistic regression ($\mathbf{\theta} = \{ \mathbf{w}, b \}$),
+$$
+\ell(\mathbf{x}^{(i)}, y^{(i)}; \mathbf{\theta}) = \log(1 + \exp(-y^{(i)}(\mathbf{w}^T \mathbf{x}^{(i)} + b))) \newline
+r(\mathbf{\theta}) = \frac{1}{C} \mathbf{w}^T \mathbf{w}.
+$$</p>
+<h4 id="types-of-optimization">Types of Optimization</h4>
+<p>When we’re dealing with optimization, we will often deal with <strong>two</strong> types of optimization.
+Convex and Non-Convex optimization.</p>
+<ul>
+<li>Convex optimization
+<ul>
+<li>The easy case.</li>
+<li>Includes logistic regression, linear regression, SVM.</li>
+</ul>
+</li>
+<li>Non-Convex optimization
+<ul>
+<li>Hard in general.</li>
+<li>Includes deep learning.</li>
+</ul>
+</li>
+</ul>
+<p>Before we understand how we approach optimization, we need to understand what convexity is.</p>
+<h3 id="convex-set">Convex Set</h3>
+<p>Recall that a <strong>line segment</strong> between $\mathbf{x}^{(1)}$ and $\mathbf{x}^{(2)}$ all points,
+$$
+\mathbf{x} = \alpha \mathbf{x}^{(1)} + (1 - \alpha) \mathbf{x}^{(2)}
+$$</p>
+<p>So, a <strong>convex set</strong>, contains line segment between any two points in the set,
+$$
+\mathbf{x}^{(1)}, \mathbf{x}^{(2)} \in \chi, 0 \leq \alpha \leq 1 \Rightarrow \alpha \mathbf{x}^{(1)} + (1 - \alpha) \mathbf{x}^{(2)} \in \chi.
+$$</p>
+<h4 id="hyperplanes-and-halfspaces">Hyperplanes and Halfspaces</h4>
+<p>A <strong>hyperplane</strong> is a set of the form,
+$$
+\{ \mathbf{x} | \mathbf{a}^T \mathbf{x} = b \} (a \neq 0).
+$$</p>
+<p>where $\mathbf{a}$ is the normal vector to the hyperplane.</p>
+<p>A <strong>halfspace</strong> is a set of the form,
+$$
+\{ \mathbf{x} | \mathbf{a}^T \mathbf{x} \leq b \} (a \neq 0).
+$$</p>
+<p>Hyperplanes and halfspaces are therefore convex sets.</p>
+<h4 id="operations-that-preserve-convexity">Operations that Preserve Convexity</h4>
+<p>When we’re dealing with optimization problems, we often need methods for establishing convexity of a set $\chi$.</p>
+<p>First, apply the definition of a convex set
+$$
+\mathbf{x}^{(1)}, \mathbf{x}^{(2)} \in \chi, 0 \leq \alpha \leq 1 \Rightarrow \alpha \mathbf{x}^{(1)} + (1 - \alpha) \mathbf{x}^{(2)} \in \chi.
+$$</p>
+<p>Then, show that $\chi$ is obtained from simple convex set (hyperplanes, halfspaces, etc.) by operations that preserve convexity.</p>
+<ul>
+<li>Intersection</li>
+<li>Affine functions</li>
+<li>$\ldots$</li>
+</ul>
+<h3 id="convex-function">Convex Function</h3>
+<p>With all of this, let’s define what a convex function is.</p>
+<p>$f : \mathbb{R}^N \rightarrow \mathbb{R}$ is convex if $dom(f)$ is a convex set and,</p>
+<p>$$
+f(\alpha \mathbf{x}^{(1)} + (1 - \alpha) \mathbf{x}^{(2)}) \leq \alpha f(\mathbf{x}^{(1)}) + (1 - \alpha) f(\mathbf{x}^{(2)})
+$$</p>
+<p>for all $\mathbf{x}^{(1)}, \mathbf{x}^{(2)} \in dom(f)$ and $0 \leq \alpha \leq 1$.</p>
+<p>Also, good to remember that $f$ is concave if $-f$ is convex.</p>
+<h4 id="examples-on-mathbbr">Examples on $\mathbb{R}$</h4>
+<ul>
+<li>Convex
+<ul>
+<li>Affine: $ax + b$ on $\mathbb{R}$, for any $a, b \in \mathbb{R}$.</li>
+<li>Exponential: $e^{ax}$, for any $a \in \mathbb{R}$.</li>
+<li>Powers: $x^a$ on $\mathbb{R}_{++}$, for $a \geq 1$ or $a \leq 0$.</li>
+<li>Powers of absolute value: $|x|^a$ on $\mathbb{R}$, for $a \geq 1$.</li>
+<li>Negative entropy: $x \log x$ on $\mathbb{R}_{++}$.</li>
+</ul>
+</li>
+<li>Concave
+<ul>
+<li>Affine: $ax + b$ on $\mathbb{R}$, for any $a, b \in \mathbb{R}$.</li>
+<li>Powers: $x^a$ on $\mathbb{R}_{++}$, for $0 \leq a \leq 1$.</li>
+<li>Logarithm: $\log x$ on $\mathbb{R}_{++}$.</li>
+</ul>
+</li>
+</ul>
+<h4 id="examples-on-mathbbrn-and-mathbbrm-times-n">Examples on $\mathbb{R}^N$ and $\mathbb{R}^{M \times N}$</h4>
+<ul>
+<li>On $\mathbb{R}^N$
+<ul>
+<li>Affine function: $\mathbf{a}^T \mathbf{x} + b$.</li>
+<li>Norms: $\Vert \mathbf{x} \Vert_p = \left(\sum_{j=1}^N |x_j|^p\right)^{1/p}$, for $p \geq 1$; $\Vert \mathbf{x} \Vert_{\infty} = \max_j |x_j|$.</li>
+</ul>
+</li>
+<li>On $\mathbb{R}^{M \times N}$ ($M \times N$ matrices)
+<ul>
+<li>
+<p>Affine function:
+$$
+f(\mathbf{X}) = \sum_{i = 1}^M \sum_{j = 1}^N A_{ij} X_{ij} + b = \text{tr}(\mathbf{A}^T \mathbf{X}) + b.
+$$</p>
+</li>
+<li>
+<p>Spectral norm (maximum singular value):
+$$
+f(\mathbf{X}) = \Vert \mathbf{X} \Vert_2 = \sigma_{\text{max}}(\mathbf{X}) = (\lambda_{\text{max}}(\mathbf{X}^T \mathbf{X}))^{1/2}.
+$$</p>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="example-quadratic-function">Example: Quadratic Function</h4>
+<p>$$
+f(x) = x^2
+$$</p>
+<p>Proof of convexity:
+$$
+\begin{align*}
+(\alpha x + (1 - \alpha)y)^2 &#x26; = \alpha^2 x^2 + 2 \alpha (1 - \alpha) xy + (1 - \alpha)^2 y^2 \newline
+&#x26; = \alpha x^2 + (1 - \alpha) y^2 + \alpha(1 - \alpha)(x^2 - 2xy + y^2) \newline
+&#x26; \leq \alpha x^2 + (1 - \alpha) y^2.
+\end{align*}
+$$</p>
+<h4 id="properties-of-convex-functions">Properties of Convex Functions</h4>
+<ul>
+<li>
+<p>Any line segment we draw between two points lies above the curve.</p>
+</li>
+<li>
+<p>Every local minimum is a <strong>global</strong> minimum.</p>
+<ul>
+<li>A simple geometric intuition is that, if the curve goes above any line segment we draw, it is not convex, by definition.</li>
+<li>This is what makes convex optimization easy. It suffices to find a local minimum because it is also a global minimum.</li>
+</ul>
+</li>
+<li>
+<p>Non-negative combinations of convex functions are convex</p>
+<ul>
+<li>$h(\mathbf{x}) = af(\mathbf{x}) + bg(\mathbf{x})$</li>
+</ul>
+</li>
+<li>
+<p>Affine scaling of convex functions are convex</p>
+<ul>
+<li>$h(\mathbf{x}) = f(A\mathbf{x} + \mathbf{b})$</li>
+</ul>
+</li>
+<li>
+<p>Pointwise maximum of convex functions is convex</p>
+<ul>
+<li>$h(\mathbf{x}) = \max(f(\mathbf{x}), g(\mathbf{x}))$</li>
+</ul>
+</li>
+<li>
+<p>Composition of convex functions are <strong>not</strong> generally convex</p>
+<ul>
+<li>Neural nets are like this $h(\mathbf{x}) = f(g(\mathbf{x}))$</li>
+</ul>
+</li>
+</ul>
+<h3 id="first-order-condition">First-Order Condition</h3>
+<p>$f$ is <strong>differentiable</strong> if the graident,
+$$
+\nabla f(\mathbf{x}) =
+\begin{bmatrix}
+\frac{\partial f(\mathbf{x})}{\partial x_1}, \frac{\partial f(\mathbf{x})}{\partial x_2}, \ldots, \frac{\partial f(\mathbf{x})}{\partial x_N}
+\end{bmatrix}^T
+$$</p>
+<p>exists at each $\mathbf{x} \in dom(f)$.</p>
+<p>The <strong>first-order condition</strong> is that, differentiable $f$ with convex domain is convexx if and only if,
+$$
+f(\mathbf{y}) \geq f(\mathbf{x}) + \nabla f(\mathbf{x})^T (\mathbf{y} - \mathbf{x}) \quad \forall \mathbf{x}, \mathbf{y} \in dom(f).
+$$</p>
+<p>First-order approximation of $f$ is global underestimator.</p>
+<h3 id="second-order-condition">Second-Order Condition</h3>
+<p>$f$ is <strong>twice differentiable</strong> if the Hessian $\nabla^2 f(\mathbf{x})$ exists at each $\mathbf{x} \in \mathbb{S}^N$,
+$$
+\nabla^2 f(\mathbf{x})_{ij} = \frac{\partial^2 f}{\partial x_i \partial x_j}.
+$$</p>
+<p>exists at each $\mathbf{x} \in dom(f)$.</p>
+<p>The <strong>second-order condition</strong> is that, twice differentiable $f$ with convex domain is convex if and only if,
+$$
+\nabla^2 f(\mathbf{x}) \succeq 0
+$$</p>
+<p>This means that the Hessian matrix is positive semidefinite,
+$$
+\mathbf{A} \succeq 0 \Leftrightarrow \forall \mathbf{x}, \mathbf{x}^T \mathbf{A} \mathbf{x} \geq 0.
+$$</p>
+<h4 id="example-quadratic">Example: Quadratic</h4>
+<p>$$
+f(x) = x^2
+$$</p>
+<p>Proof of convexity:
+$$
+f”(x) = 2 \geq 0.
+$$</p>
+<h4 id="example-exponential">Example: Exponential</h4>
+<p>$$
+f(x) = e^{x}
+$$</p>
+<p>Proof of convexity:
+$$
+f”(x) = e^{x} \geq 0.
+$$</p>
+<h4 id="example-logistic-loss">Example: Logistic Loss</h4>
+<p>$$
+f(x) = \log(1 + e^{-x})
+$$</p>
+<p>Proof of convexity:
+$$
+f’(x) = \frac{e^{-x}}{1 + e^{-x}} = \frac{1}{1 + e^x} \newline
+f”(x) = \frac{e^x}{(1 + e^x)^2} \geq 0.
+$$</p>
+<h3 id="parameter-estimation">Parameter Estimation</h3>
+<p>As we said earlier, many machine learning optimizations are convex optimization problems.</p>
+<p>So our goal is to minimize a convex loss function with respect to parameters.
+For example $\ell(\mathbf{\theta}) = \mathbf{\theta}^2$.</p>
+<p>However, sometimes we deal with problems that are not convex, then we need to use numerical methods.</p>
+<h3 id="gradient-descent">Gradient Descent</h3>
+<p>The most basic optimization algorithm is <strong>gradient descent</strong>.</p>
+<p>Gradient Descent (GD) uses the following update formula,
+$$
+\mathbf{\theta} \leftarrow \mathbf{\theta} - \alpha \nabla \ell(\mathbf{\theta}),
+$$</p>
+<p>where $\alpha$ is the learning rate.</p>
+<p>$\nabla \ell(\mathbf{\theta})$ is the gradient of $\ell(\mathbf{\theta})$ evaluated at $\mathbf{\theta}$.</p>
+<p>So, with our example $\ell(\mathbf{\theta}) = \mathbf{\theta}^2$, $\nabla \ell(\mathbf{\theta}) = 2\mathbf{\theta}$.</p>
+<p>We can repeat this process until convergence, so GD first chooses an initial point $\mathbf{\theta}^{(0)}$ and repeats,
+$$
+\mathbf{\theta}^{(t+1)} = \mathbf{\theta}^{(t)} - \alpha \nabla \ell(\mathcal{D}; \mathbf{\theta}^{(t)}) = \mathbf{\theta}^{(t)} - \alpha \frac{1}{M} \sum_{i=1}^M \nabla \ell(\mathbf{x}^{(i)}, y^{(i)}; \mathbf{\theta}^{(t)}).
+$$</p>
+<p>How do we stop?
+$$
+\Vert \mathbf{\theta}^{(t+1)} - \mathbf{\theta}^{(t)} \Vert_2 &#x3C; \epsilon \newline
+\Vert \nabla \ell(\mathcal{D}; \mathbf{\theta}^{(t)}) \Vert_2 &#x3C; \epsilon,
+$$</p>
+<p>where $\Vert \mathbf{\theta} \Vert_2 = \sqrt{\sum_{j} \mathbf{\theta}_j^2}$, is the $\ell_2$-norm of $\mathbf{\theta}$.</p>
+<p>$\epsilon$ is a small positive constant, e.g., $10^{-6}$.</p>
+<p>An important thing we need to discuss is that, a <em>negative</em> gradient step can decrease the loss function.</p>
+<p><strong>Proof.</strong> Let $\mathbf{\theta}^{(0)}$ be any initial point. Using the first-order Taylor expansion for the next point $\mathbf{\theta}^{(1)} = \mathbf{\theta}^{(0)} - \alpha \nabla \ell(\mathbf{\theta}^{(0)})$, we have
+$$
+\begin{align*}
+\ell(\mathbf{\theta}^{(1)}) &#x26; = \ell(\mathbf{\theta}^{(0)} - \nabla \ell(\mathbf{\theta}^{(0)}))^T (\mathbf{\theta}^{(1)} - \mathbf{\theta}^{(0)}) \newline
+&#x26; = \ell(\mathbf{\theta}^{(0)}) + \nabla \ell(\mathbf{\theta}^{(0)})^T (-\alpha \nabla \ell(\mathbf{\theta}^{(0)})) \newline
+&#x26; = \ell(\mathbf{\theta}^{(0)}) - \alpha \Vert \nabla \ell(\mathbf{\theta}^{(0)}) \Vert_2^2
+\end{align*}
+$$</p>
+<p>Hence, if $\nabla \ell(\mathbf{\theta}^{(0)}) \neq 0$ and $\alpha$ is sufficiently small, we have,
+$$
+\ell(\mathbf{\theta}^{(1)}) - \ell(\mathbf{\theta}^{(0)}) = -\alpha \Vert \nabla \ell(\mathbf{\theta}^{(0)}) \Vert_2^2 &#x3C; 0.
+$$</p>
+<p>For sufficiently small $\alpha$, $\mathbf{\theta}^{(1)}$ is an improvement over $\mathbf{\theta}^{(0)}$.</p>
+<p>The initial point matters, the final convergence point depends a lot on the initial point.</p>
+<p>To improve optimization, run GD multiple times with different initial points and choose the best one.</p>
+<p>The learning rate matters as well, if it’s too big, GD moves more quickly with high risk that the algorithm will never converge.</p>
+<p>If it is too small, GD moves slowly, so slowly that you might just lose patience and never reach the minimum.</p>
+<h3 id="stochastic-gradient-descent">Stochastic Gradient Descent</h3>
+<p>The computational cost for GD at each iteration is $\mathcal{O}(M)$, which grows linearly with $M$.</p>
+<p>SGD, reduces the computational cost at each iteration to $\mathcal{O}(1)$.</p>
+<p>At $t$-th iteration, randomly sample a single training example and compute the gradient to update $\mathbf{\theta}^{(t)}$.
+$$
+\mathbf{\theta}^{(t+1)} = \mathbf{\theta}^{(t)} - \alpha \nabla \ell(\mathbf{x}^{(i)}, y^{(i)}; \mathbf{\theta}^{(t)}).
+$$</p>
+<p>In expectation, SGD converges to the same solution as GD, but with more noise.
+$$
+\mathbb{E}[\nabla \ell(\mathbf{x}, y; \mathbf{\theta})] = \frac{1}{M} \sum_{i=1}^M \nabla \ell(\mathbf{x}^{(i)}, y^{(i)}; \mathbf{\theta}) = \nabla \ell(\mathcal{D}; \mathbf{\theta}).
+$$</p>
+<ul>
+<li>Advantages
+<ul>
+<li>It is easy to fit into memory and computationally fast due to a single training sample being processed at each iteration.</li>
+<li>The steps have oscillations, which may help the algorithm get out of bad local minima.</li>
+</ul>
+</li>
+<li>Disadvantages
+<ul>
+<li>The steps are noisy. The objective does not always decrease for each step, and it may take longer to achieve convergence.</li>
+<li>It loses the advantage of vectorized operations as it deals with only a single example at a time.</li>
+</ul>
+</li>
+</ul>
+<h3 id="mini-batch-gradient-descent-a-compromise">Mini-Batch Gradient Descent: A Compromise</h3>
+<p>Unlike SGD, mini-batch gradient descent randomly samples a small subset of training data $\mathcal{B} \subset \mathcal{D}$ at $t$-th iteration, and compute the gradient to update $\mathbf{\theta}^{(t)}$.
+$$
+\mathbf{\theta}^{(t+1)} = \mathbf{\theta}^{(t)} - \alpha \nabla \ell(\mathcal{B}; \mathbf{\theta}^{(t)}) = \mathbf{\theta}^{(t)} - \alpha \frac{1}{|\mathcal{B}|} \sum_{(\mathbf{x}, y) \in \mathcal{B}} \nabla \ell(\mathbf{x}, y; \mathbf{\theta}^{(t)}).
+$$</p>
+<p>Mini-batch gradient descent and its variants are extremely popular and extensively used in deep learning</p>
+<h3 id="summary-convex-optimization-and-numerical-methods">Summary: Convex Optimization and Numerical Methods</h3>
+<ul>
+<li>Convex optimization
+<ul>
+<li>Convex set
+<ul>
+<li>$\mathbf{x}^{(1)}, \mathbf{x}^{(2)} \in \chi, 0 \leq \alpha \leq 1 \Rightarrow \alpha \mathbf{x}^{(1)} + (1 - \alpha) \mathbf{x}^{(2)} \in \chi$.</li>
+</ul>
+</li>
+<li>Convex function
+<ul>
+<li>$dom(f)$ is convex</li>
+<li>$f(\alpha \mathbf{x} + (1 - \alpha) \mathbf{y}) \leq \alpha f(\mathbf{x}) + (1 - \alpha) f(\mathbf{y})$.</li>
+</ul>
+</li>
+<li>Establish convexity
+<ul>
+<li>By definition</li>
+<li>First-order condition $f(\mathbf{y}) \geq f(\mathbf{x}) + \nabla f(\mathbf{x})^T (\mathbf{y} - \mathbf{x})$.</li>
+<li>Second-order condition $\nabla^2 f(\mathbf{x}) \succeq 0$.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Numerical optimization methods
+<ul>
+<li>GD - guarantee to decrease loss; not scalable to large datasets.</li>
+<li>SGD - superfast to compute with noisy gradients.</li>
+<li>Mini-batch GD - a compromise between GD and SGD; the de facto method in deep learning.</li>
+</ul>
+</li>
+</ul>
+<h3 id="support-vector-machines">Support Vector Machines</h3>
+<p>So far we have only seen one example of a discriminative linear classifier, the logistic regression.
+The logistic regression uses a maximum likelihood framework to learn the separating hyperplane.</p>
+<p>The <strong>Support Vector Machine (SVM)</strong> is another example of a discriminative linear classifier.
+However, this is a purely geometric approach.</p>
+<h4 id="linearly-separable-data">Linearly Separable Data</h4>
+<p>For now, assume that the training is <strong>linearly separable</strong>.
+E.g. the two classes in the training data can be separated by a line (hyperplane).</p>
+<p>There are many “correct” solutions, but which is the “best” separating line?</p>
+<h4 id="maximum-margin-principle">Maximum Margin Principle</h4>
+<p>We can define the distance between the separating line and the closest point as the <strong>margin</strong>.
+Think of this space as the “amount of wiggle room” for accommodating errors in estimating $\mathbf{w}$.</p>
+<p><strong>Idea</strong>: the best separating line is the one that <em>maximizes</em> the margin.
+I.e. puts the most distance between the closest points and the decision boundary.</p>
+<p>The solution is quite trivial if you think about it.</p>
+<p>By symmetry, there should be at least <em>one</em> margin point on <em>each</em> side of the boundary.
+The points on the margins are called the <em>support vectors</em>.
+The points support (define) the margin.</p>
+<h4 id="computing-the-margin">Computing the Margin</h4>
+<p>What is the margin (i.e., distance) of $\mathbf{w}^T \mathbf{x} + b = 0$ with respect to a point $(\mathbf{x}^{(i)}, y^{(i)})$?
+$$
+d^{(i)} = \frac{y^{(i)}(\mathbf{w}^T \mathbf{x}^{(i)} + b)}{\Vert \mathbf{w} \Vert_2}.
+$$</p>
+<p>This is called the <strong>geometric</strong> margin.
+The numerator $y^{(i)}(\mathbf{w}^T \mathbf{x}^{(i)}$ is called the <strong>functional</strong> margin.</p>
+<p>What is the margin of $\mathbf{w}^T \mathbf{x} + b = 0$ with respect to a training set $\mathcal{D} = \{(\mathbf{x}^{(i)}, y^{(i)}), i = 1, \ldots, M\}$?
+$$
+d = \min\{d^{(i)}\}_{i=1}^M = \underset{(\mathbf{x}, y) \in \mathcal{D}} \min \frac{y(\mathbf{w}^T \mathbf{x} + b)}{\Vert \mathbf{w} \Vert_2}.
+$$</p>
+<h4 id="maximizing-the-margin">Maximizing the Margin</h4>
+<p>The maximum margin solution is found by solving,
+$$
+\underset{\mathbf{w}, b} \max\left(\frac{1}{\Vert \mathbf{w} \Vert_2} \underset{(\mathbf{x}, y) \in \mathcal{D}} \min y(\mathbf{w}^T \mathbf{x} + b)\right).
+$$</p>
+<p>Notice that if we make the rescaling $\mathbf{w} \rightarrow \gamma \mathbf{w}$ and $b \rightarrow \gamma b$, then the objective function is unchanged.</p>
+<p>We can use this freedom to set,
+$$
+\underset{(\mathbf{x}, y) \in \mathcal{D}} \min y(\mathbf{w}^T \mathbf{x} + b) = 1.
+$$</p>
+<p>Or equivalently,
+$$
+y^{(i)}(\mathbf{w}^T \mathbf{x}^{(i)} + b) \geq 1 \quad \forall i = 1, \ldots, M.
+$$</p>
+<h3 id="svm-primal-form-hard-margin">SVM (Primal Form, Hard-Margin)</h3>
+<p>Given a training set $\mathcal{D} = \{\mathbf{x}^{(i)}, y^{(i)}\}_{i=1}^M$, optimize,
+$$
+\underset{\mathbf{w}, b} \min \frac{1}{2} \Vert \mathbf{w} \Vert_2^2 \newline
+\text{subject to } y^{(i)}(\mathbf{w}^T \mathbf{x}^{(i)} + b) \geq 1 \quad \forall i = 1, \ldots, M.
+$$</p>
+<p>The objective minimizes the inverse of the margin distance, i.e., maximizes the <strong>geometric</strong> margin.</p>
+<p>The inequality constraints ensure that all points are either on or outside the <strong>functional</strong> margin.</p>
+<p>With this, our prediction, given a new data point $\mathbf{x}^{\star}$, use sign of linear function to predict class.
+$$
+y^{\star} = \text{sign}(\mathbf{w}^T \mathbf{x}^{\star} + b).
+$$</p>
+<h4 id="why-is-maximizing-the-margin-good">Why is Maximizing the Margin Good?</h4>
+<p>The true $\mathbf{w}$ is uncertain. Maximizing the margin allows the most uncertainty (wiggle room) for $\mathbf{w}$, while keeping all the points correctly classified.</p>
+<p>The data points are also uncertain. Maximizing the margin allows the most wiggle of the points, while keeping all the points correctly classified.</p>
+<h4 id="is-hard-margin-enough">Is Hard-Margin Enough?</h4>
+<p>The hard-margin SVM is very sensitive to outliers, if we have trained an SVM in an “ideal” dataset, it will perform very poorly on a new but different dataset that maybe reflects real-world data better.</p>
+<p>So what is the solution to make our classifier more robust?</p>
+<p>Allow some training samples to violate the margin. I.e., are inside the margin (or even miss-classified).</p>
+<p>We define the “slack” variable $\xi_i \geq 0$, where $\xi_i = 0$ means sample is outside of margin area (no slack) and $\xi_i > 0$ means sample is inside margin area (slack).</p>
+<h3 id="svm-primal-form-soft-margin">SVM (Primal Form, Soft-Margin)</h3>
+<p>So now we instead optimize,
+$$
+\underset{\mathbf{w}, b} \min \frac{1}{2} \Vert \mathbf{w} \Vert_2^2  + C \sum_{i=1}^M \xi_i \newline
+\text{subject to } y^{(i)}(\mathbf{w}^T \mathbf{x}^{(i)} + b) \geq 1 - \xi_i \quad \forall i = 1, \ldots, M \newline
+$$</p>
+<p>This will introduce a parameter $C$ as penalty for violating the margin.
+Smaller value of $C$ means that we allow more violation (less penalty). Larger values of $C$ means we do not allow violations (more penalty).</p>
+<h4 id="loss-function">Loss Function</h4>
+<p>In the case of primal-form SVM with soft-margin, it is equivalent to minimizing the function,
+$$
+\sum_{i = 1}^m \max(0, 1 - y^{(i)}(\mathbf{w}^T \mathbf{x}^{(i)} + b)) + \frac{1}{2C} \Vert \mathbf{w} \Vert_2^2.
+$$</p>
+<p>This is called the <strong>hinge loss</strong>,
+$$
+\ell_h(z) = max(0, 1 - z)
+$$</p>
+<h4 id="zero-one-loss">Zero-One Loss</h4>
+<p>Both the logistic loss and the hinge loss are convex relaxations of the zero-one loss,
+$$
+\ell_{01}(z) = \mathbb{I}[z \leq 0].
+$$</p>
+<p>The average zero-one loss over a data set is exactly the classification error rate.</p>
+<p>This is the loss function we’d like to minimize, but this generally isn’t computationally feasible, thus the need for surrogate loss functions.</p>
+<h3 id="multiclass-svm">Multiclass SVM</h3>
+<p>If we have multiple classes to classify, we can use different approaches to solve the objective.</p>
+<ul>
+<li>“1-vs-1” multiclass classification
+<ul>
+<li>Train binary classifiers on all pairs of classes.
+<ul>
+<li>3-class example: 1 vs 2, 1 vs 3, 2 vs 3.</li>
+</ul>
+</li>
+<li>To label a sample, pick the class with the most votes among the binary classifies.</li>
+<li><strong>Problem</strong>: 1v1 classification is very slow when there are many number of classes
+<ul>
+<li>If there are $C$ classes, we need to train $C/(C - 1)/2$ binary classifiers.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>“1-vs-rest” classification
+<ul>
+<li>Train 1-vs-rest binary classifiers
+<ul>
+<li>3-class example: 1 vs {2, 3}, 2 vs {1, 3}, 3 vs {1, 2}.</li>
+</ul>
+</li>
+<li>To label a sample, pick the class with the largest geometric margin.
+<ul>
+<li>$y^{\star} =  \underset{c \in \{1, \ldots, C\}}{\arg \max} (\mathbf{w}^T_c \mathbf{x}^{\star} + b_c) / \Vert \mathbf{W}_c \Vert_2$.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="summary-svm">Summary: SVM</h3>
+<ul>
+<li><strong>Classifier</strong>
+<ul>
+<li>Linear Function $f(\mathbf{x}) = \mathbf{w}^T \mathbf{x} + b$.</li>
+<li>Given new sample $\mathbf{x}^{\star}$, predict $y^{\star} = \text{ sign}(\mathbf{w}^t \mathbf{x}^{\star} + b)$.</li>
+</ul>
+</li>
+<li><strong>Training</strong>
+<ul>
+<li>Maximize the margin of the training data
+<ul>
+<li>I.e., maximize the separation between the points and the decision boundary.</li>
+</ul>
+</li>
+<li>Allow some training samples to violate the margin.
+<ul>
+<li>Use cross-validation to pick the hyperparameter $C$.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>Linear classifiers</strong>
+<ul>
+<li>Separate the data using a linear surface (hyperplane).</li>
+<li>$y = \text{ sign}(\mathbf{w}^T \mathbf{x} + b)$.</li>
+</ul>
+</li>
+<li><strong>Two formulations</strong>
+<ul>
+<li>Logistic regression - maximize the probability of the data.</li>
+<li>Support Vector Machine - maximize the margin of the hyperplane.</li>
+</ul>
+</li>
+<li><strong>Loss functions</strong>
+<ul>
+<li>Logistic regression - push the classification boundary as far as possible from all points.</li>
+<li>Support Vector Machine - ensure a margin of 1 between boundary and closest point.</li>
+</ul>
+</li>
+<li><strong>Advantages</strong>
+<ul>
+<li>SVM works well on high-dimensional features ($N$ large), and has low generalization error.</li>
+<li>LR has well-defined probabilities.</li>
+</ul>
+</li>
+<li><strong>Disadvantages</strong>
+<ul>
+<li>Decision surface can only be linear.</li>
+</ul>
+</li>
+</ul> <div class="mt-24"> <div class="grid grid-cols-2 gap-1.5 sm:gap-3"> <a href="/cityu/cs4487/cs4487_2" class="group relative flex flex-nowrap rounded-lg border border-black/15 px-4 py-3 pl-10 no-underline transition-colors duration-300 ease-in-out hover:bg-black/5 hover:text-black focus-visible:bg-black/5 focus-visible:text-black dark:border-white/20 dark:hover:bg-white/5 dark:hover:text-white dark:focus-visible:bg-white/5 dark:focus-visible:text-white"> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="absolute left-2 top-1/2 size-5 -translate-y-1/2 fill-none stroke-current stroke-2"> <line x1="5" y1="12" x2="19" y2="12" class="translate-x-3 scale-x-0 transition-transform duration-300 ease-in-out group-hover:translate-x-0 group-hover:scale-x-100 group-focus-visible:translate-x-0 group-focus-visible:scale-x-100"></line> <polyline points="12 5 5 12 12 19" class="translate-x-1 transition-transform duration-300 ease-in-out group-hover:translate-x-0 group-focus-visible:translate-x-0"></polyline> </svg> <div class="flex items-center text-sm"> Part 2 - Generative VS. Discriminative Models </div> </a> <div class="invisible"></div> </div> </div> <div class="mt-24"> <div class="giscus"></div> <script data-astro-rerun src="https://giscus.app/client.js" data-repo="rezaarezvan/rezvan.xyz" data-repo-id="R_kgDOHvQr3w" data-category="General" data-category-id="DIC_kwDOHvQr384CiWVC" data-mapping="pathname" data-strict="0" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="bottom" data-theme="preferred_color_scheme" data-lang="en" data-loading="lazy" crossorigin="anonymous" async></script> </div> </article> </div>  </main> <footer class="animate"> <div class="mx-auto max-w-screen-sm px-3"> <div class="relative"> <div class="absolute -top-12 right-0"> <button id="back-to-top" class="group relative flex w-fit flex-nowrap rounded border border-black/15 py-1.5 pl-8 pr-3 transition-colors duration-300 ease-in-out hover:bg-black/5 hover:text-black focus-visible:bg-black/5 focus-visible:text-black dark:border-white/20 dark:hover:bg-white/5 dark:hover:text-white dark:focus-visible:bg-white/5 dark:focus-visible:text-white"> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="absolute left-2 top-1/2 size-4 -translate-y-1/2 rotate-90 fill-none stroke-current stroke-2"> <line x1="5" y1="12" x2="19" y2="12" class="translate-x-2 scale-x-0 transition-transform duration-300 ease-in-out group-hover:translate-x-0 group-hover:scale-x-100 group-focus-visible:translate-x-0 group-focus-visible:scale-x-100"></line> <polyline points="12 5 5 12 12 19" class="translate-x-1 transition-transform duration-300 ease-in-out group-hover:translate-x-0 group-focus-visible:translate-x-0"></polyline> </svg> <div class="text-sm">Back to top</div> </button> </div> </div> <div class="flex items-center justify-between"> <div>&copy; 2024 • rezvan.xyz </div> <div class="flex flex-wrap items-center gap-1.5"> <button id="light-theme-button" aria-label="Light theme" class="group flex size-9 items-center justify-center rounded border border-black/15 hover:bg-black/5 focus-visible:bg-black/5 dark:border-white/20 dark:hover:bg-white/5 dark:focus-visible:bg-white/5"> <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="transition-colors duration-300 ease-in-out group-hover:animate-pulse group-hover:stroke-black group-focus-visible:animate-pulse group-focus-visible:stroke-black group-hover:dark:stroke-white dark:group-focus-visible:stroke-white"> <circle cx="12" cy="12" r="5"></circle> <line x1="12" y1="1" x2="12" y2="3"></line> <line x1="12" y1="21" x2="12" y2="23"></line> <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line> <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line> <line x1="1" y1="12" x2="3" y2="12"></line> <line x1="21" y1="12" x2="23" y2="12"></line> <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line> <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line> </svg> </button> <button id="dark-theme-button" aria-label="Dark theme" class="group flex size-9 items-center justify-center rounded border border-black/15 hover:bg-black/5 focus-visible:bg-black/5 dark:border-white/20 dark:hover:bg-white/5 dark:focus-visible:bg-white/5"> <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="transition-colors duration-300 ease-in-out group-hover:animate-pulse group-hover:stroke-black group-focus-visible:animate-pulse group-focus-visible:stroke-black group-hover:dark:stroke-white dark:group-focus-visible:stroke-white"> <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path> </svg> </button> <button id="system-theme-button" aria-label="System theme" class="group flex size-9 items-center justify-center rounded border border-black/15 hover:bg-black/5 focus-visible:bg-black/5 dark:border-white/20 dark:hover:bg-white/5 dark:focus-visible:bg-white/5"> <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="transition-colors duration-300 ease-in-out group-hover:animate-pulse group-hover:stroke-black group-focus-visible:animate-pulse group-focus-visible:stroke-black group-hover:dark:stroke-white dark:group-focus-visible:stroke-white"> <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect> <line x1="8" y1="21" x2="16" y2="21"></line> <line x1="12" y1="17" x2="12" y2="21"></line> </svg> </button> </div> </div> </div> </footer> <aside data-pagefind-ignore> <div id="backdrop" class="bg-[rgba(0, 0, 0, 0.5] invisible fixed left-0 top-0 z-50 flex h-screen w-full justify-center p-6 backdrop-blur-sm" data-astro-transition-persist="astro-3snakcvo-2"> <div id="pagefind-container" class="m-0 flex h-fit max-h-[80%] w-full max-w-screen-sm flex-col overflow-auto rounded border border-black/15 bg-neutral-100 p-2 px-4 py-3 shadow-lg dark:border-white/20 dark:bg-neutral-900"> <div id="search" class="pagefind-ui pagefind-init" data-pagefind-ui data-bundle-path="/pagefind/" data-ui-options="{&#34;showImages&#34;:false,&#34;excerptLength&#34;:15,&#34;resetStyles&#34;:false}"></div>  <div class="mr-2 pb-1 pt-4 text-right text-xs dark:prose-invert">
+Press <span class="prose text-xs dark:prose-invert"><kbd class="">Esc</kbd></span> or click anywhere to close
+</div> </div> </div> </aside> <script>
+  const magnifyingGlass = document.getElementById("magnifying-glass");
+  const backdrop = document.getElementById("backdrop");
+
+  function openPagefind() {
+    const searchDiv = document.getElementById("search");
+    const search = searchDiv.querySelector("input");
+    setTimeout(() => {
+      search.focus();
+    }, 0);
+    backdrop?.classList.remove("invisible");
+    backdrop?.classList.add("visible");
+  }
+
+  function closePagefind() {
+    const search = document.getElementById("search");
+    search.value = "";
+    backdrop?.classList.remove("visible");
+    backdrop?.classList.add("invisible");
+  }
+
+  // open pagefind
+  magnifyingGlass?.addEventListener("click", () => {
+    openPagefind();
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "/") {
+      e.preventDefault();
+      openPagefind();
+    } else if ((e.metaKey || e.ctrlKey) && e.key === "k") {
+      e.preventDefault();
+      openPagefind();
+    }
+  });
+
+  // close pagefind
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" || e.keyCode === 27) {
+      closePagefind();
+    }
+  });
+
+  // close pagefind when searched result(link) clicked
+  document.addEventListener("click", (event) => {
+    if (event.target.classList.contains("pagefind-ui__result-link")) {
+      closePagefind();
+    }
+  });
+
+  backdrop?.addEventListener("click", (event) => {
+    if (!event.target.closest("#pagefind-container")) {
+      closePagefind();
+    }
+  });
+
+  // prevent form submission
+  const form = document.getElementById("form");
+  form?.addEventListener("submit", (event) => {
+    event.preventDefault();
+  });
+</script>  </body></html>
