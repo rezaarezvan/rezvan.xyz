@@ -1,0 +1,469 @@
+<!DOCTYPE html><html lang="en"> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" type="image/icon" href="/favicon.ico"><meta name="generator" content="Astro v4.11.5"><!-- Canonical URL --><link rel="canonical" href="https://rezvan.xyz/cityu/mne3115/mne3115_3/"><!-- Primary Meta Tags --><title>Part 3 - Thin Film Growth and Deposition | microelectromechanical systems | rezvan.xyz</title><meta name="title" content="Part 3 - Thin Film Growth and Deposition | microelectromechanical systems | rezvan.xyz"><meta name="description"><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://rezvan.xyz/cityu/mne3115/mne3115_3/"><meta property="og:title" content="Part 3 - Thin Film Growth and Deposition | microelectromechanical systems | rezvan.xyz"><meta property="og:description"><meta property="og:image" content="https://rezvan.xyz/favicon.ico"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://rezvan.xyz/cityu/mne3115/mne3115_3/"><meta property="twitter:title" content="Part 3 - Thin Film Growth and Deposition | microelectromechanical systems | rezvan.xyz"><meta property="twitter:description"><meta property="twitter:image" content="https://rezvan.xyz/favicon.ico"><!-- PageFind --><link href="/pagefind/pagefind-ui.css" rel="stylesheet"><script src="/pagefind/pagefind-ui.js"></script><!-- KaTeX support --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script><!-- inline KaTeX --><script>
+    function renderKaTeX() {
+        if (typeof renderMathInElement !== "undefined") {
+            renderMathInElement(document.body, {
+                delimiters: [
+                    { left: "$$", right: "$$", display: true },
+                    { left: "$", right: "$", display: false },
+                ],
+            });
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", renderKaTeX);
+    document.addEventListener("astro:after-swap", renderKaTeX);
+</script><meta name="astro-view-transitions-enabled" content="true"><meta name="astro-view-transitions-fallback" content="animate"><script>
+    function init() {
+        preloadTheme();
+        onScroll();
+        animate();
+        updateThemeButtons();
+        addCopyCodeButtons();
+        setGiscusTheme();
+
+        const backToTop = document.getElementById("back-to-top");
+        backToTop?.addEventListener("click", (event) => scrollToTop(event));
+
+        const backToPrev = document.getElementById("back-to-prev");
+        backToPrev?.addEventListener("click", () => window.history.back());
+
+        const lightThemeButton = document.getElementById("light-theme-button");
+        lightThemeButton?.addEventListener("click", () => {
+            localStorage.setItem("theme", "light");
+            toggleTheme(false);
+            updateThemeButtons();
+        });
+
+        const darkThemeButton = document.getElementById("dark-theme-button");
+        darkThemeButton?.addEventListener("click", () => {
+            localStorage.setItem("theme", "dark");
+            toggleTheme(true);
+            updateThemeButtons();
+        });
+
+        const systemThemeButton = document.getElementById(
+            "system-theme-button",
+        );
+        systemThemeButton?.addEventListener("click", () => {
+            localStorage.setItem("theme", "system");
+            toggleTheme(
+                window.matchMedia("(prefers-color-scheme: dark)").matches,
+            );
+            updateThemeButtons();
+        });
+
+        window
+            .matchMedia("(prefers-color-scheme: dark)")
+            .addEventListener("change", (event) => {
+                if (localStorage.theme === "system") {
+                    toggleTheme(event.matches);
+                }
+            });
+
+        document.addEventListener("scroll", onScroll);
+    }
+
+    function updateThemeButtons() {
+        const theme = localStorage.getItem("theme");
+        const lightThemeButton = document.getElementById("light-theme-button");
+        const darkThemeButton = document.getElementById("dark-theme-button");
+        const systemThemeButton = document.getElementById(
+            "system-theme-button",
+        );
+
+        function removeActiveButtonTheme(button) {
+            button?.classList.remove("bg-black/5");
+            button?.classList.remove("dark:bg-white/5");
+        }
+
+        function addActiveButtonTheme(button) {
+            button?.classList.add("bg-black/5");
+            button?.classList.add("dark:bg-white/5");
+        }
+
+        removeActiveButtonTheme(lightThemeButton);
+        removeActiveButtonTheme(darkThemeButton);
+        removeActiveButtonTheme(systemThemeButton);
+
+        if (theme === "light") {
+            addActiveButtonTheme(lightThemeButton);
+        } else if (theme === "dark") {
+            addActiveButtonTheme(darkThemeButton);
+        } else {
+            addActiveButtonTheme(systemThemeButton);
+        }
+    }
+
+    function animate() {
+        const animateElements = document.querySelectorAll(".animate");
+
+        animateElements.forEach((element, index) => {
+            setTimeout(() => {
+                element.classList.add("show");
+            }, index * 100);
+        });
+    }
+
+    function onScroll() {
+        if (window.scrollY > 0) {
+            document.documentElement.classList.add("scrolled");
+        } else {
+            document.documentElement.classList.remove("scrolled");
+        }
+    }
+
+    function scrollToTop(event) {
+        event.preventDefault();
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth",
+        });
+    }
+
+    function toggleTheme(dark) {
+        const css = document.createElement("style");
+
+        css.appendChild(
+            document.createTextNode(
+                `* {
+             -webkit-transition: none !important;
+             -moz-transition: none !important;
+             -o-transition: none !important;
+             -ms-transition: none !important;
+             transition: none !important;
+          }
+        `,
+            ),
+        );
+
+        document.head.appendChild(css);
+
+        if (dark) {
+            document.documentElement.classList.add("dark");
+        } else {
+            document.documentElement.classList.remove("dark");
+        }
+
+        window.getComputedStyle(css).opacity;
+        document.head.removeChild(css);
+
+        setGiscusTheme();
+    }
+
+    function preloadTheme() {
+        const userTheme = localStorage.theme;
+
+        if (userTheme === "light" || userTheme === "dark") {
+            toggleTheme(userTheme === "dark");
+        } else {
+            toggleTheme(
+                window.matchMedia("(prefers-color-scheme: dark)").matches,
+            );
+        }
+    }
+
+    function addCopyCodeButtons() {
+        let copyButtonLabel = "📋";
+        let codeBlocks = Array.from(document.querySelectorAll("pre"));
+
+        async function copyCode(codeBlock, copyButton) {
+            const codeText = codeBlock.innerText;
+            const buttonText = copyButton.innerText;
+            const textToCopy = codeText.replace(buttonText, "");
+
+            await navigator.clipboard.writeText(textToCopy);
+            copyButton.innerText = "✅";
+
+            setTimeout(() => {
+                copyButton.innerText = copyButtonLabel;
+            }, 2000);
+        }
+
+        for (let codeBlock of codeBlocks) {
+            const wrapper = document.createElement("div");
+            wrapper.style.position = "relative";
+
+            const copyButton = document.createElement("button");
+            copyButton.innerText = copyButtonLabel;
+            copyButton.classList = "copy-code";
+
+            codeBlock.setAttribute("tabindex", "0");
+            codeBlock.appendChild(copyButton);
+
+            codeBlock.parentNode.insertBefore(wrapper, codeBlock);
+            wrapper.appendChild(codeBlock);
+
+            copyButton?.addEventListener("click", async () => {
+                await copyCode(codeBlock, copyButton);
+            });
+        }
+    }
+
+    const setGiscusTheme = () => {
+        const giscus = document.querySelector(".giscus-frame");
+
+        const isDark = document.documentElement.classList.contains("dark");
+
+        if (giscus) {
+            const url = new URL(giscus.src);
+            url.searchParams.set("theme", isDark ? "dark" : "light");
+            giscus.src = url.toString();
+        }
+    };
+
+    document.addEventListener("DOMContentLoaded", () => init());
+    document.addEventListener("astro:after-swap", () => init());
+    preloadTheme();
+</script><link rel="stylesheet" href="/_astro/_subject_.CmU_Tg_r.css">
+<style>summary[data-astro-cid-xvrfupwn]{cursor:pointer;border-top-left-radius:.5rem;border-top-right-radius:.5rem;padding:.375rem .75rem;font-weight:500;transition-property:color,background-color,border-color,text-decoration-color,fill,stroke;transition-timing-function:cubic-bezier(.4,0,.2,1);transition-duration:.15s}summary[data-astro-cid-xvrfupwn]:hover{background-color:#0000000d}summary[data-astro-cid-xvrfupwn]:hover:is(.dark *){background-color:#ffffff0d}details[data-astro-cid-xvrfupwn][open] summary[data-astro-cid-xvrfupwn]{background-color:#0000000d}details[data-astro-cid-xvrfupwn][open] summary[data-astro-cid-xvrfupwn]:is(.dark *){background-color:#ffffff0d}
+</style><script type="module" src="/_astro/hoisted.DzxSAGjc.js"></script></head> <body> <header data-astro-transition-persist="astro-l7r54iwe-1"> <div class="mx-auto max-w-screen-sm px-3"> <div class="flex flex-wrap justify-between gap-y-2"> <a href="/" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out">  <div class="font-semibold"> rezvan.xyz </div>  </a> <nav class="flex items-center gap-1 text-sm"> <a href="/posts" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> posts </a> <span> / </span> <a href="/chalmers" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> chalmers </a> <span> / </span> <a href="/cityu" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> cityu </a> <span> / </span> <a href="/pdf/cv/cv.pdf" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> cv </a> <span> / </span> <button id="magnifying-glass" aria-label="Search" class="flex items-center rounded border border-black/15 bg-neutral-100 px-2 py-1 text-xs transition-colors duration-300 ease-in-out hover:bg-black/5 hover:text-black focus-visible:bg-black/5 focus-visible:text-black dark:border-white/20 dark:bg-neutral-900 dark:hover:bg-white/5 dark:hover:text-white dark:focus-visible:bg-white/5 dark:focus-visible:text-white"> <svg height="16" stroke-linejoin="round" viewBox="0 0 16 16" width="16" style="color: currentcolor;"><path fill-rule="evenodd" clip-rule="evenodd" d="M3.5 7C3.5 5.067 5.067 3.5 7 3.5C8.933 3.5 10.5 5.067 10.5 7C10.5 7.88461 10.1718 8.69256 9.63058 9.30876L9.30876 9.63058C8.69256 10.1718 7.88461 10.5 7 10.5C5.067 10.5 3.5 8.933 3.5 7ZM9.96544 11.0261C9.13578 11.6382 8.11014 12 7 12C4.23858 12 2 9.76142 2 7C2 4.23858 4.23858 2 7 2C9.76142 2 12 4.23858 12 7C12 8.11014 11.6382 9.13578 11.0261 9.96544L14.0303 12.9697L14.5607 13.5L13.5 14.5607L12.9697 14.0303L9.96544 11.0261Z" fill="currentColor"></path></svg>
+&nbsp;Search
+</button> </nav> </div> </div> </header> <main>  <div class="mx-auto max-w-screen-sm px-3"> <div class="animate"> <a href="/cityu/mne3115" class="not-prose group relative flex w-fit flex-nowrap rounded border border-black/15 py-1.5 pl-7 pr-3 transition-colors duration-300 ease-in-out hover:bg-black/5 hover:text-black focus-visible:bg-black/5 focus-visible:text-black dark:border-white/20 dark:hover:bg-white/5 dark:hover:text-white dark:focus-visible:bg-white/5 dark:focus-visible:text-white"> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="absolute left-2 top-1/2 size-4 -translate-y-1/2 fill-none stroke-current stroke-2"> <line x1="5" y1="12" x2="19" y2="12" class="translate-x-2 scale-x-0 transition-transform duration-300 ease-in-out group-hover:translate-x-0 group-hover:scale-x-100 group-focus-visible:translate-x-0 group-focus-visible:scale-x-100"></line> <polyline points="12 5 5 12 12 19" class="translate-x-1 transition-transform duration-300 ease-in-out group-hover:translate-x-0 group-focus-visible:translate-x-0"></polyline> </svg> <div class="text-sm"> Back to microelectromechanical systems </div> </a> </div> <div class="my-10 space-y-1"> <div class="animate flex items-center gap-1.5"> <div class="font-base text-sm"> MNE3115 </div>
+&bull;
+<div class="font-base text-sm"> <time datetime="2024-09-27T00:00:00.000Z"> September 27, 2024 </time> </div> 
+&bull;
+<div class="font-base text-sm"> 7 min read </div> </div> <h1 class="animate text-3xl font-semibold text-black dark:text-white"> Part 3 - Thin Film Growth and Deposition </h1> </div> <details open class="animate rounded-lg border border-black/15 dark:border-white/20" data-astro-cid-xvrfupwn> <summary data-astro-cid-xvrfupwn>Table of Contents</summary> <nav class="" data-astro-cid-xvrfupwn> <ul class="py-3" data-astro-cid-xvrfupwn> <li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#the-thin-film" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> The Thin Film </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#oxidation" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Oxidation </a> <ul class="translate-x-3"> <li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#oxidation-equipment" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Oxidation Equipment </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#oxidation-process" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Oxidation Process </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#modeling-thermal-oxidation-of-silicon" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Modeling Thermal Oxidation of Silicon </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#oxidation-propety" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Oxidation Propety </a>  </li> </ul> </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#chemical-vapor-deposition-cvd" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Chemical Vapor Deposition (CVD) </a> <ul class="translate-x-3"> <li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#film-conformity" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Film Conformity </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#low-pressure-cvd-lpcvd" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Low-Pressure CVD (LPCVD) </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#plasma-enhanced-cvd-pecvd" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Plasma-Enhanced CVD (PECVD) </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#comparison-of-cvd-methods" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Comparison of CVD Methods </a>  </li> </ul> </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#physical-vapor-deposition-pvd" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Physical Vapor Deposition (PVD) </a> <ul class="translate-x-3"> <li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#thermal-evaporation" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Thermal Evaporation </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#e-beam-evaporation" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> E-Beam Evaporation </a>  </li> </ul> </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#physical-vapor-deposition-pvd-cont" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Physical Vapor Deposition (PVD) (cont.) </a> <ul class="translate-x-3"> <li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#sputtering" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Sputtering </a> <ul class="translate-x-3"> <li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#plasmas-and-glow-discharges" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Plasmas and Glow Discharges </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#non-reactive-sputtering-vs-reactive-sputtering" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Non-Reactive Sputtering VS. Reactive Sputtering </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#properties-of-sputtering" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Properties of Sputtering </a>  </li> </ul> </li> </ul> </li> </ul> </nav> </details> <article class="animate"> <h3 id="the-thin-film">The Thin Film</h3>
+<p>Thin film formation is an important step to provide solid material for micromachining.</p>
+<p>There are a few methods and approaches for film formation, and we will cover three different ways.</p>
+<h3 id="oxidation">Oxidation</h3>
+<p>One method to grow a film of $\text{SiO}_2$ from a polysilicon film or silicon wafer of single-crystal silicon is to heat the silicon in an oxygen-rich environment. This process is called oxidation.</p>
+<p>The high temperature process is usually between $700$ to $1200^{\circ}C$.</p>
+<p>The purpose of oxidation is to create both electrical and thermal isolation, biocompatibility and as the sacrificial layer.</p>
+<h4 id="oxidation-equipment">Oxidation Equipment</h4>
+<p>Thermal oxidation is carried out in a high temperature furnace tube.
+The tubes are usually made of <strong>quartz or silicon carbide</strong>.</p>
+<!-- ![pic later]() -->
+<h4 id="oxidation-process">Oxidation Process</h4>
+<p>Oxidation is the process to grow a thin $\text{SiO}_2$ film.
+$$
+\text{Si} + \text{O}_2 \rightarrow \text{SiO}_2 \ | \ \text{Dry Oxidation} \newline
+\text{Si} + 2\text{H}_2\text{O} \rightarrow \text{SiO}_2 + 2\text{H}_2 \ | \ \text{Wet Oxidation}
+$$</p>
+<p>Important to note is that silicon is consumed during the oxidation process, and the thickness of the oxide layer is proportional to the consumed silicon.</p>
+<h4 id="modeling-thermal-oxidation-of-silicon">Modeling Thermal Oxidation of Silicon</h4>
+<p>The oxidation occurs at the $\text{Si}-\text{SiO}_2$ interface.
+$\text{O}_2$ or $\text{H}_2\text{O}$ (gas) must diffuse through the grown oxide film.</p>
+<p>The oxidation rate will decrease with time and the increased oxide thickness.</p>
+<p>Let $N$ be the surface concentration of the oxidant.</p>
+<p>The diffusion flux of oxidizing species,
+$$
+J_D = -D \frac{\partial N}{\partial x} \cong \frac{D(N_0 - N_1)}{h}.
+$$</p>
+<p>The flux of reaction rate,
+$$
+J_R = kN_1 \ | \ [mol/m^2s].
+$$</p>
+<p>At steady state,
+$$
+J_D = J_R = J = kN_1 \newline
+-D \frac{\partial N}{\partial x} \cong \frac{D(N_0 - N_1)}{h} = kN_1 \newline
+N_1 = \frac{DN_0}{kh + D}
+$$</p>
+<p>Which means,
+$$
+J = \frac{DN_0}{h + D / k}.
+$$</p>
+<p>The film growth rate,
+$$
+vJ = vkN_1 = \frac{dh}{dt},
+$$</p>
+<p>where $v$ (= $27.3 \text{ cm}^3/\text{mol}$) is the molar volume of the oxide.</p>
+<p>$$
+\frac{dh}{dt} = \frac{vDN_0}{h + D / k}.
+$$</p>
+<p>If we integrate with respect to time,
+$$
+t = \frac{h}{kN_0v} + \frac{h^2}{2DN_0v}
+$$</p>
+<p>where $h(t = 0) = 0$.</p>
+<p>For thin films,
+$$
+h \approx kN_0vt \ | \ \text{reaction limit}
+$$</p>
+<p>For thick films,
+$$
+h \approx \sqrt{2DN_0vt} \ | \ \text{diffusion limit}
+$$</p>
+<h4 id="oxidation-propety">Oxidation Propety</h4>
+<p><strong>Thin</strong> oxide is usually grown using <strong>dry oxidation</strong>.
+<strong>Thick</strong> oxide is usually grown using <strong>wet oxidation</strong>.</p>
+<p>Dry oxidation results in slower growth rate, but high density, higher breakdown voltage.</p>
+<ul>
+<li>Advantages
+<ul>
+<li>Easy and cost-effective.</li>
+<li>Good quality.</li>
+</ul>
+</li>
+<li>Disadvantages
+<ul>
+<li>High temperature → Thermal stress.</li>
+<li>Slow process.</li>
+<li>Silicon compounds only.</li>
+</ul>
+</li>
+</ul>
+<h3 id="chemical-vapor-deposition-cvd">Chemical Vapor Deposition (CVD)</h3>
+<p>Compared to oxidation, deposition <em>does not</em> consume the substrate.</p>
+<p>It is a chemical process that is driven by chemical reactions and decomposition of gases.</p>
+<p>The slowest step dominates the growth rate, so it is a reaction-rate limited process and mass-transport limited process.</p>
+<h4 id="film-conformity">Film Conformity</h4>
+<p>When mass-transport is limited, the growth rate in each direction is dependent on the direction of gas molecule flux incident on the surface, which is a function of acceptance angle.</p>
+<p>Poor thickness uniformity and conformity (step coverage). This also requires high tempurates.</p>
+<h4 id="low-pressure-cvd-lpcvd">Low-Pressure CVD (LPCVD)</h4>
+<p>LPCVD is a method to deposit thin films at low pressure.</p>
+<p>This requires high temperature ($480$ to $1200^{\circ}C$), and a pressure level typically $100$ to $300$ m-torr (Long mean free path, high diffusivity and, good step coverage).</p>
+<p>This is conducted in reaction-limited regime.
+This will yield better film uniformity, less concern about the wafer location and orientation, ergo higher productivity.
+Also less pin-hole problems, gas phase product is quickly removed.</p>
+<p>This is commonly used for MEMS &#x26; IC fabrication.</p>
+<h4 id="plasma-enhanced-cvd-pecvd">Plasma-Enhanced CVD (PECVD)</h4>
+<p>Plasma combined with thermal energy to crack the molecules.
+This will lead to a faster reaction, also requires lower temperature, only in the $100$ to $400^{\circ}C$ range.</p>
+<p>This is also conducted in reaction-limited regime.</p>
+<p>However, the deposited film may be contaminated by the product, which will require periodic cleaning.</p>
+<h4 id="comparison-of-cvd-methods">Comparison of CVD Methods</h4>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Process</th><th>Advantages</th><th>Disadvantages</th><th>Applications</th></tr></thead><tbody><tr><td>LPCVD</td><td>Excellent purity, uniformity, and conformity. Large productivity.</td><td>High temperature, low deposition</td><td>Oxide, Poly Silicon, Silicon Nitride</td></tr><tr><td>PECVD</td><td>Low temperature, fast deposition, good conformity.</td><td>Chemical and particulate contamination</td><td>Metal, Poly Silicon, Oxide, Silicon Nitride</td></tr></tbody></table>
+<h3 id="physical-vapor-deposition-pvd">Physical Vapor Deposition (PVD)</h3>
+<p>PVD is a method to deposit thin films by physical means instead of chemical reactions.</p>
+<p>In PVD process, the film is deposited via the following steps,</p>
+<ul>
+<li>The material to be deposited is physically converted to vapor</li>
+<li>The vapor is transported from the source to the substrate in a low-pressure environment (i.e. vacuum is required, also to prevent oxidation and to get better step coverage).</li>
+<li>The vapor condensed on the substrate to form a thin film.</li>
+</ul>
+<h4 id="thermal-evaporation">Thermal Evaporation</h4>
+<p>Place wafers upside down to reduce particulates and face the source.</p>
+<p>Using thermal energy to create vapor, however we might have possible contamination from the heater.</p>
+<p>It is also hard to deposit thick films, and hard to control the thickness.</p>
+<p>This way of evaporation is not for alloy deposition.</p>
+<h4 id="e-beam-evaporation">E-Beam Evaporation</h4>
+<p>E-beam evaporation is a method to deposit thin films by using an electron beam to heat the source material.</p>
+<p>We have a focused electron beam to locally heat the source.
+This can be used to heat/evaporate even high-melting-point materials.</p>
+<p>Note, centripetal acceleration causes electrons to emit x-rays, so we need to shield the chamber.</p>
+<h3 id="physical-vapor-deposition-pvd-cont">Physical Vapor Deposition (PVD) (cont.)</h3>
+<p>Film is deposited by the condensation of a vapor onto a cooler substrate.</p>
+<p>Vapor generation methods include,</p>
+<ul>
+<li>Boiling vapor of a molten metal (thermal or e-beam evaporation)</li>
+<li>Material physically knocked, bombarded, or sputtered off (sputtering)</li>
+</ul>
+<p>Thickness depends on angle between surface and the incoming source flux → this “conformity” issue.</p>
+<h4 id="sputtering">Sputtering</h4>
+<p>Instead of using thermal energy, sputter deposition is a process to form films on the substrate from atoms that are generated by the bombardment of highly energized particles.</p>
+<p>Ions generated by a plasma are accelerated towards the target material, and the momentum transfer causes the target material to be ejected.</p>
+<p>Target ions are ejected by the ions, and then transported to the substrate.
+Atoms condense and form a thin film on the substrate, this can be used for alloys.</p>
+<h5 id="plasmas-and-glow-discharges">Plasmas and Glow Discharges</h5>
+<p>Plasma is partially ionized gas mixture with equal number of positive (gas+) and negative (e_) charges.</p>
+<p>A glow discharge is a sustained plasma created by applying a voltage between two electrodes in a gas-filled chamber.</p>
+<h5 id="non-reactive-sputtering-vs-reactive-sputtering">Non-Reactive Sputtering VS. Reactive Sputtering</h5>
+<p>In Non-reactive sputtering, the sputtering gas is not to be incorporated into the film.
+By far, Argon is the most popular gas.</p>
+<p>In Reactive sputtering, the sputtering gas is to be incorporated into the film.
+This forms alloys such as $\text{Al}_2\text{O}_3, \text{Si}_x\text{N}_y$ and $\text{SiO}_2$.</p>
+<p>Common choices of gas are $\text{O}_2, \text{N}_2, \text{NH}_3$.</p>
+<h5 id="properties-of-sputtering">Properties of Sputtering</h5>
+<ul>
+<li>Advantages
+<ul>
+<li>Better uniformity, adhesion and conformity (plane source).</li>
+<li>Control of alloy composition.</li>
+<li>Better control of film thickness.</li>
+</ul>
+</li>
+<li>Disadvantages
+<ul>
+<li>Ion bombardment is critical for some materials.</li>
+<li>Higher residual stress.</li>
+<li>Higher impurity due to the low vacuum.</li>
+</ul>
+</li>
+</ul> <div class="mt-24"> <div class="grid grid-cols-2 gap-1.5 sm:gap-3"> <a href="/cityu/mne3115/mne3115_2" class="group relative flex flex-nowrap rounded-lg border border-black/15 px-4 py-3 pl-10 no-underline transition-colors duration-300 ease-in-out hover:bg-black/5 hover:text-black focus-visible:bg-black/5 focus-visible:text-black dark:border-white/20 dark:hover:bg-white/5 dark:hover:text-white dark:focus-visible:bg-white/5 dark:focus-visible:text-white"> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="absolute left-2 top-1/2 size-5 -translate-y-1/2 fill-none stroke-current stroke-2"> <line x1="5" y1="12" x2="19" y2="12" class="translate-x-3 scale-x-0 transition-transform duration-300 ease-in-out group-hover:translate-x-0 group-hover:scale-x-100 group-focus-visible:translate-x-0 group-focus-visible:scale-x-100"></line> <polyline points="12 5 5 12 12 19" class="translate-x-1 transition-transform duration-300 ease-in-out group-hover:translate-x-0 group-focus-visible:translate-x-0"></polyline> </svg> <div class="flex items-center text-sm"> Part 2 - Photolithography </div> </a> <div class="invisible"></div> </div> </div> <div class="mt-24"> <div class="giscus"></div> <script data-astro-rerun src="https://giscus.app/client.js" data-repo="rezaarezvan/rezvan.xyz" data-repo-id="R_kgDOHvQr3w" data-category="General" data-category-id="DIC_kwDOHvQr384CiWVC" data-mapping="pathname" data-strict="0" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="bottom" data-theme="preferred_color_scheme" data-lang="en" data-loading="lazy" crossorigin="anonymous" async></script> </div> </article> </div>  </main> <footer class="animate"> <div class="mx-auto max-w-screen-sm px-3"> <div class="relative"> <div class="absolute -top-12 right-0"> <button id="back-to-top" class="group relative flex w-fit flex-nowrap rounded border border-black/15 py-1.5 pl-8 pr-3 transition-colors duration-300 ease-in-out hover:bg-black/5 hover:text-black focus-visible:bg-black/5 focus-visible:text-black dark:border-white/20 dark:hover:bg-white/5 dark:hover:text-white dark:focus-visible:bg-white/5 dark:focus-visible:text-white"> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="absolute left-2 top-1/2 size-4 -translate-y-1/2 rotate-90 fill-none stroke-current stroke-2"> <line x1="5" y1="12" x2="19" y2="12" class="translate-x-2 scale-x-0 transition-transform duration-300 ease-in-out group-hover:translate-x-0 group-hover:scale-x-100 group-focus-visible:translate-x-0 group-focus-visible:scale-x-100"></line> <polyline points="12 5 5 12 12 19" class="translate-x-1 transition-transform duration-300 ease-in-out group-hover:translate-x-0 group-focus-visible:translate-x-0"></polyline> </svg> <div class="text-sm">Back to top</div> </button> </div> </div> <div class="flex items-center justify-between"> <div>&copy; 2024 • rezvan.xyz </div> <div class="flex flex-wrap items-center gap-1.5"> <button id="light-theme-button" aria-label="Light theme" class="group flex size-9 items-center justify-center rounded border border-black/15 hover:bg-black/5 focus-visible:bg-black/5 dark:border-white/20 dark:hover:bg-white/5 dark:focus-visible:bg-white/5"> <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="transition-colors duration-300 ease-in-out group-hover:animate-pulse group-hover:stroke-black group-focus-visible:animate-pulse group-focus-visible:stroke-black group-hover:dark:stroke-white dark:group-focus-visible:stroke-white"> <circle cx="12" cy="12" r="5"></circle> <line x1="12" y1="1" x2="12" y2="3"></line> <line x1="12" y1="21" x2="12" y2="23"></line> <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line> <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line> <line x1="1" y1="12" x2="3" y2="12"></line> <line x1="21" y1="12" x2="23" y2="12"></line> <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line> <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line> </svg> </button> <button id="dark-theme-button" aria-label="Dark theme" class="group flex size-9 items-center justify-center rounded border border-black/15 hover:bg-black/5 focus-visible:bg-black/5 dark:border-white/20 dark:hover:bg-white/5 dark:focus-visible:bg-white/5"> <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="transition-colors duration-300 ease-in-out group-hover:animate-pulse group-hover:stroke-black group-focus-visible:animate-pulse group-focus-visible:stroke-black group-hover:dark:stroke-white dark:group-focus-visible:stroke-white"> <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path> </svg> </button> <button id="system-theme-button" aria-label="System theme" class="group flex size-9 items-center justify-center rounded border border-black/15 hover:bg-black/5 focus-visible:bg-black/5 dark:border-white/20 dark:hover:bg-white/5 dark:focus-visible:bg-white/5"> <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="transition-colors duration-300 ease-in-out group-hover:animate-pulse group-hover:stroke-black group-focus-visible:animate-pulse group-focus-visible:stroke-black group-hover:dark:stroke-white dark:group-focus-visible:stroke-white"> <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect> <line x1="8" y1="21" x2="16" y2="21"></line> <line x1="12" y1="17" x2="12" y2="21"></line> </svg> </button> </div> </div> </div> </footer> <aside data-pagefind-ignore> <div id="backdrop" class="bg-[rgba(0, 0, 0, 0.5] invisible fixed left-0 top-0 z-50 flex h-screen w-full justify-center p-6 backdrop-blur-sm" data-astro-transition-persist="astro-3snakcvo-2"> <div id="pagefind-container" class="m-0 flex h-fit max-h-[80%] w-full max-w-screen-sm flex-col overflow-auto rounded border border-black/15 bg-neutral-100 p-2 px-4 py-3 shadow-lg dark:border-white/20 dark:bg-neutral-900"> <div id="search" class="pagefind-ui pagefind-init" data-pagefind-ui data-bundle-path="/pagefind/" data-ui-options="{&#34;showImages&#34;:false,&#34;excerptLength&#34;:15,&#34;resetStyles&#34;:false}"></div>  <div class="mr-2 pb-1 pt-4 text-right text-xs dark:prose-invert">
+Press <span class="prose text-xs dark:prose-invert"><kbd class="">Esc</kbd></span> or click anywhere to close
+</div> </div> </div> </aside> <script>
+  const magnifyingGlass = document.getElementById("magnifying-glass");
+  const backdrop = document.getElementById("backdrop");
+
+  function openPagefind() {
+    const searchDiv = document.getElementById("search");
+    const search = searchDiv.querySelector("input");
+    setTimeout(() => {
+      search.focus();
+    }, 0);
+    backdrop?.classList.remove("invisible");
+    backdrop?.classList.add("visible");
+  }
+
+  function closePagefind() {
+    const search = document.getElementById("search");
+    search.value = "";
+    backdrop?.classList.remove("visible");
+    backdrop?.classList.add("invisible");
+  }
+
+  // open pagefind
+  magnifyingGlass?.addEventListener("click", () => {
+    openPagefind();
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "/") {
+      e.preventDefault();
+      openPagefind();
+    } else if ((e.metaKey || e.ctrlKey) && e.key === "k") {
+      e.preventDefault();
+      openPagefind();
+    }
+  });
+
+  // close pagefind
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" || e.keyCode === 27) {
+      closePagefind();
+    }
+  });
+
+  // close pagefind when searched result(link) clicked
+  document.addEventListener("click", (event) => {
+    if (event.target.classList.contains("pagefind-ui__result-link")) {
+      closePagefind();
+    }
+  });
+
+  backdrop?.addEventListener("click", (event) => {
+    if (!event.target.closest("#pagefind-container")) {
+      closePagefind();
+    }
+  });
+
+  // prevent form submission
+  const form = document.getElementById("form");
+  form?.addEventListener("submit", (event) => {
+    event.preventDefault();
+  });
+</script>  </body></html>
