@@ -1,0 +1,585 @@
+<!DOCTYPE html><html lang="en"> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" type="image/icon" href="/favicon.ico"><meta name="generator" content="Astro v4.11.5"><!-- Canonical URL --><link rel="canonical" href="https://rezvan.xyz/cityu/cs4487/cs4487_5/"><!-- Primary Meta Tags --><title>Part 5 - Regression | machine learning | rezvan.xyz</title><meta name="title" content="Part 5 - Regression | machine learning | rezvan.xyz"><meta name="description"><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://rezvan.xyz/cityu/cs4487/cs4487_5/"><meta property="og:title" content="Part 5 - Regression | machine learning | rezvan.xyz"><meta property="og:description"><meta property="og:image" content="https://rezvan.xyz/favicon.ico"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://rezvan.xyz/cityu/cs4487/cs4487_5/"><meta property="twitter:title" content="Part 5 - Regression | machine learning | rezvan.xyz"><meta property="twitter:description"><meta property="twitter:image" content="https://rezvan.xyz/favicon.ico"><!-- PageFind --><link href="/pagefind/pagefind-ui.css" rel="stylesheet"><script src="/pagefind/pagefind-ui.js"></script><!-- KaTeX support --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script><!-- inline KaTeX --><script>
+    function renderKaTeX() {
+        if (typeof renderMathInElement !== "undefined") {
+            renderMathInElement(document.body, {
+                delimiters: [
+                    { left: "$$", right: "$$", display: true },
+                    { left: "$", right: "$", display: false },
+                ],
+            });
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", renderKaTeX);
+    document.addEventListener("astro:after-swap", renderKaTeX);
+</script><meta name="astro-view-transitions-enabled" content="true"><meta name="astro-view-transitions-fallback" content="animate"><script>
+    function init() {
+        preloadTheme();
+        onScroll();
+        animate();
+        updateThemeButtons();
+        addCopyCodeButtons();
+        setGiscusTheme();
+
+        const backToTop = document.getElementById("back-to-top");
+        backToTop?.addEventListener("click", (event) => scrollToTop(event));
+
+        const backToPrev = document.getElementById("back-to-prev");
+        backToPrev?.addEventListener("click", () => window.history.back());
+
+        const lightThemeButton = document.getElementById("light-theme-button");
+        lightThemeButton?.addEventListener("click", () => {
+            localStorage.setItem("theme", "light");
+            toggleTheme(false);
+            updateThemeButtons();
+        });
+
+        const darkThemeButton = document.getElementById("dark-theme-button");
+        darkThemeButton?.addEventListener("click", () => {
+            localStorage.setItem("theme", "dark");
+            toggleTheme(true);
+            updateThemeButtons();
+        });
+
+        const systemThemeButton = document.getElementById(
+            "system-theme-button",
+        );
+        systemThemeButton?.addEventListener("click", () => {
+            localStorage.setItem("theme", "system");
+            toggleTheme(
+                window.matchMedia("(prefers-color-scheme: dark)").matches,
+            );
+            updateThemeButtons();
+        });
+
+        window
+            .matchMedia("(prefers-color-scheme: dark)")
+            .addEventListener("change", (event) => {
+                if (localStorage.theme === "system") {
+                    toggleTheme(event.matches);
+                }
+            });
+
+        document.addEventListener("scroll", onScroll);
+    }
+
+    function updateThemeButtons() {
+        const theme = localStorage.getItem("theme");
+        const lightThemeButton = document.getElementById("light-theme-button");
+        const darkThemeButton = document.getElementById("dark-theme-button");
+        const systemThemeButton = document.getElementById(
+            "system-theme-button",
+        );
+
+        function removeActiveButtonTheme(button) {
+            button?.classList.remove("bg-black/5");
+            button?.classList.remove("dark:bg-white/5");
+        }
+
+        function addActiveButtonTheme(button) {
+            button?.classList.add("bg-black/5");
+            button?.classList.add("dark:bg-white/5");
+        }
+
+        removeActiveButtonTheme(lightThemeButton);
+        removeActiveButtonTheme(darkThemeButton);
+        removeActiveButtonTheme(systemThemeButton);
+
+        if (theme === "light") {
+            addActiveButtonTheme(lightThemeButton);
+        } else if (theme === "dark") {
+            addActiveButtonTheme(darkThemeButton);
+        } else {
+            addActiveButtonTheme(systemThemeButton);
+        }
+    }
+
+    function animate() {
+        const animateElements = document.querySelectorAll(".animate");
+
+        animateElements.forEach((element, index) => {
+            setTimeout(() => {
+                element.classList.add("show");
+            }, index * 100);
+        });
+    }
+
+    function onScroll() {
+        if (window.scrollY > 0) {
+            document.documentElement.classList.add("scrolled");
+        } else {
+            document.documentElement.classList.remove("scrolled");
+        }
+    }
+
+    function scrollToTop(event) {
+        event.preventDefault();
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth",
+        });
+    }
+
+    function toggleTheme(dark) {
+        const css = document.createElement("style");
+
+        css.appendChild(
+            document.createTextNode(
+                `* {
+             -webkit-transition: none !important;
+             -moz-transition: none !important;
+             -o-transition: none !important;
+             -ms-transition: none !important;
+             transition: none !important;
+          }
+        `,
+            ),
+        );
+
+        document.head.appendChild(css);
+
+        if (dark) {
+            document.documentElement.classList.add("dark");
+        } else {
+            document.documentElement.classList.remove("dark");
+        }
+
+        window.getComputedStyle(css).opacity;
+        document.head.removeChild(css);
+
+        setGiscusTheme();
+    }
+
+    function preloadTheme() {
+        const userTheme = localStorage.theme;
+
+        if (userTheme === "light" || userTheme === "dark") {
+            toggleTheme(userTheme === "dark");
+        } else {
+            toggleTheme(
+                window.matchMedia("(prefers-color-scheme: dark)").matches,
+            );
+        }
+    }
+
+    function addCopyCodeButtons() {
+        let copyButtonLabel = "📋";
+        let codeBlocks = Array.from(document.querySelectorAll("pre"));
+
+        async function copyCode(codeBlock, copyButton) {
+            const codeText = codeBlock.innerText;
+            const buttonText = copyButton.innerText;
+            const textToCopy = codeText.replace(buttonText, "");
+
+            await navigator.clipboard.writeText(textToCopy);
+            copyButton.innerText = "✅";
+
+            setTimeout(() => {
+                copyButton.innerText = copyButtonLabel;
+            }, 2000);
+        }
+
+        for (let codeBlock of codeBlocks) {
+            const wrapper = document.createElement("div");
+            wrapper.style.position = "relative";
+
+            const copyButton = document.createElement("button");
+            copyButton.innerText = copyButtonLabel;
+            copyButton.classList = "copy-code";
+
+            codeBlock.setAttribute("tabindex", "0");
+            codeBlock.appendChild(copyButton);
+
+            codeBlock.parentNode.insertBefore(wrapper, codeBlock);
+            wrapper.appendChild(codeBlock);
+
+            copyButton?.addEventListener("click", async () => {
+                await copyCode(codeBlock, copyButton);
+            });
+        }
+    }
+
+    const setGiscusTheme = () => {
+        const giscus = document.querySelector(".giscus-frame");
+
+        const isDark = document.documentElement.classList.contains("dark");
+
+        if (giscus) {
+            const url = new URL(giscus.src);
+            url.searchParams.set("theme", isDark ? "dark" : "light");
+            giscus.src = url.toString();
+        }
+    };
+
+    document.addEventListener("DOMContentLoaded", () => init());
+    document.addEventListener("astro:after-swap", () => init());
+    preloadTheme();
+</script><link rel="stylesheet" href="/_astro/_subject_.DPh3UX5U.css">
+<style>summary[data-astro-cid-xvrfupwn]{cursor:pointer;border-top-left-radius:.5rem;border-top-right-radius:.5rem;padding:.375rem .75rem;font-weight:500;transition-property:color,background-color,border-color,text-decoration-color,fill,stroke;transition-timing-function:cubic-bezier(.4,0,.2,1);transition-duration:.15s}summary[data-astro-cid-xvrfupwn]:hover{background-color:#0000000d}summary[data-astro-cid-xvrfupwn]:hover:is(.dark *){background-color:#ffffff0d}details[data-astro-cid-xvrfupwn][open] summary[data-astro-cid-xvrfupwn]{background-color:#0000000d}details[data-astro-cid-xvrfupwn][open] summary[data-astro-cid-xvrfupwn]:is(.dark *){background-color:#ffffff0d}
+</style><script type="module" src="/_astro/hoisted.DzxSAGjc.js"></script></head> <body> <header data-astro-transition-persist="astro-l7r54iwe-1"> <div class="mx-auto max-w-screen-sm px-3"> <div class="flex flex-wrap justify-between gap-y-2"> <a href="/" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out">  <div class="font-semibold"> rezvan.xyz </div>  </a> <nav class="flex items-center gap-1 text-sm"> <a href="/posts" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> posts </a> <span> / </span> <a href="/chalmers" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> chalmers </a> <span> / </span> <a href="/cityu" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> cityu </a> <span> / </span> <a href="/pdf/cv/cv.pdf" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> cv </a> <span> / </span> <button id="magnifying-glass" aria-label="Search" class="flex items-center rounded border border-black/15 bg-neutral-100 px-2 py-1 text-xs transition-colors duration-300 ease-in-out hover:bg-black/5 hover:text-black focus-visible:bg-black/5 focus-visible:text-black dark:border-white/20 dark:bg-neutral-900 dark:hover:bg-white/5 dark:hover:text-white dark:focus-visible:bg-white/5 dark:focus-visible:text-white"> <svg height="16" stroke-linejoin="round" viewBox="0 0 16 16" width="16" style="color: currentcolor;"><path fill-rule="evenodd" clip-rule="evenodd" d="M3.5 7C3.5 5.067 5.067 3.5 7 3.5C8.933 3.5 10.5 5.067 10.5 7C10.5 7.88461 10.1718 8.69256 9.63058 9.30876L9.30876 9.63058C8.69256 10.1718 7.88461 10.5 7 10.5C5.067 10.5 3.5 8.933 3.5 7ZM9.96544 11.0261C9.13578 11.6382 8.11014 12 7 12C4.23858 12 2 9.76142 2 7C2 4.23858 4.23858 2 7 2C9.76142 2 12 4.23858 12 7C12 8.11014 11.6382 9.13578 11.0261 9.96544L14.0303 12.9697L14.5607 13.5L13.5 14.5607L12.9697 14.0303L9.96544 11.0261Z" fill="currentColor"></path></svg>
+&nbsp;Search
+</button> </nav> </div> </div> </header> <main>  <div class="mx-auto max-w-screen-sm px-3"> <div class="animate"> <a href="/cityu/cs4487" class="not-prose group relative flex w-fit flex-nowrap rounded border border-black/15 py-1.5 pl-7 pr-3 transition-colors duration-300 ease-in-out hover:bg-black/5 hover:text-black focus-visible:bg-black/5 focus-visible:text-black dark:border-white/20 dark:hover:bg-white/5 dark:hover:text-white dark:focus-visible:bg-white/5 dark:focus-visible:text-white"> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="absolute left-2 top-1/2 size-4 -translate-y-1/2 fill-none stroke-current stroke-2"> <line x1="5" y1="12" x2="19" y2="12" class="translate-x-2 scale-x-0 transition-transform duration-300 ease-in-out group-hover:translate-x-0 group-hover:scale-x-100 group-focus-visible:translate-x-0 group-focus-visible:scale-x-100"></line> <polyline points="12 5 5 12 12 19" class="translate-x-1 transition-transform duration-300 ease-in-out group-hover:translate-x-0 group-focus-visible:translate-x-0"></polyline> </svg> <div class="text-sm"> Back to machine learning </div> </a> </div> <div class="my-10 space-y-1"> <div class="animate flex items-center gap-1.5"> <div class="font-base text-sm"> CS4487 </div>
+&bull;
+<div class="font-base text-sm"> <time datetime="2024-10-09T00:00:00.000Z"> October 09, 2024 </time> </div> 
+&bull;
+<div class="font-base text-sm"> 11 min read </div> </div> <h1 class="animate text-3xl font-semibold text-black dark:text-white"> Part 5 - Regression </h1> </div> <details open class="animate rounded-lg border border-black/15 dark:border-white/20" data-astro-cid-xvrfupwn> <summary data-astro-cid-xvrfupwn>Table of Contents</summary> <nav class="" data-astro-cid-xvrfupwn> <ul class="py-3" data-astro-cid-xvrfupwn> <li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#the-regression-task" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> The Regression Task </a> <ul class="translate-x-3"> <li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#example-curve-fitting" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Example: Curve Fitting </a>  </li> </ul> </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#the-regression-learning-problem" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> The Regression Learning Problem </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#linear-regression" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Linear Regression </a> <ul class="translate-x-3"> <li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#ordinary-least-squares-ols" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Ordinary Least Squares (OLS) </a> <ul class="translate-x-3"> <li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#solving-ols-for-one-feature" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Solving OLS For One Feature </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#general-ols-solution" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> General OLS Solution </a>  </li> </ul> </li> </ul> </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#connection-to-probabilistic-models" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Connection to Probabilistic Models </a> <ul class="translate-x-3"> <li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#more-on-linear-regression" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> More on Linear Regression </a>  </li> </ul> </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#regularized-linear-regression" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Regularized Linear Regression </a> <ul class="translate-x-3"> <li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#ridge-regression" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Ridge Regression </a> <ul class="translate-x-3"> <li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#but-why" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> But, Why? </a>  </li> </ul> </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#ridge-regression-closed-form-solution" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Ridge Regression Closed-Form Solution </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#lasso-regression" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Lasso Regression </a>  </li> </ul> </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#why-shrinkage" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Why Shrinkage? </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#linear-regression-summary" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Linear Regression Summary </a>  </li> </ul> </nav> </details> <article class="animate"> <h3 id="the-regression-task">The Regression Task</h3>
+<p>Definition of the regression task,</p>
+<blockquote>
+<p>Given a feature vector $\mathbf{x} \in \mathbb{R}^N$, predict its corresponding output vale $y \in \mathbb{R}$.</p>
+</blockquote>
+<h4 id="example-curve-fitting">Example: Curve Fitting</h4>
+<p>Given $M$ points sampled from some underlying curve (assuming no measurement noise), the goal is to find that curve.</p>
+<p>But let’s first think about this problem.</p>
+<ul>
+<li>Would a small handful of points work well, or them or the better?</li>
+<li>Given that the number of points are fixed, do their locations matter?</li>
+<li>Given a set of $M$ points, is curve fitting unique?</li>
+<li>Lastly, how do we determine a “seemingly best” curve, compared to other possibilities?</li>
+</ul>
+<p>I would say the answer to 1-3 are quite obvious, but the fourth one is the deal-breaker.</p>
+<p>Answers</p>
+<ul>
+<li>We always like more samples, if possible.</li>
+<li>Samples need to be representative or informative.</li>
+<li>Estimating continuous model from discrete data is an ill-posed problem and in most cases cannot be certain.</li>
+<li>You need to have some <em>criteria</em> to choose your preferred model.</li>
+</ul>
+<h3 id="the-regression-learning-problem">The Regression Learning Problem</h3>
+<p>Definition of the regression learning problem,</p>
+<blockquote>
+<p>Given a data set of example pairs $\mathcal{D} = \{(\mathbf{x}^{(i)}, y^{(i)}), i = 1, \ldots, M \}$ where $\mathbf{x}^{(i)} \in \mathbb{R}^N$ is a feature vector and $y^{(i)} \in \mathbb{R}$ is the output, learn a function $f : \mathbb{R}^N \mapsto \mathbb{R}$ that accurately predicts $y$ for any feature vector $\mathbf{x}$.</p>
+</blockquote>
+<p>Okay, so we have our goal defined. Let’s define our error.</p>
+<p>Definition of error measure, in this case the mean squared error (MSE),</p>
+<blockquote>
+<p>Given a data set of example pairs $\mathcal{D} = \{(\mathbf{x}^{(i)}, y^{(i)}), i = 1, \ldots, M \}$ and a function $f : \mathbb{R}^N \mapsto \mathbb{R}$, the MSE of $f$ on $\mathcal{D}$ is defined as,
+$$
+MSE(\mathcal{D}, f) = \frac{1}{M} \sum_{i=1}^{M} (y^{(i)} - f(\mathbf{x}^{(i)}))^2
+$$</p>
+</blockquote>
+<h3 id="linear-regression">Linear Regression</h3>
+<p>If we are in $1$-D, the output $y$ is a linear function of input feature $x$.
+I.e.,
+$$
+y = wx + b
+$$
+where $w$ is the slope and $b$ is the intercept.</p>
+<p>Let’s generalize this to $N$ dimensions.</p>
+<p>In the $N$-D case, the output $y$ is a linear combination of $N$ input features $x_1, x_2, \ldots, x_N$.
+I.e.,
+$$
+y = w_1x_1 + w_2x_2 + \ldots + w_Nx_N + w_0
+$$</p>
+<p>Or equivalently,
+$$
+y = \mathbf{w}^T \mathbf{x} + w_0 = \sum_{i=1}^{N} w_i x_i + w_0 = \sum_{i=0}^{N} w_i x_i \ \bigg\rvert \ x_0 = 1
+$$</p>
+<p>$\mathbf{x} \in \mathbb{R}^{N}$ is the vector of input values.</p>
+<p>$\mathbf{w} \in \mathbb{R}^{N}$ are the weights of the linear function and $w_0$ is the intercept (bias term).</p>
+<h4 id="ordinary-least-squares-ols">Ordinary Least Squares (OLS)</h4>
+<p>The linear function has form $f(\mathbf{x}) = \mathbf{w}^T \mathbf{x} + b$.</p>
+<p>How do we estimate the parameters $(\mathbf{w}, b)$ from the data?</p>
+<p>Ordinary Least Squares (OLS) selects the linear regression parameters to minimize the MSE on the training data set.
+$$
+\mathbf{w}^{\star}, b^{\star} = \underset{\mathbf{w}, b}{\arg \min} \frac{1}{M} \sum_{i=1}^{M} (y^{(i)} - \mathbf{w}^T \mathbf{x}^{(i)} - b)^2
+$$</p>
+<h5 id="solving-ols-for-one-feature">Solving OLS For One Feature</h5>
+<p>Let’s solve this for one feature, i.e., take the derivate of the objective with respect to $w$ and set it to zero.
+$$
+\frac{\partial}{\partial w} \frac{1}{M} \sum_{i=1}^{M} (y^{(i)} - w x^{(i)} - b)^2 = 0 \newline
+2 \frac{1}{M} \sum_{i=1}^{M} (y^{(i)} - w x^{(i)} - b)(-x^{(i)}) = 0 \newline
+\left( \sum_{i=1}^{M} (x^{(i)})^2 \right) w + \left( \sum_{i=1}^{M} x^{(i)} \right) b = \sum_{i=1}^{M} y^{(i)} x^{(i)}
+$$</p>
+<p>Now, let’s do the same for the intercept $b$.
+$$
+\frac{\partial}{\partial b} \frac{1}{M} \sum_{i=1}^{M} (y^{(i)} - w x^{(i)} - b)^2 = 0 \newline
+2 \frac{1}{M} \sum_{i=1}^{M} (y^{(i)} - w x^{(i)} - b)(-1) = 0 \newline
+\left( \sum_{i=1}^{M} x^{(i)} \right) w + M b = \sum_{i=1}^{M} y^{(i)}
+$$</p>
+<p>We can now write the two equations in matrix form,
+$$
+\begin{bmatrix}
+\sum_{i=1}^{M} (x^{(i)})^2 &#x26; \sum_{i=1}^{M} x^{(i)} \newline
+\sum_{i=1}^{M} x^{(i)} &#x26; M
+\end{bmatrix}
+\begin{bmatrix}
+w \newline
+b
+\end{bmatrix} =
+\begin{bmatrix}
+\sum_{i=1}^{M} y^{(i)} x^{(i)} \newline
+\sum_{i=1}^{M} y^{(i)}
+\end{bmatrix}
+$$</p>
+<p>Solving for the parameters,
+$$
+\begin{bmatrix}
+w \newline
+b
+\end{bmatrix} =
+\begin{bmatrix}
+\sum_{i=1}^{M} (x^{(i)})^2 &#x26; \sum_{i=1}^{M} x^{(i)} \newline
+\sum_{i=1}^{M} x^{(i)} &#x26; M
+\end{bmatrix}^{-1}
+\begin{bmatrix}
+\sum_{i=1}^{M} y^{(i)} x^{(i)} \newline
+\sum_{i=1}^{M} y^{(i)}
+\end{bmatrix}
+$$</p>
+<h5 id="general-ols-solution">General OLS Solution</h5>
+<p>In matrix notation, $\mathbf{X} \in \mathbb{R}^{M \times (N+1)}$ with one data case $\mathbf{x}^{(i)} \in \mathbb{R}^{N+1}$ per row.</p>
+<p>$$
+\mathbf{X} = \begin{bmatrix}
+— &#x26; (\mathbf{x}^{(1)})^T &#x26; — \newline
+— &#x26; (\mathbf{x}^{(2)})^T &#x26; — \newline
+&#x26; \vdots &#x26; \newline
+— &#x26; (\mathbf{x}^{(M)})^T &#x26; —
+\end{bmatrix},
+$$</p>
+<p>where $\mathbf{x}^{(i)} \in \mathbb{R}^{N+1}$ and we have defined $x_0^{(i)} = 1$.</p>
+<p>$\mathbf{y} \in \mathbb{R}^{M}$ is a column vector containing the corresponding outputs,
+$$
+\mathbf{y} = \begin{bmatrix}
+y^{(1)} \newline
+y^{(2)} \newline
+\vdots \newline
+y^{(M)}
+\end{bmatrix}
+$$</p>
+<p>and $\mathbf{w} \in \mathbb{R}^{N+1}$, where $w_0 = b$.</p>
+<p>This yields the general solution for $\mathbf{w} = \in \mathbb{R}^{N+1}$,
+$$
+\begin{align*}
+\mathbf{w}^{\star} &#x26; = \underset{\mathbf{w}}{\arg \min} \frac{1}{M} \sum_{i=1}^{M} (y^{(i)} - (\mathbf{x}^{(i)})^T \mathbf{w})^2 \newline
+&#x26; = \underset{\mathbf{w}}{\arg \min} \frac{1}{M} (\mathbf{y} - \mathbf{X} \mathbf{w})^T (\mathbf{y} - \mathbf{X} \mathbf{w})
+\end{align*}
+$$</p>
+<p>Taking the derivative with respect to $\mathbf{w}$ and setting it to zero,
+$$
+\begin{align*}
+\frac{\partial}{\partial \mathbf{w}} \frac{1}{M} (\mathbf{y} - \mathbf{X} \mathbf{w})^T (\mathbf{y} - \mathbf{X} \mathbf{w}) &#x26; = 0 \newline
+\frac{\partial}{\partial \mathbf{w}} \frac{1}{M} (y^T - (\mathbf{X} \mathbf{w})^T)(\mathbf{y} - \mathbf{X} \mathbf{w}) &#x26; = 0 \newline
+\frac{\partial}{\partial \mathbf{w}} \frac{1}{M} (y^T y - y^T \mathbf{X} \mathbf{w} - (\mathbf{X} \mathbf{w})^T \mathbf{y} + (\mathbf{X} \mathbf{w})^T \mathbf{X} \mathbf{w}) &#x26; = 0 \newline
+\frac{\partial}{\partial \mathbf{w}} \frac{1}{M} (y^T y - y^T \mathbf{X} \mathbf{w} - \mathbf{w}^T \mathbf{X}^T \mathbf{y} + \mathbf{w}^T \mathbf{X}^T \mathbf{X} \mathbf{w}) &#x26; = 0 \bigg\rvert (AB)^T = B^T A^T \newline
+\frac{\partial}{\partial \mathbf{w}} \frac{1}{M} (y^T y - y^T \mathbf{X} \mathbf{w} - y^T \mathbf{X}\mathbf{w} + \mathbf{w}^T \mathbf{X}^T \mathbf{X} \mathbf{w}) &#x26; = 0 \bigg\rvert (AB)^T = B^T A^T \newline
+\frac{\partial}{\partial \mathbf{w}} \frac{1}{M} (y^T y - 2 y^T \mathbf{X} \mathbf{w} + \mathbf{w}^T \mathbf{X}^T \mathbf{X} \mathbf{w}) &#x26; = 0 \newline
+\end{align*}
+$$</p>
+<p>Now, the first term is a constant, so we can ignore it.
+For the second term, we can use the identity,
+$$
+\frac{\partial}{\partial \mathbf{w}} A^T \mathbf{w} = A
+$$</p>
+<p>For the third term, we can use the identity,
+$$
+\frac{\partial}{\partial \mathbf{w}} \mathbf{w}^T A \mathbf{w} = 2 A \mathbf{w}
+$$</p>
+<p>If $A$ is symmetric, i.e., $A = A^T$.</p>
+<p>Which yields,</p>
+<p>$$
+\begin{align*}
+\frac{2}{M} (-\mathbf{X}^T \mathbf{y} + \mathbf{X}^T \mathbf{X} \mathbf{w}) &#x26; = 0 \newline
+\mathbf{X}^T \mathbf{X} \mathbf{w} &#x26; = \mathbf{X}^T \mathbf{y} \newline
+\mathbf{w}^{\star} &#x26; = (\mathbf{X}^T \mathbf{X})^{-1} \mathbf{X}^T \mathbf{y}
+\end{align*}
+$$</p>
+<h3 id="connection-to-probabilistic-models">Connection to Probabilistic Models</h3>
+<p>The same solution can be derived as the MLE of the parameters under a conditional Gaussian model.</p>
+<p>Assumption, the output (or the observation) $\mathbf{y}$ is from a deterministic function with additive Gaussian noise,
+$$
+\mathbf{y} = \mathbf{w}^T \mathbf{x} + \mathbf{\epsilon}, \ \text{where} \ p(\mathbf{\epsilon}, \sigma^2) = \mathcal{N}(\mathbf{\epsilon}; 0, \sigma^2 \mathbf{I})
+$$</p>
+<p>This implies that,
+$$
+p(\mathbf{y} | \mathbf{X}; \mathbf{w}, \sigma^2) = p(\mathbf{y} - \mathbf{X} \mathbf{w}; \sigma^2) = \mathcal{N}(\mathbf{y} - \mathbf{X} \mathbf{w}; 0, \sigma^2 \mathbf{I}) = \mathcal{N}(\mathbf{y}; \mathbf{X} \mathbf{w}, \sigma^2 \mathbf{I})
+$$</p>
+<p>Or equivalently,
+$$
+p(\mathbf{y} | \mathbf{X}; \mathbf{w}, \sigma^2) = \frac{1}{\sqrt{(2\pi \sigma^2)^{M}}} \exp \left( -\frac{1}{2\sigma^2} (\mathbf{y} - \mathbf{X} \mathbf{w})^T (\mathbf{y} - \mathbf{X} \mathbf{w}) \right)
+$$</p>
+<p>Let’s maximize the log likelihood,
+$$
+\begin{align*}
+\underset{\mathbf{w}, \sigma^2}{\arg \max} \log p(\mathbf{y} | \mathbf{X}; \mathbf{w}, \sigma^2)
+&#x26; = \underset{\mathbf{w}, \sigma^2}{\arg \max} -\frac{M}{2} \log(2\pi) - \frac{M}{2} \log(\sigma^2) - \frac{1}{2\sigma^2} (\mathbf{y} - \mathbf{X} \mathbf{w})^T (\mathbf{y} - \mathbf{X} \mathbf{w}) \newline
+&#x26; = \underset{\mathbf{w}, \sigma^2}{\arg \min} \frac{M}{2} \log(\sigma^2) + \frac{1}{2\sigma^2} (\mathbf{y} - \mathbf{X} \mathbf{w})^T (\mathbf{y} - \mathbf{X} \mathbf{w})
+\end{align*}
+$$</p>
+<p>Note that solving for $\mathbf{w}$ is independent of $\sigma^2$.
+$$
+\mathbf{w}^{\star} = \underset{\mathbf{w}}{\arg \min} \frac{1}{2} (\mathbf{y} - \mathbf{X} \mathbf{w})^T (\mathbf{y} - \mathbf{X} \mathbf{w})
+$$</p>
+<h4 id="more-on-linear-regression">More on Linear Regression</h4>
+<p>Take a closer look at the closed-form solution,
+$$
+\mathbf{w}^{\star} = (\mathbf{X}^T \mathbf{X})^{-1} \mathbf{X}^T \mathbf{y}
+$$</p>
+<p>We call $\mathbf{X}^{\dagger} = (\mathbf{X}^T \mathbf{X})^{-1} \mathbf{X}^T$ the <em>pseudo-inverse</em> (generalization of inverse to non-square matrix).
+See for a square invertible matrix $\mathbf{X}$, we have $\mathbf{X}^{\dagger} = \mathbf{X}^{-1} (\mathbf{X}^T)^{-1} \mathbf{X}^T = \mathbf{X}^{-1}$.</p>
+<p>What if $\mathbf{X}^T \mathbf{X} \in \mathbb{R}^{(N+1) \times (N+1)}$ is non-invertible?</p>
+<ul>
+<li>If $M &#x3C; N + 1$, add more data or enforce regularization.</li>
+<li>If $M \geq N + 1$, remove redundant features or enforce regularization.</li>
+</ul>
+<p>What if $N$ is too large? We can use gradient descent,
+$$
+\mathbf{w}^{(t+1)} = \mathbf{w}^{(t)} - \alpha \mathbf{X}^t (\mathbf{X} \mathbf{w}^{(t)} - \mathbf{y})
+$$</p>
+<p>What if $M$ is too large? Use mini-batch gradient descent.
+$$
+\mathbf{w}^{(t+1)} = \mathbf{w}^{(t)} - \alpha \sum_{(\mathbf{x}, y) \in \mathcal{B}} \mathbf{x} (\mathbf{x}^T \mathbf{w}^{(t)} - y)
+$$</p>
+<h3 id="regularized-linear-regression">Regularized Linear Regression</h3>
+<p>As we have discussed previously, regularization is a technique to prevent overfitting.
+But also to obtain numerically more stable solutions (e.g., when $\mathbf{X}^T\mathbf{X}$ is not invertible), and enforce the desired parameter space as a prior (e.g., select a subset of features that are good for prediction by enforcing the weights of irrelevant features to zero).</p>
+<p>But the price we pay for having regularization is that the regularization term will bias the least squares estimate.</p>
+<h4 id="ridge-regression">Ridge Regression</h4>
+<p>Let’s add regularization to OLS,
+$$
+\underset{\mathbf{w}}{\min} \frac{1}{2} \Vert \mathbf{X} \mathbf{w} - \mathbf{y} \Vert_2^2 + \frac{\alpha}{2} \Vert \mathbf{w} \Vert_2^2
+$$</p>
+<p>The first term is the data-fit term, we sum the squared error of the prediction.</p>
+<p>The second term is the regularization term, $\Vert \mathbf{w} \Vert_2^2 = \sum_{j=1}^{N+1} w_j^2$ penalizes large weights.</p>
+<p>$\alpha$ is the hyperparameter that controls the amount of “shrinkage”. Larger $\alpha$ means more shrinkage, $\alpha = 0$ is OLS.</p>
+<p>This also has a probabilistic interpretation,
+$$
+p(\mathbf{w} | \mathbf{X}; \mathbf{y}, \alpha) \propto p(\mathbf{y} | \mathbf{w}, \mathbf{X}; \sigma^2) p(\mathbf{w}; \alpha)
+$$</p>
+<h5 id="but-why">But, Why?</h5>
+<p>Why should we penalize large weights in the first place?</p>
+<p>Equivalently, why are smaller weights (i.e., weights that are close to zero) more preferred than larger weights?</p>
+<ul>
+<li>
+<p><strong>Reason 1</strong>: Smaller weights are more robust to perturbations of input features.</p>
+<ul>
+<li>Consider $f_1(x) = 2x + 0.1$ and $f_2(x) = 100x-98$.</li>
+<li>If we add a small perturbation to $x \rightarrow x + 0.1$.</li>
+<li>Then, $\Delta f_1(x) = 0.2$ and $\Delta f_2(x) = 10$.</li>
+</ul>
+</li>
+<li>
+<p><strong>Reason 2</strong></p>
+<ul>
+<li>There are better chances to zero out some input features $x$ that are redundant or uninformative, leading to more accurate prediction of $y$.</li>
+</ul>
+</li>
+</ul>
+<h4 id="ridge-regression-closed-form-solution">Ridge Regression Closed-Form Solution</h4>
+<p>The closed-form solution for Ridge regression is,
+$$
+\mathbf{w}^{\star} = (\mathbf{X}^T \mathbf{X} + \alpha \mathbf{I})^{-1} \mathbf{X}^T \mathbf{y}
+$$</p>
+<p>The term “ridge regression” comes from the closed-form solution, where a “ridge” is added to the diagonal of $\mathbf{X}^T \mathbf{X}$.</p>
+<h4 id="lasso-regression">Lasso Regression</h4>
+<p>With ridge regression, some weights are small but still non-zero. These are less important, but somehow still necessary.</p>
+<p>To get a better shrinkage to zero, we can change the regularization term to encourge more weights to be zero.</p>
+<p>The Lasso regression is defined as,
+$$
+\underset{\mathbf{w}}{\min} \frac{1}{2} \Vert \mathbf{X} \mathbf{w} - \mathbf{y} \Vert_2^2 + \alpha \Vert \mathbf{w} \Vert_1
+$$</p>
+<p><strong>L</strong>east <strong>A</strong>bsolute <strong>S</strong>hrinkage and <strong>S</strong>election <strong>O</strong>perator, or LASSO.</p>
+<p>Keeps the same data-fit term, but changes the regularization term.
+We take the sum of absolute weight values $\Vert \mathbf{w} \Vert_1 = \sum_{j=1}^{N} |w_j|$.</p>
+<p>When a weight is close to zero, the regularization term will force it to be equal to zero.</p>
+<p>This is a convex optimization problem, with no closed-form solution in general.
+However, it can be solved efficiently using an algorithm called <strong>least angle regression</strong>.</p>
+<h3 id="why-shrinkage">Why Shrinkage?</h3>
+<p>Under the orthogonal design $(\mathbf{X}^T \mathbf{X} = \mathbf{I})$, we have,</p>
+<p>Linear Regression: $\underset{\mathbf{w}}{\min} \frac{1}{2} \Vert \mathbf{X} \mathbf{w} - \mathbf{y} \Vert_2^2$,
+$$
+\mathbf{w}_L = (\mathbf{X}^T \mathbf{X})^{-1} \mathbf{X}^T \mathbf{y} = \mathbf{X}^T \mathbf{y}
+$$</p>
+<p>Ridge Regression: $\underset{\mathbf{w}}{\min} \frac{1}{2} \Vert \mathbf{X} \mathbf{w} - \mathbf{y} \Vert_2^2 + \frac{\alpha}{2} \Vert \mathbf{w} \Vert_2^2$,
+$$
+\mathbf{w}_{RR} = (\mathbf{X}^T \mathbf{X} + \alpha \mathbf{I})^{-1} \mathbf{X}^T \mathbf{y} = \frac{\mathbf{X}^T \mathbf{y}}{1 + \alpha}
+$$</p>
+<p>Which is just
+$$
+\frac{\mathbf{w}_L}{1 + \alpha}
+$$</p>
+<p>Lasso Regression: $\underset{\mathbf{w}}{\min} \frac{1}{2} \Vert \mathbf{X} \mathbf{w} - \mathbf{y} \Vert_2^2 + \alpha \Vert \mathbf{w} \Vert_1$,
+$$
+\mathbf{w}_{LR} = \underset{\mathbf{w}}{\arg \min} \frac{1}{2} \Vert \mathbf{X} \mathbf{w} - \mathbf{y} \Vert_2^2 + \alpha \Vert \mathbf{w} \Vert_1
+$$</p>
+<p>Which is just,
+$$
+sign(\mathbf{w}_L) \max(|\mathbf{w}_L - \alpha|, 0)
+$$</p>
+<h3 id="linear-regression-summary">Linear Regression Summary</h3>
+<ul>
+<li>OLS needs at least $M \geq N + 1$ data cases to learn a model with a $N$ dimensional feature vector.</li>
+<li>Ridge and Lasso work when $\mathbf{X}^T \mathbf{X}$ is close to singular.
+<ul>
+<li>E.g., caused by co-linear features $(x_i \approx ax_j + b)$.</li>
+</ul>
+</li>
+<li>MSE objective function for OLS, Ridge, and Lasso is sensitive to noise and <strong>outliers</strong>.
+<ul>
+<li>Regularization (Ridge and Lasso) can prevent very large weights, and reduce the possibility of overfitting to outliers.</li>
+</ul>
+</li>
+<li>All fail when output $y$ <strong>non-linearly</strong> depends on input features $\mathbf{x}$.</li>
+</ul> <div class="mt-24"> <div class="grid grid-cols-2 gap-1.5 sm:gap-3"> <a href="/cityu/cs4487/cs4487_4" class="group relative flex flex-nowrap rounded-lg border border-black/15 px-4 py-3 pl-10 no-underline transition-colors duration-300 ease-in-out hover:bg-black/5 hover:text-black focus-visible:bg-black/5 focus-visible:text-black dark:border-white/20 dark:hover:bg-white/5 dark:hover:text-white dark:focus-visible:bg-white/5 dark:focus-visible:text-white"> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="absolute left-2 top-1/2 size-5 -translate-y-1/2 fill-none stroke-current stroke-2"> <line x1="5" y1="12" x2="19" y2="12" class="translate-x-3 scale-x-0 transition-transform duration-300 ease-in-out group-hover:translate-x-0 group-hover:scale-x-100 group-focus-visible:translate-x-0 group-focus-visible:scale-x-100"></line> <polyline points="12 5 5 12 12 19" class="translate-x-1 transition-transform duration-300 ease-in-out group-hover:translate-x-0 group-focus-visible:translate-x-0"></polyline> </svg> <div class="flex items-center text-sm"> Part 4 - Duality and SVM </div> </a> <div class="invisible"></div> </div> </div> <div class="mt-24"> <div class="giscus"></div> <script data-astro-rerun src="https://giscus.app/client.js" data-repo="rezaarezvan/rezvan.xyz" data-repo-id="R_kgDOHvQr3w" data-category="General" data-category-id="DIC_kwDOHvQr384CiWVC" data-mapping="pathname" data-strict="0" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="bottom" data-theme="preferred_color_scheme" data-lang="en" data-loading="lazy" crossorigin="anonymous" async></script> </div> </article> </div>  </main> <footer class="animate"> <div class="mx-auto max-w-screen-sm px-3"> <div class="relative"> <div class="absolute -top-12 right-0"> <button id="back-to-top" class="group relative flex w-fit flex-nowrap rounded border border-black/15 py-1.5 pl-8 pr-3 transition-colors duration-300 ease-in-out hover:bg-black/5 hover:text-black focus-visible:bg-black/5 focus-visible:text-black dark:border-white/20 dark:hover:bg-white/5 dark:hover:text-white dark:focus-visible:bg-white/5 dark:focus-visible:text-white"> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="absolute left-2 top-1/2 size-4 -translate-y-1/2 rotate-90 fill-none stroke-current stroke-2"> <line x1="5" y1="12" x2="19" y2="12" class="translate-x-2 scale-x-0 transition-transform duration-300 ease-in-out group-hover:translate-x-0 group-hover:scale-x-100 group-focus-visible:translate-x-0 group-focus-visible:scale-x-100"></line> <polyline points="12 5 5 12 12 19" class="translate-x-1 transition-transform duration-300 ease-in-out group-hover:translate-x-0 group-focus-visible:translate-x-0"></polyline> </svg> <div class="text-sm">Back to top</div> </button> </div> </div> <div class="flex items-center justify-between"> <div>&copy; 2024 • rezvan.xyz </div> <div class="flex flex-wrap items-center gap-1.5"> <button id="light-theme-button" aria-label="Light theme" class="group flex size-9 items-center justify-center rounded border border-black/15 hover:bg-black/5 focus-visible:bg-black/5 dark:border-white/20 dark:hover:bg-white/5 dark:focus-visible:bg-white/5"> <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="transition-colors duration-300 ease-in-out group-hover:animate-pulse group-hover:stroke-black group-focus-visible:animate-pulse group-focus-visible:stroke-black group-hover:dark:stroke-white dark:group-focus-visible:stroke-white"> <circle cx="12" cy="12" r="5"></circle> <line x1="12" y1="1" x2="12" y2="3"></line> <line x1="12" y1="21" x2="12" y2="23"></line> <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line> <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line> <line x1="1" y1="12" x2="3" y2="12"></line> <line x1="21" y1="12" x2="23" y2="12"></line> <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line> <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line> </svg> </button> <button id="dark-theme-button" aria-label="Dark theme" class="group flex size-9 items-center justify-center rounded border border-black/15 hover:bg-black/5 focus-visible:bg-black/5 dark:border-white/20 dark:hover:bg-white/5 dark:focus-visible:bg-white/5"> <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="transition-colors duration-300 ease-in-out group-hover:animate-pulse group-hover:stroke-black group-focus-visible:animate-pulse group-focus-visible:stroke-black group-hover:dark:stroke-white dark:group-focus-visible:stroke-white"> <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path> </svg> </button> <button id="system-theme-button" aria-label="System theme" class="group flex size-9 items-center justify-center rounded border border-black/15 hover:bg-black/5 focus-visible:bg-black/5 dark:border-white/20 dark:hover:bg-white/5 dark:focus-visible:bg-white/5"> <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="transition-colors duration-300 ease-in-out group-hover:animate-pulse group-hover:stroke-black group-focus-visible:animate-pulse group-focus-visible:stroke-black group-hover:dark:stroke-white dark:group-focus-visible:stroke-white"> <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect> <line x1="8" y1="21" x2="16" y2="21"></line> <line x1="12" y1="17" x2="12" y2="21"></line> </svg> </button> </div> </div> </div> </footer> <aside data-pagefind-ignore> <div id="backdrop" class="bg-[rgba(0, 0, 0, 0.5] invisible fixed left-0 top-0 z-50 flex h-screen w-full justify-center p-6 backdrop-blur-sm" data-astro-transition-persist="astro-3snakcvo-2"> <div id="pagefind-container" class="m-0 flex h-fit max-h-[80%] w-full max-w-screen-sm flex-col overflow-auto rounded border border-black/15 bg-neutral-100 p-2 px-4 py-3 shadow-lg dark:border-white/20 dark:bg-neutral-900"> <div id="search" class="pagefind-ui pagefind-init" data-pagefind-ui data-bundle-path="/pagefind/" data-ui-options="{&#34;showImages&#34;:false,&#34;excerptLength&#34;:15,&#34;resetStyles&#34;:false}"></div>  <div class="mr-2 pb-1 pt-4 text-right text-xs dark:prose-invert">
+Press <span class="prose text-xs dark:prose-invert"><kbd class="">Esc</kbd></span> or click anywhere to close
+</div> </div> </div> </aside> <script>
+  const magnifyingGlass = document.getElementById("magnifying-glass");
+  const backdrop = document.getElementById("backdrop");
+
+  function openPagefind() {
+    const searchDiv = document.getElementById("search");
+    const search = searchDiv.querySelector("input");
+    setTimeout(() => {
+      search.focus();
+    }, 0);
+    backdrop?.classList.remove("invisible");
+    backdrop?.classList.add("visible");
+  }
+
+  function closePagefind() {
+    const search = document.getElementById("search");
+    search.value = "";
+    backdrop?.classList.remove("visible");
+    backdrop?.classList.add("invisible");
+  }
+
+  // open pagefind
+  magnifyingGlass?.addEventListener("click", () => {
+    openPagefind();
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "/") {
+      e.preventDefault();
+      openPagefind();
+    } else if ((e.metaKey || e.ctrlKey) && e.key === "k") {
+      e.preventDefault();
+      openPagefind();
+    }
+  });
+
+  // close pagefind
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" || e.keyCode === 27) {
+      closePagefind();
+    }
+  });
+
+  // close pagefind when searched result(link) clicked
+  document.addEventListener("click", (event) => {
+    if (event.target.classList.contains("pagefind-ui__result-link")) {
+      closePagefind();
+    }
+  });
+
+  backdrop?.addEventListener("click", (event) => {
+    if (!event.target.closest("#pagefind-container")) {
+      closePagefind();
+    }
+  });
+
+  // prevent form submission
+  const form = document.getElementById("form");
+  form?.addEventListener("submit", (event) => {
+    event.preventDefault();
+  });
+</script>  </body></html>
