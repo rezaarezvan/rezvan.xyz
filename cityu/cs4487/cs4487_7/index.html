@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" type="image/icon" href="/favicon.ico"><meta name="generator" content="Astro v4.11.5"><!-- Canonical URL --><link rel="canonical" href="https://rezvan.xyz/cityu/cs4487/cs4487_7/"><!-- Primary Meta Tags --><title>Part 7 - The Expectation Maximization Algorithm | machine learning | rezvan.xyz</title><meta name="title" content="Part 7 - The Expectation Maximization Algorithm | machine learning | rezvan.xyz"><meta name="description"><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://rezvan.xyz/cityu/cs4487/cs4487_7/"><meta property="og:title" content="Part 7 - The Expectation Maximization Algorithm | machine learning | rezvan.xyz"><meta property="og:description"><meta property="og:image" content="https://rezvan.xyz/favicon.ico"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://rezvan.xyz/cityu/cs4487/cs4487_7/"><meta property="twitter:title" content="Part 7 - The Expectation Maximization Algorithm | machine learning | rezvan.xyz"><meta property="twitter:description"><meta property="twitter:image" content="https://rezvan.xyz/favicon.ico"><!-- PageFind --><link href="/pagefind/pagefind-ui.css" rel="stylesheet"><script src="/pagefind/pagefind-ui.js"></script><!-- KaTeX support --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script><!-- inline KaTeX --><script>
+<!DOCTYPE html><html lang="en"> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" type="image/icon" href="/favicon.ico"><meta name="generator" content="Astro v4.11.5"><!-- Canonical URL --><link rel="canonical" href="https://rezvan.xyz/cityu/cs4487/cs4487_7/"><!-- Primary Meta Tags --><title>Part 7 - The Expectation Maximization Algorithm &amp; Linear Dimensionality Reduction | machine learning | rezvan.xyz</title><meta name="title" content="Part 7 - The Expectation Maximization Algorithm &#38; Linear Dimensionality Reduction | machine learning | rezvan.xyz"><meta name="description"><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://rezvan.xyz/cityu/cs4487/cs4487_7/"><meta property="og:title" content="Part 7 - The Expectation Maximization Algorithm &#38; Linear Dimensionality Reduction | machine learning | rezvan.xyz"><meta property="og:description"><meta property="og:image" content="https://rezvan.xyz/favicon.ico"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://rezvan.xyz/cityu/cs4487/cs4487_7/"><meta property="twitter:title" content="Part 7 - The Expectation Maximization Algorithm &#38; Linear Dimensionality Reduction | machine learning | rezvan.xyz"><meta property="twitter:description"><meta property="twitter:image" content="https://rezvan.xyz/favicon.ico"><!-- PageFind --><link href="/pagefind/pagefind-ui.css" rel="stylesheet"><script src="/pagefind/pagefind-ui.js"></script><!-- KaTeX support --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script><!-- inline KaTeX --><script>
     function renderKaTeX() {
         if (typeof renderMathInElement !== "undefined") {
             renderMathInElement(document.body, {
@@ -222,7 +222,10 @@
 &bull;
 <div class="font-base text-sm"> <time datetime="2024-10-23T00:00:00.000Z"> October 23, 2024 </time> </div> 
 &bull;
-<div class="font-base text-sm"> 3 min read </div> </div> <h1 class="animate text-3xl font-semibold text-black dark:text-white"> Part 7 - The Expectation Maximization Algorithm </h1> </div> <details open class="animate rounded-lg border border-black/15 dark:border-white/20" data-astro-cid-xvrfupwn> <summary data-astro-cid-xvrfupwn>Table of Contents</summary> <nav class="" data-astro-cid-xvrfupwn> <ul class="py-3" data-astro-cid-xvrfupwn> <li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#expectation-maximization-em" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Expectation Maximization (EM) </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#jensens-inequality" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Jensen’s Inequality </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#em-derivation" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> EM Derivation </a>  </li> </ul> </nav> </details> <article class="animate"> <h3 id="expectation-maximization-em">Expectation Maximization (EM)</h3>
+<div class="font-base text-sm">
+Last modified:  <time datetime="2024-10-23T16:06:58.000Z"> October 24, 2024 </time> </div> 
+&bull;
+<div class="font-base text-sm"> 7 min read </div> </div> <h1 class="animate text-3xl font-semibold text-black dark:text-white"> Part 7 - The Expectation Maximization Algorithm &amp; Linear Dimensionality Reduction </h1> </div> <details open class="animate rounded-lg border border-black/15 dark:border-white/20" data-astro-cid-xvrfupwn> <summary data-astro-cid-xvrfupwn>Table of Contents</summary> <nav class="" data-astro-cid-xvrfupwn> <ul class="py-3" data-astro-cid-xvrfupwn> <li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#expectation-maximization-em" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Expectation Maximization (EM) </a> <ul class="translate-x-3"> <li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#jensens-inequality" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Jensen’s Inequality </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#em-derivation" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> EM Derivation </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#em-convergence" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> EM Convergence </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#remark" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Remark </a>  </li> </ul> </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#clustering-summary" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Clustering Summary </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#dimensionality-reduction" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Dimensionality Reduction </a> <ul class="translate-x-3"> <li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#reasons-for-dimensionality-reduction" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Reasons for Dimensionality Reduction </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#dimensionality-reduction-vs-feature-selection" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Dimensionality Reduction VS. Feature Selection </a>  </li> </ul> </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#linear-dimensionality-reduction" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Linear Dimensionality Reduction </a> <ul class="translate-x-3"> <li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#connection-to-linear-regression" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Connection to Linear Regression </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#matrix-formulation" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Matrix Formulation </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#learning-criterion" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Learning Criterion </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#alternating-least-squares" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Alternating Least Squares </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#lack-of-uniqueness-for-optimal-parameters" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Lack of Uniqueness for Optimal Parameters </a>  </li> </ul> </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#singular-value-decomposition-svd" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Singular Value Decomposition (SVD) </a> <ul class="translate-x-3"> <li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#reduced-form-svd" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Reduced-Form SVD </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#eckart-young-mirsky-theorem" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Eckart-Young-Mirsky Theorem </a>  </li> </ul> </li> </ul> </nav> </details> <article class="animate"> <h3 id="expectation-maximization-em">Expectation Maximization (EM)</h3>
 <p>EM solves a maximum likelihood problem of the form,</p>
 <p>$$
 L(\mathbf{\theta}) = \sum_{i = 1}^M \log p(\mathbf{x}^{(i)}; \mathbf{\theta}) = \sum_{i = 1}^M \log \sum_{\mathbf{z}^{(i)} = 1}^K p(\mathbf{x}^{(i)}, \mathbf{z}^{(i)}; \mathbf{\theta})
@@ -232,7 +235,7 @@ $$</p>
 <li>$\{x^{(i)}\}_{i = 1}^M$: Observed training examples.</li>
 <li>$\{z^{(i)}\}_{i = 1}^M$: Unobserved latent variables. (e.g., in GMM, $z^{(i)}$ indicates which one of the $K$ clusters $x^{(i)}$ belongs to, which is unobserved.)</li>
 </ul>
-<h3 id="jensens-inequality">Jensen’s Inequality</h3>
+<h4 id="jensens-inequality">Jensen’s Inequality</h4>
 <p>Let’s revisit Jensen’s inequality, for concave functions.</p>
 <p>Suppose $f : \mathbb{R} \mapsto \mathbb{R}$ is <strong>concave</strong>, then for all probability distributions $p$, we have,</p>
 <p>$$
@@ -244,7 +247,7 @@ $$</p>
 <li>$\mathbf{x}$ is a constant, or,</li>
 <li>$f$ is an affine function (i.e., $f(\mathbf{x}) = a^T \mathbf{x} + b$).</li>
 </ol>
-<h3 id="em-derivation">EM Derivation</h3>
+<h4 id="em-derivation">EM Derivation</h4>
 <p>Let’s derive the EM algorithm for the maximum likelihood problem.</p>
 <p>$$
 \begin{aligned}
@@ -269,7 +272,298 @@ L(\mathbf{\theta}) &#x26;= \sum_{i = 1}^M \sum_{\mathbf{z}^{(i)} = 1}^K q(\mathb
 \end{aligned}
 $$</p>
 <p>Let’s call this last expression for $ell(\mathbf{\theta})$, this is a lower bound of the original objective $L(\mathbf{\theta})$.
-The equality holds when $\frac{p(\mathbf{x}^{(i)}, \mathbf{z}^{(i)}; \mathbf{\theta})}{q(\mathbf{z}^{(i)})}$ is a constant.</p> <div class="mt-24"> <div class="grid grid-cols-2 gap-1.5 sm:gap-3"> <a href="/cityu/cs4487/cs4487_6" class="group relative flex flex-nowrap rounded-lg border border-black/15 px-4 py-3 pl-10 no-underline transition-colors duration-300 ease-in-out hover:bg-black/5 hover:text-black focus-visible:bg-black/5 focus-visible:text-black dark:border-white/20 dark:hover:bg-white/5 dark:hover:text-white dark:focus-visible:bg-white/5 dark:focus-visible:text-white"> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="absolute left-2 top-1/2 size-5 -translate-y-1/2 fill-none stroke-current stroke-2"> <line x1="5" y1="12" x2="19" y2="12" class="translate-x-3 scale-x-0 transition-transform duration-300 ease-in-out group-hover:translate-x-0 group-hover:scale-x-100 group-focus-visible:translate-x-0 group-focus-visible:scale-x-100"></line> <polyline points="12 5 5 12 12 19" class="translate-x-1 transition-transform duration-300 ease-in-out group-hover:translate-x-0 group-focus-visible:translate-x-0"></polyline> </svg> <div class="flex items-center text-sm"> Part 6 - Robust, Non-Linear Regression and Clustering </div> </a> <div class="invisible"></div> </div> </div> <div class="mt-24"> <div class="giscus"></div> <script data-astro-rerun src="https://giscus.app/client.js" data-repo="rezaarezvan/rezvan.xyz" data-repo-id="R_kgDOHvQr3w" data-category="General" data-category-id="DIC_kwDOHvQr384CiWVC" data-mapping="pathname" data-strict="0" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="bottom" data-theme="preferred_color_scheme" data-lang="en" data-loading="lazy" crossorigin="anonymous" async></script> </div> </article> </div>  </main> <footer class="animate"> <div class="mx-auto max-w-screen-sm px-3"> <div class="relative"> <div class="absolute -top-12 right-0"> <button id="back-to-top" class="group relative flex w-fit flex-nowrap rounded border border-black/15 py-1.5 pl-8 pr-3 transition-colors duration-300 ease-in-out hover:bg-black/5 hover:text-black focus-visible:bg-black/5 focus-visible:text-black dark:border-white/20 dark:hover:bg-white/5 dark:hover:text-white dark:focus-visible:bg-white/5 dark:focus-visible:text-white"> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="absolute left-2 top-1/2 size-4 -translate-y-1/2 rotate-90 fill-none stroke-current stroke-2"> <line x1="5" y1="12" x2="19" y2="12" class="translate-x-2 scale-x-0 transition-transform duration-300 ease-in-out group-hover:translate-x-0 group-hover:scale-x-100 group-focus-visible:translate-x-0 group-focus-visible:scale-x-100"></line> <polyline points="12 5 5 12 12 19" class="translate-x-1 transition-transform duration-300 ease-in-out group-hover:translate-x-0 group-focus-visible:translate-x-0"></polyline> </svg> <div class="text-sm">Back to top</div> </button> </div> </div> <div class="flex items-center justify-between"> <div>&copy; 2024 • rezvan.xyz </div> <div class="flex flex-wrap items-center gap-1.5"> <button id="light-theme-button" aria-label="Light theme" class="group flex size-9 items-center justify-center rounded border border-black/15 hover:bg-black/5 focus-visible:bg-black/5 dark:border-white/20 dark:hover:bg-white/5 dark:focus-visible:bg-white/5"> <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="transition-colors duration-300 ease-in-out group-hover:animate-pulse group-hover:stroke-black group-focus-visible:animate-pulse group-focus-visible:stroke-black group-hover:dark:stroke-white dark:group-focus-visible:stroke-white"> <circle cx="12" cy="12" r="5"></circle> <line x1="12" y1="1" x2="12" y2="3"></line> <line x1="12" y1="21" x2="12" y2="23"></line> <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line> <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line> <line x1="1" y1="12" x2="3" y2="12"></line> <line x1="21" y1="12" x2="23" y2="12"></line> <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line> <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line> </svg> </button> <button id="dark-theme-button" aria-label="Dark theme" class="group flex size-9 items-center justify-center rounded border border-black/15 hover:bg-black/5 focus-visible:bg-black/5 dark:border-white/20 dark:hover:bg-white/5 dark:focus-visible:bg-white/5"> <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="transition-colors duration-300 ease-in-out group-hover:animate-pulse group-hover:stroke-black group-focus-visible:animate-pulse group-focus-visible:stroke-black group-hover:dark:stroke-white dark:group-focus-visible:stroke-white"> <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path> </svg> </button> <button id="system-theme-button" aria-label="System theme" class="group flex size-9 items-center justify-center rounded border border-black/15 hover:bg-black/5 focus-visible:bg-black/5 dark:border-white/20 dark:hover:bg-white/5 dark:focus-visible:bg-white/5"> <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="transition-colors duration-300 ease-in-out group-hover:animate-pulse group-hover:stroke-black group-focus-visible:animate-pulse group-focus-visible:stroke-black group-hover:dark:stroke-white dark:group-focus-visible:stroke-white"> <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect> <line x1="8" y1="21" x2="16" y2="21"></line> <line x1="12" y1="17" x2="12" y2="21"></line> </svg> </button> </div> </div> </div> </footer> <aside data-pagefind-ignore> <div id="backdrop" class="bg-[rgba(0, 0, 0, 0.5] invisible fixed left-0 top-0 z-50 flex h-screen w-full justify-center p-6 backdrop-blur-sm" data-astro-transition-persist="astro-3snakcvo-2"> <div id="pagefind-container" class="m-0 flex h-fit max-h-[80%] w-full max-w-screen-sm flex-col overflow-auto rounded border border-black/15 bg-neutral-100 p-2 px-4 py-3 shadow-lg dark:border-white/20 dark:bg-neutral-900"> <div id="search" class="pagefind-ui pagefind-init" data-pagefind-ui data-bundle-path="/pagefind/" data-ui-options="{&#34;showImages&#34;:false,&#34;excerptLength&#34;:15,&#34;resetStyles&#34;:false}"></div>  <div class="mr-2 pb-1 pt-4 text-right text-xs dark:prose-invert">
+The equality holds when $\frac{p(\mathbf{x}^{(i)}, \mathbf{z}^{(i)}; \mathbf{\theta})}{q(\mathbf{z}^{(i)})}$ is a constant.</p>
+<p>This can be achieved for $q(z^{(i)}) = p(z^{(i)} | x^{(i)}; \theta)$.</p>
+<p>The EM algorithm aims to optimize the lower bound $ell(\mathbf{\theta})$,</p>
+<p>$$
+\mathbf{\theta}^{\star} = \underset{\mathbf{\theta}}{\arg \max} \ell(\mathbf{\theta}) = \underset{\mathbf{\theta}}{\arg \max} \sum_{i = 1}^M \sum_{\mathbf{z}^{(i)} = 1}^K q(\mathbf{z}^{(i)}) \log \frac{p(\mathbf{x}^{(i)}, \mathbf{z}^{(i)}; \mathbf{\theta})}{q(\mathbf{z}^{(i)})}
+$$</p>
+<p>EM repeatedly performs the following two steps until convergence.</p>
+<p>At $t$-th iteration,</p>
+<ol>
+<li>E-step: For each index $i$, we compute,</li>
+</ol>
+<p>$$
+q^{(t)}(z^{(i)}) = p(z^{(i)} | x^{(i)}; \mathbf{\theta}^{(t)})
+$$</p>
+<ol start="2">
+<li>M-step: Compute,</li>
+</ol>
+<p>$$
+\mathbf{\theta}^{(t + 1)} = \underset{\mathbf{\theta}}{\arg \max} \sum_{i = 1}^M \sum_{\mathbf{z}^{(i)} = 1} q^{(t)}(\mathbf{z}^{(i)}) \log p(\mathbf{x}^{(i)}, \mathbf{z}^{(i)}; \mathbf{\theta})
+$$</p>
+<p>In the E-step, we do not fill in the unobserved $z^{(i)}$ with hard values, but find a posterior distribution $q(z^{(i)})$, given $x^{(i)}$ and $\theta^{(t)}$, i.e.,</p>
+<p>$$
+q^{(t)}(z^{(i)}) = p(z^{(i)} | x^{(i)}; \mathbf{\theta}^{(t)}).
+$$</p>
+<p>In the M-step, we maximize the lower bound $ell(\mathbf{\theta})$, while holding $q^{(t)}(z^{(i)})$ fixed, which is computed from the E-step.</p>
+<p>The M-step optimization can be done efficiently in most cases. For example, in GMM, we have a closed-form solution for all parameters.</p>
+<h4 id="em-convergence">EM Convergence</h4>
+<p>Assuming $\mathbf{\theta}^{(t)}$ and $\mathbf{\theta}^{(t + 1)}$ are the parameters from two successive iterations of EM, we have,</p>
+<p>$$
+\begin{aligned}
+L(\mathbf{\theta}^{(t)}) &#x26;\stackrel{(1)}{=} \sum_{i = 1}^M \log p(\mathbf{x}^{(i)}; \mathbf{\theta}^{(t)}) \stackrel{(2)}{=} \sum_i^M \log \sum_{\mathbf{z}^{(i)} = 1}^K q(\mathbf{z}^{(i)}) \frac{p(\mathbf{x}^{(i)}, \mathbf{z}^{(i)}; \mathbf{\theta}^{(t)})}{q^(\mathbf{z}^{(i)})} \newline
+&#x26; \stackrel{(3)}{=} \sum_{i = 1}^M \sum_{\mathbf{z}^{(i)} = 1}^K q^{(t)}(\mathbf{z}^{(i)}) \log \frac{p(\mathbf{x}^{(i)}, \mathbf{z}^{(i)}; \mathbf{\theta}^{(t)})}{q^{(t)}(\mathbf{z}^{(i)})} \newline
+&#x26; \stackrel{(4)}{\leq} \sum_{i = 1}^M \sum_{\mathbf{z}^{(i)} = 1}^K q^{(t)}(\mathbf{z}^{(i)}) \log p(\mathbf{x}^{(i)}, \mathbf{z}^{(i)}; \mathbf{\theta}^{(t)}) \newline
+&#x26; \stackrel{(5)}{\leq} \sum_{i = 1}^M \log \sum_{\mathbf{z}^{(i)} = 1}^K q^{(t)}(\mathbf{z}^{(i)}) \frac{p(\mathbf{x}^{(i)}, \mathbf{z}^{(i)}; \mathbf{\theta}^{(t)})}{q^{(t)}(\mathbf{z}^{(i)})} \stackrel{(6)}{=} L(\mathbf{\theta}^{(t + 1)})
+\end{aligned}
+$$</p>
+<ol>
+<li>By definition, this is the (log) likelihood of the data.</li>
+<li>By marginalization over $z^{(i)}$ and multiplication an arbitrary distribution $q(z^{(i)})$ to both numerator and denominator inside log.</li>
+<li>By Jensen’s inequality where equality condition is satisfied by setting $q^{(t)}(z^{(i)}) = p(z^{(i)} | x^{(i)}; \mathbf{\theta}^{(t)})$.</li>
+<li>By M-step of EM, where we maximize (3), holding $q^{(t)}(z^{(i)})$ fixed.</li>
+<li>By Jensen’s inequality (in reverse order). Note that we have already updated $\mathbf{\theta}$ from $\mathbf{\theta}^{(t)}$ to $\mathbf{\theta}^{(t + 1)}$, $q^{(t)}(z^{(i)})$ may now not satisfy the equality condition.</li>
+<li>By definition, this is the lower bound of the likelihood.</li>
+</ol>
+<p>Hence, EM causes the likelihood to increase <strong>monotonically</strong>.</p>
+<h4 id="remark">Remark</h4>
+<p>One remark that we have to do is, if we define the EM as,
+$$
+J(q, \mathbf{\theta}) = \sum_{i = 1}^M \sum_{\mathbf{z}^{(i)} = 1}^K q(\mathbf{z}^{(i)}) \log \frac{p(\mathbf{x}^{(i)}, \mathbf{z}^{(i)}; \mathbf{\theta})}{q(\mathbf{z}^{(i)})}
+$$</p>
+<p>We can view this as coordinate ascent on $J$, in which the E-step maximizes $J$ with respect to $q$, and the M-step maximizes $J$ with respect to $\mathbf{\theta}$.
+One can easily prove this using Lagrangian multipliers!</p>
+<h3 id="clustering-summary">Clustering Summary</h3>
+<ul>
+<li><strong>Clustering Task</strong>
+<ul>
+<li>Given a set of input vectors $\mathcal{D} = \{x^{(i)}\}_{i = 1}^M$, with $x^{(i)} \in \mathbb{R}^N$, group similar $x^{(i)}$ into clusters.
+<ul>
+<li>Estimate a cluster center, representing the data points in that cluster.</li>
+<li>Predict the cluster for a new data point.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>Exhaustive clustering</strong>
+<ul>
+<li><strong>Cluster shape</strong>: Arbitrary shape.</li>
+<li><strong>Principle</strong>: Minimize an assumed clustering criterion with brute-force search.</li>
+<li><strong>Pros</strong>: Optimal under the given clustering criterion.</li>
+<li><strong>Cons</strong>: Impractical to construct the clustering criterion, prohibitive to compute.</li>
+</ul>
+</li>
+<li><strong>$K$-means</strong>
+<ul>
+<li><strong>Cluster shape</strong>: Circular.</li>
+<li><strong>Principle</strong>: Minimize distance to cluster center.</li>
+<li><strong>Pros</strong>: Simple and scalable (MiniBatchKMeans).</li>
+<li><strong>Cons</strong>: Sensitive to initialization, could get bad solutions due to local minima, need to choose $K$.</li>
+</ul>
+</li>
+<li><strong>Gaussian Mixture Model (GMM)</strong>
+<ul>
+<li><strong>Cluster shape</strong>: Elliptical.</li>
+<li><strong>Principle</strong>: Maximum likelihood using expectation maximization.</li>
+<li><strong>Pros</strong>: Elliptical cluster shapes.</li>
+<li><strong>Cons</strong>: Sensitive to initialization, could get bad solutions due to local minima, need to choose $K$.</li>
+</ul>
+</li>
+<li><strong>Feature normalization</strong>
+<ul>
+<li>Feature normalization is typically required for clustering.</li>
+<li>E.g., algorithms based on Eucledian distance ($K$-means).</li>
+</ul>
+</li>
+</ul>
+<h3 id="dimensionality-reduction">Dimensionality Reduction</h3>
+<p>Transform high-dimensional vectors into low-dimensional vectors.
+Dimensions in the low-dimensional data represent co-occuring features in the high-dimensional data.
+Dimensions in the low-dimensional data may have semantic meaning.</p>
+<p>For example, in document analysis.</p>
+<ul>
+<li>High-dimensional data: Bag-of-word vectors of documents.</li>
+<li>Low-dimensional data: Each dimension represents similarity to a topic.</li>
+</ul>
+<h4 id="reasons-for-dimensionality-reduction">Reasons for Dimensionality Reduction</h4>
+<ul>
+<li>Preprocessing, makes the dataset easier to use.</li>
+<li>Reduce computational cost of running machine learning algorithms.</li>
+<li>Can be used to “de-noise” data by projecting to lower-dimensional space and then projecting back to the original high-dimensional space.</li>
+<li>Makes the results easier to understand (e.g., visualization).</li>
+</ul>
+<h4 id="dimensionality-reduction-vs-feature-selection">Dimensionality Reduction VS. Feature Selection</h4>
+<p>The goal of feature selection is to remove features that are not informative with respect to the class label.
+This obviously reduces the dimensionality of the feature space.</p>
+<p>Dimensionality reduction can be used to find a meaningful lower-dimensional feature space even when there is information in each feature dimension so that none can be discarded.</p>
+<p>Another important property of dimensionality reduction is that it is <strong>unsupervised</strong>.</p>
+<p>While dimensionality reduction can be seen as a simplistic form of (data) compression, it is not equivalent to it, as the goal of compression is to reduce the expected code length (which is lower bounded by <strong>entropy</strong>) of the representation not only the dimensionality.</p>
+<p>For example, in lossless compression, <strong>arithmetic coding</strong> encodes the entire data into a single number, an arbitrary-precision fraction $q$ where $0.0 \leq q &#x3C; 1.0$.</p>
+<h3 id="linear-dimensionality-reduction">Linear Dimensionality Reduction</h3>
+<p>In linear dimensionality reduction we project the original data onto a lower-dimensional hyperplane (e.g., line, plane).</p>
+<p>I.e., move and rotate the coordinate axis of the data, then we represent the data with coordinates in the new component space.</p>
+<p>Mathematically, this can be written as,</p>
+<p>$$
+\mathbf{x}^{(i)} = \sum_{k = 1}^K z_k^{(i)} \mathbf{b}_k
+$$</p>
+<p>where $\mathbf{b}<em>k = [b</em>{1k}, b_{2k}, \ldots, b_{Nk}]^T$ is a basis vector and $z_k^{(i)} \in \mathbb{R}$ is the corresponding weight.</p>
+<h4 id="connection-to-linear-regression">Connection to Linear Regression</h4>
+<p>If we focus on the $j$-th entry of $\mathbf{x}^{(i)}$, we have,</p>
+<p>$$
+x_j^{(i)} = \sum_{k = 1}^K z_k^{(i)} b_{jk}
+$$</p>
+<p>This expression can be seen as linear regression.</p>
+<ul>
+<li>$x_j^{(i)}$ is the target.</li>
+<li>$z_k^{(i)}$ for each $k$ are the weights.</li>
+<li>$b_{jk}$ for each $k$ are the features.</li>
+</ul>
+<p>Alternatively, we may view $z_k^{(i)}$ as feature and $b_{jk}$ as weights.</p>
+<p>Unlike linear regression, we only know “targets”. We must learn both features and weights.</p>
+<h4 id="matrix-formulation">Matrix Formulation</h4>
+<p>Let $\mathbf{X} \in \mathbb{R}^{M \times N}$ be the data matrix, with one data case $\mathbf{x}^{(i)} \in \mathbb{R}^N$ per row.
+$$
+\mathbf{X} =
+\begin{bmatrix}
+— &#x26; (\mathbf{x}^{(1)})^T &#x26; — \newline
+— &#x26; (\mathbf{x}^{(2)})^T &#x26; — \newline
+&#x26; \vdots &#x26; \newline
+— &#x26; (\mathbf{x}^{(M)})^T &#x26; —
+\end{bmatrix}
+$$</p>
+<p>Let $\mathbf{Z} \in \mathbb{R}^{M \times K}$ be the loading matrix and $\mathbf{B} \in \mathbb{R}^{K \times N}$ be the factor matrix.
+$$
+\mathbf{Z} =
+\begin{bmatrix}
+z_1^{(1)} &#x26; z_2^{(1)} &#x26; \ldots &#x26; z_K^{(1)} \newline
+z_1^{(2)} &#x26; z_2^{(2)} &#x26; \ldots &#x26; z_K^{(2)} \newline
+\vdots &#x26; \ddots &#x26; \ddots &#x26; \vdots \newline
+z_1^{(M)} &#x26; z_2^{(M)} &#x26; \ldots &#x26; z_K^{(M)}
+\end{bmatrix},
+\mathbf{B} =
+\begin{bmatrix}
+— &#x26; (\mathbf{b}_1)^T &#x26; — \newline
+— &#x26; (\mathbf{b}_2)^T &#x26; — \newline
+&#x26; \vdots &#x26; \newline
+— &#x26; (\mathbf{b}_K)^T &#x26; —
+\end{bmatrix}
+$$</p>
+<p>With this we can express $\mathbf{X}$ as follows,</p>
+<p>$$
+X = ZB.
+$$</p>
+<p>However, most real world data will be subject to noise.
+If we assume that $\mathbf{\epsilon} \in \mathbb{R}^{M \times N}$ is a matrix of noise values from some probability distribution, we have,</p>
+<p>$$
+X = ZB + \mathbf{\epsilon}.
+$$</p>
+<h4 id="learning-criterion">Learning Criterion</h4>
+<p>The learning problem for linear dimensionality reduction is to estimate values for both $\mathbf{Z}$ and $\mathbf{B}$ given only the noisy observations of $\mathbf{X}$.</p>
+<p>One possible learning criterion is to minimize the sum of squared errors when <strong>reconstructing</strong> $\mathbf{X}$ from $\mathbf{Z}$ and $\mathbf{B}$.</p>
+<p>This leads to,</p>
+<p>$$
+\underset{\mathbf{Z}, \mathbf{B}}{\arg \min} \Vert \mathbf{X} - \mathbf{ZB} \Vert_F^2
+$$</p>
+<p>Where $\Vert \cdot \Vert_F$ is the Frobenius norm of a matrix, defined as,</p>
+<p>$$
+\Vert \mathbf{A} \Vert_F = \sqrt{\sum_{ij} A_{ij}^2}
+$$</p>
+<h4 id="alternating-least-squares">Alternating Least Squares</h4>
+<p>By leveraging the OLS solution for linear regression, we can estimate $\mathbf{Z}$ and $\mathbf{B}$ using <strong>A</strong>lternating <strong>L</strong>east <strong>S</strong>quares (ALS).</p>
+<p>Starting from some random initialization, ALS iterates between two steps until covergence.</p>
+<ol>
+<li>
+<p>Assume $\mathbf{Z}$ is fixed and optimize $\mathbf{B}$,
+$$
+\mathbf{B} \leftarrow (\mathbf{Z}^T \mathbf{Z})^{-1} \mathbf{Z}^T \mathbf{X}
+$$</p>
+</li>
+<li>
+<p>Assume $\mathbf{B}$ is fixed and optimize $\mathbf{Z}$,
+$$
+\mathbf{Z}^T \leftarrow (\mathbf{B} \mathbf{B}^T)^{-1} \mathbf{B} \mathbf{X}^T
+$$</p>
+</li>
+</ol>
+<h4 id="lack-of-uniqueness-for-optimal-parameters">Lack of Uniqueness for Optimal Parameters</h4>
+<p>Suppose we run the ALS algorithm to convergence and obtain optimal parameters $\mathbf{Z}^{\star}$ and $\mathbf{B}^{\star}$ such that,
+$$
+\ell^{\star} = \Vert \mathbf{X} - \mathbf{Z}^{\star} \mathbf{B}^{\star} \Vert_F^2
+$$</p>
+<p>Let $\mathbf{R} \in \mathbb{R}^{K \times K$ be an arbitrary invertible matrix.</p>
+<p>A $K \times K$ matrix $\mathbf{R}$ is invertible, if there exists a $K \times K$ matrix $\mathbf{S}$ such that $\mathbf{R} \mathbf{S} = \mathbf{S} \mathbf{R} = \mathbf{I}$.
+Which we also can denote as $\mathbf{R}^{-1} = \mathbf{S}$.</p>
+<p>We obtain a different set of parameters $\mathbf{\tilde{Z}} = \mathbf{Z}^{\star} \mathbf{R}$ and $\mathbf{\tilde{B}} = \mathbf{R}^{-1} \mathbf{B}^{\star}$, with the same optimal value,
+$$
+\ell^{\star} = \Vert \mathbf{X} - \mathbf{Z}^{\star} (\mathbf{I}) \mathbf{B}^{\star} \Vert_F^2 = \Vert \mathbf{X} - \mathbf{Z}^{\star} (\mathbf{R} \mathbf{R}^{-1}) \mathbf{B}^{\star} \Vert_F^2 = \Vert \mathbf{X} - \mathbf{\tilde{Z}} \mathbf{\tilde{B}} \Vert_F^2
+$$</p>
+<p>We can obtain the <strong>global</strong> optimal solution(s) and make them <strong>unique</strong> by specifying additional criteria.</p>
+<h3 id="singular-value-decomposition-svd">Singular Value Decomposition (SVD)</h3>
+<p>Let $\mathbf{X}$ be a $M \times N$ matrix, with $M \geq N$. It can be facotrized as,</p>
+<p>$$
+\mathbf{X} = \mathbf{U}
+\begin{pmatrix}
+\mathbf{\Sigma} \newline
+\mathbf{0}
+\end{pmatrix}
+\mathbf{V}^T
+$$</p>
+<p>Where $\mathbf{U} \in \mathbb{R}^{M \times M}$ and $\mathbf{V} \in \mathbb{R}^{N \times N}$ are orthogonal, i.e.,
+$$
+\mathbf{U}^T \mathbf{U} = \mathbf{U} \mathbf{U}^T = \mathbf{I}_M, \quad \mathbf{V}^T \mathbf{V} = \mathbf{V} \mathbf{V}^T = \mathbf{I}_N
+$$</p>
+<p>Columns of $\mathbf{U}$ and $\mathbf{V}$ are called left and right <strong>singular vectors</strong> of $\mathbf{X}$, respectively.</p>
+<p>$\mathbf{\Sigma} \in \mathbb{R}^{M \times N}$ is a diagonal matrix,
+$$
+\mathbf{\Sigma} = \text{diag}(\sigma_1, \sigma_2, \ldots, \sigma_N), \sigma_1 \geq \sigma_2 \geq \ldots \geq \sigma_N \geq 0
+$$</p>
+<p>$\sigma_i$‘s are called <strong>singular values</strong> of $\mathbf{X}$.</p>
+<p><img src="/images/cityu/CS4487/SVD.png" alt="">
+<strong>Figure 1</strong>: SVD visualization of the matrices.</p>
+<p><img src="/images/cityu/CS4487/SVD2.png" alt="">
+<strong>Figure 2</strong>: SVD visualization of the different operations.</p>
+<p>In Figure 2, we see four different operations.</p>
+<ul>
+<li>Upper Left: The unit disc with the two canonical unit vectors.</li>
+<li>Upper Right: Transformed with $\mathbf{M}$.</li>
+<li>Lower Left: The action of $\mathbf{V}^T$. This is just a rotation.</li>
+<li>Lower Right: The action of $\mathbf{\Sigma}\mathbf{V}^T$. $\mathbf{\Sigma}$ scales vertically and horizontally.</li>
+</ul>
+<h4 id="reduced-form-svd">Reduced-Form SVD</h4>
+<p>If only $K &#x3C; \min{M, N}$ singular values are non-zero, the SVD $\mathbf{X} \in \mathbb{R}^{M \times N}$ can be represented in reduced form as follows,</p>
+<p>$$
+\mathbf{X} = \mathbf{U} \mathbf{\Sigma}_K \mathbf{V}^T,
+$$</p>
+<p>which we can write as,</p>
+<p>$$
+\mathbf{X} = \sum_{k = 1}^K \sigma_k \mathbf{u}_k \mathbf{v}_k^T.
+$$</p>
+<p>Where</p>
+<ul>
+<li>$\mathbf{U} = [\mathbf{u}_1, \mathbf{u}_2, \ldots, \mathbf{u}_M] \in \mathbb{R}^{M \times K}$.
+<ul>
+<li>$\mathbf{U}^T \mathbf{U} = \mathbf{I}_K$.</li>
+</ul>
+</li>
+<li>$\mathbf{V} = [\mathbf{v}_1, \mathbf{v}_2, \ldots, \mathbf{v}_N] \in \mathbb{R}^{N \times K}$.
+<ul>
+<li>$\mathbf{V}^T \mathbf{V} = \mathbf{I}_K$.</li>
+</ul>
+</li>
+<li>$\mathbf{\Sigma}_K = \text{diag}(\sigma_1, \sigma_2, \ldots, \sigma_K) \in \mathbb{R}^{K \times K}$.
+<ul>
+<li>$\sigma_1 \geq \sigma_2 \geq \ldots \geq \sigma_K \geq 0$.</li>
+</ul>
+</li>
+<li>$\mathbf{u}_k \mathbf{v}_k^T \in \mathbb{R}^{M \times N}$ is the product of a column vector $\mathbf{u}_k$ and a row vector $\mathbf{v}_k^T$.
+<ul>
+<li>It has <strong>rank</strong> 1.</li>
+<li>$\mathbf{X}$ is a weighted summation of $K$ rank-1 matrices.</li>
+</ul>
+</li>
+</ul>
+<h4 id="eckart-young-mirsky-theorem">Eckart-Young-Mirsky Theorem</h4>
+<blockquote>
+<p>Given a $M \times N$ matrix $\mathbf{X}$ of rank $R \leq \min {M, N}$ and its singular value decomposition $\mathbf{X} = \mathbf{U} \mathbf{\Sigma}_R \mathbf{V}^T$
+with singular values $\sigma_1 \geq \sigma_2 \geq \ldots \geq \sigma_R > 0$ and the rest being zero,
+then among all $M \times N$ matrices of lower rank $K \leq R$,
+the best approximation is $\mathbf{Y}^{\star} = \mathbf{U} \mathbf{\Sigma}_K \mathbf{V}^T$, where $\mathbf{\Sigma}_K$ is the diagonal matrix with singular values $\sigma_1, \sigma_2, \ldots, \sigma_K$ in the sense that,
+$$
+\Vert \mathbf{X} - \mathbf{Y}^{\star} \Vert_F^2 = \min \{\Vert \mathbf{X} - \mathbf{Y} \Vert_F^2; \mathbf{Y} \in \mathbb{R}^{M \times N}, \text{rank} \mathbf{Y} \leq K\}
+$$</p>
+</blockquote>
+<p>SVD provdies a unique solution to minimum Frobenius norm linear dimensionality reduction.</p> <div class="mt-24"> <div class="grid grid-cols-2 gap-1.5 sm:gap-3"> <a href="/cityu/cs4487/cs4487_6" class="group relative flex flex-nowrap rounded-lg border border-black/15 px-4 py-3 pl-10 no-underline transition-colors duration-300 ease-in-out hover:bg-black/5 hover:text-black focus-visible:bg-black/5 focus-visible:text-black dark:border-white/20 dark:hover:bg-white/5 dark:hover:text-white dark:focus-visible:bg-white/5 dark:focus-visible:text-white"> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="absolute left-2 top-1/2 size-5 -translate-y-1/2 fill-none stroke-current stroke-2"> <line x1="5" y1="12" x2="19" y2="12" class="translate-x-3 scale-x-0 transition-transform duration-300 ease-in-out group-hover:translate-x-0 group-hover:scale-x-100 group-focus-visible:translate-x-0 group-focus-visible:scale-x-100"></line> <polyline points="12 5 5 12 12 19" class="translate-x-1 transition-transform duration-300 ease-in-out group-hover:translate-x-0 group-focus-visible:translate-x-0"></polyline> </svg> <div class="flex items-center text-sm"> Part 6 - Robust, Non-Linear Regression and Clustering </div> </a> <div class="invisible"></div> </div> </div> <div class="mt-24"> <div class="giscus"></div> <script data-astro-rerun src="https://giscus.app/client.js" data-repo="rezaarezvan/rezvan.xyz" data-repo-id="R_kgDOHvQr3w" data-category="General" data-category-id="DIC_kwDOHvQr384CiWVC" data-mapping="pathname" data-strict="0" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="bottom" data-theme="preferred_color_scheme" data-lang="en" data-loading="lazy" crossorigin="anonymous" async></script> </div> </article> </div>  </main> <footer class="animate"> <div class="mx-auto max-w-screen-sm px-3"> <div class="relative"> <div class="absolute -top-12 right-0"> <button id="back-to-top" class="group relative flex w-fit flex-nowrap rounded border border-black/15 py-1.5 pl-8 pr-3 transition-colors duration-300 ease-in-out hover:bg-black/5 hover:text-black focus-visible:bg-black/5 focus-visible:text-black dark:border-white/20 dark:hover:bg-white/5 dark:hover:text-white dark:focus-visible:bg-white/5 dark:focus-visible:text-white"> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="absolute left-2 top-1/2 size-4 -translate-y-1/2 rotate-90 fill-none stroke-current stroke-2"> <line x1="5" y1="12" x2="19" y2="12" class="translate-x-2 scale-x-0 transition-transform duration-300 ease-in-out group-hover:translate-x-0 group-hover:scale-x-100 group-focus-visible:translate-x-0 group-focus-visible:scale-x-100"></line> <polyline points="12 5 5 12 12 19" class="translate-x-1 transition-transform duration-300 ease-in-out group-hover:translate-x-0 group-focus-visible:translate-x-0"></polyline> </svg> <div class="text-sm">Back to top</div> </button> </div> </div> <div class="flex items-center justify-between"> <div>&copy; 2024 • rezvan.xyz </div> <div class="flex flex-wrap items-center gap-1.5"> <button id="light-theme-button" aria-label="Light theme" class="group flex size-9 items-center justify-center rounded border border-black/15 hover:bg-black/5 focus-visible:bg-black/5 dark:border-white/20 dark:hover:bg-white/5 dark:focus-visible:bg-white/5"> <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="transition-colors duration-300 ease-in-out group-hover:animate-pulse group-hover:stroke-black group-focus-visible:animate-pulse group-focus-visible:stroke-black group-hover:dark:stroke-white dark:group-focus-visible:stroke-white"> <circle cx="12" cy="12" r="5"></circle> <line x1="12" y1="1" x2="12" y2="3"></line> <line x1="12" y1="21" x2="12" y2="23"></line> <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line> <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line> <line x1="1" y1="12" x2="3" y2="12"></line> <line x1="21" y1="12" x2="23" y2="12"></line> <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line> <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line> </svg> </button> <button id="dark-theme-button" aria-label="Dark theme" class="group flex size-9 items-center justify-center rounded border border-black/15 hover:bg-black/5 focus-visible:bg-black/5 dark:border-white/20 dark:hover:bg-white/5 dark:focus-visible:bg-white/5"> <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="transition-colors duration-300 ease-in-out group-hover:animate-pulse group-hover:stroke-black group-focus-visible:animate-pulse group-focus-visible:stroke-black group-hover:dark:stroke-white dark:group-focus-visible:stroke-white"> <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path> </svg> </button> <button id="system-theme-button" aria-label="System theme" class="group flex size-9 items-center justify-center rounded border border-black/15 hover:bg-black/5 focus-visible:bg-black/5 dark:border-white/20 dark:hover:bg-white/5 dark:focus-visible:bg-white/5"> <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="transition-colors duration-300 ease-in-out group-hover:animate-pulse group-hover:stroke-black group-focus-visible:animate-pulse group-focus-visible:stroke-black group-hover:dark:stroke-white dark:group-focus-visible:stroke-white"> <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect> <line x1="8" y1="21" x2="16" y2="21"></line> <line x1="12" y1="17" x2="12" y2="21"></line> </svg> </button> </div> </div> </div> </footer> <aside data-pagefind-ignore> <div id="backdrop" class="bg-[rgba(0, 0, 0, 0.5] invisible fixed left-0 top-0 z-50 flex h-screen w-full justify-center p-6 backdrop-blur-sm" data-astro-transition-persist="astro-3snakcvo-2"> <div id="pagefind-container" class="m-0 flex h-fit max-h-[80%] w-full max-w-screen-sm flex-col overflow-auto rounded border border-black/15 bg-neutral-100 p-2 px-4 py-3 shadow-lg dark:border-white/20 dark:bg-neutral-900"> <div id="search" class="pagefind-ui pagefind-init" data-pagefind-ui data-bundle-path="/pagefind/" data-ui-options="{&#34;showImages&#34;:false,&#34;excerptLength&#34;:15,&#34;resetStyles&#34;:false}"></div>  <div class="mr-2 pb-1 pt-4 text-right text-xs dark:prose-invert">
 Press <span class="prose text-xs dark:prose-invert"><kbd class="">Esc</kbd></span> or click anywhere to close
 </div> </div> </div> </aside> <script>
   const magnifyingGlass = document.getElementById("magnifying-glass");
