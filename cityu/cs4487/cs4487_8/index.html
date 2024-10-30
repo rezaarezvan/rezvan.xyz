@@ -1,0 +1,618 @@
+<!DOCTYPE html><html lang="en"> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" type="image/icon" href="/favicon.ico"><meta name="generator" content="Astro v4.11.5"><!-- Canonical URL --><link rel="canonical" href="https://rezvan.xyz/cityu/cs4487/cs4487_8/"><!-- Primary Meta Tags --><title>Part 8 - Principal Component Analysis | machine learning | rezvan.xyz</title><meta name="title" content="Part 8 - Principal Component Analysis | machine learning | rezvan.xyz"><meta name="description"><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://rezvan.xyz/cityu/cs4487/cs4487_8/"><meta property="og:title" content="Part 8 - Principal Component Analysis | machine learning | rezvan.xyz"><meta property="og:description"><meta property="og:image" content="https://rezvan.xyz/favicon.ico"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://rezvan.xyz/cityu/cs4487/cs4487_8/"><meta property="twitter:title" content="Part 8 - Principal Component Analysis | machine learning | rezvan.xyz"><meta property="twitter:description"><meta property="twitter:image" content="https://rezvan.xyz/favicon.ico"><!-- PageFind --><link href="/pagefind/pagefind-ui.css" rel="stylesheet"><script src="/pagefind/pagefind-ui.js"></script><!-- KaTeX support --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script><!-- inline KaTeX --><script>
+    function renderKaTeX() {
+        if (typeof renderMathInElement !== "undefined") {
+            renderMathInElement(document.body, {
+                delimiters: [
+                    { left: "$$", right: "$$", display: true },
+                    { left: "$", right: "$", display: false },
+                ],
+            });
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", renderKaTeX);
+    document.addEventListener("astro:after-swap", renderKaTeX);
+</script><meta name="astro-view-transitions-enabled" content="true"><meta name="astro-view-transitions-fallback" content="animate"><script>
+    function init() {
+        preloadTheme();
+        onScroll();
+        animate();
+        updateThemeButtons();
+        addCopyCodeButtons();
+        setGiscusTheme();
+
+        const backToTop = document.getElementById("back-to-top");
+        backToTop?.addEventListener("click", (event) => scrollToTop(event));
+
+        const backToPrev = document.getElementById("back-to-prev");
+        backToPrev?.addEventListener("click", () => window.history.back());
+
+        const lightThemeButton = document.getElementById("light-theme-button");
+        lightThemeButton?.addEventListener("click", () => {
+            localStorage.setItem("theme", "light");
+            toggleTheme(false);
+            updateThemeButtons();
+        });
+
+        const darkThemeButton = document.getElementById("dark-theme-button");
+        darkThemeButton?.addEventListener("click", () => {
+            localStorage.setItem("theme", "dark");
+            toggleTheme(true);
+            updateThemeButtons();
+        });
+
+        const systemThemeButton = document.getElementById(
+            "system-theme-button",
+        );
+        systemThemeButton?.addEventListener("click", () => {
+            localStorage.setItem("theme", "system");
+            toggleTheme(
+                window.matchMedia("(prefers-color-scheme: dark)").matches,
+            );
+            updateThemeButtons();
+        });
+
+        window
+            .matchMedia("(prefers-color-scheme: dark)")
+            .addEventListener("change", (event) => {
+                if (localStorage.theme === "system") {
+                    toggleTheme(event.matches);
+                }
+            });
+
+        document.addEventListener("scroll", onScroll);
+    }
+
+    function updateThemeButtons() {
+        const theme = localStorage.getItem("theme");
+        const lightThemeButton = document.getElementById("light-theme-button");
+        const darkThemeButton = document.getElementById("dark-theme-button");
+        const systemThemeButton = document.getElementById(
+            "system-theme-button",
+        );
+
+        function removeActiveButtonTheme(button) {
+            button?.classList.remove("bg-black/5");
+            button?.classList.remove("dark:bg-white/5");
+        }
+
+        function addActiveButtonTheme(button) {
+            button?.classList.add("bg-black/5");
+            button?.classList.add("dark:bg-white/5");
+        }
+
+        removeActiveButtonTheme(lightThemeButton);
+        removeActiveButtonTheme(darkThemeButton);
+        removeActiveButtonTheme(systemThemeButton);
+
+        if (theme === "light") {
+            addActiveButtonTheme(lightThemeButton);
+        } else if (theme === "dark") {
+            addActiveButtonTheme(darkThemeButton);
+        } else {
+            addActiveButtonTheme(systemThemeButton);
+        }
+    }
+
+    function animate() {
+        const animateElements = document.querySelectorAll(".animate");
+
+        animateElements.forEach((element, index) => {
+            setTimeout(() => {
+                element.classList.add("show");
+            }, index * 100);
+        });
+    }
+
+    function onScroll() {
+        if (window.scrollY > 0) {
+            document.documentElement.classList.add("scrolled");
+        } else {
+            document.documentElement.classList.remove("scrolled");
+        }
+    }
+
+    function scrollToTop(event) {
+        event.preventDefault();
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth",
+        });
+    }
+
+    function toggleTheme(dark) {
+        const css = document.createElement("style");
+
+        css.appendChild(
+            document.createTextNode(
+                `* {
+             -webkit-transition: none !important;
+             -moz-transition: none !important;
+             -o-transition: none !important;
+             -ms-transition: none !important;
+             transition: none !important;
+          }
+        `,
+            ),
+        );
+
+        document.head.appendChild(css);
+
+        if (dark) {
+            document.documentElement.classList.add("dark");
+        } else {
+            document.documentElement.classList.remove("dark");
+        }
+
+        window.getComputedStyle(css).opacity;
+        document.head.removeChild(css);
+
+        setGiscusTheme();
+    }
+
+    function preloadTheme() {
+        const userTheme = localStorage.theme;
+
+        if (userTheme === "light" || userTheme === "dark") {
+            toggleTheme(userTheme === "dark");
+        } else {
+            toggleTheme(
+                window.matchMedia("(prefers-color-scheme: dark)").matches,
+            );
+        }
+    }
+
+    function addCopyCodeButtons() {
+        let copyButtonLabel = "📋";
+        let codeBlocks = Array.from(document.querySelectorAll("pre"));
+
+        async function copyCode(codeBlock, copyButton) {
+            const codeText = codeBlock.innerText;
+            const buttonText = copyButton.innerText;
+            const textToCopy = codeText.replace(buttonText, "");
+
+            await navigator.clipboard.writeText(textToCopy);
+            copyButton.innerText = "✅";
+
+            setTimeout(() => {
+                copyButton.innerText = copyButtonLabel;
+            }, 2000);
+        }
+
+        for (let codeBlock of codeBlocks) {
+            const wrapper = document.createElement("div");
+            wrapper.style.position = "relative";
+
+            const copyButton = document.createElement("button");
+            copyButton.innerText = copyButtonLabel;
+            copyButton.classList = "copy-code";
+
+            codeBlock.setAttribute("tabindex", "0");
+            codeBlock.appendChild(copyButton);
+
+            codeBlock.parentNode.insertBefore(wrapper, codeBlock);
+            wrapper.appendChild(codeBlock);
+
+            copyButton?.addEventListener("click", async () => {
+                await copyCode(codeBlock, copyButton);
+            });
+        }
+    }
+
+    const setGiscusTheme = () => {
+        const giscus = document.querySelector(".giscus-frame");
+
+        const isDark = document.documentElement.classList.contains("dark");
+
+        if (giscus) {
+            const url = new URL(giscus.src);
+            url.searchParams.set("theme", isDark ? "dark" : "light");
+            giscus.src = url.toString();
+        }
+    };
+
+    document.addEventListener("DOMContentLoaded", () => init());
+    document.addEventListener("astro:after-swap", () => init());
+    preloadTheme();
+</script><link rel="stylesheet" href="/_astro/_subject_.DPh3UX5U.css">
+<style>summary[data-astro-cid-xvrfupwn]{cursor:pointer;border-top-left-radius:.5rem;border-top-right-radius:.5rem;padding:.375rem .75rem;font-weight:500;transition-property:color,background-color,border-color,text-decoration-color,fill,stroke;transition-timing-function:cubic-bezier(.4,0,.2,1);transition-duration:.15s}summary[data-astro-cid-xvrfupwn]:hover{background-color:#0000000d}summary[data-astro-cid-xvrfupwn]:hover:is(.dark *){background-color:#ffffff0d}details[data-astro-cid-xvrfupwn][open] summary[data-astro-cid-xvrfupwn]{background-color:#0000000d}details[data-astro-cid-xvrfupwn][open] summary[data-astro-cid-xvrfupwn]:is(.dark *){background-color:#ffffff0d}
+</style><script type="module" src="/_astro/hoisted.DzxSAGjc.js"></script></head> <body> <header data-astro-transition-persist="astro-l7r54iwe-1"> <div class="mx-auto max-w-screen-sm px-3"> <div class="flex flex-wrap justify-between gap-y-2"> <a href="/" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out">  <div class="font-semibold"> rezvan.xyz </div>  </a> <nav class="flex items-center gap-1 text-sm"> <a href="/posts" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> posts </a> <span> / </span> <a href="/chalmers" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> chalmers </a> <span> / </span> <a href="/cityu" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> cityu </a> <span> / </span> <a href="/pdf/cv/cv.pdf" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> cv </a> <span> / </span> <button id="magnifying-glass" aria-label="Search" class="flex items-center rounded border border-black/15 bg-neutral-100 px-2 py-1 text-xs transition-colors duration-300 ease-in-out hover:bg-black/5 hover:text-black focus-visible:bg-black/5 focus-visible:text-black dark:border-white/20 dark:bg-neutral-900 dark:hover:bg-white/5 dark:hover:text-white dark:focus-visible:bg-white/5 dark:focus-visible:text-white"> <svg height="16" stroke-linejoin="round" viewBox="0 0 16 16" width="16" style="color: currentcolor;"><path fill-rule="evenodd" clip-rule="evenodd" d="M3.5 7C3.5 5.067 5.067 3.5 7 3.5C8.933 3.5 10.5 5.067 10.5 7C10.5 7.88461 10.1718 8.69256 9.63058 9.30876L9.30876 9.63058C8.69256 10.1718 7.88461 10.5 7 10.5C5.067 10.5 3.5 8.933 3.5 7ZM9.96544 11.0261C9.13578 11.6382 8.11014 12 7 12C4.23858 12 2 9.76142 2 7C2 4.23858 4.23858 2 7 2C9.76142 2 12 4.23858 12 7C12 8.11014 11.6382 9.13578 11.0261 9.96544L14.0303 12.9697L14.5607 13.5L13.5 14.5607L12.9697 14.0303L9.96544 11.0261Z" fill="currentColor"></path></svg>
+&nbsp;Search
+</button> </nav> </div> </div> </header> <main>  <div class="mx-auto max-w-screen-sm px-3"> <div class="animate"> <a href="/cityu/cs4487" class="not-prose group relative flex w-fit flex-nowrap rounded border border-black/15 py-1.5 pl-7 pr-3 transition-colors duration-300 ease-in-out hover:bg-black/5 hover:text-black focus-visible:bg-black/5 focus-visible:text-black dark:border-white/20 dark:hover:bg-white/5 dark:hover:text-white dark:focus-visible:bg-white/5 dark:focus-visible:text-white"> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="absolute left-2 top-1/2 size-4 -translate-y-1/2 fill-none stroke-current stroke-2"> <line x1="5" y1="12" x2="19" y2="12" class="translate-x-2 scale-x-0 transition-transform duration-300 ease-in-out group-hover:translate-x-0 group-hover:scale-x-100 group-focus-visible:translate-x-0 group-focus-visible:scale-x-100"></line> <polyline points="12 5 5 12 12 19" class="translate-x-1 transition-transform duration-300 ease-in-out group-hover:translate-x-0 group-focus-visible:translate-x-0"></polyline> </svg> <div class="text-sm"> Back to machine learning </div> </a> </div> <div class="my-10 space-y-1"> <div class="animate flex items-center gap-1.5"> <div class="font-base text-sm"> CS4487 </div>
+&bull;
+<div class="font-base text-sm"> <time datetime="2024-10-30T00:00:00.000Z"> October 30, 2024 </time> </div> 
+&bull;
+<div class="font-base text-sm"> 14 min read </div> </div> <h1 class="animate text-3xl font-semibold text-black dark:text-white"> Part 8 - Principal Component Analysis </h1> </div> <details open class="animate rounded-lg border border-black/15 dark:border-white/20" data-astro-cid-xvrfupwn> <summary data-astro-cid-xvrfupwn>Table of Contents</summary> <nav class="" data-astro-cid-xvrfupwn> <ul class="py-3" data-astro-cid-xvrfupwn> <li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#eigenvectors" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Eigenvectors </a> <ul class="translate-x-3"> <li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#example" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Example </a>  </li> </ul> </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#linear-independence" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Linear Independence </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#some-matrices" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Some Matrices </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#eigendecomposition" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Eigendecomposition </a> <ul class="translate-x-3"> <li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#eigendecomposition-of-symmetric-matrix" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Eigendecomposition of Symmetric Matrix </a>  </li> </ul> </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#principal-component-analysis" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Principal Component Analysis </a> <ul class="translate-x-3"> <li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#sample-variance-in-a-given-direction" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Sample Variance in a Given Direction </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#pre-centering" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Pre-Centering </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#the-direction-of-maximum-variance" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> The Direction of Maximum Variance </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#k-largest-directions-of-variance" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> $K$ Largest Directions of Variance </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#dimensionality-reduction-with-pca" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Dimensionality Reduction with PCA </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#how-to-choose-the-number-of-pcs" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> How to Choose the Number of PCs? </a>  </li> </ul> </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#connection-to-svd" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Connection to SVD </a> <ul class="translate-x-3"> <li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#when-does-pca-fail" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> When Does PCA Fail? </a>  </li> </ul> </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#kernel-principal-component-analysis" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Kernel Principal Component Analysis </a> <ul class="translate-x-3"> <li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#limitations-of-linear-dimensionality-reduction" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Limitations of Linear Dimensionality Reduction </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#feature-mapping" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Feature Mapping </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#feature-mapping--svd" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Feature Mapping + SVD </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#feature-mapping--pca" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Feature Mapping + PCA </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#kernel-pca" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Kernel PCA </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#kernel-pca-algorithm" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Kernel PCA Algorithm </a>  </li> </ul> </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#summary" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Summary </a>  </li> </ul> </nav> </details> <article class="animate"> <h3 id="eigenvectors">Eigenvectors</h3>
+<p>Let’s do a quick linear algebra recap.</p>
+<p>Assume $\mathbf{A} \in \mathbb{R}^{N \times N}, \mathbf{v} \in \mathbb{C}^{N \times 1}$, and $\lambda \in \mathbb{C}$.</p>
+<p>If $\mathbf{A} \mathbf{v} = \lambda \mathbf{v}$, then $\mathbf{v}$ is a right eigenvector of $\mathbf{A}$ with eigenvalue $\lambda$.</p>
+<p>If $\mathbf{A}^T \mathbf{v} = \lambda \mathbf{v}$, then $\mathbf{v}$ is a left eigenvector of $\mathbf{A}$ with eigenvalue $\lambda$.
+(Equivalently, $\mathbf{v}^T \mathbf{A} = \lambda \mathbf{v}^T$.)</p>
+<p>If $\mathbf{A}$ is symmetric such that $\mathbf{A} = \mathbf{A}^T$, then the left and right eigenvectors of $\mathbf{A}$ are the same with the same eigenvalues.</p>
+<h4 id="example">Example</h4>
+<p>$$
+\begin{bmatrix}
+2 &#x26; 1 \newline
+1 &#x26; 2
+\end{bmatrix}
+\begin{bmatrix}
+1 \newline
+1
+\end{bmatrix} =
+\begin{bmatrix}
+3 \newline
+3
+\end{bmatrix} =
+3
+\begin{bmatrix}
+1 \newline
+1
+\end{bmatrix}
+$$</p>
+<p>$$
+\begin{bmatrix}
+1 &#x26; 1
+\end{bmatrix}
+\begin{bmatrix}
+2 &#x26; 1 \newline
+1 &#x26; 2
+\end{bmatrix} =
+3
+\begin{bmatrix}
+1 &#x26; 1
+\end{bmatrix}
+$$</p>
+<h3 id="linear-independence">Linear Independence</h3>
+<p>Linear independence is arguably the most important concept in linear algebra.</p>
+<p>A set of vectors $\{\mathbf{v}_1, \mathbf{v}_2, \ldots, \mathbf{v}_N\}$ is linearly independent if vector equation,</p>
+<p>$$
+a_1 \mathbf{v}_1 + a_2 \mathbf{v}_2 + \ldots + a_N \mathbf{v}_N = \mathbf{0},
+$$</p>
+<p>has only the trivial solution $a_1 = a_2 = \ldots = a_N = 0$.</p>
+<p>$\{\mathbf{v}_1, \mathbf{v}_2, \ldots, \mathbf{v}_N\}$ is linearly dependent if there exists numbers $a_1, a_2, \ldots, a_N$ not all equal to zero, such that,</p>
+<p>$$
+a_1 \mathbf{v}_1 + a_2 \mathbf{v}_2 + \ldots + a_N \mathbf{v}_N = \mathbf{0}.
+$$</p>
+<p>Assuming $a_1 \neq 0$, we have $\mathbf{v}_1 = -\frac{a_2}{a_1} \mathbf{v}_2 - \ldots - \frac{a_N}{a_1} \mathbf{v}_N$.</p>
+<h3 id="some-matrices">Some Matrices</h3>
+<p>An $N \times N$ square matrix $\mathbf{A}$ is <strong>invertible</strong> if there exists an $N \times N$ square matrix $\mathbf{B}$ such that,</p>
+<p>$$
+\mathbf{A} \mathbf{B} = \mathbf{B} \mathbf{A} = \mathbf{I}_N,
+$$</p>
+<p>Equivalently, the columns/rows of $\mathbf{A}$ are linearly independent.</p>
+<p>A square matrix $\mathbf{Q}$ is <strong>orthogonal</strong> if its columns and rows are orthogonal unit vectors (orthonormal vectors),</p>
+<p>$$
+\mathbf{Q} \mathbf{Q}^T = \mathbf{Q}^T \mathbf{Q} = \mathbf{I}.
+$$</p>
+<p>A square matrix $\mathbf{A}$ is <strong>diagonalizable</strong> if there exists an invertible matrix $\mathbf{P}$ and a diagonal matrix $\mathbf{D}$ such that,</p>
+<p>$$
+\mathbf{P}^{-1} \mathbf{A} \mathbf{P} = \mathbf{D},
+$$</p>
+<p>or equivalently,</p>
+<p>$$
+\mathbf{A} = \mathbf{P} \mathbf{D} \mathbf{P}^{-1}.
+$$</p>
+<p><strong>Real symmetric</strong> matrices are diagonalizable by orthogonal matrices.
+This can be proven by the spectral theorem.</p>
+<h3 id="eigendecomposition">Eigendecomposition</h3>
+<p>Let $\mathbf{V} \in \mathbb{R}^{N \times N}$ be a matrix whose columns $\mathbf{v_i}$ are $N$ linearly independent eigenvectors of $\mathbf{A}$ with $\mathbf{\Lambda}$ the corresponding diagonal matrix of eigenvalues such taht $\Lambda_{ii} = \lambda_i$.</p>
+<p>Then,</p>
+<p>$$
+\begin{align*}
+\mathbf{A} \mathbf{V} &#x26; = \mathbf{V} \mathbf{\Lambda} \newline
+\mathbf{A} &#x26; = \mathbf{V} \mathbf{\Lambda} \mathbf{V}^{-1} \newline
+\mathbf{V}^{-1} \mathbf{A} \mathbf{V} &#x26; = \mathbf{\Lambda}
+\end{align*}
+$$</p>
+<h4 id="eigendecomposition-of-symmetric-matrix">Eigendecomposition of Symmetric Matrix</h4>
+<p>If $\mathbf{A}$ is a real symmetric, we can choose $N$ orthonormal eigenvectors so that $\Vert \mathbf{v}_i \Vert_2^2 = 1$, $\mathbf{v}_i^T \mathbf{v}_j = 0$ and $N$ real eigenvalues $\lambda_i \in \mathbb{R}$.</p>
+<p>As a result, we have,</p>
+<p>$$
+\begin{align*}
+\mathbf{A} &#x26; = \mathbf{V} \mathbf{\Lambda} \mathbf{V}^T = \sum_{i = 1}^N \lambda_i \mathbf{v_i} \mathbf{v_i}^T \newline
+\mathbf{V}^T \mathbf{A} \mathbf{V} &#x26; = \mathbf{\Lambda}
+\end{align*}
+$$</p>
+<h3 id="principal-component-analysis">Principal Component Analysis</h3>
+<p>Principal Component Analysis (PCA) is an unsupervised method, given a data matrix $\mathbf{X} \in \mathbb{R}^{M \times N}$, the goal of PCA is to identify the directions of maximum variance contained in the data.</p>
+<p>We need to choose the basis vectors along the maximum variance (longest extent) of the data.
+The basis vectors are called principal components (PC).</p>
+<h4 id="sample-variance-in-a-given-direction">Sample Variance in a Given Direction</h4>
+<p>Let $\mathbf{v} \in \mathbb{R}^N$ such that $\Vert \mathbf{v} \Vert_2 = \mathbf{v}^T \mathbf{v} = 1$.</p>
+<p>The variance in the direction $\mathbf{v}$ is given by the expression,</p>
+<p>$$
+\frac{1}{M} \sum_{i = 1}^M (\mathbf{v}^T \mathbf{x}^{(i)} - \mathbf{\mu})^2,
+$$</p>
+<p>where $\mathbf{\mu} = \frac{1}{M} \sum_{i = 1}^M \mathbf{v}^T \mathbf{x}^{(i)}$ is the mean of the projected data.</p>
+<h4 id="pre-centering">Pre-Centering</h4>
+<p>Under the assumption that the data are pre-centered so that $\frac{1}{M} \sum_{i = 1}^M (\mathbf{v}^T \mathbf{x}^{(i)}) = 0$, this expression simplifies to,</p>
+<p>$$
+\begin{align*}
+\frac{1}{M} \sum_{i = 1}^M (\mathbf{v}^T \mathbf{x}^{(i)})^2 &#x26; = \frac{1}{M} \sum_{i = 1}^M \left(\mathbf{v}^T \mathbf{x}^{(i)}\right)^T \left(\mathbf{v}^T \mathbf{x}^{(i)}\right) \newline
+&#x26; = \frac{1}{M} \sum_{i = 1}^M \left(\mathbf{v}^T \mathbf{x}^{(i)}\right)^T \left(\mathbf{x}^{(i)}\right)^T \left((\mathbf{x}^{(i)})^T \mathbf{v}\right) \newline
+&#x26; = \frac{1}{M} \mathbf{v}^T \left(\sum_{i = 1}^M \mathbf{x}^{(i)} (\mathbf{x}^{(i)})^T\right) \mathbf{v} \newline
+&#x26; = \frac{1}{M} \mathbf{v}^T \mathbf{X}^T \mathbf{X} \mathbf{v}.
+\end{align*}
+$$</p>
+<h4 id="the-direction-of-maximum-variance">The Direction of Maximum Variance</h4>
+<p>Suppose we want to identify the direction $\mathbf{v}_1$ of maximum variance given the data matrix $\mathbf{X}$.</p>
+<p>We can formulate this optimization problem as follows,</p>
+<p>$$
+\begin{align*}
+\underset{\mathbf{v}}{\max} &#x26; \quad \frac{1}{M} \mathbf{v}^T \mathbf{X}^T \mathbf{X} \mathbf{v} \newline
+\text{subject to} &#x26; \quad \Vert \mathbf{v} \Vert_2 = 1.
+\end{align*}
+$$</p>
+<p>Letting $\mathbf{\Sigma} = \frac{1}{M} \mathbf{X}^T \mathbf{X}$, we form the Lagrangian,</p>
+<p>$$
+L(\mathbf{v}, \nu) = \mathbf{v}^T \mathbf{\Sigma} \mathbf{v} + \nu (1 - \Vert \mathbf{v} \Vert_2^2).
+$$</p>
+<p>Taking the derivative of $L(\mathbf{v}, \nu)$ with respect to $\mathbf{v}$ and setting it to zero, we have,</p>
+<p>$$
+\begin{align*}
+\frac{\partial L(\mathbf{v}, \nu)}{\partial \mathbf{v}} &#x26; = 2 \mathbf{\Sigma} \mathbf{v} - 2 \nu \mathbf{v} = 0 \newline
+\mathbf{\Sigma} \mathbf{v} &#x26; = \nu \mathbf{v}.
+\end{align*}
+$$</p>
+<p>As $\mathbf{v} \neq 0, \mathbf{v}$ must be an eigenvector of $\mathbf{\Sigma}$ with eigenvalue $\nu$.</p>
+<p>Assuming $\{\mathbf{v}_1, \mathbf{v}_2, \ldots, \mathbf{v}_N\}$ are the eigenvectors of $\mathbf{\Sigma}$, corresponding to eigenvalues $\sigma_1 \geq \ldots \geq \sigma_N$, respectively, we have,</p>
+<p>$$
+\begin{align*}
+\mathbf{v}^{\star} &#x26; = \mathbf{v}_1 \newline
+p^{\star} &#x26; = \mathbf{v}_1^T \mathbf{\Sigma} \mathbf{v}_1 = \mathbf{v}_1^T \nu \mathbf{v}_1 = \nu \mathbf{v}_1^T \mathbf{v}_1 = \nu = \sigma_1.
+\end{align*}
+$$</p>
+<h4 id="k-largest-directions-of-variance">$K$ Largest Directions of Variance</h4>
+<p>Suppose instead of just the direction of maximum variance, we want the $K$ largest directions of variance that are all mutually <em>orthogonal</em>.</p>
+<p>Finding the second-largest direction of variance corresponds to solving the problem,</p>
+<p>$$
+\begin{align*}
+\underset{\mathbf{v}}{\max} &#x26; \quad \frac{1}{M} \mathbf{v}^T \mathbf{X}^T \mathbf{X} \mathbf{v} \newline
+\text{subject to} &#x26; \quad \Vert \mathbf{v} \Vert_2 = 1, \newline
+&#x26; \quad \mathbf{v}^T \mathbf{v}_1 = 0.
+\end{align*}
+$$</p>
+<p>We form the Lagrangian,</p>
+<p>$$
+L(\mathbf{v}, \nu, \lambda) = \mathbf{v}^T \mathbf{\Sigma} \mathbf{v} + \nu (1 - \Vert \mathbf{v} \Vert_2^2) + \lambda \mathbf{v}^T \mathbf{v}_1.
+$$</p>
+<p>Taking the derivative of $L(\mathbf{v}, \nu, \lambda)$ with respect to $\mathbf{v}$ and setting it to zero, we have,</p>
+<p>$$
+\frac{\partial L(\mathbf{v}, \nu, \lambda)}{\partial \mathbf{v}} = 2 \mathbf{\Sigma} \mathbf{v} - 2 \nu \mathbf{v} + \lambda \mathbf{v}_1 = 0.
+$$</p>
+<p>If we left-multiply by $\mathbf{v}_1^T$ on both sides, we have,
+$$
+\begin{align*}
+2 \mathbf{v_1}^T \mathbf{\Sigma} \mathbf{v} - 2 \nu \mathbf{v_1}^T \mathbf{v} + \lambda \mathbf{v_1}^T \mathbf{v_1} &#x26; = 0 \newline
+2(\mathbf{\Sigma} \mathbf{v_1})^T \mathbf{v} - 0 + \lambda &#x26; = 0 \newline
+2 \sigma_1 \mathbf{v_1}^T \mathbf{v} - 0 + \lambda &#x26; = 0 \newline
+\lambda = 0.
+\end{align*}
+$$</p>
+<p>Therefore, we arrive at the eigenvalue equation again,</p>
+<p>$$
+\mathbf{\Sigma} \mathbf{v} = \nu \mathbf{v}.
+$$</p>
+<p>It is easy to see that $\mathbf{v}^{\star}$ is the eigenvector corresponding to the second largest eigenvalue.</p>
+<p>In general, the top $K$ directions of variance $\mathbf{v}_1, \ldots, \mathbf{v}_K$ are given by the $K$ eigenvectors corresponding to the $K$ largest eigenvalues of $\frac{1}{M} \mathbf{X}^T \mathbf{X}$.</p>
+<p>PCA can also be derived by picking the principal vectors that minimize the approximation error arising from projecting the data onto the $K$-dimensional subspace spanned by these vectors,</p>
+<p>$$
+\underset{\mathbf{V}}{\min} \frac{1}{M} \sum_{i = 1}^M \Vert \mathbf{x}^{(i)} - (\mathbf{v}^T \mathbf{x}^{(i)}) \mathbf{v} \Vert_2^2.
+$$</p>
+<h4 id="dimensionality-reduction-with-pca">Dimensionality Reduction with PCA</h4>
+<p>The informal algorithm can be described as follows,</p>
+<ol>
+<li>Subtract the mean of the data.</li>
+<li>The first PC $\mathbf{v}_1$ is the direction that explains the most variance of the data.</li>
+<li>The second PC $\mathbf{v}_2$ is the direction perpendicular to $\mathbf{v}_1$ that explains the most variance.</li>
+<li>The third PC $\mathbf{v}_3$ is the direction perpendicular to $\{\mathbf{v}_1, \mathbf{v}_2\}$ that explains the most variance.</li>
+<li>$\ldots$</li>
+</ol>
+<p>The formal algorithm can be described as follows,</p>
+<ol>
+<li>Data preprocessing: Compute $\mathbf{\mu} = \frac{1}{M} \sum_i \mathbf{x}^{(i)}$ and replace each $\mathbf{x}^{(i)}$ with $\mathbf{x}^{(i)} - \mathbf{\mu}$.</li>
+<li>Given pre-processed data matrix $\mathbf{X} \in \mathbb{R}^{M \times N}$, compute the sample covariance matrix $\mathbf{\Sigma} = \frac{1}{M} \mathbf{X}^T \mathbf{X}$.</li>
+<li>Compute the $K$ leading eigenvectors $\mathbf{v}_1, \ldots, \mathbf{v}_K$ of $\mathbf{\Sigma}$ where $\mathbf{v}_i \in \mathbb{R}^N$.</li>
+<li>Stack the eigenvectors together into an $N \times K$ matrix $\mathbf{V}$ where each column $i$ of $\mathbf{V}$ corresponds to $\mathbf{v}_i$.</li>
+<li>Project the matrix $\mathbf{X}$ into the rank-$K$ subspace of maximum variance by computing the matrix product $\mathbf{Z} = \mathbf{X} \mathbf{V}$.</li>
+<li>To reconstruct $\mathbf{X}$ given $\mathbf{Z}$ and $\mathbf{V}$, we use $\mathbf{\hat{X}} = \mathbf{Z} \mathbf{V}^T$.</li>
+</ol>
+<h4 id="how-to-choose-the-number-of-pcs">How to Choose the Number of PCs?</h4>
+<p>We have two methods to set the number of components $K$.</p>
+<ul>
+<li>Preserve some percentage of the variance, e.g., 95%.</li>
+<li>Whatever works well for our final task (e.g., classification, regression).</li>
+</ul>
+<h3 id="connection-to-svd">Connection to SVD</h3>
+<p>We have seen that the minimum Frobenius norm linear dimensionality reduction problem could be solved using the rank-$K$ SVD of $\mathbf{X}$,</p>
+<p>$$
+\begin{align*}
+\underset{\mathbf{U}, \mathbf{S}, \mathbf{V}}{\arg \min} &#x26; \quad \Vert \mathbf{X} - \mathbf{U} \mathbf{S} \mathbf{V}^T \Vert_F^2,
+\end{align*}
+$$</p>
+<p>where $\mathbf{U} \in \mathbb{R}^{M \times K}$, $\mathbf{S} \in \mathbb{R}^{K \times K}$, and $\mathbf{V} \in \mathbb{R}^{N \times K}$.</p>
+<p>The matrix $\mathbf{Z} = \mathbf{U} \mathbf{S}$ gives the optimal rank-$K$ representation of $\mathbf{X}$ with respect to Frobenius norm minimization.</p>
+<p>If we let $K = N$ then $\mathbf{X} = \mathbf{U} \mathbf{S} \mathbf{V}^T$ and $\mathbf{X}^T \mathbf{X} = \mathbf{V} \mathbf{S}^T \mathbf{U}^T \mathbf{U} \mathbf{S} \mathbf{V}^T$.</p>
+<p>Due to orthogonality of $\mathbf{U}$, we get $\mathbf{X}^T \mathbf{X} = \mathbf{V} \mathbf{S}^2 \mathbf{V}^T$.</p>
+<p>This means that the right singular vectors of $\mathbf{X}$ are exactly the eigenvectors of $\mathbf{X}^T \mathbf{X}$.</p>
+<p>We can also see that the eigenvalues of $\mathbf{X}^T \mathbf{X}$ are the squares of the diagonal elements of $\mathbf{S}$.</p>
+<p>This means that the $K$ largest singular values and $K$ largest eigenvalues correspond to the same $K$ basis vectors.</p>
+<p>According to PCA, the projection operation is $\mathbf{Z} = \mathbf{X} \mathbf{V}$, therefore,</p>
+<p>$$
+\mathbf{Z} = \mathbf{X} \mathbf{V} = (\mathbf{U} \mathbf{S} \mathbf{V}^T)(\mathbf{V}) = \mathbf{U} \mathbf{S}.
+$$</p>
+<p>Finally, note that if the decomposition are based only on the $K$ leading principal vectors, the projections $\mathbf{Z} = \mathbf{X} \mathbf{V}$ and $\mathbf{Z} = \mathbf{U} \mathbf{S}$ will still be identical.</p>
+<p>These manipulations show that PCA on $\mathbf{X}^T \mathbf{X}$ and SVD on $\mathbf{X}$ identify exactly the same subspace and result in exactly the same projection of the data into that subspace.</p>
+<p>As a result, generic linear dimensionality reduction simultaneously minimizes the Frobenius norm of the reconstruction error of $\mathbf{X}$ and maximizes the retained variance in the learned subspace.</p>
+<p>Both SVD and PCA provide the same description of generic linear dimensionality reduction, an orthogonal basis for exactly the same optimal linear subspace.</p>
+<h4 id="when-does-pca-fail">When Does PCA Fail?</h4>
+<p>The primary motivation behind PCA is to decorrelate the dataset, i.e., remove second-order dependencies.</p>
+<p>If higher-order dependencies exist between the features in the data, PCA may be insufficient at revealing all strucutre in the data.</p>
+<p>PCA requires that each component must be perpendicular to the previous ones, but clearly, this requirement is overly stringent and the data might be arranged along non-orthogonal axes.</p>
+<h3 id="kernel-principal-component-analysis">Kernel Principal Component Analysis</h3>
+<p>Kernel PCA (KPCA) is a non-linear extension of PCA that can be used to extract non-linear structure in the data.</p>
+<h4 id="limitations-of-linear-dimensionality-reduction">Limitations of Linear Dimensionality Reduction</h4>
+<p>What if the data “lives” on a non-flat surface?</p>
+<p>PCA can not capture the curvature of the data.</p>
+<p>As usual, feature mapping can be used to overcome this.</p>
+<h4 id="feature-mapping">Feature Mapping</h4>
+<p>If we apply a high-dimensional feature transformation to the data $\mathbf{x}^{(i)} \rightarrow \phi(\mathbf{x}^{(i)})$, we can project the high-dimensional data to a linear surface, i.e., run PCA on $\phi(\mathbf{X})$.
+In the original space, the projection will be non-linear.</p>
+<h4 id="feature-mapping--svd">Feature Mapping + SVD</h4>
+<p>Given a data set $\mathbf{X} \in \mathbb{R}^{M \times N}$ and a feature mapping function $\phi : \mathbb{R}^N \mapsto \mathbb{R}^L$ for $L > N$, we obtain the following SVD-based algorithm,</p>
+<ol>
+<li>Compute $\mathbf{U}, \mathbf{S}, \mathbf{V} = \text{SVD}(\phi(\mathbf{X}))$.</li>
+<li>Return $\mathbf{Z} = \mathbf{U} \mathbf{S}$.</li>
+</ol>
+<h4 id="feature-mapping--pca">Feature Mapping + PCA</h4>
+<p>Given a data set $\mathbf{X} \in \mathbb{R}^{M \times N}$ and a feature mapping function $\phi : \mathbb{R}^N \mapsto \mathbb{R}^L$ for $L > N$, we obtain the following PCA-based algorithm,</p>
+<ol>
+<li>
+<p>Compute $\mathbf{\Sigma} = \frac{1}{M} \sum_i (\phi(\mathbf{x}^{(i)} - \mathbf{\mu})) (\phi(\mathbf{x}^{(i)} - \mathbf{\mu}))^T$.
+where $\mathbf{\mu} = \frac{1}{M} \sum_i \phi(\mathbf{x}^{(i)})$.</p>
+</li>
+<li>
+<p>Compute the $K$ leading eigenvectors $\mathbf{v}_1, \ldots, \mathbf{v}_K$ of $\mathbf{\Sigma}$ where $\mathbf{v}_j \in \mathbb{R}^L$ for $j = 1, \ldots, K$.</p>
+</li>
+<li>
+<p>Stack the eigenvectors together to form $\mathbf{V} = [\mathbf{v}_1, \mathbf{v}_2, \ldots, \mathbf{v}_K]$, where $\mathbf{V} \in \mathbb{R}^{L \times K}$.</p>
+</li>
+<li>
+<p>Project the matrix $\phi(\mathbf{X})$ into the rank-$K$ subspace of maximum variance by computing the matrix product $\mathbf{Z} = \phi(\mathbf{X}) \mathbf{V}$.</p>
+</li>
+</ol>
+<h4 id="kernel-pca">Kernel PCA</h4>
+<p>As in classification, it becomes very expensive to use an explicit feature function to map data into a high-dimensional space.</p>
+<p>In the basic SVD-based algortihm, there’s no way to avoid this problem.</p>
+<p>However, in the PCA-based algorithm, we are able to take advantage of the <strong>kernel</strong> trick,</p>
+<p>$$
+\mathcal{K}(\mathbf{x}^{(i)}, \mathbf{x}^{(j)}) = \phi(\mathbf{x}^{(i)})^T \phi(\mathbf{x}^{(j)}).
+$$</p>
+<p>Given $\phi : \mathbb{R}^N \mapsto \mathbb{R}^L$, we can compute the covariance matrix in the new feature space,</p>
+<p>$$
+\mathbf{\Sigma} = \frac{1}{M} \sum_{j = 1}^M \phi(\mathbf{x}^{(i)}) \phi(\mathbf{x}^{(j)})^T.
+$$</p>
+<p>Note that we have assumed that the data is pre-centered in our new feature space.
+If this turns out to be false, we can center the data by subtracting the mean of the data in the new feature space.</p>
+<p>Eigendecomposition of $\mathbf{\Sigma}$ is given by,</p>
+<p>$$
+\mathbf{\Sigma} \mathbf{v_k} = \frac{1}{M} \sum_{j = 1}^M \phi(\mathbf{x}^{(i)}) \phi(\mathbf{x}^{(j)})^T \mathbf{v}_k = \lambda_k \mathbf{v}_k, \forall k = 1, \ldots, L.
+$$</p>
+<p>It is not hard to see that $\mathbf{v}_k$ can be expressed as,</p>
+<p>$$
+\mathbf{v_k} = \sum_{j = 1}^M w_k^{(j)} \phi(\mathbf{x}^{(j)}),
+$$</p>
+<p>where $w_k^{(j)} = \frac{1}{M \lambda_k} \phi(\mathbf{x}^{(j)})^T \mathbf{v}_k$.</p>
+<p>So, the kernel PCA is a linear combination of high-dimensional vectors, and $w_k^{(j)}$ are weights to be determined.</p>
+<p>If we left-multiply $\phi(\mathbf{x}^{(i)})^T$ to both sides, we have,</p>
+<p>$$
+\phi(\mathbf{x}^{(i)})^T \mathbf{v_k} = \sum_{j = 1}^M w_k^{(j)} \phi(\mathbf{x}^{(i)})^T \phi(\mathbf{x}^{(j)}) = M \lambda_k w_k^{(i)}.
+$$</p>
+<p>Defining the kernel matrix $\mathbf{K} \in \mathbb{R}^{M \times M}$, where $K_{ij} = \mathcal{K}(\mathbf{x}^{(i)}, \mathbf{x}^{(j)}) = \phi(\mathbf{x}^{(i)})^T \phi(\mathbf{x}^{(j)})$.</p>
+<p>Then,</p>
+<p>$$
+\sum_{j = 1}^M K_{ij} w_k^{(j)} = M \lambda_k w_k^{(i)}.
+$$</p>
+<p>If we consider $i = 1, \ldots, M$, the above scalar equation becomes the $i$-th component of the following vector equation,
+$$
+\mathbf{K} \mathbf{w}_k = M \lambda_k \mathbf{w}_k,
+$$</p>
+<p>where $\mathbf{w}_k = [w_k^{(1)}, w_k^{(2)}, \ldots, w_k^{(M)}]^T$ is the $k$-th eigenvector of $\mathbf{K}$.</p>
+<p>$M \lambda_k$ is the eigenvalue of $\mathbf{K}$, which is proportional to the eigenvalue $\lambda_k$ of the covariance matrix $\mathbf{\Sigma}$ in the feature space.</p>
+<p>Therefore, PCA on $\mathbf{\Sigma}$ is equivalent to PCA on $\mathbf{K}$.</p>
+<p>For a new point $\mathbf{x}^{\star}$, the $k$-th kernel PC can be obtained by projection $\phi(\mathbf{x}^{\star})$ on the $k$-th eigenvector $\mathbf{v}_k$ of $\mathbf{\Sigma}$.</p>
+<p>$$
+\phi(\mathbf{x}^{\star})^T \mathbf{v_k} = \sum_{i = 1} w_k^{(i)} \phi(\mathbf{x}^{\star})^T \phi(\mathbf{x}^{(i)}) = \sum_{i = 1} w_k^{(i)} \mathcal{K}(\mathbf{x}^{\star}, \mathbf{x}^{(i)}).
+$$</p>
+<h4 id="kernel-pca-algorithm">Kernel PCA Algorithm</h4>
+<p>Given a data set $\mathbf{X} \in \mathbb{R}^{M \times N}$ and a kernel function $\mathcal{K}$, kernel PCA can be computed as follows,</p>
+<ol>
+<li>
+<p>Compute $K_{ij} = \mathcal{K}(\mathbf{x}^{(i)}, \mathbf{x}^{(j)})$ for all $i,j$.</p>
+</li>
+<li>
+<p>Compute $\mathbf{K}^{\prime} = (\mathbf{I} - \mathbf{1}_M) \mathbf{K} (\mathbf{I} - \mathbf{1}_M)$ where $\mathbf{1}_M$ is an $M \times M$ matrix where every entry is $\frac{1}{M}$.
+The goal is to zero center data points in the feature space.</p>
+</li>
+<li>
+<p>Compute the $K$ leading eigenvectors $\mathbf{w}_1, \ldots, \mathbf{w}_K$ of $\mathbf{K}^{\prime}$ along with their eigenvalues $M \lambda_1, \ldots, M \lambda_K$.</p>
+</li>
+<li>
+<p>Compute the $k$-th PC of the projected data vector $\mathbf{z} \in \mathbb{R}^{K \times 1}$,</p>
+</li>
+</ol>
+<p>$$
+z_k = \sum_{i = 1}^M w_k^{(i)} \mathcal{K}(\mathbf{x}, \mathbf{x}^{(i)}).
+$$</p>
+<h3 id="summary">Summary</h3>
+<p>Kernel PCA uses the kernel trick to peform PCA in high-dimensional space.</p>
+<ul>
+<li>Coeffcients are based on a non-linear projection of the data.</li>
+<li>The type of projection is based on the kernel function selected.</li>
+</ul>
+<p>Using RBF kernel, KPCA can split the data into clusters.</p>
+<p>Kernel PCA can provide an effective pre-processing step for clustering methods as well as linear classification and regression methods.</p>
+<p>However, exact compuation of kernel PCA can be expensive because the size of the matrix to be decomposed is $M \times M$.</p> <div class="mt-24"> <div class="grid grid-cols-2 gap-1.5 sm:gap-3"> <a href="/cityu/cs4487/cs4487_7" class="group relative flex flex-nowrap rounded-lg border border-black/15 px-4 py-3 pl-10 no-underline transition-colors duration-300 ease-in-out hover:bg-black/5 hover:text-black focus-visible:bg-black/5 focus-visible:text-black dark:border-white/20 dark:hover:bg-white/5 dark:hover:text-white dark:focus-visible:bg-white/5 dark:focus-visible:text-white"> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="absolute left-2 top-1/2 size-5 -translate-y-1/2 fill-none stroke-current stroke-2"> <line x1="5" y1="12" x2="19" y2="12" class="translate-x-3 scale-x-0 transition-transform duration-300 ease-in-out group-hover:translate-x-0 group-hover:scale-x-100 group-focus-visible:translate-x-0 group-focus-visible:scale-x-100"></line> <polyline points="12 5 5 12 12 19" class="translate-x-1 transition-transform duration-300 ease-in-out group-hover:translate-x-0 group-focus-visible:translate-x-0"></polyline> </svg> <div class="flex items-center text-sm"> Part 7 - The Expectation Maximization Algorithm &amp; Linear Dimensionality Reduction </div> </a> <div class="invisible"></div> </div> </div> <div class="mt-24"> <div class="giscus"></div> <script data-astro-rerun src="https://giscus.app/client.js" data-repo="rezaarezvan/rezvan.xyz" data-repo-id="R_kgDOHvQr3w" data-category="General" data-category-id="DIC_kwDOHvQr384CiWVC" data-mapping="pathname" data-strict="0" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="bottom" data-theme="preferred_color_scheme" data-lang="en" data-loading="lazy" crossorigin="anonymous" async></script> </div> </article> </div>  </main> <footer class="animate"> <div class="mx-auto max-w-screen-sm px-3"> <div class="relative"> <div class="absolute -top-12 right-0"> <button id="back-to-top" class="group relative flex w-fit flex-nowrap rounded border border-black/15 py-1.5 pl-8 pr-3 transition-colors duration-300 ease-in-out hover:bg-black/5 hover:text-black focus-visible:bg-black/5 focus-visible:text-black dark:border-white/20 dark:hover:bg-white/5 dark:hover:text-white dark:focus-visible:bg-white/5 dark:focus-visible:text-white"> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="absolute left-2 top-1/2 size-4 -translate-y-1/2 rotate-90 fill-none stroke-current stroke-2"> <line x1="5" y1="12" x2="19" y2="12" class="translate-x-2 scale-x-0 transition-transform duration-300 ease-in-out group-hover:translate-x-0 group-hover:scale-x-100 group-focus-visible:translate-x-0 group-focus-visible:scale-x-100"></line> <polyline points="12 5 5 12 12 19" class="translate-x-1 transition-transform duration-300 ease-in-out group-hover:translate-x-0 group-focus-visible:translate-x-0"></polyline> </svg> <div class="text-sm">Back to top</div> </button> </div> </div> <div class="flex items-center justify-between"> <div>&copy; 2024 • rezvan.xyz </div> <div class="flex flex-wrap items-center gap-1.5"> <button id="light-theme-button" aria-label="Light theme" class="group flex size-9 items-center justify-center rounded border border-black/15 hover:bg-black/5 focus-visible:bg-black/5 dark:border-white/20 dark:hover:bg-white/5 dark:focus-visible:bg-white/5"> <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="transition-colors duration-300 ease-in-out group-hover:animate-pulse group-hover:stroke-black group-focus-visible:animate-pulse group-focus-visible:stroke-black group-hover:dark:stroke-white dark:group-focus-visible:stroke-white"> <circle cx="12" cy="12" r="5"></circle> <line x1="12" y1="1" x2="12" y2="3"></line> <line x1="12" y1="21" x2="12" y2="23"></line> <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line> <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line> <line x1="1" y1="12" x2="3" y2="12"></line> <line x1="21" y1="12" x2="23" y2="12"></line> <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line> <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line> </svg> </button> <button id="dark-theme-button" aria-label="Dark theme" class="group flex size-9 items-center justify-center rounded border border-black/15 hover:bg-black/5 focus-visible:bg-black/5 dark:border-white/20 dark:hover:bg-white/5 dark:focus-visible:bg-white/5"> <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="transition-colors duration-300 ease-in-out group-hover:animate-pulse group-hover:stroke-black group-focus-visible:animate-pulse group-focus-visible:stroke-black group-hover:dark:stroke-white dark:group-focus-visible:stroke-white"> <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path> </svg> </button> <button id="system-theme-button" aria-label="System theme" class="group flex size-9 items-center justify-center rounded border border-black/15 hover:bg-black/5 focus-visible:bg-black/5 dark:border-white/20 dark:hover:bg-white/5 dark:focus-visible:bg-white/5"> <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="transition-colors duration-300 ease-in-out group-hover:animate-pulse group-hover:stroke-black group-focus-visible:animate-pulse group-focus-visible:stroke-black group-hover:dark:stroke-white dark:group-focus-visible:stroke-white"> <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect> <line x1="8" y1="21" x2="16" y2="21"></line> <line x1="12" y1="17" x2="12" y2="21"></line> </svg> </button> </div> </div> </div> </footer> <aside data-pagefind-ignore> <div id="backdrop" class="bg-[rgba(0, 0, 0, 0.5] invisible fixed left-0 top-0 z-50 flex h-screen w-full justify-center p-6 backdrop-blur-sm" data-astro-transition-persist="astro-3snakcvo-2"> <div id="pagefind-container" class="m-0 flex h-fit max-h-[80%] w-full max-w-screen-sm flex-col overflow-auto rounded border border-black/15 bg-neutral-100 p-2 px-4 py-3 shadow-lg dark:border-white/20 dark:bg-neutral-900"> <div id="search" class="pagefind-ui pagefind-init" data-pagefind-ui data-bundle-path="/pagefind/" data-ui-options="{&#34;showImages&#34;:false,&#34;excerptLength&#34;:15,&#34;resetStyles&#34;:false}"></div>  <div class="mr-2 pb-1 pt-4 text-right text-xs dark:prose-invert">
+Press <span class="prose text-xs dark:prose-invert"><kbd class="">Esc</kbd></span> or click anywhere to close
+</div> </div> </div> </aside> <script>
+  const magnifyingGlass = document.getElementById("magnifying-glass");
+  const backdrop = document.getElementById("backdrop");
+
+  function openPagefind() {
+    const searchDiv = document.getElementById("search");
+    const search = searchDiv.querySelector("input");
+    setTimeout(() => {
+      search.focus();
+    }, 0);
+    backdrop?.classList.remove("invisible");
+    backdrop?.classList.add("visible");
+  }
+
+  function closePagefind() {
+    const search = document.getElementById("search");
+    search.value = "";
+    backdrop?.classList.remove("visible");
+    backdrop?.classList.add("invisible");
+  }
+
+  // open pagefind
+  magnifyingGlass?.addEventListener("click", () => {
+    openPagefind();
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "/") {
+      e.preventDefault();
+      openPagefind();
+    } else if ((e.metaKey || e.ctrlKey) && e.key === "k") {
+      e.preventDefault();
+      openPagefind();
+    }
+  });
+
+  // close pagefind
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" || e.keyCode === 27) {
+      closePagefind();
+    }
+  });
+
+  // close pagefind when searched result(link) clicked
+  document.addEventListener("click", (event) => {
+    if (event.target.classList.contains("pagefind-ui__result-link")) {
+      closePagefind();
+    }
+  });
+
+  backdrop?.addEventListener("click", (event) => {
+    if (!event.target.closest("#pagefind-container")) {
+      closePagefind();
+    }
+  });
+
+  // prevent form submission
+  const form = document.getElementById("form");
+  form?.addEventListener("submit", (event) => {
+    event.preventDefault();
+  });
+</script>  </body></html>
