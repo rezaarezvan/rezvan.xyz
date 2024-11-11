@@ -1,0 +1,775 @@
+<!DOCTYPE html><html lang="en"> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" type="image/icon" href="/favicon.ico"><meta name="generator" content="Astro v4.11.5"><!-- Canonical URL --><link rel="canonical" href="https://rezvan.xyz/cityu/cs4487/cs4487_9/"><!-- Primary Meta Tags --><title>Part 9 - Neural Networks and Deep Learning | machine learning | rezvan.xyz</title><meta name="title" content="Part 9 - Neural Networks and Deep Learning | machine learning | rezvan.xyz"><meta name="description"><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://rezvan.xyz/cityu/cs4487/cs4487_9/"><meta property="og:title" content="Part 9 - Neural Networks and Deep Learning | machine learning | rezvan.xyz"><meta property="og:description"><meta property="og:image" content="https://rezvan.xyz/favicon.ico"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://rezvan.xyz/cityu/cs4487/cs4487_9/"><meta property="twitter:title" content="Part 9 - Neural Networks and Deep Learning | machine learning | rezvan.xyz"><meta property="twitter:description"><meta property="twitter:image" content="https://rezvan.xyz/favicon.ico"><!-- PageFind --><link href="/pagefind/pagefind-ui.css" rel="stylesheet"><script src="/pagefind/pagefind-ui.js"></script><!-- KaTeX support --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script><!-- inline KaTeX --><script>
+    function renderKaTeX() {
+        if (typeof renderMathInElement !== "undefined") {
+            renderMathInElement(document.body, {
+                delimiters: [
+                    { left: "$$", right: "$$", display: true },
+                    { left: "$", right: "$", display: false },
+                ],
+            });
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", renderKaTeX);
+    document.addEventListener("astro:after-swap", renderKaTeX);
+</script><meta name="astro-view-transitions-enabled" content="true"><meta name="astro-view-transitions-fallback" content="animate"><script>
+    function init() {
+        preloadTheme();
+        onScroll();
+        animate();
+        updateThemeButtons();
+        addCopyCodeButtons();
+        setGiscusTheme();
+
+        const backToTop = document.getElementById("back-to-top");
+        backToTop?.addEventListener("click", (event) => scrollToTop(event));
+
+        const backToPrev = document.getElementById("back-to-prev");
+        backToPrev?.addEventListener("click", () => window.history.back());
+
+        const lightThemeButton = document.getElementById("light-theme-button");
+        lightThemeButton?.addEventListener("click", () => {
+            localStorage.setItem("theme", "light");
+            toggleTheme(false);
+            updateThemeButtons();
+        });
+
+        const darkThemeButton = document.getElementById("dark-theme-button");
+        darkThemeButton?.addEventListener("click", () => {
+            localStorage.setItem("theme", "dark");
+            toggleTheme(true);
+            updateThemeButtons();
+        });
+
+        const systemThemeButton = document.getElementById(
+            "system-theme-button",
+        );
+        systemThemeButton?.addEventListener("click", () => {
+            localStorage.setItem("theme", "system");
+            toggleTheme(
+                window.matchMedia("(prefers-color-scheme: dark)").matches,
+            );
+            updateThemeButtons();
+        });
+
+        window
+            .matchMedia("(prefers-color-scheme: dark)")
+            .addEventListener("change", (event) => {
+                if (localStorage.theme === "system") {
+                    toggleTheme(event.matches);
+                }
+            });
+
+        document.addEventListener("scroll", onScroll);
+    }
+
+    function updateThemeButtons() {
+        const theme = localStorage.getItem("theme");
+        const lightThemeButton = document.getElementById("light-theme-button");
+        const darkThemeButton = document.getElementById("dark-theme-button");
+        const systemThemeButton = document.getElementById(
+            "system-theme-button",
+        );
+
+        function removeActiveButtonTheme(button) {
+            button?.classList.remove("bg-black/5");
+            button?.classList.remove("dark:bg-white/5");
+        }
+
+        function addActiveButtonTheme(button) {
+            button?.classList.add("bg-black/5");
+            button?.classList.add("dark:bg-white/5");
+        }
+
+        removeActiveButtonTheme(lightThemeButton);
+        removeActiveButtonTheme(darkThemeButton);
+        removeActiveButtonTheme(systemThemeButton);
+
+        if (theme === "light") {
+            addActiveButtonTheme(lightThemeButton);
+        } else if (theme === "dark") {
+            addActiveButtonTheme(darkThemeButton);
+        } else {
+            addActiveButtonTheme(systemThemeButton);
+        }
+    }
+
+    function animate() {
+        const animateElements = document.querySelectorAll(".animate");
+
+        animateElements.forEach((element, index) => {
+            setTimeout(() => {
+                element.classList.add("show");
+            }, index * 100);
+        });
+    }
+
+    function onScroll() {
+        if (window.scrollY > 0) {
+            document.documentElement.classList.add("scrolled");
+        } else {
+            document.documentElement.classList.remove("scrolled");
+        }
+    }
+
+    function scrollToTop(event) {
+        event.preventDefault();
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth",
+        });
+    }
+
+    function toggleTheme(dark) {
+        const css = document.createElement("style");
+
+        css.appendChild(
+            document.createTextNode(
+                `* {
+             -webkit-transition: none !important;
+             -moz-transition: none !important;
+             -o-transition: none !important;
+             -ms-transition: none !important;
+             transition: none !important;
+          }
+        `,
+            ),
+        );
+
+        document.head.appendChild(css);
+
+        if (dark) {
+            document.documentElement.classList.add("dark");
+        } else {
+            document.documentElement.classList.remove("dark");
+        }
+
+        window.getComputedStyle(css).opacity;
+        document.head.removeChild(css);
+
+        setGiscusTheme();
+    }
+
+    function preloadTheme() {
+        const userTheme = localStorage.theme;
+
+        if (userTheme === "light" || userTheme === "dark") {
+            toggleTheme(userTheme === "dark");
+        } else {
+            toggleTheme(
+                window.matchMedia("(prefers-color-scheme: dark)").matches,
+            );
+        }
+    }
+
+    function addCopyCodeButtons() {
+        let copyButtonLabel = "📋";
+        let codeBlocks = Array.from(document.querySelectorAll("pre"));
+
+        async function copyCode(codeBlock, copyButton) {
+            const codeText = codeBlock.innerText;
+            const buttonText = copyButton.innerText;
+            const textToCopy = codeText.replace(buttonText, "");
+
+            await navigator.clipboard.writeText(textToCopy);
+            copyButton.innerText = "✅";
+
+            setTimeout(() => {
+                copyButton.innerText = copyButtonLabel;
+            }, 2000);
+        }
+
+        for (let codeBlock of codeBlocks) {
+            const wrapper = document.createElement("div");
+            wrapper.style.position = "relative";
+
+            const copyButton = document.createElement("button");
+            copyButton.innerText = copyButtonLabel;
+            copyButton.classList = "copy-code";
+
+            codeBlock.setAttribute("tabindex", "0");
+            codeBlock.appendChild(copyButton);
+
+            codeBlock.parentNode.insertBefore(wrapper, codeBlock);
+            wrapper.appendChild(codeBlock);
+
+            copyButton?.addEventListener("click", async () => {
+                await copyCode(codeBlock, copyButton);
+            });
+        }
+    }
+
+    const setGiscusTheme = () => {
+        const giscus = document.querySelector(".giscus-frame");
+
+        const isDark = document.documentElement.classList.contains("dark");
+
+        if (giscus) {
+            const url = new URL(giscus.src);
+            url.searchParams.set("theme", isDark ? "dark" : "light");
+            giscus.src = url.toString();
+        }
+    };
+
+    document.addEventListener("DOMContentLoaded", () => init());
+    document.addEventListener("astro:after-swap", () => init());
+    preloadTheme();
+</script><link rel="stylesheet" href="/_astro/_subject_.aYemk0WB.css">
+<style>summary[data-astro-cid-xvrfupwn]{cursor:pointer;border-top-left-radius:.5rem;border-top-right-radius:.5rem;padding:.375rem .75rem;font-weight:500;transition-property:color,background-color,border-color,text-decoration-color,fill,stroke;transition-timing-function:cubic-bezier(.4,0,.2,1);transition-duration:.15s}summary[data-astro-cid-xvrfupwn]:hover{background-color:#0000000d}summary[data-astro-cid-xvrfupwn]:hover:is(.dark *){background-color:#ffffff0d}details[data-astro-cid-xvrfupwn][open] summary[data-astro-cid-xvrfupwn]{background-color:#0000000d}details[data-astro-cid-xvrfupwn][open] summary[data-astro-cid-xvrfupwn]:is(.dark *){background-color:#ffffff0d}
+</style><script type="module" src="/_astro/hoisted.DzxSAGjc.js"></script></head> <body> <header data-astro-transition-persist="astro-l7r54iwe-1"> <div class="mx-auto max-w-screen-sm px-3"> <div class="flex flex-wrap justify-between gap-y-2"> <a href="/" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out">  <div class="font-semibold"> rezvan.xyz </div>  </a> <nav class="flex items-center gap-1 text-sm"> <a href="/posts" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> posts </a> <span> / </span> <a href="/chalmers" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> chalmers </a> <span> / </span> <a href="/cityu" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> cityu </a> <span> / </span> <a href="/pdf/cv/cv.pdf" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> cv </a> <span> / </span> <button id="magnifying-glass" aria-label="Search" class="flex items-center rounded border border-black/15 bg-neutral-100 px-2 py-1 text-xs transition-colors duration-300 ease-in-out hover:bg-black/5 hover:text-black focus-visible:bg-black/5 focus-visible:text-black dark:border-white/20 dark:bg-neutral-900 dark:hover:bg-white/5 dark:hover:text-white dark:focus-visible:bg-white/5 dark:focus-visible:text-white"> <svg height="16" stroke-linejoin="round" viewBox="0 0 16 16" width="16" style="color: currentcolor;"><path fill-rule="evenodd" clip-rule="evenodd" d="M3.5 7C3.5 5.067 5.067 3.5 7 3.5C8.933 3.5 10.5 5.067 10.5 7C10.5 7.88461 10.1718 8.69256 9.63058 9.30876L9.30876 9.63058C8.69256 10.1718 7.88461 10.5 7 10.5C5.067 10.5 3.5 8.933 3.5 7ZM9.96544 11.0261C9.13578 11.6382 8.11014 12 7 12C4.23858 12 2 9.76142 2 7C2 4.23858 4.23858 2 7 2C9.76142 2 12 4.23858 12 7C12 8.11014 11.6382 9.13578 11.0261 9.96544L14.0303 12.9697L14.5607 13.5L13.5 14.5607L12.9697 14.0303L9.96544 11.0261Z" fill="currentColor"></path></svg>
+&nbsp;Search
+</button> </nav> </div> </div> </header> <main>  <div class="mx-auto max-w-screen-sm px-3"> <div class="animate"> <a href="/cityu/cs4487" class="not-prose group relative flex w-fit flex-nowrap rounded border border-black/15 py-1.5 pl-7 pr-3 transition-colors duration-300 ease-in-out hover:bg-black/5 hover:text-black focus-visible:bg-black/5 focus-visible:text-black dark:border-white/20 dark:hover:bg-white/5 dark:hover:text-white dark:focus-visible:bg-white/5 dark:focus-visible:text-white"> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="absolute left-2 top-1/2 size-4 -translate-y-1/2 fill-none stroke-current stroke-2"> <line x1="5" y1="12" x2="19" y2="12" class="translate-x-2 scale-x-0 transition-transform duration-300 ease-in-out group-hover:translate-x-0 group-hover:scale-x-100 group-focus-visible:translate-x-0 group-focus-visible:scale-x-100"></line> <polyline points="12 5 5 12 12 19" class="translate-x-1 transition-transform duration-300 ease-in-out group-hover:translate-x-0 group-focus-visible:translate-x-0"></polyline> </svg> <div class="text-sm"> Back to machine learning </div> </a> </div> <div class="my-10 space-y-1"> <div class="animate flex items-center gap-1.5"> <div class="font-base text-sm"> CS4487 </div>
+&bull;
+<div class="font-base text-sm"> <time datetime="2024-11-06T00:00:00.000Z"> November 06, 2024 </time> </div> 
+&bull;
+<div class="font-base text-sm"> 17 min read </div> </div> <h1 class="animate text-3xl font-semibold text-black dark:text-white"> Part 9 - Neural Networks and Deep Learning </h1> </div> <details open class="animate rounded-lg border border-black/15 dark:border-white/20" data-astro-cid-xvrfupwn> <summary data-astro-cid-xvrfupwn>Table of Contents</summary> <nav class="" data-astro-cid-xvrfupwn> <ul class="py-3" data-astro-cid-xvrfupwn> <li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#history" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> History </a> <ul class="translate-x-3"> <li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#original-idea" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Original Idea </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#synapses" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Synapses </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#multiple-outputs" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Multiple Outputs? </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#multi-layer-perceptron" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Multi-Layer Perceptron </a> <ul class="translate-x-3"> <li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#decline-in-the-1990s" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Decline in the 1990s </a>  </li> </ul> </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#deep-learning" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Deep Learning </a>  </li> </ul> </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#perceptron" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Perceptron </a> <ul class="translate-x-3"> <li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#mcculloch-and-pitts-neuron-1943" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> McCulloch and Pitts Neuron (1943) </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#the-perceptron-1950" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> The Perceptron (1950) </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#perception-algorithm" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Perception Algorithm </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#perceptron-loss-function" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Perceptron Loss Function </a>  </li> </ul> </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#multi-layer-perceptron-1" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Multi-Layer Perceptron </a> <ul class="translate-x-3"> <li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#activation-functions" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Activation Functions </a> <ul class="translate-x-3"> <li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#sigmoid-or-logistic-activation-function" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Sigmoid or Logistic Activation Function </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#tanh-activation-function" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Tanh Activation Function </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#relu-activation-function" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> ReLU Activation Function </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#variants-of-relu" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Variants of ReLU </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#maxout-activation-function" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Maxout Activation Function </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#other-emerging-activation-functions" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Other Emerging Activation Functions </a>  </li> </ul> </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#training-an-mlp" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Training an MLP </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#backpropagation-backward-propagation" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Backpropagation (Backward Propagation) </a>  </li> </ul> </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#universal-approximation-theorem" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Universal Approximation Theorem </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#gradient-descent-with-the-chain-rule" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Gradient Descent with the Chain Rule </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#convolutional-neural-networks-cnn" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Convolutional Neural Networks (CNN) </a> <ul class="translate-x-3"> <li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#image-inputs-and-neural-networks" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Image Inputs and Neural Networks </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#from-fully-connected-to-convolutional-layer" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> From Fully Connected to Convolutional Layer </a> <ul class="translate-x-3"> <li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#padding" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Padding </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#spatial-subsampling" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Spatial Subsampling </a>  </li> </ul> </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#adding-back-mlp" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Adding back MLP </a>  </li> </ul> </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#origin-of-convolution" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Origin of Convolution </a> <ul class="translate-x-3"> <li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#where-does-convolution-come-from" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Where Does Convolution Come From? </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#time-invariant-systems" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Time Invariant Systems </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#linear-systems" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Linear Systems </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#unit-sample-response" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Unit Sample Response </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#unit-sample-decomposition" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Unit Sample Decomposition </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#modeling-lti-systems" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Modeling LTI Systems </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#discrete-convolution" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Discrete Convolution </a>  </li> </ul> </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#summary" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Summary </a>  </li> </ul> </nav> </details> <article class="animate"> <h3 id="history">History</h3>
+<p>The history of deep learning is fun and interesting, and many do not seem to have the proper timeline, so let’s take a look.</p>
+<h4 id="original-idea">Original Idea</h4>
+<p>The perceptron is the original idea of a neural network, and it was originally proposed by Warren McCulloch and Walter Pitts in 1943 and later on Rosenblatt in 1957.</p>
+<p>The idea was to simulate a neuron in the brain.</p>
+<ol>
+<li>It takes binary inputs (input from nearby neurons)</li>
+<li>Multiplies the inputs by weights (synaptic strength)</li>
+<li>Sum and threshold the input to get binary output (output axon)</li>
+</ol>
+<p>We train the weights from the data.</p>
+<p><img src="/images/cityu/CS4487/P.jpg" alt="">
+<strong>Figure 1:</strong> Biological Neuron and Perceptron</p>
+<h4 id="synapses">Synapses</h4>
+<p>Let’s take a moment and talk about the biological background of these ideas.</p>
+<p>Synapses are junctions at which neurons communicate with one another.</p>
+<p>Most synapses are chemical (i.e., chemical messengers).
+Other synpases are electrical (i.e., ions flow directly between cells).</p>
+<p>At a chemical synapse, an action potential triggers the presynaptic neuron to release neurotransmitters.
+These molecules bind to receptors on the postsynaptic cell and make it more or less likely to fire an action potential</p>
+<p><img src="/images/cityu/CS4487/S.jpg" alt="">
+<strong>Figure 2:</strong> Two Neurons Connected by a Synapse</p>
+<h4 id="multiple-outputs">Multiple Outputs?</h4>
+<p>The perceptron can only have one output, but what if we want multiple outputs?</p>
+<p>Multiple outputs can be handled by using multiple perceptrons.</p>
+<p><img src="/images/cityu/CS4487/MP.jpg" alt="">
+<strong>Figure 3:</strong> Multiple Perceptrons</p>
+<p>But there is a problem with this, this is a linear classifier, we can not solve any complex problems using this.</p>
+<h4 id="multi-layer-perceptron">Multi-Layer Perceptron</h4>
+<p>If we add “hidden layers” between the input and output neurons, we might have a solution to this problem</p>
+<ol>
+<li>Each layer extracts some features from previous layers.</li>
+<li>We can represent complex non-linear functions.</li>
+<li>We can train the weights using the backpropagation algorithm (1970-80s).</li>
+</ol>
+<p>This is a modern day neural network!</p>
+<p>But again, there are a few problems with (early) neural networks.</p>
+<ul>
+<li>Difficult to train.</li>
+<li>Sensitivity to initialization.</li>
+<li>Computational expensive (at that time).</li>
+</ul>
+<h5 id="decline-in-the-1990s">Decline in the 1990s</h5>
+<p>Because of these problems, neural networks became less popular in the 1990s.</p>
+<p>Support Vector Machines (SVM) had good accuracy along with,</p>
+<ul>
+<li>Easy to use - only one global optimum.</li>
+<li>Learning is not sensitive to initialization.</li>
+<li>Theory about performance guarantees.</li>
+</ul>
+<p>Only a few groups continued to work on neural networks during this time period, some notable names are LeCun, Bengio, Hinton and Schmidhuber.</p>
+<h4 id="deep-learning">Deep Learning</h4>
+<p>Neural networks resurged in the 2000s, due to a number of factors,</p>
+<ul>
+<li>Improvements in network architectures.
+<ul>
+<li>Developed nodes that are easier to train.</li>
+</ul>
+</li>
+<li>Better training algorithms.
+<ul>
+<li>Better (stochastic) optimizers for large-scale nonlinear problems.</li>
+<li>Better ways to prevent overfitting.</li>
+<li>Better initialization methods.</li>
+</ul>
+</li>
+<li>Infrastructure for faster computing.
+<ul>
+<li>Massively parallel GPUs.</li>
+<li>Distributed computing.</li>
+</ul>
+</li>
+<li>More labeled data.
+<ul>
+<li>From the internet.</li>
+<li>Crowd-sourcing for labeling data (Amazon Mechanical Turk).</li>
+</ul>
+</li>
+</ul>
+<p>With this, we began to train neural networks with more and more layers, this is the start of the deep learning era.</p>
+<p>Let’s now dive into each of these topics in more detail.</p>
+<h3 id="perceptron">Perceptron</h3>
+<p>As we have seen, the perceptron is the basic building block of a neural network.</p>
+<h4 id="mcculloch-and-pitts-neuron-1943">McCulloch and Pitts Neuron (1943)</h4>
+<p>This idea tries to model a single neuron as we have seen.</p>
+<p>We have an input $\mathbf{x} \in \mathbb{R}^N$, which is a $N$-dim vector.
+We apply a weight vector to the inputs, we sum and apply a threshold function to get the output.</p>
+<p>Let’s formally write this as,</p>
+<p>$$
+y = f(\mathbf{w}^T \mathbf{x}) = f(\sum_{j=0}^{N} w_j x_j),
+$$</p>
+<p>where $\mathbf{w}$ is the weight vector and $f(\cdot)$ is the activation function, e.g. $f(a) = \begin{cases} 1 &#x26; a > 0 \newline 0 &#x26; \text{otherwise} \end{cases}$.</p>
+<h4 id="the-perceptron-1950">The Perceptron (1950)</h4>
+<p>The perceptron is a simple algorithm for adapting the weights in a McCulloch/Pitts neuron, which was developed in the 1950s by Rosenblatt @ Cornell.</p>
+<p>The perceptron training criteria is,</p>
+<ul>
+<li>Train the perceptron on data $\mathcal{D} = \{(\mathbf{x}^{(i)}, y^{(i)})\}_{i=1}^M$.</li>
+<li>Only look at the points that are misclassified, i.e.,
+<ul>
+<li>Loss is based on how badly points are misclassified.</li>
+<li>$\ell(\mathbf{w}) = \sum_{i=1}^M \begin{cases} -y^{(i)} \mathbf{w}^T \mathbf{x}^{(i)} &#x26; \mathbf{x}^{(i)} \text{ is misclassified} \newline 0 &#x26; \text{otherwise} \end{cases}$.</li>
+</ul>
+</li>
+<li>Minimize the loss, $\mathbf{w}^{\star} = \underset{\mathbf{w}}{\arg\min} \ell(\mathbf{w})$.</li>
+</ul>
+<p>Since the computational power was not enough back then, they could only look at one data point at a time, with for exampele stochastic gradient descent (SGD).</p>
+<p><strong>Procedure:</strong></p>
+<ol>
+<li>Start with all-zero weight vector $\mathbf{w}^{(0)}$, and initialize $t$ to 0.</li>
+<li>For all $(\mathbf{x}^{(i)}, y^{(i)}) \in \mathcal{D}$ compute the activation $a^{(i)} = (\mathbf{w}^{(t)})^T \mathbf{x}^{(i)}$.</li>
+<li>If $y^{(i)} a^{(i)} &#x3C; 0$, then $\mathbf{w}^{(t+1)} = \alpha y^{(i)} \mathbf{x}^{(i)}$ and $t \leftarrow t+1$.</li>
+<li>Repeat Steps 1-3 until no more points are misclassified.</li>
+</ol>
+<p><strong>Notes</strong></p>
+<ul>
+<li>$\alpha$ is the update step (i.e., learning rate) for SGD.
+<ul>
+<li>The effect of the update step is to rotate $\mathbf{w}$ towards the misclassified point $\mathbf{x}^{(i)}$.</li>
+</ul>
+</li>
+<li>If $y^{(i)} = 1$ and $\hat{y}^{(i)} = \text{sign}(a^{(i)}) = -1$, the activation is initially negative and will be increased.</li>
+<li>If $y^{(i)} = -1$ and $\hat{y}^{(i)} = \text{sign}(a^{(i)}) = 1$, the activation is initially positive and will be decreased.</li>
+</ul>
+<h4 id="perception-algorithm">Perception Algorithm</h4>
+<p>This algorithm fails to converge if the data is not linearly separable.</p>
+<p>Rosenblatt proved that the algorithm will converge if the data is linearly separable.
+The number of iterations is inversely proportional to the seperation (margin) between classes.
+This was one of the first machine learning results!</p>
+<p>Different initializations can yield different weight vectors, and hence different decision boundaries.</p>
+<h4 id="perceptron-loss-function">Perceptron Loss Function</h4>
+<p>We can define a loss function for this algorithm.</p>
+<p>Firstly, let’s define the margin of a point as,</p>
+<p>$$
+z^{(i)} = y^{(i)} \mathbf{w}^T \mathbf{x}^{(i)},
+$$</p>
+<p>Then, the loss function $\ell(z^{(i)})$ can be defined as,</p>
+<p>$$
+\ell(z^{(i)}) = \max(0, -z^{(i)}).
+$$</p>
+<h3 id="multi-layer-perceptron-1">Multi-Layer Perceptron</h3>
+<p>As we discussed earlier, if we add “hidden layers” between the inputs and the outputs, we can model more complex functions.</p>
+<p>Formally, for one layer we can write,</p>
+<p>$$
+\mathbf{h} = f(\mathbf{W}^T \mathbf{x}),
+$$</p>
+<p>where $\mathbf{W}$ is the weight matrix, one column for each output node.</p>
+<p>Input $\mathbf{x}$ from previous layer.</p>
+<p>Output $\mathbf{h}$ to next layer.</p>
+<p>$f(\cdot)$ is the activation function - applied to each dimension to get output.</p>
+<h4 id="activation-functions">Activation Functions</h4>
+<p>There are many activation functions that can be used in neural networks.
+All for different purposes and different properties.</p>
+<p><img src="/images/cityu/CS4487/AF.jpg" alt="">
+<strong>Figure 4:</strong> Activation Functions</p>
+<h5 id="sigmoid-or-logistic-activation-function">Sigmoid or Logistic Activation Function</h5>
+<p>The sigmoid function is defined as,</p>
+<p>$$
+\sigma(x) = \frac{1}{1 + e^{-x}}.
+$$</p>
+<p>Sigmoid function translates the input ranged in $[-\infty, \infty]$ to the range in $(0, 1)$.</p>
+<p>A more generalized sigmoid function that is used for (multi)class classification is the softmax function.</p>
+<p>The sigmoid function has some problems though.</p>
+<p>The $exp(\cdot)$ function is computationally expensive.</p>
+<p>It also has the <strong>vanishing gradient problem</strong>.</p>
+<h5 id="tanh-activation-function">Tanh Activation Function</h5>
+<p>The tanh function is defined as,</p>
+<p>$$
+\tanh(x) = \frac{e^{2x} - 1}{e^{2x} + 1}.
+$$</p>
+<p>It is bound to the range $(-1, 1)$.</p>
+<p>The gradient is stronger (i.e., steeper) for tanh than sigmoid.</p>
+<p>Like sigmoid however, tanh also has a vanishing gradient problem.</p>
+<p>But, optimization is easier for tanh, hence in practice it is always preferred over sigmoid.</p>
+<h5 id="relu-activation-function">ReLU Activation Function</h5>
+<p>The ReLU (Rectified Linear Unit) function is defined as,</p>
+<p>$$
+\text{ReLU}(x) =
+\begin{cases}
+x, &#x26; \text{if } x \geq 0 \newline
+0, &#x26; \text{if } x &#x3C; 0
+\end{cases}.
+$$</p>
+<p>ReLU is the identity function for positive values and zero for negative values.
+It is traditionally known as <strong>half-wave rectification</strong> in signal processing.</p>
+<p>Benefits of ReLU are,</p>
+<ul>
+<li>Cheap to compute and easy to optimize.</li>
+<li>It converges faster.</li>
+<li>No vanishing gradient problem.</li>
+<li>Can output a true zero value, leading to representational sparsity.</li>
+</ul>
+<p>Problesm of ReLU are,</p>
+<ul>
+<li>If one neuron gets negative it is unlikely for it to recover.
+This is called the “dying ReLU” problem.</li>
+</ul>
+<h5 id="variants-of-relu">Variants of ReLU</h5>
+<p>Leaky ReLU is defined as,</p>
+<p>$$
+\text{LReLU}(x) =
+\begin{cases}
+x, &#x26; \text{if } x \geq 0 \newline
+ax, &#x26; \text{if } x &#x3C; 0
+\end{cases}.
+$$</p>
+<p>Leaky ReLU attempts to fix the “dying ReLU” problem.
+Instead of the function being zero when $x &#x3C; 0$, a leaky ReLU gives a small slope.</p>
+<p>$a$ is a parameter constrained to be positive.
+It can be pre-determined or learned from the data.</p>
+<p>The ELU (Exponential Linear Unit) function is defined as,</p>
+<p>$$
+\text{ELU}(x) =
+\begin{cases}
+x, &#x26; \text{if } x \geq 0 \newline
+a(e^x - 1), &#x26; \text{if } x &#x3C; 0
+\end{cases}.
+$$</p>
+<p>It follows the same rule for $x \geq 0$ as ReLU, and increases exponentially for $x &#x3C; 0$.</p>
+<p>ELU tries to make the mean activations closer to zero which speeds up training (by adjusting $a$).</p>
+<p>Empirically, ELU leads to higher performance.</p>
+<h5 id="maxout-activation-function">Maxout Activation Function</h5>
+<p>The maxout function is defined as,</p>
+<p>$$
+\text{Maxout}(\mathbf{x}; \mathbf{w_1}, \mathbf{w_2}) = \max(\mathbf{w_1}^T \mathbf{x}, \mathbf{w_2}^T \mathbf{x}).
+$$</p>
+<p>It is a piecewise linear function.</p>
+<p>The maxout activation is a generalization of ReLU and leaky ReLU.
+It is a learnable activation function.</p>
+<p>The maxout neuron, therefore, enjoys all the benefits of ReLU (linear regime of operation, no saturation) and does not have its drawbacks (dying ReLU).</p>
+<p>However, it increases the total number of parameters for each neuron and hence, a higher total number of parameters need to be trained.</p>
+<h5 id="other-emerging-activation-functions">Other Emerging Activation Functions</h5>
+<p>There are many other activation functions that are being developed and used in practice.</p>
+<p>Gaussain Error Linear Unit (GELU),</p>
+<p>$$
+\text{GELU}(x) = x \Phi(x),
+$$</p>
+<p>where $\Phi(x)$ is the normal cumulative distribution function (CDF).</p>
+<p>Softplus,</p>
+<p>$$
+\text{Softplus}(x) = \log(1 + \exp(x)).
+$$</p>
+<p>As a continuous and differentiable approximation to the ReLU function.</p>
+<p>Swish,</p>
+<p>$$
+\text{Swish}(x) = x \cdot \text{sigmoid}(\beta x) = \frac{x}{1 + \exp(-\beta x)}.
+$$</p>
+<p>$\beta$ is either constant or a trainable parameter.</p>
+<h4 id="training-an-mlp">Training an MLP</h4>
+<p>For classification, we use the cross-entropy function as the loss.</p>
+<ul>
+<li>$\ell = -\sum_{j=1}^C y_j \log(\hat{y}_j)$
+<ul>
+<li>$y_j$ is 1 for the true class, and 0 otherwise.</li>
+<li>$\hat{y}_j$ is the softmax output for the $j$-th class.</li>
+</ul>
+</li>
+</ul>
+<p>Use (stochastic) gradient descent as the optimization tool.</p>
+<ul>
+<li>$w_{ij} \leftarrow w_{ij} - \alpha \frac{\partial \ell}{\partial w_{ij}}$.
+<ul>
+<li>Layer $i$, node $j$.</li>
+</ul>
+</li>
+<li>$\alpha$ is the learning rate, which controls convergence rate.
+<ul>
+<li>Too small → converges very slowly.</li>
+<li>Too large → possibly does not converge.</li>
+</ul>
+</li>
+</ul>
+<h4 id="backpropagation-backward-propagation">Backpropagation (Backward Propagation)</h4>
+<p>Backpropagation is the algorithm used to train neural networks.</p>
+<p>We do a forward pass to calculate the prediction, and do a backward pass to update the weights that were responsible for an error.</p>
+<h3 id="universal-approximation-theorem">Universal Approximation Theorem</h3>
+<p>It can be shown that a sigmoid network with one hidden layer (of infinite nodes) is a unversial function approximator.</p>
+<p>In terms of classification, this means neural netwroks with one hidden layer (of unbounded size) can represent any decision boundary and thus have infinite capacity.</p>
+<p>It was also shown that deep networks can be more efficient at representing certain types of functions than shallow (single layer) networks.</p>
+<p>It is not the specific choice of the activation function, but rather the mulit-layer feedforward architecture itself which gives neural networks the potential of being universal approximators.</p>
+<p>It does not touch upon the algorithmic learnability of those parameters.</p>
+<h3 id="gradient-descent-with-the-chain-rule">Gradient Descent with the Chain Rule</h3>
+<p>Suppose we have a 2-layer network.</p>
+<ul>
+<li>$\ell$ is the cost function.</li>
+<li>$g_1, g_2$ are the output functions of the two layers.
+<ul>
+<li>$g_j(\mathbf{x}) = f(\mathbf{W_j}^T \mathbf{x})$, and $\mathbf{W_1}, \mathbf{W_2}$ are the weight matrices.</li>
+</ul>
+</li>
+<li>Prediction for input $\mathbf{x}$, $\hat{y} = g_2(g_1(\mathbf{x}))$.</li>
+<li>Cost for input $\mathbf{x}$, $\ell(g_2(g_1(\mathbf{x})))$.</li>
+</ul>
+<p>If we apply the chain rule to get the gradients of the weights,</p>
+<p>$$
+\begin{aligned}
+\frac{\partial \ell}{\partial \mathbf{W_2}} &#x26;= \frac{\partial \ell}{\partial g_2} \frac{\partial g_2}{\partial \mathbf{W_2}} \newline
+\frac{\partial \ell}{\partial \mathbf{W_1}} &#x26;= \frac{\partial \ell}{\partial g_2} \frac{\partial g_2}{\partial g_1} \frac{\partial g_1}{\partial \mathbf{W_1}}.
+\end{aligned}
+$$</p>
+<p>We can define a set of recursive relationships.</p>
+<ol>
+<li>Calculate the output of each node from the first layer to the last layer.</li>
+<li>Calculate the gradient of each node from the first layer to the last layer.</li>
+</ol>
+<p><strong>NB</strong>
+The gradients multiply in each layer!</p>
+<p>If two gradients are small (&#x3C; 1), their product will be even smaller. This is the vanishing gradient problem.</p>
+<h3 id="convolutional-neural-networks-cnn">Convolutional Neural Networks (CNN)</h3>
+<p>CNNs are a type of neural network that is designed to recognize visual patterns directly from pixel images with minimal preprocessing.</p>
+<p>Let’s see how we can combine images and neural networks.</p>
+<h4 id="image-inputs-and-neural-networks">Image Inputs and Neural Networks</h4>
+<p>In MLP (multi-layer perceptron), each node accepts all nodes in the previous layer.</p>
+<p>For an image input, we first need to transform the image into a (flat) vector, which is the input to the network.</p>
+<p>But this comes with a few problems.</p>
+<ul>
+<li>This ignores spatial relationships between pixels in the image.
+<ul>
+<li>Images contain local structures.
+<ul>
+<li>Groups of neighboring pixels correspond to visual structures (edges, corners, textures).</li>
+<li>Pixels far from each other are typically not correlated.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="from-fully-connected-to-convolutional-layer">From Fully Connected to Convolutional Layer</h4>
+<p>Say we have an image of $32 \times 32 \times 3$ (RGB) image., if we were to stretch/flatten it, we would get $3072 \times 1$ input instead.</p>
+<p>If we now have 10 classes, we would have a weight matrix of $10 \times 3072$.</p>
+<p>This is a lot of parameters!</p>
+<p>Instead, we can use a convolutional layer.
+We preserve the original $32 \times 32 \times 3$ structure, this also preserves spatial structure.</p>
+<p>But how would we even use these convolutional layers?</p>
+<p>We use convolutional filters, which are small matrices that slide over the image.
+Or, rather, we <strong>convolve</strong> the filter with the image, i.e., “slide over the image spatially”, computing dot products.</p>
+<p>Note that filters always extend the full depth of the input volume.</p>
+<h5 id="padding">Padding</h5>
+<p>We have different types of padding,</p>
+<ul>
+<li>Valid Padding
+<ul>
+<li>No padding is added to the input image, the output image is smaller than the input image.</li>
+</ul>
+</li>
+<li>Same padding
+<ul>
+<li>Padding is added to the input image, such that the size of the output image is the same as the input image.</li>
+</ul>
+</li>
+<li>Full Padding
+<ul>
+<li>Padding is added to the input image, such that the size of the output image is greater than the input image.</li>
+</ul>
+</li>
+<li>Constant Padding (including zero padding)
+<ul>
+<li>Add a border of constant-value pixels around the edges of the original image.</li>
+</ul>
+</li>
+<li>Replicate Padding
+<ul>
+<li>The pixels of the padding are copied from the border values.</li>
+</ul>
+</li>
+<li>Reflection Padding
+<ul>
+<li>The pixels at the edges of the image are mirrored to create a boundary of reflected pixels.</li>
+</ul>
+</li>
+<li>Circular Padding
+<ul>
+<li>Copy the pixels at the dges of the images and append them to the opposite side of the image.</li>
+</ul>
+</li>
+</ul>
+<h5 id="spatial-subsampling">Spatial Subsampling</h5>
+<p>We can reduce the feature map size by subsampling the feature maps.</p>
+<p><em>Stride</em> for convolution filters - step size when moving the windows across the image.</p>
+<p>Use the maximum over the pooling window.</p>
+<h4 id="adding-back-mlp">Adding back MLP</h4>
+<p>After several convolutional layers, input the feature map into an MLP to get the final classification.</p>
+<h3 id="origin-of-convolution">Origin of Convolution</h3>
+<p>As you have seen, I’ve not decided to go super in depth about CNNs, there are a lot of better resources to do that, but let’s dive into the origin of convolutions, since it is a very interesting topic.</p>
+<h4 id="where-does-convolution-come-from">Where Does Convolution Come From?</h4>
+<p>Convolution arises from the field of signal processing, which describes the output (In terms of the input) of an important class of operations (or systems) known as <em>linear-time-invariant</em> (LTI) systems.</p>
+<p>A discrete-time signal such as $x[n]$ or $y[n]$ is described by an infinite sequence of values, i.e., the time index $n$ takes values in $-\infty$ to $\infty$.</p>
+<p>The sequence of output values $y[\cdot]$ is the response of system $S$ to the input sequence $x[\cdot]$.</p>
+<h4 id="time-invariant-systems">Time Invariant Systems</h4>
+<p>Let $y[n]$ be the response of $S$ to the input $x[n]$.</p>
+<p>If for all possible sequences $x[n]$ and integers $N$,</p>
+<p>$$
+S(x[n - N]) = y[n - N],
+$$</p>
+<p>then the system is said to be time-invariant.</p>
+<p>then the system $S$ is said to be time-invariant (TI).</p>
+<p>A time shift in the input sequence to $S$ results in an identical time shift of the output sequence.</p>
+<h4 id="linear-systems">Linear Systems</h4>
+<p>Let $y_1[n]$ be the response of $S$ to an arbitrary input $x_1[n]$ and $y_2[n]$ be the response to an arbitrary input $x_2[n]$.</p>
+<p>If, for arbitrary scalar coefficients $a$ and $b$, we have,</p>
+<p>$$
+S(a x_1[n] + b x_2[n]) = a y_1[n] + b y_2[n],
+$$</p>
+<p>then the system $S$ is said to be linear.</p>
+<p>If the input is the weighted sum of several signals, the response is the superposition (i.e., the same weighted sum) of the response to those signals.</p>
+<p>One key consequence, if the input is identically 0 for a linear system, the output must also be identically 0.</p>
+<h4 id="unit-sample-response">Unit Sample Response</h4>
+<p>The unit sample response of a system is the response of the system to a unit impulse.</p>
+<p>The unit impulse function is defined as,</p>
+<p>$$
+\delta[n] =
+\begin{cases}
+1, &#x26; \text{if } n = 0 \newline
+0, &#x26; \text{otherwise}
+\end{cases}.
+$$</p>
+<p>Which means that,</p>
+<p>$$
+\delta[n - N] =
+\begin{cases}
+1, &#x26; \text{if } n = N \newline
+0, &#x26; \text{otherwise}
+\end{cases}.
+$$</p>
+<p>We will always denote the unit sample response as $h[n]$.</p>
+<h4 id="unit-sample-decomposition">Unit Sample Decomposition</h4>
+<p>A discrete-time signal can be decomposed into a sum of time-shifted and scaled unit samples.</p>
+<p>So, in general we can write,</p>
+<p>$$
+x[n] = \sum_{k = -\infty}^{\infty} x[k] \delta[n - k].
+$$</p>
+<h4 id="modeling-lti-systems">Modeling LTI Systems</h4>
+<p>If system $S$ is both linear and time-invariant (LTI), then we can use the unit sample response to predict the response to any input waveform $x[n]$.</p>
+<p>$$
+\begin{aligned}
+x[n] &#x26;= \sum_{k = -\infty}^{\infty} x[k] \delta[n - k] \newline
+y[n] &#x26;= \sum_{k = -\infty}^{\infty} x[k] h[n - k]
+\end{aligned}
+$$</p>
+<p>This is the convolution sum!</p>
+<h4 id="discrete-convolution">Discrete Convolution</h4>
+<p>Discrete convolution typically contains the following steps.</p>
+<ol>
+<li>List the index $k$ covering a sufficient range.</li>
+<li>List the input $x[k]$.</li>
+<li>Obtain the <strong>reversed</strong> sequence $h[-k]$, and align the rightmost element of $h[n - k]$ with the leftmost element of $x[k]$.</li>
+<li>Cross-multiply and sum (i.e., dot product) the nonzero overlap terms to produce $y[n]$.</li>
+<li>Slide $h[n - k]$ to the right by one position.</li>
+<li>Repeat Steps 4 and 5. Stop if all the output values are zero of if required.</li>
+</ol>
+<h3 id="summary">Summary</h3>
+<ul>
+<li>Different types of neural networks.
+<ul>
+<li>Perceptron - single node (similar to logistic regression).</li>
+<li>MLP - collection of perceptrons in layers.
+<ul>
+<li>Also called fully connected networks.</li>
+</ul>
+</li>
+<li>CNN - Convolutional filters for extracting local image features.
+<ul>
+<li>Originates from LTI systems in signal processing.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>Training</strong>
+<ul>
+<li>Optimization using <em>variants</em> of stochastic gradient descent.</li>
+</ul>
+</li>
+<li><strong>Advantages</strong>
+<ul>
+<li>Large capacity to learn from large amounts of data.</li>
+</ul>
+</li>
+<li><strong>Disadvantages</strong>
+<ul>
+<li>Lots of parameters - easy to overfit data.
+<ul>
+<li>Need to <em>regularize</em> parameters.</li>
+<li>Need to monitor the training process.</li>
+</ul>
+</li>
+<li>Sensitive to initialization, learning rate, training algorithm.</li>
+</ul>
+</li>
+</ul> <div class="mt-24"> <div class="grid grid-cols-2 gap-1.5 sm:gap-3"> <a href="/cityu/cs4487/cs4487_8" class="group relative flex flex-nowrap rounded-lg border border-black/15 px-4 py-3 pl-10 no-underline transition-colors duration-300 ease-in-out hover:bg-black/5 hover:text-black focus-visible:bg-black/5 focus-visible:text-black dark:border-white/20 dark:hover:bg-white/5 dark:hover:text-white dark:focus-visible:bg-white/5 dark:focus-visible:text-white"> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="absolute left-2 top-1/2 size-5 -translate-y-1/2 fill-none stroke-current stroke-2"> <line x1="5" y1="12" x2="19" y2="12" class="translate-x-3 scale-x-0 transition-transform duration-300 ease-in-out group-hover:translate-x-0 group-hover:scale-x-100 group-focus-visible:translate-x-0 group-focus-visible:scale-x-100"></line> <polyline points="12 5 5 12 12 19" class="translate-x-1 transition-transform duration-300 ease-in-out group-hover:translate-x-0 group-focus-visible:translate-x-0"></polyline> </svg> <div class="flex items-center text-sm"> Part 8 - Principal Component Analysis </div> </a> <div class="invisible"></div> </div> </div> <div class="mt-24"> <div class="giscus"></div> <script data-astro-rerun src="https://giscus.app/client.js" data-repo="rezaarezvan/rezvan.xyz" data-repo-id="R_kgDOHvQr3w" data-category="General" data-category-id="DIC_kwDOHvQr384CiWVC" data-mapping="pathname" data-strict="0" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="bottom" data-theme="preferred_color_scheme" data-lang="en" data-loading="lazy" crossorigin="anonymous" async></script> </div> </article> </div>  </main> <footer class="animate"> <div class="mx-auto max-w-screen-sm px-3"> <div class="relative"> <div class="absolute -top-12 right-0"> <button id="back-to-top" class="group relative flex w-fit flex-nowrap rounded border border-black/15 py-1.5 pl-8 pr-3 transition-colors duration-300 ease-in-out hover:bg-black/5 hover:text-black focus-visible:bg-black/5 focus-visible:text-black dark:border-white/20 dark:hover:bg-white/5 dark:hover:text-white dark:focus-visible:bg-white/5 dark:focus-visible:text-white"> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="absolute left-2 top-1/2 size-4 -translate-y-1/2 rotate-90 fill-none stroke-current stroke-2"> <line x1="5" y1="12" x2="19" y2="12" class="translate-x-2 scale-x-0 transition-transform duration-300 ease-in-out group-hover:translate-x-0 group-hover:scale-x-100 group-focus-visible:translate-x-0 group-focus-visible:scale-x-100"></line> <polyline points="12 5 5 12 12 19" class="translate-x-1 transition-transform duration-300 ease-in-out group-hover:translate-x-0 group-focus-visible:translate-x-0"></polyline> </svg> <div class="text-sm">Back to top</div> </button> </div> </div> <div class="flex items-center justify-between"> <div>&copy; 2024 • rezvan.xyz </div> <div class="flex flex-wrap items-center gap-1.5"> <button id="light-theme-button" aria-label="Light theme" class="group flex size-9 items-center justify-center rounded border border-black/15 hover:bg-black/5 focus-visible:bg-black/5 dark:border-white/20 dark:hover:bg-white/5 dark:focus-visible:bg-white/5"> <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="transition-colors duration-300 ease-in-out group-hover:animate-pulse group-hover:stroke-black group-focus-visible:animate-pulse group-focus-visible:stroke-black group-hover:dark:stroke-white dark:group-focus-visible:stroke-white"> <circle cx="12" cy="12" r="5"></circle> <line x1="12" y1="1" x2="12" y2="3"></line> <line x1="12" y1="21" x2="12" y2="23"></line> <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line> <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line> <line x1="1" y1="12" x2="3" y2="12"></line> <line x1="21" y1="12" x2="23" y2="12"></line> <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line> <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line> </svg> </button> <button id="dark-theme-button" aria-label="Dark theme" class="group flex size-9 items-center justify-center rounded border border-black/15 hover:bg-black/5 focus-visible:bg-black/5 dark:border-white/20 dark:hover:bg-white/5 dark:focus-visible:bg-white/5"> <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="transition-colors duration-300 ease-in-out group-hover:animate-pulse group-hover:stroke-black group-focus-visible:animate-pulse group-focus-visible:stroke-black group-hover:dark:stroke-white dark:group-focus-visible:stroke-white"> <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path> </svg> </button> <button id="system-theme-button" aria-label="System theme" class="group flex size-9 items-center justify-center rounded border border-black/15 hover:bg-black/5 focus-visible:bg-black/5 dark:border-white/20 dark:hover:bg-white/5 dark:focus-visible:bg-white/5"> <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="transition-colors duration-300 ease-in-out group-hover:animate-pulse group-hover:stroke-black group-focus-visible:animate-pulse group-focus-visible:stroke-black group-hover:dark:stroke-white dark:group-focus-visible:stroke-white"> <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect> <line x1="8" y1="21" x2="16" y2="21"></line> <line x1="12" y1="17" x2="12" y2="21"></line> </svg> </button> </div> </div> </div> </footer> <aside data-pagefind-ignore> <div id="backdrop" class="bg-[rgba(0, 0, 0, 0.5] invisible fixed left-0 top-0 z-50 flex h-screen w-full justify-center p-6 backdrop-blur-sm" data-astro-transition-persist="astro-3snakcvo-2"> <div id="pagefind-container" class="m-0 flex h-fit max-h-[80%] w-full max-w-screen-sm flex-col overflow-auto rounded border border-black/15 bg-neutral-100 p-2 px-4 py-3 shadow-lg dark:border-white/20 dark:bg-neutral-900"> <div id="search" class="pagefind-ui pagefind-init" data-pagefind-ui data-bundle-path="/pagefind/" data-ui-options="{&#34;showImages&#34;:false,&#34;excerptLength&#34;:15,&#34;resetStyles&#34;:false}"></div>  <div class="mr-2 pb-1 pt-4 text-right text-xs dark:prose-invert">
+Press <span class="prose text-xs dark:prose-invert"><kbd class="">Esc</kbd></span> or click anywhere to close
+</div> </div> </div> </aside> <script>
+  const magnifyingGlass = document.getElementById("magnifying-glass");
+  const backdrop = document.getElementById("backdrop");
+
+  function openPagefind() {
+    const searchDiv = document.getElementById("search");
+    const search = searchDiv.querySelector("input");
+    setTimeout(() => {
+      search.focus();
+    }, 0);
+    backdrop?.classList.remove("invisible");
+    backdrop?.classList.add("visible");
+  }
+
+  function closePagefind() {
+    const search = document.getElementById("search");
+    search.value = "";
+    backdrop?.classList.remove("visible");
+    backdrop?.classList.add("invisible");
+  }
+
+  // open pagefind
+  magnifyingGlass?.addEventListener("click", () => {
+    openPagefind();
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "/") {
+      e.preventDefault();
+      openPagefind();
+    } else if ((e.metaKey || e.ctrlKey) && e.key === "k") {
+      e.preventDefault();
+      openPagefind();
+    }
+  });
+
+  // close pagefind
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" || e.keyCode === 27) {
+      closePagefind();
+    }
+  });
+
+  // close pagefind when searched result(link) clicked
+  document.addEventListener("click", (event) => {
+    if (event.target.classList.contains("pagefind-ui__result-link")) {
+      closePagefind();
+    }
+  });
+
+  backdrop?.addEventListener("click", (event) => {
+    if (!event.target.closest("#pagefind-container")) {
+      closePagefind();
+    }
+  });
+
+  // prevent form submission
+  const form = document.getElementById("form");
+  form?.addEventListener("submit", (event) => {
+    event.preventDefault();
+  });
+</script>  </body></html>
