@@ -1,0 +1,839 @@
+<!DOCTYPE html><html lang="en"> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" type="image/icon" href="/favicon.ico"><meta name="generator" content="Astro v4.11.5"><!-- Canonical URL --><link rel="canonical" href="https://rezvan.xyz/cityu/cs4487/cs4487_10/"><!-- Primary Meta Tags --><title>Part 10 - Neural Networks and Deep Learning Part 2 | machine learning | rezvan.xyz</title><meta name="title" content="Part 10 - Neural Networks and Deep Learning Part 2 | machine learning | rezvan.xyz"><meta name="description"><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://rezvan.xyz/cityu/cs4487/cs4487_10/"><meta property="og:title" content="Part 10 - Neural Networks and Deep Learning Part 2 | machine learning | rezvan.xyz"><meta property="og:description"><meta property="og:image" content="https://rezvan.xyz/favicon.ico"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://rezvan.xyz/cityu/cs4487/cs4487_10/"><meta property="twitter:title" content="Part 10 - Neural Networks and Deep Learning Part 2 | machine learning | rezvan.xyz"><meta property="twitter:description"><meta property="twitter:image" content="https://rezvan.xyz/favicon.ico"><!-- PageFind --><link href="/pagefind/pagefind-ui.css" rel="stylesheet"><script src="/pagefind/pagefind-ui.js"></script><!-- KaTeX support --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script><!-- inline KaTeX --><script>
+    function renderKaTeX() {
+        if (typeof renderMathInElement !== "undefined") {
+            renderMathInElement(document.body, {
+                delimiters: [
+                    { left: "$$", right: "$$", display: true },
+                    { left: "$", right: "$", display: false },
+                ],
+            });
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", renderKaTeX);
+    document.addEventListener("astro:after-swap", renderKaTeX);
+</script><meta name="astro-view-transitions-enabled" content="true"><meta name="astro-view-transitions-fallback" content="animate"><script>
+    function init() {
+        preloadTheme();
+        onScroll();
+        animate();
+        updateThemeButtons();
+        addCopyCodeButtons();
+        setGiscusTheme();
+
+        const backToTop = document.getElementById("back-to-top");
+        backToTop?.addEventListener("click", (event) => scrollToTop(event));
+
+        const backToPrev = document.getElementById("back-to-prev");
+        backToPrev?.addEventListener("click", () => window.history.back());
+
+        const lightThemeButton = document.getElementById("light-theme-button");
+        lightThemeButton?.addEventListener("click", () => {
+            localStorage.setItem("theme", "light");
+            toggleTheme(false);
+            updateThemeButtons();
+        });
+
+        const darkThemeButton = document.getElementById("dark-theme-button");
+        darkThemeButton?.addEventListener("click", () => {
+            localStorage.setItem("theme", "dark");
+            toggleTheme(true);
+            updateThemeButtons();
+        });
+
+        const systemThemeButton = document.getElementById(
+            "system-theme-button",
+        );
+        systemThemeButton?.addEventListener("click", () => {
+            localStorage.setItem("theme", "system");
+            toggleTheme(
+                window.matchMedia("(prefers-color-scheme: dark)").matches,
+            );
+            updateThemeButtons();
+        });
+
+        window
+            .matchMedia("(prefers-color-scheme: dark)")
+            .addEventListener("change", (event) => {
+                if (localStorage.theme === "system") {
+                    toggleTheme(event.matches);
+                }
+            });
+
+        document.addEventListener("scroll", onScroll);
+    }
+
+    function updateThemeButtons() {
+        const theme = localStorage.getItem("theme");
+        const lightThemeButton = document.getElementById("light-theme-button");
+        const darkThemeButton = document.getElementById("dark-theme-button");
+        const systemThemeButton = document.getElementById(
+            "system-theme-button",
+        );
+
+        function removeActiveButtonTheme(button) {
+            button?.classList.remove("bg-black/5");
+            button?.classList.remove("dark:bg-white/5");
+        }
+
+        function addActiveButtonTheme(button) {
+            button?.classList.add("bg-black/5");
+            button?.classList.add("dark:bg-white/5");
+        }
+
+        removeActiveButtonTheme(lightThemeButton);
+        removeActiveButtonTheme(darkThemeButton);
+        removeActiveButtonTheme(systemThemeButton);
+
+        if (theme === "light") {
+            addActiveButtonTheme(lightThemeButton);
+        } else if (theme === "dark") {
+            addActiveButtonTheme(darkThemeButton);
+        } else {
+            addActiveButtonTheme(systemThemeButton);
+        }
+    }
+
+    function animate() {
+        const animateElements = document.querySelectorAll(".animate");
+
+        animateElements.forEach((element, index) => {
+            setTimeout(() => {
+                element.classList.add("show");
+            }, index * 100);
+        });
+    }
+
+    function onScroll() {
+        if (window.scrollY > 0) {
+            document.documentElement.classList.add("scrolled");
+        } else {
+            document.documentElement.classList.remove("scrolled");
+        }
+    }
+
+    function scrollToTop(event) {
+        event.preventDefault();
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth",
+        });
+    }
+
+    function toggleTheme(dark) {
+        const css = document.createElement("style");
+
+        css.appendChild(
+            document.createTextNode(
+                `* {
+             -webkit-transition: none !important;
+             -moz-transition: none !important;
+             -o-transition: none !important;
+             -ms-transition: none !important;
+             transition: none !important;
+          }
+        `,
+            ),
+        );
+
+        document.head.appendChild(css);
+
+        if (dark) {
+            document.documentElement.classList.add("dark");
+        } else {
+            document.documentElement.classList.remove("dark");
+        }
+
+        window.getComputedStyle(css).opacity;
+        document.head.removeChild(css);
+
+        setGiscusTheme();
+    }
+
+    function preloadTheme() {
+        const userTheme = localStorage.theme;
+
+        if (userTheme === "light" || userTheme === "dark") {
+            toggleTheme(userTheme === "dark");
+        } else {
+            toggleTheme(
+                window.matchMedia("(prefers-color-scheme: dark)").matches,
+            );
+        }
+    }
+
+    function addCopyCodeButtons() {
+        let copyButtonLabel = "📋";
+        let codeBlocks = Array.from(document.querySelectorAll("pre"));
+
+        async function copyCode(codeBlock, copyButton) {
+            const codeText = codeBlock.innerText;
+            const buttonText = copyButton.innerText;
+            const textToCopy = codeText.replace(buttonText, "");
+
+            await navigator.clipboard.writeText(textToCopy);
+            copyButton.innerText = "✅";
+
+            setTimeout(() => {
+                copyButton.innerText = copyButtonLabel;
+            }, 2000);
+        }
+
+        for (let codeBlock of codeBlocks) {
+            const wrapper = document.createElement("div");
+            wrapper.style.position = "relative";
+
+            const copyButton = document.createElement("button");
+            copyButton.innerText = copyButtonLabel;
+            copyButton.classList = "copy-code";
+
+            codeBlock.setAttribute("tabindex", "0");
+            codeBlock.appendChild(copyButton);
+
+            codeBlock.parentNode.insertBefore(wrapper, codeBlock);
+            wrapper.appendChild(codeBlock);
+
+            copyButton?.addEventListener("click", async () => {
+                await copyCode(codeBlock, copyButton);
+            });
+        }
+    }
+
+    const setGiscusTheme = () => {
+        const giscus = document.querySelector(".giscus-frame");
+
+        const isDark = document.documentElement.classList.contains("dark");
+
+        if (giscus) {
+            const url = new URL(giscus.src);
+            url.searchParams.set("theme", isDark ? "dark" : "light");
+            giscus.src = url.toString();
+        }
+    };
+
+    document.addEventListener("DOMContentLoaded", () => init());
+    document.addEventListener("astro:after-swap", () => init());
+    preloadTheme();
+</script><link rel="stylesheet" href="/_astro/_subject_.BX1NeU5u.css">
+<style>summary[data-astro-cid-xvrfupwn]{cursor:pointer;border-top-left-radius:.5rem;border-top-right-radius:.5rem;padding:.375rem .75rem;font-weight:500;transition-property:color,background-color,border-color,text-decoration-color,fill,stroke;transition-timing-function:cubic-bezier(.4,0,.2,1);transition-duration:.15s}summary[data-astro-cid-xvrfupwn]:hover{background-color:#0000000d}summary[data-astro-cid-xvrfupwn]:hover:is(.dark *){background-color:#ffffff0d}details[data-astro-cid-xvrfupwn][open] summary[data-astro-cid-xvrfupwn]{background-color:#0000000d}details[data-astro-cid-xvrfupwn][open] summary[data-astro-cid-xvrfupwn]:is(.dark *){background-color:#ffffff0d}
+</style><script type="module" src="/_astro/hoisted.DzxSAGjc.js"></script></head> <body> <header data-astro-transition-persist="astro-l7r54iwe-1"> <div class="mx-auto max-w-screen-sm px-3"> <div class="flex flex-wrap justify-between gap-y-2"> <a href="/" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out">  <div class="font-semibold"> rezvan.xyz </div>  </a> <nav class="flex items-center gap-1 text-sm"> <a href="/posts" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> posts </a> <span> / </span> <a href="/chalmers" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> chalmers </a> <span> / </span> <a href="/cityu" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> cityu </a> <span> / </span> <a href="/pdf/cv/cv.pdf" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> cv </a> <span> / </span> <button id="magnifying-glass" aria-label="Search" class="flex items-center rounded border border-black/15 bg-neutral-100 px-2 py-1 text-xs transition-colors duration-300 ease-in-out hover:bg-black/5 hover:text-black focus-visible:bg-black/5 focus-visible:text-black dark:border-white/20 dark:bg-neutral-900 dark:hover:bg-white/5 dark:hover:text-white dark:focus-visible:bg-white/5 dark:focus-visible:text-white"> <svg height="16" stroke-linejoin="round" viewBox="0 0 16 16" width="16" style="color: currentcolor;"><path fill-rule="evenodd" clip-rule="evenodd" d="M3.5 7C3.5 5.067 5.067 3.5 7 3.5C8.933 3.5 10.5 5.067 10.5 7C10.5 7.88461 10.1718 8.69256 9.63058 9.30876L9.30876 9.63058C8.69256 10.1718 7.88461 10.5 7 10.5C5.067 10.5 3.5 8.933 3.5 7ZM9.96544 11.0261C9.13578 11.6382 8.11014 12 7 12C4.23858 12 2 9.76142 2 7C2 4.23858 4.23858 2 7 2C9.76142 2 12 4.23858 12 7C12 8.11014 11.6382 9.13578 11.0261 9.96544L14.0303 12.9697L14.5607 13.5L13.5 14.5607L12.9697 14.0303L9.96544 11.0261Z" fill="currentColor"></path></svg>
+&nbsp;Search
+</button> </nav> </div> </div> </header> <main>  <div class="mx-auto max-w-screen-sm px-3"> <div class="animate"> <a href="/cityu/cs4487" class="not-prose group relative flex w-fit flex-nowrap rounded border border-black/15 py-1.5 pl-7 pr-3 transition-colors duration-300 ease-in-out hover:bg-black/5 hover:text-black focus-visible:bg-black/5 focus-visible:text-black dark:border-white/20 dark:hover:bg-white/5 dark:hover:text-white dark:focus-visible:bg-white/5 dark:focus-visible:text-white"> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="absolute left-2 top-1/2 size-4 -translate-y-1/2 fill-none stroke-current stroke-2"> <line x1="5" y1="12" x2="19" y2="12" class="translate-x-2 scale-x-0 transition-transform duration-300 ease-in-out group-hover:translate-x-0 group-hover:scale-x-100 group-focus-visible:translate-x-0 group-focus-visible:scale-x-100"></line> <polyline points="12 5 5 12 12 19" class="translate-x-1 transition-transform duration-300 ease-in-out group-hover:translate-x-0 group-focus-visible:translate-x-0"></polyline> </svg> <div class="text-sm"> Back to machine learning </div> </a> </div> <div class="my-10 space-y-1"> <div class="animate flex items-center gap-1.5"> <div class="font-base text-sm"> CS4487 </div>
+&bull;
+<div class="font-base text-sm"> <time datetime="2024-11-06T00:00:00.000Z"> November 06, 2024 </time> </div> 
+&bull;
+<div class="font-base text-sm"> 21 min read </div> </div> <h1 class="animate text-3xl font-semibold text-black dark:text-white"> Part 10 - Neural Networks and Deep Learning Part 2 </h1> </div> <details open class="animate rounded-lg border border-black/15 dark:border-white/20" data-astro-cid-xvrfupwn> <summary data-astro-cid-xvrfupwn>Table of Contents</summary> <nav class="" data-astro-cid-xvrfupwn> <ul class="py-3" data-astro-cid-xvrfupwn> <li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#training-deep-neural-networks" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Training Deep Neural Networks </a> <ul class="translate-x-3"> <li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#gradient-descent-gd" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Gradient Descent (GD) </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#stochastic-gradient-descent-sgd" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Stochastic Gradient Descent (SGD) </a>  </li> </ul> </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#optimization-techniques" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Optimization Techniques </a> <ul class="translate-x-3"> <li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#more-problems-with-sgd" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> More Problems with SGD </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#momentum" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Momentum </a> <ul class="translate-x-3"> <li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#sgd-with-momentum" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> SGD with Momentum </a>  </li> </ul> </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#nesterov-momentum" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Nesterov Momentum </a> <ul class="translate-x-3"> <li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#sgd-with-nesterov-momentum" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> SGD with Nesterov Momentum </a>  </li> </ul> </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#adaptive-learning-rate-methods" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Adaptive Learning Rate Methods </a> <ul class="translate-x-3"> <li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#adagrad" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> AdaGrad </a>  </li> </ul> </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#rmsprop-leaky-adagrad" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> RMSProp: “Leaky AdaGrad” </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#adam-adaptive-moments" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Adam: ADAptive Moments </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#adamw-adaptive-moments-with-weight-decay" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> AdamW: ADAptive Moments with Weight Decay </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#other-emerging-optimization-techniques" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Other Emerging Optimization Techniques </a>  </li> </ul> </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#regularization" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Regularization </a> <ul class="translate-x-3"> <li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#data-augmentation" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Data Augmentation </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#emerging-data-augmentation-techniques" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Emerging Data Augmentation Techniques </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#other-regularization-techniques" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Other Regularization Techniques </a> <ul class="translate-x-3"> <li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#early-stopping" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Early Stopping </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#dropout" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Dropout </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#dropout-at-test-time" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Dropout at Test Time </a>  </li> </ul> </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#stochastic-depth" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Stochastic Depth </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#batch-normalization" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Batch Normalization </a> <ul class="translate-x-3"> <li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#batch-normalization-at-test-time" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Batch Normalization at Test Time </a>  </li> </ul> </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#layer-normalization" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Layer Normalization </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#group-normalization" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Group Normalization </a>  </li> </ul> </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#practical-tricks--tips" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Practical Tricks &amp; Tips </a> <ul class="translate-x-3"> <li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#data--pre-procesing" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Data  Pre-Procesing </a> <ul class="translate-x-3"> <li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#pca-as-whitening" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> PCA as Whitening </a>  </li> </ul> </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#weight-initialization" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Weight Initialization </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#learning-rate-decay" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Learning Rate Decay </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#transfer-learning" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Transfer Learning </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#choosing-hyperparameters" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Choosing Hyperparameters </a>  </li> </ul> </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#summary" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Summary </a>  </li> </ul> </nav> </details> <article class="animate"> <h3 id="training-deep-neural-networks">Training Deep Neural Networks</h3>
+<p>As we discussed last time, training neural networks is a highly non-convex optimization problem in high dimensional space.
+In the loss landscape, we will have lots of plateaus, saddle points and local optimas that can hinder our training process.</p>
+<p>So far, we have learned about Gradient Descent (GD) and Stochastic Gradient Descent (SGD, along with its mini-batch version) as optimization techniques.</p>
+<h4 id="gradient-descent-gd">Gradient Descent (GD)</h4>
+<p>Recall the algorithm for (batch) Gradient Descent:</p>
+<ol>
+<li><strong>Require</strong>: Learning Rate $\alpha^{(t)}$</li>
+<li><strong>Require</strong>: Initial Parameter $\mathbf{\theta}^{(0)}$</li>
+<li><strong>while</strong> stopping criterion not met <strong>do</strong></li>
+<li>$\quad$ Compute gradient estimate over $M$ examples:</li>
+<li>$\quad$ $\mathbf{g}^{(t)} = \nabla_{\mathbf{\theta}} \frac{1}{M} \sum_{i=1}^{M} \ell(f(\mathbf{x}^{(i)}; \mathbf{\theta}), y^{(i)})$</li>
+<li>$\quad$ Apply update: $\mathbf{\theta}^{(t+1)} = \mathbf{\theta}^{(t)} - \alpha^{(t)} \mathbf{g}^{(t)}$</li>
+<li>$\quad$ $t = t + 1$</li>
+<li><strong>end while</strong></li>
+</ol>
+<ul>
+<li>Pros: Gradient estimates are stable</li>
+<li>Cons: Need to compute gradients over the entire training set for one update.</li>
+</ul>
+<h4 id="stochastic-gradient-descent-sgd">Stochastic Gradient Descent (SGD)</h4>
+<p>Recall the algorithm for Stochastic Gradient Descent:</p>
+<ol>
+<li><strong>Require</strong>: Learning Rate $\alpha^{(t)}$</li>
+<li><strong>Require</strong>: Initial Parameter $\mathbf{\theta}^{(0)}$</li>
+<li><strong>while</strong> stopping criterion not met <strong>do</strong></li>
+<li>$\quad$ Sample example $(\mathbf{x}^{(i)}, y^{(i)})$ from the training set.</li>
+<li>$\quad$ Compute gradient estimate:</li>
+<li>$\quad$ $\mathbf{g}^{(t)} = \nabla_{\mathbf{\theta}} \ell(f(\mathbf{x}^{(i)}; \mathbf{\theta}), y^{(i)})$</li>
+<li>$\quad$ Apply update: $\mathbf{\theta}^{(t+1)} = \mathbf{\theta}^{(t)} - \alpha^{(t)} \mathbf{g}^{(t)}$</li>
+<li>$\quad$ $t = t + 1$</li>
+<li><strong>end while</strong></li>
+</ol>
+<ul>
+<li>Pros: Computation time per update does not depend on $M$, allowing convergence on extremely large datasets.</li>
+<li>Cons: Gradient estimates can be noisy, use mini-batches to mitigate this.</li>
+</ul>
+<h3 id="optimization-techniques">Optimization Techniques</h3>
+<p>We will discuss other optimization techniques that can help us train deep neural networks more effectively.</p>
+<h4 id="more-problems-with-sgd">More Problems with SGD</h4>
+<p>What if the loss changes quickly in one direction and slowly in another (i.e., error surface has high curvature)?
+SGD will have a hard time converging in this case.</p>
+<p>As we know, gradient descent gains very slow progress along a shallow direction and starts to jitter along steep direction.</p>
+<h4 id="momentum">Momentum</h4>
+<p>How do we solve this problem? One way is to use <strong>momentum</strong>.</p>
+<p>We introduce a new variable $\mathbf{v}$, the velocity.</p>
+<p>We think of $\mathbf{v}$ as the direction and speed by which the parameters move as the learning dynamics progress.</p>
+<p>The velocity is an <strong>exponentially decaying moving average</strong> of the negative gradients,</p>
+<p>$$
+\mathbf{v}^{(t + 1)} = \rho \mathbf{v}^{(t)} - \alpha^{(t)} \nabla_{\mathbf{\theta}} \ell(f(\mathbf{x}^{(i)}; \mathbf{\theta}), y^{(i)})
+$$</p>
+<p>where $\rho \in [0, 1)$.</p>
+<p>Update rule: $\mathbf{\theta}^{(t+1)} = \mathbf{\theta}^{(t)} + \mathbf{v}^{(t+1)}$</p>
+<p>Let’s take a closer look at the velocity term,</p>
+<p>$$
+\mathbf{v}^{(t + 1)} = \rho \mathbf{v}^{(t)} - \alpha^{(t)} \nabla_{\mathbf{\theta}} \ell(f(\mathbf{x}^{(i)}; \mathbf{\theta}), y^{(i)})
+$$</p>
+<p>We can see that the velocity <strong>accumulates</strong> the previous gradients.</p>
+<p>But, what is the role of $rho$?</p>
+<p>If $rho$ is larger than $\alpha^{(t)}$, the current update is more affected by the previous gradients.</p>
+<p>We usually set $rho$ to a high value, e.g., 0.9.</p>
+<h5 id="sgd-with-momentum">SGD with Momentum</h5>
+<ol>
+<li><strong>Require</strong>: Learning Rate $\alpha^{(t)}$</li>
+<li><strong>Require</strong>: Momentum $\rho$</li>
+<li><strong>Require</strong>: Initial Parameter $\mathbf{\theta}^{(0)}$</li>
+<li><strong>Require</strong>: Initial Velocity $\mathbf{v}^{(0)}$</li>
+<li><strong>while</strong> stopping criterion not met <strong>do</strong></li>
+<li>$\quad$ Sample example $(\mathbf{x}^{(i)}, y^{(i)})$ from the training set.</li>
+<li>$\quad$ Compute gradient estimate: $\mathbf{g}^{(t)} = \nabla_{\mathbf{\theta}} \ell(f(\mathbf{x}^{(i)}; \mathbf{\theta}), y^{(i)})$</li>
+<li>$\quad$ Update velocity: $\mathbf{v}^{(t+1)} = \rho \mathbf{v}^{(t)} - \alpha^{(t)} \mathbf{g}^{(t)}$</li>
+<li>$\quad$ Apply update: $\mathbf{\theta}^{(t+1)} = \mathbf{\theta}^{(t)} + \mathbf{v}^{(t+1)}$</li>
+<li>$\quad$ $t = t + 1$</li>
+<li><strong>end while</strong></li>
+</ol>
+<h4 id="nesterov-momentum">Nesterov Momentum</h4>
+<p>Another approach that we can take, is to use <strong>Nesterov Momentum</strong>.</p>
+<p>First take a step in the direction of the accumulated gradient, then calculate the gradient and make a correction.</p>
+<p>Let’s write it out.</p>
+<p>Recall the velocity term in the momentum update,</p>
+<p>$$
+\mathbf{v}^{(t + 1)} = \rho \mathbf{v}^{(t)} - \alpha^{(t)} \nabla_{\mathbf{\theta}} \ell(f(\mathbf{x}^{(i)}; \mathbf{\theta}), y^{(i)})
+$$</p>
+<p>Nesterov Momentum changes the update rule to,</p>
+<p>$$
+\begin{align*}
+\tilde{\mathbf{\theta}} = \mathbf{\theta}^{(t)} + \rho \mathbf{v}^{(t)} \newline
+\mathbf{v}^{(t + 1)} = \rho \mathbf{v}^{(t)} - \alpha^{(t)} \nabla_{\mathbf{\theta}} \ell(f(\mathbf{x}^{(i)}; \tilde{\mathbf{\theta}}), y^{(i)}) \newline
+\end{align*}
+$$</p>
+<p>Update: $\mathbf{\theta}^{(t+1)} = \mathbf{\theta}^{(t)} + \mathbf{v}^{(t+1)}$</p>
+<h5 id="sgd-with-nesterov-momentum">SGD with Nesterov Momentum</h5>
+<ol>
+<li><strong>Require</strong>: Learning Rate $\alpha^{(t)}$</li>
+<li><strong>Require</strong>: Momentum $\rho$</li>
+<li><strong>Require</strong>: Initial Parameter $\mathbf{\theta}^{(0)}$</li>
+<li><strong>Require</strong>: Initial Velocity $\mathbf{v}^{(0)}$</li>
+<li><strong>while</strong> stopping criterion not met <strong>do</strong></li>
+<li>$\quad$ Sample example $(\mathbf{x}^{(i)}, y^{(i)})$ from the training set.</li>
+<li>$\quad$ Update: $\tilde{\mathbf{\theta}} = \mathbf{\theta}^{(t)} + \rho \mathbf{v}^{(t)}$</li>
+<li>$\quad$ Compute gradient estimate: $\mathbf{g}^{(t)} = \nabla_{\mathbf{\theta}} \ell(f(\mathbf{x}^{(i)}; \tilde{\mathbf{\theta}}), y^{(i)})$</li>
+<li>$\quad$ Update velocity: $\mathbf{v}^{(t+1)} = \rho \mathbf{v}^{(t)} - \alpha^{(t)} \mathbf{g}^{(t)}$</li>
+<li>$\quad$ Apply update: $\mathbf{\theta}^{(t+1)} = \mathbf{\theta}^{(t)} + \mathbf{v}^{(t+1)}$</li>
+<li>$\quad$ $t = t + 1$</li>
+<li><strong>end while</strong></li>
+</ol>
+<h4 id="adaptive-learning-rate-methods">Adaptive Learning Rate Methods</h4>
+<p>Till now we have assigned the same learning rate to all parameters $\theta_j$‘s.</p>
+<p>But, if $\theta_j$‘s vary in importance and convergence speed, is this really a good idea?</p>
+<p>Probably not.</p>
+<h5 id="adagrad">AdaGrad</h5>
+<p>One way to address this issue is to use <strong>AdaGrad</strong>.</p>
+<p>Idea: Scale the gradient of a model parameter by the square root of sum of squares of all its historical values.</p>
+<p>Or in other words, progress along “steep” directions (with large partial derivatives) are damped.</p>
+<p>Progress along “flat” directions (with small partial derivatives) are accelerated.</p>
+<p>Here is a conceptual question that is quite important.</p>
+<p>What will happen to the gradient magnitude over a long time?</p>
+<p>It will decay to zero.</p>
+<ol>
+<li><strong>Require</strong>: Initial Learning Rate $\alpha$</li>
+<li><strong>Require</strong>: Initial Parameter $\mathbf{\theta}^{(0)}$</li>
+<li>Initialize $\mathbf{r}^{(0)} = 0$</li>
+<li><strong>while</strong> stopping criterion not met <strong>do</strong></li>
+<li>$\quad$ Sample example $(\mathbf{x}^{(i)}, y^{(i)})$ from the training set.</li>
+<li>$\quad$ Compute gradient estimate: $\mathbf{g}^{(t)} = \nabla_{\mathbf{\theta}} \ell(f(\mathbf{x}^{(i)}; \mathbf{\theta}), y^{(i)})$</li>
+<li>$\quad$ Accumulate: $\mathbf{r}^{(t+1)} = \mathbf{r}^{(t)} + \mathbf{g}^{(t)} \odot \mathbf{g}^{(t)}$</li>
+<li>$\quad$ Compute update: $\Delta \mathbf{\theta} = -\frac{\alpha}{\epsilon + \sqrt{\mathbf{r}^{(t+1)}}} \odot \mathbf{g}^{(t)}$</li>
+<li>$\quad$ Apply update: $\mathbf{\theta}^{(t+1)} = \mathbf{\theta}^{(t)} + \Delta \mathbf{\theta}$</li>
+<li>$\quad$ $t = t + 1$</li>
+<li><strong>end while</strong></li>
+</ol>
+<h4 id="rmsprop-leaky-adagrad">RMSProp: “Leaky AdaGrad”</h4>
+<p>AdaGrad is good when the objective is convex, however, it may not be the best choice for non-convex problems.</p>
+<p>AdaGrad might shrink the learning rate too aggressievly sometimes as well, but we can overcome these problems.</p>
+<p>We can adapt it to perform better in non-convex settings by accumulating an exponentially decaying average of the gradient.
+This is an idea that we will see time and time again in deep learning.</p>
+<ol>
+<li><strong>Require</strong>: Global Learning Rate $\alpha$</li>
+<li><strong>Require</strong>: Decay Rate $\rho$</li>
+<li><strong>Require</strong>: Initial Parameter $\mathbf{\theta}^{(0)}$</li>
+<li>Initialize $\mathbf{r}^{(0)} = 0$</li>
+<li><strong>while</strong> stopping criterion not met <strong>do</strong></li>
+<li>$\quad$ Sample example $(\mathbf{x}^{(i)}, y^{(i)})$ from the training set.</li>
+<li>$\quad$ Compute gradient estimate: $\mathbf{g}^{(t)} = \nabla_{\mathbf{\theta}} \ell(f(\mathbf{x}^{(i)}; \mathbf{\theta}), y^{(i)})$</li>
+<li>$\quad$ Accumulate: $\mathbf{r}^{(t+1)} = \rho \mathbf{r}^{(t)} + (1 - \rho) \mathbf{g}^{(t)} \odot \mathbf{g}^{(t)}$</li>
+<li>$\quad$ Compute update: $\Delta \mathbf{\theta} = -\frac{\alpha}{\epsilon + \sqrt{\mathbf{r}^{(t+1)}}} \odot \mathbf{g}^{(t)}$</li>
+<li>$\quad$ Apply update: $\mathbf{\theta}^{(t+1)} = \mathbf{\theta}^{(t)} + \Delta \mathbf{\theta}$</li>
+<li>$\quad$ $t = t + 1$</li>
+<li><strong>end while</strong></li>
+</ol>
+<h4 id="adam-adaptive-moments">Adam: ADAptive Moments</h4>
+<p>Adam is currently <strong>the</strong> default optimization algorithm for training deep neural networks.</p>
+<p>Adam is like RMSProp with momentum but with bias correction terms for the first (mean) and second (uncentered variance) moments.</p>
+<ol>
+<li><strong>Require</strong>: Global Learning Rate $\alpha$</li>
+<li><strong>Require</strong>: Decay Rates $\rho_1, \rho_2$</li>
+<li><strong>Require</strong>: Initial Parameter $\mathbf{\theta}^{(0)}$</li>
+<li>Initialize moment variables $\mathbf{s}^{(0)} = 0$, $\mathbf{r}^{(0)} = 0$</li>
+<li><strong>while</strong> stopping criterion not met <strong>do</strong></li>
+<li>$\quad$ Sample example $(\mathbf{x}^{(i)}, y^{(i)})$ from the training set.</li>
+<li>$\quad$ Compute gradient estimate: $\mathbf{g}^{(t)} = \nabla_{\mathbf{\theta}} \ell(f(\mathbf{x}^{(i)}; \mathbf{\theta}), y^{(i)})$</li>
+<li>$\quad$ Update: $\mathbf{s}^{(t+1)} = \rho_1 \mathbf{s}^{(t)} + (1 - \rho_1) \mathbf{g}^{(t)}$</li>
+<li>$\quad$ Update: $\mathbf{r}^{(t+1)} = \rho_2 \mathbf{r}^{(t)} + (1 - \rho_2) \mathbf{g}^{(t)} \odot \mathbf{g}^{(t)}$</li>
+<li>$\quad$ Correct biases: $\hat{\mathbf{s}} = \frac{\mathbf{s}^{(t+1)}}{1 - \rho_1^{t+1}}$, $\hat{\mathbf{r}} = \frac{\mathbf{r}^{(t+1)}}{1 - \rho_2^{t+1}}$</li>
+<li>$\quad$ Compute and apply update: $\Delta \mathbf{\theta} = -\frac{\hat{\mathbf{s}}}{\delta + \sqrt{\hat{\mathbf{r}}}}, \mathbf{\theta}^{(t+1)} = \mathbf{\theta}^{(t)} + \Delta \mathbf{\theta}$</li>
+<li>$\quad$ $t = t + 1$</li>
+<li><strong>end while</strong></li>
+</ol>
+<h4 id="adamw-adaptive-moments-with-weight-decay">AdamW: ADAptive Moments with Weight Decay</h4>
+<p>AdamW is an extension of Adam, and has gained popularity, especially in training transformer-based deep models.</p>
+<p>Weight decay (which is just a fancy word for $\ell_2$-regularization and ridge regularization) is a regularization technique to prevent ovefitting.
+It is just adding a $\Vert \mathbf{\theta} \Vert_2^2$ term to the loss function.</p>
+<p>AdamW applies weight decay as a separate regularization term during the update step, decoupling it from the adaptive learning rate mechanism.</p>
+<p>AdamW addresses the issue of large weights being incorrectly penalized by weight decay.</p>
+<p>It also provides improved regularization and better generalization compared to original Adam.</p>
+<p>$\colorbox{pink}{\text{Adam}}$ VS. $\colorbox{lime}{\text{AdamW}}$</p>
+<ol>
+<li><strong>Require</strong>: Global Learning Rate $\alpha$</li>
+<li><strong>Require</strong>: Decay Rates $\rho_1, \rho_2$</li>
+<li><strong>Require</strong>: Weight Decay $\lambda$</li>
+<li><strong>Require</strong>: Initial Parameter $\mathbf{\theta}^{(0)}$</li>
+<li>Initialize moment variables $\mathbf{s}^{(0)} = 0$, $\mathbf{r}^{(0)} = 0$</li>
+<li><strong>while</strong> stopping criterion not met <strong>do</strong></li>
+<li>$\quad$ Sample example $(\mathbf{x}^{(i)}, y^{(i)})$ from the training set.</li>
+<li>$\quad$ Compute gradient estimate: $\mathbf{g}^{(t)} = \nabla_{\mathbf{\theta}} \ell(f(\mathbf{x}^{(i)}; \mathbf{\theta}), y^{(i)}) \colorbox{pink}{$+ \lambda \mathbf{\theta}^{(t)}$}$</li>
+<li>$\quad$ Update: $\mathbf{s}^{(t+1)} = \rho_1 \mathbf{s}^{(t)} + (1 - \rho_1) \mathbf{g}^{(t)}$</li>
+<li>$\quad$ Update: $\mathbf{r}^{(t+1)} = \rho_2 \mathbf{r}^{(t)} + (1 - \rho_2) \mathbf{g}^{(t)} \odot \mathbf{g}^{(t)}$</li>
+<li>$\quad$ Correct biases: $\hat{\mathbf{s}} = \frac{\mathbf{s}^{(t+1)}}{1 - \rho_1^{t+1}}$, $\hat{\mathbf{r}} = \frac{\mathbf{r}^{(t+1)}}{1 - \rho_2^{t+1}}$</li>
+<li>$\quad$ Compute and apply update: $\Delta \mathbf{\theta} = -\frac{\hat{\mathbf{s}}}{\delta + \sqrt{\hat{\mathbf{r}}}} \colorbox{lime}{$- \lambda \mathbf{\theta}^{(t)}$}$, $\mathbf{\theta}^{(t+1)} = \mathbf{\theta}^{(t)} + \Delta \mathbf{\theta}$</li>
+<li>$\quad$ $t = t + 1$</li>
+<li><strong>end while</strong></li>
+</ol>
+<h4 id="other-emerging-optimization-techniques">Other Emerging Optimization Techniques</h4>
+<ul>
+<li>AdaBelief, unlike Adam, AdaBelief divides by the exponentially decaying moving average of variance of the gradients.</li>
+</ul>
+<p>In Adam: $\mathbf{r}^{(t+1)} = \rho_2 \mathbf{r}^{(t)} + (1 - \rho_2) \mathbf{g}^{(t)} \odot \mathbf{g}^{(t)}$
+In AdaBelief: $\mathbf{r}^{(t+1)} = \rho_2 \mathbf{r}^{(t)} + (1 - \rho_2) (\mathbf{g}^{(t)} - \mathbf{m}^{(t)}) \odot (\mathbf{g}^{(t)} - \mathbf{s}^{(t + 1)})^2$</p>
+<ul>
+<li>AdaHessian: Second-order optimization technique that incorporates the curvature of the loss function via adaptive estimates of the Hessian diagonals
+Since calculating the Hessian is a computationally expensive operation, it can be approximated with a Hessian vector product.</li>
+</ul>
+<h3 id="regularization">Regularization</h3>
+<p>We’ve discussed regularization before, but this has mostly been in the loss function.
+However, when it comes to preventing overfit for models, we can apply regularization elsewhere, for example, in the data.</p>
+<h4 id="data-augmentation">Data Augmentation</h4>
+<p>If we artificially permute the data to increase the dataset size, we will have more data to train on!</p>
+<p>Common ways to do this are,</p>
+<ul>
+<li>Horizontal flipping
+<ul>
+<li>As the name suggests, we flip the image horizontally.</li>
+</ul>
+</li>
+<li>Random crops and scales.
+<ul>
+<li><strong>Training</strong>: Sample random crops/scales (given that the input resolution is $512 \times 512$).
+<ol>
+<li>Pick random $L$ in range $[256, 480]$.</li>
+<li>Resize training image short side to $L$.</li>
+<li>Sample random $224 \times 224$ patch.</li>
+</ol>
+</li>
+<li><strong>Testing</strong>: Average a fixed set of crops.
+<ol>
+<li>Resize image at 5 scales, $\{224, 256, 384, 480, 640\}$.</li>
+<li>For each size, use 10 $224 \times 224$ crops, 4 corners + center + flips.</li>
+</ol>
+</li>
+</ul>
+</li>
+<li>Color jittering
+<ul>
+<li>Randomly change the brightness, contrast, saturation, and hue of the image.</li>
+</ul>
+</li>
+<li>And so on…
+<ul>
+<li>Random mix of:
+<ul>
+<li>Translation</li>
+<li>Rotation</li>
+<li>Stretching</li>
+<li>Shearing</li>
+<li>Lens distortion</li>
+<li>Add noise to pixels</li>
+<li>$\ldots$</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>But we have to be careful about the transformation we choose, it has to be <strong>label preserving</strong>.</p>
+<p>For example, if we are dealing with text, we simply can not flip the characters, a ‘b’ will become a ‘d’.
+If we are working with the MNIST dataset, we can not perform a 180$^\circ$ rotation, a ‘6’ will become a ‘9’.</p>
+<h4 id="emerging-data-augmentation-techniques">Emerging Data Augmentation Techniques</h4>
+<p>There are a few emerging data augmentation techniques that are worth mentioning.</p>
+<ul>
+<li>Cutout
+<ul>
+<li>Idea: Randomly remove a square region of pixels in an image during training.
+<ul>
+<li>Pros: Can remove noise, e.g., irrelevant background.</li>
+<li>Cons: Can remove important information.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Mixup
+<ul>
+<li>Idea: Linearly mix two random images and their labels during training.
+<ul>
+<li>Pros: Increase diversity in the training data.</li>
+<li>Cons: Can create blurred images (which can be a pro sometimes!), especially for images with complex textures.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Cutmix
+<ul>
+<li>Idea: Randomly select two images during training, cut a random patch of pixels from one image and paste it to the other, and then mix their labels proportionally to the area of the patch.
+<ul>
+<li>Pros: Increase diversity in the training data.</li>
+<li>Cons: Can create unrealistic images, can also remove important features.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="other-regularization-techniques">Other Regularization Techniques</h4>
+<p>We can also apply regularization to the training process itself. Here are a few examples.</p>
+<h5 id="early-stopping">Early Stopping</h5>
+<p>As the name suggests, we do not want to train a network to have a too small training error.</p>
+<p>Recall that overfitting, with a large and complex model, means that it is easier to (over)fit the training samples into them.</p>
+<p>To prevent this, we use the validation error to decide when to stop training.</p>
+<p>We can think of early stopping as a type of regularization, why?</p>
+<p>The <strong>effective</strong> complexity of the network starts out small, as the weights are initialized small</p>
+<p>The effect complexity grows during training, as the weights get larger and larger.</p>
+<p>Early stopping then represents a way of limiting the effective network complexity.</p>
+<p>In practice, when we are training we also output the validation error, to get a sense of both.</p>
+<p>Every time the validation error improves, we want to save this checkpoint.</p>
+<p>When the validation error plateaus for some time (or starts to increase for some time), we should stop.</p>
+<p>The number of training steps (i.e., epochs) is also a hyperparameter that we can tune.</p>
+<h5 id="dropout">Dropout</h5>
+<p>Dropout is a regularization technique that is applied to the network itself.</p>
+<p>In each update step, randomly sample a different <strong>binary</strong> mask to all the input and hidden units.</p>
+<p>Multiply the mask with the units and do the update as usual, typical dropout probabilities are 0.8/0.5 for input/hidden units.</p>
+<p>This is especially useful for fully connected layers, less so for convolutional layers.</p>
+<p>But why is this even a good idea, don’t we want more units and parameters to represent the data?</p>
+<p>This is true, but we want <strong>representative</strong> parameters, this forces the network to avoid having <strong>redundant</strong> or <strong>dependent</strong> representations.
+I.e., prevents co-adaptation of features, in which a feature is only helpful in the context/presence of several other specific features (although, this can be useful in some cases).</p>
+<p>We also train a large ensemble of models (that share parameters), each binary mask corresponds to one model.</p>
+<p>But how do we make a final decision?</p>
+<p>At test time all the neurons are active always (usually).
+We scale the activations so that for each neuron, the output at test time = <em>expected</em> output at training time.</p>
+<p>We can also use mask sampling (not as common).
+We randomly sample some (typically, 10-20) masks, for each mask, we apply it to the trained model to get a prediction, then we take the majority vote (i.e., average) over the predicitons.</p>
+<h5 id="dropout-at-test-time">Dropout at Test Time</h5>
+<p>So, as we can see, dropout makes our output random!</p>
+<p>$$
+\mathbf{y} = f_{\mathbf{W}} (\mathbf{x}, \mathbf{z})
+$$</p>
+<p>where $\mathbf{z}$ is the random mask.</p>
+<p>We want to “average out” the randomness at test time.</p>
+<p>$$
+\mathbf{y} = f_W (\mathbf{x}) = \mathbb{E}_z [f_W (\mathbf{x}, \mathbf{z})] = \int_z f_W (\mathbf{x}, \mathbf{z}) p(\mathbf{z}) d\mathbf{z}
+$$</p>
+<p>Consider a single neuron, $a = w_1 x_1 + w_2 x_2$.</p>
+<p>At test time, we have $\mathbb{E}[a] = w_1 x_1 + w_2 x_2$.</p>
+<p>At training time (with a dropout probability of 0.5), we have,</p>
+<p>$$
+\begin{align*}
+\mathbb{E}[a] &#x26;= \frac{1}{4}(w_1 x_1 + w_2 x_2) + \frac{1}{4}(w_1 x_1 + w_2 0) \newline
+&#x26;+ \frac{1}{4}(w_1 0 + w_2 x_2) + \frac{1}{4}(w_1 0 + w_2 0) \newline
+&#x26;= \frac{1}{2}(w_1 x_1 + w_2 x_2)
+\end{align*}
+$$</p>
+<p>At test time, we multiply by the dropout probability to get the expected value.</p>
+<p>However, this is quite tedious, as we need to change the test time.</p>
+<p>A more common way is the “inverted dropout”, where we instead scale the activations at training time.</p>
+<p>Thus, the test time remains the same.</p>
+<h4 id="stochastic-depth">Stochastic Depth</h4>
+<p>Similar to Droput, in each iteration, Stochastic Depth randomly drops a subset of <em>layers</em> with some survival probabilities and bypasses them with the identity function.</p>
+<p>At test time, all layers are activated and re-calibrated by multiplying the corresponding survival probabilities.</p>
+<p>This reduces training time substantially and improves generalization as an implicit model ensemble.</p>
+<h4 id="batch-normalization">Batch Normalization</h4>
+<p>The idea of batch normalization is to adjust activations to lie within a desired operating range, while maintaining their relative values.</p>
+<p>Given a mini-batch $\mathcal{B} = \{(\mathbf{x}^{(i)}, y^{(i)}, i = 1, \ldots, M\}$.</p>
+<p>We compute the per-channel (i.e., feature) mean, $\mu_j = \frac{1}{M} \sum_{i = 1}^M x_j^{(i)}$ and,</p>
+<p>compute the per-channel variance, $\sigma_j^2 = \frac{1}{M} \sum_{i = 1}^M (x_j^{(i)} - \mu_j)^2$.</p>
+<p>Normalize $\mathbf{x}^{(i)}$ across the channel/feature, $\hat{x}_j^{(i)} = \frac{x_j^{(i)} - \mu_j}{\sqrt{\sigma_j^2 + \epsilon}}$.</p>
+<p>But we have a issue, what if a zero mean and unit variance are too hard of a constraint?</p>
+<p>The answer is more learnable parameters (as usual), we incorporate learnable scale and shift parameters $\gamma$ and $\beta$ such that,</p>
+<p>$$
+z_j^{(i)} = \gamma_j \hat{x}_j^{(i)} + \beta_j
+$$</p>
+<h5 id="batch-normalization-at-test-time">Batch Normalization at Test Time</h5>
+<p>Mean and variance estimates depend on mini-batch at train time, but we can not do this at test time.</p>
+<p>What’s the solution? We keep exponentially decaying the moving average of values seen during training and use them for testing.</p>
+<p>During testing, batch normalization becomes a linear operator, which means it can be fused with the previous (convolutional) layer.</p>
+<p>We usually use batch normalization after convolutional layers and before nonlinearity.</p>
+<p>So remember, it behaves <strong>differently</strong> during training and testing, this can be a source for lots of pesky bugs.</p>
+<h4 id="layer-normalization">Layer Normalization</h4>
+<p>Layer normalization is similar to batch normalization, but it normalizes across the feature dimension.</p>
+<p>Since we are normalizing across the channel dimension, we get the same behavior at training and testing time.</p>
+<p>Layer normalization for convolutional layers normalizes along both channel and spatial dimensions.</p>
+<h4 id="group-normalization">Group Normalization</h4>
+<p>Group normalization is a compromise between batch and layer normalization.</p>
+<p>It divides the channels into groups and computes the mean and variance within each group.</p>
+<p>Group normalization is more stable than batch normalization when the batch size is small.</p>
+<h3 id="practical-tricks--tips">Practical Tricks &#x26; Tips</h3>
+<p>We will discuss some practical tips and tricks that can help you train deep neural networks more effectively.</p>
+<h4 id="data--pre-procesing">Data  Pre-Procesing</h4>
+<p>Data pre-processing is a crucial step in training deep neural networks.</p>
+<p>Assume $\mathbf{X} \in \mathbb{R}^{M \times N}$ is the data matrix (each example in a row).</p>
+<p>We can make the data zero-centered by subtracting the mean of each feature,</p>
+<p>$$
+\mathbf{X} = \mathbf{X} - \mathbf{1} \mu
+$$</p>
+<p>where $\mu = \frac{1}{M} \mathbf{X}^T \mathbf{1}$.</p>
+<p>We can also normalize the data by dividing by the standard deviation of each feature,</p>
+<p>$$
+\mathbf{X} = \mathbf{X} \oslash \sigma
+$$</p>
+<p>where $\sigma = \sqrt{\frac{1}{M} \mathbf{X}^T \mathbf{X}}$.</p>
+<p>In practice, we may also want to PCA (Principal Component Analysis) the data.</p>
+<p>The data is first centered, then projected into the eigenbasis, followed by divding every dimension by the corresponding eigenvalue.</p>
+<p>We call the first step for decorrelation and the second step for whitening.</p>
+<h5 id="pca-as-whitening">PCA as Whitening</h5>
+<p>Recall the eigendeomposition,</p>
+<p>$$
+\mathbf{C} = \frac{1}{M} \mathbf{X}^T \mathbf{X} = \frac{1}{M} \sum_{i = 1}^M \mathbf{x}^{(i)} (\mathbf{x}^{(i)})^T = \mathbf{U} \mathbf{\Sigma}^2 \mathbf{U}^T
+$$</p>
+<p>Defining $\hat{\mathbf{x}^{(i)}} = \mathbf{\Sigma}^{-1} \mathbf{U}^T \mathbf{x}^{(i)}$, we have,</p>
+<p>$$
+\begin{align*}
+\hat{\mathbf{C}} &#x26;= \frac{1}{M} \sum_{i = 1}^M \hat{\mathbf{x}^{(i)}} (\hat{\mathbf{x}^{(i)}})^T \newline
+&#x26;= \frac{1}{M} \sum_{i = 1}^M \mathbf{\Sigma}^{-1} \mathbf{U}^T \mathbf{x}^{(i)} (\mathbf{x}^{(i)})^T \mathbf{U} \mathbf{\Sigma}^{-1} \newline
+&#x26;= \mathbf{\Sigma}^{-1} \mathbf{U}^T \left( \frac{1}{M} \sum_{i = 1}^M \mathbf{x}^{(i)} (\mathbf{x}^{(i)})^T \right) \mathbf{U} \mathbf{\Sigma}^{-1} \newline
+&#x26;= \mathbf{\Sigma}^{-1} \mathbf{U}^T \mathbf{U} \mathbf{\Sigma}^2 \mathbf{U}^T \mathbf{U} \mathbf{\Sigma}^{-1} \newline
+&#x26;= \mathbf{I}
+\end{align*}
+$$</p>
+<p>In practice, for color (RGB) images, we only do this for the center, it is not common to do PCA whitening for the entire image.</p>
+<p>But, we can three variants.</p>
+<ul>
+<li>Subtract the mean image.
+<ul>
+<li>Mean image = [3, height, width] array.</li>
+</ul>
+</li>
+<li>Subtract per-channel mean.
+<ul>
+<li>Mean along each channel = 3 numbers.</li>
+</ul>
+</li>
+<li>Subtract per-channel mean and divide by per-channel std.
+<ul>
+<li>Mean and std along each channel = $2 \times 3$ numbers.</li>
+</ul>
+</li>
+</ul>
+<p>As we lightly discussed earlier, we typically train our network several times on the entire dataset, one complete pass through the data is calle an <em>epoch</em>.</p>
+<p>Also, never forget to <strong>shuffle</strong> your training data per epoch, since otherwise the training sequence can introduce bias.</p>
+<h4 id="weight-initialization">Weight Initialization</h4>
+<p>Weight initialization is another crucial step in training deep neural networks.</p>
+<p>Constant (including all zero) initialization is a bad idea and wrong.</p>
+<p>Why? If every neuron in the netwrok computes the same output, then all of them will also compute the same gradients during backpropagation and undergo the exact same parameter updates.</p>
+<p>Small random initialization is a good idea, but we have to be careful.
+It works okay for small networks, but for deeper and more complex networks this doesn’t work well.</p>
+<p>The current recommendation for initializing CNNs with ReLU, for example is,</p>
+<p>$$
+w = np.random.randn(n) \times \sqrt{\frac{2}{n}}
+$$</p>
+<p>where <code>randn</code> is Gaussian and $n$ is the number of input channels.</p>
+<p>Proper initialization is an active research area, and there are many other initialization techniques.</p>
+<h4 id="learning-rate-decay">Learning Rate Decay</h4>
+<p>SGD, AdaGrad, RMSProp, and Adam all have learning rate as a hyperparameter, but which learning rate should we choose?</p>
+<ul>
+<li>If we have a very high learning rate, our loss will diverge.</li>
+<li>If we have a high learning rate, our loss will quickly drop then plateau.</li>
+<li>If we have a low learning rate, our loss will slowly drop, but we may get stuck in a local minima.</li>
+</ul>
+<p>Which one should we choose? All of them, we first start with a high learning rate and decay it over time.</p>
+<p>We can do this stepwise, i.e., we reduce the learning rate at a few fixed points, for example, multiply $\alpha$ by 0.1 after every 30 epochs.</p>
+<p>There are also some other common <em>schedulers</em> for learning rate decay.</p>
+<ul>
+<li>Cosine: $\alpha^{(t)} = \frac{1}{2} \alpha^{(0)} \left(1 + \cos \left(\frac{t}{T} \pi \right) \right)$</li>
+<li>Linear: $\alpha^{(t)} = \alpha^{(0)} \left(1 - \frac{t}{T} \right)$</li>
+</ul>
+<p>where $t$ is the epoch index and $T$ is the total number of epochs.</p>
+<h4 id="transfer-learning">Transfer Learning</h4>
+<p>Transfer learning is a technique where we use a pre-trained model on a different task as a starting point for training a new model.</p>
+<p>Deep features are fairly transferable, and open source pre-trained models are everywhere, so this is a common practice</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th></th><th>Very Similar Dataset</th><th>Very Different Dataset</th></tr></thead><tbody><tr><td>Very Little Data</td><td>Use Linear classifier on top layer</td><td>You’re in trouble… Try linear classifier from different stages</td></tr><tr><td>Quite a lot of data</td><td>Finetune a few layers</td><td>Finetune a large number of layers</td></tr></tbody></table>
+<h4 id="choosing-hyperparameters">Choosing Hyperparameters</h4>
+<p>Choosing hyperparameters is a crucial step in training deep neural networks.</p>
+<ol>
+<li>Check initial loss.
+<ul>
+<li>Turn off weight decay and sanity check loss at initialization.
+<ul>
+<li>E.g. $\log(C)$ for softmax with $C$ classes.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Overfit a small sample.
+<ul>
+<li>Try to train to 100% training accuracy on a small sample of training data (5-10 mini-batches).
+<ul>
+<li>Fiddle with the architechture, learning rate, weight initialization, etc.</li>
+</ul>
+</li>
+<li>Loss not going down?
+<ul>
+<li>Learning rate too low, bad initialization, etc.</li>
+</ul>
+</li>
+<li>Loss explodes to Inf or NaN?
+<ul>
+<li>Learning rate too high, bad initialization, etc.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Find learning rate that mkaes loss go down.
+<ul>
+<li>Use the architecture from the previous step, use all training data, turn on small weight decay, find a learning rate that mkaes the loss drop significantly within ~100 iterations.</li>
+<li>Good learning rates to usually start off with are, $1e^{-1}, 1e^{-2}, 1e^{-3}, 1e^{-4}$.</li>
+</ul>
+</li>
+<li>Coarse grid, train for 1-5 epochs.
+<ul>
+<li>Choose a few values of learning rate and weight decay around what worked from (3) and train a few models for 1-5 epochs.</li>
+<li>Good weight decay to usually start off with are, $1e^{-4}, 1e^{-5}, 0$.</li>
+</ul>
+</li>
+<li>Refine grid and train longer.
+<ul>
+<li>Pick the best model(s) from (4) and train them for longer (10-20 epochs) without learning rate decay.</li>
+</ul>
+</li>
+<li>Look at loss curves.
+<ul>
+<li>Losses may be noisy
+<ul>
+<li>Use a scatter plot</li>
+<li>Also plot exponentially decaying moving average to see trends better.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Go to (5)</li>
+</ol>
+<h3 id="summary">Summary</h3>
+<ul>
+<li>Improve your training error
+<ul>
+<li>Network architectures</li>
+<li>Initializations</li>
+<li>Optimizers</li>
+<li>Learning rate schedulers</li>
+</ul>
+</li>
+<li>Improve your test error
+<ul>
+<li>Regularization</li>
+<li>Choosing Hyperparameters</li>
+</ul>
+</li>
+</ul> <div class="mt-24"> <div class="grid grid-cols-2 gap-1.5 sm:gap-3"> <a href="/cityu/cs4487/cs4487_9" class="group relative flex flex-nowrap rounded-lg border border-black/15 px-4 py-3 pl-10 no-underline transition-colors duration-300 ease-in-out hover:bg-black/5 hover:text-black focus-visible:bg-black/5 focus-visible:text-black dark:border-white/20 dark:hover:bg-white/5 dark:hover:text-white dark:focus-visible:bg-white/5 dark:focus-visible:text-white"> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="absolute left-2 top-1/2 size-5 -translate-y-1/2 fill-none stroke-current stroke-2"> <line x1="5" y1="12" x2="19" y2="12" class="translate-x-3 scale-x-0 transition-transform duration-300 ease-in-out group-hover:translate-x-0 group-hover:scale-x-100 group-focus-visible:translate-x-0 group-focus-visible:scale-x-100"></line> <polyline points="12 5 5 12 12 19" class="translate-x-1 transition-transform duration-300 ease-in-out group-hover:translate-x-0 group-focus-visible:translate-x-0"></polyline> </svg> <div class="flex items-center text-sm"> Part 9 - Neural Networks and Deep Learning </div> </a> <div class="invisible"></div> </div> </div> <div class="mt-24"> <div class="giscus"></div> <script data-astro-rerun src="https://giscus.app/client.js" data-repo="rezaarezvan/rezvan.xyz" data-repo-id="R_kgDOHvQr3w" data-category="General" data-category-id="DIC_kwDOHvQr384CiWVC" data-mapping="pathname" data-strict="0" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="bottom" data-theme="preferred_color_scheme" data-lang="en" data-loading="lazy" crossorigin="anonymous" async></script> </div> </article> </div>  </main> <footer class="animate"> <div class="mx-auto max-w-screen-sm px-3"> <div class="relative"> <div class="absolute -top-12 right-0"> <button id="back-to-top" class="group relative flex w-fit flex-nowrap rounded border border-black/15 py-1.5 pl-8 pr-3 transition-colors duration-300 ease-in-out hover:bg-black/5 hover:text-black focus-visible:bg-black/5 focus-visible:text-black dark:border-white/20 dark:hover:bg-white/5 dark:hover:text-white dark:focus-visible:bg-white/5 dark:focus-visible:text-white"> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="absolute left-2 top-1/2 size-4 -translate-y-1/2 rotate-90 fill-none stroke-current stroke-2"> <line x1="5" y1="12" x2="19" y2="12" class="translate-x-2 scale-x-0 transition-transform duration-300 ease-in-out group-hover:translate-x-0 group-hover:scale-x-100 group-focus-visible:translate-x-0 group-focus-visible:scale-x-100"></line> <polyline points="12 5 5 12 12 19" class="translate-x-1 transition-transform duration-300 ease-in-out group-hover:translate-x-0 group-focus-visible:translate-x-0"></polyline> </svg> <div class="text-sm">Back to top</div> </button> </div> </div> <div class="flex items-center justify-between"> <div>&copy; 2024 • rezvan.xyz </div> <div class="flex flex-wrap items-center gap-1.5"> <button id="light-theme-button" aria-label="Light theme" class="group flex size-9 items-center justify-center rounded border border-black/15 hover:bg-black/5 focus-visible:bg-black/5 dark:border-white/20 dark:hover:bg-white/5 dark:focus-visible:bg-white/5"> <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="transition-colors duration-300 ease-in-out group-hover:animate-pulse group-hover:stroke-black group-focus-visible:animate-pulse group-focus-visible:stroke-black group-hover:dark:stroke-white dark:group-focus-visible:stroke-white"> <circle cx="12" cy="12" r="5"></circle> <line x1="12" y1="1" x2="12" y2="3"></line> <line x1="12" y1="21" x2="12" y2="23"></line> <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line> <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line> <line x1="1" y1="12" x2="3" y2="12"></line> <line x1="21" y1="12" x2="23" y2="12"></line> <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line> <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line> </svg> </button> <button id="dark-theme-button" aria-label="Dark theme" class="group flex size-9 items-center justify-center rounded border border-black/15 hover:bg-black/5 focus-visible:bg-black/5 dark:border-white/20 dark:hover:bg-white/5 dark:focus-visible:bg-white/5"> <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="transition-colors duration-300 ease-in-out group-hover:animate-pulse group-hover:stroke-black group-focus-visible:animate-pulse group-focus-visible:stroke-black group-hover:dark:stroke-white dark:group-focus-visible:stroke-white"> <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path> </svg> </button> <button id="system-theme-button" aria-label="System theme" class="group flex size-9 items-center justify-center rounded border border-black/15 hover:bg-black/5 focus-visible:bg-black/5 dark:border-white/20 dark:hover:bg-white/5 dark:focus-visible:bg-white/5"> <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="transition-colors duration-300 ease-in-out group-hover:animate-pulse group-hover:stroke-black group-focus-visible:animate-pulse group-focus-visible:stroke-black group-hover:dark:stroke-white dark:group-focus-visible:stroke-white"> <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect> <line x1="8" y1="21" x2="16" y2="21"></line> <line x1="12" y1="17" x2="12" y2="21"></line> </svg> </button> </div> </div> </div> </footer> <aside data-pagefind-ignore> <div id="backdrop" class="bg-[rgba(0, 0, 0, 0.5] invisible fixed left-0 top-0 z-50 flex h-screen w-full justify-center p-6 backdrop-blur-sm" data-astro-transition-persist="astro-3snakcvo-2"> <div id="pagefind-container" class="m-0 flex h-fit max-h-[80%] w-full max-w-screen-sm flex-col overflow-auto rounded border border-black/15 bg-neutral-100 p-2 px-4 py-3 shadow-lg dark:border-white/20 dark:bg-neutral-900"> <div id="search" class="pagefind-ui pagefind-init" data-pagefind-ui data-bundle-path="/pagefind/" data-ui-options="{&#34;showImages&#34;:false,&#34;excerptLength&#34;:15,&#34;resetStyles&#34;:false}"></div>  <div class="mr-2 pb-1 pt-4 text-right text-xs dark:prose-invert">
+Press <span class="prose text-xs dark:prose-invert"><kbd class="">Esc</kbd></span> or click anywhere to close
+</div> </div> </div> </aside> <script>
+  const magnifyingGlass = document.getElementById("magnifying-glass");
+  const backdrop = document.getElementById("backdrop");
+
+  function openPagefind() {
+    const searchDiv = document.getElementById("search");
+    const search = searchDiv.querySelector("input");
+    setTimeout(() => {
+      search.focus();
+    }, 0);
+    backdrop?.classList.remove("invisible");
+    backdrop?.classList.add("visible");
+  }
+
+  function closePagefind() {
+    const search = document.getElementById("search");
+    search.value = "";
+    backdrop?.classList.remove("visible");
+    backdrop?.classList.add("invisible");
+  }
+
+  // open pagefind
+  magnifyingGlass?.addEventListener("click", () => {
+    openPagefind();
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "/") {
+      e.preventDefault();
+      openPagefind();
+    } else if ((e.metaKey || e.ctrlKey) && e.key === "k") {
+      e.preventDefault();
+      openPagefind();
+    }
+  });
+
+  // close pagefind
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" || e.keyCode === 27) {
+      closePagefind();
+    }
+  });
+
+  // close pagefind when searched result(link) clicked
+  document.addEventListener("click", (event) => {
+    if (event.target.classList.contains("pagefind-ui__result-link")) {
+      closePagefind();
+    }
+  });
+
+  backdrop?.addEventListener("click", (event) => {
+    if (!event.target.closest("#pagefind-container")) {
+      closePagefind();
+    }
+  });
+
+  // prevent form submission
+  const form = document.getElementById("form");
+  form?.addEventListener("submit", (event) => {
+    event.preventDefault();
+  });
+</script>  </body></html>

@@ -1,0 +1,765 @@
+<!DOCTYPE html><html lang="en"> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" type="image/icon" href="/favicon.ico"><meta name="generator" content="Astro v4.11.5"><!-- Canonical URL --><link rel="canonical" href="https://rezvan.xyz/cityu/bme3105/bme3105_8/"><!-- Primary Meta Tags --><title>Part 8 - Stability and Controller Design | biomedical systems and control | rezvan.xyz</title><meta name="title" content="Part 8 - Stability and Controller Design | biomedical systems and control | rezvan.xyz"><meta name="description"><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://rezvan.xyz/cityu/bme3105/bme3105_8/"><meta property="og:title" content="Part 8 - Stability and Controller Design | biomedical systems and control | rezvan.xyz"><meta property="og:description"><meta property="og:image" content="https://rezvan.xyz/favicon.ico"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://rezvan.xyz/cityu/bme3105/bme3105_8/"><meta property="twitter:title" content="Part 8 - Stability and Controller Design | biomedical systems and control | rezvan.xyz"><meta property="twitter:description"><meta property="twitter:image" content="https://rezvan.xyz/favicon.ico"><!-- PageFind --><link href="/pagefind/pagefind-ui.css" rel="stylesheet"><script src="/pagefind/pagefind-ui.js"></script><!-- KaTeX support --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script><!-- inline KaTeX --><script>
+    function renderKaTeX() {
+        if (typeof renderMathInElement !== "undefined") {
+            renderMathInElement(document.body, {
+                delimiters: [
+                    { left: "$$", right: "$$", display: true },
+                    { left: "$", right: "$", display: false },
+                ],
+            });
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", renderKaTeX);
+    document.addEventListener("astro:after-swap", renderKaTeX);
+</script><meta name="astro-view-transitions-enabled" content="true"><meta name="astro-view-transitions-fallback" content="animate"><script>
+    function init() {
+        preloadTheme();
+        onScroll();
+        animate();
+        updateThemeButtons();
+        addCopyCodeButtons();
+        setGiscusTheme();
+
+        const backToTop = document.getElementById("back-to-top");
+        backToTop?.addEventListener("click", (event) => scrollToTop(event));
+
+        const backToPrev = document.getElementById("back-to-prev");
+        backToPrev?.addEventListener("click", () => window.history.back());
+
+        const lightThemeButton = document.getElementById("light-theme-button");
+        lightThemeButton?.addEventListener("click", () => {
+            localStorage.setItem("theme", "light");
+            toggleTheme(false);
+            updateThemeButtons();
+        });
+
+        const darkThemeButton = document.getElementById("dark-theme-button");
+        darkThemeButton?.addEventListener("click", () => {
+            localStorage.setItem("theme", "dark");
+            toggleTheme(true);
+            updateThemeButtons();
+        });
+
+        const systemThemeButton = document.getElementById(
+            "system-theme-button",
+        );
+        systemThemeButton?.addEventListener("click", () => {
+            localStorage.setItem("theme", "system");
+            toggleTheme(
+                window.matchMedia("(prefers-color-scheme: dark)").matches,
+            );
+            updateThemeButtons();
+        });
+
+        window
+            .matchMedia("(prefers-color-scheme: dark)")
+            .addEventListener("change", (event) => {
+                if (localStorage.theme === "system") {
+                    toggleTheme(event.matches);
+                }
+            });
+
+        document.addEventListener("scroll", onScroll);
+    }
+
+    function updateThemeButtons() {
+        const theme = localStorage.getItem("theme");
+        const lightThemeButton = document.getElementById("light-theme-button");
+        const darkThemeButton = document.getElementById("dark-theme-button");
+        const systemThemeButton = document.getElementById(
+            "system-theme-button",
+        );
+
+        function removeActiveButtonTheme(button) {
+            button?.classList.remove("bg-black/5");
+            button?.classList.remove("dark:bg-white/5");
+        }
+
+        function addActiveButtonTheme(button) {
+            button?.classList.add("bg-black/5");
+            button?.classList.add("dark:bg-white/5");
+        }
+
+        removeActiveButtonTheme(lightThemeButton);
+        removeActiveButtonTheme(darkThemeButton);
+        removeActiveButtonTheme(systemThemeButton);
+
+        if (theme === "light") {
+            addActiveButtonTheme(lightThemeButton);
+        } else if (theme === "dark") {
+            addActiveButtonTheme(darkThemeButton);
+        } else {
+            addActiveButtonTheme(systemThemeButton);
+        }
+    }
+
+    function animate() {
+        const animateElements = document.querySelectorAll(".animate");
+
+        animateElements.forEach((element, index) => {
+            setTimeout(() => {
+                element.classList.add("show");
+            }, index * 100);
+        });
+    }
+
+    function onScroll() {
+        if (window.scrollY > 0) {
+            document.documentElement.classList.add("scrolled");
+        } else {
+            document.documentElement.classList.remove("scrolled");
+        }
+    }
+
+    function scrollToTop(event) {
+        event.preventDefault();
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth",
+        });
+    }
+
+    function toggleTheme(dark) {
+        const css = document.createElement("style");
+
+        css.appendChild(
+            document.createTextNode(
+                `* {
+             -webkit-transition: none !important;
+             -moz-transition: none !important;
+             -o-transition: none !important;
+             -ms-transition: none !important;
+             transition: none !important;
+          }
+        `,
+            ),
+        );
+
+        document.head.appendChild(css);
+
+        if (dark) {
+            document.documentElement.classList.add("dark");
+        } else {
+            document.documentElement.classList.remove("dark");
+        }
+
+        window.getComputedStyle(css).opacity;
+        document.head.removeChild(css);
+
+        setGiscusTheme();
+    }
+
+    function preloadTheme() {
+        const userTheme = localStorage.theme;
+
+        if (userTheme === "light" || userTheme === "dark") {
+            toggleTheme(userTheme === "dark");
+        } else {
+            toggleTheme(
+                window.matchMedia("(prefers-color-scheme: dark)").matches,
+            );
+        }
+    }
+
+    function addCopyCodeButtons() {
+        let copyButtonLabel = "📋";
+        let codeBlocks = Array.from(document.querySelectorAll("pre"));
+
+        async function copyCode(codeBlock, copyButton) {
+            const codeText = codeBlock.innerText;
+            const buttonText = copyButton.innerText;
+            const textToCopy = codeText.replace(buttonText, "");
+
+            await navigator.clipboard.writeText(textToCopy);
+            copyButton.innerText = "✅";
+
+            setTimeout(() => {
+                copyButton.innerText = copyButtonLabel;
+            }, 2000);
+        }
+
+        for (let codeBlock of codeBlocks) {
+            const wrapper = document.createElement("div");
+            wrapper.style.position = "relative";
+
+            const copyButton = document.createElement("button");
+            copyButton.innerText = copyButtonLabel;
+            copyButton.classList = "copy-code";
+
+            codeBlock.setAttribute("tabindex", "0");
+            codeBlock.appendChild(copyButton);
+
+            codeBlock.parentNode.insertBefore(wrapper, codeBlock);
+            wrapper.appendChild(codeBlock);
+
+            copyButton?.addEventListener("click", async () => {
+                await copyCode(codeBlock, copyButton);
+            });
+        }
+    }
+
+    const setGiscusTheme = () => {
+        const giscus = document.querySelector(".giscus-frame");
+
+        const isDark = document.documentElement.classList.contains("dark");
+
+        if (giscus) {
+            const url = new URL(giscus.src);
+            url.searchParams.set("theme", isDark ? "dark" : "light");
+            giscus.src = url.toString();
+        }
+    };
+
+    document.addEventListener("DOMContentLoaded", () => init());
+    document.addEventListener("astro:after-swap", () => init());
+    preloadTheme();
+</script><link rel="stylesheet" href="/_astro/_subject_.BX1NeU5u.css">
+<style>summary[data-astro-cid-xvrfupwn]{cursor:pointer;border-top-left-radius:.5rem;border-top-right-radius:.5rem;padding:.375rem .75rem;font-weight:500;transition-property:color,background-color,border-color,text-decoration-color,fill,stroke;transition-timing-function:cubic-bezier(.4,0,.2,1);transition-duration:.15s}summary[data-astro-cid-xvrfupwn]:hover{background-color:#0000000d}summary[data-astro-cid-xvrfupwn]:hover:is(.dark *){background-color:#ffffff0d}details[data-astro-cid-xvrfupwn][open] summary[data-astro-cid-xvrfupwn]{background-color:#0000000d}details[data-astro-cid-xvrfupwn][open] summary[data-astro-cid-xvrfupwn]:is(.dark *){background-color:#ffffff0d}
+</style><script type="module" src="/_astro/hoisted.DzxSAGjc.js"></script></head> <body> <header data-astro-transition-persist="astro-l7r54iwe-1"> <div class="mx-auto max-w-screen-sm px-3"> <div class="flex flex-wrap justify-between gap-y-2"> <a href="/" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out">  <div class="font-semibold"> rezvan.xyz </div>  </a> <nav class="flex items-center gap-1 text-sm"> <a href="/posts" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> posts </a> <span> / </span> <a href="/chalmers" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> chalmers </a> <span> / </span> <a href="/cityu" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> cityu </a> <span> / </span> <a href="/pdf/cv/cv.pdf" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> cv </a> <span> / </span> <button id="magnifying-glass" aria-label="Search" class="flex items-center rounded border border-black/15 bg-neutral-100 px-2 py-1 text-xs transition-colors duration-300 ease-in-out hover:bg-black/5 hover:text-black focus-visible:bg-black/5 focus-visible:text-black dark:border-white/20 dark:bg-neutral-900 dark:hover:bg-white/5 dark:hover:text-white dark:focus-visible:bg-white/5 dark:focus-visible:text-white"> <svg height="16" stroke-linejoin="round" viewBox="0 0 16 16" width="16" style="color: currentcolor;"><path fill-rule="evenodd" clip-rule="evenodd" d="M3.5 7C3.5 5.067 5.067 3.5 7 3.5C8.933 3.5 10.5 5.067 10.5 7C10.5 7.88461 10.1718 8.69256 9.63058 9.30876L9.30876 9.63058C8.69256 10.1718 7.88461 10.5 7 10.5C5.067 10.5 3.5 8.933 3.5 7ZM9.96544 11.0261C9.13578 11.6382 8.11014 12 7 12C4.23858 12 2 9.76142 2 7C2 4.23858 4.23858 2 7 2C9.76142 2 12 4.23858 12 7C12 8.11014 11.6382 9.13578 11.0261 9.96544L14.0303 12.9697L14.5607 13.5L13.5 14.5607L12.9697 14.0303L9.96544 11.0261Z" fill="currentColor"></path></svg>
+&nbsp;Search
+</button> </nav> </div> </div> </header> <main>  <div class="mx-auto max-w-screen-sm px-3"> <div class="animate"> <a href="/cityu/bme3105" class="not-prose group relative flex w-fit flex-nowrap rounded border border-black/15 py-1.5 pl-7 pr-3 transition-colors duration-300 ease-in-out hover:bg-black/5 hover:text-black focus-visible:bg-black/5 focus-visible:text-black dark:border-white/20 dark:hover:bg-white/5 dark:hover:text-white dark:focus-visible:bg-white/5 dark:focus-visible:text-white"> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="absolute left-2 top-1/2 size-4 -translate-y-1/2 fill-none stroke-current stroke-2"> <line x1="5" y1="12" x2="19" y2="12" class="translate-x-2 scale-x-0 transition-transform duration-300 ease-in-out group-hover:translate-x-0 group-hover:scale-x-100 group-focus-visible:translate-x-0 group-focus-visible:scale-x-100"></line> <polyline points="12 5 5 12 12 19" class="translate-x-1 transition-transform duration-300 ease-in-out group-hover:translate-x-0 group-focus-visible:translate-x-0"></polyline> </svg> <div class="text-sm"> Back to biomedical systems and control </div> </a> </div> <div class="my-10 space-y-1"> <div class="animate flex items-center gap-1.5"> <div class="font-base text-sm"> BME3105 </div>
+&bull;
+<div class="font-base text-sm"> <time datetime="2024-11-15T00:00:00.000Z"> November 15, 2024 </time> </div> 
+&bull;
+<div class="font-base text-sm"> 12 min read </div> </div> <h1 class="animate text-3xl font-semibold text-black dark:text-white"> Part 8 - Stability and Controller Design </h1> </div> <details open class="animate rounded-lg border border-black/15 dark:border-white/20" data-astro-cid-xvrfupwn> <summary data-astro-cid-xvrfupwn>Table of Contents</summary> <nav class="" data-astro-cid-xvrfupwn> <ul class="py-3" data-astro-cid-xvrfupwn> <li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#internal-stability" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Internal Stability </a> <ul class="translate-x-3"> <li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#internal-stability-theorem" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Internal Stability Theorem </a> <ul class="translate-x-3"> <li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#example" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Example </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#example-2" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Example 2 </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#example-3" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Example 3 </a>  </li> </ul> </li> </ul> </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#state-feedback-control" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> State Feedback Control </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#state-feedback-stabilization" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> State Feedback Stabilization </a> <ul class="translate-x-3"> <li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#eigenvalue-placement-problem" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Eigenvalue Placement Problem </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#ackermanns-formula" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Ackermann’s Formula </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#example-1" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Example </a> <ul class="translate-x-3"> <li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#ackermanns-formula-1" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Ackermann’s Formula </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#direct-method" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Direct Method </a>  </li> </ul> </li> </ul> </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#asymptotic-tracking" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Asymptotic Tracking </a> <ul class="translate-x-3"> <li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#solution-with-r-constant" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Solution with $r$ constant </a> <ul class="translate-x-3"> <li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#proof" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Proof </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#example-4" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Example </a>  </li><li class="list-inside list-disc px-6 py-1.5 text-sm"> <a href="#solution" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> Solution </a>  </li> </ul> </li> </ul> </li> </ul> </nav> </details> <article class="animate"> <h3 id="internal-stability">Internal Stability</h3>
+<p>Consider the LTI system,</p>
+<p>$$
+\begin{align*}
+\dot{x} &#x26;= Fx + Gu \quad x(0) = x_0, t \geq 0 \newline
+y &#x26;= Hx + Ju
+\end{align*}
+$$</p>
+<p>where $F \in \mathbb{R}^{n \times n}$, $G \in \mathbb{R}^{n \times 1}$, $H \in \mathbb{R}^{1 \times n}$, and $J \in \mathbb{R}^{1 \times 1}$.</p>
+<blockquote>
+<p>The LTI system is said to be <em>internally stable</em> if the zero input solution approaches 0 as $t \to \infty$ for any $x(0)$, or in mathematical terms,
+$$
+\lim_{t \to \infty} x(t) = \lim_{t \to \infty} e^{Ft}x(0) = 0, \quad \forall x_0.
+$$</p>
+</blockquote>
+<h4 id="internal-stability-theorem">Internal Stability Theorem</h4>
+<blockquote>
+<p>The LTI system is said to be internally stable if and only if all the eigenvalues of $F$ have negative real parts.</p>
+</blockquote>
+<p>Let’s take a look at an example.</p>
+<h5 id="example">Example</h5>
+<p>Consider this simple circuit with one inductor.</p>
+<p><img src="/images/cityu/BME3105/IS1.jpg" alt="">
+<strong>Figure 1:</strong> Simple circuit with one inductor.</p>
+<p>We consider the current $i$ as the output and the voltage source $V_s$ as the input.</p>
+<p>We know that the voltage across the inductor is given by,</p>
+<p>$$
+V = L \frac{di}{dt}
+$$</p>
+<p>From KVL, we get,</p>
+<p>$$
+V_s = V
+$$</p>
+<p>Solving $i$ in terms of $V_s$, we get</p>
+<p>$$
+i = i(0) + \int_0^t \frac{V_s}{L} dt
+$$</p>
+<p>If we assume $V_s = 1, t \geq 0$, then</p>
+<p>$$
+i = i(0) + \frac{t}{L}, \quad t \geq 0
+$$</p>
+<p>Thus, the transfer function is</p>
+<p>$$
+\frac{I(s)}{V_s(s)} = \frac{1}{Ls}
+$$</p>
+<p>Since the poles of the system are at $s = 0$, the system is not internally stable.</p>
+<p>We can also see this from the time domain solution.
+If the time goes to infinity, the current will go to infinity.</p>
+<h5 id="example-2">Example 2</h5>
+<p>Let’s add a resistor before the inductor.</p>
+<p><img src="/images/cityu/BME3105/IS2.jpg" alt="">
+<strong>Figure 2:</strong> Circuit with resistor and inductor.</p>
+<p>With KVL we know that,</p>
+<p>$$
+V_s = Ri + L \frac{di}{dt}
+$$</p>
+<p>Thus, the transfer function is</p>
+<p>$$
+\frac{I(s)}{V_s(s)} = \frac{1}{Ls + R}
+$$</p>
+<p>The poles of the system are at $s = -\frac{R}{L}$.
+Since both $R$ and $L$ are positive, the poles are negative, and the system is internally stable.</p>
+<h5 id="example-3">Example 3</h5>
+<p>Now, let’s combine these two circuits and also find the state space equations for it.</p>
+<p><img src="/images/cityu/BME3105/IS3.jpg" alt="">
+<strong>Figure 3:</strong> Combined circuit.</p>
+<p>From KVL, we get</p>
+<p>$$
+\begin{align*}
+L_1 \frac{di_1}{dt} = V_s \newline
+R i_2 + L_2 \frac{di_2}{dt} = V_s
+\end{align*}
+$$</p>
+<p>Let $x = \begin{bmatrix} x_1 \newline x_2 \end{bmatrix} = \begin{bmatrix} i_1 \newline i_2 \end{bmatrix}$, then the state space equations are</p>
+<p>$$
+\begin{align*}
+\begin{bmatrix} \dot{x_1} \newline \dot{x_2} \end{bmatrix} &#x26;= \begin{bmatrix} 0 &#x26; 0 \newline 0 &#x26; -\frac{R}{L_2} \end{bmatrix} \begin{bmatrix} x_1 \newline x_2 \end{bmatrix} + \begin{bmatrix} \frac{1}{L_1} \newline \frac{1}{L_2} \end{bmatrix} V_s \newline
+y &#x26;= \begin{bmatrix} 1 &#x26; 0 \end{bmatrix} \begin{bmatrix} x_1 \newline x_2 \end{bmatrix}
+\end{align*}
+$$</p>
+<p>We can see that $F = \begin{bmatrix} 0 &#x26; 0 \newline 0 &#x26; -\frac{R}{L_2} \end{bmatrix}$.</p>
+<p>Remember that the eigenvalues of a matrix can be found by,</p>
+<p>$$
+\begin{align*}
+\det(F - \lambda I) &#x26;= 0 \newline
+\det\left(\begin{bmatrix} -\lambda &#x26; 0 \newline 0 &#x26; -\frac{R}{L_2} - \lambda \end{bmatrix}\right) &#x26;= 0 \newline
+\lambda^2 + \frac{R}{L_2} \lambda &#x26;= 0 \newline
+\lambda(\lambda + \frac{R}{L_2}) &#x26;= 0
+\lambda_0 = 0, \lambda_1 = -\frac{R}{L_2}
+\end{align*}
+$$</p>
+<p>Since we have one eigenvalue which is not negative, the system is not internally stable.</p>
+<h3 id="state-feedback-control">State Feedback Control</h3>
+<p>Given the LTI system,</p>
+<p>$$
+\begin{align*}
+\dot{x} &#x26;= Fx + Gu \quad x(0) = x_0, t \geq 0 \newline
+y &#x26;= Hx + Ju
+\end{align*}
+$$</p>
+<p>where $F \in \mathbb{R}^{n \times n}$, $G \in \mathbb{R}^{n \times m}$, $H \in \mathbb{R}^{p \times m}$, and $J \in \mathbb{R}^{p \times m}$.</p>
+<p>The <strong>control law</strong> of the form</p>
+<p>$$
+u = -Kx + Mr, K \in \mathbb{R}^{m \times n}, M \in \mathbb{R}^{m \times m},
+$$</p>
+<p>is called a <strong>state feedback control</strong>.</p>
+<p>If we substitute the control law into the state space equations, we get</p>
+<p>$$
+\begin{align*}
+\dot{x} &#x26;= (F - GK)x + GMr = F_cx + G_c r \newline
+y &#x26;= Hx + Ju
+\end{align*}
+$$</p>
+<p>whihc is called the <strong>closed-loop system</strong> under the state feedback control.</p>
+<p><strong>Remark</strong></p>
+<ol>
+<li>$K$ and $M$ can modify $F$ and $G$, thus the behavior of the entire system.</li>
+<li>$K$ is called the <strong>feedback</strong> gain. It can be used to <em>stabilize</em> the system and modify the <em>trasnient</em> response.</li>
+<li>$M$ is called the <strong>feedforward</strong> gain. It can be used for <em>tracking and disturbance rejection</em> and modify the <em>steady state</em> response.</li>
+<li>The state space equation above is called the state feedback since the state is the feedback signal.</li>
+</ol>
+<h3 id="state-feedback-stabilization">State Feedback Stabilization</h3>
+<p>Let’s first look at this when we have $r = 0$. In other words,</p>
+<p>$$
+u = -Kx
+$$</p>
+<p>and the closed loop system becomes,</p>
+<p>$$
+\dot{x} = (F - GK)x
+$$</p>
+<p>We denote the $n$ eigenvalues of the matrix $F - GK$ with $\lambda_I(F - GK), i = 1, 2, \ldots, n$.</p>
+<p>Then, the system is said to be internally stable if and only if,</p>
+<p>$$
+\Re(\lambda_i(F - GK)) &#x3C; 0, \quad i = 1, 2, \ldots, n,
+$$</p>
+<p>where $\Re(\lambda_i)$ denotes the real part of the eigenvalue $\lambda_i$.</p>
+<p>We call the problem of fidning $K \in \mathbb{R}^{m \times n}$ subject to the above as the <strong>state feedback stabilization problem</strong>.</p>
+<h4 id="eigenvalue-placement-problem">Eigenvalue Placement Problem</h4>
+<p>Before we figure out how we find (and place) our eigenvalues, let us make some preparations.</p>
+<ol>
+<li>
+<p>Let $\lambda = x + iy$ be a complex number where $i = \sqrt{-1}$. Then the <em>complex conjugate</em> of $\lambda$ is a complex number $x - iy$ denoted by $\bar{\lambda}$.</p>
+</li>
+<li>
+<p>As set of $n$ complex numbers $\{\lambda_{d_1}, \lambda_{d_2}, \ldots, \lambda_{d_n}\}$ is said to be <em>self-conjugate</em> if and only if,
+$$
+\lambda \in \{\lambda_{d_1}, \lambda_{d_2}, \ldots, \lambda_{d_n}\} \Rightarrow \bar{\lambda} \in \{\lambda_{d_1}, \lambda_{d_2}, \ldots, \lambda_{d_n}\}
+$$</p>
+</li>
+<li>
+<p>If $\lambda$ is a root of a polynomial with real coefficients, so is $\bar{\lambda}$.</p>
+</li>
+</ol>
+<p>Now, for the problem.</p>
+<blockquote>
+<p>Given a set of $n$ self-conjugate complex numbers $\{\lambda_{d_1}, \lambda_{d_2}, \ldots, \lambda_{d_n}\}$, find $K \in \mathbb{R}^{m \times n}$ such that,
+$$
+\{\lambda_i(F - GK), i = 1, 2, \ldots, n\} = \{\lambda_{d_1}, \lambda_{d_2}, \ldots, \lambda_{d_n}\}
+$$</p>
+</blockquote>
+<blockquote>
+<p>If all $\lambda_{d_1}, \lambda_{d_2}, \ldots, \lambda_{d_n}$ are chosen such that they have negative real parts, then the solution of the eigenvalue placement problem leads to the solution of the state feedback stabilization problem.</p>
+</blockquote>
+<p>Let,</p>
+<p>$$
+\begin{align*}
+q(s) &#x26; = (s - \lambda_{d_1}) \ldots (s - \lambda_{d_n}) \newline
+&#x26; = s^n + \alpha_1 s^{n-1} + \ldots + \alpha_{n-1} s + \alpha_n
+\end{align*}
+$$</p>
+<p>Then the eigenvalue placement problem is equivalent to that of finding $K \in \mathbb{R}^{m \times n}$ such that,</p>
+<p>$$
+\det(sI - (F - GK)) = q(s)
+$$</p>
+<p>We will only focus on single input systems, i.e., $m = 1$.</p>
+<h4 id="ackermanns-formula">Ackermann’s Formula</h4>
+<p>Let $q(s) = s^n + \alpha_1 s^{n-1} + \ldots + \alpha_{n-1} s + \alpha_n$ be the desired polynomial.</p>
+<blockquote>
+<p>Assume $[F, G]$ is controllable. Then,
+$$
+K = \begin{bmatrix} 0 &#x26; 0 &#x26; \ldots &#x26; 0 &#x26; 1 \end{bmatrix} C^{-1}(F, G) q(F)
+$$</p>
+</blockquote>
+<p>where $q(F) = F^n + \alpha_1 F^{n-1} + \ldots + \alpha_{n-1} F + \alpha_n I$ and $C^{-1}(F, G)$ is the inverse of the controllability matrix.</p>
+<h4 id="example-1">Example</h4>
+<p>Suppose you have a pendulum with frequency $\omega_0$ described by,</p>
+<p>$$
+\dot{x} = \begin{bmatrix} 0 &#x26; 1 \newline -\omega_0^2 &#x26; 0 \end{bmatrix} x + \begin{bmatrix} 0 \newline 1 \end{bmatrix} u
+$$</p>
+<p>Find the control law that places the closed loop eigenvalues of the system at $-2\omega_0$.</p>
+<p>Since we have a double pole, the desired polynomial is,</p>
+<p>$$
+q(s) = (s + 2\omega_0)^2 = s^2 + 4\omega_0 s + 4\omega_0^2
+$$</p>
+<h5 id="ackermanns-formula-1">Ackermann’s Formula</h5>
+<p>Since we have a system of order two, the controllability matrix is,</p>
+<p>$$
+C(F, G) = \begin{bmatrix} G &#x26; FG \end{bmatrix}
+$$</p>
+<p>Firstly, let’s find $FG$,</p>
+<p>$$
+FG =
+\begin{bmatrix}
+1 \newline
+0
+\end{bmatrix}
+$$</p>
+<p>Then, we can find $C(F, G)$,</p>
+<p>$$
+C(F, G) =
+\begin{bmatrix}
+0 &#x26; 1 \newline
+1 &#x26; 0
+\end{bmatrix}
+$$</p>
+<p>Now, we can find the inverse of $C(F, G)$,</p>
+<p>$$
+C^{-1}(F, G) =
+\begin{bmatrix}
+0 &#x26; 1 \newline
+1 &#x26; 0
+\end{bmatrix}
+$$</p>
+<p>Now, for $q(F)$, we need to find $F^2$,</p>
+<p>$$
+F^2 =
+\begin{bmatrix}
+-\omega_0^2 &#x26; 0 \newline
+0 &#x26; -\omega_0^2
+\end{bmatrix}
+$$</p>
+<p>Then, we can find $q(F)$,
+$$
+\begin{align*}
+q(F) &#x26;= F^2 + 4\omega_0 F + 4\omega_0^2 I \newline
+&#x26;=
+\begin{bmatrix}
+-\omega_0^2 &#x26; 0 \newline
+0 &#x26; -\omega_0^2
+\end{bmatrix} + 4\omega_0
+\begin{bmatrix}
+0 &#x26; 1 \newline
+-\omega_0^2 &#x26; 0
+\end{bmatrix} + 4\omega_0^2 I \newline
+&#x26;=
+\begin{bmatrix}
+3\omega_0^2 &#x26; 4\omega_0 \newline
+-4\omega_0^3 &#x26; 3\omega_0^2
+\end{bmatrix}
+\end{align*}
+$$</p>
+<p>Which finally means,</p>
+<p>$$
+K =
+\begin{bmatrix} 0 &#x26; 1 \end{bmatrix}
+\begin{bmatrix}
+0 &#x26; 1 \newline
+1 &#x26; 0
+\end{bmatrix}
+\begin{bmatrix}
+3\omega_0^2 &#x26; 4\omega_0 \newline
+-4\omega_0^3 &#x26; 3\omega_0^2
+\end{bmatrix} =
+\begin{bmatrix}
+3\omega_0^2 &#x26; 4\omega_0
+\end{bmatrix}
+$$</p>
+<h5 id="direct-method">Direct Method</h5>
+<p>Let $K = \begin{bmatrix} k_1 &#x26; k_2 \end{bmatrix}$. Then,</p>
+<p>$$
+F - GK =
+\begin{bmatrix}
+0 &#x26; 1 \newline
+-\omega_0^2 &#x26; 0
+\end{bmatrix} -
+\begin{bmatrix}
+0 \newline
+1
+\end{bmatrix}
+\begin{bmatrix} k_1 &#x26; k_2 \end{bmatrix} =
+\begin{bmatrix}
+0 &#x26; 1 \newline
+-\omega_0^2 - k_1 &#x26; -k_2
+\end{bmatrix}
+$$</p>
+<p>For the matrix equation $sI - (F - GK)$, we get</p>
+<p>$$
+sI - (F - GK) =
+\begin{bmatrix}
+s &#x26; -1 \newline
+\omega_0^2 + k_1 &#x26; s + k_2
+\end{bmatrix}
+$$</p>
+<p>The determinant of this matrix is,</p>
+<p>$$
+\begin{align*}
+\det(sI - (F - GK)) &#x26;= s(s + k_2) - (-1)(\omega_0^2 + k_1) \newline
+&#x26;= s^2 + k_2 s + \omega_0^2 + k_1
+\end{align*}
+$$</p>
+<p>If we compare this with the desired polynomial,</p>
+<p>$$
+s^2 + 4\omega_0 s + 4\omega_0^2
+$$</p>
+<p>we can see that $k_1 = 3\omega_0^2$ and $k_2 = 4\omega_0$.</p>
+<p><strong>Remark</strong></p>
+<ol>
+<li>
+<p>For lower order systems such as $n = 2,3$, the direct method is more convenient.
+Otherwise use built in functions if available.</p>
+</li>
+<li>
+<p>How to decide $q(s)$ or desirable eigenvalues of $(F - GK)$? This is an important question, the locations of the closed loop poles mainly depend on the requirements of transient response such as the rise time, overshoot, and settling time. Also, it is important to achieve a balance between a good system response and control effort.</p>
+</li>
+<li>
+<p>To move the poles a long way requires large gains, which is not always possible.</p>
+</li>
+</ol>
+<h3 id="asymptotic-tracking">Asymptotic Tracking</h3>
+<p>Given a plant,</p>
+<p>$$
+\begin{align*}
+\dot{x} &#x26;= Fx + Gu \quad x(0) = x_0, t \geq 0 \newline
+y &#x26;= Hx + Ju
+\end{align*}
+$$</p>
+<p>where $F \in \mathbb{R}^{n \times n}$, $G \in \mathbb{R}^{n \times m}$, $H \in \mathbb{R}^{p \times n}$, and $J \in \mathbb{R}^{p \times m}$.</p>
+<p>and a reference input $r$, the control law of the form</p>
+<p>$$
+u = -Kx + Mr
+$$</p>
+<p>such that $(F - GK)$ is stable, or in other words $\Re(\lambda_i(F - GK)) &#x3C; 0, i = 1, 2, \ldots, n$. and,
+$lim_{t \to \infty} (y(t) - r(t)) = 0$ is called an <strong>asymptotic tracking control</strong>.</p>
+<h4 id="solution-with-r-constant">Solution with $r$ constant</h4>
+<p>Let $K \in \mathbb{R}^{1 \times n}$ be such that $F - GK$ is stable, and $N_x \in \mathbb{R}^{n \times 1} and N_u \in \mathbb{R}^{1 \times 1}$ be given by,</p>
+<p>$$
+\begin{bmatrix}
+N_x \newline
+N_u
+\end{bmatrix} =
+\begin{bmatrix}
+F &#x26; G \newline
+H &#x26; J
+\end{bmatrix}^{-1}
+\begin{bmatrix}
+\mathbf{0}_{n \times 1} \newline
+1
+\end{bmatrix}
+$$</p>
+<p>This is equivalent to,</p>
+<p>$$
+\begin{align*}
+F N_x + G N_u &#x26;= \mathbf{0}_{n \times 1} \newline
+H N_x + J N_u &#x26;= 1
+\end{align*}
+$$</p>
+<p>Then, the following control law solves the asymptotic tracking problem,</p>
+<p>$$
+u = -Kx + Mr, \quad M = N_u + K N_x
+$$</p>
+<h5 id="proof">Proof</h5>
+<p>Under $u = -Kx + Mr = N_u r - K(x - N_x r)$, the closed loop system satisfies,</p>
+<p>$$
+\begin{align*}
+\dot{x} &#x26;= Fx + GN_u r - GK(x - N_x r) \newline
+&#x26;= F(x - N_x r) + F N_x r 0 G N_u r - GK(x - N_x r) \newline
+&#x26;= (F - GK)(x - N_x r) + (F N_x + G N_u) r \newline
+&#x26;= (F - GK)(x - N_x r)
+\end{align*}
+$$</p>
+<p>Similarly,</p>
+<p>$$
+\begin{align*}
+y &#x26;= Hx + Ju = Hx + J(N_u r - K(x - N_x r)) \newline
+&#x26;= H(x - N_x r) + H N_x r + J N_u r - JK(x - N_x r) \newline
+&#x26;= (H - JK)(x - N_x r) + (H N_x + J N_u) r \newline
+&#x26;= (H - JK)(x - N_x r) + r
+\end{align*}
+$$</p>
+<p>Clearly if $lim_{t \to \infty} (x(t) - N_x r) = 0$, then $lim_{t \to \infty} y(t) = r(t)$.</p>
+<p>But let $z = x - N_x r$, then $\dot{z} = \dot{x} - 0 = \dot{x}$.</p>
+<p>Which means,</p>
+<p>$$
+\dot{z} = (F - GK)z
+$$</p>
+<p>it follows from the stability of $(F - GK)$ that $\lim_{t \to \infty} z(t) = 0$.</p>
+<p>Let $x_{ss} = N_x r$. Then $\lim_{t \to \infty} z(t) = 0$ implies $\lim_{t \to \infty} x(t) = x_{ss}$.</p>
+<p>We call $x_{ss}$ the steady state value of $x$.</p>
+<p><strong>Remark</strong></p>
+<p>It is also possible to obtain an output feedback control law as follows,</p>
+<p>$$
+\begin{align*}
+u &#x26;= -K\hat{x} + Mr \newline
+\dot{\hat{x}} &#x26;= F\hat{x} + Gu + L(y - H\hat{x})
+\end{align*}
+$$</p>
+<p>where $L$ i such taht $(F -LH)$ is stable.</p>
+<p><strong>Remark</strong></p>
+<p>The control law can also be written as follows,</p>
+<p>$$
+\begin{align*}
+u &#x26;= -Kx + Mr = -Kx + (N_u + K N_x)r \newline
+&#x26;= N_u r - K(x - N_x r)
+&#x26;= u_{ss} - k(x - x_{ss})
+\end{align*}
+$$</p>
+<p>where $u_{ss} = N_u r$.</p>
+<p>It can be seen that,</p>
+<p>$$
+\lim_{t \to \infty} u(t) = u_{ss}
+$$</p>
+<p>which is the steady state input.</p>
+<p>When $r = $, $u_{ss} = 0$ and $x_{ss} = 0$.</p>
+<p>the control law becomes,</p>
+<p>$$
+u = -Kx
+$$</p>
+<p>Thus, the stabilization problem is a special case of the asymptotic tracking.</p>
+<h5 id="example-4">Example</h5>
+<p>Given,</p>
+<p>$$
+\begin{align*}
+\dot{x} &#x26;=
+\begin{bmatrix}
+0 &#x26; 1 \newline
+-\omega_0^2 &#x26; 0
+\end{bmatrix} x +
+\begin{bmatrix}
+0 \newline
+1
+\end{bmatrix} u = Fx + Gu \newline
+y &#x26;=
+\begin{bmatrix}
+1 &#x26; 0
+\end{bmatrix} x = Hx
+\end{align*}
+$$</p>
+<p>Find $u = -Kx + Mr$ such that,</p>
+<p>$$
+\det(sI - (F - GK)) = s^2 + 4\omega_0 s + 4\omega_0^2
+$$</p>
+<p>and</p>
+<p>$$
+\lim_{t \to \infty} y(t) = r(t)
+$$</p>
+<p>Let $\omega_0 = 1$.</p>
+<h5 id="solution">Solution</h5>
+<p>As we previously have found $K$ to be,</p>
+<p>$$
+K =
+\begin{bmatrix}
+3\omega_0^2 &#x26; 4\omega_0
+\end{bmatrix} =
+\begin{bmatrix}
+3 &#x26; 4
+\end{bmatrix}
+$$</p>
+<p>Then, we can find $N_x$ and $N_u$ which satisfies,</p>
+<p>$$
+F N_x + G N_u = \mathbf{0}_{2 \times 1}
+$$</p>
+<p>and</p>
+<p>$$
+H N_x + J N_u = 1
+$$</p>
+<p>By solving these equations, we get,</p>
+<p>$$
+N_x =
+\begin{bmatrix}
+1 \newline
+0
+\end{bmatrix}, N_u = 1
+$$</p>
+<p>Then, let $M = N_u + K N_x = 1 + 3 = 4$.</p>
+<p>Thus, the control law is,</p>
+<p>$$
+u = -Kx + Mr = -3x_1 - 4x_2 + 4r
+$$</p> <div class="mt-24"> <div class="grid grid-cols-2 gap-1.5 sm:gap-3"> <a href="/cityu/bme3105/bme3105_7" class="group relative flex flex-nowrap rounded-lg border border-black/15 px-4 py-3 pl-10 no-underline transition-colors duration-300 ease-in-out hover:bg-black/5 hover:text-black focus-visible:bg-black/5 focus-visible:text-black dark:border-white/20 dark:hover:bg-white/5 dark:hover:text-white dark:focus-visible:bg-white/5 dark:focus-visible:text-white"> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="absolute left-2 top-1/2 size-5 -translate-y-1/2 fill-none stroke-current stroke-2"> <line x1="5" y1="12" x2="19" y2="12" class="translate-x-3 scale-x-0 transition-transform duration-300 ease-in-out group-hover:translate-x-0 group-hover:scale-x-100 group-focus-visible:translate-x-0 group-focus-visible:scale-x-100"></line> <polyline points="12 5 5 12 12 19" class="translate-x-1 transition-transform duration-300 ease-in-out group-hover:translate-x-0 group-focus-visible:translate-x-0"></polyline> </svg> <div class="flex items-center text-sm"> Part 7 - State Space Realization </div> </a> <div class="invisible"></div> </div> </div> <div class="mt-24"> <div class="giscus"></div> <script data-astro-rerun src="https://giscus.app/client.js" data-repo="rezaarezvan/rezvan.xyz" data-repo-id="R_kgDOHvQr3w" data-category="General" data-category-id="DIC_kwDOHvQr384CiWVC" data-mapping="pathname" data-strict="0" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="bottom" data-theme="preferred_color_scheme" data-lang="en" data-loading="lazy" crossorigin="anonymous" async></script> </div> </article> </div>  </main> <footer class="animate"> <div class="mx-auto max-w-screen-sm px-3"> <div class="relative"> <div class="absolute -top-12 right-0"> <button id="back-to-top" class="group relative flex w-fit flex-nowrap rounded border border-black/15 py-1.5 pl-8 pr-3 transition-colors duration-300 ease-in-out hover:bg-black/5 hover:text-black focus-visible:bg-black/5 focus-visible:text-black dark:border-white/20 dark:hover:bg-white/5 dark:hover:text-white dark:focus-visible:bg-white/5 dark:focus-visible:text-white"> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="absolute left-2 top-1/2 size-4 -translate-y-1/2 rotate-90 fill-none stroke-current stroke-2"> <line x1="5" y1="12" x2="19" y2="12" class="translate-x-2 scale-x-0 transition-transform duration-300 ease-in-out group-hover:translate-x-0 group-hover:scale-x-100 group-focus-visible:translate-x-0 group-focus-visible:scale-x-100"></line> <polyline points="12 5 5 12 12 19" class="translate-x-1 transition-transform duration-300 ease-in-out group-hover:translate-x-0 group-focus-visible:translate-x-0"></polyline> </svg> <div class="text-sm">Back to top</div> </button> </div> </div> <div class="flex items-center justify-between"> <div>&copy; 2024 • rezvan.xyz </div> <div class="flex flex-wrap items-center gap-1.5"> <button id="light-theme-button" aria-label="Light theme" class="group flex size-9 items-center justify-center rounded border border-black/15 hover:bg-black/5 focus-visible:bg-black/5 dark:border-white/20 dark:hover:bg-white/5 dark:focus-visible:bg-white/5"> <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="transition-colors duration-300 ease-in-out group-hover:animate-pulse group-hover:stroke-black group-focus-visible:animate-pulse group-focus-visible:stroke-black group-hover:dark:stroke-white dark:group-focus-visible:stroke-white"> <circle cx="12" cy="12" r="5"></circle> <line x1="12" y1="1" x2="12" y2="3"></line> <line x1="12" y1="21" x2="12" y2="23"></line> <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line> <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line> <line x1="1" y1="12" x2="3" y2="12"></line> <line x1="21" y1="12" x2="23" y2="12"></line> <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line> <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line> </svg> </button> <button id="dark-theme-button" aria-label="Dark theme" class="group flex size-9 items-center justify-center rounded border border-black/15 hover:bg-black/5 focus-visible:bg-black/5 dark:border-white/20 dark:hover:bg-white/5 dark:focus-visible:bg-white/5"> <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="transition-colors duration-300 ease-in-out group-hover:animate-pulse group-hover:stroke-black group-focus-visible:animate-pulse group-focus-visible:stroke-black group-hover:dark:stroke-white dark:group-focus-visible:stroke-white"> <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path> </svg> </button> <button id="system-theme-button" aria-label="System theme" class="group flex size-9 items-center justify-center rounded border border-black/15 hover:bg-black/5 focus-visible:bg-black/5 dark:border-white/20 dark:hover:bg-white/5 dark:focus-visible:bg-white/5"> <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="transition-colors duration-300 ease-in-out group-hover:animate-pulse group-hover:stroke-black group-focus-visible:animate-pulse group-focus-visible:stroke-black group-hover:dark:stroke-white dark:group-focus-visible:stroke-white"> <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect> <line x1="8" y1="21" x2="16" y2="21"></line> <line x1="12" y1="17" x2="12" y2="21"></line> </svg> </button> </div> </div> </div> </footer> <aside data-pagefind-ignore> <div id="backdrop" class="bg-[rgba(0, 0, 0, 0.5] invisible fixed left-0 top-0 z-50 flex h-screen w-full justify-center p-6 backdrop-blur-sm" data-astro-transition-persist="astro-3snakcvo-2"> <div id="pagefind-container" class="m-0 flex h-fit max-h-[80%] w-full max-w-screen-sm flex-col overflow-auto rounded border border-black/15 bg-neutral-100 p-2 px-4 py-3 shadow-lg dark:border-white/20 dark:bg-neutral-900"> <div id="search" class="pagefind-ui pagefind-init" data-pagefind-ui data-bundle-path="/pagefind/" data-ui-options="{&#34;showImages&#34;:false,&#34;excerptLength&#34;:15,&#34;resetStyles&#34;:false}"></div>  <div class="mr-2 pb-1 pt-4 text-right text-xs dark:prose-invert">
+Press <span class="prose text-xs dark:prose-invert"><kbd class="">Esc</kbd></span> or click anywhere to close
+</div> </div> </div> </aside> <script>
+  const magnifyingGlass = document.getElementById("magnifying-glass");
+  const backdrop = document.getElementById("backdrop");
+
+  function openPagefind() {
+    const searchDiv = document.getElementById("search");
+    const search = searchDiv.querySelector("input");
+    setTimeout(() => {
+      search.focus();
+    }, 0);
+    backdrop?.classList.remove("invisible");
+    backdrop?.classList.add("visible");
+  }
+
+  function closePagefind() {
+    const search = document.getElementById("search");
+    search.value = "";
+    backdrop?.classList.remove("visible");
+    backdrop?.classList.add("invisible");
+  }
+
+  // open pagefind
+  magnifyingGlass?.addEventListener("click", () => {
+    openPagefind();
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "/") {
+      e.preventDefault();
+      openPagefind();
+    } else if ((e.metaKey || e.ctrlKey) && e.key === "k") {
+      e.preventDefault();
+      openPagefind();
+    }
+  });
+
+  // close pagefind
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" || e.keyCode === 27) {
+      closePagefind();
+    }
+  });
+
+  // close pagefind when searched result(link) clicked
+  document.addEventListener("click", (event) => {
+    if (event.target.classList.contains("pagefind-ui__result-link")) {
+      closePagefind();
+    }
+  });
+
+  backdrop?.addEventListener("click", (event) => {
+    if (!event.target.closest("#pagefind-container")) {
+      closePagefind();
+    }
+  });
+
+  // prevent form submission
+  const form = document.getElementById("form");
+  form?.addEventListener("submit", (event) => {
+    event.preventDefault();
+  });
+</script>  </body></html>
