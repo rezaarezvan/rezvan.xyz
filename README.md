@@ -1,4 +1,4 @@
-# rezvan.xyz
+# rezarezvan.com
 
 Personal blog, has gone through many iterations.
 
