@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" type="image/icon" href="/favicon.ico"><meta name="generator" content="Astro v4.16.17"><!-- Canonical URL --><link rel="canonical" href="https://rezvan.xyz/chalmers/tda384/tda384_6/"><!-- Primary Meta Tags --><title>Part 6 &amp; 7 - Message-Passing Concurrency | concurrent programming | rezarezvan.com</title><meta name="title" content="Part 6 &#38; 7 - Message-Passing Concurrency | concurrent programming | rezarezvan.com"><meta name="description"><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://rezvan.xyz/chalmers/tda384/tda384_6/"><meta property="og:title" content="Part 6 &#38; 7 - Message-Passing Concurrency | concurrent programming | rezarezvan.com"><meta property="og:description"><meta property="og:image" content="https://rezvan.xyz/favicon.ico"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://rezvan.xyz/chalmers/tda384/tda384_6/"><meta property="twitter:title" content="Part 6 &#38; 7 - Message-Passing Concurrency | concurrent programming | rezarezvan.com"><meta property="twitter:description"><meta property="twitter:image" content="https://rezvan.xyz/favicon.ico"><!-- PageFind --><link href="/pagefind/pagefind-ui.css" rel="stylesheet"><script src="/pagefind/pagefind-ui.js"></script><!-- KaTeX support --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script><!-- inline KaTeX --><script>
+<!DOCTYPE html><html lang="en"> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" type="image/icon" href="/favicon.ico"><meta name="generator" content="Astro v5.0.5"><!-- Canonical URL --><link rel="canonical" href="https://rezvan.xyz/chalmers/tda384/tda384_6/"><!-- Primary Meta Tags --><title>Part 6 &amp; 7 - Message-Passing Concurrency | concurrent programming | rezarezvan.com</title><meta name="title" content="Part 6 &#38; 7 - Message-Passing Concurrency | concurrent programming | rezarezvan.com"><meta name="description"><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://rezvan.xyz/chalmers/tda384/tda384_6/"><meta property="og:title" content="Part 6 &#38; 7 - Message-Passing Concurrency | concurrent programming | rezarezvan.com"><meta property="og:description"><meta property="og:image" content="https://rezvan.xyz/favicon.ico"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://rezvan.xyz/chalmers/tda384/tda384_6/"><meta property="twitter:title" content="Part 6 &#38; 7 - Message-Passing Concurrency | concurrent programming | rezarezvan.com"><meta property="twitter:description"><meta property="twitter:image" content="https://rezvan.xyz/favicon.ico"><!-- PageFind --><link href="/pagefind/pagefind-ui.css" rel="stylesheet"><script src="/pagefind/pagefind-ui.js"></script><!-- KaTeX support --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script><!-- inline KaTeX --><script>
     function renderKaTeX() {
         if (typeof renderMathInElement !== "undefined") {
             renderMathInElement(document.body, {
@@ -12,7 +12,7 @@
 
     document.addEventListener("DOMContentLoaded", renderKaTeX);
     document.addEventListener("astro:after-swap", renderKaTeX);
-</script><meta name="astro-view-transitions-enabled" content="true"><meta name="astro-view-transitions-fallback" content="animate"><script>
+</script><meta name="astro-view-transitions-enabled" content="true"><meta name="astro-view-transitions-fallback" content="animate"><script type="module" src="/_astro/ClientRouter.astro_astro_type_script_index_0_lang.BScVxmeO.js"></script><script>
     function init() {
         preloadTheme();
         onScroll();
@@ -216,7 +216,8 @@
     preloadTheme();
 </script><link rel="stylesheet" href="/_astro/_subject_.BiiDyz4N.css">
 <style>summary[data-astro-cid-xvrfupwn]{cursor:pointer;border-top-left-radius:.5rem;border-top-right-radius:.5rem;padding:.375rem .75rem;font-weight:500;transition-property:color,background-color,border-color,text-decoration-color,fill,stroke;transition-timing-function:cubic-bezier(.4,0,.2,1);transition-duration:.15s}summary[data-astro-cid-xvrfupwn]:hover{background-color:#0000000d}summary[data-astro-cid-xvrfupwn]:hover:is(.dark *){background-color:#ffffff0d}details[data-astro-cid-xvrfupwn][open] summary[data-astro-cid-xvrfupwn]{background-color:#0000000d}details[data-astro-cid-xvrfupwn][open] summary[data-astro-cid-xvrfupwn]:is(.dark *){background-color:#ffffff0d}
-</style><script type="module" src="/_astro/hoisted.DU8ikvBN.js"></script></head> <body> <header data-astro-transition-persist="astro-l7r54iwe-1"> <div class="mx-auto max-w-screen-sm px-3"> <div class="flex flex-wrap justify-between gap-y-2"> <a href="/" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out">  <div class="font-semibold"> rezarezvan.com </div>  </a> <nav class="flex items-center gap-1 text-sm"> <a href="/posts" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> posts </a> <span> / </span> <a href="/chalmers" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> chalmers </a> <span> / </span> <a href="/cityu" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> cityu </a> <span> / </span> <a href="/pdf/cv/cv.pdf" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> cv </a> <span> / </span> <button id="magnifying-glass" aria-label="Search" class="flex items-center rounded border border-black/15 bg-neutral-100 px-2 py-1 text-xs transition-colors duration-300 ease-in-out hover:bg-black/5 hover:text-black focus-visible:bg-black/5 focus-visible:text-black dark:border-white/20 dark:bg-neutral-900 dark:hover:bg-white/5 dark:hover:text-white dark:focus-visible:bg-white/5 dark:focus-visible:text-white"> <svg height="16" stroke-linejoin="round" viewBox="0 0 16 16" width="16" style="color: currentcolor;"><path fill-rule="evenodd" clip-rule="evenodd" d="M3.5 7C3.5 5.067 5.067 3.5 7 3.5C8.933 3.5 10.5 5.067 10.5 7C10.5 7.88461 10.1718 8.69256 9.63058 9.30876L9.30876 9.63058C8.69256 10.1718 7.88461 10.5 7 10.5C5.067 10.5 3.5 8.933 3.5 7ZM9.96544 11.0261C9.13578 11.6382 8.11014 12 7 12C4.23858 12 2 9.76142 2 7C2 4.23858 4.23858 2 7 2C9.76142 2 12 4.23858 12 7C12 8.11014 11.6382 9.13578 11.0261 9.96544L14.0303 12.9697L14.5607 13.5L13.5 14.5607L12.9697 14.0303L9.96544 11.0261Z" fill="currentColor"></path></svg>
+[data-astro-image]{width:100%;height:auto;-o-object-fit:var(--fit);object-fit:var(--fit);-o-object-position:var(--pos);object-position:var(--pos);aspect-ratio:var(--w) / var(--h)}[data-astro-image=responsive]{max-width:calc(var(--w) * 1px);max-height:calc(var(--h) * 1px)}[data-astro-image=fixed]{width:calc(var(--w) * 1px);height:calc(var(--h) * 1px)}
+</style></head> <body> <header data-astro-transition-persist="astro-l7r54iwe-1"> <div class="mx-auto max-w-screen-sm px-3"> <div class="flex flex-wrap justify-between gap-y-2"> <a href="/" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out">  <div class="font-semibold"> rezarezvan.com </div>  </a> <nav class="flex items-center gap-1 text-sm"> <a href="/posts" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> posts </a> <span> / </span> <a href="/chalmers" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> chalmers </a> <span> / </span> <a href="/cityu" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> cityu </a> <span> / </span> <a href="/pdf/cv/cv.pdf" target="_self" class="inline-block decoration-black/30 dark:decoration-white/30 hover:decoration-black/50 focus-visible:decoration-black/50 dark:hover:decoration-white/50 dark:focus-visible:decoration-white/50 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-300 ease-in-out underline underline-offset-[3px]"> cv </a> <span> / </span> <button id="magnifying-glass" aria-label="Search" class="flex items-center rounded border border-black/15 bg-neutral-100 px-2 py-1 text-xs transition-colors duration-300 ease-in-out hover:bg-black/5 hover:text-black focus-visible:bg-black/5 focus-visible:text-black dark:border-white/20 dark:bg-neutral-900 dark:hover:bg-white/5 dark:hover:text-white dark:focus-visible:bg-white/5 dark:focus-visible:text-white"> <svg height="16" stroke-linejoin="round" viewBox="0 0 16 16" width="16" style="color: currentcolor;"><path fill-rule="evenodd" clip-rule="evenodd" d="M3.5 7C3.5 5.067 5.067 3.5 7 3.5C8.933 3.5 10.5 5.067 10.5 7C10.5 7.88461 10.1718 8.69256 9.63058 9.30876L9.30876 9.63058C8.69256 10.1718 7.88461 10.5 7 10.5C5.067 10.5 3.5 8.933 3.5 7ZM9.96544 11.0261C9.13578 11.6382 8.11014 12 7 12C4.23858 12 2 9.76142 2 7C2 4.23858 4.23858 2 7 2C9.76142 2 12 4.23858 12 7C12 8.11014 11.6382 9.13578 11.0261 9.96544L14.0303 12.9697L14.5607 13.5L13.5 14.5607L12.9697 14.0303L9.96544 11.0261Z" fill="currentColor"></path></svg>
 &nbsp;Search
 </button> </nav> </div> </div> </header> <main>  <div class="mx-auto max-w-screen-sm px-3"> <div class="animate"> <a href="/chalmers/tda384" class="not-prose group relative flex w-fit flex-nowrap rounded border border-black/15 py-1.5 pl-7 pr-3 transition-colors duration-300 ease-in-out hover:bg-black/5 hover:text-black focus-visible:bg-black/5 focus-visible:text-black dark:border-white/20 dark:hover:bg-white/5 dark:hover:text-white dark:focus-visible:bg-white/5 dark:focus-visible:text-white"> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="absolute left-2 top-1/2 size-4 -translate-y-1/2 fill-none stroke-current stroke-2"> <line x1="5" y1="12" x2="19" y2="12" class="translate-x-2 scale-x-0 transition-transform duration-300 ease-in-out group-hover:translate-x-0 group-hover:scale-x-100 group-focus-visible:translate-x-0 group-focus-visible:scale-x-100"></line> <polyline points="12 5 5 12 12 19" class="translate-x-1 transition-transform duration-300 ease-in-out group-hover:translate-x-0 group-focus-visible:translate-x-0"></polyline> </svg> <div class="text-sm"> Back to concurrent programming </div> </a> </div> <div class="my-10 space-y-1"> <div class="animate flex items-center gap-1.5"> <div class="font-base text-sm"> TDA384 </div>
 &bull;
@@ -235,17 +236,15 @@ specifically, <em>message-passing</em> concurrency.</p>
 The message-passing part is concurrent and implements the <em>actor model</em>, where Erlang processes are actors.</p>
 <p>This post won’t cover functional languages in general, so I hope you remember good ‘ol Haskell.</p>
 <p>Let’s look at a little code snippet from Erlang:</p>
-<pre class="astro-code css-variables" style="background-color:var(--astro-code-color-background);color:var(--astro-code-color-text); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>-module(power).</span></span>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>-module(power).</span></span>
 <span class="line"><span>-export([power/2]).</span></span>
 <span class="line"><span></span></span>
 <span class="line"><span>power(X, 0) -> 1;</span></span>
-<span class="line"><span>power(X, N) -> X * power(X, N - 1).</span></span>
-<span class="line"><span></span></span></code></pre>
+<span class="line"><span>power(X, N) -> X * power(X, N - 1).</span></span></code></pre>
 <p>Then if we enter the erl shell by <code>erl</code> and doing:</p>
-<pre class="astro-code css-variables" style="background-color:var(--astro-code-color-background);color:var(--astro-code-color-text); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>c(power).</span></span>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>c(power).</span></span>
 <span class="line"><span></span></span>
-<span class="line"><span>power:power(2, 3).</span></span>
-<span class="line"><span></span></span></code></pre>
+<span class="line"><span>power:power(2, 3).</span></span></code></pre>
 <p>We see the output 8!</p>
 <h3 id="types-in-erlang">Types in Erlang</h3>
 <p>Erlang has 8 primitives types and 5 compound types:</p>
@@ -343,26 +342,23 @@ Instead, the <em>atoms</em> <code>true</code> and <code>false</code> are used fo
 which are the “normal” equal we associate with.</p>
 <h3 id="order-between-types">Order between types</h3>
 <p>In Erlang, types have a distinct order relation:</p>
-<pre class="astro-code css-variables" style="background-color:var(--astro-code-color-background);color:var(--astro-code-color-text); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>number &#x3C; atom &#x3C; reference &#x3C; funs &#x3C; port &#x3C; pid &#x3C; tuple &#x3C; map &#x3C; list</span></span>
-<span class="line"><span></span></span></code></pre>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>number &#x3C; atom &#x3C; reference &#x3C; funs &#x3C; port &#x3C; pid &#x3C; tuple &#x3C; map &#x3C; list</span></span></code></pre>
 <p>Which means that for example:
 <code>3 &#x3C; true</code> is true.</p>
 <h3 id="tuples">Tuples</h3>
 <p>Tuples are written like this in Erlang:</p>
-<pre class="astro-code css-variables" style="background-color:var(--astro-code-color-background);color:var(--astro-code-color-text); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>{ }</span></span>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>{ }</span></span>
 <span class="line"><span>{10, 12, 98}</span></span>
 <span class="line"><span>{8.88, false, aToM}</span></span>
-<span class="line"><span>{10, {-1, true}}</span></span>
-<span class="line"><span></span></span></code></pre>
+<span class="line"><span>{10, {-1, true}}</span></span></code></pre>
 <p>They are also 1-indexed.</p>
 <h3 id="lists">Lists</h3>
-<pre class="astro-code css-variables" style="background-color:var(--astro-code-color-background);color:var(--astro-code-color-text); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>[ ]</span></span>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>[ ]</span></span>
 <span class="line"><span>[10, 12, 98]</span></span>
 <span class="line"><span>[8.88, false, aToM]</span></span>
-<span class="line"><span>[10, [-1, true]]</span></span>
-<span class="line"><span></span></span></code></pre>
+<span class="line"><span>[10, [-1, true]]</span></span></code></pre>
 <p>They have the following nice operators as well:</p>
-<pre class="astro-code css-variables" style="background-color:var(--astro-code-color-background);color:var(--astro-code-color-text); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>% A copy of L with H added as head element</span></span>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>% A copy of L with H added as head element</span></span>
 <span class="line"><span>[H | L]</span></span>
 <span class="line"><span></span></span>
 <span class="line"><span>% Get head element</span></span>
@@ -373,41 +369,36 @@ which are the “normal” equal we associate with.</p>
 <span class="line"><span></span></span>
 <span class="line"><span>% Concatenation and deletion</span></span>
 <span class="line"><span>L1 ++ L2</span></span>
-<span class="line"><span>L1 -- L2</span></span>
-<span class="line"><span></span></span></code></pre>
+<span class="line"><span>L1 -- L2</span></span></code></pre>
 <h3 id="records">Records</h3>
 <p>Records are ordered sequences with a fixed number of elements, where each element has an
 atom as name</p>
 <ul>
 <li>Records are just syntactic sugar for tuples where positions are named</li>
 </ul>
-<pre class="astro-code css-variables" style="background-color:var(--astro-code-color-background);color:var(--astro-code-color-text); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>-record(person, { name="add name", age })</span></span>
-<span class="line"><span></span></span></code></pre>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>-record(person, { name="add name", age })</span></span></code></pre>
 <h3 id="multiple-expressions">Multiple expressions</h3>
 <p>The <code>,</code> operator in Erlang makes it so we can combine expressions, for example:</p>
-<pre class="astro-code css-variables" style="background-color:var(--astro-code-color-background);color:var(--astro-code-color-text); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>% Evalutes 3 &#x3C; 0 and returns 2</span></span>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>% Evalutes 3 &#x3C; 0 and returns 2</span></span>
 <span class="line"><span>3 &#x3C; 0, 2.</span></span>
 <span class="line"><span></span></span>
 <span class="line"><span>% Evaluates 3 + true and fails (because of 3 + true)</span></span>
 <span class="line"><span>3 + true, 2.</span></span>
 <span class="line"><span></span></span>
 <span class="line"><span>% Binds 10 to R, binds 3.14 to Pi, returns 62.8...</span></span>
-<span class="line"><span>R = 10, Pi = 3.14, 2*Pi*R.</span></span>
-<span class="line"><span></span></span></code></pre>
+<span class="line"><span>R = 10, Pi = 3.14, 2*Pi*R.</span></span></code></pre>
 <h3 id="modules">Modules</h3>
 <p>In our power example you may have noticed the <code>module</code> and <code>export</code> keywords.</p>
-<pre class="astro-code css-variables" style="background-color:var(--astro-code-color-background);color:var(--astro-code-color-text); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>-module(foo).</span></span>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>-module(foo).</span></span>
 <span class="line"><span>-export([bar/1, baz/0]).</span></span>
 <span class="line"><span></span></span>
 <span class="line"><span>bar(X) -> X.</span></span>
-<span class="line"><span>baz()  -> 0.</span></span>
-<span class="line"><span></span></span></code></pre>
+<span class="line"><span>baz()  -> 0.</span></span></code></pre>
 <p>As you can the, <code>f/n</code>, declares the function name and number of parameters (or arity n, with patterns).</p>
 <h3 id="guards">Guards</h3>
 <p>This is something we should be familiar with from Haskell:</p>
-<pre class="astro-code css-variables" style="background-color:var(--astro-code-color-background);color:var(--astro-code-color-text); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>can_drive(Name, Age) when Age >= 18 -> Name ++ " can drive";</span></span>
-<span class="line"><span>can_drive(Name, _) -> Name ++ " cannot drive".</span></span>
-<span class="line"><span></span></span></code></pre>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>can_drive(Name, Age) when Age >= 18 -> Name ++ " can drive";</span></span>
+<span class="line"><span>can_drive(Name, _) -> Name ++ " cannot drive".</span></span></code></pre>
 <p>Erlang is very similar to Haskell in its clauses, gaurds, pattern matchings.
 Since it’s functional as well, we can pass around functions as values, but also remember higher-order functions etc etc.</p>
 <p>This is mostly so, I remember the Erlang syntax itself, and not a post on functional languages as I said :).</p>
@@ -463,41 +454,36 @@ Since it’s functional as well, we can pass around functions as values, but als
 it is identified by its PID (Process identifier) and executes its behavioral function, <code>f</code>, (which is passed as a parameter into <code>spawn</code>).
 When the function terminates the process <code>ends</code>.</p>
 <p>Let’s take a look at the <code>spawn</code> function:</p>
-<pre class="astro-code css-variables" style="background-color:var(--astro-code-color-background);color:var(--astro-code-color-text); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>spawn(M, F, Args)</span></span>
-<span class="line"><span></span></span></code></pre>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>spawn(M, F, Args)</span></span></code></pre>
 <p>When creating a process, the newly created process runs the function <code>F</code> in module <code>M</code> with arguments <code>Args</code>.</p>
 <p>Let’s look at an example:</p>
-<pre class="astro-code css-variables" style="background-color:var(--astro-code-color-background);color:var(--astro-code-color-text); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>-module(procs).</span></span>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>-module(procs).</span></span>
 <span class="line"><span></span></span>
 <span class="line"><span>print_sum(X,Y) -></span></span>
 <span class="line"><span>    io:format("~p~n", [X+Y]).</span></span>
 <span class="line"><span></span></span>
-<span class="line"><span>compute_sum(X,Y) -> X + Y.</span></span>
-<span class="line"><span></span></span></code></pre>
+<span class="line"><span>compute_sum(X,Y) -> X + Y.</span></span></code></pre>
 <p>then in the shell we just do:</p>
-<pre class="astro-code css-variables" style="background-color:var(--astro-code-color-background);color:var(--astro-code-color-text); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>spawn(procs, print_sum, [3, 4]).</span></span>
-<span class="line"><span></span></span></code></pre>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>spawn(procs, print_sum, [3, 4]).</span></span></code></pre>
 <p>And we should see the result <code>7</code>.</p>
 <p>Messages are as simple, typically a message is the result of evaluting an expression:</p>
-<pre class="astro-code css-variables" style="background-color:var(--astro-code-color-background);color:var(--astro-code-color-text); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>Pid ! Message</span></span>
-<span class="line"><span></span></span></code></pre>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>Pid ! Message</span></span></code></pre>
 <p>This sends the evaluation, <code>T</code>, of <code>Message</code> to the process with PID, <code>Pid</code>, and returns <code>T</code> as a result.</p>
 <p>Note that the, <code>!</code>, or “bang” operator is <em>right-associative</em></p>
 <h3 id="mailboxes">Mailboxes</h3>
 <p>Every process has a mailbox, this is how it becomes asynchronous,
 a process never needs to wait to read a message, we only need to check our mailbox.</p>
 <p>To check a process with Pid, <code>Pid</code>, we can use:</p>
-<pre class="astro-code css-variables" style="background-color:var(--astro-code-color-background);color:var(--astro-code-color-text); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>% How many elements are in the mailbox</span></span>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>% How many elements are in the mailbox</span></span>
 <span class="line"><span>process_info(Pid, message_queue_len)</span></span>
 <span class="line"><span></span></span>
 <span class="line"><span>% List of messages in the mailbox (oldest to newest)</span></span>
 <span class="line"><span>process_info(Pid, messages)</span></span>
 <span class="line"><span></span></span>
 <span class="line"><span>% Empty the current process's mailbox</span></span>
-<span class="line"><span>flush()</span></span>
-<span class="line"><span></span></span></code></pre>
+<span class="line"><span>flush()</span></span></code></pre>
 <p>For example:</p>
-<pre class="astro-code css-variables" style="background-color:var(--astro-code-color-background);color:var(--astro-code-color-text); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>% Send 'hello' twice to self</span></span>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>% Send 'hello' twice to self</span></span>
 <span class="line"><span>self() ! self() ! hello.</span></span>
 <span class="line"><span></span></span>
 <span class="line"><span>% send 'world' to self</span></span>
@@ -505,25 +491,22 @@ a process never needs to wait to read a message, we only need to check our mailb
 <span class="line"><span></span></span>
 <span class="line"><span>process_info(self(), message).</span></span>
 <span class="line"><span></span></span>
-<span class="line"><span>> {messages, [hello, hello, world]}</span></span>
-<span class="line"><span></span></span></code></pre>
+<span class="line"><span>> {messages, [hello, hello, world]}</span></span></code></pre>
 <p>To <em>receive</em> a message, we can use the <code>receive</code> expression:</p>
-<pre class="astro-code css-variables" style="background-color:var(--astro-code-color-background);color:var(--astro-code-color-text); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>receive</span></span>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>receive</span></span>
 <span class="line"><span>    P1 when C1 -> E1;</span></span>
 <span class="line"><span>        .</span></span>
 <span class="line"><span>        .</span></span>
 <span class="line"><span>        .</span></span>
 <span class="line"><span>    PN when CN -> EN</span></span>
-<span class="line"><span>end</span></span>
-<span class="line"><span></span></span></code></pre>
+<span class="line"><span>end</span></span></code></pre>
 <p>Evaluating the <code>recieve</code> expression, selects the <strong>oldest</strong> message in our mailbox, that matches the pattern.
 If we don’t find any match we <em>block</em> until a suitable message arrives.</p>
 <p>For example, a simple echo function:</p>
-<pre class="astro-code css-variables" style="background-color:var(--astro-code-color-background);color:var(--astro-code-color-text); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>echo() -></span></span>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>echo() -></span></span>
 <span class="line"><span>    recieve Msg -> io:format("Receive: ~p~n", [Msg]) end.</span></span>
 <span class="line"><span>    % To make this permanent we just do this:</span></span>
-<span class="line"><span>    echo().</span></span>
-<span class="line"><span></span></span></code></pre>
+<span class="line"><span>    echo().</span></span></code></pre>
 <p>Note that Erlang’s runtime only provides weak guarantees of message delivery <em>order</em>.
 So it’s not guaranteed that the messages are received in the same order as sent.
 This is in the case when sending to multiple <em>different</em> processes, if we are only sending to a single process, the order will be the same.</p>
@@ -532,7 +515,7 @@ This is in the case when sending to multiple <em>different</em> processes, if we
 thus we need to store the state information using arguments.</p>
 <p>These values gets updates by the recursive calls used to make a process permanently running.</p>
 <p>An example makes this clear, let’s implement our beloved counter program:</p>
-<pre class="astro-code css-variables" style="background-color:var(--astro-code-color-background);color:var(--astro-code-color-text); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>base_counter(N) -></span></span>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>base_counter(N) -></span></span>
 <span class="line"><span>recieve {From, Command} -> case Command of</span></span>
 <span class="line"><span>    increment -> base_counter(N + 1);</span></span>
 <span class="line"><span></span></span>
@@ -540,8 +523,7 @@ thus we need to store the state information using arguments.</p>
 <span class="line"><span>                 base_counter(N);</span></span>
 <span class="line"><span></span></span>
 <span class="line"><span>    % Unrecongnized command</span></span>
-<span class="line"><span>    U         -> io:format("? ~p~n", [U])</span></span>
-<span class="line"><span></span></span></code></pre>
+<span class="line"><span>    U         -> io:format("? ~p~n", [U])</span></span></code></pre>
 <h3 id="clients-and-servers">Clients and servers</h3>
 <p>The client/server architecture is widely used, so let’s go!</p>
 <ol>
@@ -569,7 +551,7 @@ thus we need to store the state information using arguments.</p>
 </ul>
 <h3 id="math-server">Math server</h3>
 <p>Let’s make a simple math server:</p>
-<pre class="astro-code css-variables" style="background-color:var(--astro-code-color-background);color:var(--astro-code-color-text); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>% Interface for the server/commands</span></span>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>% Interface for the server/commands</span></span>
 <span class="line"><span></span></span>
 <span class="line"><span>start(): start a math server, and return the server's PID</span></span>
 <span class="line"><span></span></span>
@@ -577,10 +559,9 @@ thus we need to store the state information using arguments.</p>
 <span class="line"><span></span></span>
 <span class="line"><span>status(S): return the number of requests server so far on the server with PID, S</span></span>
 <span class="line"><span></span></span>
-<span class="line"><span>stop(S): shutdown server with PID, S</span></span>
-<span class="line"><span></span></span></code></pre>
+<span class="line"><span>stop(S): shutdown server with PID, S</span></span></code></pre>
 <p>The main/event loop would be:</p>
-<pre class="astro-code css-variables" style="background-color:var(--astro-code-color-background);color:var(--astro-code-color-text); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>loop(N) -></span></span>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>loop(N) -></span></span>
 <span class="line"><span></span></span>
 <span class="line"><span>    receive% ‘factorial’ command:</span></span>
 <span class="line"><span>    {factorial, From, Ref, M} -></span></span>
@@ -598,10 +579,9 @@ thus we need to store the state information using arguments.</p>
 <span class="line"><span></span></span>
 <span class="line"><span>    % ‘stop’ command:</span></span>
 <span class="line"><span>    {stop, _From, _Ref} -> ok</span></span>
-<span class="line"><span>end.</span></span>
-<span class="line"><span></span></span></code></pre>
+<span class="line"><span>end.</span></span></code></pre>
 <p>The starting and stopping:</p>
-<pre class="astro-code css-variables" style="background-color:var(--astro-code-color-background);color:var(--astro-code-color-text); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>% start a server, return server’s pid</span></span>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>% start a server, return server’s pid</span></span>
 <span class="line"><span>start() -></span></span>
 <span class="line"><span>    spawn(fun () -> loop(0) end).</span></span>
 <span class="line"><span></span></span>
@@ -609,10 +589,9 @@ thus we need to store the state information using arguments.</p>
 <span class="line"><span>stop(Server) -></span></span>
 <span class="line"><span>    % Ref is not needed</span></span>
 <span class="line"><span>    Server ! {stop, self(), 0},</span></span>
-<span class="line"><span>    ok.</span></span>
-<span class="line"><span></span></span></code></pre>
+<span class="line"><span>    ok.</span></span></code></pre>
 <p>Factorial and status:</p>
-<pre class="astro-code css-variables" style="background-color:var(--astro-code-color-background);color:var(--astro-code-color-text); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>% compute factorial(M) on ‘Server’:</span></span>
+<pre class="astro-code css-variables" style="background-color:var(--astro-code-background);color:var(--astro-code-foreground); overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>% compute factorial(M) on ‘Server’:</span></span>
 <span class="line"><span>factorial(Server, M) -></span></span>
 <span class="line"><span>    % unique reference number</span></span>
 <span class="line"><span>    Ref = make_ref(),</span></span>
@@ -632,8 +611,7 @@ thus we need to store the state information using arguments.</p>
 <span class="line"><span>    Server ! {status, self(), Ref},</span></span>
 <span class="line"><span></span></span>
 <span class="line"><span>    % wait for response, and return it:</span></span>
-<span class="line"><span>    receive {response, Ref, Result} -> Result end.</span></span>
-<span class="line"><span></span></span></code></pre> <div class="mt-24"> <div class="grid grid-cols-2 gap-1.5 sm:gap-3"> <a href="/chalmers/tda384/tda384_5" class="group relative flex flex-nowrap rounded-lg border border-black/15 px-4 py-3 pl-10 no-underline transition-colors duration-300 ease-in-out hover:bg-black/5 hover:text-black focus-visible:bg-black/5 focus-visible:text-black dark:border-white/20 dark:hover:bg-white/5 dark:hover:text-white dark:focus-visible:bg-white/5 dark:focus-visible:text-white"> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="absolute left-2 top-1/2 size-5 -translate-y-1/2 fill-none stroke-current stroke-2"> <line x1="5" y1="12" x2="19" y2="12" class="translate-x-3 scale-x-0 transition-transform duration-300 ease-in-out group-hover:translate-x-0 group-hover:scale-x-100 group-focus-visible:translate-x-0 group-focus-visible:scale-x-100"></line> <polyline points="12 5 5 12 12 19" class="translate-x-1 transition-transform duration-300 ease-in-out group-hover:translate-x-0 group-focus-visible:translate-x-0"></polyline> </svg> <div class="flex items-center text-sm"> Part 5 - Monitors </div> </a> <a href="/chalmers/tda384/tda384_8" class="group relative flex flex-grow flex-row-reverse flex-nowrap rounded-lg border border-black/15 px-4 py-4 pr-10 no-underline transition-colors duration-300 ease-in-out hover:bg-black/5 hover:text-black focus-visible:bg-black/5 focus-visible:text-black dark:border-white/20 dark:hover:bg-white/5 dark:hover:text-white dark:focus-visible:bg-white/5 dark:focus-visible:text-white"> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="absolute right-2 top-1/2 size-5 -translate-y-1/2 fill-none stroke-current stroke-2"> <line x1="5" y1="12" x2="19" y2="12" class="translate-x-3 scale-x-0 transition-transform duration-300 ease-in-out group-hover:translate-x-0 group-hover:scale-x-100 group-focus-visible:translate-x-0 group-focus-visible:scale-x-100"></line> <polyline points="12 5 19 12 12 19" class="-translate-x-1 transition-transform duration-300 ease-in-out group-hover:translate-x-0 group-focus-visible:translate-x-0"></polyline> </svg> <div class="flex items-center text-sm"> Part 8 - Synchronization problems (2) </div> </a> </div> </div> <div class="mt-24"> <div class="giscus"></div> <script data-astro-rerun src="https://giscus.app/client.js" data-repo="rezaarezvan/rezvan.xyz" data-repo-id="R_kgDOHvQr3w" data-category="General" data-category-id="DIC_kwDOHvQr384CiWVC" data-mapping="pathname" data-strict="0" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="bottom" data-theme="preferred_color_scheme" data-lang="en" data-loading="lazy" crossorigin="anonymous" async></script> </div> </article> </div>  </main> <footer class="animate"> <div class="mx-auto max-w-screen-sm px-3"> <div class="relative"> <div class="absolute -top-12 right-0"> <button id="back-to-top" class="group relative flex w-fit flex-nowrap rounded border border-black/15 py-1.5 pl-8 pr-3 transition-colors duration-300 ease-in-out hover:bg-black/5 hover:text-black focus-visible:bg-black/5 focus-visible:text-black dark:border-white/20 dark:hover:bg-white/5 dark:hover:text-white dark:focus-visible:bg-white/5 dark:focus-visible:text-white"> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="absolute left-2 top-1/2 size-4 -translate-y-1/2 rotate-90 fill-none stroke-current stroke-2"> <line x1="5" y1="12" x2="19" y2="12" class="translate-x-2 scale-x-0 transition-transform duration-300 ease-in-out group-hover:translate-x-0 group-hover:scale-x-100 group-focus-visible:translate-x-0 group-focus-visible:scale-x-100"></line> <polyline points="12 5 5 12 12 19" class="translate-x-1 transition-transform duration-300 ease-in-out group-hover:translate-x-0 group-focus-visible:translate-x-0"></polyline> </svg> <div class="text-sm">Back to top</div> </button> </div> </div> <div class="flex items-center justify-between"> <div>&copy; 2024 • rezarezvan.com </div> <div class="flex flex-wrap items-center gap-1.5"> <button id="light-theme-button" aria-label="Light theme" class="group flex size-9 items-center justify-center rounded border border-black/15 hover:bg-black/5 focus-visible:bg-black/5 dark:border-white/20 dark:hover:bg-white/5 dark:focus-visible:bg-white/5"> <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="transition-colors duration-300 ease-in-out group-hover:animate-pulse group-hover:stroke-black group-focus-visible:animate-pulse group-focus-visible:stroke-black group-hover:dark:stroke-white dark:group-focus-visible:stroke-white"> <circle cx="12" cy="12" r="5"></circle> <line x1="12" y1="1" x2="12" y2="3"></line> <line x1="12" y1="21" x2="12" y2="23"></line> <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line> <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line> <line x1="1" y1="12" x2="3" y2="12"></line> <line x1="21" y1="12" x2="23" y2="12"></line> <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line> <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line> </svg> </button> <button id="dark-theme-button" aria-label="Dark theme" class="group flex size-9 items-center justify-center rounded border border-black/15 hover:bg-black/5 focus-visible:bg-black/5 dark:border-white/20 dark:hover:bg-white/5 dark:focus-visible:bg-white/5"> <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="transition-colors duration-300 ease-in-out group-hover:animate-pulse group-hover:stroke-black group-focus-visible:animate-pulse group-focus-visible:stroke-black group-hover:dark:stroke-white dark:group-focus-visible:stroke-white"> <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path> </svg> </button> <button id="system-theme-button" aria-label="System theme" class="group flex size-9 items-center justify-center rounded border border-black/15 hover:bg-black/5 focus-visible:bg-black/5 dark:border-white/20 dark:hover:bg-white/5 dark:focus-visible:bg-white/5"> <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="transition-colors duration-300 ease-in-out group-hover:animate-pulse group-hover:stroke-black group-focus-visible:animate-pulse group-focus-visible:stroke-black group-hover:dark:stroke-white dark:group-focus-visible:stroke-white"> <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect> <line x1="8" y1="21" x2="16" y2="21"></line> <line x1="12" y1="17" x2="12" y2="21"></line> </svg> </button> </div> </div> </div> </footer> <aside data-pagefind-ignore> <div id="backdrop" class="bg-[rgba(0, 0, 0, 0.5] invisible fixed left-0 top-0 z-50 flex h-screen w-full justify-center p-6 backdrop-blur-sm" data-astro-transition-persist="astro-3snakcvo-2"> <div id="pagefind-container" class="m-0 flex h-fit max-h-[80%] w-full max-w-screen-sm flex-col overflow-auto rounded border border-black/15 bg-neutral-100 p-2 px-4 py-3 shadow-lg dark:border-white/20 dark:bg-neutral-900"> <div id="search" class="pagefind-ui pagefind-init" data-pagefind-ui data-bundle-path="/pagefind/" data-ui-options="{&#34;showImages&#34;:false,&#34;excerptLength&#34;:15,&#34;resetStyles&#34;:false}"></div>  <div class="mr-2 pb-1 pt-4 text-right text-xs dark:prose-invert">
+<span class="line"><span>    receive {response, Ref, Result} -> Result end.</span></span></code></pre> <div class="mt-24"> <div class="grid grid-cols-2 gap-1.5 sm:gap-3"> <a href="/chalmers/tda384/tda384_5" class="group relative flex flex-nowrap rounded-lg border border-black/15 px-4 py-3 pl-10 no-underline transition-colors duration-300 ease-in-out hover:bg-black/5 hover:text-black focus-visible:bg-black/5 focus-visible:text-black dark:border-white/20 dark:hover:bg-white/5 dark:hover:text-white dark:focus-visible:bg-white/5 dark:focus-visible:text-white"> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="absolute left-2 top-1/2 size-5 -translate-y-1/2 fill-none stroke-current stroke-2"> <line x1="5" y1="12" x2="19" y2="12" class="translate-x-3 scale-x-0 transition-transform duration-300 ease-in-out group-hover:translate-x-0 group-hover:scale-x-100 group-focus-visible:translate-x-0 group-focus-visible:scale-x-100"></line> <polyline points="12 5 5 12 12 19" class="translate-x-1 transition-transform duration-300 ease-in-out group-hover:translate-x-0 group-focus-visible:translate-x-0"></polyline> </svg> <div class="flex items-center text-sm"> Part 5 - Monitors </div> </a> <a href="/chalmers/tda384/tda384_8" class="group relative flex flex-grow flex-row-reverse flex-nowrap rounded-lg border border-black/15 px-4 py-4 pr-10 no-underline transition-colors duration-300 ease-in-out hover:bg-black/5 hover:text-black focus-visible:bg-black/5 focus-visible:text-black dark:border-white/20 dark:hover:bg-white/5 dark:hover:text-white dark:focus-visible:bg-white/5 dark:focus-visible:text-white"> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="absolute right-2 top-1/2 size-5 -translate-y-1/2 fill-none stroke-current stroke-2"> <line x1="5" y1="12" x2="19" y2="12" class="translate-x-3 scale-x-0 transition-transform duration-300 ease-in-out group-hover:translate-x-0 group-hover:scale-x-100 group-focus-visible:translate-x-0 group-focus-visible:scale-x-100"></line> <polyline points="12 5 19 12 12 19" class="-translate-x-1 transition-transform duration-300 ease-in-out group-hover:translate-x-0 group-focus-visible:translate-x-0"></polyline> </svg> <div class="flex items-center text-sm"> Part 8 - Synchronization problems (2) </div> </a> </div> </div> <div class="mt-24"> <div class="giscus"></div> <script data-astro-rerun src="https://giscus.app/client.js" data-repo="rezaarezvan/rezvan.xyz" data-repo-id="R_kgDOHvQr3w" data-category="General" data-category-id="DIC_kwDOHvQr384CiWVC" data-mapping="pathname" data-strict="0" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="bottom" data-theme="preferred_color_scheme" data-lang="en" data-loading="lazy" crossorigin="anonymous" async></script> </div> </article> </div>  </main> <footer class="animate"> <div class="mx-auto max-w-screen-sm px-3"> <div class="relative"> <div class="absolute -top-12 right-0"> <button id="back-to-top" class="group relative flex w-fit flex-nowrap rounded border border-black/15 py-1.5 pl-8 pr-3 transition-colors duration-300 ease-in-out hover:bg-black/5 hover:text-black focus-visible:bg-black/5 focus-visible:text-black dark:border-white/20 dark:hover:bg-white/5 dark:hover:text-white dark:focus-visible:bg-white/5 dark:focus-visible:text-white"> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="absolute left-2 top-1/2 size-4 -translate-y-1/2 rotate-90 fill-none stroke-current stroke-2"> <line x1="5" y1="12" x2="19" y2="12" class="translate-x-2 scale-x-0 transition-transform duration-300 ease-in-out group-hover:translate-x-0 group-hover:scale-x-100 group-focus-visible:translate-x-0 group-focus-visible:scale-x-100"></line> <polyline points="12 5 5 12 12 19" class="translate-x-1 transition-transform duration-300 ease-in-out group-hover:translate-x-0 group-focus-visible:translate-x-0"></polyline> </svg> <div class="text-sm">Back to top</div> </button> </div> </div> <div class="flex items-center justify-between"> <div>&copy; 2024 • rezarezvan.com </div> <div class="flex flex-wrap items-center gap-1.5"> <button id="light-theme-button" aria-label="Light theme" class="group flex size-9 items-center justify-center rounded border border-black/15 hover:bg-black/5 focus-visible:bg-black/5 dark:border-white/20 dark:hover:bg-white/5 dark:focus-visible:bg-white/5"> <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="transition-colors duration-300 ease-in-out group-hover:animate-pulse group-hover:stroke-black group-focus-visible:animate-pulse group-focus-visible:stroke-black group-hover:dark:stroke-white dark:group-focus-visible:stroke-white"> <circle cx="12" cy="12" r="5"></circle> <line x1="12" y1="1" x2="12" y2="3"></line> <line x1="12" y1="21" x2="12" y2="23"></line> <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line> <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line> <line x1="1" y1="12" x2="3" y2="12"></line> <line x1="21" y1="12" x2="23" y2="12"></line> <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line> <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line> </svg> </button> <button id="dark-theme-button" aria-label="Dark theme" class="group flex size-9 items-center justify-center rounded border border-black/15 hover:bg-black/5 focus-visible:bg-black/5 dark:border-white/20 dark:hover:bg-white/5 dark:focus-visible:bg-white/5"> <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="transition-colors duration-300 ease-in-out group-hover:animate-pulse group-hover:stroke-black group-focus-visible:animate-pulse group-focus-visible:stroke-black group-hover:dark:stroke-white dark:group-focus-visible:stroke-white"> <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path> </svg> </button> <button id="system-theme-button" aria-label="System theme" class="group flex size-9 items-center justify-center rounded border border-black/15 hover:bg-black/5 focus-visible:bg-black/5 dark:border-white/20 dark:hover:bg-white/5 dark:focus-visible:bg-white/5"> <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="transition-colors duration-300 ease-in-out group-hover:animate-pulse group-hover:stroke-black group-focus-visible:animate-pulse group-focus-visible:stroke-black group-hover:dark:stroke-white dark:group-focus-visible:stroke-white"> <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect> <line x1="8" y1="21" x2="16" y2="21"></line> <line x1="12" y1="17" x2="12" y2="21"></line> </svg> </button> </div> </div> </div> </footer> <aside data-pagefind-ignore> <div id="backdrop" class="bg-[rgba(0, 0, 0, 0.5] invisible fixed left-0 top-0 z-50 flex h-screen w-full justify-center p-6 backdrop-blur-sm" data-astro-transition-persist="astro-3snakcvo-2"> <div id="pagefind-container" class="m-0 flex h-fit max-h-[80%] w-full max-w-screen-sm flex-col overflow-auto rounded border border-black/15 bg-neutral-100 p-2 px-4 py-3 shadow-lg dark:border-white/20 dark:bg-neutral-900"> <div id="search" class="pagefind-ui pagefind-init" data-pagefind-ui data-bundle-path="/pagefind/" data-ui-options="{&#34;showImages&#34;:false,&#34;excerptLength&#34;:15,&#34;resetStyles&#34;:false}"></div> <script type="module" src="/_astro/Search.astro_astro_type_script_index_0_lang.BoThSDgl.js"></script> <div class="mr-2 pb-1 pt-4 text-right text-xs dark:prose-invert">
 Press <span class="prose text-xs dark:prose-invert"><kbd class="">Esc</kbd></span> or click anywhere to close
 </div> </div> </div> </aside> <script>
   const magnifyingGlass = document.getElementById("magnifying-glass");
